@@ -526,9 +526,18 @@ def foodontorag_4agent_linking(mention, kb_additives):
 
     # === Agent 1: Hybrid Retrieval ===
     candidates = retriever.retrieve(raw_text, top_k=5)
+    best_retrieval_confidence = 0.0
 
     # === Agent 2: Selector Agent ===
     best_additive, selector_score, selector_rationale = selector_agent(candidates, raw_text)
+    if best_additive is not None:
+        best_retrieval_confidence = max(
+            (
+                score for additive, score, _ in candidates
+                if additive is best_additive
+            ),
+            default=0.0,
+        )
 
     # === Agent 2b: Kiểm tra có exact match thực sự không ===
     has_exact_match = False
@@ -563,6 +572,13 @@ def foodontorag_4agent_linking(mention, kb_additives):
                 if retry_tau > tau:
                     best_additive = retry_best
                     tau = retry_tau
+                    best_retrieval_confidence = max(
+                        (
+                            score for additive, score, _ in retry_candidates
+                            if additive is retry_best
+                        ),
+                        default=0.0,
+                    )
                     selector_rationale = f"Synonym Feedback Loop [{eq}] -> {retry_rationale}"
                     feedback_note = f" (Feedback loop: mở rộng '{eq}')"
                     break
@@ -592,6 +608,7 @@ def foodontorag_4agent_linking(mention, kb_additives):
         "category": mention.get("category", "ingredient"),
         "matched_entity": best_additive,
         "confidence_tau": tau,
+        "retrieval_confidence": best_retrieval_confidence if best_additive else 0.0,
         "rationale": rationale,
         "retrieval_engine": engine_info,
     }

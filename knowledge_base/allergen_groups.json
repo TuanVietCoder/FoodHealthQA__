@@ -5,22 +5,66 @@
     "name_en": "Cereals containing gluten",
     "severity": "warning",
     "keywords": [
-      "gluten", "bột mì", "lúa mì", "wheat", "flour",
-      "barley", "lúa mạch", "rye", "oat", "yến mạch", "spelt",
-      "mì", "bột", "mì sợi", "mì ống", "pasta", "bread", "bánh mì"
+      "gluten",
+      "bột mì",
+      "lúa mì",
+      "wheat",
+      "barley",
+      "lúa mạch",
+      "rye",
+      "oat",
+      "yến mạch",
+      "spelt",
+      "mì sợi",
+      "mì ống",
+      "pasta",
+      "bread",
+      "bánh mì"
     ],
     "negation_rules": {
       "gluten": "ALLERGEN_RISK",
       "bột mì": "ALLERGEN_RISK",
-      "wheat": "ALLERGEN_RISK",
-      "flour": "ALLERGEN_RISK"
+      "wheat": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (1)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: cereals containing gluten",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 1",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Bắt buộc ghi nhãn theo Codex/EU/VN. Celiac disease là chống chỉ định tuyệt đối."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "milk",
@@ -28,10 +72,27 @@
     "name_en": "Milk and milk products (including lactose)",
     "severity": "warning",
     "keywords": [
-      "sữa", "milk", "bột sữa", "bơ", "dairy", "whey",
-      "casein", "cream", "kem", "lactose", "phô mai", "cheese",
-      "yogurt", "sữa chua", "sữa bò", "sữa dê", "butter",
-      "sữa béo", "sữa tươi", "sữa đặc", "condensed milk"
+      "sữa",
+      "milk",
+      "bột sữa",
+      "bơ",
+      "dairy",
+      "whey",
+      "casein",
+      "cream",
+      "kem",
+      "lactose",
+      "phô mai",
+      "cheese",
+      "yogurt",
+      "sữa chua",
+      "sữa bò",
+      "sữa dê",
+      "butter",
+      "sữa béo",
+      "sữa tươi",
+      "sữa đặc",
+      "condensed milk"
     ],
     "negation_rules": {
       "sữa": "ALLERGEN_RISK",
@@ -42,12 +103,55 @@
       "casein": "ALLERGEN_RISK",
       "lactose": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (7)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: milk and milk products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 7",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Dị ứng protein sữa bò phổ biến ở trẻ em. Lactose intolerance khác với milk allergy."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "egg",
@@ -55,21 +159,72 @@
     "name_en": "Eggs and egg products",
     "severity": "warning",
     "keywords": [
-      "trứng", "egg", "albumin", "lòng trắng", "lòng đỏ",
-      "trứng gà", "trứng vịt", "egg white", "egg yolk",
-      "trứng tươi", "bột trứng"
+      "trứng",
+      "egg",
+      "albumin",
+      "lòng trắng",
+      "lòng đỏ",
+      "trứng gà",
+      "trứng vịt",
+      "egg white",
+      "egg yolk",
+      "trứng tươi",
+      "bột trứng"
     ],
     "negation_rules": {
       "trứng": "ALLERGEN_RISK",
       "egg": "ALLERGEN_RISK",
       "albumin": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (3)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: eggs and egg products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 3",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Top 3 dị ứng thực phẩm ở trẻ em toàn cầu."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "soy",
@@ -77,118 +232,383 @@
     "name_en": "Soybeans and soy products",
     "severity": "warning",
     "keywords": [
-      "đậu nành", "đậu tương", "soya", "soy", "lecithin",
-      "tofu", "đậu hũ", "tương", "nước tương", "soy sauce",
-      "đậu phụ", "soy protein", "soy milk", "sữa đậu nành",
-      "edamame", "miso", "tempeh"
+      "đậu nành",
+      "đậu tương",
+      "soya",
+      "soy",
+      "lecithin",
+      "tofu",
+      "đậu hũ",
+      "nước tương",
+      "soy sauce",
+      "đậu phụ",
+      "soy protein",
+      "soy milk",
+      "sữa đậu nành",
+      "edamame",
+      "miso",
+      "tempeh"
     ],
     "negation_rules": {
-      "INS 322i": "ALLERGEN_RISK",
-      "INS 322": "ALLERGEN_RISK",
       "lecithin": "ALLERGEN_RISK",
       "đậu nành": "ALLERGEN_RISK",
       "soy": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (6)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: soybeans and soy products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 6",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Lecithin đậu nành (INS 322i) là nguồn dị ứng ẩn phổ biến nhất trong bánh kẹo."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "peanut",
     "name_vi": "Đậu phộng (lạc)",
     "name_en": "Peanuts and peanut products",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "đậu phộng", "đậu phụng", "lạc", "peanut",
-      "bơ đậu phộng", "peanut butter", "peanut oil", "dầu lạc",
+      "đậu phộng",
+      "đậu phụng",
+      "lạc",
+      "peanut",
+      "bơ đậu phộng",
+      "peanut butter",
+      "peanut oil",
+      "dầu lạc",
       "dầu phộng"
     ],
     "negation_rules": {
-      "đậu phộng": "CONTRAINDICATED",
-      "lạc": "CONTRAINDICATED",
-      "peanut": "CONTRAINDICATED"
+      "đậu phộng": "ALLERGEN_RISK",
+      "lạc": "ALLERGEN_RISK",
+      "peanut": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (5)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: peanuts and peanut products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 5",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Nguyên nhân hàng đầu gây sốc phản vệ tử vong do thực phẩm tại Âu-Mỹ."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "nuts",
     "name_vi": "Các loại hạt cây",
     "name_en": "Tree nuts",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "hạnh nhân", "hạt cây", "óc chó", "điều",
-      "almond", "walnut", "cashew", "macadamia", "pistachio",
-      "hạt dẻ", "pecan", "hazelnut", "brazil nut",
-      "hạt thông", "pine nut", "chestnut"
+      "hạnh nhân",
+      "hạt cây",
+      "óc chó",
+      "điều",
+      "almond",
+      "walnut",
+      "cashew",
+      "macadamia",
+      "pistachio",
+      "hạt dẻ",
+      "pecan",
+      "hazelnut",
+      "brazil nut",
+      "hạt thông",
+      "pine nut",
+      "chestnut"
     ],
     "negation_rules": {
-      "hạnh nhân": "CONTRAINDICATED",
-      "almond": "CONTRAINDICATED",
-      "walnut": "CONTRAINDICATED",
-      "cashew": "CONTRAINDICATED",
-      "hạt cây": "CONTRAINDICATED"
+      "hạnh nhân": "ALLERGEN_RISK",
+      "almond": "ALLERGEN_RISK",
+      "walnut": "ALLERGEN_RISK",
+      "cashew": "ALLERGEN_RISK",
+      "hạt cây": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (8)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: tree nuts",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 8",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Dị ứng chéo cao giữa các loại hạt cây."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "shellfish",
     "name_vi": "Giáp xác (tôm, cua)",
     "name_en": "Crustaceans and crustacean products",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "tôm", "cua", "hải sản", "shrimp", "crab",
-      "lobster", "tôm hùm", "crawfish", "prawn",
-      "tôm sú", "tôm thẻ", "cua biển", "ghẹ"
+      "tôm",
+      "cua",
+      "hải sản",
+      "shrimp",
+      "crab",
+      "lobster",
+      "tôm hùm",
+      "crawfish",
+      "prawn",
+      "tôm sú",
+      "tôm thẻ",
+      "cua biển",
+      "ghẹ"
     ],
     "negation_rules": {
-      "tôm": "CONTRAINDICATED",
-      "cua": "CONTRAINDICATED",
-      "shrimp": "CONTRAINDICATED",
-      "crab": "CONTRAINDICATED",
+      "tôm": "ALLERGEN_RISK",
+      "cua": "ALLERGEN_RISK",
+      "shrimp": "ALLERGEN_RISK",
+      "crab": "ALLERGEN_RISK",
       "hải sản": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (2)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: crustacea and products thereof",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 2 (crustaceans)",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Dị ứng #1 tại Việt Nam — 56.9% ca dị ứng thực phẩm ở trẻ em (nghiên cứu JCU 2019)."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "fish",
     "name_vi": "Cá và sản phẩm từ cá",
     "name_en": "Fish and fish products",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "cá", "fish", "nước mắm", "fish sauce",
-      "cá ngừ", "tuna", "salmon", "anchovy", "cá cơm",
-      "cá hồi", "cá thu", "cá basa", "cá tra",
-      "surimi", "chả cá", "fish ball"
+      "cá",
+      "fish",
+      "nước mắm",
+      "fish sauce",
+      "cá ngừ",
+      "tuna",
+      "salmon",
+      "anchovy",
+      "cá cơm",
+      "cá hồi",
+      "cá thu",
+      "cá basa",
+      "cá tra",
+      "surimi",
+      "chả cá",
+      "fish ball"
     ],
     "negation_rules": {
-      "cá": "CONTRAINDICATED",
-      "fish": "CONTRAINDICATED",
+      "cá": "ALLERGEN_RISK",
+      "fish": "ALLERGEN_RISK",
       "nước mắm": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4",
-      "eu": "EU 1169/2011 Annex II (4)",
-      "vietnam": "Thông tư 24/2019/TT-BYT"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: fish and fish products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 4",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Dị ứng #2 tại Việt Nam — 1.6% người lớn. Nước mắm là nguồn ẩn phổ biến."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "celery",
@@ -196,19 +616,53 @@
     "name_en": "Celery and celery products",
     "severity": "warning",
     "keywords": [
-      "cần tây", "celery", "celeriac",
-      "celery salt", "muối cần tây"
+      "cần tây",
+      "celery",
+      "celeriac",
+      "celery salt",
+      "muối cần tây"
     ],
     "negation_rules": {
       "cần tây": "ALLERGEN_RISK",
       "celery": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "Không bắt buộc theo Codex",
-      "eu": "EU 1169/2011 Annex II (9)",
-      "vietnam": "Không quy định riêng"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 9",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Bắt buộc ghi nhãn tại EU. Phổ biến ở Châu Âu, hiếm ở Việt Nam."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "mustard",
@@ -216,19 +670,53 @@
     "name_en": "Mustard and mustard products",
     "severity": "warning",
     "keywords": [
-      "mù tạt", "mustard", "wasabi",
-      "mustard seed", "hạt mù tạt"
+      "mù tạt",
+      "mustard",
+      "wasabi",
+      "mustard seed",
+      "hạt mù tạt"
     ],
     "negation_rules": {
       "mù tạt": "ALLERGEN_RISK",
       "mustard": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "Không bắt buộc theo Codex",
-      "eu": "EU 1169/2011 Annex II (10)",
-      "vietnam": "Không quy định riêng"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 10",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Bắt buộc ghi nhãn tại EU. Hiếm ở Việt Nam."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "sesame",
@@ -236,102 +724,273 @@
     "name_en": "Sesame seeds and sesame products",
     "severity": "warning",
     "keywords": [
-      "vừng", "mè", "sesame",
-      "dầu mè", "sesame oil", "sesame seed",
-      "tahini", "hạt vừng"
+      "vừng",
+      "mè",
+      "sesame",
+      "dầu mè",
+      "sesame oil",
+      "sesame seed",
+      "tahini",
+      "hạt vừng"
     ],
     "negation_rules": {
       "vừng": "ALLERGEN_RISK",
       "mè": "ALLERGEN_RISK",
       "sesame": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 (bổ sung 2023)",
-      "eu": "EU 1169/2011 Annex II (11)",
-      "vietnam": "Không quy định riêng"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 11",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Mỹ thêm vào Big 9 từ 01/2023 (FASTER Act). Dùng nhiều trong ẩm thực VN."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "sulfites",
     "name_vi": "Sulfite / SO₂ (≥ 10 mg/kg)",
     "name_en": "Sulphur dioxide and sulphites",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "sulfite", "sulphite", "SO2", "SO₂",
-      "lưu huỳnh", "sulfur dioxide", "sulphur dioxide",
-      "INS 220", "INS 221", "INS 222", "INS 223",
-      "INS 224", "INS 225", "INS 226", "INS 227", "INS 228",
-      "metabisulfite", "metabisulphite",
-      "natri sulfit", "kali metabisulfit"
+      "sulfite",
+      "sulphite",
+      "SO2",
+      "SO₂",
+      "lưu huỳnh",
+      "sulfur dioxide",
+      "sulphur dioxide",
+      "INS 220",
+      "INS 221",
+      "INS 222",
+      "INS 223",
+      "INS 224",
+      "INS 225",
+      "INS 226",
+      "INS 227",
+      "INS 228",
+      "metabisulfite",
+      "metabisulphite",
+      "natri sulfit",
+      "kali metabisulfit"
     ],
     "negation_rules": {
-      "sulfite": "CONTRAINDICATED",
-      "sulphite": "CONTRAINDICATED",
-      "SO2": "CONTRAINDICATED",
-      "INS 220": "CONTRAINDICATED",
-      "INS 221": "CONTRAINDICATED",
-      "INS 222": "CONTRAINDICATED",
-      "INS 223": "CONTRAINDICATED",
-      "INS 224": "CONTRAINDICATED",
-      "INS 225": "CONTRAINDICATED",
-      "INS 226": "CONTRAINDICATED",
-      "INS 227": "CONTRAINDICATED",
-      "INS 228": "CONTRAINDICATED"
+      "sulfite": "ALLERGEN_RISK",
+      "sulphite": "ALLERGEN_RISK",
+      "SO2": "ALLERGEN_RISK",
+      "INS 220": "ALLERGEN_RISK",
+      "INS 221": "ALLERGEN_RISK",
+      "INS 222": "ALLERGEN_RISK",
+      "INS 223": "ALLERGEN_RISK",
+      "INS 224": "ALLERGEN_RISK",
+      "INS 225": "ALLERGEN_RISK",
+      "INS 226": "ALLERGEN_RISK",
+      "INS 227": "ALLERGEN_RISK",
+      "INS 228": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "CXS 1-1985 Section 4.2.1.4 (≥ 10 mg/kg SO₂)",
-      "eu": "EU 1169/2011 Annex II (12)",
-      "vietnam": "Thông tư 24/2019/TT-BYT (Phụ lục 2A)"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "threshold_note": "The linked Codex CXS 1-1985 copy says sulphite at 10 mg/kg or more; the linked text is amended through 2010. Confirm current rule and jurisdiction.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: sulphite at 10 mg/kg or more",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 12",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "3-10% người hen suyễn nhạy cảm. Ngưỡng ghi nhãn: ≥ 10 mg/kg hoặc 10 mg/L SO₂."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "lupin",
     "name_vi": "Đậu lupin",
     "name_en": "Lupin and lupin products",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "lupin", "lupine", "đậu lupin",
-      "lupin flour", "bột đậu lupin"
+      "lupin",
+      "lupine",
+      "đậu lupin",
+      "lupin flour",
+      "bột đậu lupin"
     ],
     "negation_rules": {
-      "lupin": "CONTRAINDICATED",
-      "lupine": "CONTRAINDICATED"
+      "lupin": "ALLERGEN_RISK",
+      "lupine": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "Không bắt buộc theo Codex",
-      "eu": "EU 1169/2011 Annex II (13)",
-      "vietnam": "Không quy định riêng"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 13",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Bắt buộc ghi nhãn tại EU. Dị ứng chéo cao với đậu phộng. Gần như không có ở VN."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "molluscs",
     "name_vi": "Thân mềm (mực, ngao, sò, ốc)",
     "name_en": "Molluscs and mollusc products",
-    "severity": "critical",
+    "severity": "warning",
     "keywords": [
-      "thân mềm", "ốc", "hàu", "oyster",
-      "mực", "squid", "ngao", "sò",
-      "bạch tuộc", "octopus", "clam", "mussel",
-      "sò điệp", "scallop", "ốc hương", "hến"
+      "thân mềm",
+      "ốc",
+      "hàu",
+      "oyster",
+      "mực",
+      "squid",
+      "ngao",
+      "sò",
+      "bạch tuộc",
+      "octopus",
+      "clam",
+      "mussel",
+      "sò điệp",
+      "scallop",
+      "ốc hương",
+      "hến"
     ],
     "negation_rules": {
-      "mực": "CONTRAINDICATED",
-      "ốc": "CONTRAINDICATED",
-      "hàu": "CONTRAINDICATED",
-      "ngao": "CONTRAINDICATED",
-      "sò": "CONTRAINDICATED",
-      "squid": "CONTRAINDICATED",
-      "oyster": "CONTRAINDICATED"
+      "mực": "ALLERGEN_RISK",
+      "ốc": "ALLERGEN_RISK",
+      "hàu": "ALLERGEN_RISK",
+      "ngao": "ALLERGEN_RISK",
+      "sò": "ALLERGEN_RISK",
+      "squid": "ALLERGEN_RISK",
+      "oyster": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "Không bắt buộc theo Codex",
-      "eu": "EU 1169/2011 Annex II (14)",
-      "vietnam": "Không quy định riêng"
+    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 14",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Dị ứng #3 tại Việt Nam — 1.3% người lớn. Dị ứng chéo với giáp xác (shellfish)."
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   },
   {
     "id": "beef",
@@ -339,20 +998,54 @@
     "name_en": "Beef and beef products",
     "severity": "warning",
     "keywords": [
-      "thịt bò", "bò", "beef", "bò viên",
-      "gelatin bò", "beef gelatin", "beef extract",
-      "nước hầm xương bò", "beef broth", "bò khô"
+      "thịt bò",
+      "bò",
+      "beef",
+      "bò viên",
+      "gelatin bò",
+      "beef gelatin",
+      "beef extract",
+      "nước hầm xương bò",
+      "beef broth",
+      "bò khô"
     ],
     "negation_rules": {
       "thịt bò": "ALLERGEN_RISK",
       "bò": "ALLERGEN_RISK",
       "beef": "ALLERGEN_RISK"
     },
-    "regulation": {
-      "codex": "Không bắt buộc theo Codex",
-      "eu": "Không bắt buộc theo EU",
-      "vietnam": "Không quy định riêng"
+    "note": "Beef remains a food ingredient term but is not treated as one of the sourced priority allergen-label groups in this dataset.",
+    "enabled_for_allergen_screening": false,
+    "verification_status": "unsupported_as_major_label_allergen",
+    "source_ids": [],
+    "source_urls": [],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
     },
-    "note": "Top 4 dị ứng tại Việt Nam — 1.0% người lớn (nghiên cứu JCU 2020). Liên quan alpha-gal syndrome."
+    "keyword_vocabulary_status": "not_used_for_allergen_screening"
   }
 ]

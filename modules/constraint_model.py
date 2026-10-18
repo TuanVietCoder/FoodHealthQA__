@@ -22,21 +22,33 @@ import re
 
 
 def _load_allergen_groups():
-    """Nạp 15 nhóm dị nguyên từ knowledge_base/allergen_groups.json."""
+    """Load source-linked allergen label categories enabled for screening."""
     kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge_base", "allergen_groups.json")
     if not os.path.isfile(kb_path):
         return [], {}, {}
     with open(kb_path, "r", encoding="utf-8") as f:
-        groups = json.load(f)
+        groups = [
+            group for group in json.load(f)
+            if group.get("enabled_for_allergen_screening", True)
+        ]
     keywords = {g["id"]: g["keywords"] for g in groups}
     negation = {}
     for g in groups:
         key = f"{g['id']}_allergy"
         negation[key] = {
-            kw: (CONSTRAINT_CONTRAINDICATED if ctype == "CONTRAINDICATED" else CONSTRAINT_ALLERGEN_RISK)
+            kw: CONSTRAINT_ALLERGEN_RISK
             for kw, ctype in g.get("negation_rules", {}).items()
         }
     return groups, keywords, negation
+
+
+def contains_label_term(text, term):
+    """Match a complete label term instead of an arbitrary substring."""
+    text = str(text or "")
+    term = str(term or "").strip()
+    if not text or not term:
+        return False
+    return bool(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text, re.IGNORECASE))
 
 
 # =====================================================================
@@ -264,53 +276,45 @@ CONSTRAINT_ALLERGEN_RISK = "ALLERGEN_RISK"
 
 # Bảng ánh xạ ràng buộc phủ định: (bệnh lý) -> (thành phần) -> loại ràng buộc
 # Quy tắc bệnh lý (không phải dị ứng) — các quy tắc dị ứng được nạp từ allergen_groups.json
-_MEDICAL_NEGATION_RULES = {
-    "pku": {
-        "INS 951": CONSTRAINT_CONTRAINDICATED,
-        "aspartame": CONSTRAINT_CONTRAINDICATED,
-        "phenylalanine": CONSTRAINT_CONTRAINDICATED,
-    },
-    "hypertension": {
-        "INS 621": CONSTRAINT_RESTRICTED,
-        "INS 211": CONSTRAINT_RESTRICTED,
-        "INS 500ii": CONSTRAINT_RESTRICTED,
-        "bột ngọt": CONSTRAINT_RESTRICTED,
-        "msg": CONSTRAINT_RESTRICTED,
-    },
-    "diabetes": {
-        "INS 1420": CONSTRAINT_RESTRICTED,
-        "tinh bột biến tính": CONSTRAINT_RESTRICTED,
-    },
-    "asthma": {
-        "INS 102": CONSTRAINT_RESTRICTED,
-        "INS 211": CONSTRAINT_RESTRICTED,
-        "INS 220": CONSTRAINT_RESTRICTED,
-        "sulfite": CONSTRAINT_RESTRICTED,
-        "tartrazine": CONSTRAINT_RESTRICTED,
-        "benzoat": CONSTRAINT_RESTRICTED,
-    },
-    "children_under_6": {
-        "INS 102": CONSTRAINT_RESTRICTED,
-        "INS 951": CONSTRAINT_RESTRICTED,
-        "INS 220": CONSTRAINT_RESTRICTED,
-        "tartrazine": CONSTRAINT_RESTRICTED,
-        "aspartame": CONSTRAINT_RESTRICTED,
-    },
-    "pregnancy": {
-        "INS 951": CONSTRAINT_RESTRICTED,
-        "aspartame": CONSTRAINT_RESTRICTED,
-    },
-    "chronic_kidney_disease": {
-        "INS 500ii": CONSTRAINT_RESTRICTED,
-        "INS 503ii": CONSTRAINT_RESTRICTED,
-    },
-}
+def _load_verified_medical_rules():
+    """Only source-checked health considerations may create condition matches."""
+    kb_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        "knowledge_base",
+        "additives_standard.json",
+    )
+    if not os.path.isfile(kb_path):
+        return {}
+    with open(kb_path, "r", encoding="utf-8") as source:
+        additives = json.load(source)
+    rules = {}
+    for additive in additives:
+        for item in additive.get("health_considerations", []):
+            if item.get("verification_status") != "source_checked":
+                continue
+            condition = str(item.get("condition", "")).strip().lower().replace(" ", "_")
+            if not condition:
+                continue
+            keywords = [
+                additive.get("ins_code", ""),
+                additive.get("e_number", ""),
+                additive.get("canonical_name_en", ""),
+                *additive.get("synonyms", []),
+            ]
+            rules.setdefault(condition, {})
+            for keyword in keywords:
+                if keyword:
+                    rules[condition][str(keyword)] = CONSTRAINT_RESTRICTED
+    return rules
 
 # Nạp từ knowledge_base/allergen_groups.json → ALLERGEN_KEYWORDS + _ALLERGEN_NEGATION_RULES
 _ALLERGEN_GROUPS, ALLERGEN_KEYWORDS, _ALLERGEN_NEGATION_RULES = _load_allergen_groups()
 
 # Gộp tất cả negation rules: bệnh lý + dị ứng
-_NEGATION_RULES = {**_MEDICAL_NEGATION_RULES, **_ALLERGEN_NEGATION_RULES}
+_NEGATION_RULES = {
+    **_load_verified_medical_rules(),
+    **_ALLERGEN_NEGATION_RULES,
+}
 
 
 def classify_constraint_type(mention_text, additive, persona):
@@ -334,21 +338,16 @@ def classify_constraint_type(mention_text, additive, persona):
     for condition in all_conditions:
         rules = _NEGATION_RULES.get(condition, {})
         for keyword, ctype in rules.items():
-            keyword_lower = keyword.lower()
-            if keyword_lower in mention_lower or keyword_lower in ins_code.lower():
+            if contains_label_term(mention_lower, keyword) or contains_label_term(ins_code, keyword):
                 if _severity_rank(ctype) > _severity_rank(constraint_type):
                     constraint_type = ctype
                     matched_rule = (condition, keyword)
 
-    _CRITICAL_ALLERGENS = {g["id"] for g in _ALLERGEN_GROUPS if g.get("severity") == "critical"}
     for allergy in user_allergies:
         keywords = ALLERGEN_KEYWORDS.get(allergy, [allergy])
         for kw in keywords:
-            if kw.lower() in mention_lower:
-                if allergy in _CRITICAL_ALLERGENS:
-                    new_type = CONSTRAINT_CONTRAINDICATED
-                else:
-                    new_type = CONSTRAINT_ALLERGEN_RISK
+            if contains_label_term(mention_lower, kw):
+                new_type = CONSTRAINT_ALLERGEN_RISK
                 if _severity_rank(new_type) > _severity_rank(constraint_type):
                     constraint_type = new_type
                     matched_rule = (f"{allergy}_allergy", kw)
@@ -439,7 +438,8 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
     Trả về dict với thông tin tuân thủ ADI dựa trên cân nặng người dùng.
     Công thức: Lượng nạp tối đa/ngày = ADI_upper × body_weight_kg (mg/ngày)
     """
-    adi_str = additive_entity.get("jecfa_adi", "")
+    assessment = additive_entity.get("adi_assessment") or {}
+    adi_str = assessment.get("display_text", additive_entity.get("jecfa_adi", ""))
     codex_str = additive_entity.get("codex_standard", "")
     ins_code = additive_entity.get("ins_code", "")
     name = additive_entity.get("canonical_name", "")
@@ -451,9 +451,34 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
         "max_daily_intake_mg": None,
         "ml_value": None,
         "compliance_status": "UNKNOWN",
-        "source": "",
+        "source": assessment.get("source_id", ""),
         "detail": "",
     }
+
+    if not assessment or assessment.get("verification_status") != "source_checked":
+        result["compliance_status"] = "SOURCE_REVIEW_REQUIRED"
+        result["detail"] = (
+            "Không tính giới hạn ADI: claim chưa được xác minh bằng nguồn chính."
+        )
+        if assessment:
+            result["source_url"] = assessment.get("source_url", "")
+        return result
+
+    if not assessment.get("use_for_numeric_compliance"):
+        if ins_code == "INS 621":
+            result["compliance_status"] = "NOT_NUMERICALLY_APPLICABLE"
+            result["detail"] = (
+                "ADI glutamate của EFSA là ADI nhóm E620-E625, biểu thị theo glutamic acid; "
+                "không thể áp dụng phép tính số riêng cho INS 621."
+            )
+        else:
+            result["compliance_status"] = "NO_NUMERIC_ADI"
+            result["detail"] = (
+                "Nguồn đã được đối chiếu nhưng không thiết lập ADI dạng số để quy đổi "
+                "thành giới hạn dùng hằng ngày."
+            )
+        result["source_url"] = assessment.get("source_url", "")
+        return result
 
     adi = parse_adi_value(adi_str)
     if adi:
@@ -474,7 +499,13 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
             f"Lượng nạp tối đa cho người {body_weight_kg:.0f} kg: {max_daily:.0f} mg/ngày"
         )
     else:
-        if "GMP" in adi_str.upper() or "GMP" in codex_str.upper():
+        if assessment:
+            result["compliance_status"] = "SOURCE_REVIEW_REQUIRED"
+            result["detail"] = (
+                "Không có ngưỡng ADI dạng số đã xác minh để tính lượng dùng cá nhân."
+            )
+            result["source_url"] = assessment.get("source_url", "")
+        elif "GMP" in adi_str.upper() or "GMP" in codex_str.upper():
             result["compliance_status"] = "GMP"
             result["source"] = "Codex STAN 192-1995 (GMP)"
             result["detail"] = "Sử dụng theo nguyên tắc GMP — không giới hạn ADI cụ thể"
@@ -515,6 +546,10 @@ def _load_efsa_opinions():
                 "risk_groups": efsa["risk_groups"],
                 "key_finding": efsa["key_finding"],
                 "reference": efsa["reference"],
+                "verification_status": efsa.get(
+                    "verification_status",
+                    "pending_primary_source_check",
+                ),
             }
     return opinions
 
@@ -635,6 +670,8 @@ def evaluate_efsa_risk(additive_entity, persona):
     opinion = get_efsa_opinion(ins_code)
     if not opinion:
         return None
+    if opinion.get("verification_status") != "source_checked":
+        return None
 
     user_conditions = [c.lower().replace(" ", "_") for c in persona.get("conditions", [])]
     user_allergies = [a.lower().replace(" ", "_") for a in persona.get("allergies", [])]
@@ -658,72 +695,22 @@ def evaluate_efsa_risk(additive_entity, persona):
 
 
 # =====================================================================
-# 5. QUY CHUẨN PHÁP LÝ VIỆT NAM - THÔNG TƯ 24/2019/TT-BYT
+# 5. QUY CHUẨN PHÁP LÝ VIỆT NAM
 # =====================================================================
 
-_VN_REGULATION_DB = {
-    "INS 621": {
-        "appendix": "Phụ lục 1",
-        "status": "Được phép (GMP)",
-        "ml_mg_kg": None,
-        "note": "Sử dụng theo nguyên tắc thực hành sản xuất tốt (GMP). Không quy định ML cụ thể.",
-        "categories": "Tất cả nhóm thực phẩm (trừ thực phẩm cho trẻ dưới 12 tháng tuổi)",
-    },
-    "INS 951": {
-        "appendix": "Phụ lục 2",
-        "status": "Được phép (ML theo nhóm)",
-        "ml_mg_kg": {"đồ uống có ga": 600, "thạch rau câu": 1000, "kẹo cao su": 5500, "kem": 500},
-        "note": "Giới hạn ML khác nhau theo từng nhóm thực phẩm. Bắt buộc ghi nhãn 'Chứa phenylalanine'.",
-        "categories": "Đồ uống, kẹo, mứt, sản phẩm sữa, kem",
-    },
-    "INS 102": {
-        "appendix": "Phụ lục 2",
-        "status": "Được phép (ML quy định)",
-        "ml_mg_kg": {"đồ uống không cồn": 100, "mứt": 200, "kẹo": 300, "kem": 150},
-        "note": "Thuộc nhóm phẩm màu Azo. Khuyến cáo hạn chế cho trẻ em dưới 6 tuổi.",
-        "categories": "Đồ uống, kẹo, mứt, bánh, kem",
-    },
-    "INS 322i": {
-        "appendix": "Phụ lục 1",
-        "status": "Được phép (GMP)",
-        "ml_mg_kg": None,
-        "note": "Chất nhũ hóa tự nhiên. Sử dụng GMP. Yêu cầu ghi nhãn nguồn gốc (đậu nành/trứng) theo quy định dị nguyên.",
-        "categories": "Tất cả nhóm thực phẩm",
-    },
-    "INS 211": {
-        "appendix": "Phụ lục 2",
-        "status": "Được phép (ML quy định)",
-        "ml_mg_kg": {"đồ uống có ga": 150, "nước sốt": 1000, "mứt": 500, "gia vị": 1000},
-        "note": "Chất bảo quản. ML nghiêm ngặt cho đồ uống. Tránh kết hợp với acid ascorbic.",
-        "categories": "Đồ uống, nước sốt, gia vị, mứt",
-    },
-    "INS 500ii": {
-        "appendix": "Phụ lục 1",
-        "status": "Được phép (GMP)",
-        "ml_mg_kg": None,
-        "note": "Chất điều chỉnh độ acid / chất tạo xốp. Sử dụng GMP.",
-        "categories": "Bánh, mì, sản phẩm nướng",
-    },
-    "INS 1420": {
-        "appendix": "Phụ lục 2",
-        "status": "Được phép (ML quy định)",
-        "ml_mg_kg": {"bánh": 50000, "nước sốt": 60000, "kem": 10000},
-        "note": "Tinh bột biến tính acetyl hóa. ML cao (thường 5-6% khối lượng sản phẩm).",
-        "categories": "Sản phẩm sữa, nước sốt, bánh, kem",
-    },
-    "INS 471": {
-        "appendix": "Phụ lục 1",
-        "status": "Được phép (GMP)",
-        "ml_mg_kg": None,
-        "note": "Chất nhũ hóa phổ biến. An toàn theo GMP.",
-        "categories": "Tất cả nhóm thực phẩm",
-    },
-}
-
-
 def get_vn_regulation(ins_code):
-    """Tra cứu quy chuẩn TT 24/2019/TT-BYT cho phụ gia theo mã INS."""
-    return _VN_REGULATION_DB.get(ins_code)
+    """Return an explicit pending state until an official claim is verified."""
+    return {
+        "ins_code": ins_code,
+        "jurisdiction": "Vietnam",
+        "status": "SOURCE_REVIEW_REQUIRED",
+        "verification_status": "pending_official_text_and_food_category_check",
+        "use_for_compliance_decision": False,
+        "note": (
+            "Chưa gắn văn bản chính thức, phụ lục hiện hành và điều kiện theo nhóm thực phẩm; "
+            "không thể kết luận tuân thủ."
+        ),
+    }
 
 
 def evaluate_regulatory_compliance(additive_entity, persona=None, body_weight_kg=60.0):
@@ -741,7 +728,22 @@ def evaluate_regulatory_compliance(additive_entity, persona=None, body_weight_kg
     if persona:
         efsa_info = evaluate_efsa_risk(additive_entity, persona)
 
-    vn_info = get_vn_regulation(ins_code)
+    vn_info = additive_entity.get("regulatory_claim") or get_vn_regulation(ins_code)
+    if vn_info.get("verification_status") != "source_checked":
+        vn_info = {
+            "ins_code": ins_code,
+            "jurisdiction": "Vietnam",
+            "status": "SOURCE_REVIEW_REQUIRED",
+            "verification_status": vn_info.get(
+                "verification_status",
+                "pending_official_text_and_food_category_check",
+            ),
+            "use_for_compliance_decision": False,
+            "note": (
+                "Tuyên bố pháp lý chưa được xác minh bằng văn bản chính thức và điều kiện "
+                "theo nhóm thực phẩm; không thể kết luận tuân thủ."
+            ),
+        }
 
     return {
         "additive": label,

@@ -2,362 +2,4044 @@
   {
     "ins_code": "INS 621",
     "e_number": "E621",
-    "canonical_name_vi": "Mononatri L-glutamat (Bột ngọt)",
+    "canonical_name_vi": "Mononatri L-glutamat (Bột ngọt / Mì chính)",
     "canonical_name_en": "Monosodium L-glutamate",
-    "synonyms": ["Bột ngọt", "Mì chính", "MSG", "Monosodium glutamate"],
-    "function": "Chất điều vị",
-    "adi_value": "Not Specified (JECFA) / 30 mg/kg bw/day (EFSA)",
-    "adi_upper": 30.0,
-    "adi_source": "EFSA Journal 2017;15(7):4910",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
+    "synonyms": [
+      "MSG",
+      "mì chính",
+      "bột ngọt",
+      "sodium glutamate"
+    ],
+    "function": "Chất điều vị (Flavor enhancer)",
+    "adi_value": "EFSA group ADI: 30 mg/kg thể trọng/ngày, tính theo glutamic acid (E620-E625)",
+    "adi_upper": null,
+    "adi_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009848/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
-    "contraindications": [
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - Thông tư 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (General Standard for Food Additives)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
         "condition": "hypertension",
-        "severity": "CAUTION",
-        "message": "Bột ngọt chứa khoảng 12.3% natri. Người cao huyết áp cần tính vào tổng lượng natri nạp hàng ngày (< 2.000 mg/ngày theo WHO)."
+        "severity": "WARNING",
+        "message": "Chứa 12.3% natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       },
       {
-        "condition": "msg_sensitivity",
-        "severity": "CAUTION",
-        "message": "Một số cá nhân có thể gặp hội chứng nhạy cảm bột ngọt thoáng qua (nóng bừng, tê gáy) nếu tiêu thụ liều lượng lớn lúc đói."
-      },
-      {
-        "condition": "cardiovascular_risk",
-        "severity": "CAUTION",
-        "message": "Chứa 12.3% natri theo khối lượng — cần lưu ý cho bệnh nhân tim mạch."
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Thận trọng gánh nặng ion natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2017,
-      "adi_efsa": 30.0,
-      "risk_groups": ["hypertension", "cardiovascular_risk"],
-      "key_finding": "EFSA ANS Panel (2017): Thiết lập ADI 30 mg/kg bw/ngày cho glutamate và các muối của nó. Lượng nạp cao có thể gây đau đầu, nhịp tim nhanh.",
-      "reference": "EFSA Journal 2017;15(7):4910"
-    }
-  },
-  {
-    "ins_code": "INS 211",
-    "e_number": "E211",
-    "canonical_name_vi": "Natri benzoat",
-    "canonical_name_en": "Sodium benzoate",
-    "synonyms": ["Chất bảo quản 211", "Sodium benzoate"],
-    "function": "Chất bảo quản chống nấm mốc, nấm men",
-    "adi_value": "0 - 5 mg/kg bw/day",
-    "adi_upper": 5.0,
-    "adi_source": "JECFA / EFSA Journal 2016;14(3):4441",
-    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 1.000 mg/kg)",
-    "codex_standard": "Codex STAN 192-1995",
-    "allergen_groups": [],
-    "contraindications": [
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - Thông tư 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (General Standard for Food Additives)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 30 mg/kg thể trọng/ngày, tính theo glutamic acid (E620-E625)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "EFSA",
+      "source_id": "EFSA_GLUTAMATES_2017",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009848/",
+      "source_locator": "Group ADI 30 mg/kg bw/day, expressed as glutamic acid, for E620-E625.",
+      "verification_status": "source_checked",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit.",
+      "group_adi_mg_per_kg_bw_day": 30.0,
+      "group_members": "E620-E625",
+      "group_expression_basis": "glutamic acid"
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
       {
-        "condition": "asthma",
-        "severity": "WARNING",
-        "message": "Nguy cơ kích hoạt cơn hen phế quản hoặc mày đay ở người nhạy cảm aspirin."
-      },
-      {
-        "condition": "vitamin_c_interaction",
-        "severity": "WARNING",
-        "message": "Phản ứng với acid ascorbic (Vitamin C) trong nhiệt độ cao có nguy cơ sinh vết benzen."
-      },
-      {
-        "condition": "children_under_6",
-        "severity": "CAUTION",
-        "message": "Trẻ em dưới 6 tuổi hệ thải độc chưa hoàn thiện, cần hạn chế."
+        "id": "EFSA_GLUTAMATES_2017",
+        "title": "EFSA Journal 2017;15(7):4910, glutamates",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009848/",
+        "locator": "Group ADI 30 mg/kg bw/day, expressed as glutamic acid, for E620-E625."
       }
-    ],
-    "efsa_opinion": {
-      "year": 2016,
-      "adi_efsa": 5.0,
-      "risk_groups": ["asthma", "children_under_6"],
-      "key_finding": "EFSA Panel (2016): Đánh giá lại Sodium Benzoate xác nhận ADI 5 mg/kg bw/ngày. Kết hợp với acid ascorbic (vitamin C) có thể tạo thành benzene.",
-      "reference": "EFSA Journal 2016;14(3):4441"
-    }
-  },
-  {
-    "ins_code": "INS 102",
-    "e_number": "E102",
-    "canonical_name_vi": "Tartrazine (Phẩm màu vàng chanh Azo)",
-    "canonical_name_en": "Tartrazine",
-    "synonyms": ["Màu vàng 102", "Yellow 5", "FD&C Yellow No. 5", "Phẩm màu tổng hợp 102"],
-    "function": "Phẩm màu tổng hợp (nhóm Azo)",
-    "adi_value": "0 - 7.5 mg/kg bw/day",
-    "adi_upper": 7.5,
-    "adi_source": "EFSA Journal 2009;7(11):1331",
-    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 100-300 mg/kg)",
-    "codex_standard": "Codex STAN 192-1995",
-    "allergen_groups": [],
-    "contraindications": [
-      {
-        "condition": "children_adhd",
-        "severity": "WARNING",
-        "message": "Thuộc nhóm màu Southampton theo EFSA. Bằng chứng khoa học cho thấy phẩm màu azo làm gia tăng hành vi hiếu động và giảm tập trung ở trẻ nhỏ."
-      },
-      {
-        "condition": "asthma",
-        "severity": "CAUTION",
-        "message": "Rủi ro dị ứng chéo với aspirin và bệnh nhân hen suyễn (~27% phản ứng dương tính ở nhóm nhạy cảm)."
-      },
-      {
-        "condition": "pregnancy",
-        "severity": "CAUTION",
-        "message": "Phụ nữ mang thai nên ưu tiên phẩm màu tự nhiên thay vì màu tổng hợp Azo."
-      }
-    ],
-    "efsa_opinion": {
-      "year": 2009,
-      "adi_efsa": 7.5,
-      "risk_groups": ["children_under_6", "adhd", "asthma"],
-      "key_finding": "EFSA Panel on Food Additives (2009): Tái đánh giá cho thấy Tartrazine và các phẩm màu Azo có thể làm tăng hành vi hiếu động ở trẻ em. Khuyến nghị giảm ADI từ 10 xuống 7.5 mg/kg bw/ngày.",
-      "reference": "EFSA Journal 2009;7(11):1331"
-    }
+    ]
   },
   {
     "ins_code": "INS 951",
     "e_number": "E951",
     "canonical_name_vi": "Aspartame (Chất tạo ngọt nhân tạo)",
     "canonical_name_en": "Aspartame",
-    "synonyms": ["Đường ăn kiêng Aspartam", "Equal", "NutraSweet"],
-    "function": "Chất tạo ngọt năng lượng thấp",
-    "adi_value": "0 - 40 mg/kg bw/day",
+    "synonyms": [
+      "aspartam",
+      "chất tạo ngọt 951",
+      "E951"
+    ],
+    "function": "Chất tạo ngọt tổng hợp (Sweetener)",
+    "adi_value": "JECFA ADI: 0-40 mg/kg thể trọng/ngày",
     "adi_upper": 40.0,
-    "adi_source": "EFSA Journal 2013;11(12):3496 + WHO/IARC 2023",
-    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (bắt buộc ghi nhãn chứa Phenylalanine)",
-    "codex_standard": "Codex STAN 192-1995",
+    "adi_source": "https://www.who.int/news/item/14-07-2023-aspartame-hazard-and-risk-assessment-results-released",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
-    "contraindications": [
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 (Mức ML theo nhóm) - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995 (ML: 600 - 1000 mg/kg)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
         "condition": "pku",
         "severity": "CRITICAL",
-        "message": "CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI: Aspartame thủy phân sinh Phenylalanine. Bệnh nhân PKU thiếu enzyme chuyển hóa sẽ tích tụ gây tổn thương não không phục hồi."
+        "message": "CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI cho người mắc Phenylketon niệu",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       },
       {
         "condition": "pregnancy",
-        "severity": "CAUTION",
-        "message": "Cần theo dõi tổng liều lượng nạp hàng ngày không vượt ngưỡng ADI."
-      },
-      {
-        "condition": "children_under_6",
-        "severity": "CAUTION",
-        "message": "Trẻ em dưới 6 tuổi nên hạn chế sử dụng chất tạo ngọt nhân tạo."
+        "severity": "WARNING",
+        "message": "Thận trọng",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2013,
-      "adi_efsa": 40.0,
-      "risk_groups": ["pku", "pregnancy"],
-      "key_finding": "EFSA Panel (2013, cập nhật 2023): ADI 40 mg/kg bw/ngày được duy trì. Chống chỉ định tuyệt đối cho người mắc PKU. IARC (2023) phân loại nhóm 2B nhưng JECFA giữ nguyên ADI.",
-      "reference": "EFSA Journal 2013;11(12):3496 + WHO/IARC 2023"
-    }
+    "health_considerations": [
+      {
+        "condition": "pku",
+        "severity": "CAUTION",
+        "message": "Aspartame contains phenylalanine. FDA advises people with PKU to avoid or restrict it; this is a label-based precaution, not a personalized diagnosis.",
+        "source_id": "FDA_ASPARTAME",
+        "source_url": "https://www.fda.gov/food/food-additives-petitions/high-intensity-sweeteners",
+        "verification_status": "source_checked"
+      }
+    ],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 (Mức ML theo nhóm) - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (ML: 600 - 1000 mg/kg)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-40 mg/kg thể trọng/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "WHO/FAO JECFA",
+      "source_id": "WHO_JECFA_ASPARTAME_2023",
+      "source_url": "https://www.who.int/news/item/14-07-2023-aspartame-hazard-and-risk-assessment-results-released",
+      "source_locator": "WHO/FAO/IARC joint 2023 statement and linked JECFA chemical record.",
+      "verification_status": "source_checked",
+      "use_for_numeric_compliance": true,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "WHO_JECFA_ASPARTAME_2023",
+        "title": "WHO/FAO/IARC 2023 aspartame assessment summary",
+        "url": "https://www.who.int/news/item/14-07-2023-aspartame-hazard-and-risk-assessment-results-released",
+        "locator": "JECFA reaffirmed ADI 0-40 mg/kg bw/day; IARC hazard classification is distinct from a dose-specific risk assessment."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 102",
+    "e_number": "E102",
+    "canonical_name_vi": "Tartrazine (Phẩm màu vàng chanh tổng hợp)",
+    "canonical_name_en": "Tartrazine",
+    "synonyms": [
+      "FD&C Yellow No. 5",
+      "màu vàng 102",
+      "tartrazin"
+    ],
+    "function": "Phẩm màu tổng hợp (Azo Dye Color)",
+    "adi_value": "0 - 10 mg/kg thể trọng/ngày (JECFA / EFSA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 (ML quy định) - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995 (ML: 100 - 300 mg/kg)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_under_6 / adhd",
+        "severity": "WARNING",
+        "message": "Cảnh báo EFSA làm tăng hành vi hiếu động",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma",
+        "severity": "WARNING",
+        "message": "Nguy cơ kích ứng",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 (ML quy định) - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (ML: 100 - 300 mg/kg)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 10 mg/kg thể trọng/ngày (JECFA / EFSA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 322(i)",
+    "e_number": "E322i",
+    "canonical_name_vi": "Lecithin (từ đậu nành / trứng)",
+    "canonical_name_en": "Lecithin",
+    "synonyms": [
+      "soy lecithin",
+      "phosphatidylcholine",
+      "chất nhũ hóa 322"
+    ],
+    "function": "Chất nhũ hóa (Emulsifier)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "soy_allergy",
+        "severity": "WARNING",
+        "message": "Nguy cơ dị ứng nếu chiết xuất từ đậu nành",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "egg_allergy",
+        "severity": "WARNING",
+        "message": "Nguy cơ nếu từ trứng",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "source_checked_with_source_dependent_origin",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "For lecithin, the source material must be established; the E-number alone does not establish soy or egg origin."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 330",
     "e_number": "E330",
-    "canonical_name_vi": "Acid citric",
+    "canonical_name_vi": "Acid citric (Acid chanh tự nhiên)",
     "canonical_name_en": "Citric acid",
-    "synonyms": ["Axit chanh", "Chất điều chỉnh độ chua 330"],
-    "function": "Chất điều chỉnh độ acid, chất chống oxy hóa",
-    "adi_value": "Not Specified (GMP - An toàn tự nhiên)",
-    "adi_upper": null,
-    "adi_source": "JECFA (Not Specified)",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
-    "allergen_groups": [],
-    "contraindications": [
-      {
-        "condition": "severe_gastritis",
-        "severity": "CAUTION",
-        "message": "Người bị viêm loét dạ dày tá tràng nặng cần hạn chế đồ uống có độ chua cao khi đói."
-      }
+    "synonyms": [
+      "axit xitric",
+      "chất điều chỉnh độ chua 330"
     ],
-    "efsa_opinion": null
-  },
-  {
-    "ins_code": "INS 322(i)",
-    "e_number": "E322",
-    "canonical_name_vi": "Lecithin (từ đậu nành/trứng)",
-    "canonical_name_en": "Lecithin",
-    "synonyms": ["Soya lecithin", "Lecithin đậu nành", "Chất nhũ hóa 322", "322(i)"],
-    "function": "Chất nhũ hóa tự nhiên",
-    "adi_value": "Not Specified (GMP)",
+    "function": "Chất điều chỉnh độ acid (Acidity regulator)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
     "adi_upper": null,
-    "adi_source": "JECFA (Not Specified) / EFSA Journal 2017;15(4):4742",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
-    "allergen_groups": ["soy", "egg"],
-    "contraindications": [
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
-        "condition": "soy_allergy",
+        "condition": "healthy",
         "severity": "WARNING",
-        "message": "Lecithin nguồn đậu nành chứa protein đậu nành dư có thể gây phản ứng dị ứng ở người nhạy cảm."
+        "message": "Rất an toàn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       },
       {
-        "condition": "egg_allergy",
-        "severity": "CAUTION",
-        "message": "Lecithin chiết xuất từ lòng đỏ trứng gà có thể gây kích ứng ở người dị ứng trứng."
+        "condition": "peptic_ulcer",
+        "severity": "WARNING",
+        "message": "Cân nhắc liều lượng lớn khi viêm loét dạ dày cấp",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2017,
-      "adi_efsa": null,
-      "risk_groups": ["soy_allergy", "egg_allergy"],
-      "key_finding": "EFSA Panel (2017): Lecithin không cần ADI (JECFA: Not Specified). Lecithin chiết xuất từ đậu nành chứa protein đậu nành dư có thể gây phản ứng dị ứng.",
-      "reference": "EFSA Journal 2017;15(4):4742"
-    }
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 211",
+    "e_number": "E211",
+    "canonical_name_vi": "Natri benzoat (Sodium benzoate)",
+    "canonical_name_en": "Sodium benzoate",
+    "synonyms": [
+      "chất bảo quản 211",
+      "natri benzoat",
+      "E211"
+    ],
+    "function": "Chất bảo quản chống nấm men & vi khuẩn (Preservative)",
+    "adi_value": "0 - 5 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 (ML: 1000 mg/kg) - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995 (ML: 1000 mg/kg)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hypertension",
+        "severity": "WARNING",
+        "message": "Tăng tải ion natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma",
+        "severity": "WARNING",
+        "message": "Nguy cơ quá mẫn khi kết hợp với Vitamin C",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 (ML: 1000 mg/kg) - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (ML: 1000 mg/kg)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 5 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 500(ii)",
     "e_number": "E500ii",
     "canonical_name_vi": "Natri hydro carbonat (Baking soda)",
     "canonical_name_en": "Sodium hydrogen carbonate",
-    "synonyms": ["Baking soda", "Thuốc muối", "Bột nở 500ii"],
-    "function": "Chất tạo xốp và điều chỉnh độ acid",
-    "adi_value": "Not Specified (GMP)",
+    "synonyms": [
+      "baking soda",
+      "bột nở 500ii",
+      "natri bicacbonat"
+    ],
+    "function": "Chất tạo xốp & điều chỉnh độ acid (Raising agent)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
     "adi_upper": null,
-    "adi_source": "JECFA (GMP)",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
-    "contraindications": [
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
         "condition": "hypertension",
-        "severity": "CAUTION",
-        "message": "Mỗi gram NaHCO₃ chứa 274 mg natri. Người tăng huyết áp/suy thận cần tính vào tổng lượng natri."
-      },
-      {
-        "condition": "chronic_kidney_disease",
-        "severity": "CAUTION",
-        "message": "Cung cấp ion natri kiềm, bệnh nhân suy thận mạn cần kiểm soát tổng lượng natri nạp vào."
+        "severity": "WARNING",
+        "message": "Chứa natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2017,
-      "adi_efsa": null,
-      "risk_groups": ["hypertension", "chronic_kidney_disease"],
-      "key_finding": "Baking soda (NaHCO₃) — mỗi gram chứa 274 mg natri. Cần kiểm soát ở bệnh nhân tăng huyết áp và suy thận.",
-      "reference": "EFSA/Codex GMP Guidelines"
-    }
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 503(ii)",
     "e_number": "E503ii",
     "canonical_name_vi": "Amoni hydro carbonat (Bột khai)",
     "canonical_name_en": "Ammonium hydrogen carbonate",
-    "synonyms": ["Bột khai", "Baking ammonia", "Chất tạo xốp 503ii"],
-    "function": "Chất tạo xốp trong nướng bánh quy",
-    "adi_value": "Not Specified (GMP)",
+    "synonyms": [
+      "bột khai",
+      "ammonium bicarbonate",
+      "E503ii"
+    ],
+    "function": "Chất tạo xốp (Raising agent)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
     "adi_upper": null,
-    "adi_source": "JECFA (GMP)",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
-    "contraindications": [
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
-        "condition": "chronic_kidney_disease",
-        "severity": "CAUTION",
-        "message": "Phân giải sinh khí amoniac, bệnh nhân suy thận nặng cần thận trọng."
+        "condition": "chronic_kidney_disease / liver_failure",
+        "severity": "WARNING",
+        "message": "Thận trọng với tích tụ ion amoni (NH4+)",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": null
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 471",
     "e_number": "E471",
     "canonical_name_vi": "Mono- và diglycerid của các acid béo",
     "canonical_name_en": "Mono- and di-glycerides of fatty acids",
-    "synonyms": ["Chất nhũ hóa 471", "Distilled monoglycerides"],
-    "function": "Chất nhũ hóa, ổn định cấu trúc",
-    "adi_value": "Not Specified (GMP)",
+    "synonyms": [
+      "chất nhũ hóa 471",
+      "monoglyceride",
+      "diglyceride"
+    ],
+    "function": "Chất nhũ hóa và làm ổn định (Emulsifier & Stabilizer)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
     "adi_upper": null,
-    "adi_source": "JECFA (GMP) / EFSA Journal 2017;15(11):5045",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
     "contraindications": [],
-    "efsa_opinion": {
-      "year": 2017,
-      "adi_efsa": null,
-      "risk_groups": [],
-      "key_finding": "EFSA Panel (2017): Mono- và diglycerides là sản phẩm tự nhiên của quá trình tiêu hóa chất béo. Không cần ADI cụ thể. An toàn ở mức GMP.",
-      "reference": "EFSA Journal 2017;15(11):5045"
-    }
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hyperlipidemia / dyslipidemia",
+        "severity": "WARNING",
+        "message": "Chứa acid béo",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 1420",
     "e_number": "E1420",
-    "canonical_name_vi": "Tinh bột biến tính (Acetylated starch)",
+    "canonical_name_vi": "Tinh bột biến tính Acetylated starch",
     "canonical_name_en": "Acetylated starch",
-    "synonyms": ["Chất làm dày 1420", "Modified starch", "Tinh bột acetyl hóa"],
-    "function": "Chất làm dày và tạo gel",
-    "adi_value": "Not Specified (GMP)",
+    "synonyms": [
+      "chất làm dày 1420",
+      "tinh bột biến tính",
+      "modified starch"
+    ],
+    "function": "Chất làm dày và ổn định cấu trúc (Thickener)",
+    "adi_value": "EFSA: không cần ADI dạng số cho modified starches ở mức sử dụng được báo cáo",
     "adi_upper": null,
-    "adi_source": "JECFA (GMP) / EFSA Journal 2018;16(3):5180",
-    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
-    "codex_standard": "Codex STAN 192-1995",
+    "adi_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009865/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
     "allergen_groups": [],
-    "contraindications": [
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
         "condition": "diabetes",
-        "severity": "CAUTION",
-        "message": "Chỉ số đường huyết cao hơn so với tinh bột tự nhiên, cần lưu ý cho bệnh nhân đái tháo đường."
+        "severity": "WARNING",
+        "message": "Là tinh bột chuyển hóa thành carbohydrate",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2018,
-      "adi_efsa": null,
-      "risk_groups": ["diabetes"],
-      "key_finding": "EFSA Panel (2018): Tinh bột biến tính được đánh giá không cần ADI cụ thể. Tuy nhiên, bệnh nhân tiểu đường cần lưu ý chỉ số đường huyết cao hơn tinh bột tự nhiên.",
-      "reference": "EFSA Journal 2018;16(3):5180"
-    }
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA: không cần ADI dạng số cho modified starches ở mức sử dụng được báo cáo",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "EFSA",
+      "source_id": "EFSA_MODIFIED_STARCH_2017",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009865/",
+      "source_locator": "Includes E1420; no numerical ADI needed and no safety concern at reported uses/use levels for the general population.",
+      "verification_status": "source_checked",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "EFSA_MODIFIED_STARCH_2017",
+        "title": "EFSA Journal 2017;15(10):4911, modified starches",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009865/",
+        "locator": "Includes E1420; no numerical ADI needed and no safety concern at reported uses/use levels for the general population."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 150d",
+    "e_number": "E150d",
+    "canonical_name_vi": "Caramel màu loại IV (Sulfite Ammonia Caramel)",
+    "canonical_name_en": "Caramel colour class IV (Sulfite ammonia)",
+    "synonyms": [
+      "màu caramel",
+      "caramel IV",
+      "E150d"
+    ],
+    "function": "Phẩm màu (Color)",
+    "adi_value": "0 - 200 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Phẩm màu có thể ảnh hưởng hành vi trẻ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "sulfites",
+        "severity": "WARNING",
+        "message": "Quy trình sản xuất dùng sulfit",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 200 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 631",
+    "e_number": "E631",
+    "canonical_name_vi": "Dinatri 5'-inosinat (Disodium inosinate)",
+    "canonical_name_en": "Disodium 5'-inosinate",
+    "synonyms": [
+      "chất điều vị 631",
+      "IMP",
+      "disodium inosinate"
+    ],
+    "function": "Chất điều vị (Flavor enhancer)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "gout",
+        "severity": "WARNING",
+        "message": "Chứa purine có thể làm tăng acid uric",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 627",
+    "e_number": "E627",
+    "canonical_name_vi": "Dinatri 5'-guanylat (Disodium guanylate)",
+    "canonical_name_en": "Disodium 5'-guanylate",
+    "synonyms": [
+      "chất điều vị 627",
+      "GMP",
+      "disodium guanylate"
+    ],
+    "function": "Chất điều vị (Flavor enhancer)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "gout",
+        "severity": "WARNING",
+        "message": "Chứa purine có thể làm tăng acid uric",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 110",
+    "e_number": "E110",
+    "canonical_name_vi": "Sunset Yellow FCF (Phẩm màu vàng cam)",
+    "canonical_name_en": "Sunset Yellow FCF",
+    "synonyms": [
+      "FD&C Yellow No. 6",
+      "màu vàng cam",
+      "E110"
+    ],
+    "function": "Phẩm màu tổng hợp (Azo Dye Color)",
+    "adi_value": "0 - 4 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Southampton color gây hiếu động ở trẻ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma",
+        "severity": "WARNING",
+        "message": "Nguy cơ quá mẫn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 4 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 129",
+    "e_number": "E129",
+    "canonical_name_vi": "Allura Red AC (Phẩm màu đỏ)",
+    "canonical_name_en": "Allura Red AC",
+    "synonyms": [
+      "FD&C Red No. 40",
+      "đỏ allura",
+      "E129"
+    ],
+    "function": "Phẩm màu tổng hợp (Azo Dye Color)",
+    "adi_value": "0 - 7 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Southampton color gây hiếu động ở trẻ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma",
+        "severity": "WARNING",
+        "message": "Nguy cơ quá mẫn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 7 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 202",
+    "e_number": "E202",
+    "canonical_name_vi": "Kali sorbat (Potassium sorbate)",
+    "canonical_name_en": "Potassium sorbate",
+    "synonyms": [
+      "chất bảo quản 202",
+      "kali sorbate",
+      "E202"
+    ],
+    "function": "Chất bảo quản (Preservative)",
+    "adi_value": "0 - 25 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn ở mức cho phép",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 25 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 950",
+    "e_number": "E950",
+    "canonical_name_vi": "Acesulfame K (Chất tạo ngọt)",
+    "canonical_name_en": "Acesulfame potassium",
+    "synonyms": [
+      "acesulfam kali",
+      "ace-K",
+      "E950"
+    ],
+    "function": "Chất tạo ngọt tổng hợp (Sweetener)",
+    "adi_value": "0 - 15 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "WARNING",
+        "message": "Thận trọng",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "hyperkalemia",
+        "severity": "WARNING",
+        "message": "Chứa kali",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 15 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 415",
+    "e_number": "E415",
+    "canonical_name_vi": "Xanthan gum (Chất làm dày)",
+    "canonical_name_en": "Xanthan gum",
+    "synonyms": [
+      "gôm xanthan",
+      "xanthan",
+      "E415"
+    ],
+    "function": "Chất làm dày và ổn định (Thickener & Stabilizer)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn ở mức cho phép",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 412",
+    "e_number": "E412",
+    "canonical_name_vi": "Guar gum (Chất làm dày)",
+    "canonical_name_en": "Guar gum",
+    "synonyms": [
+      "gôm guar",
+      "guar",
+      "E412"
+    ],
+    "function": "Chất làm dày và ổn định (Thickener & Stabilizer)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn ở mức cho phép",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 407",
+    "e_number": "E407",
+    "canonical_name_vi": "Carrageenan (Chất làm dày từ rong biển)",
+    "canonical_name_en": "Carrageenan",
+    "synonyms": [
+      "carrageenan",
+      "kappa carrageenan",
+      "E407"
+    ],
+    "function": "Chất làm dày và tạo gel (Thickener & Gelling agent)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "gastrointestinal",
+        "severity": "WARNING",
+        "message": "EFSA 2018 khuyến cáo theo dõi ở trẻ sơ sinh",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 331(iii)",
+    "e_number": "E331iii",
+    "canonical_name_vi": "Trinatri citrat (Trisodium citrate)",
+    "canonical_name_en": "Trisodium citrate",
+    "synonyms": [
+      "natri citrat",
+      "chất điều chỉnh acid 331",
+      "E331"
+    ],
+    "function": "Chất điều chỉnh độ acid (Acidity regulator)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hypertension",
+        "severity": "WARNING",
+        "message": "Chứa natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 160a",
+    "e_number": "E160a",
+    "canonical_name_vi": "Beta-carotene (Tiền Vitamin A tự nhiên)",
+    "canonical_name_en": "Beta-carotene",
+    "synonyms": [
+      "beta caroten",
+      "provitamin A",
+      "E160a"
+    ],
+    "function": "Phẩm màu tự nhiên (Natural Color)",
+    "adi_value": "0 - 5 mg/kg thể trọng/ngày (JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+        "codex": "Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "smokers",
+        "severity": "WARNING",
+        "message": "Liều cao beta-carotene tăng nguy cơ ung thư phổi ở người hút thuốc",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép theo Phụ lục 2 - TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "0 - 5 mg/kg thể trọng/ngày (JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 300",
+    "e_number": "E300",
+    "canonical_name_vi": "Acid ascorbic (Vitamin C)",
+    "canonical_name_en": "Ascorbic acid",
+    "synonyms": [
+      "vitamin C",
+      "chất chống oxy hóa 300",
+      "E300"
+    ],
+    "function": "Chất chống oxy hóa (Antioxidant)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "kidney_stones",
+        "severity": "WARNING",
+        "message": "Liều rất cao có thể tăng nguy cơ sỏi thận oxalat",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 551",
+    "e_number": "E551",
+    "canonical_name_vi": "Silicon dioxide (Chất chống đóng vón)",
+    "canonical_name_en": "Silicon dioxide",
+    "synonyms": [
+      "silica",
+      "chất chống vón 551",
+      "E551"
+    ],
+    "function": "Chất chống đóng vón (Anti-caking agent)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "healthy",
+        "severity": "WARNING",
+        "message": "An toàn ở mức sử dụng thông thường",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 420",
+    "e_number": "E420",
+    "canonical_name_vi": "Sorbitol (Chất tạo ngọt - Đường rượu)",
+    "canonical_name_en": "Sorbitol",
+    "synonyms": [
+      "sorbitol",
+      "chất tạo ngọt 420",
+      "E420"
+    ],
+    "function": "Chất tạo ngọt (Sweetener - Sugar alcohol)",
+    "adi_value": "Chưa xác định (Not Specified - JECFA)",
+    "adi_upper": null,
+    "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+        "codex": "Codex STAN 192-1995 (GMP)"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "ibs",
+        "severity": "WARNING",
+        "message": "Polyol gây đầy hơi tiêu chảy ở người nhạy cảm FODMAP",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "diabetes",
+        "severity": "WARNING",
+        "message": "Vẫn chứa calo cần tính",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Được phép sử dụng theo GMP (Phụ lục 1 - TT 24/2019/TT-BYT)",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Codex STAN 192-1995 (GMP)",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Chưa xác định (Not Specified - JECFA)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA",
+      "source_id": "JECFA_DB",
+      "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+      "source_locator": "Individual record and monograph not yet recorded.",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify current authority, population, group members, units and status against the primary evaluation before calculating an intake limit."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": [
+      {
+        "id": "JECFA_DB",
+        "title": "WHO/FAO JECFA Food Additives Database",
+        "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+        "locator": "Use the substance-specific evaluation record and linked monograph; the database landing page is not enough to validate an individual numeric claim."
+      }
+    ]
   },
   {
     "ins_code": "INS 220",
     "e_number": "E220",
-    "canonical_name_vi": "Lưu huỳnh đioxit (Sulfite)",
-    "canonical_name_en": "Sulphur dioxide",
-    "synonyms": ["SO₂", "Sulfur dioxide", "Chất bảo quản 220", "Lưu huỳnh"],
-    "function": "Chất bảo quản, chống oxy hóa, chống nâu hóa",
-    "adi_value": "0 - 0.7 mg/kg bw/day (tính theo SO₂)",
+    "canonical_name_vi": "Sulfur dioxide (Lưu huỳnh dioxide)",
+    "canonical_name_en": "Sulfur dioxide",
+    "synonyms": [
+      "SO2",
+      "lưu huỳnh đioxit",
+      "sulphur dioxide"
+    ],
+    "function": "Chất bảo quản, chống oxy hóa (Preservative, antioxidant)",
+    "adi_value": "EFSA đã rút lại ADI tạm thời năm 2022; JECFA ADI: 0-0.7 mg/kg bw/ngày",
     "adi_upper": 0.7,
-    "adi_source": "JECFA (2009) — Group ADI cho INS 220-228",
-    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 10-2000 mg/kg tùy nhóm TP)",
-    "codex_standard": "Codex STAN 192-1995",
-    "allergen_groups": ["sulfites"],
-    "contraindications": [
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [
+      "sulfites"
+    ],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
       {
-        "condition": "asthma",
+        "condition": "asthma_allergy",
         "severity": "CRITICAL",
-        "message": "3-10% người hen suyễn nhạy cảm với sulfite. Có thể gây co thắt phế quản nghiêm trọng, đặc biệt người dùng corticosteroid."
+        "message": "Sulfite gây co thắt phế quản nghiêm trọng ở 5-10% bệnh nhân hen suyễn, có thể gây sốc phản vệ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       },
       {
-        "condition": "sulfite_sensitivity",
-        "severity": "CRITICAL",
-        "message": "Sulfite có thể gây phản ứng dị ứng nghiêm trọng: khó thở, phù mạch, hạ huyết áp, sốc phản vệ."
-      },
-      {
-        "condition": "children_under_6",
+        "condition": "pregnancy",
         "severity": "WARNING",
-        "message": "Trẻ nhỏ hệ enzyme chưa hoàn thiện, khả năng chuyển hóa sulfite thấp hơn người lớn."
+        "message": "Khuyến cáo hạn chế sulfite trong thai kỳ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
       }
     ],
-    "efsa_opinion": {
-      "year": 2016,
-      "adi_efsa": 0.7,
-      "risk_groups": ["asthma", "sulfite_sensitivity", "children_under_6"],
-      "key_finding": "EFSA Panel (2016): Tái đánh giá SO₂ và sulfites (INS 220-228). ADI nhóm 0.7 mg/kg bw/ngày tính theo SO₂. Ngưỡng ghi nhãn bắt buộc: ≥ 10 mg/kg hoặc 10 mg/L. 3-10% người hen suyễn có phản ứng bất lợi.",
-      "reference": "EFSA Journal 2016;14(4):4438"
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
     },
-    "group_members": [
-      {"ins_code": "INS 220", "name": "Sulphur dioxide"},
-      {"ins_code": "INS 221", "name": "Sodium sulphite"},
-      {"ins_code": "INS 222", "name": "Sodium hydrogen sulphite"},
-      {"ins_code": "INS 223", "name": "Sodium metabisulphite"},
-      {"ins_code": "INS 224", "name": "Potassium metabisulphite"},
-      {"ins_code": "INS 225", "name": "Potassium sulphite"},
-      {"ins_code": "INS 226", "name": "Calcium sulphite"},
-      {"ins_code": "INS 227", "name": "Calcium hydrogen sulphite"},
-      {"ins_code": "INS 228", "name": "Potassium hydrogen sulphite"}
-    ]
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA đã rút lại ADI tạm thời năm 2022; JECFA ADI: 0-0.7 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 0.7,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA đã rút lại ADI tạm thời năm 2022; JECFA ADI: 0-0.7 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [
+        "sulfites"
+      ],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 221",
+    "e_number": "E221",
+    "canonical_name_vi": "Natri sulfit",
+    "canonical_name_en": "Sodium sulfite",
+    "synonyms": [
+      "sodium sulphite",
+      "natri sunfit"
+    ],
+    "function": "Chất bảo quản (Preservative)",
+    "adi_value": "JECFA group ADI: 0-0.7 mg/kg bw/ngày (tính theo SO2, nhóm E220-E228)",
+    "adi_upper": 0.7,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [
+      "sulfites"
+    ],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "asthma_allergy",
+        "severity": "CRITICAL",
+        "message": "Nhóm sulfite gây phản ứng nghiêm trọng ở người hen suyễn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA group ADI: 0-0.7 mg/kg bw/ngày (tính theo SO2, nhóm E220-E228)",
+      "numeric_upper_mg_per_kg_bw_day": 0.7,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA group ADI: 0-0.7 mg/kg bw/ngày (tính theo SO2, nhóm E220-E228)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [
+        "sulfites"
+      ],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 250",
+    "e_number": "E250",
+    "canonical_name_vi": "Natri nitrit",
+    "canonical_name_en": "Sodium nitrite",
+    "synonyms": [
+      "sodium nitrite",
+      "chất bảo quản 250",
+      "muối diêm"
+    ],
+    "function": "Chất bảo quản, ổn định màu thịt chế biến (Preservative, color fixative)",
+    "adi_value": "EFSA ADI: 0-0.07 mg/kg bw/ngày (2017)",
+    "adi_upper": 0.07,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "WARNING",
+        "message": "Nitrit kết hợp amin trong thực phẩm có thể tạo nitrosamine gây ung thư; thai phụ nên hạn chế thịt chế biến",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "children_adhd",
+        "severity": "CAUTION",
+        "message": "Trẻ em nên hạn chế thịt chế biến chứa nitrit",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA ADI: 0-0.07 mg/kg bw/ngày (2017)",
+      "numeric_upper_mg_per_kg_bw_day": 0.07,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA ADI: 0-0.07 mg/kg bw/ngày (2017)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 251",
+    "e_number": "E251",
+    "canonical_name_vi": "Natri nitrat",
+    "canonical_name_en": "Sodium nitrate",
+    "synonyms": [
+      "sodium nitrate",
+      "diêm tiêu",
+      "muối diêm tiêu"
+    ],
+    "function": "Chất bảo quản thịt (Preservative)",
+    "adi_value": "EFSA ADI: 0-3.7 mg/kg bw/ngày (2017)",
+    "adi_upper": 3.7,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Nitrat chuyển hóa thành nitrit trong cơ thể; thai phụ nên thận trọng",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA ADI: 0-3.7 mg/kg bw/ngày (2017)",
+      "numeric_upper_mg_per_kg_bw_day": 3.7,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA ADI: 0-3.7 mg/kg bw/ngày (2017)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 320",
+    "e_number": "E320",
+    "canonical_name_vi": "BHA (Butylated hydroxyanisole)",
+    "canonical_name_en": "Butylated hydroxyanisole (BHA)",
+    "synonyms": [
+      "BHA",
+      "butylhydroxyanisol"
+    ],
+    "function": "Chất chống oxy hóa tổng hợp (Synthetic antioxidant)",
+    "adi_value": "JECFA ADI: 0-0.5 mg/kg bw/ngày",
+    "adi_upper": 0.5,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "IARC xếp BHA vào nhóm 2B (có thể gây ung thư ở người); thai phụ nên hạn chế",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "children_adhd",
+        "severity": "CAUTION",
+        "message": "Nên hạn chế chất chống oxy hóa tổng hợp cho trẻ em",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-0.5 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 0.5,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-0.5 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 321",
+    "e_number": "E321",
+    "canonical_name_vi": "BHT (Butylated hydroxytoluene)",
+    "canonical_name_en": "Butylated hydroxytoluene (BHT)",
+    "synonyms": [
+      "BHT",
+      "butylhydroxytoluen"
+    ],
+    "function": "Chất chống oxy hóa tổng hợp (Synthetic antioxidant)",
+    "adi_value": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+    "adi_upper": 0.3,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Nên hạn chế BHT trong thai kỳ do thiếu dữ liệu an toàn đầy đủ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "children_adhd",
+        "severity": "CAUTION",
+        "message": "Khuyến cáo hạn chế cho trẻ nhỏ",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 0.3,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 338",
+    "e_number": "E338",
+    "canonical_name_vi": "Acid phosphoric",
+    "canonical_name_en": "Phosphoric acid",
+    "synonyms": [
+      "phosphoric acid",
+      "axit photphoric",
+      "acid orthophosphoric"
+    ],
+    "function": "Chất điều chỉnh độ chua, hương liệu (Acidity regulator)",
+    "adi_value": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus, tổng phosphate)",
+    "adi_upper": 40.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Phosphate vô cơ gây tăng phospho máu, nguy hiểm cho bệnh nhân suy thận",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Nước ngọt có gas chứa acid phosphoric góp phần tăng huyết áp gián tiếp",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus, tổng phosphate)",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus, tổng phosphate)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 339(i)",
+    "e_number": "E339(i)",
+    "canonical_name_vi": "Mononatri phosphat",
+    "canonical_name_en": "Monosodium phosphate",
+    "synonyms": [
+      "sodium dihydrogen phosphate",
+      "MSP"
+    ],
+    "function": "Chất điều chỉnh độ chua, chất nhũ hóa (Acidity regulator, emulsifier)",
+    "adi_value": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+    "adi_upper": 40.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Phosphate natri gây tăng phospho máu và natri máu; nguy hiểm cho bệnh nhân thận",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "hypertension",
+        "severity": "WARNING",
+        "message": "Chứa natri; cần tính vào tổng lượng natri nạp",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 440",
+    "e_number": "E440",
+    "canonical_name_vi": "Pectin",
+    "canonical_name_en": "Pectin",
+    "synonyms": [
+      "pectin",
+      "pektin",
+      "chất tạo gel"
+    ],
+    "function": "Chất tạo gel, chất làm dày, chất ổn định (Gelling agent, thickener)",
+    "adi_value": "JECFA: ADI không xác định (Not specified — an toàn ở mức sử dụng thông thường)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA: ADI không xác định (Not specified — an toàn ở mức sử dụng thông thường)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA: ADI không xác định (Not specified — an toàn ở mức sử dụng thông thường)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 450(i)",
+    "e_number": "E450(i)",
+    "canonical_name_vi": "Dinatri diphosphat",
+    "canonical_name_en": "Disodium diphosphate",
+    "synonyms": [
+      "SAPP",
+      "sodium acid pyrophosphate",
+      "dinatri pyrophosphat"
+    ],
+    "function": "Chất nở, chất nhũ hóa, chất giữ ẩm (Raising agent, emulsifier)",
+    "adi_value": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+    "adi_upper": 40.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Diphosphate gây tăng phospho máu ở bệnh nhân suy thận",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Chứa natri; cần kiểm soát tổng lượng natri",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 452(i)",
+    "e_number": "E452(i)",
+    "canonical_name_vi": "Natri polyphosphat",
+    "canonical_name_en": "Sodium polyphosphate",
+    "synonyms": [
+      "sodium polyphosphate",
+      "sodium hexametaphosphate",
+      "SHMP"
+    ],
+    "function": "Chất nhũ hóa, chất giữ nước trong thịt chế biến (Emulsifier, moisture retention)",
+    "adi_value": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+    "adi_upper": 40.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Polyphosphate natri nguy hiểm cho bệnh nhân suy thận — tăng phospho và natri máu",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 955",
+    "e_number": "E955",
+    "canonical_name_vi": "Sucralose",
+    "canonical_name_en": "Sucralose",
+    "synonyms": [
+      "sucralose",
+      "splenda",
+      "chất tạo ngọt 955"
+    ],
+    "function": "Chất tạo ngọt nhân tạo (Sweetener)",
+    "adi_value": "JECFA ADI: 0-15 mg/kg bw/ngày",
+    "adi_upper": 15.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "diabetes",
+        "severity": "CAUTION",
+        "message": "Sucralose không calo nhưng một số nghiên cứu gợi ý có thể ảnh hưởng đến hệ vi sinh đường ruột và đáp ứng insulin",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "children_adhd",
+        "severity": "CAUTION",
+        "message": "Nên hạn chế chất tạo ngọt nhân tạo cho trẻ nhỏ theo WHO 2023",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-15 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 15.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-15 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 960a",
+    "e_number": "E960a",
+    "canonical_name_vi": "Steviol glycoside (Stevia)",
+    "canonical_name_en": "Steviol glycosides",
+    "synonyms": [
+      "stevia",
+      "stevioside",
+      "rebaudioside A",
+      "chất tạo ngọt stevia"
+    ],
+    "function": "Chất tạo ngọt tự nhiên (Natural sweetener)",
+    "adi_value": "JECFA ADI: 0-4 mg/kg bw/ngày (tính theo steviol)",
+    "adi_upper": 4.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "diabetes",
+        "severity": "CAUTION",
+        "message": "Steviol glycoside không ảnh hưởng đường huyết nhưng cần theo dõi tổng lượng đường thay thế",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-4 mg/kg bw/ngày (tính theo steviol)",
+      "numeric_upper_mg_per_kg_bw_day": 4.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-4 mg/kg bw/ngày (tính theo steviol)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 961",
+    "e_number": "E961",
+    "canonical_name_vi": "Neotame",
+    "canonical_name_en": "Neotame",
+    "synonyms": [
+      "neotame",
+      "neotam"
+    ],
+    "function": "Chất tạo ngọt tổng hợp, ngọt gấp 8000 lần đường (Sweetener)",
+    "adi_value": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+    "adi_upper": 0.3,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "phenylketonuria_pku",
+        "severity": "CAUTION",
+        "message": "Neotame là dẫn xuất aspartame nhưng không phóng thích phenylalanine đáng kể; FDA cho phép không cần cảnh báo PKU",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 0.3,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-0.3 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 621+631+627",
+    "e_number": "E621+E631+E627",
+    "canonical_name_vi": "Hỗn hợp điều vị (MSG + I+G)",
+    "canonical_name_en": "Flavor enhancer blend (MSG + I+G)",
+    "synonyms": [
+      "bột nêm",
+      "gia vị tổng hợp",
+      "I+G",
+      "hạt nêm"
+    ],
+    "function": "Hỗn hợp chất điều vị tăng cường umami (Flavor enhancer blend)",
+    "adi_value": "Theo ADI riêng từng thành phần: MSG (EFSA 30 mg/kg bw/ngày), IMP/GMP (JECFA: không xác định)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hypertension",
+        "severity": "WARNING",
+        "message": "Hỗn hợp MSG + I+G chứa natri cao; người cao huyết áp cần kiểm soát",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "Theo ADI riêng từng thành phần: MSG (EFSA 30 mg/kg bw/ngày), IMP/GMP (JECFA: không xác định)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "Theo ADI riêng từng thành phần: MSG (EFSA 30 mg/kg bw/ngày), IMP/GMP (JECFA: không xác định)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 401",
+    "e_number": "E401",
+    "canonical_name_vi": "Natri alginat",
+    "canonical_name_en": "Sodium alginate",
+    "synonyms": [
+      "sodium alginate",
+      "natri anginat",
+      "algin"
+    ],
+    "function": "Chất làm dày, chất tạo gel, chất ổn định (Thickener, gelling agent)",
+    "adi_value": "JECFA: ADI không xác định (Not specified — an toàn)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Natri alginat chứa natri; cần tính vào tổng lượng natri nạp cho bệnh nhân cao huyết áp",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 410",
+    "e_number": "E410",
+    "canonical_name_vi": "Gôm hạt đậu cào (Carob bean gum)",
+    "canonical_name_en": "Carob bean gum (Locust bean gum)",
+    "synonyms": [
+      "locust bean gum",
+      "LBG",
+      "gôm carob"
+    ],
+    "function": "Chất làm dày, chất ổn định (Thickener, stabilizer)",
+    "adi_value": "JECFA: ADI không xác định (Not specified — an toàn)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 414",
+    "e_number": "E414",
+    "canonical_name_vi": "Gôm arabic (Gôm acacia)",
+    "canonical_name_en": "Gum arabic (Acacia gum)",
+    "synonyms": [
+      "gum arabic",
+      "acacia gum",
+      "gôm acacia",
+      "gôm A-rập"
+    ],
+    "function": "Chất nhũ hóa, chất ổn định, chất làm dày (Emulsifier, stabilizer)",
+    "adi_value": "JECFA: ADI không xác định (Not specified — an toàn)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA: ADI không xác định (Not specified — an toàn)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 133",
+    "e_number": "E133",
+    "canonical_name_vi": "Brilliant Blue FCF (Xanh sáng FCF)",
+    "canonical_name_en": "Brilliant Blue FCF",
+    "synonyms": [
+      "FD&C Blue No. 1",
+      "CI 42090",
+      "xanh sáng",
+      "brilliant blue"
+    ],
+    "function": "Phẩm màu tổng hợp (Synthetic color)",
+    "adi_value": "JECFA ADI: 0-12.5 mg/kg bw/ngày",
+    "adi_upper": 12.5,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "CAUTION",
+        "message": "Phẩm màu tổng hợp có thể ảnh hưởng đến hành vi ở trẻ em nhạy cảm (nghiên cứu Southampton)",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Thai phụ nên hạn chế phẩm màu tổng hợp",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-12.5 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 12.5,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-12.5 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 122",
+    "e_number": "E122",
+    "canonical_name_vi": "Azorubine (Carmoisine)",
+    "canonical_name_en": "Azorubine (Carmoisine)",
+    "synonyms": [
+      "carmoisine",
+      "CI 14720",
+      "đỏ azo 122"
+    ],
+    "function": "Phẩm màu tổng hợp azo (Synthetic azo color)",
+    "adi_value": "JECFA ADI: 0-4 mg/kg bw/ngày",
+    "adi_upper": 4.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Thuộc nhóm 6 phẩm màu Southampton có liên quan đến tăng động ở trẻ em",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma_allergy",
+        "severity": "CAUTION",
+        "message": "Phẩm màu azo có thể gây phản ứng ở người nhạy cảm aspirin/hen suyễn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-4 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 4.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-4 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 124",
+    "e_number": "E124",
+    "canonical_name_vi": "Ponceau 4R (Đỏ cochineal A)",
+    "canonical_name_en": "Ponceau 4R (Cochineal Red A)",
+    "synonyms": [
+      "ponceau 4R",
+      "CI 16255",
+      "đỏ ponceau"
+    ],
+    "function": "Phẩm màu tổng hợp azo (Synthetic azo color)",
+    "adi_value": "JECFA ADI: 0-4 mg/kg bw/ngày",
+    "adi_upper": 4.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Thuộc nhóm Southampton — gây tăng động ở trẻ nhạy cảm",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "asthma_allergy",
+        "severity": "CAUTION",
+        "message": "Gây phản ứng dị ứng chéo ở người nhạy cảm aspirin",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-4 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 4.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-4 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 104",
+    "e_number": "E104",
+    "canonical_name_vi": "Quinoline Yellow",
+    "canonical_name_en": "Quinoline Yellow",
+    "synonyms": [
+      "CI 47005",
+      "vàng quinoline"
+    ],
+    "function": "Phẩm màu tổng hợp (Synthetic color)",
+    "adi_value": "JECFA ADI: 0-3 mg/kg bw/ngày",
+    "adi_upper": 3.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Thuộc nhóm Southampton — ảnh hưởng hành vi trẻ em",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA ADI: 0-3 mg/kg bw/ngày",
+      "numeric_upper_mg_per_kg_bw_day": 3.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA ADI: 0-3 mg/kg bw/ngày",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 171",
+    "e_number": "E171",
+    "canonical_name_vi": "Titan dioxide",
+    "canonical_name_en": "Titanium dioxide",
+    "synonyms": [
+      "titanium dioxide",
+      "TiO2",
+      "CI 77891"
+    ],
+    "function": "Phẩm màu trắng, chất phủ (White pigment, coating)",
+    "adi_value": "EFSA 2021: Không còn coi là an toàn (no longer considered safe); EU cấm từ 2022",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "pregnancy",
+        "severity": "WARNING",
+        "message": "EFSA kết luận không thể loại trừ nguy cơ độc tính gen; EU đã cấm E171 trong thực phẩm từ 08/2022",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      },
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Trẻ em tiếp xúc qua kẹo, bánh phủ trắng — EU đã cấm",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA 2021: Không còn coi là an toàn (no longer considered safe); EU cấm từ 2022",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA 2021: Không còn coi là an toàn (no longer considered safe); EU cấm từ 2022",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 262(i)",
+    "e_number": "E262(i)",
+    "canonical_name_vi": "Natri acetat",
+    "canonical_name_en": "Sodium acetate",
+    "synonyms": [
+      "sodium acetate",
+      "natri axetat"
+    ],
+    "function": "Chất điều chỉnh độ chua, chất bảo quản (Acidity regulator, preservative)",
+    "adi_value": "JECFA: ADI không xác định (Not specified — an toàn ở mức GMP)",
+    "adi_upper": null,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Chứa natri; cần tính vào tổng lượng natri nạp hàng ngày",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "JECFA: ADI không xác định (Not specified — an toàn ở mức GMP)",
+      "numeric_upper_mg_per_kg_bw_day": null,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "JECFA: ADI không xác định (Not specified — an toàn ở mức GMP)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
+  },
+  {
+    "ins_code": "INS 341(i)",
+    "e_number": "E341(i)",
+    "canonical_name_vi": "Monocalci phosphat",
+    "canonical_name_en": "Monocalcium phosphate",
+    "synonyms": [
+      "calcium dihydrogen phosphate",
+      "MCP",
+      "bột nở"
+    ],
+    "function": "Chất nở, chất điều chỉnh độ chua (Raising agent, acidity regulator)",
+    "adi_value": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+    "adi_upper": 40.0,
+    "adi_source": "",
+    "vn_regulation": "Pending official-source review; not for compliance decisions.",
+    "codex_standard": "Pending substance, food-category and limit verification.",
+    "allergen_groups": [],
+    "contraindications": [],
+    "unverified_legacy_regulatory_claims": {
+      "claims": {
+        "vietnam": "Pending verification — TT 24/2019/TT-BYT",
+        "codex": "Pending verification — Codex STAN 192-1995"
+      },
+      "verification_status": "pending_primary_source_check",
+      "use_for_compliance_decision": false
+    },
+    "unverified_legacy_health_claims": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "WARNING",
+        "message": "Phosphate vô cơ gây tăng phospho máu ở bệnh nhân thận mạn",
+        "verification_status": "pending_primary_source_check",
+        "use_for_personalized_alerts": false
+      }
+    ],
+    "health_considerations": [],
+    "health_claim_policy": "Only source-checked, explicitly scoped considerations may be shown. Do not infer individual safety, diagnosis, or treatment from an ingredient match.",
+    "regulatory_claim": {
+      "jurisdiction": "Vietnam",
+      "claim": "Pending verification — TT 24/2019/TT-BYT",
+      "verification_status": "pending_official_text_and_food_category_check",
+      "source_id": "VN_TT24_2019",
+      "source_url": "",
+      "use_for_compliance_decision": false
+    },
+    "codex_claim": {
+      "claim": "Pending verification — Codex STAN 192-1995",
+      "verification_status": "pending_gsfa_food_category_and_maximum_level_check",
+      "source_id": "CODEX_GSFA",
+      "source_url": "https://www.fao.org/gsfaonline/",
+      "use_for_compliance_decision": false
+    },
+    "adi_assessment": {
+      "display_text": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "numeric_upper_mg_per_kg_bw_day": 40.0,
+      "authority": "JECFA/EFSA",
+      "source_id": "",
+      "source_url": "",
+      "source_locator": "EFSA group ADI: 40 mg/kg bw/ngày (tính theo phosphorus)",
+      "verification_status": "pending_primary_source_check",
+      "use_for_numeric_compliance": false,
+      "review_note": "Verify against primary evaluation before use."
+    },
+    "allergen_assessment": {
+      "groups": [],
+      "verification_status": "not_individually_assessed",
+      "source_ids": [
+        "CODEX_CXS_1_1985",
+        "EU_1169_2011"
+      ],
+      "note": "An empty list means no allergen was recorded here, not proof of absence."
+    },
+    "sources": []
   }
 ]

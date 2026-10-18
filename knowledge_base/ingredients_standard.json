@@ -1,0 +1,1773 @@
+[
+  {
+    "id": "gluten",
+    "canonical_name_vi": "Gluten (ngũ cốc chứa gluten)",
+    "canonical_name_en": "Cereals containing gluten",
+    "label_aliases": [
+      "gluten",
+      "bột mì",
+      "lúa mì",
+      "wheat",
+      "barley",
+      "lúa mạch",
+      "rye",
+      "oat",
+      "yến mạch",
+      "spelt",
+      "mì sợi",
+      "mì ống",
+      "pasta",
+      "bread",
+      "bánh mì"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "gluten",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: cereals containing gluten",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 1",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "milk",
+    "canonical_name_vi": "Sữa và sản phẩm từ sữa",
+    "canonical_name_en": "Milk and milk products (including lactose)",
+    "label_aliases": [
+      "sữa",
+      "milk",
+      "bột sữa",
+      "bơ",
+      "dairy",
+      "whey",
+      "casein",
+      "cream",
+      "kem",
+      "lactose",
+      "phô mai",
+      "cheese",
+      "yogurt",
+      "sữa chua",
+      "sữa bò",
+      "sữa dê",
+      "butter",
+      "sữa béo",
+      "sữa tươi",
+      "sữa đặc",
+      "condensed milk"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "milk",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: milk and milk products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 7",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "egg",
+    "canonical_name_vi": "Trứng và sản phẩm từ trứng",
+    "canonical_name_en": "Eggs and egg products",
+    "label_aliases": [
+      "trứng",
+      "egg",
+      "albumin",
+      "lòng trắng",
+      "lòng đỏ",
+      "trứng gà",
+      "trứng vịt",
+      "egg white",
+      "egg yolk",
+      "trứng tươi",
+      "bột trứng"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "egg",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: eggs and egg products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 3",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "soy",
+    "canonical_name_vi": "Đậu nành và sản phẩm từ đậu nành",
+    "canonical_name_en": "Soybeans and soy products",
+    "label_aliases": [
+      "đậu nành",
+      "đậu tương",
+      "soya",
+      "soy",
+      "lecithin",
+      "tofu",
+      "đậu hũ",
+      "nước tương",
+      "soy sauce",
+      "đậu phụ",
+      "soy protein",
+      "soy milk",
+      "sữa đậu nành",
+      "edamame",
+      "miso",
+      "tempeh"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "soy",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: soybeans and soy products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 6",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "peanut",
+    "canonical_name_vi": "Đậu phộng (lạc)",
+    "canonical_name_en": "Peanuts and peanut products",
+    "label_aliases": [
+      "đậu phộng",
+      "đậu phụng",
+      "lạc",
+      "peanut",
+      "bơ đậu phộng",
+      "peanut butter",
+      "peanut oil",
+      "dầu lạc",
+      "dầu phộng"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "peanut",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: peanuts and peanut products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 5",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "nuts",
+    "canonical_name_vi": "Các loại hạt cây",
+    "canonical_name_en": "Tree nuts",
+    "label_aliases": [
+      "hạnh nhân",
+      "hạt cây",
+      "óc chó",
+      "điều",
+      "almond",
+      "walnut",
+      "cashew",
+      "macadamia",
+      "pistachio",
+      "hạt dẻ",
+      "pecan",
+      "hazelnut",
+      "brazil nut",
+      "hạt thông",
+      "pine nut",
+      "chestnut"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "nuts",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: tree nuts",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 8",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "shellfish",
+    "canonical_name_vi": "Giáp xác (tôm, cua)",
+    "canonical_name_en": "Crustaceans and crustacean products",
+    "label_aliases": [
+      "tôm",
+      "cua",
+      "hải sản",
+      "shrimp",
+      "crab",
+      "lobster",
+      "tôm hùm",
+      "crawfish",
+      "prawn",
+      "tôm sú",
+      "tôm thẻ",
+      "cua biển",
+      "ghẹ"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "shellfish",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: crustacea and products thereof",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 2 (crustaceans)",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "fish",
+    "canonical_name_vi": "Cá và sản phẩm từ cá",
+    "canonical_name_en": "Fish and fish products",
+    "label_aliases": [
+      "cá",
+      "fish",
+      "nước mắm",
+      "fish sauce",
+      "cá ngừ",
+      "tuna",
+      "salmon",
+      "anchovy",
+      "cá cơm",
+      "cá hồi",
+      "cá thu",
+      "cá basa",
+      "cá tra",
+      "surimi",
+      "chả cá",
+      "fish ball"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "fish",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: fish and fish products",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 4",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "celery",
+    "canonical_name_vi": "Cần tây",
+    "canonical_name_en": "Celery and celery products",
+    "label_aliases": [
+      "cần tây",
+      "celery",
+      "celeriac",
+      "celery salt",
+      "muối cần tây"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "celery",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 9",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "mustard",
+    "canonical_name_vi": "Mù tạt",
+    "canonical_name_en": "Mustard and mustard products",
+    "label_aliases": [
+      "mù tạt",
+      "mustard",
+      "wasabi",
+      "mustard seed",
+      "hạt mù tạt"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "mustard",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 10",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "sesame",
+    "canonical_name_vi": "Vừng (mè)",
+    "canonical_name_en": "Sesame seeds and sesame products",
+    "label_aliases": [
+      "vừng",
+      "mè",
+      "sesame",
+      "dầu mè",
+      "sesame oil",
+      "sesame seed",
+      "tahini",
+      "hạt vừng"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "sesame",
+    "source_ids": [
+      "EU_1169_2011",
+      "FDA_MAJOR_ALLERGENS"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 11",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "united_states": {
+        "claim": "Category appears in the linked US FDA Food Allergies.",
+        "source_id": "FDA_MAJOR_ALLERGENS",
+        "source_url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+        "source_locator": "FDA major food allergen list; scope depends on the US statutory definitions.",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "sulfites",
+    "canonical_name_vi": "Sulfite / SO₂ (≥ 10 mg/kg)",
+    "canonical_name_en": "Sulphur dioxide and sulphites",
+    "label_aliases": [
+      "sulfite",
+      "sulphite",
+      "SO2",
+      "SO₂",
+      "lưu huỳnh",
+      "sulfur dioxide",
+      "sulphur dioxide",
+      "INS 220",
+      "INS 221",
+      "INS 222",
+      "INS 223",
+      "INS 224",
+      "INS 225",
+      "INS 226",
+      "INS 227",
+      "INS 228",
+      "metabisulfite",
+      "metabisulphite",
+      "natri sulfit",
+      "kali metabisulfit"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "sulfites",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Category appears in the linked FAO-hosted Codex CXS 1-1985 (amended through 2010 in linked copy).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.4: sulphite at 10 mg/kg or more",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 12",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "lupin",
+    "canonical_name_vi": "Đậu lupin",
+    "canonical_name_en": "Lupin and lupin products",
+    "label_aliases": [
+      "lupin",
+      "lupine",
+      "đậu lupin",
+      "lupin flour",
+      "bột đậu lupin"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "lupin",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 13",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "molluscs",
+    "canonical_name_vi": "Thân mềm (mực, ngao, sò, ốc)",
+    "canonical_name_en": "Molluscs and mollusc products",
+    "label_aliases": [
+      "thân mềm",
+      "ốc",
+      "hàu",
+      "oyster",
+      "mực",
+      "squid",
+      "ngao",
+      "sò",
+      "bạch tuộc",
+      "octopus",
+      "clam",
+      "mussel",
+      "sò điệp",
+      "scallop",
+      "ốc hương",
+      "hến"
+    ],
+    "ingredient_type": "allergen_label_category",
+    "allergen_group_id": "molluscs",
+    "source_ids": [
+      "EU_1169_2011"
+    ],
+    "source_urls": [
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+    ],
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "use_for_allergen_screening": true,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": "Category appears in the linked Regulation (EU) No 1169/2011, Annex II.",
+        "source_id": "EU_1169_2011",
+        "source_url": "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+        "source_locator": "Regulation (EU) No 1169/2011, Annex II, item 14",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "beef",
+    "canonical_name_vi": "Thịt bò",
+    "canonical_name_en": "Beef and beef products",
+    "label_aliases": [
+      "thịt bò",
+      "bò",
+      "beef",
+      "bò viên",
+      "gelatin bò",
+      "beef gelatin",
+      "beef extract",
+      "nước hầm xương bò",
+      "beef broth",
+      "bò khô"
+    ],
+    "ingredient_type": "ingredient_term_not_screened_as_priority_allergen",
+    "allergen_group_id": null,
+    "source_ids": [],
+    "source_urls": [],
+    "verification_status": "unsupported_as_major_label_allergen",
+    "use_for_allergen_screening": false,
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "scope": "Curated common label vocabulary for screening, not an exhaustive ingredient ontology, ingredient-composition database, or proof of presence/absence."
+  },
+  {
+    "id": "FOODON:03420108",
+    "canonical_name_vi": "Đường",
+    "canonical_name_en": "sugar",
+    "label_aliases": [
+      "đường",
+      "sugar"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03420108",
+    "foodon_label": "sugar",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00004327",
+    "canonical_name_vi": "Gạo",
+    "canonical_name_en": "rice",
+    "label_aliases": [
+      "gạo",
+      "rice"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00004327",
+    "foodon_label": "rice",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301415",
+    "canonical_name_vi": "Đậu nành",
+    "canonical_name_en": "soybean",
+    "label_aliases": [
+      "đậu nành",
+      "đậu tương",
+      "soybean"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301415",
+    "foodon_label": "soybean",
+    "allergen_group_id": "soy",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03310232",
+    "canonical_name_vi": "Dầu cọ",
+    "canonical_name_en": "palm oil",
+    "label_aliases": [
+      "dầu cọ",
+      "palm oil"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03310232",
+    "foodon_label": "palm oil",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301826",
+    "canonical_name_vi": "Dầu ô liu",
+    "canonical_name_en": "olive oil",
+    "label_aliases": [
+      "dầu ô liu",
+      "olive oil"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301826",
+    "foodon_label": "olive oil",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03411457",
+    "canonical_name_vi": "Thịt gà",
+    "canonical_name_en": "chicken",
+    "label_aliases": [
+      "thịt gà",
+      "gà",
+      "chicken"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03411457",
+    "foodon_label": "chicken",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03411237",
+    "canonical_name_vi": "Tôm",
+    "canonical_name_en": "shrimp",
+    "label_aliases": [
+      "tôm",
+      "shrimp"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03411237",
+    "foodon_label": "shrimp",
+    "allergen_group_id": "shellfish",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003206",
+    "canonical_name_vi": "Đậu phộng (lạc)",
+    "canonical_name_en": "peanut",
+    "label_aliases": [
+      "đậu phộng",
+      "lạc",
+      "peanut"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003206",
+    "foodon_label": "peanut",
+    "allergen_group_id": "peanut",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003523",
+    "canonical_name_vi": "Hạnh nhân",
+    "canonical_name_en": "almond",
+    "label_aliases": [
+      "hạnh nhân",
+      "almond"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003523",
+    "foodon_label": "almond",
+    "allergen_group_id": "nuts",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03420177",
+    "canonical_name_vi": "Gluten",
+    "canonical_name_en": "gluten",
+    "label_aliases": [
+      "gluten"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03420177",
+    "foodon_label": "gluten",
+    "allergen_group_id": "gluten",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301072",
+    "canonical_name_vi": "Ca cao",
+    "canonical_name_en": "cocoa",
+    "label_aliases": [
+      "ca cao",
+      "cocoa"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301072",
+    "foodon_label": "cocoa",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003449",
+    "canonical_name_vi": "Dừa",
+    "canonical_name_en": "coconut",
+    "label_aliases": [
+      "dừa",
+      "coconut"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003449",
+    "foodon_label": "coconut",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301453",
+    "canonical_name_vi": "Cà chua",
+    "canonical_name_en": "tomato",
+    "label_aliases": [
+      "cà chua",
+      "tomato"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301453",
+    "foodon_label": "tomato",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03315354",
+    "canonical_name_vi": "Khoai tây",
+    "canonical_name_en": "potato",
+    "label_aliases": [
+      "khoai tây",
+      "potato"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03315354",
+    "foodon_label": "potato",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03316347",
+    "canonical_name_vi": "Hành tây",
+    "canonical_name_en": "onion",
+    "label_aliases": [
+      "hành tây",
+      "onion"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03316347",
+    "foodon_label": "onion",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003429",
+    "canonical_name_vi": "Yến mạch",
+    "canonical_name_en": "oat",
+    "label_aliases": [
+      "yến mạch",
+      "oat"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003429",
+    "foodon_label": "oat",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003473",
+    "canonical_name_vi": "Cá hồi",
+    "canonical_name_en": "salmon",
+    "label_aliases": [
+      "cá hồi",
+      "salmon"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003473",
+    "foodon_label": "salmon",
+    "allergen_group_id": "fish",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03411269",
+    "canonical_name_vi": "Cá ngừ",
+    "canonical_name_en": "tuna",
+    "label_aliases": [
+      "cá ngừ",
+      "tuna"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03411269",
+    "foodon_label": "tuna",
+    "allergen_group_id": "fish",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00002473",
+    "canonical_name_vi": "Táo",
+    "canonical_name_en": "apple",
+    "label_aliases": [
+      "táo",
+      "apple"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00002473",
+    "foodon_label": "apple",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00004183",
+    "canonical_name_vi": "Chuối",
+    "canonical_name_en": "banana",
+    "label_aliases": [
+      "chuối",
+      "banana"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00004183",
+    "foodon_label": "banana",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03310641",
+    "canonical_name_vi": "Đậu lăng",
+    "canonical_name_en": "lentil",
+    "label_aliases": [
+      "đậu lăng",
+      "lentil"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03310641",
+    "foodon_label": "lentil",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03306811",
+    "canonical_name_vi": "Đậu gà",
+    "canonical_name_en": "chickpea",
+    "label_aliases": [
+      "đậu gà",
+      "chickpea"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03306811",
+    "foodon_label": "chickpea",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00004510",
+    "canonical_name_vi": "Bột",
+    "canonical_name_en": "flour",
+    "label_aliases": [
+      "bột",
+      "flour"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00004510",
+    "foodon_label": "flour",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301705",
+    "canonical_name_vi": "Giấm",
+    "canonical_name_en": "vinegar",
+    "label_aliases": [
+      "giấm",
+      "vinegar"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301705",
+    "foodon_label": "vinegar",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03411345",
+    "canonical_name_vi": "Men",
+    "canonical_name_en": "yeast",
+    "label_aliases": [
+      "men",
+      "yeast"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03411345",
+    "foodon_label": "yeast",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03310351",
+    "canonical_name_vi": "Bơ",
+    "canonical_name_en": "butter",
+    "label_aliases": [
+      "bơ",
+      "butter"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03310351",
+    "foodon_label": "butter",
+    "allergen_group_id": "milk",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03000287",
+    "canonical_name_vi": "Phô mai",
+    "canonical_name_en": "cheese",
+    "label_aliases": [
+      "phô mai",
+      "cheese"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03000287",
+    "foodon_label": "cheese",
+    "allergen_group_id": "milk",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03411669",
+    "canonical_name_vi": "Thịt cừu",
+    "canonical_name_en": "lamb",
+    "label_aliases": [
+      "thịt cừu",
+      "lamb"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03411669",
+    "foodon_label": "lamb",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03310306",
+    "canonical_name_vi": "Hạt mè (vừng)",
+    "canonical_name_en": "sesame seed",
+    "label_aliases": [
+      "mè",
+      "vừng",
+      "sesame seed"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03310306",
+    "foodon_label": "sesame seed",
+    "allergen_group_id": "sesame",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301364",
+    "canonical_name_vi": "Óc chó",
+    "canonical_name_en": "walnut",
+    "label_aliases": [
+      "óc chó",
+      "walnut"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301364",
+    "foodon_label": "walnut",
+    "allergen_group_id": "nuts",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00002933",
+    "canonical_name_vi": "Hạt phỉ",
+    "canonical_name_en": "hazelnut",
+    "label_aliases": [
+      "hạt phỉ",
+      "hazelnut"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00002933",
+    "foodon_label": "hazelnut",
+    "allergen_group_id": "nuts",
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03315104",
+    "canonical_name_vi": "Chanh vàng",
+    "canonical_name_en": "lemon",
+    "label_aliases": [
+      "chanh vàng",
+      "lemon"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03315104",
+    "foodon_label": "lemon",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003415",
+    "canonical_name_vi": "Dưa chuột",
+    "canonical_name_en": "cucumber",
+    "label_aliases": [
+      "dưa chuột",
+      "cucumber"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003415",
+    "foodon_label": "cucumber",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03301175",
+    "canonical_name_vi": "Quế",
+    "canonical_name_en": "cinnamon",
+    "label_aliases": [
+      "quế",
+      "cinnamon"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03301175",
+    "foodon_label": "cinnamon",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:03310370",
+    "canonical_name_vi": "Rau mùi",
+    "canonical_name_en": "coriander",
+    "label_aliases": [
+      "rau mùi",
+      "coriander"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:03310370",
+    "foodon_label": "coriander",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  },
+  {
+    "id": "FOODON:00003744",
+    "canonical_name_vi": "Ớt",
+    "canonical_name_en": "chili pepper",
+    "label_aliases": [
+      "ớt",
+      "chili pepper"
+    ],
+    "ingredient_type": "common_food_ingredient",
+    "foodon_curie": "FOODON:00003744",
+    "foodon_label": "chili pepper",
+    "allergen_group_id": null,
+    "source_ids": [
+      "FOODON"
+    ],
+    "source_urls": [
+      "https://foodon.org/"
+    ],
+    "verification_status": "source_checked_for_ontology_identity_only",
+    "alias_verification_status": "pending_label_review",
+    "use_for_allergen_screening": false,
+    "scope": "FoodOn identity is an exact unique label match. Localized aliases and any allergen-group association are candidate vocabulary only and require review; they do not establish composition, clinical allergy, or legal status."
+  }
+]

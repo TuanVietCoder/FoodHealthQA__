@@ -23,6 +23,7 @@ Kế thừa kiến trúc:
 
 import os
 import json
+import logging
 import re
 import pandas as pd
 from modules.ocr_extractor import (
@@ -31,11 +32,12 @@ from modules.ocr_extractor import (
     run_perception,
     is_paddleocr_available
 )
-from modules.csv_data_defaults import ensure_default_csv_data
 from modules.file_resolver import find_data_file, read_table_flexibly
 from modules.foodon import enrich_additive_foodon_curie, load_foodon_entities
+from modules.benchmark import validate_citations
 from modules.hybrid_retriever import foodontorag_4agent_linking
 from modules.constraint_model import (
+    contains_label_term,
     evaluate_nutritional_constraints,
     apply_negation_constraints,
     CONSTRAINT_CONTRAINDICATED,
@@ -48,6 +50,8 @@ from modules.constraint_model import (
     _ALLERGEN_GROUPS,
 )
 
+_LOGGER = logging.getLogger(__name__)
+
 
 def load_knowledge_base(kb_path_or_dir):
     """
@@ -56,7 +60,6 @@ def load_knowledge_base(kb_path_or_dir):
     Đồng thời tự động nạp tích hợp foodon_entities.json (nếu có trong thư mục data).
     """
     data_dir = kb_path_or_dir if os.path.isdir(kb_path_or_dir) else os.path.dirname(kb_path_or_dir) or "data"
-    ensure_default_csv_data(data_dir)
 
     # Ưu tiên knowledge_base/ trước
     project_root = os.path.dirname(data_dir)
@@ -66,7 +69,7 @@ def load_knowledge_base(kb_path_or_dir):
         target_file = find_data_file(kb_dir, ["additives_standard", "additives"])
 
     if not target_file:
-        target_file = find_data_file(data_dir, ["additives_standard", "additives_mini", "additives"])
+        target_file = find_data_file(data_dir, ["additives_standard", "additives"])
     if not target_file:
         if os.path.isfile(kb_path_or_dir):
             target_file = kb_path_or_dir
@@ -84,6 +87,9 @@ def load_knowledge_base(kb_path_or_dir):
                 item["common_names"] = item.get("synonyms", [])
             if "jecfa_adi" not in item:
                 item["jecfa_adi"] = item.get("adi_value", "")
+            adi_assessment = item.get("adi_assessment")
+            if adi_assessment:
+                item["jecfa_adi"] = adi_assessment.get("display_text", item["jecfa_adi"])
         additives = raw
     else:
         df = read_table_flexibly(target_file)
@@ -132,7 +138,7 @@ def load_personas(personas_path_or_dir):
     Hỗ trợ cả personas.json (tệp có sẵn trong thư mục người dùng) lẫn nhanes_personas.csv.
     """
     data_dir = personas_path_or_dir if os.path.isdir(personas_path_or_dir) else os.path.dirname(personas_path_or_dir) or "data"
-    ensure_default_csv_data(data_dir)
+
 
     target_file = find_data_file(data_dir, ["nhanes_personas", "personas", "nhanes_user_personas"])
     if not target_file:
@@ -182,7 +188,7 @@ def load_food_hazards(hazards_path_or_dir):
     Nạp cơ sở dữ liệu sự cố & mối nguy thực phẩm (incidents_train.csv - Food Hazard Detector).
     """
     data_dir = hazards_path_or_dir if os.path.isdir(hazards_path_or_dir) else os.path.dirname(hazards_path_or_dir) or "data"
-    ensure_default_csv_data(data_dir)
+
 
     target_file = find_data_file(data_dir, ["incidents_train", "food_hazards", "incidents"])
     if not target_file:
@@ -211,7 +217,7 @@ def load_fndds_nutrition(fndds_path_or_dir):
     food.csv + food_nutrient.csv + nutrient.csv + food_category.csv + food_portion.csv
     """
     data_dir = fndds_path_or_dir if os.path.isdir(fndds_path_or_dir) else os.path.dirname(fndds_path_or_dir) or "data"
-    ensure_default_csv_data(data_dir)
+
 
     food_file = find_data_file(data_dir, ["food"])
     fn_file = find_data_file(data_dir, ["food_nutrient"])
@@ -224,32 +230,34 @@ def load_fndds_nutrition(fndds_path_or_dir):
     df_fn = read_table_flexibly(fn_file)
     df_nut = read_table_flexibly(nutrient_file)
 
-    target_nutrient_ids = {
-        1008: "calories_kcal",
-        1003: "protein_g",
-        1004: "fat_g",
-        1063: "sugars_g",
-        1093: "sodium_mg",
-        1079: "fiber_g",
-        1258: "saturated_fat_g",
+    target_nutrient_numbers = {
+        208.0: "calories_kcal",
+        203.0: "protein_g",
+        204.0: "fat_g",
+        269.0: "sugars_g",
+        307.0: "sodium_mg",
+        291.0: "fiber_g",
+        606.0: "saturated_fat_g",
     }
 
-    for col in ["id", "nutrient_nbr"]:
+    for col in ["nutrient_nbr"]:
         if col in df_nut.columns:
             df_nut[col] = pd.to_numeric(df_nut[col], errors="coerce")
     for col in ["nutrient_id", "fdc_id", "amount"]:
         if col in df_fn.columns:
             df_fn[col] = pd.to_numeric(df_fn[col], errors="coerce")
 
-    # food_nutrient.nutrient_id uses nutrient_nbr, not nutrient.id — build mapping
-    nut_targets = df_nut[df_nut["id"].isin(target_nutrient_ids.keys())]
     nbr_to_col = {}
-    for _, row in nut_targets.iterrows():
-        nbr = row["nutrient_nbr"]
-        col_name = target_nutrient_ids[int(row["id"])]
-        nbr_to_col[nbr] = col_name
+    for nutrient_number, column_name in target_nutrient_numbers.items():
+        matches = df_nut[
+            (df_nut["nutrient_nbr"] - nutrient_number).abs() < 1e-9
+        ]
+        if matches.empty:
+            continue
+        food_nutrient_id = int(nutrient_number)
+        nbr_to_col[food_nutrient_id] = column_name
 
-    target_nbrs = list(nbr_to_col.keys())
+    target_nbrs = list(nbr_to_col)
     df_fn_filtered = df_fn[df_fn["nutrient_id"].isin(target_nbrs)].copy()
 
     pivot = df_fn_filtered.pivot_table(
@@ -315,7 +323,7 @@ def load_openfoodfacts_vietnam(off_path_or_dir):
     Nạp dữ liệu nhãn sản phẩm và mã vạch Open Food Facts VN (openfoodfacts_vietnam.csv).
     """
     data_dir = off_path_or_dir if os.path.isdir(off_path_or_dir) else os.path.dirname(off_path_or_dir) or "data"
-    ensure_default_csv_data(data_dir)
+
 
     target_file = find_data_file(data_dir, ["openfoodfacts_vietnam", "openfoodfacts"])
     if not target_file:
@@ -866,7 +874,7 @@ def check_food_hazards(product_name, mentions, hazards_list):
 
         if h_cat == "allergens":
             all_allergen_kws = [kw for kws in ALLERGEN_KEYWORDS.values() for kw in kws]
-            if any(kw in mentions_text for kw in all_allergen_kws):
+            if any(contains_label_term(mentions_text, kw) for kw in all_allergen_kws):
                 score += 1.0
 
         if h_cat in ("biological", "chemical") and product_keywords:
@@ -1321,7 +1329,7 @@ def evaluate_nutritional_risk(product_name, fndds_list, persona):
     elif vn_item:
         best_item = vn_item
     else:
-        best_item = fndds_list[0] if fndds_list else None
+        best_item = None
 
     if not best_item:
         return None, [], []
@@ -1360,20 +1368,19 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
     """
     linked_results = apply_negation_constraints(linked_results, persona)
 
-    tau_scores = [item["confidence_tau"] for item in linked_results if item.get("matched_entity")]
-    s_perception = min(tau_scores) if tau_scores else avg_ocr_conf
-    s_retrieval = 0.95
+    s_perception = max(0.0, min(float(avg_ocr_conf), 1.0))
+    retrieval_scores = [
+        max(0.0, min(float(item.get("retrieval_confidence", 0.0)), 1.0))
+        for item in linked_results
+    ]
+    s_retrieval = sum(retrieval_scores) / len(retrieval_scores) if retrieval_scores else 0.0
     s_total = 0.5 * s_perception + 0.5 * s_retrieval
-
-    if s_total < 0.65:
-        return {
-            "status": "ABSTAIN",
-            "badge_color": "gray",
-            "title": "⚪ TỪ CHỐI TƯ VẤN (KHÔNG ĐỦ CĂN CỨ)",
-            "message": "Độ tin cậy trích xuất quang học hoặc bằng chứng an toàn dưới ngưỡng an toàn (S_total < 0.65). Hệ thống từ chối đưa ra phán đoán cảm tính nhằm bảo vệ an toàn sức khỏe.",
-            "citations": [],
-            "s_total": s_total
-        }
+    insufficient_evidence = s_total < 0.65
+    confidence_metrics = {
+        "s_perception": s_perception,
+        "s_retrieval": s_retrieval,
+        "s_total": s_total,
+    }
 
     critical_alerts = []
     warning_alerts = []
@@ -1389,6 +1396,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
             continue
 
         for contra in entity.get("contraindications", []):
+            if contra.get("verification_status") != "source_checked":
+                continue
             cond = contra.get("condition", "").lower()
             sev = contra.get("severity", "WARNING")
             msg = contra.get("message", "")
@@ -1397,8 +1406,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 alert_item = {
                     "additive": f"{entity['canonical_name']} ({entity.get('ins_code', '')})",
                     "message": msg,
-                    "regulation": entity.get("vn_regulation", "Thông tư 24/2019/TT-BYT"),
-                    "codex": entity.get("codex_standard", "Codex STAN 192-1995")
+                    "regulation": "Quy định Việt Nam chưa được xác minh cho claim này",
+                    "codex": "Giới hạn Codex cần kiểm tra theo phụ gia và nhóm thực phẩm",
                 }
                 if sev == "CRITICAL":
                     critical_alerts.append(alert_item)
@@ -1426,9 +1435,16 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
 
         constraint_alert = {
             "additive": label,
-            "message": f"Negation Constraint: Thành phần '{item['raw_mention']}' được phân loại [{ctype}] cho hồ sơ bệnh lý của bạn.{rule_desc}",
-            "regulation": "Thông tư 24/2019/TT-BYT",
-            "codex": "Codex STAN 192-1995"
+            "message": (
+                f"Nhãn/OCR có thể khớp với thuật ngữ dị nguyên '{item['raw_mention']}'. "
+                "Cần xác minh thành phần và nhãn đầy đủ; đây không phải chẩn đoán hay "
+                "kết luận về phản ứng cá nhân."
+                if ctype == CONSTRAINT_ALLERGEN_RISK
+                else f"Quy tắc sàng lọc [{ctype}] khớp với '{item['raw_mention']}'. "
+                "Cần xác minh nguồn, phạm vi và ngữ cảnh trước khi diễn giải."
+            ),
+            "regulation": "Quy định Việt Nam chưa được xác minh cho claim này",
+            "codex": "Giới hạn Codex cần kiểm tra theo phụ gia và nhóm thực phẩm",
         }
         if ctype == CONSTRAINT_CONTRAINDICATED:
             critical_alerts.append(constraint_alert)
@@ -1458,18 +1474,18 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
             raw_text_lower = raw_text.lower()
             for allergy in user_allergies:
                 keywords = ALLERGEN_KEYWORDS.get(allergy, [allergy])
-                if any(kw in raw_text_lower for kw in keywords):
+                if any(contains_label_term(raw_text_lower, kw) for kw in keywords):
                     allergen_alert = {
                         "additive": f"Dị nguyên: {raw_text}",
-                        "message": f"Sản phẩm chứa thành phần '{raw_text}' có nguy cơ gây dị ứng trực tiếp với cơ địa của bạn ({allergy}).",
-                        "regulation": "Thông tư 24/2019/TT-BYT (Quy định ghi nhãn cảnh báo dị ứng)",
+                        "message": (
+                            f"Nhãn/OCR có thể khớp với dị nguyên '{raw_text}' ({allergy}). "
+                            "Kết quả này không xác nhận nguồn, lượng, nhiễm chéo hay phản ứng cá nhân; "
+                            "hãy kiểm tra nhãn đầy đủ và hỏi chuyên gia y tế nếu cần."
+                        ),
+                        "regulation": "Cần xác minh quy định hiện hành theo thị trường",
                         "codex": "Codex General Standard for the Labelling of Prepackaged Foods (CXS 1-1985)"
                     }
-                    _critical_ids = {g["id"] for g in _ALLERGEN_GROUPS if g.get("severity") == "critical"}
-                    if allergy in _critical_ids:
-                        critical_alerts.append(allergen_alert)
-                    else:
-                        warning_alerts.append(allergen_alert)
+                    warning_alerts.append(allergen_alert)
                     break
 
     # Đánh giá quy chuẩn pháp lý tổng hợp: ADI (JECFA) + EFSA + TT 24/2019/TT-BYT
@@ -1489,12 +1505,16 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         return {
             "status": "CRITICAL_ALERT",
             "badge_color": "red",
-            "title": "🔴 NGUY CƠ CAO — CHỐNG CHỈ ĐỊNH Y KHOA TUYỆT ĐỐI",
+            "title": "🔴 CẢNH BÁO MỨC CAO — CẦN XÁC MINH VỚI CHUYÊN GIA",
             "alerts": critical_alerts,
             "cautions": caution_alerts,
-            "advice": "Sản phẩm chứa thành phần có nguy cơ đe dọa sức khỏe nghiêm trọng đối với tình trạng bệnh lý của bạn. Khuyến nghị KHÔNG SỬ DỤNG và chuyển tuyến tham vấn bác sĩ chuyên khoa.",
+            "advice": (
+                "Có quy tắc mức cao khớp với dữ liệu nhãn. Hệ thống không thể xác nhận "
+                "nguy cơ cá nhân; hãy kiểm tra nhãn và trao đổi với chuyên gia y tế trước "
+                "khi quyết định sử dụng."
+            ),
             "citations": list(set([a["regulation"] for a in critical_alerts] + [a["codex"] for a in critical_alerts])),
-            "s_total": s_total,
+            **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
@@ -1502,12 +1522,16 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         return {
             "status": "WARNING",
             "badge_color": "orange",
-            "title": "🟡 CẢNH BÁO — CẦN THẬN TRỌNG ĐẶC BIỆT KHI SỬ DỤNG",
+            "title": "🟡 CẢNH BÁO — CÓ THUẬT NGỮ CẦN KIỂM TRA",
             "alerts": warning_alerts,
             "cautions": caution_alerts,
-            "advice": "Sản phẩm có chứa thành phần thuộc nhóm cảnh báo sức khỏe hoặc dị nguyên đối với cơ địa của bạn. Khuyến nghị cân nhắc kỹ hoặc giới hạn tần suất tiêu thụ.",
+            "advice": (
+                "OCR có thể khớp một thuật ngữ cần kiểm tra. Kết quả này không xác nhận "
+                "thành phần, dị ứng cá nhân hay mức nguy hiểm; hãy kiểm tra nhãn đầy đủ "
+                "và hỏi chuyên gia y tế nếu cần."
+            ),
             "citations": list(set([a["regulation"] for a in warning_alerts] + [a["codex"] for a in warning_alerts])),
-            "s_total": s_total,
+            **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
@@ -1515,31 +1539,49 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         return {
             "status": "CAUTION",
             "badge_color": "yellow",
-            "title": "🟡 LƯU Ý — CÂN NHẮC VÀ THEO DÕI HÀM LƯỢNG",
+            "title": "🟡 LƯU Ý — CẦN THÊM THÔNG TIN VỀ LIỀU LƯỢNG",
             "alerts": caution_alerts,
             "cautions": [],
-            "advice": "Các phụ gia được phép sử dụng nhưng đối tượng người dùng cần lưu ý tính toán lượng nạp vào tổng thể (ví dụ: lượng natri trong bột ngọt hoặc mức độ kích ứng nhẹ).",
+            "advice": (
+                "Có thông tin cần lưu ý nhưng dữ liệu nhãn không đủ để xác định mức phơi nhiễm "
+                "hoặc đưa ra khuyến nghị cá nhân."
+            ),
             "citations": list(set([a["regulation"] for a in caution_alerts])),
-            "s_total": s_total,
+            **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
     else:
+        if insufficient_evidence:
+            return {
+                "status": "ABSTAIN",
+                "badge_color": "gray",
+                "title": "⚪ TỪ CHỐI TƯ VẤN (KHÔNG ĐỦ CĂN CỨ)",
+                "message": (
+                    "Độ tin cậy OCR hoặc độ phù hợp của kết quả truy xuất dưới ngưỡng "
+                    "an toàn (S_total < 0.65). Hệ thống không kết luận an toàn khi thiếu căn cứ."
+                ),
+                "alerts": [],
+                "cautions": [],
+                "citations": [],
+                **confidence_metrics,
+                "regulatory": regulatory_assessments,
+                "efsa_warnings": efsa_warnings,
+            }
         return {
-            "status": "SAFE",
-            "badge_color": "green",
-            "title": "🟢 AN TOÀN — THÀNH PHẦN PHÙ HỢP QUY CHUẨN",
+            "status": "SCREENED_NO_ALERT",
+            "badge_color": "blue",
+            "title": "⚪ CHƯA PHÁT HIỆN CẢNH BÁO TRONG DỮ LIỆU ĐÃ SÀNG LỌC",
             "alerts": [],
             "cautions": [],
             "benefits": matched_benefits,
-            "advice": "Tất cả các chất phụ gia và thành phần nhận diện đều nằm trong danh mục cho phép và an toàn cho hồ sơ sức khỏe hiện tại của bạn khi sử dụng ở mức độ thông thường.",
-            "citations": [
-                "Thông tư 24/2019/TT-BYT (Quy định quản lý phụ gia thực phẩm)",
-                "Codex STAN 192-1995 (General Standard for Food Additives - GSFA)",
-                "Đánh giá an toàn JECFA ADI (FAO/WHO)",
-                "EFSA Panel on Food Additives and Flavourings"
-            ],
-            "s_total": s_total,
+            "advice": (
+                "Không tìm thấy cảnh báo phù hợp trong các thành phần đã nhận diện. Điều này "
+                "không chứng minh sản phẩm an toàn, không xác nhận toàn bộ nhãn và không phải "
+                "kết luận tuân thủ pháp luật; hãy kiểm tra bao bì đầy đủ."
+            ),
+            "citations": [],
+            **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
@@ -1549,9 +1591,11 @@ _LLM_ANSWER_PROMPT = """Bạn là chuyên gia tư vấn an toàn thực phẩm V
 
 ## Yêu cầu:
 - Trả lời ngắn gọn, rõ ràng, dễ hiểu cho người tiêu dùng.
-- Mỗi nhận định PHẢI kèm trích dẫn nguồn trong ngoặc vuông, ví dụ: [TT24/2019/TT-BYT], [Codex STAN 192-1995], [EFSA 2021], [JECFA ADI].
+- Mỗi câu phải kết thúc bằng trích dẫn nguồn có trong danh sách nguồn được cung cấp.
+- Chỉ dùng chính xác tên nguồn trong danh sách; không tự tạo nguồn, năm xuất bản, URL hoặc mã trích dẫn.
 - Nếu có chống chỉ định hoặc dị ứng, cảnh báo rõ ràng và khuyên tham vấn bác sĩ.
 - Không bịa thêm thông tin ngoài bằng chứng được cung cấp.
+- Nếu không có bằng chứng liên quan để trả lời, hãy nói rõ chưa đủ dữ liệu và không suy đoán.
 - Không lặp lại nguyên văn bằng chứng, hãy tổng hợp thành câu trả lời mạch lạc.
 
 ## Hồ sơ người dùng:
@@ -1648,9 +1692,74 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
         response = client.models.generate_content(
             model="gemini-3.8-flash",
             contents=prompt,
-            config={"temperature": 0.3, "max_output_tokens": 1024},
+            config={"temperature": 0.3, "max_output_tokens": 4096},
         )
-        result = response.text.strip()
+        result = (response.text or "").strip()
+        if result and len(result) > 20:
+            citation_check = validate_citations(
+                result,
+                citations,
+                require_each_sentence=False,
+            )
+            if citation_check["valid"]:
+                return result
+            _LOGGER.warning(
+                "Citation check did not pass (returning answer anyway): %s",
+                citation_check,
+            )
+            return result
+        _LOGGER.warning("Gemini returned an empty or too-short answer.")
+    except Exception:
+        _LOGGER.exception("Gemini answer generation failed.")
+        pass
+    return None
+
+
+_LLM_ONLY_PROMPT = """Bạn là chuyên gia tư vấn an toàn thực phẩm.
+Người dùng cung cấp danh sách thành phần đọc từ nhãn bao bì thực phẩm.
+Hãy trả lời câu hỏi của họ DỰA TRÊN KIẾN THỨC CỦA BẠN (không có cơ sở dữ liệu tra cứu).
+
+## Hồ sơ người dùng:
+{persona_info}
+
+## Thành phần trên nhãn:
+{ingredients_text}
+
+## Câu hỏi:
+{question}
+
+## Trả lời (tiếng Việt, ngắn gọn, thực tế):
+"""
+
+
+def generate_llm_only_answer(raw_text, persona, question):
+    """
+    Cấu hình LLM-only: Gemini trả lời trực tiếp từ OCR text, không tra cứu RAG.
+    Dùng cho ablation study — so sánh với pipeline có RAG.
+    """
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        return None
+
+    conditions = ", ".join(persona.get("conditions", [])) or "Không có"
+    allergies = ", ".join(persona.get("allergies", [])) or "Không có"
+    persona_info = f"Bệnh lý: {conditions}. Dị ứng: {allergies}."
+
+    prompt = _LLM_ONLY_PROMPT.format(
+        persona_info=persona_info,
+        ingredients_text=raw_text or "(không có)",
+        question=question or "Sản phẩm này có an toàn cho tôi không?",
+    )
+
+    try:
+        from google import genai
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
+            model="gemini-3.8-flash",
+            contents=prompt,
+            config={"temperature": 0.3, "max_output_tokens": 4096},
+        )
+        result = (response.text or "").strip()
         if result and len(result) > 20:
             return result
     except Exception:

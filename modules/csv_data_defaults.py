@@ -9,18 +9,6 @@ USER_CLINICAL_005,"Bệnh nhân Bệnh thận mạn giai đoạn 3 (CKD) — C�
 USER_CLINICAL_006,"Người có tiền sử Dị ứng Thực phẩm (Đậu nành, Sữa, Trứng, Gluten)",Female,31,21.0,112,72,4.7,5.0,4.0,Severe_Food_Allergies,"gluten, milk, egg, soy, peanut","Allergen-Free Diet, Celiac Diet",Always reads allergen advice on food labels,"Tiền sử sốc phản vệ và nổi mày đay với protein sữa bò, trứng, đậu nành và celiac (dị ứng gluten bột mì). Cần cảnh báo khẩn cấp nếu sản phẩm chứa chất nhũ hóa Lecithin INS 322i nguồn gốc từ đậu nành hoặc có bột mì."
 USER_CLINICAL_007,Người trưởng thành Khỏe mạnh — Tiêu dùng Thực phẩm An toàn Thông thường,Male,34,22.4,118,76,5.0,5.2,5.1,Healthy_Adult,,Balanced Diet,Regular balanced diet without dietary restrictions,"Thể trạng hoàn toàn khỏe mạnh, không có bệnh nền mạn tính hay tiền sử dị ứng thực phẩm. Đánh giá phụ gia dựa trên nguyên tắc GMP và tuân thủ ngưỡng ăn vào hàng ngày JECFA ADI."'''
 
-DEFAULT_ADDITIVES_STANDARD_CSV = '''ins_code,e_number,canonical_name_vi,canonical_name_en,synonyms,foodon_curie,function,adi_value,vn_regulation,codex_standard,contraindications_summary
-INS 621,E621,Mononatri L-glutamat (Bột ngọt / Mì chính),Monosodium L-glutamate,"Bột ngọt, Mì chính, MSG, Monosodium glutamate",FOODON:03412972,Chất điều vị,Not Specified (JECFA) / 30 mg/kg bw/day (EFSA),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"hypertension:Chứa 12.3% natri; cần tính toán vào tổng lượng muối tiêu thụ hàng ngày;msg_sensitivity:Có thể gây hội chứng nóng bừng, tê gáy ở người nhạy cảm"
-INS 211,E211,Natri benzoat,Sodium benzoate,"Chất bảo quản 211, Sodium benzoate",FOODON:03400418,Chất bảo quản chống nấm,0 - 5 mg/kg thể trọng/ngày,Phụ lục 2A - TT 24/2019/TT-BYT (1.000 mg/kg),Codex STAN 192-1995,"asthma_allergy:Nguy cơ kích hoạt cơn hen phế quản hoặc mày đay ở người nhạy cảm aspirin;vitamin_c_interaction:Phản ứng với acid ascorbic sinh vết benzen nếu bảo quản nhiệt độ cao"
-INS 102,E102,Tartrazine (Phẩm màu vàng chanh Azo),Tartrazine,"Màu vàng 102, Yellow 5, Tartrazin",FOODON:03460150,Phẩm màu tổng hợp Azo,0 - 10 mg/kg thể trọng/ngày,Phụ lục 2A - TT 24/2019/TT-BYT (100 - 300 mg/kg),Codex STAN 192-1995,"children_adhd:EFSA cảnh báo làm gia tăng hành vi hiếu động và giảm tập trung ở trẻ nhỏ;allergy:Rủi ro dị ứng chéo với aspirin và bệnh nhân hen suyễn"
-INS 951,E951,Aspartame (Chất tạo ngọt nhân tạo),Aspartame,"Đường ăn kiêng Aspartam, Equal, NutraSweet",FOODON:00003948,Chất tạo ngọt năng lượng thấp,0 - 40 mg/kg thể trọng/ngày,Phụ lục 2A - TT 24/2019/TT-BYT (ML theo nhóm),Codex STAN 192-1995,"pku:CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI cho người mắc chứng Phenylketon niệu do chuyển hóa thành phenylalanine;pregnancy:Cần theo dõi tổng liều lượng nạp hàng ngày không vượt ngưỡng ADI"
-INS 330,E330,Acid citric,Citric acid,"Axit chanh, Chất điều chỉnh độ chua 330",FOODON:03413067,Chất điều chỉnh độ acid,Not Specified (An toàn tự nhiên theo GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"gastric_ulcer:Thận trọng ở người đang viêm loét dạ dày cấp tính nếu tiêu thụ nồng độ cao"
-INS 322(i),E322,Lecithin (từ đậu nành/trứng),Lecithin,"Chất nhũ hóa 322, Soy lecithin, Lecitin",FOODON:03316604,Chất nhũ hóa tự nhiên,Not Specified (GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"soy_allergy:CẢNH BÁO DỊ ỨNG nếu sản phẩm có nguồn gốc từ đậu nành;egg_allergy:Cảnh báo dị ứng nếu chiết xuất từ lòng đỏ trứng gà"
-INS 500(ii),E500ii,Natri hydro carbonat,Sodium hydrogen carbonate,"Baking soda, Thuốc muối, Bột nở 500ii",FOODON:00002385,Chất tạo xốp và điều chỉnh độ acid,Not Specified (GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"hypertension:Cung cấp ion natri kiềm, cần kiểm soát tổng lượng natri nạp vào"
-INS 503(ii),E503ii,Amoni hydro carbonat,Ammonium hydrogen carbonate,"Bột khai, Baking ammonia, Chất tạo xốp 503ii",FOODON:03412998,Chất tạo xốp bánh quy,Not Specified (GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"kidney_disease:Phân giải sinh khí amoniac, bệnh nhân suy thận nặng cần thận trọng"
-INS 471,E471,Mono- và diglycerid của các acid béo,Mono- and di-glycerides of fatty acids,"Chất nhũ hóa 471, Distilled monoglycerides",FOODON:03413156,Chất nhũ hóa và ổn định,Not Specified (GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"high_cholesterol:Chứa gốc acid béo no, người rối loạn lipid máu cần lưu ý khẩu phần tổng thể"
-INS 1420,E1420,Tinh bột biến tính (Acetyled starch),Acetylated starch,"Chất làm dày 1420, Modified starch",FOODON:03412981,Chất làm dày và tạo gel,Not Specified (GMP),Phụ lục 1 - TT 24/2019/TT-BYT (GMP),Codex STAN 192-1995,"safe_gmp:Phụ gia thực phẩm an toàn tự nhiên theo nguyên tắc GMP"'''
-
 DEFAULT_INCIDENTS_TRAIN_CSV = '''title,product,product_category,hazard,hazard_category
 Recall of Butter Cookies due to Undeclared Milk and Egg Allergens,Butter cookies,Cereals and bakery products,Milk and egg allergens,Allergens
 Alert: Undeclared Soy Lecithin in Chocolate Chip Cookie Assortment,Chocolate chip cookies,Cereals and bakery products,Undeclared soy lecithin (INS 322i),Allergens
@@ -50,9 +38,8 @@ def ensure_default_csv_data(data_dir):
     
     files_map = {
         "nhanes_personas.csv": DEFAULT_NHANES_PERSONAS_CSV,
-        "additives_standard.csv": DEFAULT_ADDITIVES_STANDARD_CSV,
         "incidents_train.csv": DEFAULT_INCIDENTS_TRAIN_CSV,
-        "openfoodfacts_vietnam.csv": DEFAULT_OPENFOODFACTS_VIETNAM_CSV
+        "openfoodfacts_vietnam.csv": DEFAULT_OPENFOODFACTS_VIETNAM_CSV,
     }
     
     for filename, content in files_map.items():

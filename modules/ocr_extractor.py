@@ -28,6 +28,7 @@ except Exception:
     pass
 
 import re
+import unicodedata
 import cv2
 import numpy as np
 from PIL import Image
@@ -461,12 +462,12 @@ def _gemini_spell_correct(raw_text):
 # PIPELINE TỔNG HỢP: OCR → Dictionary → LLM
 # =====================================================================
 
-def post_process_ocr_spelling(raw_text):
+def post_process_ocr_spelling(raw_text, use_gemini=True):
     """
     Sửa lỗi chính tả OCR cho nhãn thực phẩm tiếng Việt — Pipeline 3 giai đoạn:
       1. Structural cleanup — tách từ dính, chuẩn hóa INS, dọn ký tự rác
       2. Dictionary correction — khôi phục dấu thanh bằng từ điển thực phẩm (diacritic-stripping)
-      3. LLM polish — Gemini Flash sửa nốt các lỗi mà từ điển không cover
+      3. LLM polish tùy chọn — Gemini Flash sửa nốt các lỗi mà từ điển không cover
 
     Returns:
         dict: "final", "after_ocr_dict", "after_llm", "llm_used"
@@ -493,7 +494,7 @@ def post_process_ocr_spelling(raw_text):
     after_ocr_dict = t
 
     # ── Giai đoạn 3: LLM polish (chỉ sửa phần dictionary chưa cover) ──
-    gemini_result = _gemini_spell_correct(t)
+    gemini_result = _gemini_spell_correct(t) if use_gemini else None
     if gemini_result:
         t = gemini_result
         t = _normalize_ins_codes(t)
@@ -516,21 +517,69 @@ def parse_ingredients_from_ocr(full_text):
       Ví dụ: 'Chất nhũ hóa (INS 322i lecithin, INS 471), muối' -> ['Chất nhũ hóa (INS 322i lecithin, INS 471)', 'muối'].
     - Phân loại danh mục sơ bộ (Category classification).
     """
-    match = re.search(r"(?:thành phần|ingredients?)\s*[:\-]\s*(.*)", full_text, re.IGNORECASE | re.DOTALL)
-    target_text = match.group(1) if match else full_text
+    folded_chars = []
+    source_offsets = []
+    for source_index, char in enumerate(full_text):
+        normalized = "d" if char.casefold() == "đ" else char.casefold()
+        decomposed = unicodedata.normalize("NFKD", normalized)
+        for folded_char in decomposed:
+            if not unicodedata.combining(folded_char):
+                folded_chars.append(folded_char)
+                source_offsets.append(source_index)
+    folded_text = "".join(folded_chars)
 
-    stop_words = [
-        r"c[aả]nh\s*b[aá]o\s*d[iị]\s*[uứ]ng", r"CANH\s*BAO\s*DI", r"allergen\s*advice", r"allergen\s*information",
-        r"hướng dẫn bảo quản", r"cách bảo quản", r"điều kiện bảo quản",
-        r"hạn sử dụng", r"ngày sản xuất", r"hsd", r"nsx",
-        r"xuất xứ", r"nơi sản xuất", r"khối lượng tịnh", r"thể tích thực",
-        r"chịu trách nhiệm", r"nutrition facts", r"giá trị dinh dưỡng",
-        r"net\s*weight", r"trọng lượng tịnh",
-    ]
-    for stop_word in stop_words:
-        parts = re.split(stop_word, target_text, flags=re.IGNORECASE)
-        if parts and len(parts[0].strip()) > 10:
-            target_text = parts[0]
+    start_pattern = r"(?:thanh\s*phan|ingredients?)\s*[:\-]?\s*"
+    start_matches = list(re.finditer(start_pattern, folded_text, re.IGNORECASE))
+    start_match = start_matches[0] if start_matches else None
+    if start_match:
+        for candidate in start_matches[1:]:
+            between_headings = folded_text[start_match.end():candidate.start()]
+            if re.fullmatch(r"[\s/|,;:\-]*", between_headings):
+                start_match = candidate
+            else:
+                break
+    if start_match:
+        start_offset = source_offsets[start_match.end() - 1] + 1 if start_match.end() else 0
+        target_end = len(full_text)
+        stop_patterns = [
+            r"canh\s*bao\s*di\s*ung",
+            r"allergen\s*advice",
+            r"allergen\s*information",
+            r"huong\s*dan\s*bao\s*quan",
+            r"cach\s*bao\s*quan",
+            r"dieu\s*kien\s*bao\s*quan",
+            r"\bbao\s*quan\s*noi\b",
+            r"han\s*su\s*dung",
+            r"ngay\s*san\s*xuat",
+            r"\bhsd\b",
+            r"\bnsx\b",
+            r"xuat\s*xu",
+            r"noi\s*san\s*xuat",
+            r"khoi\s*luong\s*tinh",
+            r"the\s*tich\s*thuc",
+            r"chiu\s*trach\s*nhiem",
+            r"nutrition\s*facts",
+            r"gia\s*tri\s*dinh\s*duong",
+            r"gia\s*tri\s*dinh\s*d\w*",
+            r"g(?:ia|i)?\s*tri\s*dinh\s*\w{2,8}",
+            r"thong\s*tin\s*dinh\s*duong",
+            r"thong\s*tin\s*dinh\s*d\w*",
+            r"\bingredients?\b",
+            r"net\s*weight",
+            r"trong\s*luong\s*tinh",
+        ]
+        for stop_pattern in stop_patterns:
+            stop_match = re.search(
+                stop_pattern,
+                folded_text[start_match.end():],
+                re.IGNORECASE,
+            )
+            if stop_match:
+                folded_stop_index = start_match.end() + stop_match.start()
+                target_end = min(target_end, source_offsets[folded_stop_index])
+        target_text = full_text[start_offset:target_end]
+    else:
+        target_text = ""
 
     # Tách dấu phẩy/chấm phẩy CHỈ KHI NGOÀI ngoặc đơn (bảo toàn cụm trong ngoặc)
     raw_splits = []
@@ -563,11 +612,26 @@ def parse_ingredients_from_ocr(full_text):
         else:
             merged_splits.append(item)
 
-    mentions = []
+    pending_items = []
     for item in merged_splits:
         item = re.sub(r'^(?:vắt mì|gói gia vị|gói nêm|gói rau|thành phần)\s*[:\-]\s*', '', item, flags=re.IGNORECASE)
         item = re.sub(r'\s+', ' ', item).strip(" .-:,\n\r\t")
 
+        # Keep distinct additive codes separate so entity linking cannot collapse
+        # several INS substances from one parenthesized label into a single match.
+        code_parts = re.split(
+            r",\s*(?=(?:INS\s*\d{3,4}|E\s*\d{3,4}))",
+            item,
+            flags=re.IGNORECASE,
+        )
+        if len(code_parts) > 1:
+            pending_items.extend(code_parts)
+        else:
+            pending_items.append(item)
+
+    mentions = []
+    for item in pending_items:
+        item = re.sub(r'\s+', ' ', item).strip(" .-:,\n\r\t")
         _SHORT_VALID = {"bơ", "bò", "mì", "mè", "gà", "cá", "mỡ", "dầu", "bơ", "sữa", "mật"}
         if (len(item) >= 3 or item.lower() in _SHORT_VALID) and not re.match(r'^\d+(\.\d+)?%$', item):
             category = "ingredient"
@@ -685,72 +749,219 @@ def draw_ocr_boxes_from_boxes(img_bgr, boxes):
 # 4. CHẾ ĐỘ NHÃN CHUẨN (GROUND TRUTH BENCHMARK) & THỰC THI CHÍNH
 # =====================================================================
 
+_LABEL_STUDIO_CACHE = None
+
+
+def load_label_studio_data(assets_dir=None):
+    """
+    Nạp và parse toàn bộ dữ liệu Label Studio annotation (550 ảnh nhãn bao bì).
+    Trả về dict {image_filename: parsed_data} đã cache.
+    """
+    global _LABEL_STUDIO_CACHE
+    if _LABEL_STUDIO_CACHE is not None:
+        return _LABEL_STUDIO_CACHE
+
+    if assets_dir is None:
+        assets_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets")
+    json_path = os.path.join(assets_dir, "label_studio", "label_studio_exported_data.json")
+
+    if not os.path.exists(json_path):
+        _LABEL_STUDIO_CACHE = {}
+        return _LABEL_STUDIO_CACHE
+
+    import json
+    with open(json_path, "r", encoding="utf-8") as f:
+        raw_data = json.load(f)
+
+    parsed = {}
+    for item in raw_data:
+        image_ref = item.get("data", {}).get("image", "")
+        ann = item["annotations"][0] if item.get("annotations") else None
+        if not ann or not image_ref:
+            continue
+
+        results = ann.get("result", [])
+        id_to_text = {}
+        id_to_label = {}
+        id_to_bbox = {}
+
+        for r in results:
+            rid = r.get("id", "")
+            val = r.get("value", {})
+            if r.get("type") == "textarea":
+                id_to_text[rid] = " ".join(val.get("text", []))
+            elif r.get("type") == "rectanglelabels":
+                labels = val.get("rectanglelabels", [])
+                if labels:
+                    id_to_label[rid] = labels[0]
+                id_to_bbox[rid] = (
+                    val.get("x", 0), val.get("y", 0),
+                    val.get("width", 0), val.get("height", 0),
+                )
+
+        sorted_ids = sorted(
+            id_to_bbox.keys(),
+            key=lambda k: (round(id_to_bbox[k][1] / 3), id_to_bbox[k][0]),
+        )
+
+        product_parts = []
+        full_text_parts = []
+        ingredient_parts = []
+        additive_parts = []
+        warning_parts = []
+        lines_data = []
+
+        current_type = None
+        current_parts = []
+
+        for rid in sorted_ids:
+            text = id_to_text.get(rid, "")
+            label = id_to_label.get(rid, "O")
+            full_text_parts.append(text)
+
+            if label.startswith("B-"):
+                if current_type and current_parts:
+                    joined = " ".join(current_parts)
+                    if current_type == "PRODUCT_NAME":
+                        product_parts.append(joined)
+                    elif current_type == "INGREDIENT":
+                        ingredient_parts.append(joined)
+                    elif current_type == "ADDITIVE":
+                        additive_parts.append(joined)
+                    elif current_type == "WARNING":
+                        warning_parts.append(joined)
+                current_type = label[2:]
+                current_parts = [text]
+            elif label.startswith("I-") and current_type == label[2:]:
+                current_parts.append(text)
+            else:
+                if current_type and current_parts:
+                    joined = " ".join(current_parts)
+                    if current_type == "PRODUCT_NAME":
+                        product_parts.append(joined)
+                    elif current_type == "INGREDIENT":
+                        ingredient_parts.append(joined)
+                    elif current_type == "ADDITIVE":
+                        additive_parts.append(joined)
+                    elif current_type == "WARNING":
+                        warning_parts.append(joined)
+                current_type = None
+                current_parts = []
+
+        if current_type and current_parts:
+            joined = " ".join(current_parts)
+            if current_type == "PRODUCT_NAME":
+                product_parts.append(joined)
+            elif current_type == "INGREDIENT":
+                ingredient_parts.append(joined)
+            elif current_type == "ADDITIVE":
+                additive_parts.append(joined)
+            elif current_type == "WARNING":
+                warning_parts.append(joined)
+
+        product_name = " ".join(product_parts).strip()
+        if not product_name:
+            preview = ", ".join((ingredient_parts + additive_parts)[:3])
+            product_name = preview[:50] if preview else "Sản phẩm"
+        all_components = ingredient_parts + additive_parts
+        full_text = "Thành phần: " + ", ".join(all_components) + "."
+        if warning_parts:
+            full_text += " Cảnh báo: " + " ".join(warning_parts)
+
+        chunk_size = 80
+        raw_full = " ".join(full_text_parts)
+        words = raw_full.split()
+        for i in range(0, len(words), 12):
+            line_text = " ".join(words[i:i + 12])
+            lines_data.append({"text": line_text, "confidence": 0.99})
+
+        image_filename = os.path.basename(image_ref)
+        parsed[image_filename] = {
+            "product_name": product_name,
+            "full_text": full_text,
+            "n_ingredients": len(ingredient_parts),
+            "n_additives": len(additive_parts),
+            "warning_text": " ".join(warning_parts),
+            "lines": lines_data,
+            "image_ref": image_ref,
+        }
+
+    _LABEL_STUDIO_CACHE = parsed
+    return _LABEL_STUDIO_CACHE
+
+
+def get_label_studio_product_list(assets_dir=None):
+    """Trả về danh sách sản phẩm từ Label Studio để hiển thị trong dropdown."""
+    ls_data = load_label_studio_data(assets_dir)
+    products = []
+    for filename, info in sorted(ls_data.items()):
+        label = f"{info['product_name']} ({info['n_ingredients']}I, {info['n_additives']}A)"
+        products.append({
+            "filename": filename,
+            "label": label,
+            "product_name": info["product_name"],
+            "image_ref": info["image_ref"],
+        })
+    return products
+
+
 def get_ground_truth_sample(sample_key, image_input):
     """
-    Trả về dữ liệu nhãn chuẩn (Ground Truth Benchmark) đã được kiểm chứng 100%
-    cho các mẫu bao bì thực nghiệm của đề tài, không bị ảnh hưởng bởi sai số OCR.
+    Trả về dữ liệu nhãn chuẩn (Ground Truth Benchmark) đã được kiểm chứng.
+    Hỗ trợ: (1) 3 mẫu demo gốc, (2) 550 ảnh Label Studio annotation.
     """
     img_bgr = convert_to_cv2_image(image_input)
     key_lower = sample_key.lower()
 
-    if "cookie" in key_lower or "bánh" in key_lower:
-        full_text = (
-            "Thành phần / Ingredients: Bột mì, bơ lạt, đường kính, trứng gà tươi, bột sữa béo, "
-            "chất nhũ hóa (INS 322i lecithin từ đậu nành, INS 471), chất tạo xốp (INS 500ii, INS 503ii), "
-            "muối i-ốt, hương vani tổng hợp. Cảnh báo dị ứng: Chứa gluten (bột mì), trứng, sữa và đậu nành. "
-            "Có thể chứa vết của hạt đậu phộng, hạnh nhân."
-        )
-        lines = [
-            {"text": "Thành phần / Ingredients: Bột mì, bơ lạt, đường kính, trứng gà tươi, bột sữa béo", "confidence": 0.99},
-            {"text": "chất nhũ hóa (INS 322i lecithin từ đậu nành, INS 471), chất tạo xốp (INS 500ii, INS 503ii)", "confidence": 0.98},
-            {"text": "muối i-ốt, hương vani tổng hợp.", "confidence": 0.98},
-            {"text": "Cảnh báo dị ứng: Chứa gluten (bột mì), trứng, sữa và đậu nành.", "confidence": 0.99},
-            {"text": "Có thể chứa vết của hạt đậu phộng, hạnh nhân.", "confidence": 0.97}
-        ]
-        avg_conf = 0.98
+    # Thử tìm trong Label Studio data trước
+    ls_data = load_label_studio_data()
+    ls_match = None
+    if sample_key in ls_data:
+        ls_match = ls_data[sample_key]
+    else:
+        for filename, info in ls_data.items():
+            if sample_key in filename or filename in sample_key:
+                ls_match = info
+                break
 
-    elif "beverage" in key_lower or "nước" in key_lower or "lon" in key_lower or "cola" in key_lower:
-        full_text = (
-            "Thành phần: Nước bão hòa CO2, chất điều chỉnh độ acid (INS 330, INS 331iii), "
-            "chất tạo ngọt tổng hợp (INS 951, INS 950), màu caramen nhóm IV (INS 150d), hương cola tự nhiên. "
-            "Cảnh báo: Chứa nguồn Phenylalanine."
-        )
-        lines = [
-            {"text": "Thành phần: Nước bão hòa CO2, chất điều chỉnh độ acid (INS 330, INS 331iii)", "confidence": 0.99},
-            {"text": "chất tạo ngọt tổng hợp (INS 951, INS 950), màu caramen nhóm IV (INS 150d), hương cola tự nhiên.", "confidence": 0.98},
-            {"text": "Cảnh báo: Chứa nguồn Phenylalanine.", "confidence": 0.99}
-        ]
+    if ls_match:
+        full_text = ls_match["full_text"]
+        lines = ls_match["lines"]
         avg_conf = 0.99
+        mentions = parse_ingredients_from_ocr(full_text)
+        annotated_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+        annotated_img = Image.fromarray(annotated_rgb)
 
-    else:  # Mì ăn liền
-        full_text = (
-            "Thành phần: Vắt mì: Bột mì, dầu cọ, muối, chất làm dày (INS 1420). "
-            "Gói gia vị: Muối, đường, chất điều vị (INS 621, INS 631, INS 627), "
-            "chất bảo quản (INS 211), phẩm màu tổng hợp (INS 102)."
-        )
-        lines = [
-            {"text": "Vắt mì: Bột mì, dầu cọ, muối, chất làm dày (INS 1420).", "confidence": 0.98},
-            {"text": "Gói gia vị: Muối, đường, chất điều vị (INS 621, INS 631, INS 627),", "confidence": 0.98},
-            {"text": "chất bảo quản (INS 211), phẩm màu tổng hợp (INS 102).", "confidence": 0.97}
-        ]
-        avg_conf = 0.98
+        return {
+            "is_real_ocr": False,
+            "is_ground_truth": True,
+            "engine_name": f"Ground Truth — Label Studio Annotation ({ls_match['product_name']})",
+            "full_text": full_text,
+            "raw_text_before_norm": full_text,
+            "text_after_ocr_dict": full_text,
+            "llm_spell_used": False,
+            "avg_confidence": avg_conf,
+            "lines": lines,
+            "mentions": mentions,
+            "annotated_image": annotated_img,
+        }
 
-    mentions = parse_ingredients_from_ocr(full_text)
+    # Không tìm thấy ground truth → trả về rỗng để pipeline chuyển sang OCR thật
     annotated_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     annotated_img = Image.fromarray(annotated_rgb)
-
     return {
         "is_real_ocr": False,
-        "is_ground_truth": True,
-        "engine_name": "Dữ liệu Nhãn Chuẩn (Ground Truth Benchmark - Đã kiểm chứng)",
-        "full_text": full_text,
-        "raw_text_before_norm": full_text,
-        "text_after_ocr_dict": full_text,
+        "is_ground_truth": False,
+        "is_ocr_unavailable": True,
+        "engine_name": "Không có Ground Truth cho ảnh này",
+        "full_text": "",
+        "raw_text_before_norm": "",
+        "text_after_ocr_dict": "",
         "llm_spell_used": False,
-        "avg_confidence": avg_conf,
-        "lines": lines,
-        "mentions": mentions,
-        "annotated_image": annotated_img
+        "avg_confidence": 0.0,
+        "lines": [],
+        "mentions": [],
+        "annotated_image": annotated_img,
     }
 
 
@@ -797,7 +1008,9 @@ def _multi_pass_ocr(engine, img_bgr):
     return best_result
 
 
-def extract_with_paddle_ocr(image_input, sample_key="custom", **kwargs):
+def extract_with_paddle_ocr(
+    image_input, sample_key="custom", use_gemini_correction=True, **kwargs
+):
     """
     Thực hiện quét ảnh thực tế bằng PaddleOCR kết hợp chuỗi thuật toán:
     Multi-pass tiền xử lý ➔ Nhận diện DBNet/SVTR ➔ Phục hồi chính tả tiếng Việt.
@@ -813,7 +1026,10 @@ def extract_with_paddle_ocr(image_input, sample_key="custom", **kwargs):
             if result is not None:
                 lines_data, full_texts, avg_conf, boxes, pass_name, processed_img = result
                 raw_full_text = " ".join(full_texts)
-                spell_result = post_process_ocr_spelling(raw_full_text)
+                spell_result = post_process_ocr_spelling(
+                    raw_full_text,
+                    use_gemini=use_gemini_correction,
+                )
                 normalized_full_text = spell_result["final"]
                 mentions = parse_ingredients_from_ocr(normalized_full_text)
                 annotated_img = draw_ocr_boxes_from_boxes(processed_img, boxes)
@@ -839,10 +1055,24 @@ def extract_with_paddle_ocr(image_input, sample_key="custom", **kwargs):
     else:
         ocr_error = _INIT_ERROR or "Chưa cài đặt hoặc chưa nạp được PaddleOCR."
 
-    print(f"PaddleOCR fallback triggered: {ocr_error}")
-    fallback_res = get_ground_truth_sample(sample_key, image_input)
-    fallback_res["engine_name"] = f"Dự phòng thông minh ({ocr_error})"
-    return fallback_res
+    print(f"PaddleOCR unavailable for image OCR: {ocr_error}")
+    img_bgr = convert_to_cv2_image(image_input)
+    annotated_img = Image.fromarray(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB))
+    return {
+        "is_real_ocr": False,
+        "is_ground_truth": False,
+        "is_ocr_unavailable": True,
+        "engine_name": "OCR không khả dụng",
+        "ocr_error": ocr_error,
+        "full_text": "",
+        "raw_text_before_norm": "",
+        "text_after_ocr_dict": "",
+        "llm_spell_used": False,
+        "avg_confidence": 0.0,
+        "lines": [],
+        "mentions": [],
+        "annotated_image": annotated_img,
+    }
 
 
 def run_perception(image_input, sample_key="custom", force_real_ocr=False, **kwargs):
@@ -853,4 +1083,8 @@ def run_perception(image_input, sample_key="custom", force_real_ocr=False, **kwa
     if sample_key != "custom" and not force_real_ocr:
         return get_ground_truth_sample(sample_key, image_input)
     else:
-        return extract_with_paddle_ocr(image_input, sample_key=sample_key)
+        return extract_with_paddle_ocr(
+            image_input,
+            sample_key=sample_key,
+            **kwargs,
+        )
