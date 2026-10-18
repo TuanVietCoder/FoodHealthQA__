@@ -1,0 +1,51 @@
+[
+  {
+    "id": "healthy_adult",
+    "name": "Người trưởng thành khỏe mạnh",
+    "description": "28 tuổi, không bệnh nền, chức năng gan thận bình thường, thể trạng khỏe mạnh.",
+    "conditions": ["healthy"],
+    "allergies": []
+  },
+  {
+    "id": "pregnant_woman",
+    "name": "Phụ nữ mang thai (Thai kỳ 3 tháng giữa)",
+    "description": "29 tuổi, mang thai tuần thứ 20, cần tránh phẩm màu hóa học, hóa chất bảo quản và ưu tiên dinh dưỡng sạch.",
+    "conditions": ["pregnancy"],
+    "allergies": []
+  },
+  {
+    "id": "child_5yo",
+    "name": "Trẻ nhỏ 5 tuổi (Cơ địa hiếu động)",
+    "description": "Trẻ 5 tuổi, cân nặng 18kg, nhạy cảm với các loại phẩm màu azo (Southampton colors) và chất bảo quản tổng hợp.",
+    "conditions": ["children_adhd"],
+    "allergies": []
+  },
+  {
+    "id": "allergy_patient",
+    "name": "Người có tiền sử Dị ứng Thực phẩm (Đậu nành, Sữa, Trứng, Gluten)",
+    "description": "25 tuổi, cơ địa dị ứng IgE qua đường tiêu hóa với protein đậu nành, casein trong sữa bò, lòng trắng trứng và gluten.",
+    "conditions": ["soy_allergy", "milk_allergy", "egg_allergy", "gluten_intolerance"],
+    "allergies": ["đậu nành", "soy", "sữa", "milk", "trứng", "egg", "gluten", "bột mì"]
+  },
+  {
+    "id": "hypertension_patient",
+    "name": "Bệnh nhân Tăng huyết áp mạn tính",
+    "description": "55 tuổi, tiền sử tăng huyết áp độ 2 (150/95 mmHg), cần kiểm soát nghiêm ngặt lượng natri dưới 1.500 mg/ngày.",
+    "conditions": ["hypertension"],
+    "allergies": []
+  },
+  {
+    "id": "diabetes_type2",
+    "name": "Bệnh nhân Đái tháo đường Típ 2",
+    "description": "50 tuổi, chỉ số đường huyết lúc đói 8.2 mmol/L, cần kiêng đường tự do, theo dõi chất tạo ngọt thay thế.",
+    "conditions": ["diabetes"],
+    "allergies": []
+  },
+  {
+    "id": "pku_allergy_patient",
+    "name": "Bệnh nhân Phenylketon niệu (PKU)",
+    "description": "Bệnh nhân mắc chứng rối loạn chuyển hóa bẩm sinh Phenylketonuria (PKU), chống chỉ định tuyệt đối với Phenylalanine.",
+    "conditions": ["phenylketonuria_pku"],
+    "allergies": ["phenylalanine"]
+  }
+]

@@ -1,0 +1,6 @@
+food_code,food_description,food_category,calories_kcal,protein_g,fat_g,saturated_fat_g,carbohydrate_g,sugars_g,fiber_g,sodium_mg,potassium_mg,phosphorus_mg,cholesterol_mg
+51101010,"Butter cookies, commercial",Cookies and brownies,485.0,6.2,22.5,12.8,65.4,26.5,1.4,240.0,95.0,85.0,55.0
+27510150,"Instant soup, noodle with seasoning and oil pack",Soups,380.0,8.5,14.2,6.8,54.0,4.2,2.1,1850.0,110.0,120.0,0.0
+92410110,"Carbonated soda, cola, zero calorie with aspartame",Diet soft drinks,0.5,0.1,0.0,0.0,0.1,0.0,0.0,25.0,12.0,17.0,0.0
+11411000,"Yogurt drink, flavored, sweetened",Milk and dairy drinks,72.0,2.8,1.2,0.8,13.5,12.8,0.2,45.0,140.0,90.0,5.0
+53101000,"Potato chips, fried, cheese flavored",Snacks,540.0,6.5,35.0,10.5,52.0,3.0,3.5,680.0,420.0,145.0,2.0

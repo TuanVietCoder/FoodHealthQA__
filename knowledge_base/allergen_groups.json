@@ -1,0 +1,358 @@
+[
+  {
+    "id": "gluten",
+    "name_vi": "Gluten (ngũ cốc chứa gluten)",
+    "name_en": "Cereals containing gluten",
+    "severity": "warning",
+    "keywords": [
+      "gluten", "bột mì", "lúa mì", "wheat", "flour",
+      "barley", "lúa mạch", "rye", "oat", "yến mạch", "spelt",
+      "mì", "bột", "mì sợi", "mì ống", "pasta", "bread", "bánh mì"
+    ],
+    "negation_rules": {
+      "gluten": "ALLERGEN_RISK",
+      "bột mì": "ALLERGEN_RISK",
+      "wheat": "ALLERGEN_RISK",
+      "flour": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (1)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Bắt buộc ghi nhãn theo Codex/EU/VN. Celiac disease là chống chỉ định tuyệt đối."
+  },
+  {
+    "id": "milk",
+    "name_vi": "Sữa và sản phẩm từ sữa",
+    "name_en": "Milk and milk products (including lactose)",
+    "severity": "warning",
+    "keywords": [
+      "sữa", "milk", "bột sữa", "bơ", "dairy", "whey",
+      "casein", "cream", "kem", "lactose", "phô mai", "cheese",
+      "yogurt", "sữa chua", "sữa bò", "sữa dê", "butter",
+      "sữa béo", "sữa tươi", "sữa đặc", "condensed milk"
+    ],
+    "negation_rules": {
+      "sữa": "ALLERGEN_RISK",
+      "milk": "ALLERGEN_RISK",
+      "bơ": "ALLERGEN_RISK",
+      "dairy": "ALLERGEN_RISK",
+      "whey": "ALLERGEN_RISK",
+      "casein": "ALLERGEN_RISK",
+      "lactose": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (7)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Dị ứng protein sữa bò phổ biến ở trẻ em. Lactose intolerance khác với milk allergy."
+  },
+  {
+    "id": "egg",
+    "name_vi": "Trứng và sản phẩm từ trứng",
+    "name_en": "Eggs and egg products",
+    "severity": "warning",
+    "keywords": [
+      "trứng", "egg", "albumin", "lòng trắng", "lòng đỏ",
+      "trứng gà", "trứng vịt", "egg white", "egg yolk",
+      "trứng tươi", "bột trứng"
+    ],
+    "negation_rules": {
+      "trứng": "ALLERGEN_RISK",
+      "egg": "ALLERGEN_RISK",
+      "albumin": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (3)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Top 3 dị ứng thực phẩm ở trẻ em toàn cầu."
+  },
+  {
+    "id": "soy",
+    "name_vi": "Đậu nành và sản phẩm từ đậu nành",
+    "name_en": "Soybeans and soy products",
+    "severity": "warning",
+    "keywords": [
+      "đậu nành", "đậu tương", "soya", "soy", "lecithin",
+      "tofu", "đậu hũ", "tương", "nước tương", "soy sauce",
+      "đậu phụ", "soy protein", "soy milk", "sữa đậu nành",
+      "edamame", "miso", "tempeh"
+    ],
+    "negation_rules": {
+      "INS 322i": "ALLERGEN_RISK",
+      "INS 322": "ALLERGEN_RISK",
+      "lecithin": "ALLERGEN_RISK",
+      "đậu nành": "ALLERGEN_RISK",
+      "soy": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (6)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Lecithin đậu nành (INS 322i) là nguồn dị ứng ẩn phổ biến nhất trong bánh kẹo."
+  },
+  {
+    "id": "peanut",
+    "name_vi": "Đậu phộng (lạc)",
+    "name_en": "Peanuts and peanut products",
+    "severity": "critical",
+    "keywords": [
+      "đậu phộng", "đậu phụng", "lạc", "peanut",
+      "bơ đậu phộng", "peanut butter", "peanut oil", "dầu lạc",
+      "dầu phộng"
+    ],
+    "negation_rules": {
+      "đậu phộng": "CONTRAINDICATED",
+      "lạc": "CONTRAINDICATED",
+      "peanut": "CONTRAINDICATED"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (5)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Nguyên nhân hàng đầu gây sốc phản vệ tử vong do thực phẩm tại Âu-Mỹ."
+  },
+  {
+    "id": "nuts",
+    "name_vi": "Các loại hạt cây",
+    "name_en": "Tree nuts",
+    "severity": "critical",
+    "keywords": [
+      "hạnh nhân", "hạt cây", "óc chó", "điều",
+      "almond", "walnut", "cashew", "macadamia", "pistachio",
+      "hạt dẻ", "pecan", "hazelnut", "brazil nut",
+      "hạt thông", "pine nut", "chestnut"
+    ],
+    "negation_rules": {
+      "hạnh nhân": "CONTRAINDICATED",
+      "almond": "CONTRAINDICATED",
+      "walnut": "CONTRAINDICATED",
+      "cashew": "CONTRAINDICATED",
+      "hạt cây": "CONTRAINDICATED"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (8)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Dị ứng chéo cao giữa các loại hạt cây."
+  },
+  {
+    "id": "shellfish",
+    "name_vi": "Giáp xác (tôm, cua)",
+    "name_en": "Crustaceans and crustacean products",
+    "severity": "critical",
+    "keywords": [
+      "tôm", "cua", "hải sản", "shrimp", "crab",
+      "lobster", "tôm hùm", "crawfish", "prawn",
+      "tôm sú", "tôm thẻ", "cua biển", "ghẹ"
+    ],
+    "negation_rules": {
+      "tôm": "CONTRAINDICATED",
+      "cua": "CONTRAINDICATED",
+      "shrimp": "CONTRAINDICATED",
+      "crab": "CONTRAINDICATED",
+      "hải sản": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (2)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Dị ứng #1 tại Việt Nam — 56.9% ca dị ứng thực phẩm ở trẻ em (nghiên cứu JCU 2019)."
+  },
+  {
+    "id": "fish",
+    "name_vi": "Cá và sản phẩm từ cá",
+    "name_en": "Fish and fish products",
+    "severity": "critical",
+    "keywords": [
+      "cá", "fish", "nước mắm", "fish sauce",
+      "cá ngừ", "tuna", "salmon", "anchovy", "cá cơm",
+      "cá hồi", "cá thu", "cá basa", "cá tra",
+      "surimi", "chả cá", "fish ball"
+    ],
+    "negation_rules": {
+      "cá": "CONTRAINDICATED",
+      "fish": "CONTRAINDICATED",
+      "nước mắm": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4",
+      "eu": "EU 1169/2011 Annex II (4)",
+      "vietnam": "Thông tư 24/2019/TT-BYT"
+    },
+    "note": "Dị ứng #2 tại Việt Nam — 1.6% người lớn. Nước mắm là nguồn ẩn phổ biến."
+  },
+  {
+    "id": "celery",
+    "name_vi": "Cần tây",
+    "name_en": "Celery and celery products",
+    "severity": "warning",
+    "keywords": [
+      "cần tây", "celery", "celeriac",
+      "celery salt", "muối cần tây"
+    ],
+    "negation_rules": {
+      "cần tây": "ALLERGEN_RISK",
+      "celery": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "Không bắt buộc theo Codex",
+      "eu": "EU 1169/2011 Annex II (9)",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Bắt buộc ghi nhãn tại EU. Phổ biến ở Châu Âu, hiếm ở Việt Nam."
+  },
+  {
+    "id": "mustard",
+    "name_vi": "Mù tạt",
+    "name_en": "Mustard and mustard products",
+    "severity": "warning",
+    "keywords": [
+      "mù tạt", "mustard", "wasabi",
+      "mustard seed", "hạt mù tạt"
+    ],
+    "negation_rules": {
+      "mù tạt": "ALLERGEN_RISK",
+      "mustard": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "Không bắt buộc theo Codex",
+      "eu": "EU 1169/2011 Annex II (10)",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Bắt buộc ghi nhãn tại EU. Hiếm ở Việt Nam."
+  },
+  {
+    "id": "sesame",
+    "name_vi": "Vừng (mè)",
+    "name_en": "Sesame seeds and sesame products",
+    "severity": "warning",
+    "keywords": [
+      "vừng", "mè", "sesame",
+      "dầu mè", "sesame oil", "sesame seed",
+      "tahini", "hạt vừng"
+    ],
+    "negation_rules": {
+      "vừng": "ALLERGEN_RISK",
+      "mè": "ALLERGEN_RISK",
+      "sesame": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 (bổ sung 2023)",
+      "eu": "EU 1169/2011 Annex II (11)",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Mỹ thêm vào Big 9 từ 01/2023 (FASTER Act). Dùng nhiều trong ẩm thực VN."
+  },
+  {
+    "id": "sulfites",
+    "name_vi": "Sulfite / SO₂ (≥ 10 mg/kg)",
+    "name_en": "Sulphur dioxide and sulphites",
+    "severity": "critical",
+    "keywords": [
+      "sulfite", "sulphite", "SO2", "SO₂",
+      "lưu huỳnh", "sulfur dioxide", "sulphur dioxide",
+      "INS 220", "INS 221", "INS 222", "INS 223",
+      "INS 224", "INS 225", "INS 226", "INS 227", "INS 228",
+      "metabisulfite", "metabisulphite",
+      "natri sulfit", "kali metabisulfit"
+    ],
+    "negation_rules": {
+      "sulfite": "CONTRAINDICATED",
+      "sulphite": "CONTRAINDICATED",
+      "SO2": "CONTRAINDICATED",
+      "INS 220": "CONTRAINDICATED",
+      "INS 221": "CONTRAINDICATED",
+      "INS 222": "CONTRAINDICATED",
+      "INS 223": "CONTRAINDICATED",
+      "INS 224": "CONTRAINDICATED",
+      "INS 225": "CONTRAINDICATED",
+      "INS 226": "CONTRAINDICATED",
+      "INS 227": "CONTRAINDICATED",
+      "INS 228": "CONTRAINDICATED"
+    },
+    "regulation": {
+      "codex": "CXS 1-1985 Section 4.2.1.4 (≥ 10 mg/kg SO₂)",
+      "eu": "EU 1169/2011 Annex II (12)",
+      "vietnam": "Thông tư 24/2019/TT-BYT (Phụ lục 2A)"
+    },
+    "note": "3-10% người hen suyễn nhạy cảm. Ngưỡng ghi nhãn: ≥ 10 mg/kg hoặc 10 mg/L SO₂."
+  },
+  {
+    "id": "lupin",
+    "name_vi": "Đậu lupin",
+    "name_en": "Lupin and lupin products",
+    "severity": "critical",
+    "keywords": [
+      "lupin", "lupine", "đậu lupin",
+      "lupin flour", "bột đậu lupin"
+    ],
+    "negation_rules": {
+      "lupin": "CONTRAINDICATED",
+      "lupine": "CONTRAINDICATED"
+    },
+    "regulation": {
+      "codex": "Không bắt buộc theo Codex",
+      "eu": "EU 1169/2011 Annex II (13)",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Bắt buộc ghi nhãn tại EU. Dị ứng chéo cao với đậu phộng. Gần như không có ở VN."
+  },
+  {
+    "id": "molluscs",
+    "name_vi": "Thân mềm (mực, ngao, sò, ốc)",
+    "name_en": "Molluscs and mollusc products",
+    "severity": "critical",
+    "keywords": [
+      "thân mềm", "ốc", "hàu", "oyster",
+      "mực", "squid", "ngao", "sò",
+      "bạch tuộc", "octopus", "clam", "mussel",
+      "sò điệp", "scallop", "ốc hương", "hến"
+    ],
+    "negation_rules": {
+      "mực": "CONTRAINDICATED",
+      "ốc": "CONTRAINDICATED",
+      "hàu": "CONTRAINDICATED",
+      "ngao": "CONTRAINDICATED",
+      "sò": "CONTRAINDICATED",
+      "squid": "CONTRAINDICATED",
+      "oyster": "CONTRAINDICATED"
+    },
+    "regulation": {
+      "codex": "Không bắt buộc theo Codex",
+      "eu": "EU 1169/2011 Annex II (14)",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Dị ứng #3 tại Việt Nam — 1.3% người lớn. Dị ứng chéo với giáp xác (shellfish)."
+  },
+  {
+    "id": "beef",
+    "name_vi": "Thịt bò",
+    "name_en": "Beef and beef products",
+    "severity": "warning",
+    "keywords": [
+      "thịt bò", "bò", "beef", "bò viên",
+      "gelatin bò", "beef gelatin", "beef extract",
+      "nước hầm xương bò", "beef broth", "bò khô"
+    ],
+    "negation_rules": {
+      "thịt bò": "ALLERGEN_RISK",
+      "bò": "ALLERGEN_RISK",
+      "beef": "ALLERGEN_RISK"
+    },
+    "regulation": {
+      "codex": "Không bắt buộc theo Codex",
+      "eu": "Không bắt buộc theo EU",
+      "vietnam": "Không quy định riêng"
+    },
+    "note": "Top 4 dị ứng tại Việt Nam — 1.0% người lớn (nghiên cứu JCU 2020). Liên quan alpha-gal syndrome."
+  }
+]

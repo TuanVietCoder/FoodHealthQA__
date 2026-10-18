@@ -1,0 +1,163 @@
+[
+  {
+    "ins_code": "INS 621",
+    "e_number": "E621",
+    "canonical_name": "Mononatri glutamat",
+    "common_names": ["Bột ngọt", "Mì chính", "MSG", "Monosodium glutamate"],
+    "function": "Chất điều vị",
+    "jecfa_adi": "Không xác định (Not specified - Rất an toàn ở mức thông thường)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Phụ lục 2A - Sử dụng theo GMP)",
+    "codex_standard": "Codex STAN 192-1995 (GMP in diverse food categories)",
+    "contraindications": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Bột ngọt chứa khoảng 12% natri. Người cao huyết áp hoặc bệnh thận cần tính toán vào tổng lượng natri nạp hàng ngày (dưới 2.000 mg natri/ngày theo WHO)."
+      },
+      {
+        "condition": "msg_sensitivity",
+        "severity": "CAUTION",
+        "message": "Một số cá nhân có thể gặp hội chứng nhạy cảm bột ngọt thoáng qua (nóng bừng, tê gáy) nếu tiêu thụ liều lượng lớn lúc đói."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 211",
+    "e_number": "E211",
+    "canonical_name": "Natri benzoat",
+    "common_names": ["Sodium benzoate", "Chất bảo quản 211"],
+    "function": "Chất bảo quản chống nấm mốc, nấm men",
+    "jecfa_adi": "0 – 5 mg/kg thể trọng/ngày",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Giới hạn tối đa 1.000 mg/kg trong nước giải khát)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "asthma_allergy",
+        "severity": "CAUTION",
+        "message": "Có thể kích hoạt phản ứng co thắt phế quản ở người có tiền sử hen suyễn hoặc dị ứng với aspirin."
+      },
+      {
+        "condition": "vitamin_c_interaction",
+        "severity": "WARNING",
+        "message": "Khi kết hợp với Acid ascorbic (Vitamin C) trong môi trường nhiệt độ cao và ánh sáng, có nguy cơ nhỏ hình thành vết benzen (chất gây ung thư)."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 102",
+    "e_number": "E102",
+    "canonical_name": "Tartrazine",
+    "common_names": ["FD&C Yellow No. 5", "Màu vàng số 5", "Phẩm màu tổng hợp 102"],
+    "function": "Phẩm màu tổng hợp (nhóm Azo)",
+    "jecfa_adi": "0 – 7.5 mg/kg thể trọng/ngày",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Quy định mức ML theo từng nhóm thực phẩm)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Thuộc nhóm màu Southampton theo EFSA. Có bằng chứng khoa học cho thấy phẩm màu azo làm gia tăng hành vi hiếu động và giảm tập trung ở trẻ nhỏ."
+      },
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Phụ nữ mang thai nên ưu tiên thực phẩm sử dụng phẩm màu tự nhiên thay vì màu tổng hợp nhóm azo."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 951",
+    "e_number": "E951",
+    "canonical_name": "Aspartame",
+    "common_names": ["Chất tạo ngọt 951", "Đường hóa học NutraSweet", "Equal"],
+    "function": "Chất tạo ngọt tổng hợp có độ ngọt gấp 200 lần saccaroza",
+    "jecfa_adi": "0 – 40 mg/kg thể trọng/ngày",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Bắt buộc ghi nhãn cảnh báo chứa nguồn Phenylalanine)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "phenylketonuria_pku",
+        "severity": "CRITICAL",
+        "message": "CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI: Aspartame bị thủy phân trong ruột sinh ra axit amin Phenylalanine. Bệnh nhân Phenylketon niệu (PKU) thiếu enzyme chuyển hóa sẽ tích tụ phenylalanine gây tổn thương não không phục hồi."
+      },
+      {
+        "condition": "diabetes",
+        "severity": "MATCH",
+        "message": "Không làm tăng glucose huyết, phù hợp cho người đái tháo đường nhưng nên dùng điều độ."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 330",
+    "e_number": "E330",
+    "canonical_name": "Acid citric",
+    "common_names": ["Citric acid", "Acid chanh", "Chất điều chỉnh độ acid 330"],
+    "function": "Chất điều chỉnh độ acid, chất chống oxy hóa",
+    "jecfa_adi": "Không xác định (Not limited / GMP - Rất an toàn)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Phụ lục 2A - GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "severe_gastritis",
+        "severity": "CAUTION",
+        "message": "Người bị viêm loét dạ dày tá tràng nặng cần hạn chế đồ uống có độ chua cao khi đói."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 322(i)",
+    "e_number": "E322",
+    "canonical_name": "Lecithin",
+    "common_names": ["Soya lecithin", "Lecithin đậu nành", "Chất nhũ hóa 322", "322(i)"],
+    "function": "Chất nhũ hóa, chất làm chậm quá trình thoái hóa chất béo",
+    "jecfa_adi": "Không xác định (Not limited - GMP)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (Phụ lục 2A - GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "soy_allergy",
+        "severity": "WARNING",
+        "message": "Lecithin có nguồn gốc từ đậu nành. Người có cơ địa dị ứng đậu nành cần lưu ý khả năng tồn dư protein đậu nành có thể gây kích ứng."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 500(ii)",
+    "e_number": "E500ii",
+    "canonical_name": "Natri hydro carbonat",
+    "common_names": ["Baking soda", "Sodium bicarbonate", "Chất tạo xốp 500ii", "500(ii)"],
+    "function": "Chất tạo xốp, chất điều chỉnh độ acid",
+    "jecfa_adi": "Không xác định (GMP - An toàn)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Chứa natri (muối vô cơ), người suy thận hoặc tăng huyết áp nặng cần tính toán vào tổng lượng natri hàng ngày."
+      }
+    ]
+  },
+  {
+    "ins_code": "INS 503(ii)",
+    "e_number": "E503ii",
+    "canonical_name": "Amoni hydro carbonat",
+    "common_names": ["Ammonium bicarbonate", "Bột nở khai", "Chất tạo xốp 503ii", "503(ii)"],
+    "function": "Chất tạo xốp trong nướng bánh quy",
+    "jecfa_adi": "Không xác định (GMP)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": []
+  },
+  {
+    "ins_code": "INS 471",
+    "e_number": "E471",
+    "canonical_name": "Mono- và diglycerid của các acid béo",
+    "common_names": ["Mono- and diglycerides of fatty acids", "Chất nhũ hóa 471"],
+    "function": "Chất nhũ hóa, ổn định cấu trúc bơ sữa",
+    "jecfa_adi": "Không xác định (GMP)",
+    "vn_regulation": "Thông tư 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "contraindications": []
+  }
+]

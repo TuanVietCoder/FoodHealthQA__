@@ -1,0 +1,363 @@
+[
+  {
+    "ins_code": "INS 621",
+    "e_number": "E621",
+    "canonical_name_vi": "Mononatri L-glutamat (Bột ngọt)",
+    "canonical_name_en": "Monosodium L-glutamate",
+    "synonyms": ["Bột ngọt", "Mì chính", "MSG", "Monosodium glutamate"],
+    "function": "Chất điều vị",
+    "adi_value": "Not Specified (JECFA) / 30 mg/kg bw/day (EFSA)",
+    "adi_upper": 30.0,
+    "adi_source": "EFSA Journal 2017;15(7):4910",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Bột ngọt chứa khoảng 12.3% natri. Người cao huyết áp cần tính vào tổng lượng natri nạp hàng ngày (< 2.000 mg/ngày theo WHO)."
+      },
+      {
+        "condition": "msg_sensitivity",
+        "severity": "CAUTION",
+        "message": "Một số cá nhân có thể gặp hội chứng nhạy cảm bột ngọt thoáng qua (nóng bừng, tê gáy) nếu tiêu thụ liều lượng lớn lúc đói."
+      },
+      {
+        "condition": "cardiovascular_risk",
+        "severity": "CAUTION",
+        "message": "Chứa 12.3% natri theo khối lượng — cần lưu ý cho bệnh nhân tim mạch."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2017,
+      "adi_efsa": 30.0,
+      "risk_groups": ["hypertension", "cardiovascular_risk"],
+      "key_finding": "EFSA ANS Panel (2017): Thiết lập ADI 30 mg/kg bw/ngày cho glutamate và các muối của nó. Lượng nạp cao có thể gây đau đầu, nhịp tim nhanh.",
+      "reference": "EFSA Journal 2017;15(7):4910"
+    }
+  },
+  {
+    "ins_code": "INS 211",
+    "e_number": "E211",
+    "canonical_name_vi": "Natri benzoat",
+    "canonical_name_en": "Sodium benzoate",
+    "synonyms": ["Chất bảo quản 211", "Sodium benzoate"],
+    "function": "Chất bảo quản chống nấm mốc, nấm men",
+    "adi_value": "0 - 5 mg/kg bw/day",
+    "adi_upper": 5.0,
+    "adi_source": "JECFA / EFSA Journal 2016;14(3):4441",
+    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 1.000 mg/kg)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "asthma",
+        "severity": "WARNING",
+        "message": "Nguy cơ kích hoạt cơn hen phế quản hoặc mày đay ở người nhạy cảm aspirin."
+      },
+      {
+        "condition": "vitamin_c_interaction",
+        "severity": "WARNING",
+        "message": "Phản ứng với acid ascorbic (Vitamin C) trong nhiệt độ cao có nguy cơ sinh vết benzen."
+      },
+      {
+        "condition": "children_under_6",
+        "severity": "CAUTION",
+        "message": "Trẻ em dưới 6 tuổi hệ thải độc chưa hoàn thiện, cần hạn chế."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2016,
+      "adi_efsa": 5.0,
+      "risk_groups": ["asthma", "children_under_6"],
+      "key_finding": "EFSA Panel (2016): Đánh giá lại Sodium Benzoate xác nhận ADI 5 mg/kg bw/ngày. Kết hợp với acid ascorbic (vitamin C) có thể tạo thành benzene.",
+      "reference": "EFSA Journal 2016;14(3):4441"
+    }
+  },
+  {
+    "ins_code": "INS 102",
+    "e_number": "E102",
+    "canonical_name_vi": "Tartrazine (Phẩm màu vàng chanh Azo)",
+    "canonical_name_en": "Tartrazine",
+    "synonyms": ["Màu vàng 102", "Yellow 5", "FD&C Yellow No. 5", "Phẩm màu tổng hợp 102"],
+    "function": "Phẩm màu tổng hợp (nhóm Azo)",
+    "adi_value": "0 - 7.5 mg/kg bw/day",
+    "adi_upper": 7.5,
+    "adi_source": "EFSA Journal 2009;7(11):1331",
+    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 100-300 mg/kg)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "children_adhd",
+        "severity": "WARNING",
+        "message": "Thuộc nhóm màu Southampton theo EFSA. Bằng chứng khoa học cho thấy phẩm màu azo làm gia tăng hành vi hiếu động và giảm tập trung ở trẻ nhỏ."
+      },
+      {
+        "condition": "asthma",
+        "severity": "CAUTION",
+        "message": "Rủi ro dị ứng chéo với aspirin và bệnh nhân hen suyễn (~27% phản ứng dương tính ở nhóm nhạy cảm)."
+      },
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Phụ nữ mang thai nên ưu tiên phẩm màu tự nhiên thay vì màu tổng hợp Azo."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2009,
+      "adi_efsa": 7.5,
+      "risk_groups": ["children_under_6", "adhd", "asthma"],
+      "key_finding": "EFSA Panel on Food Additives (2009): Tái đánh giá cho thấy Tartrazine và các phẩm màu Azo có thể làm tăng hành vi hiếu động ở trẻ em. Khuyến nghị giảm ADI từ 10 xuống 7.5 mg/kg bw/ngày.",
+      "reference": "EFSA Journal 2009;7(11):1331"
+    }
+  },
+  {
+    "ins_code": "INS 951",
+    "e_number": "E951",
+    "canonical_name_vi": "Aspartame (Chất tạo ngọt nhân tạo)",
+    "canonical_name_en": "Aspartame",
+    "synonyms": ["Đường ăn kiêng Aspartam", "Equal", "NutraSweet"],
+    "function": "Chất tạo ngọt năng lượng thấp",
+    "adi_value": "0 - 40 mg/kg bw/day",
+    "adi_upper": 40.0,
+    "adi_source": "EFSA Journal 2013;11(12):3496 + WHO/IARC 2023",
+    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (bắt buộc ghi nhãn chứa Phenylalanine)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "pku",
+        "severity": "CRITICAL",
+        "message": "CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI: Aspartame thủy phân sinh Phenylalanine. Bệnh nhân PKU thiếu enzyme chuyển hóa sẽ tích tụ gây tổn thương não không phục hồi."
+      },
+      {
+        "condition": "pregnancy",
+        "severity": "CAUTION",
+        "message": "Cần theo dõi tổng liều lượng nạp hàng ngày không vượt ngưỡng ADI."
+      },
+      {
+        "condition": "children_under_6",
+        "severity": "CAUTION",
+        "message": "Trẻ em dưới 6 tuổi nên hạn chế sử dụng chất tạo ngọt nhân tạo."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2013,
+      "adi_efsa": 40.0,
+      "risk_groups": ["pku", "pregnancy"],
+      "key_finding": "EFSA Panel (2013, cập nhật 2023): ADI 40 mg/kg bw/ngày được duy trì. Chống chỉ định tuyệt đối cho người mắc PKU. IARC (2023) phân loại nhóm 2B nhưng JECFA giữ nguyên ADI.",
+      "reference": "EFSA Journal 2013;11(12):3496 + WHO/IARC 2023"
+    }
+  },
+  {
+    "ins_code": "INS 330",
+    "e_number": "E330",
+    "canonical_name_vi": "Acid citric",
+    "canonical_name_en": "Citric acid",
+    "synonyms": ["Axit chanh", "Chất điều chỉnh độ chua 330"],
+    "function": "Chất điều chỉnh độ acid, chất chống oxy hóa",
+    "adi_value": "Not Specified (GMP - An toàn tự nhiên)",
+    "adi_upper": null,
+    "adi_source": "JECFA (Not Specified)",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "severe_gastritis",
+        "severity": "CAUTION",
+        "message": "Người bị viêm loét dạ dày tá tràng nặng cần hạn chế đồ uống có độ chua cao khi đói."
+      }
+    ],
+    "efsa_opinion": null
+  },
+  {
+    "ins_code": "INS 322(i)",
+    "e_number": "E322",
+    "canonical_name_vi": "Lecithin (từ đậu nành/trứng)",
+    "canonical_name_en": "Lecithin",
+    "synonyms": ["Soya lecithin", "Lecithin đậu nành", "Chất nhũ hóa 322", "322(i)"],
+    "function": "Chất nhũ hóa tự nhiên",
+    "adi_value": "Not Specified (GMP)",
+    "adi_upper": null,
+    "adi_source": "JECFA (Not Specified) / EFSA Journal 2017;15(4):4742",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": ["soy", "egg"],
+    "contraindications": [
+      {
+        "condition": "soy_allergy",
+        "severity": "WARNING",
+        "message": "Lecithin nguồn đậu nành chứa protein đậu nành dư có thể gây phản ứng dị ứng ở người nhạy cảm."
+      },
+      {
+        "condition": "egg_allergy",
+        "severity": "CAUTION",
+        "message": "Lecithin chiết xuất từ lòng đỏ trứng gà có thể gây kích ứng ở người dị ứng trứng."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2017,
+      "adi_efsa": null,
+      "risk_groups": ["soy_allergy", "egg_allergy"],
+      "key_finding": "EFSA Panel (2017): Lecithin không cần ADI (JECFA: Not Specified). Lecithin chiết xuất từ đậu nành chứa protein đậu nành dư có thể gây phản ứng dị ứng.",
+      "reference": "EFSA Journal 2017;15(4):4742"
+    }
+  },
+  {
+    "ins_code": "INS 500(ii)",
+    "e_number": "E500ii",
+    "canonical_name_vi": "Natri hydro carbonat (Baking soda)",
+    "canonical_name_en": "Sodium hydrogen carbonate",
+    "synonyms": ["Baking soda", "Thuốc muối", "Bột nở 500ii"],
+    "function": "Chất tạo xốp và điều chỉnh độ acid",
+    "adi_value": "Not Specified (GMP)",
+    "adi_upper": null,
+    "adi_source": "JECFA (GMP)",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "hypertension",
+        "severity": "CAUTION",
+        "message": "Mỗi gram NaHCO₃ chứa 274 mg natri. Người tăng huyết áp/suy thận cần tính vào tổng lượng natri."
+      },
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "CAUTION",
+        "message": "Cung cấp ion natri kiềm, bệnh nhân suy thận mạn cần kiểm soát tổng lượng natri nạp vào."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2017,
+      "adi_efsa": null,
+      "risk_groups": ["hypertension", "chronic_kidney_disease"],
+      "key_finding": "Baking soda (NaHCO₃) — mỗi gram chứa 274 mg natri. Cần kiểm soát ở bệnh nhân tăng huyết áp và suy thận.",
+      "reference": "EFSA/Codex GMP Guidelines"
+    }
+  },
+  {
+    "ins_code": "INS 503(ii)",
+    "e_number": "E503ii",
+    "canonical_name_vi": "Amoni hydro carbonat (Bột khai)",
+    "canonical_name_en": "Ammonium hydrogen carbonate",
+    "synonyms": ["Bột khai", "Baking ammonia", "Chất tạo xốp 503ii"],
+    "function": "Chất tạo xốp trong nướng bánh quy",
+    "adi_value": "Not Specified (GMP)",
+    "adi_upper": null,
+    "adi_source": "JECFA (GMP)",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "chronic_kidney_disease",
+        "severity": "CAUTION",
+        "message": "Phân giải sinh khí amoniac, bệnh nhân suy thận nặng cần thận trọng."
+      }
+    ],
+    "efsa_opinion": null
+  },
+  {
+    "ins_code": "INS 471",
+    "e_number": "E471",
+    "canonical_name_vi": "Mono- và diglycerid của các acid béo",
+    "canonical_name_en": "Mono- and di-glycerides of fatty acids",
+    "synonyms": ["Chất nhũ hóa 471", "Distilled monoglycerides"],
+    "function": "Chất nhũ hóa, ổn định cấu trúc",
+    "adi_value": "Not Specified (GMP)",
+    "adi_upper": null,
+    "adi_source": "JECFA (GMP) / EFSA Journal 2017;15(11):5045",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [],
+    "efsa_opinion": {
+      "year": 2017,
+      "adi_efsa": null,
+      "risk_groups": [],
+      "key_finding": "EFSA Panel (2017): Mono- và diglycerides là sản phẩm tự nhiên của quá trình tiêu hóa chất béo. Không cần ADI cụ thể. An toàn ở mức GMP.",
+      "reference": "EFSA Journal 2017;15(11):5045"
+    }
+  },
+  {
+    "ins_code": "INS 1420",
+    "e_number": "E1420",
+    "canonical_name_vi": "Tinh bột biến tính (Acetylated starch)",
+    "canonical_name_en": "Acetylated starch",
+    "synonyms": ["Chất làm dày 1420", "Modified starch", "Tinh bột acetyl hóa"],
+    "function": "Chất làm dày và tạo gel",
+    "adi_value": "Not Specified (GMP)",
+    "adi_upper": null,
+    "adi_source": "JECFA (GMP) / EFSA Journal 2018;16(3):5180",
+    "vn_regulation": "Phụ lục 1 - TT 24/2019/TT-BYT (GMP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": [],
+    "contraindications": [
+      {
+        "condition": "diabetes",
+        "severity": "CAUTION",
+        "message": "Chỉ số đường huyết cao hơn so với tinh bột tự nhiên, cần lưu ý cho bệnh nhân đái tháo đường."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2018,
+      "adi_efsa": null,
+      "risk_groups": ["diabetes"],
+      "key_finding": "EFSA Panel (2018): Tinh bột biến tính được đánh giá không cần ADI cụ thể. Tuy nhiên, bệnh nhân tiểu đường cần lưu ý chỉ số đường huyết cao hơn tinh bột tự nhiên.",
+      "reference": "EFSA Journal 2018;16(3):5180"
+    }
+  },
+  {
+    "ins_code": "INS 220",
+    "e_number": "E220",
+    "canonical_name_vi": "Lưu huỳnh đioxit (Sulfite)",
+    "canonical_name_en": "Sulphur dioxide",
+    "synonyms": ["SO₂", "Sulfur dioxide", "Chất bảo quản 220", "Lưu huỳnh"],
+    "function": "Chất bảo quản, chống oxy hóa, chống nâu hóa",
+    "adi_value": "0 - 0.7 mg/kg bw/day (tính theo SO₂)",
+    "adi_upper": 0.7,
+    "adi_source": "JECFA (2009) — Group ADI cho INS 220-228",
+    "vn_regulation": "Phụ lục 2A - TT 24/2019/TT-BYT (ML: 10-2000 mg/kg tùy nhóm TP)",
+    "codex_standard": "Codex STAN 192-1995",
+    "allergen_groups": ["sulfites"],
+    "contraindications": [
+      {
+        "condition": "asthma",
+        "severity": "CRITICAL",
+        "message": "3-10% người hen suyễn nhạy cảm với sulfite. Có thể gây co thắt phế quản nghiêm trọng, đặc biệt người dùng corticosteroid."
+      },
+      {
+        "condition": "sulfite_sensitivity",
+        "severity": "CRITICAL",
+        "message": "Sulfite có thể gây phản ứng dị ứng nghiêm trọng: khó thở, phù mạch, hạ huyết áp, sốc phản vệ."
+      },
+      {
+        "condition": "children_under_6",
+        "severity": "WARNING",
+        "message": "Trẻ nhỏ hệ enzyme chưa hoàn thiện, khả năng chuyển hóa sulfite thấp hơn người lớn."
+      }
+    ],
+    "efsa_opinion": {
+      "year": 2016,
+      "adi_efsa": 0.7,
+      "risk_groups": ["asthma", "sulfite_sensitivity", "children_under_6"],
+      "key_finding": "EFSA Panel (2016): Tái đánh giá SO₂ và sulfites (INS 220-228). ADI nhóm 0.7 mg/kg bw/ngày tính theo SO₂. Ngưỡng ghi nhãn bắt buộc: ≥ 10 mg/kg hoặc 10 mg/L. 3-10% người hen suyễn có phản ứng bất lợi.",
+      "reference": "EFSA Journal 2016;14(4):4438"
+    },
+    "group_members": [
+      {"ins_code": "INS 220", "name": "Sulphur dioxide"},
+      {"ins_code": "INS 221", "name": "Sodium sulphite"},
+      {"ins_code": "INS 222", "name": "Sodium hydrogen sulphite"},
+      {"ins_code": "INS 223", "name": "Sodium metabisulphite"},
+      {"ins_code": "INS 224", "name": "Potassium metabisulphite"},
+      {"ins_code": "INS 225", "name": "Potassium sulphite"},
+      {"ins_code": "INS 226", "name": "Calcium sulphite"},
+      {"ins_code": "INS 227", "name": "Calcium hydrogen sulphite"},
+      {"ins_code": "INS 228", "name": "Potassium hydrogen sulphite"}
+    ]
+  }
+]
