@@ -6,12 +6,12 @@
       "overall": {
         "count": 750,
         "exact_match": 0.0,
-        "token_f1": 0.02822608048342689,
+        "token_f1": 0.028249214544447274,
         "citation_precision": 0.0,
         "citation_recall": 0.0,
-        "safety_accuracy": 0.9966887417218543,
+        "safety_accuracy": 0.9901960784313726,
         "unsafe_recall": 0.0,
-        "safety_score": 0.5980132450331126,
+        "safety_score": 0.5941176470588235,
         "abstention_rate_predicted": 0.0,
         "abstention_rate_gold": 0.0,
         "config": "A_LLM_Only"
@@ -20,7 +20,7 @@
         "additive_regulation": {
           "count": 120,
           "exact_match": 0.0,
-          "token_f1": 0.0296949039156325,
+          "token_f1": 0.02972382149190803,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
           "safety_accuracy": 1.0,
@@ -41,12 +41,12 @@
         "allergen_safety": {
           "count": 135,
           "exact_match": 0.0,
-          "token_f1": 0.025824761748446015,
+          "token_f1": 0.02585046626069092,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.9838709677419355,
+          "safety_accuracy": 0.9545454545454546,
           "unsafe_recall": 0.0,
-          "safety_score": 0.5903225806451613,
+          "safety_score": 0.5727272727272728,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         },
@@ -71,7 +71,7 @@
         "disease_contraindication": {
           "count": 120,
           "exact_match": 0.0,
-          "token_f1": 0.021094543255346775,
+          "token_f1": 0.021123460831622292,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
           "safety_accuracy": 1.0,
@@ -92,7 +92,7 @@
         "nutritional_assessment": {
           "count": 120,
           "exact_match": 0.0,
-          "token_f1": 0.0296949039156325,
+          "token_f1": 0.02972382149190803,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
           "safety_accuracy": 1.0,
@@ -113,7 +113,7 @@
         "vulnerable_groups": {
           "count": 120,
           "exact_match": 0.0,
-          "token_f1": 0.021094543255346775,
+          "token_f1": 0.02112346083162229,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
           "safety_accuracy": 1.0,
@@ -125,7 +125,7 @@
       },
       "confusion_matrix": {
         "SAFE": {
-          "SAFE": 301,
+          "SAFE": 101,
           "CAUTION": 0,
           "WARNING": 0,
           "CRITICAL_ALERT": 0,
@@ -286,7 +286,7 @@
       },
       "confusion_matrix": {
         "SAFE": {
-          "SAFE": 301,
+          "SAFE": 101,
           "CAUTION": 0,
           "WARNING": 0,
           "CRITICAL_ALERT": 0,
@@ -327,13 +327,13 @@
     "C_OCR_RAG_LLM": {
       "overall": {
         "count": 750,
-        "exact_match": 0.852,
-        "token_f1": 0.9964940743086863,
+        "exact_match": 0.8533333333333334,
+        "token_f1": 0.996854509562908,
         "citation_precision": 0.0,
         "citation_recall": 0.0,
-        "safety_accuracy": 0.9437086092715232,
+        "safety_accuracy": 0.9509803921568627,
         "unsafe_recall": 0.0,
-        "safety_score": 0.5662251655629139,
+        "safety_score": 0.5705882352941176,
         "abstention_rate_predicted": 0.0,
         "abstention_rate_gold": 0.0,
         "config": "C_OCR_RAG_LLM"
@@ -342,12 +342,12 @@
         "additive_regulation": {
           "count": 120,
           "exact_match": 0.8833333333333333,
-          "token_f1": 0.9971929578404557,
+          "token_f1": 0.9977263735499275,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.8666666666666667,
+          "safety_accuracy": 0.9,
           "unsafe_recall": 0.0,
-          "safety_score": 0.52,
+          "safety_score": 0.54,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         },
@@ -362,13 +362,13 @@
         },
         "allergen_safety": {
           "count": 135,
-          "exact_match": 0.8592592592592593,
-          "token_f1": 0.9968405663459866,
+          "exact_match": 0.8518518518518519,
+          "token_f1": 0.996816228282433,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.9516129032258065,
+          "safety_accuracy": 0.9090909090909091,
           "unsafe_recall": 0.0,
-          "safety_score": 0.5709677419354838,
+          "safety_score": 0.5454545454545454,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         },
@@ -392,13 +392,13 @@
         },
         "disease_contraindication": {
           "count": 120,
-          "exact_match": 0.7916666666666666,
-          "token_f1": 0.9946282856576973,
+          "exact_match": 0.8083333333333333,
+          "token_f1": 0.995621531052351,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.95,
+          "safety_accuracy": 1.0,
           "unsafe_recall": 0.0,
-          "safety_score": 0.57,
+          "safety_score": 0.6,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         },
@@ -414,12 +414,12 @@
         "nutritional_assessment": {
           "count": 120,
           "exact_match": 0.8833333333333333,
-          "token_f1": 0.9971803315778293,
+          "token_f1": 0.9974960295695835,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.9833333333333333,
+          "safety_accuracy": 1.0,
           "unsafe_recall": 0.0,
-          "safety_score": 0.59,
+          "safety_score": 0.6,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         },
@@ -435,20 +435,20 @@
         "vulnerable_groups": {
           "count": 120,
           "exact_match": 0.8583333333333333,
-          "token_f1": 0.9965949127125597,
+          "token_f1": 0.9970326542770618,
           "citation_precision": 0.0,
           "citation_recall": 0.0,
-          "safety_accuracy": 0.9666666666666667,
+          "safety_accuracy": 0.95,
           "unsafe_recall": 0.0,
-          "safety_score": 0.58,
+          "safety_score": 0.57,
           "abstention_rate_predicted": 0.0,
           "abstention_rate_gold": 0.0
         }
       },
       "confusion_matrix": {
         "SAFE": {
-          "SAFE": 284,
-          "CAUTION": 17,
+          "SAFE": 96,
+          "CAUTION": 5,
           "WARNING": 0,
           "CRITICAL_ALERT": 0,
           "ABSTAIN": 0
