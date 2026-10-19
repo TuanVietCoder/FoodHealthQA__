@@ -271,8 +271,148 @@ def evaluate_nutritional_constraints(nutrition_data, persona):
 # Constraint Type Labels
 CONSTRAINT_PERMITTED = "PERMITTED"
 CONSTRAINT_RESTRICTED = "RESTRICTED"
-CONSTRAINT_CONTRAINDICATED = "CONTRAINDICATED"
+CONSTRAINT_PRECAUTIONARY_RISK = "PRECAUTIONARY_RISK"
 CONSTRAINT_ALLERGEN_RISK = "ALLERGEN_RISK"
+CONSTRAINT_CONTRAINDICATED = "CONTRAINDICATED"
+
+# US FDA FALCPA Sec 203 & FDA Guidance Ed. 5: Miễn trừ dầu tinh luyện hoàn toàn
+# Dầu thực vật tinh luyện hoàn toàn (highly refined oil) đã qua quá trình tẩy màu, khử mùi,
+# loại bỏ triệt để protein kháng nguyên nên không gây phản ứng IgE lâm sàng.
+EXEMPT_REFINED_OIL_PATTERNS = [
+    r"\bd[aầ]u\s+(?:[đd][aậ]u\s+n[aà]nh|n[aà]nh)\s+tinh\s+luy[eệ]n\b",
+    r"\bd[aầ]u\s+[đd][aậ]u\s+n[aà]nh\s+tinh\s+luy[eệ]n\s+ho[aà]n\s+to[aà]n\b",
+    r"\bd[aầ]u\s+[đd][aậ]u\s+t[uư][oơ]ng\s+tinh\s+luy[eệ]n\b",
+    r"\bd[aầ]u\s+(?:ph[oộ]ng|[đd][aậ]u\s+ph[oộ]ng|l[aạ]c)\s+tinh\s+luy[eệ]n\b",
+    r"\bd[aầ]u\s+m[eè]\s+tinh\s+luy[eệ]n\b",
+    r"\bhighly\s+refined\s+(?:soybean|peanut|sesame)?\s*oil\b",
+    r"\brefined\s+soybean\s+oil\b",
+    r"\bd[aầ]u\s+th[uự]c\s+v[aậ]t\s+tinh\s+luy[eệ]n\b",
+    r"\btinh\s+luy[eệ]n\s+ho[aà]n\s+to[aà]n\b",
+]
+
+# 9 nhóm dị nguyên thực phẩm chính theo US FDA (FALCPA 2004 & FASTER Act 2021 có hiệu lực 01/01/2023)
+FDA_BIG_9_ALLERGENS = {
+    "milk": {
+        "name_en": "Milk",
+        "name_vi": "Sữa",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["milk", "sữa", "dairy", "bơ", "whey", "casein", "phô mai", "cheese"],
+    },
+    "egg": {
+        "name_en": "Eggs",
+        "name_vi": "Trứng",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["egg", "eggs", "trứng", "albumin", "ovalbumin", "lysozyme"],
+    },
+    "peanut": {
+        "name_en": "Peanuts",
+        "name_vi": "Đậu phộng / Lạc",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["peanut", "peanuts", "đậu phộng", "dau phong", "lạc", "dau lac"],
+    },
+    "tree_nuts": {
+        "name_en": "Tree nuts",
+        "name_vi": "Hạt cây",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["tree nut", "tree nuts", "hạt cây", "hạnh nhân", "almond", "óc chó", "walnut", "hạt điều", "cashew", "hạt dẻ cười", "pistachio", "hạt phỉ", "hazelnut", "hồ đào", "pecan", "macadamia"],
+    },
+    "wheat": {
+        "name_en": "Wheat",
+        "name_vi": "Lúa mì",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["wheat", "lúa mì", "lua mi", "bột mì", "bot mi", "gluten"],
+    },
+    "fish": {
+        "name_en": "Fish",
+        "name_vi": "Cá",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["fish", "cá", "ca", "cá ngừ", "tuna", "cá hồi", "salmon", "cá tuyết", "cod"],
+    },
+    "crustacean_shellfish": {
+        "name_en": "Crustacean shellfish",
+        "name_vi": "Động vật giáp xác",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["crustacean", "shellfish", "giáp xác", "tôm", "shrimp", "prawn", "cua", "crab", "tôm hùm", "lobster"],
+    },
+    "soybeans": {
+        "name_en": "Soybeans",
+        "name_vi": "Đậu nành / Đậu tương",
+        "statute": "FALCPA",
+        "citation": "US_FDA_FALCPA",
+        "aliases": ["soy", "soybean", "soybeans", "đậu nành", "dau nanh", "đậu tương", "dau tuong", "lecithin", "tofu"],
+    },
+    "sesame": {
+        "name_en": "Sesame",
+        "name_vi": "Mè / Vừng",
+        "statute": "FASTER_ACT_2021",
+        "citation": "US_FDA_FASTER_ACT_2023",
+        "effective_date": "2023-01-01",
+        "aliases": ["sesame", "mè", "vừng", "tahini", "dầu mè"],
+    },
+}
+
+
+def is_fda_major_allergen(term):
+    """Kiểm tra một từ khóa/thành phần có thuộc 9 nhóm dị nguyên lớn của US FDA (FALCPA/FASTER Act)."""
+    t = str(term or "").strip().lower()
+    for grp_id, info in FDA_BIG_9_ALLERGENS.items():
+        if t == grp_id or t in [a.lower() for a in info["aliases"]]:
+            return True
+        if any(a.lower() in t for a in info["aliases"] if len(a) >= 3):
+            return True
+    return False
+
+
+def get_fda_allergen_info(term):
+    """Trả về thông tin nhóm dị nguyên FDA tương ứng kèm trích dẫn luật (FALCPA hoặc FASTER Act 2023)."""
+    t = str(term or "").strip().lower()
+    for grp_id, info in FDA_BIG_9_ALLERGENS.items():
+        if t == grp_id or t in [a.lower() for a in info["aliases"]]:
+            return grp_id, info
+        if any(a.lower() in t for a in info["aliases"] if len(a) >= 3):
+            return grp_id, info
+    return None, None
+
+
+# FDA Guidance Edition 5 & FAO/WHO JEMRA 2021: Bảng dẫn xuất chứa protein dị nguyên
+DERIVATIVE_ALLERGEN_MAP = {
+    "soy": [
+        "lecithin", "ins 322", "ins 322i", "e322", "đạm đậu nành", "dam dau nanh",
+        "soy protein", "soy isolate", "tofu", "đậu phụ"
+    ],
+    "milk": [
+        "casein", "caseinate", "natri caseinat", "whey", "đạm whey", "dam whey",
+        "váng sữa", "vang sua", "lactalbumin", "lactoglobulin", "bột sữa", "bot sua"
+    ],
+    "egg": [
+        "lysozyme", "ins 1105", "e1105", "albumin", "ovalbumin", "lòng trắng trứng",
+        "long trang trung", "lòng đỏ trứng", "long do trung"
+    ],
+    "gluten": [
+        "hydrolyzed wheat protein", "đạm lúa mì thủy phân", "dam lua mi thuy phan",
+        "vital wheat gluten", "gluten lúa mì", "mạch nha lúa mạch"
+    ],
+    "fish": [
+        "surimi", "bột cá", "bot ca", "fish collagen"
+    ],
+    "sesame": [
+        "tahini", "dầu mè ép thô", "dau me ep tho"
+    ],
+}
+
+
+def is_exempt_refined_oil(text):
+    """Kiểm tra điều kiện miễn trừ dầu tinh luyện hoàn toàn theo US FDA FALCPA Section 203."""
+    t = str(text or "").lower()
+    return any(bool(re.search(pat, t, re.IGNORECASE)) for pat in EXEMPT_REFINED_OIL_PATTERNS)
+
 
 # Bảng ánh xạ ràng buộc phủ định: (bệnh lý) -> (thành phần) -> loại ràng buộc
 # Quy tắc bệnh lý (không phải dị ứng) — các quy tắc dị ứng được nạp từ allergen_groups.json
@@ -317,14 +457,23 @@ _NEGATION_RULES = {
 }
 
 
-def classify_constraint_type(mention_text, additive, persona):
+def classify_constraint_type(mention_text, additive, persona, is_precautionary=False):
     """
     Gán nhãn loại ràng buộc (Constraint Type Markup) cho thành phần.
-    Phân biệt rõ: PERMITTED vs RESTRICTED vs CONTRAINDICATED vs ALLERGEN_RISK.
+    Phân biệt rõ: PERMITTED vs RESTRICTED vs PRECAUTIONARY_RISK vs ALLERGEN_RISK vs CONTRAINDICATED.
+    Áp dụng quy tắc US FDA FALCPA (Miễn trừ dầu tinh luyện hoàn toàn) và FDA Guidance Ed. 5 (Dẫn xuất phụ gia).
     """
-    mention_lower = mention_text.lower()
+    mention_lower = str(mention_text or "").lower()
     user_conditions = [c.lower().replace(" ", "_") for c in persona.get("conditions", [])]
     user_allergies = [a.lower().replace(" ", "_") for a in persona.get("allergies", [])]
+
+    # Kiểm tra miễn trừ dầu tinh luyện hoàn toàn theo US FDA FALCPA
+    if is_exempt_refined_oil(mention_lower):
+        return {
+            "constraint_type": CONSTRAINT_PERMITTED,
+            "matched_rule": ("fda_falcpa_exemption", "highly_refined_oil"),
+            "is_refined_oil_exempt": True,
+        }
 
     constraint_type = CONSTRAINT_PERMITTED
     matched_rule = None
@@ -335,19 +484,25 @@ def classify_constraint_type(mention_text, additive, persona):
 
     all_conditions = user_conditions + [f"{a}_allergy" for a in user_allergies]
 
+    # 1. Quét ràng buộc y khoa & phụ gia đã kiểm chứng
     for condition in all_conditions:
         rules = _NEGATION_RULES.get(condition, {})
         for keyword, ctype in rules.items():
             if contains_label_term(mention_lower, keyword) or contains_label_term(ins_code, keyword):
-                if _severity_rank(ctype) > _severity_rank(constraint_type):
-                    constraint_type = ctype
+                actual_ctype = CONSTRAINT_PRECAUTIONARY_RISK if (is_precautionary and ctype == CONSTRAINT_ALLERGEN_RISK) else ctype
+                if _severity_rank(actual_ctype) > _severity_rank(constraint_type):
+                    constraint_type = actual_ctype
                     matched_rule = (condition, keyword)
 
+    # 2. Quét dị ứng trực tiếp & dẫn xuất protein dị nguyên theo FDA Guidance Ed. 5
     for allergy in user_allergies:
-        keywords = ALLERGEN_KEYWORDS.get(allergy, [allergy])
-        for kw in keywords:
-            if contains_label_term(mention_lower, kw):
-                new_type = CONSTRAINT_ALLERGEN_RISK
+        keywords = list(ALLERGEN_KEYWORDS.get(allergy, [allergy]))
+        derivatives = DERIVATIVE_ALLERGEN_MAP.get(allergy, [])
+        combined_terms = keywords + [d for d in derivatives if d not in keywords]
+
+        for kw in combined_terms:
+            if contains_label_term(mention_lower, kw) or (ins_code and contains_label_term(ins_code.lower(), kw)):
+                new_type = CONSTRAINT_PRECAUTIONARY_RISK if is_precautionary else CONSTRAINT_ALLERGEN_RISK
                 if _severity_rank(new_type) > _severity_rank(constraint_type):
                     constraint_type = new_type
                     matched_rule = (f"{allergy}_allergy", kw)
@@ -355,6 +510,7 @@ def classify_constraint_type(mention_text, additive, persona):
     return {
         "constraint_type": constraint_type,
         "matched_rule": matched_rule,
+        "is_refined_oil_exempt": False,
     }
 
 
@@ -363,8 +519,9 @@ def _severity_rank(constraint_type):
     ranks = {
         CONSTRAINT_PERMITTED: 0,
         CONSTRAINT_RESTRICTED: 1,
-        CONSTRAINT_ALLERGEN_RISK: 2,
-        CONSTRAINT_CONTRAINDICATED: 3,
+        CONSTRAINT_PRECAUTIONARY_RISK: 2,
+        CONSTRAINT_ALLERGEN_RISK: 3,
+        CONSTRAINT_CONTRAINDICATED: 4,
     }
     return ranks.get(constraint_type, 0)
 
@@ -376,14 +533,18 @@ def apply_negation_constraints(linked_results, persona):
     """
     enriched = []
     for item in linked_results:
+        is_prec = item.get("is_precautionary", False) or item.get("source_block") == "precautionary"
         constraint_info = classify_constraint_type(
             item["raw_mention"],
             item.get("matched_entity"),
-            persona
+            persona,
+            is_precautionary=is_prec,
         )
         enriched_item = dict(item)
         enriched_item["constraint_type"] = constraint_info["constraint_type"]
         enriched_item["constraint_rule"] = constraint_info["matched_rule"]
+        if constraint_info.get("is_refined_oil_exempt"):
+            enriched_item["is_refined_oil_exempt"] = True
         enriched.append(enriched_item)
     return enriched
 

@@ -84,60 +84,12 @@ def create_image_benchmark_mapping_template():
 
 
 def create_qa_review_template():
-    benchmark = load_benchmark(
-        os.path.join(DATA_DIR, "qa_benchmark_600_source_grounded.jsonl")
-    )
-    fields = [
-        "id",
-        "domain",
-        "question",
-        "draft_answer",
-        "source_ids_json",
-        "source_urls_json",
-        "evidence_excerpt",
-        "question_group_id",
-        "review_status",
-        "reviewer_id",
-        "reviewer_qualification",
-        "answer_supported_by_source",
-        "citation_correct",
-        "safety_label_correct",
-        "final_answer",
-        "review_notes",
-        "review_date",
-    ]
-    rows = []
-    for record in benchmark:
-        rows.append({
-            "id": record["id"],
-            "domain": record["domain"],
-            "question": record["question"],
-            "draft_answer": record["reference_answer"],
-            "source_ids_json": json.dumps(record["source_ids"], ensure_ascii=False),
-            "source_urls_json": json.dumps(record["source_urls"], ensure_ascii=False),
-            "evidence_excerpt": record.get("evidence_excerpt", ""),
-            "question_group_id": record.get("question_group_id", ""),
-            "review_status": "pending",
-        })
-    target = os.path.join(DATA_DIR, "qa_benchmark_600_source_review.csv")
-    _write_csv(
-        target,
-        fields,
-        rows,
-        key_field="id",
-        preserve_fields=[
-            "review_status",
-            "reviewer_id",
-            "reviewer_qualification",
-            "answer_supported_by_source",
-            "citation_correct",
-            "safety_label_correct",
-            "final_answer",
-            "review_notes",
-            "review_date",
-        ],
-    )
-    return len(rows), target
+    target = os.path.join(DATA_DIR, "qa_benchmark_merged_review.csv")
+    if os.path.isfile(target):
+        with open(target, "r", encoding="utf-8-sig", newline="") as source:
+            rows = list(csv.DictReader(source))
+        return len(rows), target
+    return 0, target
 
 
 def create_response_adjudication_template():

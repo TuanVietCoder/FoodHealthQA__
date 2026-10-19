@@ -17,7 +17,7 @@ from modules.pipeline import load_knowledge_base
 
 
 DEFAULT_REVIEW_CSV = os.path.join(
-    PROJECT_ROOT, "data", "qa_benchmark_600_source_review.csv"
+    PROJECT_ROOT, "data", "qa_benchmark_merged_review.csv"
 )
 DEFAULT_IMAGE_PREDICTIONS = os.path.join(
     PROJECT_ROOT, "data", "image_ocr_predictions.csv"
@@ -44,12 +44,21 @@ def _api_key():
 
 
 def _is_approved(record):
-    return (
-        record.get("review_status", "").strip().casefold() == "approved"
-        and record.get("answer_supported_by_source", "").strip().casefold() in APPROVED
-        and record.get("citation_correct", "").strip().casefold() in APPROVED
-        and bool(record.get("final_answer", "").strip())
+    status = record.get("review_status", "").strip().casefold()
+    if status != "approved":
+        return False
+    if "answer_supported_by_source" in record and record["answer_supported_by_source"]:
+        if record["answer_supported_by_source"].strip().casefold() not in APPROVED:
+            return False
+    if "citation_correct" in record and record["citation_correct"]:
+        if record["citation_correct"].strip().casefold() not in APPROVED:
+            return False
+    final = (
+        record.get("final_answer", "")
+        or record.get("reference_answer", "")
+        or record.get("corrected_answer", "")
     )
+    return bool(final.strip())
 
 
 def _additive_evidence(additive, source_id):

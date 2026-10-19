@@ -30,11 +30,18 @@ if PROJECT_ROOT not in sys.path:
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-from modules.evaluation import (
-    evaluate_config,
-    format_results_table,
-    format_confusion_matrix,
-)
+try:
+    from scripts_research.evaluation import (
+        evaluate_config,
+        format_results_table,
+        format_confusion_matrix,
+    )
+except ImportError:
+    from evaluation import (
+        evaluate_config,
+        format_results_table,
+        format_confusion_matrix,
+    )
 
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 

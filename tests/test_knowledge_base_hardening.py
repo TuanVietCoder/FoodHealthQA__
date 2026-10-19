@@ -12,7 +12,7 @@ from modules.foodon import load_foodon_entities
 from modules.pipeline import evaluate_safety_and_guardrail
 
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KB_DIR = os.path.join(ROOT, "knowledge_base")
 DATA_DIR = os.path.join(ROOT, "data")
 

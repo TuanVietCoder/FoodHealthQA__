@@ -1,0 +1,489 @@
+{
+  "gold_benchmark": "D:\\FoodHealthQA__\\data\\qa_benchmark_gold.jsonl",
+  "gold_count": 750,
+  "configs": {
+    "A_LLM_Only": {
+      "overall": {
+        "count": 750,
+        "exact_match": 0.0,
+        "token_f1": 0.02822608048342689,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "safety_accuracy": 0.9966887417218543,
+        "unsafe_recall": 0.0,
+        "safety_score": 0.5980132450331126,
+        "abstention_rate_predicted": 0.0,
+        "abstention_rate_gold": 0.0,
+        "config": "A_LLM_Only"
+      },
+      "per_domain": {
+        "additive_regulation": {
+          "count": 120,
+          "exact_match": 0.0,
+          "token_f1": 0.0296949039156325,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "additive_safety": {
+          "count": 10,
+          "exact_match": 0.0,
+          "token_f1": 0.03629457843743558,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "allergen_safety": {
+          "count": 135,
+          "exact_match": 0.0,
+          "token_f1": 0.025824761748446015,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.9838709677419355,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.5903225806451613,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "children_safety": {
+          "count": 10,
+          "exact_match": 0.0,
+          "token_f1": 0.08964118424003474,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "condition_safety": {
+          "count": 10,
+          "exact_match": 0.0,
+          "token_f1": 0.045829256500916335,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "disease_contraindication": {
+          "count": 120,
+          "exact_match": 0.0,
+          "token_f1": 0.021094543255346775,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutrition_facts": {
+          "count": 100,
+          "exact_match": 0.0,
+          "token_f1": 0.03184502708643373,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutritional_assessment": {
+          "count": 120,
+          "exact_match": 0.0,
+          "token_f1": 0.0296949039156325,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "pregnancy_safety": {
+          "count": 5,
+          "exact_match": 0.0,
+          "token_f1": 0.11831946101352493,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "vulnerable_groups": {
+          "count": 120,
+          "exact_match": 0.0,
+          "token_f1": 0.021094543255346775,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        }
+      },
+      "confusion_matrix": {
+        "SAFE": {
+          "SAFE": 301,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CAUTION": {
+          "SAFE": 1,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "WARNING": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CRITICAL_ALERT": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "ABSTAIN": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        }
+      },
+      "missing_predictions": [],
+      "extra_predictions": []
+    },
+    "B_GT_RAG": {
+      "overall": {
+        "count": 750,
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "safety_accuracy": 1.0,
+        "unsafe_recall": 0.0,
+        "safety_score": 0.6,
+        "abstention_rate_predicted": 0.0,
+        "abstention_rate_gold": 0.0,
+        "config": "B_GT_RAG"
+      },
+      "per_domain": {
+        "additive_regulation": {
+          "count": 120,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "additive_safety": {
+          "count": 10,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "allergen_safety": {
+          "count": 135,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "children_safety": {
+          "count": 10,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "condition_safety": {
+          "count": 10,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "disease_contraindication": {
+          "count": 120,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutrition_facts": {
+          "count": 100,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutritional_assessment": {
+          "count": 120,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "pregnancy_safety": {
+          "count": 5,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "vulnerable_groups": {
+          "count": 120,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 1.0,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.6,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        }
+      },
+      "confusion_matrix": {
+        "SAFE": {
+          "SAFE": 301,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CAUTION": {
+          "SAFE": 0,
+          "CAUTION": 1,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "WARNING": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CRITICAL_ALERT": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "ABSTAIN": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        }
+      },
+      "missing_predictions": [],
+      "extra_predictions": []
+    },
+    "C_OCR_RAG_LLM": {
+      "overall": {
+        "count": 750,
+        "exact_match": 0.852,
+        "token_f1": 0.9964940743086863,
+        "citation_precision": 0.0,
+        "citation_recall": 0.0,
+        "safety_accuracy": 0.9437086092715232,
+        "unsafe_recall": 0.0,
+        "safety_score": 0.5662251655629139,
+        "abstention_rate_predicted": 0.0,
+        "abstention_rate_gold": 0.0,
+        "config": "C_OCR_RAG_LLM"
+      },
+      "per_domain": {
+        "additive_regulation": {
+          "count": 120,
+          "exact_match": 0.8833333333333333,
+          "token_f1": 0.9971929578404557,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.8666666666666667,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.52,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "additive_safety": {
+          "count": 10,
+          "exact_match": 1.0,
+          "token_f1": 1.0,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "allergen_safety": {
+          "count": 135,
+          "exact_match": 0.8592592592592593,
+          "token_f1": 0.9968405663459866,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.9516129032258065,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.5709677419354838,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "children_safety": {
+          "count": 10,
+          "exact_match": 0.7,
+          "token_f1": 0.9927910052910052,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "condition_safety": {
+          "count": 10,
+          "exact_match": 0.8,
+          "token_f1": 0.9956741831569259,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "disease_contraindication": {
+          "count": 120,
+          "exact_match": 0.7916666666666666,
+          "token_f1": 0.9946282856576973,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.95,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.57,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutrition_facts": {
+          "count": 100,
+          "exact_match": 0.85,
+          "token_f1": 0.996919885400969,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "nutritional_assessment": {
+          "count": 120,
+          "exact_match": 0.8833333333333333,
+          "token_f1": 0.9971803315778293,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.9833333333333333,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.59,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "pregnancy_safety": {
+          "count": 5,
+          "exact_match": 0.6,
+          "token_f1": 0.9897720631209819,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        },
+        "vulnerable_groups": {
+          "count": 120,
+          "exact_match": 0.8583333333333333,
+          "token_f1": 0.9965949127125597,
+          "citation_precision": 0.0,
+          "citation_recall": 0.0,
+          "safety_accuracy": 0.9666666666666667,
+          "unsafe_recall": 0.0,
+          "safety_score": 0.58,
+          "abstention_rate_predicted": 0.0,
+          "abstention_rate_gold": 0.0
+        }
+      },
+      "confusion_matrix": {
+        "SAFE": {
+          "SAFE": 284,
+          "CAUTION": 17,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CAUTION": {
+          "SAFE": 0,
+          "CAUTION": 1,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "WARNING": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "CRITICAL_ALERT": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        },
+        "ABSTAIN": {
+          "SAFE": 0,
+          "CAUTION": 0,
+          "WARNING": 0,
+          "CRITICAL_ALERT": 0,
+          "ABSTAIN": 0
+        }
+      },
+      "missing_predictions": [],
+      "extra_predictions": []
+    }
+  }
+}

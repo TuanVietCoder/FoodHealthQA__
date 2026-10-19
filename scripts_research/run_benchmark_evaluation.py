@@ -47,6 +47,9 @@ PERSONA_MAP = {
     "P_CHILD_01": "USER_CLINICAL_003",
     "P_CKD_01": "USER_CLINICAL_005",
     "P_ALLERGY_01": "USER_CLINICAL_006",
+    "P_ALLERGY_MILK": "USER_CLINICAL_006",
+    "P_ALLERGY_PEANUT": "USER_CLINICAL_006",
+    "P_LACTOSE_INTOLERANT": "USER_CLINICAL_008",
     "P_DIAB_HYPER_01": "USER_CLINICAL_002",
     "P_OBESE_GOUT_01": "USER_CLINICAL_007",
 }
@@ -192,7 +195,7 @@ def main():
     print("Nạp Knowledge Base...")
     kb_additives = load_knowledge_base(DATA_DIR)
     personas_list = load_personas(DATA_DIR)
-    personas_dict = {p["persona_id"]: p for p in personas_list}
+    personas_dict = {p.get("persona_id", p.get("id")): p for p in personas_list}
     hazards_list = load_food_hazards(DATA_DIR)
     fndds_list = load_fndds_nutrition(DATA_DIR)
     off_products = load_openfoodfacts_vietnam(DATA_DIR)

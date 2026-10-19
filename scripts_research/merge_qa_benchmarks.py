@@ -36,6 +36,19 @@ def load_samples_json(path):
         product = r.get("food_product", {})
         citations = r.get("source_citations", [])
 
+        conds_str = ", ".join(persona.get("health_conditions", []))
+        conds_vi_map = {
+            "pregnancy, gestational_diabetes": "Mang thai (thai kỳ 24 tuần), đái tháo đường thai kỳ",
+            "childhood_hyperactivity, sensitive_stomach": "Trẻ nhỏ 5 tuổi hiếu động (nguy cơ ADHD), dạ dày nhạy cảm",
+            "diabetes_type_2, hypertension": "Đái tháo đường týp 2, tăng huyết áp mạn tính",
+            "chronic_kidney_disease, hypertension": "Bệnh thận mạn tính (CKD giai đoạn 3), tăng huyết áp",
+            "atopic_dermatitis": "Cơ địa dị ứng thực phẩm cấp tính, viêm da cơ địa",
+            "obesity, gout": "Béo phì độ 2, bệnh gút (tăng acid uric máu)",
+            "milk_allergy, atopic_asthma": "Dị ứng đạm sữa bò cấp tính, hen suyễn cơ địa",
+            "lactose_intolerance": "Không dung nạp đường lactose (thiếu hụt enzyme lactase)",
+            "soy_allergy, atopic_dermatitis": "Dị ứng đậu nành cấp tính, viêm da cơ địa",
+            "peanut_allergy": "Dị ứng đậu phộng (lạc) cấp tính (nguy cơ sốc phản vệ)",
+        }
         records.append({
             "id": r["id"],
             "source_file": "qa-benchmark-600-samples.json",
@@ -48,7 +61,8 @@ def load_samples_json(path):
             "conflict_tags": ", ".join(gt.get("conflict_tags", [])),
             "persona_id": persona.get("persona_id", ""),
             "persona_name": persona.get("name", ""),
-            "persona_conditions": ", ".join(persona.get("health_conditions", [])),
+            "persona_conditions": conds_str,
+            "persona_conditions_vi": conds_vi_map.get(conds_str, conds_str),
             "product_name": product.get("name", ""),
             "product_ingredients": ", ".join(product.get("ingredients", [])[:5]),
             "source_citations": "; ".join(
@@ -67,6 +81,15 @@ def load_source_grounded(path):
     with open(path, "r", encoding="utf-8") as f:
         raw = [json.loads(line) for line in f if line.strip()]
 
+    domain_vi_map = {
+        "additive_safety": "An toàn Phụ gia & Ngưỡng Pháp lý",
+        "allergen_safety": "An toàn Dị ứng & Sốc phản vệ",
+        "children_safety": "An toàn Trẻ em & Phẩm màu Azo",
+        "condition_safety": "Chống chỉ định Bệnh nền Lâm sàng",
+        "nutrition_facts": "Định lượng Dinh dưỡng & Calo FNDDS",
+        "pregnancy_safety": "Tư vấn Thai phụ & Dinh dưỡng Thai kỳ",
+    }
+
     seen_groups = set()
     records = []
     for r in raw:
@@ -75,11 +98,12 @@ def load_source_grounded(path):
             continue
         seen_groups.add(gid)
 
+        domain = r.get("domain", "")
         records.append({
             "id": r["id"],
             "source_file": "qa_benchmark_600_source_grounded.jsonl",
-            "domain": r.get("domain", ""),
-            "domain_vi": "",
+            "domain": domain,
+            "domain_vi": domain_vi_map.get(domain, ""),
             "question_level": r.get("question_variant", ""),
             "question": r.get("question", ""),
             "reference_answer": r.get("reference_answer", ""),
@@ -88,6 +112,7 @@ def load_source_grounded(path):
             "persona_id": "",
             "persona_name": "",
             "persona_conditions": "",
+            "persona_conditions_vi": "Tra cứu quy chuẩn chung (Không áp dụng persona)",
             "product_name": "",
             "product_ingredients": "",
             "source_citations": ", ".join(r.get("source_ids", [])),
@@ -130,7 +155,7 @@ def main():
     csv_fields = [
         "id", "source_file", "domain", "domain_vi", "question_level",
         "question", "reference_answer", "binary_answer", "conflict_tags",
-        "persona_id", "persona_name", "persona_conditions",
+        "persona_id", "persona_name", "persona_conditions", "persona_conditions_vi",
         "product_name", "product_ingredients", "source_citations",
         "gold_safety_label",
         # Cột dành cho reviewer điền

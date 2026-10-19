@@ -167,158 +167,212 @@ with col_left:
 
             st.image(img_display, caption=f"Ảnh nhãn tải lên: {uploaded_file.name}", use_column_width=True)
 
-    # Chọn hồ sơ người dùng
-    persona_names = [p["name"] for p in personas_list]
-    selected_persona_name = st.selectbox("Chọn Hồ sơ Sức khỏe Người dùng (User Persona):", persona_names)
-    selected_persona = next(p for p in personas_list if p["name"] == selected_persona_name)
-    selected_persona = enrich_persona_with_nhanes(selected_persona, DATA_DIR, biomarkers_cache=nhanes_biomarkers_cache)
+    # Chọn hồ sơ người dùng & Cấu hình trong Form (Tránh reload liên tục khi tương tác)
+    with st.form(key="analysis_config_form"):
+        st.markdown("##### ⚙️ Thiết lập Phân tích & Tư vấn")
 
-    st.info(f"**Thông tin lâm sàng:** {selected_persona['description']}")
-    nhanes_enr = selected_persona.get("nhanes_enrichment")
-    if nhanes_enr:
-        st.caption(f"Đã bổ sung dữ liệu NHANES: khớp {nhanes_enr['matched_group_size']} hồ sơ từ {', '.join(nhanes_enr['source_files'][:3])}...")
+        persona_options_map = {}
+        for p in personas_list:
+            desc_short = p.get('description', '')[:45] + "..." if len(p.get('description', '')) > 45 else p.get('description', '')
+            label = f"{p['name']} ({desc_short})"
+            persona_options_map[label] = p
 
-    # Chọn cấu hình pipeline (Ablation Study)
-    st.markdown("---")
-    has_ground_truth = sample_key != "custom"
-    if has_ground_truth:
-        pipeline_options = [
-            "C: OCR + RAG + LLM (Full Pipeline — Đo hiệu năng thực tế)",
-            "B: RAG từ văn bản chuẩn (Ground Truth — Đo hiệu năng RAG khi đầu vào hoàn hảo)",
-            "A: LLM không truy xuất (Baseline — Không RAG)",
-        ]
-        pipeline_help = (
-            "Ablation Study 3 cấu hình (cần ảnh mẫu có Ground Truth):\n"
-            "• **A vs B**: RAG cải thiện câu trả lời bao nhiêu?\n"
-            "• **B vs C**: Lỗi OCR ảnh hưởng thế nào đến kết quả RAG?\n"
-            "• **A vs C**: Full pipeline so với baseline LLM."
+        selected_persona_label = st.selectbox(
+            "Chọn Hồ sơ Sức khỏe Người dùng (User Persona):",
+            list(persona_options_map.keys()),
+            help="Hồ sơ bệnh lý lâm sàng theo chuẩn NHANES (đái tháo đường, suy thận, thai phụ, trẻ em, dị ứng...)"
         )
-    else:
-        pipeline_options = [
-            "C: OCR + RAG + LLM (Full Pipeline)",
-        ]
-        pipeline_help = (
-            "Ảnh tải lên không có Ground Truth annotation → chỉ chạy Full Pipeline (C).\n"
-            "Chọn ảnh mẫu (550 ảnh Label Studio) để mở khóa 3 cấu hình ablation study (A, B, C)."
+        selected_persona_raw = persona_options_map[selected_persona_label]
+
+        # Chọn cấu hình pipeline (Ablation Study)
+        has_ground_truth = sample_key != "custom"
+        if has_ground_truth:
+            pipeline_options = [
+                "🅲 Cấu hình C: OCR + RAG + LLM (Full Pipeline — Đo hiệu năng thực tế)",
+                "🅱️ Cấu hình B: RAG từ văn bản chuẩn (Ground Truth — Mức trần lý tưởng)",
+                "🅰️ Cấu hình A: LLM không truy xuất (Baseline — Không RAG)",
+            ]
+            pipeline_help = (
+                "Ablation Study 3 cấu hình (cần ảnh mẫu có Ground Truth):\n"
+                "• **A vs B**: RAG cải thiện câu trả lời bao nhiêu?\n"
+                "• **B vs C**: Lỗi OCR ảnh hưởng thế nào đến kết quả RAG?\n"
+                "• **A vs C**: Full pipeline so với baseline LLM."
+            )
+        else:
+            pipeline_options = [
+                "🅲 Cấu hình C: OCR + RAG + LLM (Full Pipeline)",
+            ]
+            pipeline_help = (
+                "Ảnh tải lên không có Ground Truth annotation → chỉ chạy Full Pipeline (C).\n"
+                "Chọn ảnh mẫu (550 ảnh Label Studio) để mở khóa 3 cấu hình ablation study (A, B, C)."
+            )
+
+        pipeline_mode = st.selectbox(
+            "⚙️ Cấu hình Thử nghiệm (Ablation Study):",
+            pipeline_options,
+            help=pipeline_help,
         )
 
-    pipeline_mode = st.selectbox(
-        "⚙️ Cấu hình Pipeline (Ablation Study):",
-        pipeline_options,
-        help=pipeline_help,
-    )
+        user_query = st.text_input(
+            "Câu hỏi tư vấn an toàn thực phẩm:",
+            "Sản phẩm này có an toàn cho tình trạng sức khỏe hiện tại của tôi không? Cần lưu ý chất phụ gia nào?"
+        )
 
-    # Câu hỏi người dùng
-    user_query = st.text_input(
-        "Câu hỏi tư vấn an toàn thực phẩm:",
-        "Sản phẩm này có an toàn cho tình trạng sức khỏe hiện tại của tôi không? Cần lưu ý chất phụ gia nào?"
-    )
+        btn_run = st.form_submit_button("🚀 Phân tích Nhãn & Đánh giá An toàn Sức khỏe", type="primary", use_container_width=True)
 
-    btn_run = st.button("🚀 Phân tích Nhãn & Đánh giá An toàn Sức khỏe", type="primary", use_container_width=True)
+    st.caption(f"💡 **Lâm sàng:** {selected_persona_raw['description']}")
 
 with col_right:
     st.subheader("📊 2. Kết quả Phân tích Pipeline Đa tầng")
 
-    if btn_run and img_display and image_input_to_process:
-        is_mode_a = pipeline_mode.startswith("A:")
-        is_mode_b = pipeline_mode.startswith("B:")
-        is_mode_c = pipeline_mode.startswith("C:")
+    # Xử lý tính toán khi người dùng nhấn nút Form Submit
+    if btn_run:
+        if not img_display or not image_input_to_process:
+            st.error("⚠️ Vui lòng chọn ảnh mẫu hoặc tải ảnh bao bì từ máy tính trước khi bấm Phân tích.")
+        else:
+            selected_persona = enrich_persona_with_nhanes(selected_persona_raw, DATA_DIR, biomarkers_cache=nhanes_biomarkers_cache)
+            is_mode_a = "Cấu hình A" in pipeline_mode or pipeline_mode.startswith("A:")
+            is_mode_b = "Cấu hình B" in pipeline_mode or pipeline_mode.startswith("B:")
+            is_mode_c = "Cấu hình C" in pipeline_mode or pipeline_mode.startswith("C:")
 
-        mode_label = "A" if is_mode_a else ("B" if is_mode_b else "C")
-        spinner_text = {
-            "A": "Cấu hình A: LLM-only — đang gọi Gemini Flash trả lời trực tiếp (không RAG)...",
-            "B": "Cấu hình B: Ground Truth + RAG — đang chạy pipeline RAG từ văn bản chuẩn...",
-            "C": "Cấu hình C: OCR + RAG + LLM — đang chạy full pipeline...",
-        }[mode_label]
+            mode_label = "A" if is_mode_a else ("B" if is_mode_b else "C")
+            spinner_text = {
+                "A": "Cấu hình A: LLM-only — đang gọi Gemini Flash trả lời trực tiếp (không RAG)...",
+                "B": "Cấu hình B: Ground Truth + RAG — đang chạy pipeline RAG từ văn bản chuẩn...",
+                "C": "Cấu hình C: OCR + RAG + LLM — đang chạy full pipeline...",
+            }[mode_label]
 
-        with st.spinner(spinner_text):
-            time.sleep(0.4)
+            with st.spinner(spinner_text):
+                time.sleep(0.3)
 
-            # ── Cấu hình A: LLM-only (không OCR, không RAG) ──
-            #    Dùng Ground Truth nếu có (ảnh mẫu), hoặc OCR nếu upload ảnh tùy ý
-            if is_mode_a:
-                use_ocr = sample_key == "custom"
-                ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=use_ocr)
-                raw_text = ocr_result.get("full_text", "")
-                mentions = ocr_result.get("mentions", [])
-                avg_ocr_conf = ocr_result.get("avg_confidence", 0)
-                annotated_img = ocr_result.get("annotated_image")
-                linked_results = []
-                evaluation = {"status": "N/A", "title": "Cấu hình A: LLM-only — Không có RAG/Knowledge Base",
-                              "s_perception": avg_ocr_conf, "s_retrieval": 0.0, "s_total": 0.0,
-                              "alerts": [], "advice": "", "regulatory": [], "efsa_warnings": [], "citations": []}
-                detected_hazards = []
-                matched_fndds = None
-                nutri_warnings = []
-                constraint_details = []
-                off_cross_ref = {}
-                llm_answer = generate_llm_only_answer(raw_text, selected_persona, user_query)
+                # ── Cấu hình A: LLM-only (không OCR, không RAG) ──
+                if is_mode_a:
+                    use_ocr = sample_key == "custom"
+                    ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=use_ocr)
+                    raw_text = ocr_result.get("full_text", "")
+                    mentions = ocr_result.get("mentions", [])
+                    avg_ocr_conf = ocr_result.get("avg_confidence", 0)
+                    annotated_img = ocr_result.get("annotated_image")
+                    linked_results = []
+                    evaluation = {"status": "N/A", "title": "Cấu hình A: LLM-only — Không có RAG/Knowledge Base",
+                                  "s_perception": avg_ocr_conf, "s_retrieval": 0.0, "s_total": 0.0,
+                                  "alerts": [], "advice": "", "regulatory": [], "efsa_warnings": [], "citations": []}
+                    detected_hazards = []
+                    matched_fndds = None
+                    nutri_warnings = []
+                    constraint_details = []
+                    off_cross_ref = {}
+                    llm_answer = generate_llm_only_answer(raw_text, selected_persona, user_query)
 
-            # ── Cấu hình B: Ground Truth + RAG (không OCR) ──
-            #    Dùng Ground Truth (văn bản chuẩn) để đo hiệu năng RAG khi đầu vào hoàn hảo.
-            #    Upload ảnh tùy ý → fallback OCR nhưng cảnh báo mất ý nghĩa ablation.
-            elif is_mode_b:
-                use_ocr = sample_key == "custom"
-                if use_ocr:
-                    st.warning(
-                        "⚠️ **Cấu hình B yêu cầu văn bản chuẩn (Ground Truth)** để đo hiệu năng RAG khi đầu vào hoàn hảo. "
-                        "Ảnh tải lên không có Ground Truth annotation nên hệ thống sẽ dùng OCR — "
-                        "kết quả sẽ giống Cấu hình C và không phản ánh đúng ablation study. "
-                        "**Khuyến nghị:** Chọn ảnh mẫu có sẵn (550 ảnh Label Studio) để so sánh B vs C có ý nghĩa."
-                    )
-                ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=use_ocr)
-                if ocr_result.get("is_ocr_unavailable"):
-                    st.error("Không thể đọc ảnh này. Vui lòng thử ảnh rõ hơn hoặc chọn ảnh mẫu có sẵn.")
-                    st.stop()
-                raw_text = ocr_result["full_text"]
-                mentions = ocr_result["mentions"]
-                avg_ocr_conf = ocr_result["avg_confidence"]
-                annotated_img = ocr_result["annotated_image"]
+                # ── Cấu hình B: Ground Truth + RAG (không OCR) ──
+                elif is_mode_b:
+                    use_ocr = sample_key == "custom"
+                    if use_ocr:
+                        st.warning(
+                            "⚠️ **Cấu hình B yêu cầu văn bản chuẩn (Ground Truth)** để đo hiệu năng RAG khi đầu vào hoàn hảo. "
+                            "Ảnh tải lên không có Ground Truth annotation nên hệ thống sẽ dùng OCR — "
+                            "kết quả sẽ giống Cấu hình C và không phản ánh đúng ablation study. "
+                            "**Khuyến nghị:** Chọn ảnh mẫu có sẵn (550 ảnh Label Studio) để so sánh B vs C có ý nghĩa."
+                        )
+                    ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=use_ocr)
+                    if ocr_result.get("is_ocr_unavailable"):
+                        st.error("Không thể đọc ảnh này. Vui lòng thử ảnh rõ hơn hoặc chọn ảnh mẫu có sẵn.")
+                        st.stop()
+                    raw_text = ocr_result["full_text"]
+                    mentions = ocr_result["mentions"]
+                    avg_ocr_conf = ocr_result["avg_confidence"]
+                    annotated_img = ocr_result["annotated_image"]
 
-                if selected_prod_name in ("Sản phẩm thực phẩm",) or selected_prod_name.endswith((".jpg", ".png", ".jpeg")):
-                    ingredient_text = " ".join(m.get("raw_mention", "") for m in mentions[:3])
-                    if ingredient_text.strip():
-                        selected_prod_name = ingredient_text[:80]
+                    if selected_prod_name in ("Sản phẩm thực phẩm",) or selected_prod_name.endswith((".jpg", ".png", ".jpeg")):
+                        ingredient_text = " ".join(m.get("raw_mention", "") for m in mentions[:3])
+                        if ingredient_text.strip():
+                            selected_prod_name = ingredient_text[:80]
 
-                linked_results = [foodontorag_entity_linking(m, kb_additives) for m in mentions]
-                evaluation = evaluate_safety_and_guardrail(
-                    linked_results, selected_persona, user_query, avg_ocr_conf=avg_ocr_conf, all_mentions=mentions)
-                detected_hazards = check_food_hazards(selected_prod_name, mentions, hazards_list)
-                matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(selected_prod_name, fndds_list, selected_persona)
-                off_cross_ref = cross_reference_openfoodfacts(selected_prod_name, mentions, off_products)
-                llm_answer = generate_llm_answer(
-                    evaluation, linked_results, selected_persona, user_query,
-                    detected_hazards=detected_hazards, matched_fndds=matched_fndds, nutri_warnings=nutri_warnings)
+                    linked_results = [foodontorag_entity_linking(m, kb_additives) for m in mentions]
+                    evaluation = evaluate_safety_and_guardrail(
+                        linked_results, selected_persona, user_query, avg_ocr_conf=avg_ocr_conf, all_mentions=mentions)
+                    detected_hazards = check_food_hazards(selected_prod_name, mentions, hazards_list)
+                    matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(selected_prod_name, fndds_list, selected_persona)
+                    off_cross_ref = cross_reference_openfoodfacts(selected_prod_name, mentions, off_products)
+                    llm_answer = generate_llm_answer(
+                        evaluation, linked_results, selected_persona, user_query,
+                        detected_hazards=detected_hazards, matched_fndds=matched_fndds, nutri_warnings=nutri_warnings)
 
-            # ── Cấu hình C: OCR + RAG + LLM (Full Pipeline) ──
-            #    Luôn chạy PaddleOCR thật để đo hiệu năng thực tế (kể cả ảnh mẫu có ground truth)
-            else:
-                ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=True)
-                if ocr_result.get("is_ocr_unavailable"):
-                    st.error(
-                        "Không thể đọc ảnh này vì OCR không khả dụng hoặc không nhận diện được chữ. "
-                        "Hãy cài/khởi động PaddleOCR hoặc thử ảnh rõ hơn."
-                    )
-                    st.stop()
-                raw_text = ocr_result["full_text"]
-                mentions = ocr_result["mentions"]
-                avg_ocr_conf = ocr_result["avg_confidence"]
-                annotated_img = ocr_result["annotated_image"]
+                # ── Cấu hình C: OCR + RAG + LLM (Full Pipeline) ──
+                else:
+                    ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=True)
+                    if ocr_result.get("is_ocr_unavailable"):
+                        st.error(
+                            "Không thể đọc ảnh này vì OCR không khả dụng hoặc không nhận diện được chữ. "
+                            "Hãy cài/khởi động PaddleOCR hoặc thử ảnh rõ hơn."
+                        )
+                        st.stop()
+                    raw_text = ocr_result["full_text"]
+                    mentions = ocr_result["mentions"]
+                    avg_ocr_conf = ocr_result["avg_confidence"]
+                    annotated_img = ocr_result["annotated_image"]
 
-                if selected_prod_name in ("Sản phẩm thực phẩm",) or selected_prod_name.endswith((".jpg", ".png", ".jpeg")):
-                    ingredient_text = " ".join(m.get("raw_mention", "") for m in mentions[:3])
-                    if ingredient_text.strip():
-                        selected_prod_name = ingredient_text[:80]
+                    if selected_prod_name in ("Sản phẩm thực phẩm",) or selected_prod_name.endswith((".jpg", ".png", ".jpeg")):
+                        ingredient_text = " ".join(m.get("raw_mention", "") for m in mentions[:3])
+                        if ingredient_text.strip():
+                            selected_prod_name = ingredient_text[:80]
 
-                linked_results = [foodontorag_entity_linking(m, kb_additives) for m in mentions]
-                evaluation = evaluate_safety_and_guardrail(
-                    linked_results, selected_persona, user_query, avg_ocr_conf=avg_ocr_conf, all_mentions=mentions)
-                detected_hazards = check_food_hazards(selected_prod_name, mentions, hazards_list)
-                matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(selected_prod_name, fndds_list, selected_persona)
-                off_cross_ref = cross_reference_openfoodfacts(selected_prod_name, mentions, off_products)
-                llm_answer = generate_llm_answer(
-                    evaluation, linked_results, selected_persona, user_query,
-                    detected_hazards=detected_hazards, matched_fndds=matched_fndds, nutri_warnings=nutri_warnings)
+                    linked_results = [foodontorag_entity_linking(m, kb_additives) for m in mentions]
+                    evaluation = evaluate_safety_and_guardrail(
+                        linked_results, selected_persona, user_query, avg_ocr_conf=avg_ocr_conf, all_mentions=mentions)
+                    detected_hazards = check_food_hazards(selected_prod_name, mentions, hazards_list)
+                    matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(selected_prod_name, fndds_list, selected_persona)
+                    off_cross_ref = cross_reference_openfoodfacts(selected_prod_name, mentions, off_products)
+                    llm_answer = generate_llm_answer(
+                        evaluation, linked_results, selected_persona, user_query,
+                        detected_hazards=detected_hazards, matched_fndds=matched_fndds, nutri_warnings=nutri_warnings)
+
+                # Lưu toàn bộ kết quả vào session_state để không bị mất khi chuyển tab hoặc tương tác
+                st.session_state["analysis_result"] = {
+                    "mode_label": mode_label,
+                    "is_mode_a": is_mode_a,
+                    "is_mode_b": is_mode_b,
+                    "is_mode_c": is_mode_c,
+                    "raw_text": raw_text,
+                    "mentions": mentions,
+                    "avg_ocr_conf": avg_ocr_conf,
+                    "annotated_img": annotated_img,
+                    "linked_results": linked_results,
+                    "evaluation": evaluation,
+                    "detected_hazards": detected_hazards,
+                    "matched_fndds": matched_fndds,
+                    "nutri_warnings": nutri_warnings,
+                    "constraint_details": constraint_details,
+                    "off_cross_ref": off_cross_ref,
+                    "llm_answer": llm_answer,
+                    "ocr_result": ocr_result,
+                    "selected_persona": selected_persona,
+                    "user_query": user_query,
+                    "selected_prod_name": selected_prod_name,
+                }
+
+    res = st.session_state.get("analysis_result")
+    if res is not None:
+        mode_label = res["mode_label"]
+        is_mode_a = res["is_mode_a"]
+        is_mode_b = res["is_mode_b"]
+        is_mode_c = res["is_mode_c"]
+        raw_text = res["raw_text"]
+        mentions = res["mentions"]
+        avg_ocr_conf = res.get("avg_ocr_conf", 0)
+        annotated_img = res["annotated_img"]
+        linked_results = res["linked_results"]
+        evaluation = res["evaluation"]
+        detected_hazards = res["detected_hazards"]
+        matched_fndds = res["matched_fndds"]
+        nutri_warnings = res["nutri_warnings"]
+        constraint_details = res["constraint_details"]
+        off_cross_ref = res["off_cross_ref"]
+        llm_answer = res["llm_answer"]
+        ocr_result = res["ocr_result"]
+        selected_persona = res["selected_persona"]
+        user_query = res["user_query"]
+        selected_prod_name = res["selected_prod_name"]
 
         # Banner cấu hình đang chạy
         mode_descriptions = {
@@ -327,7 +381,14 @@ with col_right:
             "C": ("🅲 Cấu hình C: OCR + RAG + LLM (Full Pipeline)", "PaddleOCR → Phục hồi chính tả → Entity Linking → RAG → Guardrail → LLM. **Đo hiệu năng thực tế với sai số OCR.**"),
         }
         mode_title, mode_desc = mode_descriptions[mode_label]
-        st.info(f"**{mode_title}** — {mode_desc}")
+        
+        c_banner, c_reset = st.columns([5, 1])
+        with c_banner:
+            st.info(f"**{mode_title}** — {mode_desc}")
+        with c_reset:
+            if st.button("🗑️ Xóa kết quả", use_container_width=True, help="Xóa kết quả hiện tại"):
+                st.session_state["analysis_result"] = None
+                st.rerun()
 
         # Hiển thị Tabs kết quả (4 Tabs) — tiêu đề thay đổi theo cấu hình
         if is_mode_a:

@@ -11,6 +11,8 @@ import sys
 
 # Đảm bảo import đúng module
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 from modules.ocr_extractor import (
     post_process_ocr_spelling,
@@ -42,7 +44,8 @@ def run_tests():
     print("\n[TEST 1] Kiểm tra Tầng Phục hồi Chính tả Thực phẩm:")
     print(f"Văn bản đầu vào (Noisy OCR):\n  -> {raw_noisy_ocr}")
 
-    corrected = post_process_ocr_spelling(raw_noisy_ocr)
+    corrected_res = post_process_ocr_spelling(raw_noisy_ocr)
+    corrected = corrected_res.get("final", "") if isinstance(corrected_res, dict) else str(corrected_res)
     print(f"\nVăn bản sau khi khôi phục chính tả & mã INS:\n  -> {corrected}")
     assert "Bột mì" in corrected or "bột mì" in corrected.lower(), "Lỗi: Không phục hồi được từ 'bột mì'"
     assert "INS 322i" in corrected, "Lỗi: Không chuẩn hóa được mã INS 322i"

@@ -1,0 +1,6 @@
+﻿id,mode,domain,llm_answer,evaluation_status,token_f1,exact_match,safety_correct,binary_correct
+FOODQA_0001,B,allergen_safety,,ABSTAIN,0.0,0.0,False,
+FOODQA_0002,B,disease_contraindication,,SCREENED_NO_ALERT,0.0,0.0,False,
+FOODQA_0003,B,additive_regulation,,SCREENED_NO_ALERT,0.0,0.0,False,
+FOODQA_0004,B,vulnerable_groups,,SCREENED_NO_ALERT,0.0,0.0,False,
+FOODQA_0005,B,nutritional_assessment,,WARNING,0.0,0.0,True,

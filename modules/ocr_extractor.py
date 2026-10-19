@@ -508,7 +508,105 @@ def post_process_ocr_spelling(raw_text, use_gemini=True):
     }
 
 
-def parse_ingredients_from_ocr(full_text):
+def parse_allergen_statements(text=None, full_text=None):
+    """
+    Phân tích 3 khối nhãn dị ứng theo khuyến nghị FAO/WHO JEMRA Part 3 và US FDA FALCPA:
+    1. Ingredients list (Danh sách thành phần cấu thành)
+    2. Intentional allergen declaration ('Contains' statement / 'Chứa:')
+    3. Precautionary Allergen Labeling ('May contain' / PAL / 'Có thể chứa vết...', 'Tiếp xúc chéo')
+    
+    Hỗ trợ nhận diện riêng khối 'Contains: ...' và khối 'May contain: ...'.
+    
+    Returns:
+        dict: {
+            "ingredients_text": str,
+            "contains_text": str,
+            "may_contain_text": str,
+            "pal_text": str,
+            "has_contains": bool,
+            "has_may_contain": bool,
+            "has_pal": bool,
+            "contains_allergens": list[str],
+            "may_contain_allergens": list[str],
+            "pal_allergens": list[str]
+        }
+    """
+    raw_input = text if text is not None else full_text
+    if not raw_input:
+        return {
+            "ingredients_text": "",
+            "contains_text": "",
+            "may_contain_text": "",
+            "pal_text": "",
+            "has_contains": False,
+            "has_may_contain": False,
+            "has_pal": False,
+            "contains_allergens": [],
+            "may_contain_allergens": [],
+            "pal_allergens": []
+        }
+
+    target_text = str(raw_input)
+    
+    # 1. Tìm khối May contain: ... / PAL (Precautionary Allergen Labeling)
+    pal_pattern = (
+        r"(?:c[oó]\s*th[eể]\s*ch[uứ]a(?:\s*v[eế]t)?(?:\s*c[uủ]a)?|"
+        r"may\s*contain(?:\s*traces\s*of)?|"
+        r"s[aả]n\s*xu[aấ]t\s*tr[eê]n\s*(?:c[uù]ng\s*)?d[aâ]y\s*chuy[eề]n|"
+        r"[đd][uư][oợ]c\s*ch[eế]\s*bi[eế]n\s*tr[eê]n\s*c[uù]ng\s*thi[eế]t\s*b[iị]|"
+        r"s[aả]n\s*xu[aấ]t\s*t[aạ]i\s*c[oơ]\s*s[oở]\s*c[oó]\s*x[uử]\s*l[yý])"
+        r"\s*[:\-]?\s*([^.\n\r]+?)(?=(?:c[aả]nh\s*b[aá]o\s*d[iị]\s*[uứ]ng|th[oô]ng\s*tin\s*d[iị]\s*[uứ]ng|allergen\b|contains\b|ch[uứ]a\b|[.\n\r;]|$))"
+    )
+    pal_match = re.search(pal_pattern, target_text, re.IGNORECASE)
+    pal_text = pal_match.group(0).strip() if pal_match else ""
+    pal_content = pal_match.group(1).strip() if pal_match else ""
+
+    # 2. Tìm khối Contains: ... / Tuyên bố dị ứng chủ ý (Contains statement)
+    contains_pattern = (
+        r"(?:c[aả]nh\s*b[aá]o\s*d[iị]\s*[uứ]ng|th[oô]ng\s*tin\s*d[iị]\s*[uứ]ng|allergen\s*(?:advice|information|warning))"
+        r"\s*[:\-]?\s*(?:ch[uứ]a|c[oó]\s*ch[uứ]a|contains)?\s*[:\-]?\s*([^.\n\r;]+?)(?=(?:may\s*contain|c[oó]\s*th[eể]\s*ch[uứ]a|[.\n\r;]|$))"
+    )
+    contains_match = re.search(contains_pattern, target_text, re.IGNORECASE)
+    if not contains_match:
+        direct_contains_pattern = (
+            r"(?:^|(?<=[.\s;\n]))(?:ch[uứ]a|c[oó]\s*ch[uứ]a|contains)\s*[:\-]\s*"
+            r"([^.\n\r;]+?)(?=(?:may\s*contain|c[oó]\s*th[eể]\s*ch[uứ]a|[.\n\r;]|$))"
+        )
+        contains_match = re.search(direct_contains_pattern, target_text, re.IGNORECASE)
+
+    contains_text = contains_match.group(0).strip() if contains_match else ""
+    contains_content = contains_match.group(1).strip() if contains_match else ""
+
+    def _split_allergen_items(statement):
+        if not statement:
+            return []
+        statement = re.sub(r'^(?:chứa|có chứa|contains)\s*[:\-]?\s*', '', statement, flags=re.IGNORECASE)
+        parts = re.split(r'[,;]|(?:\bv[aà]\b)|\band\b', statement, flags=re.IGNORECASE)
+        items = []
+        for p in parts:
+            cleaned = re.sub(r'\s+', ' ', p).strip(" .-:,\n\r\t")
+            if cleaned and len(cleaned) >= 2:
+                items.append(cleaned)
+        return items
+
+    contains_allergens = _split_allergen_items(contains_content)
+    pal_allergens = _split_allergen_items(pal_content)
+
+    return {
+        "ingredients_text": target_text,
+        "contains_text": contains_text,
+        "may_contain_text": pal_text,
+        "pal_text": pal_text,
+        "has_contains": bool(contains_text),
+        "has_may_contain": bool(pal_text),
+        "has_pal": bool(pal_text),
+        "contains_allergens": contains_allergens,
+        "may_contain_allergens": pal_allergens,
+        "pal_allergens": pal_allergens,
+    }
+
+
+def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
     """
     Thuật toán Bóc tách Thành phần bằng Lookahead Regex:
     - Tìm vị trí xuất hiện của cụm từ 'Thành phần:' hoặc 'Ingredients:'.
@@ -516,6 +614,7 @@ def parse_ingredients_from_ocr(full_text):
     - Tách theo dấu phẩy, chấm phẩy hoặc dấu chấm theo sau bởi khoảng trắng nhưng KHÔNG tách bên trong ngoặc đơn.
       Ví dụ: 'Chất nhũ hóa (INS 322i lecithin, INS 471), muối' -> ['Chất nhũ hóa (INS 322i lecithin, INS 471)', 'muối'].
     - Phân loại danh mục sơ bộ (Category classification).
+    - Hỗ trợ gán nhãn khối nguồn: source_block ('ingredient', 'contains', 'precautionary') và is_precautionary flag.
     """
     folded_chars = []
     source_offsets = []
@@ -657,7 +756,26 @@ def parse_ingredients_from_ocr(full_text):
 
             mentions.append({
                 "raw_mention": item,
-                "category": category
+                "category": category,
+                "source_block": "ingredient",
+                "is_precautionary": False,
+            })
+
+    if include_allergen_statements:
+        statements = parse_allergen_statements(full_text)
+        for ca in statements["contains_allergens"]:
+            mentions.append({
+                "raw_mention": ca,
+                "category": "allergen",
+                "source_block": "contains",
+                "is_precautionary": False,
+            })
+        for pa in statements["pal_allergens"]:
+            mentions.append({
+                "raw_mention": pa,
+                "category": "pal_allergen",
+                "source_block": "precautionary",
+                "is_precautionary": True,
             })
 
     return mentions

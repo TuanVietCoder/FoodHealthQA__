@@ -1,6 +1,9 @@
 import unittest
 
-from scripts.run_three_configs import _is_approved
+try:
+    from scripts_research.run_three_configs import _is_approved
+except ImportError:
+    from scripts.run_three_configs import _is_approved
 
 
 class ThreeConfigRunnerTests(unittest.TestCase):

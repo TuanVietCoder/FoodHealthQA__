@@ -42,7 +42,10 @@ from modules.constraint_model import (
     apply_negation_constraints,
     CONSTRAINT_CONTRAINDICATED,
     CONSTRAINT_ALLERGEN_RISK,
+    CONSTRAINT_PRECAUTIONARY_RISK,
     CONSTRAINT_RESTRICTED,
+    is_exempt_refined_oil,
+    DERIVATIVE_ALLERGEN_MAP,
     evaluate_adi_compliance,
     evaluate_efsa_risk,
     evaluate_regulatory_compliance,
@@ -162,6 +165,7 @@ def load_personas(personas_path_or_dir):
 
             personas.append({
                 "id": str(row.get("persona_id", row.get("id", ""))).strip(),
+                "persona_id": str(row.get("persona_id", row.get("id", ""))).strip(),
                 "name": str(row.get("name", "")).strip(),
                 "description": str(row.get("description", "")).strip(),
                 "conditions": conditions,
@@ -1450,6 +1454,15 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
             critical_alerts.append(constraint_alert)
         elif ctype == CONSTRAINT_ALLERGEN_RISK:
             warning_alerts.append(constraint_alert)
+        elif ctype == CONSTRAINT_PRECAUTIONARY_RISK:
+            pal_alert = dict(constraint_alert)
+            pal_alert["message"] = (
+                f"Cảnh báo tiếp xúc chéo (Precautionary Allergen Labeling - PAL): "
+                f"Nhãn ghi nhận nguy cơ nhiễm chéo hoặc có thể chứa vết của dị nguyên '{item['raw_mention']}'. "
+                "Theo khuyến nghị FAO/WHO JEMRA Part 3 (2023), đối tượng có tiền sử dị ứng thực phẩm nghiêm trọng cần thận trọng."
+            )
+            pal_alert["regulation"] = "FAO/WHO JEMRA Part 3 (Precautionary Allergen Labelling)"
+            warning_alerts.append(pal_alert)
         elif ctype == CONSTRAINT_RESTRICTED:
             caution_alerts.append(constraint_alert)
 
@@ -1472,21 +1485,62 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
 
         for raw_text in all_texts_to_scan:
             raw_text_lower = raw_text.lower()
+            # Miễn trừ dầu tinh luyện hoàn toàn theo US FDA FALCPA Sec 203
+            if is_exempt_refined_oil(raw_text_lower):
+                continue
+
+            is_prec_text = any(
+                p in raw_text_lower for p in ["có thể chứa", "may contain", "vết của", "sản xuất trên", "chế biến trên"]
+            )
             for allergy in user_allergies:
-                keywords = ALLERGEN_KEYWORDS.get(allergy, [allergy])
-                if any(contains_label_term(raw_text_lower, kw) for kw in keywords):
+                keywords = list(ALLERGEN_KEYWORDS.get(allergy, [allergy]))
+                derivatives = DERIVATIVE_ALLERGEN_MAP.get(allergy, [])
+                combined_terms = keywords + [d for d in derivatives if d not in keywords]
+
+                if any(contains_label_term(raw_text_lower, kw) for kw in combined_terms):
+                    reg_source = (
+                        "FAO/WHO JEMRA Part 3 (Precautionary Allergen Labelling)"
+                        if is_prec_text else
+                        "US FDA FALCPA & FAO/WHO JEMRA 2021 Part 1"
+                    )
                     allergen_alert = {
                         "additive": f"Dị nguyên: {raw_text}",
                         "message": (
+                            f"Cảnh báo nguy cơ tiếp xúc chéo (PAL): '{raw_text}' ({allergy}). Theo FAO/WHO JEMRA Part 3, đối tượng dị ứng nặng cần thận trọng."
+                            if is_prec_text else
                             f"Nhãn/OCR có thể khớp với dị nguyên '{raw_text}' ({allergy}). "
                             "Kết quả này không xác nhận nguồn, lượng, nhiễm chéo hay phản ứng cá nhân; "
                             "hãy kiểm tra nhãn đầy đủ và hỏi chuyên gia y tế nếu cần."
                         ),
-                        "regulation": "Cần xác minh quy định hiện hành theo thị trường",
+                        "regulation": reg_source,
                         "codex": "Codex General Standard for the Labelling of Prepackaged Foods (CXS 1-1985)"
                     }
                     warning_alerts.append(allergen_alert)
                     break
+
+    # Phân biệt không dung nạp lactose (enzyme deficiency) vs Dị ứng protein sữa (IgE)
+    # Theo FAO/WHO JEMRA 2021: Lactose không thuộc danh mục dị nguyên ưu tiên miễn dịch
+    user_cond_lower = [c.lower() for c in user_conditions]
+    has_lactose_intolerance = any("lactose" in c for c in user_cond_lower)
+    has_milk_allergy = any("milk" in a or "sua" in a for a in user_allergies)
+    if has_lactose_intolerance and not has_milk_allergy:
+        milk_indicators = ["lactose", "sữa", "sua", "whey", "casein", "bột sữa", "bot sua"]
+        detected_milk = any(
+            any(kw in item["raw_mention"].lower() for kw in milk_indicators)
+            for item in linked_results
+        )
+        if detected_milk:
+            lactose_caution = {
+                "additive": "Lactose / Sữa",
+                "message": (
+                    "Lưu ý không dung nạp đường sữa: Sản phẩm có chứa thành phần từ sữa/lactose. "
+                    "Theo FAO/WHO JEMRA 2021, đây là tình trạng thiếu hụt enzyme lactase đường tiêu hóa, "
+                    "không phải dị ứng đạm sữa qua trung gian IgE và không gây sốc phản vệ."
+                ),
+                "regulation": "FAO/WHO JEMRA 2021 Part 1 & US FDA FAQ",
+                "codex": "Codex CXS 1-1985"
+            }
+            caution_alerts.append(lactose_caution)
 
     # Đánh giá quy chuẩn pháp lý tổng hợp: ADI (JECFA) + EFSA + TT 24/2019/TT-BYT
     body_weight = persona.get("weight_kg", 60.0)

@@ -26,16 +26,18 @@
       "bột mì": "ALLERGEN_RISK",
       "wheat": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: wheat and other Triticum species, rye, barley and hybridized strains.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -62,14 +64,25 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_and_coeliac_autoimmune",
+    "clinical_severity": "High (Coeliac enteropathy & IgE anaphylaxis)"
   },
   {
     "id": "milk",
     "name_vi": "Sữa và sản phẩm từ sữa",
-    "name_en": "Milk and milk products (including lactose)",
+    "name_en": "Milk and milk products (excluding lactose)",
     "severity": "warning",
     "keywords": [
       "sữa",
@@ -81,7 +94,6 @@
       "casein",
       "cream",
       "kem",
-      "lactose",
       "phô mai",
       "cheese",
       "yogurt",
@@ -100,21 +112,22 @@
       "bơ": "ALLERGEN_RISK",
       "dairy": "ALLERGEN_RISK",
       "whey": "ALLERGEN_RISK",
-      "casein": "ALLERGEN_RISK",
-      "lactose": "ALLERGEN_RISK"
+      "casein": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: milk and milk products. Non-immune lactose intolerance is classified separately as a food intolerance.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -149,9 +162,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated_milk_protein",
+    "clinical_severity": "High (Casein and beta-lactoglobulin anaphylaxis risk)"
   },
   {
     "id": "egg",
@@ -176,18 +200,20 @@
       "egg": "ALLERGEN_RISK",
       "albumin": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: eggs and egg products.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -222,9 +248,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "High (Ovalbumin, ovomucoid anaphylaxis risk)"
   },
   {
     "id": "soy",
@@ -254,18 +291,20 @@
       "đậu nành": "ALLERGEN_RISK",
       "soy": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 recommended soybean as regional priority due to lower prevalence of severe reactions and lower potency.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -300,9 +339,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Moderate (Lower severity and potency compared to peanuts and tree nuts)"
   },
   {
     "id": "peanut",
@@ -325,18 +375,20 @@
       "lạc": "ALLERGEN_RISK",
       "peanut": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: peanuts and peanut products.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -371,9 +423,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated_high_potency",
+    "clinical_severity": "High (Extremely low eliciting dose ED01, severe anaphylaxis)"
   },
   {
     "id": "nuts",
@@ -405,18 +468,20 @@
       "cashew": "ALLERGEN_RISK",
       "hạt cây": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 specified 6 global priority tree nuts: almond, cashew, hazelnut, pecan, pistachio, walnut. Brazil nut, macadamia, and pine nuts are regional.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -451,9 +516,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "High (Anaphylaxis risk)"
   },
   {
     "id": "shellfish",
@@ -482,18 +558,20 @@
       "crab": "ALLERGEN_RISK",
       "hải sản": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: crustacea and products thereof.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -528,9 +606,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "High (Anaphylaxis risk; tropomyosin allergen)"
   },
   {
     "id": "fish",
@@ -560,18 +649,20 @@
       "fish": "ALLERGEN_RISK",
       "nước mắm": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Codex & JEMRA 2021 global priority: fish and fish products.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -606,9 +697,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "High (Parvalbumin anaphylaxis risk)"
   },
   {
     "id": "celery",
@@ -626,14 +728,16 @@
       "cần tây": "ALLERGEN_RISK",
       "celery": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 regional priority allergen.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -660,9 +764,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Moderate (High regional prevalence in central Europe)"
   },
   {
     "id": "mustard",
@@ -680,14 +795,16 @@
       "mù tạt": "ALLERGEN_RISK",
       "mustard": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 regional priority allergen.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -714,9 +831,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Moderate (Regional prevalence)"
   },
   {
     "id": "sesame",
@@ -738,16 +866,18 @@
       "mè": "ALLERGEN_RISK",
       "sesame": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Added by FAO/WHO JEMRA 2021 as a global priority allergen alongside Codex GSLPF.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "EU_1169_2011",
-      "FDA_MAJOR_ALLERGENS"
+      "FDA_MAJOR_ALLERGENS",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
-      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies"
+      "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -782,9 +912,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as GLOBAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "GLOBAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated_high_potency",
+    "clinical_severity": "High (Severe systemic allergic reactions confirmed by JEMRA 2021)"
   },
   {
     "id": "sulfites",
@@ -827,16 +968,18 @@
       "INS 227": "ALLERGEN_RISK",
       "INS 228": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "Non-immune chemical hypersensitivity. Excluded by JEMRA 2021 from immune-mediated priority allergen list; retains labeling threshold at 10 mg/kg.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
       "CODEX_CXS_1_1985",
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
       "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "threshold_note": "The linked Codex CXS 1-1985 copy says sulphite at 10 mg/kg or more; the linked text is amended through 2010. Confirm current rule and jurisdiction.",
@@ -864,9 +1007,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as EXCLUDED_FROM_PRIORITY_ALLERGEN_LIST.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "EXCLUDED_FROM_PRIORITY_ALLERGEN_LIST",
+    "immune_mechanism": "non_immune_chemical_hypersensitivity",
+    "clinical_severity": "Moderate (Bronchospasm in sensitive individuals at >= 10 mg/kg SO2)"
   },
   {
     "id": "lupin",
@@ -884,14 +1038,16 @@
       "lupin": "ALLERGEN_RISK",
       "lupine": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 regional priority allergen.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -918,9 +1074,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Moderate (Cross-reactivity with peanut)"
   },
   {
     "id": "molluscs",
@@ -954,14 +1121,16 @@
       "squid": "ALLERGEN_RISK",
       "oyster": "ALLERGEN_RISK"
     },
-    "note": "Label-screening category only. This record does not establish clinical allergy, cross-reactivity, an individual's threshold, or a jurisdiction's current legal requirements.",
+    "note": "JEMRA 2021 regional priority allergen.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
-      "EU_1169_2011"
+      "EU_1169_2011",
+      "FAO_WHO_JEMRA_2021"
     ],
     "source_urls": [
-      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj"
+      "https://eur-lex.europa.eu/eli/reg/2011/1169/oj",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
     ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
@@ -988,9 +1157,20 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Moderate to High"
   },
   {
     "id": "beef",
@@ -1014,11 +1194,15 @@
       "bò": "ALLERGEN_RISK",
       "beef": "ALLERGEN_RISK"
     },
-    "note": "Beef remains a food ingredient term but is not treated as one of the sourced priority allergen-label groups in this dataset.",
+    "note": "Non-priority allergen unless alpha-gal syndrome or regional condition.",
     "enabled_for_allergen_screening": false,
     "verification_status": "unsupported_as_major_label_allergen",
-    "source_ids": [],
-    "source_urls": [],
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
     "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
     "regulatory_claims": {
       "codex": {
@@ -1044,8 +1228,65 @@
         "source_locator": null,
         "verification_status": "pending_official_text_and_amendment_check",
         "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
       }
     },
-    "keyword_vocabulary_status": "not_used_for_allergen_screening"
+    "keyword_vocabulary_status": "not_used_for_allergen_screening",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_or_alpha_gal",
+    "clinical_severity": "Low to Moderate"
+  },
+  {
+    "id": "lactose",
+    "name_vi": "Bất dung nạp Lactose (Không phải dị ứng miễn dịch)",
+    "name_en": "Lactose intolerance (Non-immune food intolerance)",
+    "severity": "warning",
+    "keywords": [
+      "lactose",
+      "đường lactose"
+    ],
+    "negation_rules": {
+      "lactose": "ALLERGEN_RISK",
+      "đường lactose": "ALLERGEN_RISK"
+    },
+    "note": "Non-immune disaccharide intolerance caused by intestinal lactase deficiency. Excluded by FAO/WHO JEMRA 2021 from immune-mediated priority allergen list.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Non-immune food intolerance, causing gastrointestinal symptoms but no IgE-mediated anaphylaxis.",
+    "jemra_priority": "EXCLUDED_FROM_PRIORITY_ALLERGEN_LIST",
+    "immune_mechanism": "non_immune_enzyme_deficiency",
+    "clinical_severity": "Gastrointestinal discomfort (Bloating, cramps, diarrhea)",
+    "regulatory_claims": {
+      "fao_who_jemra": {
+        "claim": "Excluded from priority allergen list as non-immune intolerance.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
   }
 ]
