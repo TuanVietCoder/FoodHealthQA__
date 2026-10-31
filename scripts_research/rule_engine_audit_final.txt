@@ -1,0 +1,18 @@
+﻿=== Rule Engine Audit v4 (1868 records) ===
+
+  CANNOT_DETERMINE                960 (51.4%)
+  MATCH                           907 (48.6% total, 99.9% non-ABSTAIN)
+  MISMATCH_ALLERGEN_EDGE            1 (0.1%)
+
+=== Match by Domain ===
+  additive_regulation            total: 437  MATCH:437
+  allergen_detection             total: 386  MATCH:385 | MISMATCH_ALLERGEN_EDGE:1
+  insufficient_data              total: 960  CANNOT_DETERMINE:960
+  vulnerable_groups              total:  85  MATCH:85
+
+=== All Remaining Issues (1) ===
+  [FOODQA_G3_0468] Sô-cô-la đen Vietnamcacao
+    domain=allergen_detection gold=UNSAFE derived=CRITICAL_ALERT status=MISMATCH_ALLERGEN_EDGE
+    reason: cross_contamination: milk,nuts
+
+Saved: D:\FoodHealthQA__\scripts_research\rule_engine_audit_v4.jsonl
