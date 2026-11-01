@@ -1,5 +1,7 @@
 # Báo cáo Trạng thái Benchmark FoodHealthQA
 
+**Phiên bản:** v3 (finalized)  **Ngày:** 2026-11-01
+
 ## 1. Tệp và vai trò hiện hành
 
 | Tệp | Định dạng | Số bản ghi | Vai trò |
@@ -75,6 +77,8 @@ Tệp: `scripts_research/rule_engine_audit_final.jsonl`
 
 **1 edge case còn lại (documented):** FOODQA_G3_0468 — sô-cô-la đen có "có thể chứa sữa" nằm trong ngoặc của sub-ingredient, trong khi hạt hạnh nhân 15% xuất hiện sau dấu đóng ngoặc. Rule engine bị split sai tại cross-contamination keyword này.
 
+**Trạng thái phê duyệt:** Toàn bộ 1.868 bản ghi có `review_status = "approved"` (1.721 trực tiếp, 147 qua `corrected → approved` sau khi xác nhận labels đã đúng và review_notes đã ghi lý do).
+
 ### 3.3 Các lỗi đã sửa
 
 | Loại | Số bản ghi | Mô tả |
@@ -90,9 +94,10 @@ Tệp: `scripts_research/rule_engine_audit_final.jsonl`
 ## 4. Cách chạy
 
 ```powershell
-# Chạy rule engine audit
-python scripts_research/rule_engine_audit_final.jsonl
+# Tạo bổ sung records mới từ labels chưa có trong benchmark
+.\venv\Scripts\python.exe .\scripts_research\create_gold_benchmark.py
 
-# Đánh giá ablation 3 cấu hình
+# Đánh giá ablation 3 cấu hình A/B/C
 .\venv\Scripts\python.exe .\scripts_research\run_evaluation.py --baseline
+.\venv\Scripts\python.exe .\scripts_research\run_benchmark_evaluation.py
 ```
