@@ -369,33 +369,33 @@ Slot khớp INS cần hạn mức có kiểm soát: bản đầu tiên không gi
 
 **Tích hợp vào pipeline.** `run_grounded_pipeline` nhận `passage_retrieval_enabled` (mặc định bật), `passage_top_k` (mặc định 5) và `passage_mode` (mặc định `hybrid_dense_exact` nếu có dense, ngược lại `hybrid_exact`). Truy vấn gồm câu hỏi cùng các mã INS đã liên kết từ nhãn. Các đoạn truy xuất được đưa vào bằng chứng của LLM, và chỉ nguồn của đoạn thực sự được truy xuất mới được thêm vào danh sách trích dẫn hợp lệ. Kết quả trả thêm trường `retrieved_passages`. Cấu hình A không dùng tầng này.
 
-**Đo chất lượng truy xuất** (`scripts_research/eval_passage_retrieval.py`, không gọi LLM): trên 1.203 câu của `qa_eval_balanced.jsonl`, truy vấn là câu hỏi cộng mã INS đã liên kết (*oracle linking*, nhằm tách riêng chất lượng truy xuất khỏi lỗi liên kết thực thể). Ba chỉ số: **INS hit** (đoạn truy xuất nhắc đúng mã INS của câu), **locator hit** (có đoạn trùng vị trí nguồn chuẩn `source_claim_locators`), **citation recall** (tỷ lệ nguồn chuẩn được phủ).
+**Đo chất lượng truy xuất** (`scripts_research/eval_passage_retrieval.py`, không gọi LLM): trên 750 câu của `foodhealthqa_eval_set.jsonl` (bộ đánh giá duy nhất của hệ thống; 547 câu có mã INS trong đáp án chuẩn), kho đoạn gồm 1.095 đoạn. Truy vấn là câu hỏi cộng mã INS đã liên kết (*oracle linking*, nhằm tách riêng chất lượng truy xuất khỏi lỗi liên kết thực thể). Ba chỉ số: **INS hit** (đoạn truy xuất nhắc đúng mã INS của câu), **locator hit** (có đoạn trùng vị trí nguồn chuẩn `source_claim_locators`), **citation recall** (tỷ lệ nguồn chuẩn được phủ). Số in đậm là giá trị tốt nhất của cột.
 
 | Chế độ (top-5) | INS hit | Locator hit | Citation recall |
 | :--- | :---: | :---: | :---: |
-| `bm25` | 0,314 | 0,623 | 0,306 |
-| `tfidf` | 0,386 | 0,623 | 0,306 |
-| `dense` | 0,607 | 0,481 | 0,338 |
-| `hybrid` | 0,316 | 0,615 | 0,304 |
-| `hybrid_exact` | 0,995 | 0,660 | 0,359 |
-| `hybrid_dense` | 0,409 | 0,651 | 0,354 |
-| **`hybrid_dense_exact`** | **0,995** | **0,663** | **0,399** |
+| `bm25` | 0,384 | 0,464 | 0,298 |
+| `tfidf` | 0,417 | 0,459 | 0,297 |
+| `dense` | 0,559 | 0,529 | 0,476 |
+| `hybrid` | 0,393 | 0,460 | 0,296 |
+| `hybrid_exact` | **0,987** | 0,483 | 0,319 |
+| `hybrid_dense` | 0,455 | **0,609** | 0,475 |
+| `hybrid_dense_exact` | **0,987** | 0,601 | **0,485** |
 
-**Truy vấn chỉ gồm câu hỏi** (không gắn mã INS đã liên kết vào truy vấn; cùng 1.203 câu, top-5):
+**Truy vấn chỉ gồm câu hỏi** (không gắn mã INS đã liên kết vào truy vấn; cùng 750 câu, top-5):
 
 | Chế độ (top-5) | INS hit | Locator hit | Citation recall |
 | :--- | :---: | :---: | :---: |
-| `bm25` | 0,273 | 0,625 | 0,307 |
-| `tfidf` | 0,278 | 0,628 | 0,305 |
-| **`dense`** | 0,287 | **0,766** | **0,502** |
-| `hybrid` | 0,267 | 0,621 | 0,305 |
-| `hybrid_exact` | 0,405 | 0,679 | 0,365 |
-| `hybrid_dense` | 0,278 | 0,712 | 0,385 |
-| `hybrid_dense_exact` | 0,388 | 0,756 | 0,436 |
+| `bm25` | 0,333 | 0,467 | 0,298 |
+| `tfidf` | 0,335 | 0,461 | 0,295 |
+| `dense` | 0,313 | **0,739** | **0,643** |
+| `hybrid` | 0,331 | 0,465 | 0,296 |
+| `hybrid_exact` | **0,459** | 0,492 | 0,325 |
+| `hybrid_dense` | 0,344 | 0,645 | 0,500 |
+| `hybrid_dense_exact` | 0,457 | 0,652 | 0,513 |
 
-Nhận xét: (1) **kết luận phụ thuộc vào cách dựng truy vấn.** Khi truy vấn gắn thêm mã INS (bảng oracle), dense đứng một mình tìm đúng mã INS tốt hơn BM25/TF-IDF nhưng kém ở locator hit (0,481): các mã INS kéo vector về các đoạn theo từng phụ gia và đẩy xa các đoạn theo chủ đề (dị nguyên, JEMRA, WHO). Khi truy vấn chỉ có câu hỏi, dense lại tốt nhất ở locator hit (0,766 so với ~0,62 của sparse) và citation recall (0,502 so với ~0,31), vì embedding đa ngôn ngữ nắm được chủ đề câu hỏi dù không trùng từ khóa; (2) slot khớp mã INS là thành phần quyết định việc tìm đúng mã INS (INS hit 0,995 khi đã biết mã), và luôn cải thiện so với `hybrid`; (3) pipeline hiện gắn mã INS đã liên kết vào truy vấn nên giống kịch bản oracle; một hướng cải tiến có thể kiểm chứng là **nhúng riêng câu hỏi cho nhánh dense** (không kèm mã INS) và chỉ dùng mã INS cho BM25 và slot khớp; (4) citation recall tối đa chỉ ~0,50 vì kho đoạn chưa phủ hết các nguồn chuẩn. Đây là kết quả đo trên tập này, chưa kiểm định ý nghĩa thống kê.
+Nhận xét: (1) **kết luận phụ thuộc vào cách dựng truy vấn.** Khi truy vấn gắn thêm mã INS (bảng oracle), `hybrid_dense_exact` đạt citation recall cao nhất (0,485) và locator hit 0,601, sát mức tốt nhất của `hybrid_dense` (0,609). Khi truy vấn chỉ có câu hỏi, dense đứng một mình tốt nhất ở locator hit (0,739 so với khoảng 0,46 của các chế độ thưa) và citation recall (0,643 so với khoảng 0,30), vì embedding đa ngôn ngữ nắm được chủ đề câu hỏi dù không trùng từ khóa; (2) slot khớp mã INS là thành phần quyết định việc tìm đúng mã INS: INS hit 0,987 khi đã biết mã (so với 0,393 của `hybrid`), và chỉ còn 0,459 ở truy vấn không có mã INS; (3) pipeline hiện gắn mã INS đã liên kết vào truy vấn nên giống kịch bản oracle. Số đo cho thấy dense chỉ dùng câu hỏi (locator hit 0,739; citation recall 0,643) vượt các chế độ oracle tốt nhất (0,601; 0,485), nên một hướng cải tiến đáng kiểm chứng là **nhúng riêng câu hỏi cho nhánh dense** (không kèm mã INS) và chỉ dùng mã INS cho BM25 và slot khớp; (4) citation recall tối đa chỉ khoảng 0,64 vì kho đoạn chưa phủ hết các nguồn chuẩn. Đây là kết quả đo trên bộ 750 câu, chưa kiểm định ý nghĩa thống kê.
 
-**Chưa kiểm chứng.** Các số trên đo chất lượng truy xuất, chưa phải chất lượng câu trả lời cuối. Ảnh hưởng của tầng này lên nhãn an toàn và trích dẫn của câu trả lời cần ablation đầu-cuối (bật/tắt `passage_retrieval_enabled`, đổi `passage_mode`, `passage_top_k`) trên tập pilot hoặc tập cân bằng.
+**Chưa kiểm chứng.** Các số trên đo chất lượng truy xuất, chưa phải chất lượng câu trả lời cuối. Ảnh hưởng của tầng này lên nhãn an toàn và trích dẫn của câu trả lời cần ablation đầu-cuối (bật/tắt `passage_retrieval_enabled`, đổi `passage_mode`, `passage_top_k`) trên bộ 750 câu.
 
 ---
 
@@ -648,9 +648,9 @@ data/                                   # Dữ liệu bảng (CSV) & Benchmark
 ├── fndds_nutrition.csv                 # USDA FNDDS — dinh dưỡng định lượng (ước tính)
 ├── incidents_train.csv                 # Food Hazard Detector — 5.082 sự cố
 ├── openfoodfacts_vietnam.csv           # Open Food Facts VN — nhãn & mã vạch
-├── benchmark_manifest.json             # Chọn benchmark active; hiện là v5
-├── qa_benchmark.jsonl                  # 2.311 bản ghi JSONL, đầu vào mặc định
-├── qa_benchmark.csv                    # Cùng nội dung, CSV
+├── benchmark_manifest.json             # Ghi bộ đánh giá duy nhất (750 câu) và bản nguồn v5
+├── foodhealthqa_eval_set.jsonl         # BỘ ĐÁNH GIÁ DUY NHẤT: 750 câu (kèm .csv và _summary.json), mặc định của mọi script
+├── qa_benchmark.jsonl                  # Bản nguồn 2.311 bản ghi, chỉ dùng để dựng bộ 750, không dùng để đánh giá
 └── foodon_entities.json                # Danh mục thuật ngữ FoodOn
 
 modules/                                # Logic nghiệp vụ
@@ -761,7 +761,7 @@ Trong quá trình thực thi RAG (ở Cấu hình B và C), mô-đun [`modules/h
 
 **Hạn chế đã biết**
 
-* **Chưa có số liệu đánh giá cuối.** Hạ tầng chạy theo lô, tiếp tục và so sánh Gemini với Qwen2.5 đã có (mục 11) nhưng chưa có lần chạy đầy đủ nào. Chạy đủ A/B/C trên 2.311 bản ghi tốn khoảng 6.900 lượt gọi LLM (thêm OCR cho 489 ảnh ở Config C); vì vậy nên chạy tập pilot (150 câu) và tập cân bằng (1.203 câu) trước.
+* **Chưa có số liệu đánh giá cuối.** Hạ tầng chạy theo lô, tiếp tục và so sánh Gemini với Qwen2.5 đã có (mục 11) nhưng chưa có lần chạy đầy đủ nào. Chạy đủ A/B/C trên bộ 750 câu tốn khoảng 2.250 lượt gọi LLM (thêm OCR cho 376 ảnh ở Config C). Nên thử nhanh 5 câu bằng `--limit 5` trước khi chạy đủ.
 * **Truy xuất đoạn chưa được ablation đầu-cuối.** Mục 4.6 mới đo chất lượng truy xuất; chưa đo tác động lên nhãn an toàn và trích dẫn của câu trả lời. Kho đoạn lấy từ các tệp đã trích xuất, chưa chunk trực tiếp PDF gốc; citation recall tối đa hiện ~0,40.
 * **Mô hình cục bộ kém tuân thủ định dạng.** Qwen2.5 hay bỏ sót mã trích dẫn; đã có cơ chế gọi lại một lần nhưng tỷ lệ tuân thủ chưa được đo.
 * **Hạn mức Gemini tính theo project Google Cloud**, không theo khóa: nhiều khóa trong cùng một project dùng chung hạn mức.
@@ -772,7 +772,7 @@ Trong quá trình thực thi RAG (ở Cấu hình B và C), mô-đun [`modules/h
 * **Tầng QA động dùng quy tắc.** Nhận diện ý định và thực thể bằng biểu thức chính quy và registry phụ gia (400 mục, trong đó 50 mục có dữ liệu quy chuẩn đầy đủ trong KB). Câu hỏi diễn đạt lạ có thể bị nhận sai ý định.
 * **Retrieval vẫn chạy toàn bộ nguồn.** Ý định mới quyết định vết tra cứu và bằng chứng ghi cho LLM, chưa thật sự chọn công cụ để chạy.
 * **Một lượt hỏi.** Chưa có bộ nhớ phiên cho câu hỏi nối tiếp.
-* **Phép so sánh nhãn cũ/mới** của tầng QA động mới chạy trên mẫu 386/2.311 bản ghi và chỉ xét nhãn an toàn.
+* **Phép so sánh nhãn cũ/mới** của tầng QA động mới chạy trên mẫu 386 bản ghi lấy từ bản nguồn 2.311 (trước khi chốt bộ 750 câu) và chỉ xét nhãn an toàn.
 
 **Hướng phát triển**
 
@@ -792,13 +792,7 @@ Mục này mô tả cách chạy đánh giá khi hạn mức Gemini giới hạn
 
 ### 11.1. Tập câu hỏi và các biến môi trường
 
-| Tập | Tệp | Số câu | Dùng khi |
-| :--- | :--- | :---: | :--- |
-| Pilot | `data/qa_eval_pilot.jsonl` | 150 | Kiểm tra pipeline, so sánh sơ bộ, ablation nhanh. Tạo bằng `scripts_research/build_pilot_subset.py` (phân tầng theo lĩnh vực × nhãn, seed cố định). |
-| Cân bằng | `data/qa_eval_balanced.jsonl` | 1.203 | Số liệu chính thức cho cấu hình tốt nhất. |
-| Toàn bộ | `data/qa_benchmark.jsonl` | 2.311 | Mặc định của các script nếu không chỉ định tập khác. |
-
-**Mọi lệnh phải truyền cùng một tập** qua `--benchmark` (sinh dự đoán) hoặc `--gold` (đánh giá, so sánh); nếu quên, script dùng toàn bộ 2.311 bản ghi.
+Hệ thống chỉ có **một bộ đánh giá**: `data/foodhealthqa_eval_set.jsonl` (750 câu). Mọi script mặc định dùng bộ này, không cần truyền `--benchmark` hay `--gold`; nếu file bị thiếu, script báo lỗi thay vì chuyển sang bộ khác. Bản nguồn `data/qa_benchmark.jsonl` (2.311 bản ghi) chỉ dùng để dựng lại bộ 750 bằng `scripts_research/build_foodhealthqa_subset.py`.
 
 | Biến môi trường | Ý nghĩa |
 | :--- | :--- |
@@ -816,20 +810,20 @@ cd D:\FoodHealthQA__
 $env:PASSAGE_EMBEDDING = "bge-m3"     # tùy chọn: bật truy xuất dense
 
 # 1) Thử nhanh 5 câu (kiểm tra A, B, C chạy được)
-python scripts_research/generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider ollama --limit 5 --output-dir data/runs/smoke
+python scripts_research/generate_predictions.py --llm-provider ollama --limit 5 --output-dir data/runs/smoke
 
 # 2) Chạy đủ với Ollama (có thể để chạy nền; bị ngắt thì chạy lại đúng lệnh)
-python scripts_research/generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider ollama --resume
+python scripts_research/generate_predictions.py --llm-provider ollama --resume
 
 # 3) Chạy với Gemini, mỗi ngày một lần đến khi hết hạn mức; hôm sau chạy lại đúng lệnh
-python scripts_research/generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider gemini --resume
+python scripts_research/generate_predictions.py --llm-provider gemini --resume
 
 # 4) Xem tiến độ
-python scripts_research/generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider gemini --status
+python scripts_research/generate_predictions.py --llm-provider gemini --status
 
 # 5) Đánh giá từng mô hình (cần đủ A+B+C, không lỗi) và so sánh hai mô hình
-python scripts_research/run_evaluation.py --run-dir data/runs/ollama --gold data/qa_eval_pilot.jsonl
-python scripts_research/compare_providers.py --gold data/qa_eval_pilot.jsonl
+python scripts_research/run_evaluation.py --run-dir data/runs/ollama
+python scripts_research/compare_providers.py
 
 # 6) Đo tỷ lệ tuân thủ trích dẫn khi chạy lặp (B; 10 câu x 3 lần = 30 lượt gọi LLM)
 python scripts_research/measure_citation_compliance.py --llm-provider ollama --questions 10 --repeats 3

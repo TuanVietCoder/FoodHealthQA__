@@ -59,16 +59,13 @@ Số lượng test có thể thay đổi theo phiên bản; chỉ coi lần ch�
 ```powershell
 streamlit run app.py
 ```
-Trình duyệt sẽ tự động mở ứng dụng tại `http://localhost:8501`. Thanh bên trái có hai không gian làm việc; ứng dụng mở mặc định vào **Trải Nghiệm Demo**.
+Trình duyệt sẽ tự động mở ứng dụng tại `http://localhost:8501`. Ứng dụng chỉ có một màn hình **hỏi đáp phụ gia và dị nguyên từ ảnh nhãn** (pipeline cấu hình C: ảnh → OCR → normalization → retrieval → answer). Kết quả hiển thị trên một trang, theo thứ tự:
+1. **Ảnh nhãn và vùng chữ OCR đọc được** (khung xanh quanh từng dòng chữ).
+2. **Văn bản đã đọc**, kèm so sánh OCR thô và sau phục hồi chính tả.
+3. **Bảng chuẩn hóa gọn**: tên trên nhãn → thực thể chuẩn, mã INS/E, FoodOn CURIE, độ tin cậy.
+4. **Câu trả lời kèm trích dẫn đánh số `[1]`, `[2]`** bấm được, nhãn lĩnh vực của câu hỏi, và danh sách nguồn (tên tài liệu, mục/điều khoản, đoạn trích, URL, mức tin cậy của nguồn). Khi thiếu bằng chứng, hộp cảnh báo nêu rõ lý do (ảnh khó đọc, không nhận diện được thành phần, không truy xuất được đoạn bằng chứng, điểm tin cậy dưới 0,65).
 
-**1. 🔍 Trải Nghiệm Demo (Hỏi Đáp & Quét Nhãn)** — sản phẩm hỏi đáp từ ảnh bao bì. Mặc định chạy **Cấu hình C** (ảnh → OCR → normalization → retrieval → answer); có thể chọn A hoặc B, hoặc bật *Chế độ nghiên cứu* để chạy A/B/C cạnh nhau trên cùng một đầu vào. Các tab kết quả:
-- **🛡️ Đánh giá An toàn & Guardrail**: Kết luận cảnh báo y khoa, điểm tin cậy kép $S_{total}$, lời khuyên và câu trả lời LLM có trích dẫn (ở Cấu hình A, tab này là câu trả lời LLM không truy xuất).
-- **🧬 Chuẩn hóa Thực thể (FoodOntoRAG)** *(B, C)*: Bảng liên kết FoodOn CURIE, mã INS, chức năng và rationale.
-- **📝 Nhận diện OCR & Phục hồi Chính tả** *(chỉ C hiển thị OCR; A/B hiển thị văn bản đầu vào)*: Ảnh kèm Bounding Box màu xanh lá quanh từng dòng chữ, bảng đối chiếu OCR thô và văn bản sau sửa lỗi.
-
-**2. 🔬 Báo Cáo Nghiên Cứu (Ablation Study 3 Cấu Hình)** — dành cho phần nghiên cứu, gồm:
-- Dashboard thực nghiệm 3 cấu hình A/B/C, phân tích 4 miền chuyên môn, ma trận nhầm lẫn (Confusion Matrix) và độ lan truyền sai số (Error Propagation).
-- **📁 Tra cứu Đa nguồn Dữ liệu (Data Hub)**: Trình duyệt trực quan các tệp dữ liệu CSV/JSON (đặt dưới dashboard, dùng chung cho mọi cấu hình).
+Quy chuẩn ADI, sự cố thu hồi và cảnh báo chỉ hiện khi khớp phụ gia/dị nguyên được hỏi. Phần chi tiết kỹ thuật (bảng 4-Agent FoodOntoRAG đầy đủ, phả hệ FoodOn, từng dòng OCR, các đoạn bằng chứng đã truy xuất) nằm trong mục **🔧 Chi tiết kỹ thuật**. Cấu hình A và B chỉ dùng để đánh giá, chạy bằng `scripts_research/` và không có trong giao diện.
 
 ### 🧭 Cách hỏi đáp: QA động
 
@@ -86,8 +83,8 @@ Hệ thống đi theo hướng **QA động**: câu hỏi của người dùng q
 | Nhóm | Vị trí | Vai trò |
 | :--- | :--- | :--- |
 | **Cơ sở tri thức (KB) chuẩn hóa** | `knowledge_base/` | Phụ gia, thành phần, nhóm dị nguyên, thẻ nguồn (`sources/`). Pipeline nạp trực tiếp khi truy xuất. |
-| **Bảng tra cứu nguồn ngoài (Data Hub)** | `data/` (`P_*.csv` NHANES, `food*.csv`/`nutrient.csv` USDA, `incidents_train.csv`, `openfoodfacts_vietnam.csv`, `foodon_entities.json`, `nhanes_personas.csv`) | Dữ liệu tham chiếu, xem trong không gian "Báo Cáo Nghiên Cứu". |
-| **Bộ QA** | `data/foodhealthqa_eval_set.*` (chính, 750 câu); `data/qa_benchmark.*` (đầy đủ 2.311, dự phòng) | Câu hỏi, đáp án, nguồn, nhãn lĩnh vực. |
+| **Bảng tra cứu nguồn ngoài (Data Hub)** | `data/` (`P_*.csv` NHANES, `food*.csv`/`nutrient.csv` USDA, `incidents_train.csv`, `openfoodfacts_vietnam.csv`, `foodon_entities.json`, `nhanes_personas.csv`) | Dữ liệu tham chiếu của các tầng chuẩn hóa và đối soát; không có màn hình riêng trong giao diện. |
+| **Bộ QA** | `data/foodhealthqa_eval_set.*` (bộ đánh giá duy nhất, 750 câu); `data/qa_benchmark.*` (bản nguồn 2.311, chỉ để dựng bộ 750) | Câu hỏi, đáp án, nguồn, nhãn lĩnh vực. |
 | **Kết quả thí nghiệm** | `data/predictions_config_*.jsonl`, `data/evaluation_results.json`, `data/runs/`, `data/cache/` | Sinh ra bởi `scripts_research/`; có thể tạo lại. |
 
 Lưu ý: `data/additives_standard.csv` (10 dòng) chỉ là bảng đối soát nhỏ, **không** thay thế `knowledge_base/additives_standard.json` (50 mục, là nguồn KB chính mà pipeline dùng).
@@ -96,14 +93,14 @@ Lưu ý: `data/additives_standard.csv` (10 dòng) chỉ là bảng đối soát 
 
 ## 📊 Bộ QA Silver/Pre-Gold & Đánh Giá 3 Cấu Hình
 
-Bộ dùng để **đánh giá và demo** là **`data/foodhealthqa_eval_set.jsonl`** (bản CSV: `foodhealthqa_eval_set.csv`): **750 câu hỏi–đáp**, gắn với **376 ảnh nhãn** và 7 nhóm persona. Bộ này là tập con phân tầng của bộ đầy đủ **`data/qa_benchmark.jsonl`** (2.311 câu, 489 ảnh); cả 750 câu có cùng mã và cùng đáp án với bản đầy đủ. **Bộ 2.311 câu chỉ lưu dự phòng và làm nguồn dựng bộ con**, không dùng để chấm điểm (xem `primary_evaluation_set` trong `data/benchmark_manifest.json`). Cả hai đều là bộ **silver kiểm chứng bằng quy tắc, không có chuyên gia** (`expert_validated = false`): không dùng để tuyên bố hiệu năng trên gold standard.
+Bộ **đánh giá duy nhất** của hệ thống là **`data/foodhealthqa_eval_set.jsonl`** (bản CSV: `foodhealthqa_eval_set.csv`): **750 câu hỏi–đáp**, gắn với **376 ảnh nhãn** và 7 nhóm persona. Bộ này là tập con phân tầng của bản nguồn `data/qa_benchmark.jsonl` (2.311 câu, 489 ảnh), cùng mã và cùng đáp án; bản nguồn **chỉ dùng để dựng bộ 750** (`scripts_research/build_foodhealthqa_subset.py`), không dùng để chấm điểm hay demo (xem `primary_evaluation_set` trong `data/benchmark_manifest.json`). Đây là bộ **silver kiểm chứng bằng quy tắc, không có chuyên gia** (`expert_validated = false`): không dùng để tuyên bố hiệu năng trên gold standard. Mô tả đầy đủ (cách dựng, phân bố, nguồn dẫn chứng, giới hạn): [docs/MO_TA_BO_DANH_GIA_750_CAU.md](docs/MO_TA_BO_DANH_GIA_750_CAU.md).
+- Mô tả cấu trúc và phân bố: [docs/MO_TA_BO_DANH_GIA_750_CAU.md](docs/MO_TA_BO_DANH_GIA_750_CAU.md). Cách tạo và kiểm chứng: [docs/BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md](docs/BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md).
 
 - Mọi bản ghi đều có nguồn tra cứu đã kiểm chứng nguyên văn; bản ghi không có nguồn đã bị loại khỏi bộ (xem báo cáo).
 - Mọi bản ghi tính điểm (`eligible_for_scoring = yes`) và đã qua 6 cổng kiểm tra G1–G6; các thẻ nguồn nằm trong `knowledge_base/sources/catalog/source_citation_catalog.json`.
 - Cột `gold_safety_label` dùng 5 nhãn của app; nhãn mịn nằm ở `label_v5`.
 - Mỗi bản ghi có `split_group` (một ảnh = một nhóm; chia train/test và lấy mẫu lại theo trường này) và `template_id` (dạng câu hỏi). Tier `core` (1.498) dùng để so sánh chính, `silver` (813) báo riêng. Báo cáo kết quả bằng `python scripts_research/benchmark_report.py [--predictions file.jsonl]` (theo domain/tier, macro-F1, baseline nhãn đa số, khoảng tin cậy theo ảnh).
 - 753 bản ghi dị ứng có thêm cột `persona_conditions` / `persona_conditions_vi` để dựng danh sách dị ứng đúng với tên persona (trước đó 143/753 bản ghi bị lệch). Các chỉ số của nhóm dị ứng tính trước thay đổi này không còn giá trị và cần chạy lại.
-- Chi tiết, giới hạn và lịch sử: [docs/BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md](docs/BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md).
 
 - **Phân bổ 4 miền chuyên môn:**
   - `vulnerable_groups`: 712 câu
@@ -121,9 +118,9 @@ Bộ dùng để **đánh giá và demo** là **`data/foodhealthqa_eval_set.json
 | **Normalization/Retrieval/Guardrail** | Không | Có | Có — cùng mã xử lý với B |
 | **Nhãn đánh giá** | Do LLM sinh | Do guardrail sinh | Do guardrail sinh |
 
-> Bộ chấm mặc định là bộ 750 câu `data/foodhealthqa_eval_set.jsonl` (cả `generate_predictions.py` và `run_evaluation.py`). Các chỉ số là số liệu theo nhãn kiểm chứng bằng quy tắc, không phải hiệu năng gold-standard. **Mọi lệnh phải dùng cùng một tập** (`--benchmark` khi sinh dự đoán, `--gold` khi chấm hoặc so sánh); chỉ truyền `data/qa_benchmark.jsonl` khi cố ý chạy trên bản đầy đủ.
+> Mọi script (`generate_predictions.py`, `run_evaluation.py`, `compare_providers.py`, `eval_passage_retrieval.py`...) mặc định dùng bộ 750 câu `data/foodhealthqa_eval_set.jsonl`; nếu file thiếu, script báo lỗi thay vì chuyển sang bộ khác. Các chỉ số là số liệu theo nhãn kiểm chứng bằng quy tắc, không phải hiệu năng gold-standard.
 
-**Nhãn mẫu và đầu vào tự nhập.** Trên giao diện, A và B nhận văn bản thành phần (chọn nhãn mẫu hoặc tự nhập, không hiển thị ảnh), C nhận ảnh (ảnh mẫu hoặc tải lên). Chỉ nhãn mẫu mới có ảnh đối chiếu cho phép so sánh A–B–C; đầu vào tự nhập dùng để thử nghiệm. Chi tiết: mục 3.3 của `docs/QUY_TRINH_3_CAU_HINH_HE_THONG.md`.
+**Đầu vào của từng cấu hình khi chấm.** A và B nhận văn bản thành phần lấy từ annotation của ảnh mẫu (không OCR); C nhận chính ảnh và chạy OCR. Chi tiết: mục 3.3 của `docs/QUY_TRINH_3_CAU_HINH_HE_THONG.md`.
 
 **Cấu hình mô hình và truy xuất (biến môi trường / `.env`):**
 
@@ -140,18 +137,18 @@ Bộ dùng để **đánh giá và demo** là **`data/foodhealthqa_eval_set.json
 Toàn bộ script nghiên cứu khoa học được lưu tại thư mục `scripts_research/`:
 
 ```powershell
-# 0. Tạo tập pilot phân tầng 150 câu (từ qa_eval_balanced.jsonl; seed cố định)
-.\venv\Scripts\python.exe .\scripts_research\build_pilot_subset.py
+# 0. (Tùy chọn) Dựng lại bộ 750 câu từ bản nguồn v5
+.\venv\Scripts\python.exe .\scripts_research\build_foodhealthqa_subset.py
 
 # 1. Sinh dự đoán A/B/C. Chọn mô hình: --llm-provider gemini (mặc định) hoặc ollama (Qwen2.5 cục bộ).
 #    Kết quả ghi vào data/runs/<provider>/. --resume chạy tiếp (chạy lại bản ghi lỗi); dừng sạch khi hết hạn mức Gemini.
-.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider ollama --resume
-.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider gemini --resume
-.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --benchmark data/qa_eval_pilot.jsonl --llm-provider gemini --status
+.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --llm-provider ollama --resume
+.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --llm-provider gemini --resume
+.\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --llm-provider gemini --status
 
 # 2. Chấm đủ A/B/C cho từng mô hình, rồi so sánh Gemini với Qwen2.5 trên cùng tập câu hỏi
-.\venv\Scripts\python.exe .\scripts_research\run_evaluation.py --run-dir data/runs/ollama --gold data/qa_eval_pilot.jsonl
-.\venv\Scripts\python.exe .\scripts_research\compare_providers.py --gold data/qa_eval_pilot.jsonl
+.\venv\Scripts\python.exe .\scripts_research\run_evaluation.py --run-dir data/runs/ollama
+.\venv\Scripts\python.exe .\scripts_research\compare_providers.py
 
 # 3. Đo sai số nhận diện OCR (CER/WER) và độ chính xác bóc tách
 .\venv\Scripts\python.exe .\scripts_research\compute_ocr_metrics.py
@@ -172,7 +169,7 @@ Toàn bộ script nghiên cứu khoa học được lưu tại thư mục `scrip
 
 ```text
 d:\FoodHealthQA__\
-├── app.py                         # Giao diện chính Streamlit (2 không gian: Demo hỏi đáp từ ảnh & Báo cáo Nghiên cứu gồm Ablation, Data Hub)
+├── app.py                         # Giao diện Streamlit: demo hỏi đáp phụ gia/dị nguyên từ ảnh nhãn (cấu hình C)
 ├── .streamlit/config.toml         # Giao diện sáng, bảng màu teal
 ├── requirements.txt               # Khai báo thư viện (Streamlit, PaddleOCR, Pandas, Pillow, OpenCV...)
 ├── README.md                      # Tài liệu kỹ thuật và hướng dẫn vận hành
@@ -181,14 +178,14 @@ d:\FoodHealthQA__\
 │   ├── images/                    # Kho ảnh; 489 ảnh đang được benchmark tham chiếu
 │   └── labels/                    # Nhãn bóc tách ground-truth tương ứng
 ├── data/                          # Kho dữ liệu tích hợp đa nguồn
-│   ├── benchmark_manifest.json    # Ghi bộ đánh giá chính (750 câu) và bản đầy đủ dự phòng (v5)
-│   ├── foodhealthqa_eval_set.jsonl # BỘ ĐÁNH GIÁ CHÍNH: 750 câu QA (kèm .csv và _summary.json)
-│   ├── qa_benchmark.jsonl         # Bản đầy đủ 2.311 câu, chỉ lưu dự phòng / nguồn dựng bộ con
+│   ├── benchmark_manifest.json    # Ghi bộ đánh giá duy nhất (750 câu) và bản nguồn v5
+│   ├── foodhealthqa_eval_set.jsonl # BỘ ĐÁNH GIÁ DUY NHẤT: 750 câu QA (kèm .csv và _summary.json); mặc định của mọi script
+│   ├── qa_benchmark.jsonl         # Bản nguồn 2.311 câu, chỉ dùng để dựng bộ 750, không dùng để đánh giá
 │   ├── qa_benchmark.csv           # Cùng nội dung bản đầy đủ, định dạng CSV
 │   ├── build/                     # Tệp trung gian của quy trình dựng (đầu vào, bản đầy đủ, kiểm tra từng bản ghi)
 │   ├── runs/                      # Kết quả theo mô hình: gemini/, ollama/ (predictions_config_*.jsonl, run_log.jsonl), comparison.md|json
 │   ├── cache/                     # Bộ nhớ đệm embedding bge-m3 (embeddings_bge-m3.npz)
-│   ├── qa_eval_balanced.jsonl     # Tập cân bằng 1.203 câu; qa_eval_pilot.jsonl: tập pilot 150 câu
+│   ├── archive/retired_eval_sets/ # Các tập đã ngừng dùng (cân bằng 1.203, pilot 150) và script/test dựng chúng, chỉ lưu để tham khảo
 │   ├── evaluation_results.json    # Kết quả đo 3 cấu hình A, B, C (CHƯA CÓ: tạo bằng generate_predictions.py rồi run_evaluation.py; kết quả theo mô hình nằm ở data/runs/<provider>/)
 │   ├── _backup_pre_persona_conditions/  # Bản benchmark trước khi thêm persona_conditions (kèm SHA256.txt)
 │   ├── foodon_entities.json       # Danh mục bản thể học FoodOn CURIE
@@ -222,13 +219,13 @@ d:\FoodHealthQA__\
 │   ├── generate_predictions.py    # Sinh câu trả lời bằng Gemini hoặc Qwen2.5 (Ollama); chạy theo lô, resume, --status
 │   ├── run_evaluation.py          # Đánh giá tự động 3 cấu hình và xuất ma trận nhầm lẫn (--run-dir cho từng mô hình)
 │   ├── compare_providers.py       # So sánh Gemini và Qwen2.5 trên cùng tập câu hỏi (bootstrap theo cặp)
-│   ├── build_pilot_subset.py      # Tạo tập pilot phân tầng
 │   ├── eval_passage_retrieval.py  # Đo truy xuất đoạn: INS hit, locator hit, citation recall
 │   ├── measure_citation_compliance.py  # Đo tuân thủ trích dẫn và thẻ nguồn lạ khi chạy lặp
 │   ├── compute_ocr_metrics.py     # Đo lường sai số OCR CER/WER
 │   └── benchmark_report.py        # Báo cáo cân bằng nhãn, baseline, macro-F1, khoảng tin cậy
 ├── docs/                          # Báo cáo chuyên sâu
+│   ├── MO_TA_BO_DANH_GIA_750_CAU.md           # Mô tả bộ đánh giá 750 câu
 │   ├── QUY_TRINH_3_CAU_HINH_HE_THONG.md       # Báo cáo quy trình chi tiết 3 cấu hình
-│   └── BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md # Báo cáo kiểm chứng nguồn và trạng thái benchmark
-└── tests/                         # Bộ kiểm thử tự động (244 test đạt tại 2026-11-12, gồm test_dynamic_qa.py, test_passage_retriever.py, test_dense_retrieval.py, test_llm_provider.py, test_llm_keys.py, test_compare_runner.py, test_citation_compliance.py)
+│   └── BAO_CAO_DANH_GIA_BENCHMARK_CHUNG_CU.md # Cách tạo và kiểm chứng bộ 750 câu
+└── tests/                         # Bộ kiểm thử tự động (282 test đạt tại 2026-11-13, gồm test_dynamic_qa.py, test_passage_retriever.py, test_dense_retrieval.py, test_llm_provider.py, test_llm_keys.py, test_compare_runner.py, test_citation_compliance.py)
 ```

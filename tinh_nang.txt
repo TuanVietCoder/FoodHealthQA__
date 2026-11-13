@@ -1,6 +1,6 @@
 # BẢN MÔ TẢ CHI TIẾT TÍNH NĂNG VÀ KIẾN TRÚC HỆ THỐNG FOODHEALTHQA
 
-Ứng dụng FoodHealthQA được thiết kế theo kiến trúc 5 tầng. Bộ QA chuẩn hiện hành (v5, silver kiểm chứng bằng quy tắc, chưa có chuyên gia) có 1.870 câu hỏi–trả lời, tham chiếu 489 ảnh nhãn và 7 nhóm persona.
+Ứng dụng FoodHealthQA được thiết kế theo kiến trúc 5 tầng. Bộ QA đánh giá duy nhất của hệ thống (silver kiểm chứng bằng quy tắc, chưa có chuyên gia) có 750 câu hỏi–trả lời, tham chiếu 376 ảnh nhãn và 7 nhóm persona.
 
 ---
 
@@ -67,62 +67,41 @@
 ### 5. Tầng 5: Giao diện Người dùng & Tương tác Thử nghiệm (Streamlit Interactive Hub)
 Giao diện Web tương tác được tổ chức hiện đại, trực quan với **Cột Điều khiển Đầu vào (Input Panel)** và **Dashboard Kết quả Đa chiều (5 Tabs chuyên sâu)**:
 
-#### A. Cột Điều khiển Đầu vào (Sidebar / Input Panel)
-* **Chế độ Chọn nhãn sản phẩm thực nghiệm:** Cho phép lựa chọn ảnh bao bì và nhãn bóc tách chuẩn; benchmark hiện tham chiếu **489 ảnh**.
-* **Chế độ Tải ảnh nhãn tùy ý:** Người dùng tải ảnh bao bì từ máy tính cá nhân để phân tích trực tiếp.
-* **Chọn Hồ sơ Sức khỏe Lâm sàng (User Persona):** Lựa chọn giữa Người khỏe mạnh bình thường, Bệnh thận mạn (CKD), Đái tháo đường Type 2, Tăng huyết áp, Trẻ em < 12 tuổi, Phụ nữ mang thai, Dị ứng Đậu nành, Dị ứng Gluten, v.v.
-* **Tích hợp Bộ câu hỏi Benchmark v5 (1.870 câu):**
-  * Hộp dropdown tự động nạp và lọc danh sách các câu hỏi chuẩn đối với đúng sản phẩm đang chọn.
-  * Khi chọn một câu hỏi gợi ý, hệ thống tự động điền nội dung câu hỏi vào ô nhập và **tự động chuyển Persona** tương ứng với ngữ cảnh câu hỏi.
-* **Nhập câu hỏi tự do:** Cho phép người dùng đặt câu hỏi bằng ngôn ngữ tự nhiên.
+#### A. Cột Điều khiển Đầu vào
+* **Chọn ảnh nhãn mẫu:** Chọn ảnh bao bì có sẵn kèm nhãn bóc tách chuẩn; bộ đánh giá 750 câu tham chiếu **376 ảnh**.
+* **Tải ảnh nhãn tùy ý:** Người dùng tải ảnh bao bì từ máy tính để phân tích trực tiếp.
+* **Chọn Hồ sơ Sức khỏe (User Persona):** Người khỏe mạnh, bệnh thận mạn (CKD), đái tháo đường, tăng huyết áp, trẻ em, phụ nữ mang thai, dị ứng thực phẩm, v.v.
+* **Nhập câu hỏi tự do:** Người dùng đặt câu hỏi bằng ngôn ngữ tự nhiên về phụ gia hoặc dị nguyên. Câu hỏi và đáp án của bộ QA không đi vào giao diện.
+* **Chọn mô hình sinh câu trả lời:** Gemini hoặc Qwen2.5 chạy cục bộ qua Ollama.
 
-#### B. Dashboard Kết quả Đa chiều (5 Tabs)
-* **Tab 1: Guardrail & Tư vấn Sức khỏe Cá nhân hóa:**
-  * Banner trạng thái an toàn 4 cấp độ (SAFE / CAUTION / WARNING / CRITICAL_ALERT).
-  * Điểm tin cậy kép $S_{total}$ và thanh đo độ tin cậy thị giác/truy xuất.
-  * Câu trả lời tư vấn chi tiết từ LLM với trích dẫn quy chuẩn pháp lý minh bạch (`[VN_TT24_2019]`, `[CODEX_STAN_192_1995]`, `[JECFA_EVALUATIONS]`, `[US_FDA_FALCPA]`, ...).
-  * Định lượng dinh dưỡng FNDDS và lịch sử cảnh báo thu hồi từ Food Hazard Detector.
-  * **🎯 Hộp Mở rộng Đối chiếu với Đáp án Chuẩn Đối chứng (Benchmark Gold Reference) (Benchmark Gold Reference):**
-    * So sánh trực quan Nhãn An toàn Dự đoán vs Nhãn Chuẩn (*Gold Safety Label*).
-    * Hiển thị câu trả lời chuẩn đối chứng từ quy chuẩn (*Reference Answer*).
-    * Danh mục nguồn văn bản quy chuẩn gốc (*Source Citations*).
-    * Ghi chú thẩm định y khoa lâm sàng của chuyên gia (*Expert Review Notes*).
-* **Tab 2: Chuẩn hóa Bản thể học Thực phẩm (FoodOntoRAG Normalization):**
-  * Bảng chuẩn hóa từng thành phần và phụ gia bóc tách được.
-  * Mã định danh FoodOn CURIE (`FOODON:...`), mã INS/E-number, chức năng công nghệ thực phẩm.
-  * Điểm tin cậy liên kết $\tau \in [0.0, 1.0]$ và căn cứ suy luận (*Rationale*).
-* **Tab 3: Bóc tách Thị giác & OCR Bounding Box:**
-  * Hiển thị ảnh chụp bao bì gốc đã được vẽ các khung chữ nhật Bounding Box màu xanh lá quanh từng dòng văn bản phát hiện được bởi DBNet.
-  * Bảng đối chiếu song song giữa Văn bản OCR thô (*Raw OCR*) và Văn bản sau khi phục hồi chính tả (*Post-OCR Lexical Normalized*).
-* **Tab 4: Bộ duyệt Tri thức & Dữ liệu Nền tảng (Data Hub):**
-  * Bộ tra cứu trực quan tương tác 16 tệp dữ liệu CSV/JSON nền tảng của hệ thống (Quy chuẩn phụ gia, mã INS, Food Hazard incidents, bảng phân tích dinh dưỡng FNDDS, chỉ số sinh hóa NHANES).
-* **Tab 5: Nghiên cứu Thực nghiệm & Ablation Study Dashboard:**
-  * **Metric Cards Tổng quan:** Chỉ hiển thị kết quả khi đủ 1.870 prediction thật của cả A/B/C; file chạy thiếu hoặc lỗi bị chặn.
-  * **Bảng Ma trận So sánh 3 Cấu hình Thực nghiệm:**
-    * *Config A (LLM Không truy xuất / No-RAG):* EM = 0.0%, F1 = 6.0%, Safety Score = 0.11.
-    * *Config B (Text Gold RAG):* dùng Ground Truth text và pipeline downstream chuẩn.
-    * *Config C (OCR RAG):* dùng PaddleOCR + VietOCR rồi gọi đúng cùng pipeline downstream của B.
-  * **Phân tích Lan truyền Lỗi:** Chỉ tính chênh lệch B–C sau khi có kết quả chạy thật đầy đủ.
-  * **Bảng & Biểu đồ Phân tích Theo 4 Miền Chuyên môn:** Đánh giá chi tiết trên `additive_regulation` (414 câu), `allergen_detection` (446 câu), `insufficient_data` (1.146 câu), và `vulnerable_groups` (319 câu).
-  * **Ma trận Nhầm lẫn Tương tác (Interactive Confusion Matrix):** Phân tích chi tiết sự chuyển dịch giữa các nhãn cảnh báo (SAFE, CAUTION, WARNING, CRITICAL_ALERT, ABSTAIN).
-  * **4 Khía cạnh Phân tích Thành phần (Ablation Study Sub-tabs):**
-    1. *Retriever Strategy:* So sánh Hybrid (BM25 + FAISS) vs Dense-only vs Sparse-only.
-    2. *Top-K Documents:* Đánh giá ảnh hưởng của tham số $K \in \{1, 3, 5, 10\}$.
-    3. *Embedding Models:* Đánh giá all-MiniLM-L6-v2 vs BGE-small-en vs Sentence-BERT.
-    4. *Prompt Engineering & Grounding:* Đánh giá vai trò của CoT, Guardrail Verification và Few-shot.
+#### B. Màn hình Kết quả (một trang, cấu hình C)
+Ứng dụng chỉ chạy pipeline đầy đủ (cấu hình C); cấu hình A/B và dashboard ablation chỉ dùng để đánh giá bằng `scripts_research/`, không có trong giao diện. Kết quả hiển thị theo thứ tự:
+1. **Ảnh nhãn và vùng chữ OCR:** ảnh bao bì vẽ khung xanh quanh từng dòng chữ DBNet phát hiện được.
+2. **Văn bản đã đọc:** so sánh văn bản OCR thô và văn bản sau phục hồi chính tả.
+3. **Bảng chuẩn hóa gọn:** chữ trên nhãn → thực thể chuẩn, mã INS/E, FoodOn CURIE, độ tin cậy liên kết $\tau$.
+4. **Câu trả lời và dẫn chứng:**
+   * Banner trạng thái an toàn và nhãn lĩnh vực của câu hỏi (cùng bộ 4 nhãn với dataset).
+   * Câu trả lời có trích dẫn đánh số `[1]`, `[2]` bấm được; rê chuột hiện tên tài liệu và mục.
+   * Danh sách nguồn: tên tài liệu (kèm URL), mục/điều khoản, đoạn trích gốc, mức tin cậy của nguồn.
+   * Hộp cảnh báo "chưa đủ bằng chứng" nêu rõ lý do (ảnh khó đọc, không nhận diện được thành phần, không truy xuất được đoạn bằng chứng, điểm tin cậy dưới 0,65).
+   * Cảnh báo, bảng ADI/TT 24/2019 và sự cố thu hồi chỉ hiện khi khớp phụ gia hoặc dị nguyên được hỏi.
+5. **🔧 Chi tiết kỹ thuật (thu gọn):** bảng 4-Agent FoodOntoRAG đầy đủ, phả hệ FoodOn, từng dòng OCR, đoạn bằng chứng đã truy xuất, và các đối soát phụ (FNDDS, NHANES, Open Food Facts).
+
+#### C. Chấm điểm ngoài giao diện
+Bộ **750 câu** (`data/foodhealthqa_eval_set.jsonl`) là bộ đánh giá duy nhất, phân bố theo miền: `additive_regulation` (126 câu), `allergen_detection` (138 câu), `insufficient_data` (67 câu), `vulnerable_groups` (419 câu). Việc chạy 3 cấu hình A/B/C và ablation do `generate_predictions.py`, `run_evaluation.py` và các script trong `scripts_research/` thực hiện; số liệu chỉ có giá trị khi đủ 750 dự đoán thật cho mỗi cấu hình.
 
 ---
 
 ## II. NGUỒN TRI THỨC VÀ CƠ SỞ DỮ LIỆU TÍCH HỢP
 
-1. **Bộ Dữ liệu Nhãn Thực tế:** Kho ảnh và nhãn ground-truth; 489 ảnh đang được benchmark hiện hành tham chiếu.
+1. **Bộ Dữ liệu Nhãn Thực tế:** Kho ảnh và nhãn ground-truth; 376 ảnh được bộ đánh giá 750 câu tham chiếu.
 2. **NHANES (CDC Hoa Kỳ) & FNDDS (USDA) — Hồ Sơ Lâm Sàng & Dinh Dưỡng:** Xây dựng hồ sơ bệnh nhân thực tế (chỉ số sinh hóa HbA1c, glucose, huyết áp, ure/BUN) và liên kết giá trị dinh dưỡng định lượng theo chuẩn đối sánh NGQA.
 3. **Codex Alimentarius (GSFA) & JECFA (FAO/WHO) — Quy Chuẩn Phụ Gia Quốc Tế:** Cung cấp mã định danh quốc tế (mã INS), mức giới hạn tối đa (ML), nguyên tắc Thực hành sản xuất tốt (GMP) và ngưỡng nạp an toàn hàng ngày (ADI).
 4. **EFSA Opinions (Cơ quan An toàn Thực phẩm Châu Âu):** Cung cấp các bằng chứng y học cập nhật về rủi ro sức khỏe đối với các nhóm đối tượng nhạy cảm (trẻ nhỏ, phụ nữ mang thai).
 5. **Văn Bản Quy Chuẩn Việt Nam (Bộ Y Tế):** Thông tư 24/2019/TT-BYT quy định về quản lý và sử dụng phụ gia thực phẩm tại Việt Nam.
 6. **Bản Thể Học FoodOn (Food Ontology):** Trích xuất cây phân cấp phả hệ các thực thể phụ gia và nguyên liệu để lấy mã định danh CURIE chuẩn quốc tế.
 7. **Dữ liệu Báo cáo Sự cố & Mối nguy Thực phẩm (Food Hazard & Incident Dataset):** Kế thừa 5.082 báo cáo sự cố an toàn thực phẩm từ dự án Food Hazard Detector nhằm phát hiện nguy cơ nhiễm chéo hoặc dị nguyên ẩn ngoài thông tin nhãn.
-8. **FoodHealthQA QA v5 (silver):** 1.870 cặp câu hỏi–đáp án trong tệp hiện hành, kèm persona, nhãn an toàn và trường nguồn phục vụ chấm điểm.
+8. **FoodHealthQA bộ đánh giá (silver):** 750 cặp câu hỏi–đáp án, kèm persona, nhãn an toàn và trường nguồn phục vụ chấm điểm.
 
 ---
 
@@ -135,7 +114,7 @@ Giao diện Web tương tác được tổ chức hiện đại, trực quan v�
 * Tìm hiểu và ứng dụng Food QA, Knowledge Graph, RAG, Ontology, Entity Linking và Grounded Generation.
 * Phân tích NGQA về nutritional QA, FoodOntoRAG về chuẩn hóa thực thể và Food Hazard Detector về RAG trong food safety.
 * Xây dựng Knowledge Base chuẩn hóa gồm thành phần, phụ gia, mã INS/E-number, chức năng công nghệ, ADI, dị ứng và nhóm nguy cơ.
-* Bộ benchmark v5 (silver) hiện gồm **1.870 câu hỏi–trả lời** trên 4 miền: an toàn phụ gia, dị ứng, nhóm nhạy cảm và từ chối khi thiếu dữ liệu.
+* Bộ đánh giá (silver) gồm **750 câu hỏi–trả lời** trên 4 miền: an toàn phụ gia, dị ứng, nhóm nhạy cảm và từ chối khi thiếu dữ liệu.
 * Xây dựng và đo lường 3 cấu hình thử nghiệm:
   $$\text{Config A: LLM Không truy xuất} \longrightarrow \text{Config B: RAG từ nhãn chuẩn} \longrightarrow \text{Config C: OCR RAG (Pipeline quang học)}.$$
 * Đánh giá chi tiết ảnh hưởng của lỗi OCR và lỗi chuẩn hóa thành phần đến chất lượng câu trả lời (*Error Propagation Analysis*).
@@ -146,8 +125,8 @@ Giao diện Web tương tác được tổ chức hiện đại, trực quan v�
 
 ### 3. Sản phẩm mục tiêu hoàn thiện
 1. **Knowledge Base:** Kho tri thức đa nguồn về phụ gia, thành phần, dinh dưỡng và an toàn thực phẩm (Codex, TT24/2019/TT-BYT, JECFA, FALCPA, FNDDS, NHANES, Food Hazard).
-2. **Bộ dữ liệu FoodHealthQA Benchmark v5 (silver, chưa có chuyên gia):** Gồm 1.870 bản ghi có cấu trúc trong phiên bản hiện hành.
+2. **Bộ dữ liệu FoodHealthQA (silver, chưa có chuyên gia):** Bộ đánh giá duy nhất gồm 750 bản ghi có cấu trúc, tập con phân tầng của bản nguồn v5.
 3. **Mã nguồn Source Code Pipeline hoàn chỉnh:** Luồng khép kín từ `Ảnh nhãn bao bì` $\rightarrow$ `OCR chuyên sâu` $\rightarrow$ `Chuẩn hóa Thực thể Đa tác tử FoodOntoRAG` $\rightarrow$ `Truy xuất Tri thức Lai Hybrid RAG` $\rightarrow$ `Sinh câu trả lời Grounded Generation & Guardrail An toàn`.
-4. **Giao diện Web Demo Tương tác Thông minh (Streamlit Hub):** Hỗ trợ tra cứu, quét ảnh, gợi ý câu hỏi benchmark theo từng sản phẩm, đối chiếu song song với đáp án chuẩn đối chứng (Gold Reference), và trực quan hóa toàn diện kết quả Ablation Study 3 cấu hình.
+4. **Giao diện Web Demo Tương tác Thông minh (Streamlit Hub):** Hỏi đáp phụ gia và dị nguyên từ ảnh nhãn: hiển thị ảnh với khung OCR, văn bản đã đọc, bảng chuẩn hóa và câu trả lời kèm trích dẫn đánh số, danh sách nguồn và lý do khi thiếu bằng chứng.
 Dùng PaddleOCR cho bước Text Detection: Tận dụng mô hình DBNet cực nhanh của PaddleOCR để tìm và cắt chính xác các hộp chứa chữ (bounding boxes) trên ảnh hoá đơn hoặc bao bì.
 Dùng VietOCR cho bước Text Recognition: Đưa các ảnh hộp chữ vừa cắt được vào VietOCR để đọc ra văn bản tiếng Việt với độ chính xác cao nhất.

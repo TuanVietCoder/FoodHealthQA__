@@ -1,280 +1,221 @@
-# Báo cáo Kiểm chứng Nguồn và Trạng thái Benchmark FoodHealthQA
+# Báo cáo Cách Tạo và Kiểm chứng Bộ Đánh giá FoodHealthQA (750 câu)
+
+Báo cáo này trả lời hai câu hỏi: **bộ 750 câu được tạo ra như thế nào** (mục 1) và **đáp án, nhãn của nó được kiểm chứng ra sao, dựa trên nguồn nào, còn giới hạn gì** (mục 2 trở đi). Cấu trúc bản ghi và các bảng phân bố nằm ở [MO_TA_BO_DANH_GIA_750_CAU.md](MO_TA_BO_DANH_GIA_750_CAU.md); báo cáo này không lặp lại các bảng đó.
 
 | Thuộc tính | Giá trị |
 |---|---|
-| Phiên bản active | **v5** (phân tầng, kiểm chứng câu trả lời bằng quy tắc, chỉ giữ bản ghi có nguồn kiểm chứng) |
-| Cập nhật lần cuối | 2026-11-09 |
-| Trạng thái | **Silver kiểm chứng bằng quy tắc, không có chuyên gia** (`expert_validated = false`, không đủ điều kiện gold) |
-| Số bản ghi | **2.311**, trong đó **2.311 tính điểm** (không còn bản ghi "giữ để kiểm toán") |
-| Số nhãn bao bì | 493 tệp `assets/labels/*.json` ứng với 493 ảnh `assets/images/*.jpeg`; bộ benchmark dùng 489 ảnh |
-| Tệp chuẩn duy nhất | [qa_benchmark.csv](../data/qa_benchmark.csv) / [qa_benchmark.jsonl](../data/qa_benchmark.jsonl) |
-| Tệp kiểm toán (trong `data/build/`) | [bản dựng đầy đủ](../data/build/qa_build_full.jsonl), [fix list](../data/build/qa_fix_list.csv), [kiểm tra từng bản ghi](../data/build/qa_verification.csv), [activation report](../data/build/qa_activation_report.json) |
+| Bộ được kiểm chứng | `data/foodhealthqa_eval_set.{jsonl,csv}`: **750 câu**, **376 ảnh nhãn** (bộ đánh giá duy nhất của hệ thống) |
+| Xuất xứ | Tập con của bản nguồn v5 (2.311 bản ghi, `data/qa_benchmark.*`); cùng mã câu hỏi và cùng đáp án với bản nguồn, nên thừa hưởng toàn bộ kiểm chứng của bản nguồn |
+| Trạng thái | **Silver kiểm chứng bằng quy tắc, không có chuyên gia** (`expert_validated = false`; không đủ điều kiện gold) |
+| Phương pháp kiểm chứng | `rule_based_gates_G1_G6_plus_label_text_adjudication` (750/750 bản ghi) |
+| Cập nhật lần cuối | 2026-11-13 |
 | Mục đích sử dụng | Phát triển hệ thống và đánh giá độ trung thực/an toàn; **chưa thay thế tư vấn y khoa lâm sàng** |
-| Kiểm thử | 244 test tự động đều qua (cập nhật 2026-11-12); 0/2.311 bản ghi trượt các cổng G1–G6 |
 
-> **Nguyên tắc từ phiên này:** một bản ghi không có nguồn tra cứu kiểm chứng được thì **không** đưa vào bộ QA, vì bộ QA là chuẩn để chấm hệ thống. Vì vậy 303 bản ghi của v4/v5 cũ đã bị loại (mục 6).
-
-Mục 1–4 mô tả v4 (lịch sử, không còn active). Mục 5 trở đi mô tả v5 hiện hành.
-
-**Một bộ chuẩn duy nhất.** Chỉ có `data/qa_benchmark.csv` / `.jsonl` được dùng để đánh giá. Cấu trúc thư mục dữ liệu:
-
-| Vị trí | Nội dung | Dùng để đánh giá? |
-|---|---|---|
-| `data/qa_benchmark.{csv,jsonl}` | Bộ chuẩn (v5, 2.311 bản ghi) | **Có** |
-| `data/benchmark_manifest.json` | Chỉ ghi bộ chuẩn hiện hành | — |
-| `data/build/` | Tệp trung gian của quy trình dựng: đầu vào đã kiểm nguồn, bản dựng đầy đủ, danh sách sửa, kiểm tra từng bản ghi, báo cáo kích hoạt | Không |
-
-Chạy lại quy trình: `create_benchmark_v5.py` → `verify_v5_answers.py` → `finalize_benchmark_v5.py` (từ 5.10: chạy thêm `add_authority_records_v5.py` trước `create_benchmark_v5.py`; đọc `data/build/qa_input_source_verified.*`, ghi `data/build/*` và `data/qa_benchmark.*`).
-
-> **Cập nhật 2026-11-11 (persona dị ứng).** Hàm dựng persona trước đó suy ra danh sách dị ứng bằng cách quét từ khóa trong câu hỏi vì bản ghi không có trường `persona_conditions`; kết quả là 143/753 bản ghi dị ứng có danh sách lệch tên persona (141 thừa, 3 thiếu, 1 rơi về danh sách chung). Bản benchmark hiện hành đã thêm hai cột `persona_conditions` và `persona_conditions_vi` cho 753 bản ghi dị ứng (tạo bằng `scripts_research/add_persona_conditions.py`, các trường gốc không đổi); bản cũ lưu ở `data/_backup_pre_persona_conditions/`. Chỉ số nhóm dị ứng tính trước thay đổi này cần chạy lại.
+> **Nguyên tắc nền:** một bản ghi không có nguồn tra cứu kiểm chứng được thì **không** đưa vào bộ QA, vì bộ QA là chuẩn để chấm hệ thống. Hệ quả là bộ có phạm vi hẹp hơn nhu cầu thực tế (mục 9), nhưng mọi khẳng định trong đáp án đều truy được tới văn bản gốc.
 
 ---
 
-# Phần A — v4 (lịch sử)
+## 1. Cách tạo bộ 750 câu
 
-## 1. Tóm tắt kiểm chứng nguồn của v4
+Bộ 750 không được viết riêng từ đầu: nó là **tập con chọn ra từ bản nguồn v5** (2.311 bản ghi, `data/qa_benchmark.*`), và bản nguồn này đã qua toàn bộ quy trình sinh và kiểm chứng. Vì vậy mỗi câu trong bộ 750 có cùng mã `id` và cùng đáp án với bản ghi tương ứng của bản nguồn (đã đối chiếu: 750/750 mã có trong bản nguồn và 750/750 đáp án giống hệt).
 
-Phiên bản v4 (2.081 cặp QA) được đối soát với nhãn bao bì đã gắn nhãn thủ công và các quy chuẩn `VN_TT24_2019`, `CODEX_STAN_192_1995`, `US_FDA_FALCPA`, `FAO_WHO_JEMRA`. Các chỉ số "100%" của v4 (độ phủ nhãn, độ phủ locator, `approved_source_verified`) chỉ nói rằng mỗi bản ghi có nhãn và locator đi kèm; **không** chứng minh từng câu trả lời đúng nguồn. Việc đó được làm ở v5 (mục 5.1) và đã phát hiện nhiều lỗi của v4 (mục 5.2, 5.4, 5.6, 5.6c).
+| Giai đoạn | Việc làm | Kết quả | Script / tệp truy vết |
+|---|---|---|---|
+| 1. Dữ liệu nền | Ảnh bao bì thực phẩm bán tại Việt Nam và bản chép nhãn (thành phần, phụ gia, cảnh báo, dinh dưỡng); đối chiếu bản chép với ảnh gốc | 493 ảnh, 493 tệp nhãn | `assets/images/`, `assets/labels/`, `data/label_audit_*.csv` |
+| 2. Sinh câu hỏi và đáp án | Sinh câu hỏi theo mẫu từ nội dung nhãn; đáp án dẫn xuất bằng quy tắc, mở đầu bằng kết luận, nêu giới hạn thông tin trên nhãn và kết thúc bằng thẻ nguồn | Bản nguồn 2.311 bản ghi, 489 ảnh, 278 mẫu câu hỏi (`template_id`) | `create_benchmark_v5.py`, `add_authority_records_v5.py` |
+| 3. Kiểm chứng và loại bỏ | Đối chiếu nguyên văn khẳng định nguồn; chạy 6 cổng G1–G6; bản ghi không có nguồn kiểm chứng được thì loại | 2.311/2.311 qua cổng; 303 bản ghi bị loại ở các bước trước (mục 8) | `verify_external_claims.py`, `verify_v5_answers.py`, `finalize_benchmark_v5.py` |
+| 4. Phân tầng | Gán tầng `core` (dùng cho so sánh chính) hoặc `silver` (báo cáo riêng) | 1.498 `core`, 813 `silver` | `finalize_benchmark_v5.py` |
+| 5. Chọn 750 câu | Lấy mẫu phân tầng theo trụ cột, nhãn an toàn, ảnh và mẫu câu hỏi | 750 bản ghi, 376 ảnh, 150 mẫu câu hỏi | `build_foodhealthqa_subset.py` |
 
-## 2. Phân bố v4 (để tham chiếu)
+### 1.1. Giai đoạn 2: các nhóm câu hỏi và cách sinh
 
-| Domain | Số bản ghi v4 |
-|---|---:|
-| `allergen_detection` | 632 |
-| `insufficient_data` | 568 |
-| `additive_regulation` | 453 |
-| `vulnerable_groups` | 428 |
+Câu hỏi được sinh theo mẫu; mỗi bản ghi mang `domain` (4 miền: dị nguyên, phụ gia, thiếu dữ liệu, nhóm dễ tổn thương) và `template_id`. Ngoài nhóm cơ bản về dị nguyên và phụ gia, các nhóm sau được bổ sung từng bước, mỗi nhóm gắn với đúng một nguồn thẩm quyền và chỉ khẳng định điều nguồn đó nói. Số câu của từng nhóm trong bộ 750 xem bảng `label_scope` ở mục 4.
 
-## 3. Quy tắc chuẩn hóa của v4 vẫn còn hiệu lực
-1. "Không có PAL" không phải bảo đảm phi dị nguyên (Codex CXS 1-1985 4.2.1.4, FAO/WHO JEMRA Part 3): v4 chuyển `SAFE` → `CAUTION`; v5 mịn hơn thành `NOT_DECLARED` (xem 5.3).
-2. Người PKU và aspartame (INS 951): `CRITICAL_ALERT` theo 21 CFR 172.804.
-3. Phụ gia có trong danh mục cho phép nhưng nhãn không ghi hàm lượng: chỉ khẳng định tư cách có trong danh mục, không kết luận tuân thủ ML.
-4. Mỗi bản ghi có hai lớp locator: lớp nhãn (`assets/labels/{id}.json#/…`) và lớp văn bản pháp quy (`modules/claim_locator_resolver.py`).
+- **Dị nguyên và nhiễm chéo:** nhãn dị nguyên đối chiếu với bộ tái suy luận riêng (từ điển dị nguyên viết tách khỏi bộ máy v4, nhưng cùng một người xây dựng nên không độc lập tuyệt đối); câu ABSTAIN dùng cho nhãn thiếu thông tin hoặc không có câu cảnh báo nhiễm chéo (PAL).
+- **Phụ gia theo danh mục và ADI (`ins_listing`, `ins_adi`):** mỗi câu hỏi **đúng một mã INS**, chọn các mã in trên nhãn nằm trong danh mục TT 24 và đúng khoảng INS 100–1599; đáp án do các hàm dựng sẵn sinh từ nguồn đã kiểm (`permitted_answer`, `codex192_sentence`, `jecfa_status_answer`), không viết tay và không dùng nguồn mới.
+- **Cờ theo cơ quan có thẩm quyền:** EU Phụ lục V (phẩm màu), IARC Vol. 134 (aspartame), FDA Red No. 3, Codex mục 4.2.1.7 (sulphite), 21 CFR 172.804 (PKU). Mỗi câu chỉ nói điều văn bản nói và ghi giới hạn ngay trong đáp án (ví dụ Phụ lục V là quy định ghi nhãn của EU, không suy ra yêu cầu ở Việt Nam).
+- **Nhóm dễ tổn thương (EFSA, WHO):** photphat với người bệnh thận mạn (EFSA 2019), phẩm màu McCann và E211 với trẻ em (EFSA 2008), nitrit và TiO2 với thai phụ (EFSA 2017, 2021). Nhãn ở nhóm này nghĩa là "nhãn có/không có chất mà văn bản nêu ra", không phải khuyến cáo lâm sàng.
+- **Chất ngọt không đường và caffeine (WHO 2023, EFSA 2015):** mỗi chủ đề có **câu cờ** (nhãn có chất đó) và **câu đối chứng** (nhãn không có chất đó). Cả hai dùng chung một câu hỏi trung tính nên mẫu câu hỏi không tiết lộ nhãn; câu đối chứng chọn ngẫu nhiên với seed cố định, số lượng bằng số câu cờ, từ các nhãn không có bất kỳ dấu hiệu nào của chất đó.
+- **Ngưỡng dinh dưỡng (Codex CAC/GL 23-1997):** natri với ngưỡng "natri thấp" (≤ 0,12 g/100 g) và đường với ngưỡng "không đường" (≤ 0,5 g/100 g). Chỉ dùng nhãn có xác định được cơ sở của bảng dinh dưỡng (`sodium_basis`: 100 g, 100 ml hay khẩu phần) rồi quy đổi về 100 g hoặc 100 ml; nhãn chỉ ghi khoảng giá trị hoặc hai sản phẩm trong một hộp bị loại.
 
-## 4. Hướng dẫn sử dụng tập benchmark
-* Dùng [qa_benchmark.csv](../data/qa_benchmark.csv) (hoặc `.jsonl`) làm benchmark đánh giá RAG, LLM và bộ máy quy tắc. Các cột `v4_*` đã được bỏ khỏi file; bộ chỉ còn nội dung v5.
-* **Chia tập Train/Validation/Test bắt buộc theo `image_ref`**, không chia ngẫu nhiên theo dòng.
-* Định danh khi công bố: **Silver — kiểm chứng bằng quy tắc, không có chuyên gia**; không gọi là gold.
+### 1.2. Giai đoạn 5: chọn 750 câu từ bản nguồn
 
----
+`build_foodhealthqa_subset.py` (mặc định `--size 750 --seed 42 --max-per-image 4 --max-per-template 30`) làm theo các bước, đều xác định được và lặp lại được:
 
-# Phần B — v5 (ACTIVE)
+1. **Đầu vào:** chỉ bản ghi `eligible_for_scoring = yes` (2.311/2.311).
+2. **Gán trụ cột chuyên môn** bằng quy tắc xác định, kiểm theo thứ tự ưu tiên: Dinh dưỡng, Thai phụ, Trẻ em, Bệnh nền, Dị ứng & Dị nguyên, An toàn phụ gia. Bản ghi vào trụ cột đầu tiên mà nó thỏa.
+3. **Chia hạn ngạch theo trụ cột** theo tỷ lệ mục tiêu 22% / 22% / 16% / 15% / 14% / 11% (An toàn phụ gia, Dị ứng, Trẻ em, Bệnh nền, Thai phụ, Dinh dưỡng); phần dư làm tròn dồn vào An toàn phụ gia.
+4. **Phân tầng theo nhãn an toàn** trong từng trụ cột: hạn ngạch mỗi nhãn tỷ lệ với phân bố của nhóm trong bản nguồn, tối thiểu 1 câu mỗi nhãn.
+5. **Lấy mẫu ngẫu nhiên có seed (42).** Vòng 1 áp hai trần: tối đa 4 câu mỗi ảnh (`split_group`) và 30 câu mỗi mẫu câu hỏi (`template_id`). Vòng 2 chỉ chạy khi chưa đủ hạn ngạch: nới trần theo mẫu câu hỏi và ưu tiên bản ghi có ảnh và mẫu ít bị dùng nhất.
+6. **Xuất** JSONL, CSV (4 trường bắt buộc đứng đầu) và `foodhealthqa_eval_set_summary.json`, sắp theo `id`.
 
-## 5. Cấu trúc và kết quả
+Kết quả theo trụ cột (số bản ghi trong bản nguồn và số được chọn):
 
-| Thuộc tính | Giá trị |
+| Trụ cột | Bản nguồn | Được chọn | Tỷ lệ chọn |
+|---|---:|---:|---:|
+| An toàn phụ gia | 846 | 166 | 19,6% |
+| Dị ứng & Dị nguyên | 753 | 165 | 21,9% |
+| Trẻ em | 254 | 120 | 47,2% |
+| Bệnh nền | 198 | 112 | 56,6% |
+| Thai phụ | 157 | 105 | 66,9% |
+| Dinh dưỡng | 103 | 82 | 79,6% |
+| **Tổng** | **2.311** | **750** | **32,5%** |
+
+Bộ 750 chọn tỷ lệ cao ở các trụ cột nhỏ (Dinh dưỡng, Thai phụ, Bệnh nền, Trẻ em) và thấp ở trụ cột lớn, nên cân bằng hơn bản nguồn, nhưng **không còn đại diện cho phân bố của bản nguồn**. Bộ 750 phủ 376 trên 489 ảnh và 150 trên 278 mẫu câu hỏi của bản nguồn.
+
+## 2. Kết quả kiểm chứng trên 750 bản ghi
+
+Các số dưới đây đếm trực tiếp từ `data/foodhealthqa_eval_set.jsonl` và `data/build/qa_verification.csv`.
+
+| Kiểm tra | Kết quả |
 |---|---|
-| Scripts | `create_benchmark_v5.py` → `verify_v5_answers.py` → `finalize_benchmark_v5.py`; nguồn dùng `verify_external_claims.py` (khẳng định kiểm chứng nguyên văn) và `source_grounding_v5.py` |
-| Mức xác minh | **1.744** bản có khẳng định pháp lý đã đối chiếu nguyên văn; **34** bản chỉ khẳng định về nhãn |
-| Khẳng định nguồn đã kiểm | 151/151 đạt (`knowledge_base/sources/derived/external_claim_verification.json`); catalog nguồn có 204 mục |
+| Trạng thái duyệt (`review_status`) | `approved_rule_verified`: 750/750 |
+| Bản ghi trượt cổng G1–G6 (`verify_failed_gates`) | **0/750**; cả 750 id đều có trong `qa_verification.csv` với `eligible = yes` và không có cổng nào trượt |
+| Mức kiểm chứng nguồn (`source_verification_level`) | 741 bản `label_and_primary_source_text_verified` (nhãn và văn bản nguồn gốc đều được kiểm); 9 bản `label_only_no_regulatory_assertion` (chỉ đối chiếu nhãn, không khẳng định về quy định) |
+| Khẳng định nguồn được dùng (`external_claims`) | **57 khẳng định khác nhau**, tất cả đều đạt trong `external_claim_verification.json` (tệp này có 159 khẳng định, 159 đạt) |
+| Bản ghi không có khẳng định nguồn nào | 9 (chính là 9 bản chỉ khẳng định về nhãn) |
+| Khoảng trống nguồn (`source_gap`) | rỗng ở 750/750 |
+| Ảnh nhãn được đối chiếu thủ công với bản chép | 376/376 (mục 6) |
 
-### Phân bố sau kiểm chứng
-| Domain | Số bản ghi |
-|---|---:|
-| `allergen_detection` | 629 |
-| `additive_regulation` | 440 |
-| `insufficient_data` | 359 |
-| `vulnerable_groups` | 350 |
+Lưu ý: các trường `answer_correct`, `citation_correct`, `safety_label_correct` (đều `yes` ở 750 bản) là **kết quả của bộ kiểm tra quy tắc**, không phải đánh giá của người.
 
-| Nhãn mịn `label_v5` | Số bản ghi | Nhãn app `gold_safety_label` | Số bản ghi |
-|---|---:|---|---:|
-| `UNSAFE` | 387 | `UNSAFE` | 387 |
-| `PERMITTED_LISTED` | 372 | `SAFE` (gồm PERMITTED_LISTED + SAFE) | 613 |
-| `SAFE` | 241 | | |
-| `ABSTAIN` | 345 | `ABSTAIN` | 345 |
-| `NOT_DECLARED` | 156 | `CAUTION` (gồm NOT_DECLARED + CAUTION) | 324 |
-| `CAUTION` | 168 | | |
-| `CRITICAL_ALERT` | 109 | `CRITICAL_ALERT` | 109 |
+## 3. Các cổng kiểm tra từng câu trả lời (G1–G6)
 
-| Nhóm người dùng | Số bản ghi |
-|---|---:|
-| Dị ứng | 753 |
-| Người trưởng thành khỏe mạnh | 675 |
-| Bệnh thận mạn giai đoạn 3 | 141 |
-| Trẻ 5 tuổi | 84 |
-| Phenylketon niệu | 57 |
-| Tăng huyết áp (chỉ natri) | 53 |
-| Thai phụ (chỉ câu hỏi về cảnh báo trên nhãn) | 15 |
+Mỗi bản ghi phải qua đủ 6 cổng (`scripts_research/verify_v5_answers.py`):
 
-### 5.1 Các cổng kiểm tra từng câu trả lời (G1–G6)
 | Cổng | Kiểm tra |
 |---|---|
 | G1 Kết luận | Mở đầu đáp án khớp nhãn; không có từ ngữ phủ định nhãn dương và ngược lại |
 | G2 Đúng câu hỏi | Nhắc đúng sản phẩm; nêu đúng dị nguyên được hỏi; mọi mã INS trong câu hỏi có trong đáp án; đúng chủ đề |
 | G3 Đúng nhãn | Mọi mã INS trong đáp án có trên nhãn; nhãn dị nguyên khớp bộ tái suy luận độc lập; số liệu dinh dưỡng khớp bảng nhãn |
-| G4 Trích dẫn | Thẻ nguồn được công nhận; nguồn phù hợp chủ đề; không có ngoặc vuông lạ bị parser đọc nhầm; câu trả lời natri không được dẫn USDA |
-| G5 Định vị | Claim locator có trong `source_citation_catalog.json`; trích đoạn nhãn có nguyên văn trong trường được trỏ tới |
-| G6 Đúng nguồn | Mọi thẻ nguồn phải có một khẳng định đã kiểm chứng nguyên văn tương ứng (ví dụ thẻ JECFA cần claim `JECFA_ADI_*`, thẻ Codex GL 23 cần `CODEX_GL23_*`, thẻ FDA Q&A cần `FDA_QA5_*`); mọi mã `PERMITTED_LISTED` khớp văn bản gốc TT 24/2019 |
+| G4 Trích dẫn | Thẻ nguồn thuộc danh mục được công nhận; nguồn phù hợp chủ đề; không có ngoặc vuông lạ bị parser đọc nhầm; câu trả lời natri không được dẫn USDA |
+| G5 Định vị | Claim locator có trong `knowledge_base/sources/catalog/source_citation_catalog.json`; trích đoạn nhãn có nguyên văn trong trường được trỏ tới |
+| G6 Đúng nguồn | Mọi thẻ nguồn phải có một khẳng định đã kiểm chứng nguyên văn tương ứng (ví dụ thẻ JECFA cần khẳng định `JECFA_ADI_*`, thẻ Codex GL 23 cần `CODEX_GL23_*`); mọi mã `PERMITTED_LISTED` khớp văn bản gốc TT 24/2019 |
 
-Độ nhạy của bộ kiểm tra được kiểm bằng cách cố ý chèn lỗi (đổi nhãn, xóa tên sản phẩm, đổi mã INS, thẻ nguồn bịa, đáp án lạc đề, mã ngoài TT24): đạt ≥95% ở cả 6 loại (`tests/test_benchmark_v5.py`).
+**Độ nhạy của bộ kiểm tra** được thử bằng cách cố ý chèn lỗi (đổi nhãn, xóa tên sản phẩm, đổi mã INS, thẻ nguồn bịa, đáp án lạc đề, mã ngoài TT 24): theo `tests/test_benchmark_v5.py`, bộ kiểm tra bắt được từ 95% trở lên ở cả 6 loại lỗi. Đây là thử nghiệm trên bản nguồn; không riêng cho tập con 750.
 
-### 5.2 Lỗi của v4 được phát hiện và sửa nhờ các cổng này
-- 11 bản dị nguyên gán nhãn sai (ví dụ `FOODQA_G3_2058`); 3 bản ABSTAIN khẳng định "nhãn không kê khai" trong khi nhãn có khai (`FOODQA_G3_0257`, `1413`, `1705`).
-- 22 đáp án thai phụ không nhắc tên sản phẩm; 5 câu hỏi về tăng động bị trả lời về nitrit; 21 đáp án PKU trích sai thẻ nguồn; 22 locator không có trong catalog.
-- 374 nhãn `SAFE` về phụ gia đổi thành `PERMITTED_LISTED`; 157 ca "không có PAL" đổi `CAUTION` → `NOT_DECLARED`.
-- Các bản có mã INS giả hoặc cũ (ví dụ `INS025` sinh từ "0,025 %", `INS3220` thật ra là 322(i), `INS422` thật ra là 1422): 8 bản bị xóa (mục 6).
+## 4. Nhãn an toàn và phạm vi khẳng định
 
-### 5.3 Nhãn đánh giá cho consumer
-`gold_safety_label` dùng 5 nhãn của app (`PERMITTED_LISTED → SAFE`, `NOT_DECLARED → CAUTION`); nhãn mịn nằm ở `label_v5`. Các câu hỏi `PERMITTED_LISTED` đã được viết lại để hỏi đúng thứ nguồn trả lời (phụ gia có nằm trong danh mục TT 24/2019 hay không), không hỏi "có an toàn không".
+**Ánh xạ nhãn.** `gold_safety_label` dùng 5 nhãn của ứng dụng; nhãn mịn của v5 nằm ở `label_v5`. Với 750 câu:
 
-### 5.4 Đối chiếu văn bản nguồn gốc
-Tài liệu gốc ở `knowledge_base/sources/raw/external/` (sha256 trong `external_sources_manifest.json`), đối chiếu bằng `verify_external_claims.py`: 151/151 khẳng định đạt.
+| Nhãn mịn `label_v5` | Số câu | Nhãn ứng dụng `gold_safety_label` | Số câu |
+|---|---:|---|---:|
+| `PERMITTED_LISTED` | 88 | `SAFE` (= PERMITTED_LISTED + SAFE) | 285 |
+| `SAFE` | 197 | | |
+| `NOT_DECLARED` | 35 | `CAUTION` (= NOT_DECLARED + CAUTION) | 277 |
+| `CAUTION` | 242 | | |
+| `UNSAFE` | 85 | `UNSAFE` | 85 |
+| `ABSTAIN` | 72 | `ABSTAIN` | 72 |
+| `CRITICAL_ALERT` | 31 | `CRITICAL_ALERT` | 31 |
 
-| Khẳng định được phép dùng | Nguồn đã đọc |
-|---|---|
-| 9 "major food allergen"; **không có động vật thân mềm** | 21 U.S.C. 321(qq) |
-| Danh sách ưu tiên toàn cầu: ngũ cốc chứa gluten, giáp xác, trứng, cá, sữa, đậu phộng, mè, 6 loại hạt cây; **đậu nành và yến mạch không thuộc danh sách** | FAO/WHO JEMRA 2021 Part 1 |
-| Hệ thống PAL chưa thống nhất và chưa đủ thông tin | FAO/WHO JEMRA Part 3 (2023, toàn văn báo cáo 104 trang `JEMRA_PART3.pdf`, p.31, 104) |
-| EFSA 2021: E171 không còn được coi là an toàn | Trang thông cáo EFSA |
-| Câu "PHENYLKETONURICS: CONTAINS PHENYLALANINE" | 21 CFR 172.804(d)(2) |
-| Phụ lục 1 liệt kê phụ gia theo mã INS và tên (400/400 dòng); Phụ lục 2 quy định ML theo mg/kg | PDF TT 24/2019 |
-| **Mới:** natri thấp ≤ 0,12 g/100 g, rất thấp ≤ 0,04 g, không natri ≤ 0,005 g | Codex CAC/GL 23-1997 (bảng điều kiện công bố) |
-| **Mới:** dầu tinh luyện hoàn toàn từ dị nguyên chính được miễn quy định khai báo dị nguyên; dầu chưa tinh luyện phải khai nguồn | FDA Q&A về dị nguyên, Edition 5 (1/2025), mục D.9 |
+Các câu `PERMITTED_LISTED` hỏi đúng thứ nguồn trả lời được (phụ gia có nằm trong danh mục TT 24/2019 hay không), không hỏi "có an toàn không". Các câu `NOT_DECLARED` là ca "nhãn không có câu cảnh báo nhiễm chéo (PAL)": theo Codex CXS 1-1985 và FAO/WHO JEMRA Part 3, không có PAL không bảo đảm sản phẩm không có dị nguyên, nên nhãn là `CAUTION`, không phải `SAFE`.
 
-Lỗi nguồn của v4 mà việc đối chiếu làm lộ ra (đã sửa trong v5): trích JEMRA "ưu tiên" cho đậu nành và nhuyễn thể; trích FALCPA cho nhuyễn thể; URL JEMRA Part 3 trả 404; thẻ 21 CFR 172.804 mang nhầm `citation_id`; ID hóa chất JECFA trỏ sai; đáp án "SAFE theo Codex STAN 192-1995" không kiểm chứng được nên chỉ giữ khẳng định tư cách có trong danh mục TT24.
+**Phạm vi khẳng định (`label_scope`).** Mỗi câu chỉ khẳng định đúng điều nguồn nói; phạm vi này được ghi ngay trong bản ghi:
 
-### 5.5 Đối chiếu JECFA (cơ sở dữ liệu WHO)
-`fetch_jecfa.py` và `fetch_jecfa_more.py` chỉ nhận một bản ghi khi **số INS in trên trang JECFA khớp đúng** mã đang kiểm, không đoán theo tên. Trang gốc lưu ở `knowledge_base/sources/raw/external/jecfa/` kèm sha256.
+| `label_scope` | Số câu | Ý nghĩa |
+|---|---:|---|
+| `full_record` | 167 | Kết luận đầy đủ theo nhãn và nguồn |
+| `authority_flag:who_nss_pregnancy` | 91 | Cờ theo WHO 2023 về chất ngọt không đường ở thai phụ (gồm câu đối chứng không có chất đó) |
+| `listed_in_positive_list_only` | 88 | Chỉ khẳng định phụ gia có tên trong Phụ lục 1 TT 24/2019 |
+| `authority_flag:efsa_2019_phosphate_group` | 81 | Cờ theo EFSA 2019 về photphat (người bệnh thận mạn) |
+| `authority_flag:efsa_2008_mccann_substances` | 50 | Cờ theo EFSA 2008 về nhóm phẩm màu McCann và E211 (trẻ em) |
+| `authority_flag:who_nss_child` | 50 | Cờ theo WHO 2023 về chất ngọt không đường ở trẻ em |
+| `single_factor:natri_vs_codex_low_threshold_per_100g` | 42 | Chỉ so natri với ngưỡng "natri thấp" của Codex CAC/GL 23 trên 100 g |
+| `sugar_free_codex_gl23_per_100g` | 40 | Chỉ so đường với ngưỡng "không đường" của Codex CAC/GL 23 trên 100 g |
+| `declared_ingredients_only` | 35 | Chỉ dựa trên thành phần nhãn đã khai |
+| `authority_flag:cfr_172_804_aspartame` | 31 | Cờ theo 21 CFR 172.804 (người phenylketon niệu và aspartame) |
+| `adi_status_per_jecfa_only` | 22 | Chỉ nêu trạng thái ADI theo trang JECFA |
+| `authority_flag:efsa_caffeine_child` | 20 | Cờ theo EFSA 2015 về caffeine ở trẻ em |
+| `authority_flag:eu_annex_v_colours` | 10 | Cờ theo Phụ lục V Quy định EU 1333/2008 |
+| `authority_flag:efsa_2021_e171` | 8 | Cờ theo EFSA 2021 về E171 |
+| `authority_flag:efsa_2017_nitrite` | 6 | Cờ theo EFSA 2017 về nitrit |
+| `authority_flag:iarc_v134_aspartame` | 4 | Cờ theo IARC Vol. 134 (aspartame nhóm 2B) |
+| `authority_flag:codex_sulphite_declaration` | 3 | Cờ theo Codex CXS 1 mục 4.2.1.7 (sulphite) |
+| `authority_flag:fda_red3_revoked` | 2 | Cờ theo lệnh bãi bỏ FD&C Red No. 3 của FDA |
 
-**Đợt 1 (14 mã)**, ví dụ: INS 300 (not specified), 322(i) (not limited), 330 (not limited), 401, 407, 440, 500(ii) (not limited), 551, 627, 415. Không tìm được bản ghi cho INS 471.
+Nhãn ở nhóm `authority_flag` nghĩa là *"nhãn có/không có chất mà văn bản của cơ quan này nêu ra"*, **không phải lời khuyên y khoa**. Toàn bộ 419 câu miền `vulnerable_groups` thuộc dạng này.
 
-**Đợt 2 (mở rộng, 186 mã INS xuất hiện trong các câu hỏi ABSTAIN):**
-- Tìm được trang JECFA cho **130** mã, trong đó **117** mã có giá trị ADI. **69 mã chưa có ADI**: 56 mã không tìm thấy trang và 13 mã có trang nhưng không có ADI (nhiều mã nhóm phụ như phosphate 339(ii), 340(i), 450(ii), 452(i); 1100(i); 960d; 640; 965…).
-- Hai lỗi đọc trang đã được sửa giữa chừng: (1) trang có thêm số COE/FEMA giữa trường INS và phần sau nên mã bị đọc sai; (2) mục đánh giá mới nhất nhiều trang chỉ ghi "chỉ xét tiêu chuẩn kỹ thuật" và không có ADI, ADI nằm ở mục trước.
-- Với mỗi bản ghi mà **mọi** mã INS trong câu hỏi đều có trang JECFA, đáp án được viết lại: nếu tất cả mã có ADI "not specified/not limited" thì `SAFE`; ngược lại `ABSTAIN` có dẫn ADI của từng chất và nêu lý do thiếu hàm lượng trên nhãn để tính mức phơi nhiễm. **153 bản ghi** thuộc dạng này (69 SAFE, 84 ABSTAIN), `label_scope = adi_status_per_jecfa_only`.
-- Chỉ một mã thiếu nguồn là đủ để bản ghi bị loại; đó là lý do 171 bản ghi nhóm này không còn trong bộ (mục 6).
+## 5. Đối chiếu văn bản nguồn gốc
 
-### 5.6 Đối chiếu Codex (3 tệp PDF do người dùng tải tay, bản sửa đổi 2026) và Codex CAC/GL 23-1997
-| Khẳng định | Kết quả đọc từ văn bản |
-|---|---|
-| CXS 192-1995 Table One / Table Three | 322 mã INS ở Table One (cho phép có điều kiện) và 192 mã ở Table Three (GMP); lưu `knowledge_base/sources/derived/codex_192_ins_codes.json` |
-| CXS 1-1985 mục 4.2.1.4 | Ngũ cốc chứa gluten (lúa mì, lúa mạch đen, đại mạch), giáp xác, trứng, cá, đậu phộng, sữa, mè, 6 loại hạt cây. **Không có đậu nành, không có nhuyễn thể** |
-| CXS 1-1985 mục 4.2.1.5 | Kiều mạch, cần tây, **yến mạch**, lupin, mù tạt, đậu nành, 3 loại hạt (Brazil, macadamia, hạt thông) và một số thực phẩm khác: có thể khai báo tùy quốc gia. Chú thích: yến mạch nhiều người celiac dung nạp được nhưng không phải tất cả vì nhiễm chéo với lúa mì, đại mạch, lúa mạch đen |
-| CXS 1-1985 Phụ lục PAL (2026) | PAL là tuyên bố nguy cơ hiện diện ngoài ý muốn do tiếp xúc chéo, xác định bằng đánh giá rủi ro |
-| CXG 36-1989 | Hệ thống số INS và tên nhóm chức năng |
-| **Mới:** CAC/GL 23-1997 | Bảng điều kiện công bố natri tính trên 100 g (xem 5.7) |
+Tài liệu gốc nằm ở `knowledge_base/sources/raw/` (băm sha256 trong `catalog/external_sources_manifest.json`); mỗi khẳng định được đối chiếu nguyên văn bằng `scripts_research/verify_external_claims.py`. Bảng liệt kê các khẳng định nguồn mà 750 câu dựa vào (số câu: một câu có thể dùng nhiều khẳng định).
 
-Lỗi nguồn của v4: locator `Table3_GMP` áp cho mọi phụ gia, nhưng 183/374 bản "được phép" có ít nhất một mã chỉ nằm ở Table One (ví dụ INS 211, 202, 951, 102, 133).
+**Dị nguyên**
 
-### 5.6b Ngưỡng dinh dưỡng và benzen
-| Khẳng định đã đọc | Hệ quả |
-|---|---|
-| 21 CFR 101.61: natri "free" <5 mg, "very low" ≤35 mg, "low" ≤140 mg, **mỗi khẩu phần tham chiếu (RACC)** | Không áp được lên bảng dinh dưỡng ghi trên 100 g |
-| 21 CFR 101.54: "high" = từ 20% DV trở lên mỗi RACC | Số "480 mg ≥ 20% DV" của v4 không có trong văn bản |
-| FDA Q&A: benzen có thể hình thành ở mức ppb trong **một số đồ uống** | 2 bản benzen của v4 là bánh, nguồn không bao trùm → **đã loại** |
-| WHO 2015: khuyến nghị về **đường tự do**, không phải đường tổng số trên nhãn | Ngưỡng "15 g/khẩu phần" của v4 không có nguồn → **62 bản đường đã loại** |
+| Khẳng định (`external_claims`) | Số câu | Nguồn đã đọc |
+|---|---:|---|
+| `FALCPA_321qq_NINE_ALLERGENS` | 165 | 21 U.S.C. 321(qq): 9 "major food allergen"; không có động vật thân mềm |
+| `JEMRA1_PRIORITY_LIST` | 148 | FAO/WHO JEMRA 2021 Part 1: danh sách ưu tiên toàn cầu (ngũ cốc chứa gluten, giáp xác, trứng, cá, sữa, đậu phộng, mè, 6 loại hạt cây) |
+| `CXS1_4214_MANDATORY_ALLERGEN_LIST` | 148 | Codex CXS 1-1985 mục 4.2.1.4: danh sách phải khai báo; không có đậu nành, không có nhuyễn thể |
+| `JEMRA1_SOY_AND_OATS_NOT_GLOBAL` | 54 | JEMRA 2021 Part 1: đậu nành và yến mạch không thuộc danh sách toàn cầu |
+| `CXS1_4215_OPTIONAL_LIST_SOY_OATS` | 54 | Codex CXS 1-1985 mục 4.2.1.5: đậu nành, yến mạch "có thể phải khai báo" tùy quốc gia |
+| `JEMRA3_PAL_REPORT` | 82 | FAO/WHO JEMRA Part 3 (2023): hệ thống PAL hiện chưa thống nhất và chưa đủ thông tin (tr. 31, 104) |
+| `CXS1_PAL_ANNEX_DEFINITION` | 82 | Codex CXS 1-1985, Phụ lục (2026): định nghĩa PAL |
+| `CFR_172_804_PKU_STATEMENT` | 31 | 21 CFR 172.804: câu "PHENYLKETONURICS: CONTAINS PHENYLALANINE" |
+| `CXS1_4217_SULPHITE_DECLARATION` | 3 | Codex CXS 1-1985 mục 4.2.1.7: sulphite từ 10 mg/kg phải khai báo bằng tên |
+| `FDA_QA5_REFINED_OIL_EXEMPT` | 1 | FDA Q&A về dị nguyên, Edition 5 (2025), mục D.9: dầu tinh luyện cao được miễn khai báo |
 
-### 5.6c Đối chiếu toàn văn 4 ý kiến EFSA và nhóm dễ tổn thương
-| Ý kiến | Khẳng định được phép dùng |
-|---|---|
-| EFSA 2019;17(6):5674 (photphat) | ADI nhóm 40 mg/kg tt/ngày tính theo phospho bảo vệ người lớn khỏe mạnh nhưng **không áp dụng cho người giảm chức năng thận mức vừa đến nặng** |
-| EFSA 2008;6(3):660 (McCann 2007) | Thử 6 phẩm màu và natri benzoat E211 ở trẻ 3 và 8–9 tuổi; "bằng chứng hạn chế", không quy được cho từng chất |
-| EFSA 2017;15(6):4786 (nitrit) | ADI 0,07 mg ion nitrit/kg tt/ngày; báo cáo trích Hội đồng Bộ trưởng Bắc Âu xếp thai phụ vào nhóm nhạy cảm hơn |
-| EFSA 2021;19(5):6585 (TiO2) | Không loại trừ được mối lo ngại độc tính gen; E171 không còn được coi là an toàn |
+**Phụ gia**
 
-Nhãn CAUTION/SAFE ở nhóm này nghĩa là *"nhãn có/không có chất mà văn bản của cơ quan này nêu ra"*, không phải lời khuyên y khoa. Nhóm này gồm 297 bản (CKD, trẻ em, PKU, thai phụ với TiO2/nitrit). Lỗi v4 đã sửa: bộ nối mã INS bỏ sót mã trong ngoặc vuông (`FOODQA_G3_1998`); quy tắc trẻ em bỏ sót E211; các câu "KDOQI 2020", "sinh khả dụng 90–100%" không có trong văn bản; DOI EFSA 2008 trong catalog trỏ nhầm.
+| Khẳng định | Số câu | Nguồn đã đọc |
+|---|---:|---|
+| `TT24_PHULUC1_LISTS_INS_AND_NAME` | 106 | TT 24/2019/TT-BYT, Phụ lục 1: danh mục phụ gia theo mã INS và tên |
+| `TT24_ML_IN_MG_PER_KG` | 10 | TT 24/2019/TT-BYT, Phụ lục 2: mức tối đa (ML) tính theo mg/kg |
+| `CODEX192_TABLE1_TABLE3_PARSED` | 88 | Codex CXS 192-1995 (bản 2026): mã INS ở Table One (có điều kiện) và Table Three (GMP) |
+| `CODEX_CXG36_INS_AND_CLASS_NAMES` | 17 | Codex CXG 36-1989: hệ thống số INS và nhóm chức năng |
+| `JECFA_ADI_*` (30 khẳng định, mỗi mã INS một khẳng định) | 22 bản ghi | Trang cơ sở dữ liệu JECFA của WHO; chỉ nhận khi **số INS in trên trang khớp đúng** mã đang kiểm |
+| `IARC_V134_ASPARTAME_2B` | 4 | IARC Monographs Vol. 134 (2023): aspartame nhóm 2B |
+| `EU_ANNEXV_COLOURS_WARNING` | 10 | Quy định EU 1333/2008, Phụ lục V: cảnh báo cho 6 phẩm màu |
+| `FDA_RED3_REVOKED_FOOD` | 2 | FDA, FR Doc. 2025-00830: bãi bỏ FD&C Red No. 3 trong thực phẩm |
 
-### 5.7 Natri cho người tăng huyết áp — dựng lại theo ngưỡng Codex trên 100 g
-- 59 bản natri của bản cũ trích USDA FDC (không phải nguồn ngưỡng) và trích nhầm Codex CXS 1 mục 4.2.1.4 (mục về dị nguyên). Ngưỡng FDA tính theo RACC nên không dùng được cho bảng ghi trên 100 g.
-- Tôi mở cả 59 ảnh để xác định số natri tính trên gì: 33 nhãn ghi trên 100 g, 7 nhãn trên 100 ml, 13 nhãn chỉ ghi trên khẩu phần/gói/ly (quy đổi sang mg/100 g); 6 nhãn chỉ ghi khoảng giá trị hoặc gồm hai sản phẩm trong một hộp (0178, 0238, 0446, 0479, 0522, 0570) nên bị xóa. Trường `sodium_basis` được thêm vào 53 nhãn.
-- **53 bản ghi còn lại** hỏi "natri có đạt điều kiện natri thấp (≤120 mg/100 g) theo Codex CAC/GL 23-1997 không": 17 `SAFE`, 36 `CAUTION`. Đáp án nói rõ đây là so sánh với ngưỡng công bố dinh dưỡng, không phải kết luận y khoa. Đồ uống: coi 100 ml tương đương 100 g.
+**Nhóm dễ tổn thương và ngưỡng dinh dưỡng**
 
-### 5.8 Kiểm tra nhãn với ảnh gốc
-Toàn bộ ảnh nhãn đã được đối chiếu thủ công với bản chép trong `assets/labels/*.json` (người kiểm: một người, không phải chuyên gia độc lập; chỉ xem một mặt bao bì mỗi sản phẩm):
+| Khẳng định | Số câu | Nguồn đã đọc |
+|---|---:|---|
+| `WHO_NSS_2023_PREGNANCY` | 91 | WHO (2023) *Use of non-sugar sweeteners*: khuyến cáo có điều kiện; bằng chứng quan sát về sinh non có độ chắc chắn thấp |
+| `WHO_NSS_2023_CHILDREN` | 50 | Cùng tài liệu, phần trẻ em; không phải ngưỡng an toàn |
+| `EFSA_OPINION_2019_PHOSPHATES` | 81 | EFSA 2019;17(6):5674: ADI nhóm 40 mg/kg tt/ngày không áp dụng cho người giảm chức năng thận |
+| `EFSA_OPINION_2008_MCCANN` | 50 | EFSA 2008;6(3):660: thử nghiệm McCann, bằng chứng hạn chế, không quy được cho từng chất |
+| `EFSA_CAFFEINE_2015_CHILDREN` | 20 | EFSA 2015;13(5):4102: chưa đủ thông tin để xác định mức caffeine an toàn cho trẻ em |
+| `EFSA_OPINION_2017_NITRITE` | 6 | EFSA 2017;15(6):4786: ADI nitrit 0,07 mg/kg tt/ngày |
+| `EFSA_2021_TIO2_FULLTEXT`, `EFSA_2021_TIO2_NOT_SAFE` | 8 + 1 | EFSA 2021;19(5):6585: không loại trừ độc tính gen; E171 không còn được coi là an toàn |
+| `CODEX_GL23_SODIUM_PER_100G` | 42 | Codex CAC/GL 23-1997: natri thấp ≤ 0,12 g/100 g |
+| `CODEX_GL23_SUGARS_FREE_PER_100G` | 40 | Codex CAC/GL 23-1997: không đường ≤ 0,5 g/100 g (hoặc 100 ml) |
 
-| Nhóm kiểm | Số ảnh | Lỗi nặng (sai/thiếu câu dị nguyên, sai mã INS, sai sản phẩm) |
-|---|---:|---:|
-| Mẫu ngẫu nhiên | 100 | 11 |
-| Danh sách rủi ro cao (nhiều bản ghi phụ thuộc) | 321 | 14 (4,4%) |
-| Phần còn lại | 74 | 1 |
+Ba điểm về cách đọc nguồn, rút từ quá trình kiểm chứng:
+- **JECFA:** trang JECFA chỉ được nhận khi số INS in trên trang khớp đúng mã đang kiểm (không đoán theo tên). Một câu hỏi chứa nhiều mã INS chỉ được giữ khi **mọi** mã đều có trang JECFA đã kiểm; thiếu một mã là loại cả câu.
+- **Natri và đường** dùng ngưỡng Codex CAC/GL 23 tính trên 100 g, không dùng ngưỡng FDA theo khẩu phần tham chiếu (RACC) vì bảng dinh dưỡng trên nhãn ghi theo 100 g. Các nhãn chỉ ghi trên khẩu phần được quy đổi về 100 g hoặc 100 ml; đồ uống coi 100 ml tương đương 100 g.
+- **WHO NSS và EFSA caffeine:** đáp án chỉ nói điều văn bản nói (bằng chứng hạn chế, không chứng minh nhân quả) và **không nêu bất kỳ giới hạn an toàn nào cho trẻ em hoặc thai phụ**. Polyol (sorbitol, maltitol, erythritol, xylitol) không bị gắn cờ vì WHO nói rõ chúng không phải chất ngọt không đường thuộc phạm vi khuyến cáo.
 
-Các kết quả ở `data/label_audit_sample.csv`, `label_audit_high_risk.csv`, `label_audit_remaining.csv`. Hậu quả: hơn 100 tệp nhãn được sửa; câu hỏi được sinh lại từ nhãn đã sửa; nhãn 0429 bị xóa theo yêu cầu, nhãn 0585 bị xóa vì trùng sản phẩm 0467 (khác thể tích; 0467 ghi `net_weight` 180 ml và câu cảnh báo đúng "sữa và gluten từ ngũ cốc (lúa mạch)").
+## 6. Kiểm tra nhãn với ảnh gốc
 
-**Nhận diện phụ gia chỉ ghi bằng tên.** Mô-đun `additive_names.py` nhận phosphat, phẩm màu McCann, nitrit, TiO2, aspartame khi nhãn ghi tên thay vì mã INS, loại trừ mẫu phủ định ("không chứa natri benzoat") và các chất không thuộc nhóm EFSA (iron pyrophosphate, distarch phosphate…). Tên đối chiếu từ Phụ lục 1 TT 24/2019 (`knowledge_base/sources/derived/tt24_additive_names.json`, 392 mã).
+Toàn bộ ảnh nhãn đã được đối chiếu thủ công với bản chép trong `assets/labels/*.json`. **Cả 376 ảnh của bộ 750 đều nằm trong đợt kiểm này.** Kết quả ghi ở `data/label_audit_sample.csv`, `label_audit_high_risk.csv`, `label_audit_remaining.csv`:
 
-### 5.9 Áp dụng hướng dẫn FDA Q&A (Edition 5) và JEMRA Part 1 vào hệ thống
-Đã làm:
-- **Dầu tinh luyện (D.9):** dầu ghi rõ "tinh luyện" không còn tính là bằng chứng dị nguyên; dầu không ghi tinh luyện vẫn tính là có khai báo. Ảnh hưởng 1 bản ghi (`FOODQA_G3_1240`, đáp án thêm câu giải thích).
-- **Nhãn "Có chứa" thiếu dị nguyên (D.5, D.6):** script `check_contains_consistency.py` → `data/label_contains_consistency.csv`, 41 cờ trên 30 nhãn. Sau khi mở ảnh: 22 trường hợp nhà sản xuất khai thiếu (nhiều nhất **mè: 11**), 19 trường hợp dùng từ chung ("hải sản", "các loại hạt"), 1 báo nhầm. Không có lỗi chép nhãn. Kết luận: phải nhận diện dị nguyên cả từ danh sách thành phần, không chỉ từ phần "Có chứa".
-- **Lỗi thật phát hiện:** "Sữa chiết từ đậu nành" bị coi là sữa bò; đã sửa (đáp án `FOODQA_G3_1802` được chỉnh).
-- **Hạt cây theo Bảng 1 (C.7, C.8)** và **tuyên bố "không sữa"** (D.13): quy tắc benchmark và app đều đã cập nhật; sữa thực vật và "không sữa" không còn là bằng chứng sữa; bột kem không sữa vẫn cảnh báo cho người dị ứng sữa (có chủ ý).
-- **Danh mục nhóm dị nguyên (`allergen_groups.json`):** sửa nhuyễn thể và thịt bò (bản tóm tắt JEMRA không kết luận cho hai nhóm này); thêm kiều mạch; tách yến mạch khỏi nhóm gluten (nhóm gluten chỉ còn cảnh báo yến mạch ở mức nhiễm chéo); thêm danh sách theo dõi (đậu các loại, côn trùng, kiwi) ở trạng thái tắt; mô tả mức nghiêm trọng của cần tây, mù tạt, lupin, đậu nành, kiều mạch, yến mạch đổi thành "không nêu trong tài liệu"; cảnh báo của app nay hiện mức ưu tiên toàn cầu/khu vực (không đổi mức nghiêm trọng).
+| Nhóm kiểm | Ảnh thuộc bộ 750 |
+|---|---:|
+| Danh sách rủi ro cao (nhiều bản ghi phụ thuộc) | 245 |
+| Mẫu ngẫu nhiên | 78 |
+| Phần còn lại | 53 |
+| **Tổng** | **376** |
 
-Chưa làm: mô tả mức nghiêm trọng của 10 nhóm còn lại (gluten, sữa, trứng, đậu phộng, hạt cây, giáp xác, cá, mè, sulfit, lactose) còn chi tiết không có trong bản tóm tắt JEMRA; hướng dẫn xử trí khi phản ứng, lưu ý giai đoạn chuyển tiếp của mè, và lưu bao bì/báo cáo sự cố (từ trang "Food Allergies: What You Need to Know" của FDA) chưa được thêm vào app.
+Trong 376 ảnh, **103 ảnh (27,4%)** bị đánh dấu có ít nhất một sai lệch giữa ảnh và bản chép ở thời điểm kiểm: 49 ảnh sai mã phụ gia, 40 sai danh sách thành phần, 30 sai câu cảnh báo dị nguyên, 4 sai tên sản phẩm. Các tệp nhãn có sai lệch đã được sửa và câu hỏi được sinh lại từ nhãn đã sửa trước khi dựng bản nguồn hiện hành (theo ghi nhận của lần kiểm này, hơn 100 tệp nhãn được sửa). Cột đánh dấu là cờ cho mọi mức sai lệch, nên số 103 không phải số lỗi nặng; số lỗi nặng (sai/thiếu câu dị nguyên, sai mã INS, sai sản phẩm) chỉ là một phần của số này.
 
-### 5.10 Câu phụ gia bổ sung từ ba nguồn mới và Codex mục 4.2.1.7 (1.778 → 1.870)
-Mục đích: phần phụ gia có 87% nhãn SAFE nên không đo được khả năng nhận diện phụ gia cần thận trọng. Thêm **92 câu** (nhãn CAUTION, tier `silver`), mỗi câu chỉ khẳng định đúng điều văn bản nguồn nói và đều qua cổng G1–G6:
+**Hạn chế của lần kiểm:** do một người thực hiện, không phải chuyên gia độc lập; chỉ xem một mặt bao bì của mỗi sản phẩm nên câu cảnh báo ở mặt khác không phát hiện được; một số ảnh bị cắt dở hoặc mờ.
 
-| Chủ đề (`authority_topic`) | Số câu | Nguồn (tệp trong `knowledge_base/sources/raw/external/`) | Claim kiểm chứng |
-|---|---:|---|---|
-| `eu_annex_v_colours` | 52 | EU Reg. 1333/2008 Phụ lục V (`EU_REG_1333_2008_ANNEX_V.pdf`): E102, 104, 110, 122, 124, 129 phải kèm cảnh báo về trẻ em; ngoại lệ đánh dấu thịt/vỏ trứng và đồ uống trên 1,2% cồn | `EU_ANNEXV_COLOURS_WARNING` |
-| `iarc_v134_aspartame` | 22 | IARC Monographs Vol. 134 (`IARC_V134_ASPARTAME.pdf`): aspartame Nhóm 2B | `IARC_V134_ASPARTAME_2B` |
-| `fda_red3_revoked` | 7 | FDA, FR Doc. 2025-00830 (`FR_RED3_REVOCATION.pdf`): bãi bỏ FD&C Red No. 3 trong thực phẩm, hiệu lực 15/01/2027 | `FDA_RED3_REVOKED_FOOD` |
-| `codex_sulphite_declaration` | 11 | Codex CXS 1-1985 mục 4.2.1.7 (`cxs_001e.pdf`): sulphite từ 10 mg/kg phải khai báo bằng tên; chỉ lấy nhãn ghi mã E220–228 mà không có chữ sulphite/sulfite | `CXS1_4217_SULPHITE_DECLARATION` |
+**Nhận diện phụ gia chỉ ghi bằng tên.** Mô-đun `modules/additive_names.py` nhận phosphat, phẩm màu McCann, nitrit, TiO2, aspartame khi nhãn ghi tên thay vì mã INS, loại trừ mẫu phủ định ("không chứa natri benzoat") và các chất không thuộc nhóm EFSA. Tên đối chiếu từ Phụ lục 1 TT 24/2019 (`knowledge_base/sources/derived/tt24_additive_names.json`).
 
-Giới hạn ghi ngay trong đáp án: Phụ lục V là quy định ghi nhãn của EU, không suy ra yêu cầu ở Việt Nam; lệnh của FDA dựa trên điều khoản Delaney và dữ liệu ở chuột đực, không phải đánh giá nguy cơ ở người; IARC mô tả mức độ bằng chứng chứ không phải rủi ro ở một mức tiêu thụ; nhãn không có hàm lượng nên không kết luận được vi phạm. Không câu nào nhắc JECFA hay EFSA.
+## 7. Lỗi đã phát hiện và sửa nhờ kiểm chứng
 
-Quy trình: `add_authority_records_v5.py` (thêm dòng đầu vào, cùng ảnh với bản ghi cũ, id từ `FOODQA_G3_2101`) → `create_benchmark_v5.py` → `verify_v5_answers.py` → `finalize_benchmark_v5.py --activate`. Dùng Python hệ thống (venv thiếu PyMuPDF). Số claim nguồn: 155, tất cả đạt.
+Các lỗi dưới đây có ở phiên bản trước (v4) và đã được sửa ở v5; bộ 750 thừa hưởng bản đã sửa. Chúng cho thấy cổng kiểm tra bắt được lỗi thật:
+- **Sai nhãn và sai đáp án:** 11 bản dị nguyên gán nhãn sai; 3 bản ABSTAIN khẳng định "nhãn không kê khai" trong khi nhãn có khai; 22 đáp án thai phụ không nhắc tên sản phẩm; 5 câu hỏi về tăng động bị trả lời về nitrit; 21 đáp án PKU trích sai thẻ nguồn; 22 locator không có trong catalog.
+- **Nhãn quá mạnh:** 374 nhãn `SAFE` về phụ gia đổi thành `PERMITTED_LISTED` (chỉ khẳng định tư cách có trong danh mục); 157 ca "không có PAL" đổi `CAUTION` thành `NOT_DECLARED`.
+- **Mã INS giả hoặc cũ** (ví dụ `INS025` sinh từ "0,025 %", `INS3220` thực ra là 322(i)): 8 bản bị xóa.
+- **Trích nguồn sai:** trích JEMRA "ưu tiên" cho đậu nành và nhuyễn thể; trích FALCPA cho nhuyễn thể; locator `Table3_GMP` áp cho mọi phụ gia trong khi 183/374 bản "được phép" có ít nhất một mã chỉ nằm ở Table One (ví dụ INS 211, 202, 951); URL JEMRA Part 3 trả 404; ID hóa chất JECFA trỏ sai.
+- **Ngưỡng không có nguồn:** ngưỡng "480 mg ≥ 20% DV" và "15 g đường/khẩu phần" không có trong văn bản nguồn; WHO 2015 khuyến nghị về đường tự do, không phải đường tổng số trên nhãn; 2 bản benzen về bánh không được nguồn bao trùm (nguồn chỉ nói về đồ uống).
+- **Lỗi nhận diện dị nguyên:** "Sữa chiết từ đậu nành" từng bị coi là sữa bò; nhiều nhãn "Có chứa" khai thiếu dị nguyên (nhiều nhất là mè), nên hệ thống nhận diện dị nguyên cả từ danh sách thành phần chứ không chỉ từ phần "Có chứa".
 
-Kết quả: phụ gia từ 440 lên 532 câu (SAFE 382, CAUTION 100, ABSTAIN 50); nhãn SAFE còn khoảng 72%, baseline "luôn đoán SAFE" của phụ gia khoảng 72%.
+## 8. Bản ghi bị loại ở bản nguồn
 
-### 5.11 Trường nhóm, dạng câu hỏi và báo cáo kết quả
-Thêm vào mỗi bản ghi hai trường sinh trong `finalize_benchmark_v5.py`: `split_group` (một ảnh là một nhóm, 489 nhóm) và `template_id` (dạng câu hỏi trong từng domain, 255 dạng). `scripts_research/benchmark_report.py` báo cáo theo domain và tier, accuracy, macro-F1, accuracy cân bằng theo dạng câu hỏi, baseline "luôn đoán nhãn đa số" và khoảng tin cậy lấy mẫu lại theo ảnh. Mỗi claim nguồn PDF nay có `evidence_pages` (16/19 claim PDF định vị được; 3 claim bảng/định nghĩa dạng phân tích chưa định vị) và mỗi bản ghi có `source_claim_pages` (1.594/1.870). Chưa làm vùng ảnh (bounding box) cho đoạn trích nhãn; việc này chỉ giúp tra cứu, không ảnh hưởng điểm số. Trên tier `core`, baseline nhãn đa số đạt 74,9% accuracy nhưng macro-F1 chỉ khoảng 0,49, nên khi chấm hệ thống phải so với các con số này.
-
-### 5.12 Từ chối hai loại trong hệ thống và độ phủ trên bộ chuẩn
-
-Hệ thống từ chối theo hai loại (`insufficient_data` → chụp lại nhãn / bổ sung thông tin; `out_of_scope` → hỏi chuyên gia), mô tả ở `docs/QUY_TRINH_3_CAU_HINH_HE_THONG.md`. Đo bằng `scripts_research/measure_abstention.py` (tầng luật, Cấu hình B, OCR = 1,0): từ chối đúng 330/345 câu gold ABSTAIN (nhóm `PAL_NOT_ON_LABEL` 118/119, `LABEL_MISSING_INFO` 212/226) và từ chối nhầm 77/1525 câu có đáp án khác. Bộ chuẩn chưa có câu gold thuộc loại vượt phạm vi, và điểm số chỉ so nhãn ABSTAIN chứ không chấm loại từ chối hay nội dung lời khuyên; nên loại `out_of_scope` hiện chỉ được kiểm bằng test đơn vị (`tests/test_abstention.py`).
-
-### 5.11 Câu hỏi thai phụ từ hướng dẫn WHO 2023 về chất ngọt không đường (1.870 → 2.012)
-
-Trước đó nhóm thai phụ chỉ có 15 câu, đều dựa trên TiO2 và nitrit. Nguồn bổ sung là *Use of non-sugar sweeteners: WHO guideline* (2023), tệp `Bookshelf_NBK592258.pdf` (90 trang, bạn tải thủ công; hai tệp HTML cùng đợt chỉ là trang CAPTCHA nên không dùng). Thêm **71 câu cờ cảnh báo** (`authority_topic = who_nss_pregnancy`, persona `pregnant_woman`, nhãn CAUTION, tier `silver`), mỗi câu ứng với một nhãn sản phẩm có kê khai INS 950, 951, 952, 954, 955, 960, 961 hoặc 969 (thực tế gặp 950: 32, 955: 24, 951: 22, 960: 8, 952: 1).
-
-Claim `WHO_NSS_2023_PREGNANCY` đối chiếu nguyên văn 9 đoạn trong PDF và ghi số trang: khuyến cáo có điều kiện (tr. 34), áp dụng cho cả phụ nữ mang thai và cho con bú, trừ người đã có đái tháo đường (tr. 13, 37), phân tích gộp ba nghiên cứu đoàn hệ về sinh non (OR 1,25; KTC 95% 1,07-1,46; độ chắc chắn thấp, tr. 26, 36), không thấy liên quan với đái tháo đường thai kỳ, lưu ý nhiễu và quan hệ nhân quả ngược (tr. 78), danh sách NSS và việc loại polyol (tr. 37).
-
-Phạm vi và giới hạn:
-- Câu trả lời chỉ nói những gì WHO nói: bằng chứng hạn chế, quan sát, không chứng minh nhân quả, không có ngưỡng an toàn riêng cho thai phụ; không viết "gây sinh non" hay "không an toàn".
-- Polyol (sorbitol 420, maltitol 965, erythritol 968, xylitol 967) không bị gắn cờ vì WHO nói rõ chúng không phải NSS. Thaumatin (957) và hỗn hợp aspartame-acesulfame (962) không có trong danh sách WHO nên không được đưa vào.
-- Chỉ phát hiện NSS theo mã INS trên nhãn (và tên aspartame); nhãn chỉ ghi tên chất ngọt khác mà không có mã sẽ không được gắn cờ.
-- **Câu đối chứng (`who_nss_pregnancy_absent`, 71 câu, nhãn SAFE, tier `silver`):** cùng một câu hỏi trung tính với 71 câu cờ cảnh báo ("nhãn có chứa chất ngọt không đường ... không?"), nên mẫu câu hỏi không tiết lộ nhãn. Chọn ngẫu nhiên (seed cố định 2026) từ các nhãn mà **không có bất kỳ dấu hiệu chất ngọt nào**: không mã 950-969, không tên chất ngọt, không chữ "ngọt"/"sweet" ở bất cứ trường nào của bản phiên âm, danh sách thành phần đủ dài (từ 30 ký tự). Quy tắc cố ý rộng để nhãn nghi ngờ bị loại hơn là gắn nhầm SAFE; cổng G3 quét lại độc lập toàn bộ bản phiên âm. "SAFE" ở đây chỉ có nghĩa "không kê khai NSS": câu trả lời nói rõ kết luận chỉ về NSS, không đánh giá các phụ gia khác, và polyol không phải NSS.
-- Nhóm thai phụ hiện có **157 câu** (86 CAUTION, 71 SAFE). Vẫn chỉ có hai nhãn và chỉ một yếu tố (NSS cùng TiO2/nitrit), nên chỉ dùng để mô tả và đo báo động giả, không so sánh thống kê giữa các cấu hình về lâm sàng.
-- Phát hiện chất ngọt chỉ dựa trên mã INS (và tên aspartame) khi gắn cờ; nhãn chỉ ghi tên chất ngọt khác mà không có mã sẽ không được gắn cờ (đã được loại khỏi nhóm đối chứng).
-- Nguồn dùng cho kiểm tra này không phải hướng dẫn riêng về thai kỳ: đây là hướng dẫn chung của WHO có một đoạn về thai phụ.
-
-### 5.12 Mở rộng phủ mã INS: câu danh mục TT24 và câu ADI JECFA (2.012 → 2.091)
-
-Trước đó 69 mã INS (cơ sở số) được hỏi trong khi nhãn in ra 150 mã. Script `add_authority_records_v5.py` (hàm `ins_coverage_rows`) chọn các mã in trên nhãn, **chưa được bản ghi nào hỏi**, nằm trong danh mục TT24 và đúng khoảng INS (100-1599). Mỗi câu hỏi **đúng một mã**, đáp án do các hàm dựng sẵn sinh từ nguồn đã kiểm (`permitted_answer`, `codex192_sentence`, `jecfa_status_answer`); không viết tay, không nguồn mới:
-
-| Loại (`authority_topic`) | Số câu | Nội dung | Nhãn |
-|---|---:|---|---|
-| `ins_listing` | 61 | Có tên trong Phụ lục 1 TT24 (kèm Codex 192 nếu có); tối đa 2 câu mỗi mã; không kết luận an toàn | PERMITTED_LISTED (SAFE) |
-| `ins_adi` | 18 | Trạng thái ADI theo JECFA; chỉ khi mã có bản ghi JECFA đã kiểm; tối đa 1 câu mỗi mã | 12 SAFE (ADI không dạng số), 6 ABSTAIN (ADI dạng số, thiếu hàm lượng) |
-
-Kết quả: 36 mã mới, số mã INS khác nhau trong bộ từ 69 lên 105. Cả 79 câu thuộc tier `core` (là tra cứu xác định, giống các câu cùng loại đã có) và qua G1-G6. Số mã mới ít hơn ước tính ban đầu (82) vì phép đếm ban đầu tính theo bản đã sinh lại; theo dữ liệu đầu vào thực tế, 109 mã đã được hỏi, phần còn lại là mã đọc sai (900, 109, 130, 137...) hoặc không có trong TT24 nên bị loại theo quy tắc "không nguồn thì không đưa vào". Không thêm câu "mã không có trong danh mục": không có mã thật nào nằm trên nhãn mà thiếu trong TT24. Hệ quả cần biết: domain `additive_regulation` core thiên SAFE hơn (cận đa số 0,879 → 0,895), nên vẫn chỉ dùng domain này để kiểm tra tính đúng, không để so sánh cấu hình.
-
-### 5.13 Câu về đường theo Codex CAC/GL 23-1997 (2.091 → 2.141)
-
-Nguồn WHO "Guideline: sugars intake for adults and children" (`WHO_SUGARS_2015_PAGE.html`) **không dùng được**: tệp chỉ là trang điều hướng, không có nội dung ngưỡng 10% / 5% năng lượng. Hơn nữa ngưỡng đó áp dụng cho tổng năng lượng cả ngày, không so được với một sản phẩm. Thay vào đó dùng bảng công bố dinh dưỡng trong `cxg_023e.pdf` (đã có): **"sugars free" = không quá 0,5 g/100 g (rắn) hoặc 100 ml (lỏng)**, claim `CODEX_GL23_SUGARS_FREE_PER_100G` (đối chiếu nguyên văn, trang 3).
-
-Thêm **50 câu** (`sugar_codex`, persona đái tháo đường & tăng huyết áp, tier `core`): cùng quy tắc với natri, chỉ dùng nhãn có `sodium_basis` (cơ sở của bảng dinh dưỡng, dùng chung cho cả bảng) và một dòng "đường tổng số" dạng số đơn thuần; quy đổi về /100 g hoặc /100 ml rồi so với 0,5 g. Cổng G3 tự tính lại độc lập từ nhãn. Giới hạn: **48 CAUTION, 2 SAFE** (hầu hết sản phẩm có đường vượt 0,5 g/100 g; 2 câu SAFE là kẹo gum xylitol và trân châu có "0 g"); đây là so sánh với ngưỡng công bố dinh dưỡng, không phải kết luận y khoa về đường huyết. Đường bổ sung/lactose/glucose... không được tính là đường tổng.
-
-### 5.14 Câu hỏi của phụ huynh trẻ 5 tuổi: chất ngọt không đường (WHO 2023) và caffeine (EFSA 2015) (2.141 → 2.311)
-
-Nhóm `child_5yo` trước đó chỉ có 84 câu, đều theo hai dạng câu về phẩm màu/tăng động (nguồn EFSA 2008). Thêm **170 câu** (persona `child_5yo`, domain `vulnerable_groups`, tier `silver`), nâng nhóm này lên 254 câu (120 CAUTION, 134 SAFE).
-
-| Chủ đề | Cờ cảnh báo (CAUTION) | Đối chứng không có chất đó (SAFE) | Claim đã đối chiếu nguyên văn |
-|---|---:|---:|---|
-| `who_nss_child` / `who_nss_child_absent` | 71 | 71 | `WHO_NSS_2023_CHILDREN` (PDF NBK592258; trang 9–37, gồm trang 26) |
-| `efsa_caffeine_child` / `efsa_caffeine_child_absent` | 14 | 14 | `EFSA_CAFFEINE_2015_CHILDREN` (EFSA Journal 2015;13(5):4102, 120 trang, bạn tải thủ công; trang 1 và 20) |
-
-**WHO NSS, trẻ em.** Khuyến cáo có điều kiện không dùng NSS để kiểm soát cân nặng hoặc giảm nguy cơ bệnh không lây áp dụng cho trẻ em như người lớn (trừ người đã có đái tháo đường; trang 13). Bằng chứng trực tiếp ở trẻ em hạn chế: một thử nghiệm ngẫu nhiên có đối chứng ghi nhận giảm một số chỉ số mỡ cơ thể, nhưng khi gộp với thử nghiệm thứ hai thì không có tác động lên BMI z-score; các nghiên cứu quan sát không thấy liên quan có ý nghĩa; độ chắc chắn chung được đánh giá là thấp (trang 12, 26, 35). WHO nói rõ hướng dẫn này dựa trên mức dùng đã được coi là an toàn và không thay thế các mức an toàn hiện hành (trang 16). Vì vậy đáp án chỉ là **cờ cảnh báo**, không nói chất này gây hại cho trẻ. Quy tắc phát hiện nhãn dùng chung với chủ đề thai phụ (mã INS 950, 951, 952, 954, 955, 960, 961, 969; polyol không bị gắn cờ).
-
-**EFSA caffeine.** Điều EFSA viết cho trẻ em và thanh thiếu niên là: *thông tin hiện có không đủ để xác định mức caffeine an toàn* (trang 1). EFSA chỉ nói mức không đáng ngại đã xác định cho người lớn khi dùng một lần (3 mg/kg thể trọng) **có thể làm cơ sở** để suy ra mức cho các nhóm này. Do đó đáp án **không nêu bất kỳ giới hạn an toàn nào cho trẻ**, và không viết mức 3 mg/kg là mức hằng ngày hay mức dành cho trẻ (test kiểm tra điều này). Cờ chỉ gắn khi danh sách thành phần có cà phê hoặc caffeine (EFSA nêu cà phê, trà, đồ uống mềm có caffeine và sô cô la là các nguồn caffeine chính trong khẩu phần; trang 20); không gắn khi chỉ có "hương cà phê", hay nhãn ghi không caffeine/khử caffeine; không gắn cho trà (có thể là trà thảo mộc) và sô cô la (ít caffeine), nhưng các nhãn đó cũng **không** được dùng làm đối chứng. Đối chứng là nhãn mà toàn bộ bản phiên âm không có dấu hiệu của bất kỳ nguồn nào EFSA nêu (cà phê, trà, ca cao/sô cô la, cola, guarana, nước tăng lực, taurine...).
-
-Cách xây dựng giống nhóm thai phụ: một câu hỏi trung tính duy nhất cho cả câu cờ và câu đối chứng (test kiểm tra mỗi chủ đề chỉ có một dạng câu hỏi), đối chứng lấy mẫu ngẫu nhiên với seed cố định và bằng đúng số câu cờ, cổng G3 quét lại toàn bộ bản phiên âm bằng mẫu regex riêng. Các chủ đề mới được thêm **sau** mọi chủ đề cũ nên không có id nào của 2.311 bản ghi trước đó thay đổi (đã kiểm tra: 0 bản ghi cũ bị đổi).
-
-Giới hạn: chỉ 14 nhãn có caffeine/cà phê và hầu hết nhãn không ghi hàm lượng, nên không thể ước tính mức tiếp xúc theo cân nặng; bằng chứng WHO cho trẻ em có độ chắc chắn thấp; mọi câu là cờ theo văn bản cơ quan, không phải khuyến cáo lâm sàng.
-
-## 6. Bản ghi bị loại (2.081 → 1.778, sau đó thêm 92 câu ở 5.10, 142 câu ở 5.11, 79 câu ở 5.12, 50 câu ở 5.13 và 170 câu ở 5.14)
+Nguyên tắc "không nguồn thì không đưa vào" đã loại 303 bản ghi của v4/v5 cũ, nên bộ 750 chỉ chứa những gì có nguồn kiểm chứng:
 
 | Lý do | Số bản ghi |
 |---|---:|
@@ -289,32 +230,43 @@ Giới hạn: chỉ 14 nhãn có caffeine/cà phê và hầu hết nhãn không 
 | Benzen ngoài đồ uống (nguồn chỉ bao trùm đồ uống) | 2 |
 | **Tổng** | **303** |
 
-Số lượng theo từng lý do ở bảng trên. Danh sách ID chi tiết của 303 bản ghi bị loại từng nằm trong thư mục sao lưu cũ và đã bị xóa cùng thư mục đó, nên không còn tệp liệt kê từng ID.
+Danh sách ID chi tiết của 303 bản ghi này đã không còn lưu, chỉ còn số lượng theo lý do.
 
-## 7. Giới hạn cần nêu khi công bố
+## 9. Giới hạn cần nêu khi công bố
 
-**Bộ chuẩn này không đo được:**
-- Phụ gia không-SAFE ngoài các chủ đề ở 5.10 (màu azo/EU, Red No. 3, aspartame, sulphite, TiO2, photphat, nitrit, nhóm McCann) vẫn thưa. Thai kỳ và trẻ em chỉ được đo qua cờ cảnh báo của vài nguồn (chất ngọt không đường WHO 2023, TiO2, nitrit, phẩm màu; riêng trẻ em thêm caffeine EFSA 2015), không đo qua đánh giá phụ gia riêng cho từng nhóm.
-- Đường chỉ được đo theo ngưỡng "không đường" của Codex trên 100 g (50 câu, 48 CAUTION và 2 SAFE); không đo ngưỡng WHO 10%/5% năng lượng vì ngưỡng đó tính theo cả ngày, không so được với một sản phẩm.
-- Mức caffeine an toàn cho trẻ em: EFSA 2015 kết luận không đủ thông tin để xác định, nên bộ chuẩn không có và không được tạo ra bất kỳ giới hạn nào cho trẻ. Chỉ 14 nhãn có cà phê/caffeine và hầu hết không ghi hàm lượng, nên không ước tính được mức tiếp xúc theo cân nặng.
-- Benzen trong thực phẩm không phải đồ uống.
-- 69 mã phụ gia chưa có ADI trên JECFA (phosphat nhóm phụ, 1100(i), 960d, 640, 965…), nên các câu hỏi chứa những mã này bị loại.
-- Tăng huyết áp chỉ đo qua natri (53 bản, ngưỡng Codex trên 100 g); không đo huyết áp hay tổng lượng natri trong ngày.
+Các giới hạn về cấu trúc bộ (nhãn phụ thuộc trụ cột, mẫu câu hỏi `T256` chiếm 11,3%, tầng silver 54,8%, một persona cho mỗi câu) xem [MO_TA_BO_DANH_GIA_750_CAU.md](MO_TA_BO_DANH_GIA_750_CAU.md), mục 7. Các giới hạn riêng về kiểm chứng:
+
+**Bộ này không đo được:**
+- Phụ gia không-SAFE ngoài các chủ đề đã có nguồn (màu azo/EU, Red No. 3, aspartame, sulphite, TiO2, photphat, nitrit, nhóm McCann) vẫn thưa. Thai kỳ và trẻ em chỉ được đo qua cờ cảnh báo của vài nguồn, không qua đánh giá phụ gia riêng cho từng nhóm.
+- Đường chỉ được đo theo ngưỡng "không đường" của Codex trên 100 g; không đo ngưỡng WHO 10%/5% năng lượng vì ngưỡng đó tính theo cả ngày, không so được với một sản phẩm.
+- Mức caffeine an toàn cho trẻ em: EFSA 2015 kết luận không đủ thông tin, nên bộ không có và không tạo ra giới hạn nào cho trẻ.
+- Tăng huyết áp chỉ đo qua natri trên 100 g, không đo huyết áp hay tổng lượng natri trong ngày.
+- Benzen trong thực phẩm không phải đồ uống; các mã phụ gia chưa có ADI trên JECFA (nhiều mã nhóm phụ như phosphate 339(ii), 450(ii), 1100(i), 960d, 640, 965).
 
 **Về phương pháp:**
-- **Ô nhỏ.** Ba ô có dưới 30 bản ghi: `insufficient_data` × UNSAFE (3), `insufficient_data` × CRITICAL_ALERT (2) và `vulnerable_groups` × CRITICAL_ALERT (21, toàn bộ là PKU với aspartame, đã dùng hết các nhãn có aspartame). Không thêm bản ghi vì không có nguồn đã kiểm chứng; `benchmark_report.py` chỉ báo số lượng và khoảng tin cậy Wilson cho các ô này (không báo F1), và đọc domain `insufficient_data` như quyết định nhị phân từ chối/trả lời (301 ABSTAIN, 76 còn lại).
-- **Tập đánh giá chuẩn FoodHealthQA 750 câu** `data/foodhealthqa_eval_set.jsonl` (tạo bằng `scripts_research/build_foodhealthqa_subset.py`): phân tầng cân bằng theo đúng 6 trụ cột chuyên môn (An toàn phụ gia 166, Dị ứng 165, Trẻ em 120, Bệnh nền 112, Thai phụ 105, Dinh dưỡng 82), khống chế $\le 4$ câu/ảnh, bao phủ 376 ảnh bao bì thực tế và 150 template khác nhau, có đầy đủ 5 nhãn an toàn (`SAFE` 285, `CAUTION` 277, `UNSAFE` 85, `ABSTAIN` 72, `CRITICAL_ALERT` 31), 100% đầy đủ 4 trường bắt buộc (*câu hỏi, câu trả lời, nguồn tham khảo, nhãn lĩnh vực*) phục vụ đánh giá so sánh các cấu hình A/B/C.
-- **Tập đánh giá cân bằng** `data/qa_eval_balanced.jsonl` (tạo bằng `scripts_research/build_eval_subset.py`, không sửa bộ chuẩn): mỗi template tối đa 30 câu, mỗi ảnh tối đa 4 câu, `insufficient_data` giảm ABSTAIN về 1× nhãn lớn kế tiếp (đa số còn khoảng 55%), các domain khác 2×. Đây là góc nhìn dẫn xuất để chạy thử và giảm chi phí; kết quả chính vẫn báo trên bộ đầy đủ theo tier.
-- **Nhóm trẻ em và PKU còn nhỏ** (child_5yo 254, pku_patient 57): chỉ nêu như quan sát. PKU bị giới hạn bởi số nhãn có aspartame; thêm bản ghi cần ảnh nhãn mới (cần cả bản ghi nền và phiên âm đã kiểm).
-- **Vòng tròn quy tắc ↔ guardrail.** Đáp án chuẩn được dẫn xuất bằng quy tắc, và guardrail của hệ thống dùng quy tắc/kho tri thức tương tự, nên điểm của cấu hình B/C có thể cao một phần do trùng logic; mức cải thiện so với cấu hình A (không truy xuất) vẫn có ý nghĩa, nhưng không diễn giải điểm B/C là độ an toàn thực tế.
-- Nhãn nhóm dễ tổn thương và nhóm natri là **cờ theo văn bản của cơ quan được trích**, không phải chẩn đoán hay khuyến cáo lâm sàng; chưa có chuyên gia đánh giá.
-- Kiểm tra nhãn với ảnh do một người thực hiện, chỉ một mặt bao bì mỗi sản phẩm; câu cảnh báo nằm ở mặt khác thì không phát hiện được. Một số ảnh bị cắt dở hoặc mờ (ví dụ 0472, dùng danh sách thành phần do người dùng cung cấp).
-- Bộ tái suy luận dị nguyên và cờ nhóm dễ tổn thương do cùng một người xây dựng nên không độc lập tuyệt đối.
-- 34 bản ghi (khoảng 1,5%) chỉ khẳng định về nhãn, không khẳng định pháp lý.
-- Hướng dẫn FDA Q&A là tài liệu không bắt buộc của Mỹ, chỉ dùng để giải thích cách hiểu "dẫn xuất từ dị nguyên"; nhãn trong dữ liệu là hàng bán tại Việt Nam, chưa đối chiếu văn bản pháp quy Việt Nam về dị nguyên (trong danh mục nhóm dị nguyên, mục Việt Nam đang ở trạng thái chờ kiểm tra văn bản chính thức).
-- Các script và test của quy trình v3/v4 đã bị xóa; bộ QA chỉ còn v5 và dựng lại bằng chuỗi script v5 (`verify_external_claims` → `add_authority_records_v5` → `create_benchmark_v5` → `finalize_benchmark_v5 --activate`). v3 vẫn có thể lấy từ lịch sử git (commit `d1612d35`). Thư mục `data/archive/backups_2026-11/` chỉ giữ các bản sao lưu trước mỗi lần mở rộng.
-- Mã sinh và kiểm các chủ đề mới (WHO NSS, INS listing/ADI, đường Codex, trẻ em) từng bị mất khỏi thư mục làm việc và đã được dựng lại từ nhật ký phiên làm việc; chạy lại chuỗi cho ra đúng 2.141 bản ghi giống hệt dữ liệu trước đó, nhưng nên giữ mọi thay đổi trong git để tránh lặp lại.
+- **Không có chuyên gia.** Điểm đo trên bộ này là số liệu theo nhãn kiểm chứng bằng quy tắc (exploratory), không phải hiệu năng gold standard.
+- **Vòng tròn quy tắc ↔ guardrail.** Đáp án chuẩn được dẫn xuất bằng quy tắc, và guardrail của hệ thống dùng quy tắc/kho tri thức tương tự, nên điểm của cấu hình B/C có thể cao một phần do trùng logic; không diễn giải điểm B/C là độ an toàn thực tế.
+- **Bộ tái suy luận dị nguyên và cờ nhóm dễ tổn thương** do cùng một người xây dựng nên không độc lập tuyệt đối.
+- **Kiểm tra nhãn với ảnh** do một người thực hiện, một mặt bao bì mỗi sản phẩm (mục 6).
+- **Ô nhỏ:** các ô nhãn có ít câu (xem mục 7 của MO_TA_BO_DANH_GIA_750_CAU.md) cần báo cáo kèm khoảng tin cậy; `benchmark_report.py` báo số lượng và khoảng tin cậy Wilson cho các ô này, không báo F1.
+- **Hướng dẫn FDA Q&A** là tài liệu không bắt buộc của Mỹ, chỉ dùng để giải thích cách hiểu "dẫn xuất từ dị nguyên" (1 câu trong bộ 750). Nhãn trong dữ liệu là hàng bán tại Việt Nam, nhưng chưa đối chiếu văn bản pháp quy Việt Nam về dị nguyên.
+- **Mã sinh dữ liệu từng bị mất** khỏi thư mục làm việc và đã được dựng lại từ nhật ký phiên làm việc; chạy lại chuỗi cho ra dữ liệu giống hệt dữ liệu trước đó. Nên giữ mọi thay đổi trong git để tránh lặp lại.
 
 **Về thực nghiệm (chưa có kết quả):**
-- Chưa chạy 3 cấu hình A (LLM không truy xuất), B (RAG trên văn bản chuẩn) và C (ảnh → OCR → RAG) trên bộ này, chưa đo CER/WER của OCR, chưa chạy ablation (retriever, top-k, embedding, prompt, nguồn tri thức), nên chưa có số liệu EM, F1, citation accuracy, groundedness, faithfulness hay độ an toàn. Mọi con số trong báo cáo này chỉ mô tả bộ dữ liệu và nguồn, không mô tả hiệu năng hệ thống.
-- Khi báo kết quả cần đi kèm: macro-F1 và baseline đa số theo domain, baseline theo template (cross-validated), khoảng tin cậy lấy mẫu lại theo ảnh, và ghi rõ các ô nhỏ ở trên. Bộ chỉ là silver (`expert_validated = false`), không gọi là gold.
+- Chưa chạy 3 cấu hình A (LLM không truy xuất), B (RAG trên văn bản chuẩn), C (ảnh → OCR → RAG) trên 750 câu, chưa đo CER/WER của OCR và chưa chạy ablation toàn diện. Vì vậy chưa có số liệu EM, F1, citation accuracy, groundedness, faithfulness hay độ an toàn của hệ thống. Mọi con số trong báo cáo này chỉ mô tả bộ dữ liệu và nguồn, không mô tả hiệu năng hệ thống.
+- Đã đo chất lượng truy xuất đoạn bằng chứng trên 750 câu (không gọi LLM); kết quả ở `docs/QUY_TRINH_3_CAU_HINH_HE_THONG.md`, mục 4.6.
+- Khi báo kết quả cần đi kèm: macro-F1 và baseline đa số theo trụ cột, báo cáo theo `template_id`, khoảng tin cậy lấy mẫu lại theo ảnh (`split_group`), và ghi rõ các ô nhỏ ở trên. Bộ chỉ là silver, không gọi là gold.
+
+## 10. Truy vết và dựng lại
+
+| Thành phần | Vị trí |
+|---|---|
+| Bộ đánh giá 750 câu | `data/foodhealthqa_eval_set.{jsonl,csv,_summary.json}`, dựng bằng `scripts_research/build_foodhealthqa_subset.py` (seed 42) |
+| Bản nguồn v5 (2.311 bản ghi) | `data/qa_benchmark.{jsonl,csv}`, chỉ để dựng bộ 750 |
+| Kiểm tra từng bản ghi | `data/build/qa_verification.csv`; kèm `qa_fix_list.csv`, `qa_activation_report.json`, `qa_build_full.jsonl`, `qa_input_source_verified.*` |
+| Khẳng định nguồn đã kiểm | `knowledge_base/sources/derived/external_claim_verification.json`, `jecfa_adi_verification*.json`, `codex_192_ins_codes.json`, `tt24_*.json` |
+| Danh mục nguồn (tên tài liệu, mục, URL) | `knowledge_base/sources/catalog/source_citation_catalog.json` |
+| Tài liệu gốc và băm sha256 | `knowledge_base/sources/raw/`, `catalog/external_sources_manifest.json` |
+| Kiểm tra nhãn với ảnh | `data/label_audit_*.csv` |
+
+Dựng lại bản nguồn: `verify_external_claims.py` → `add_authority_records_v5.py` → `create_benchmark_v5.py` → `verify_v5_answers.py` → `finalize_benchmark_v5.py`; sau đó dựng lại bộ 750 bằng `build_foodhealthqa_subset.py`. Khi chia train/validation/test hoặc lấy mẫu lại **bắt buộc theo `split_group`** (một ảnh là một nhóm), không chia ngẫu nhiên theo dòng.

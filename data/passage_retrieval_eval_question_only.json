@@ -1,0 +1,256 @@
+{
+  "data": "D:\\FoodHealthQA__\\data\\foodhealthqa_eval_set.jsonl",
+  "linking": "none",
+  "dense_model": "bge-m3",
+  "n_corpus": 1095,
+  "corpus_kinds": {
+    "additive_identity": 50,
+    "vn_regulation": 50,
+    "tt24_positive_list": 51,
+    "tt24_usage_limits": 178,
+    "jecfa_adi": 201,
+    "codex_membership": 514,
+    "external_claim": 30,
+    "allergen_group": 21
+  },
+  "runs": {
+    "bm25": {
+      "@1": {
+        "ins_hit": 0.0786,
+        "citation_recall": 0.2549,
+        "locator_hit": 0.3427,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.2523,
+        "citation_recall": 0.2898,
+        "locator_hit": 0.452,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.3327,
+        "citation_recall": 0.2983,
+        "locator_hit": 0.4667,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.4717,
+        "citation_recall": 0.3284,
+        "locator_hit": 0.5067,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "tfidf": {
+      "@1": {
+        "ins_hit": 0.0859,
+        "citation_recall": 0.1361,
+        "locator_hit": 0.2467,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.2431,
+        "citation_recall": 0.273,
+        "locator_hit": 0.432,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.3346,
+        "citation_recall": 0.2951,
+        "locator_hit": 0.4613,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.4753,
+        "citation_recall": 0.4654,
+        "locator_hit": 0.5947,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "dense": {
+      "@1": {
+        "ins_hit": 0.1079,
+        "citation_recall": 0.5273,
+        "locator_hit": 0.5267,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.2505,
+        "citation_recall": 0.5998,
+        "locator_hit": 0.6813,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.3126,
+        "citation_recall": 0.6433,
+        "locator_hit": 0.7387,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.4717,
+        "citation_recall": 0.7194,
+        "locator_hit": 0.8227,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "hybrid": {
+      "@1": {
+        "ins_hit": 0.0859,
+        "citation_recall": 0.243,
+        "locator_hit": 0.3187,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.2614,
+        "citation_recall": 0.2861,
+        "locator_hit": 0.4507,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.3309,
+        "citation_recall": 0.2958,
+        "locator_hit": 0.4653,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.4735,
+        "citation_recall": 0.329,
+        "locator_hit": 0.5027,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "hybrid_exact": {
+      "@1": {
+        "ins_hit": 0.0859,
+        "citation_recall": 0.243,
+        "locator_hit": 0.3187,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.4223,
+        "citation_recall": 0.3141,
+        "locator_hit": 0.476,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.4589,
+        "citation_recall": 0.3251,
+        "locator_hit": 0.492,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.5759,
+        "citation_recall": 0.3663,
+        "locator_hit": 0.528,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "hybrid_dense": {
+      "@1": {
+        "ins_hit": 0.0914,
+        "citation_recall": 0.3676,
+        "locator_hit": 0.5093,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.2285,
+        "citation_recall": 0.4607,
+        "locator_hit": 0.592,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.3437,
+        "citation_recall": 0.4999,
+        "locator_hit": 0.6453,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.5009,
+        "citation_recall": 0.5199,
+        "locator_hit": 0.6893,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    },
+    "hybrid_dense_exact": {
+      "@1": {
+        "ins_hit": 0.0914,
+        "citation_recall": 0.3676,
+        "locator_hit": 0.5093,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@3": {
+        "ins_hit": 0.3766,
+        "citation_recall": 0.4753,
+        "locator_hit": 0.6013,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@5": {
+        "ins_hit": 0.457,
+        "citation_recall": 0.5132,
+        "locator_hit": 0.652,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      },
+      "@10": {
+        "ins_hit": 0.5941,
+        "citation_recall": 0.5599,
+        "locator_hit": 0.7213,
+        "n_ins": 547,
+        "n_cit": 750,
+        "n_loc": 750
+      }
+    }
+  }
+}
