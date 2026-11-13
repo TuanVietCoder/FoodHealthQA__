@@ -1,7 +1,23 @@
+# ── Runtime chính (Streamlit demo app) ────────────────────────────────
 streamlit>=1.30.0
 pillow>=10.0.0
-pandas>=2.0.0
-opencv-python>=4.8.0
+pandas>=2.0.0,<3.0.0
 pyarrow<18.0.0
 python-dotenv>=1.0.0
 google-genai>=1.0.0
+
+# Dựng lại registry phụ gia từ PDF văn bản hợp nhất TT24
+PyMuPDF>=1.24.0
+
+# ── OCR Pipeline ───────────────────────────────────────────────────────
+# Yêu cầu Python 3.10–3.11 (không tương thích Python 3.12+)
+# Cài đúng thứ tự: numpy → paddlepaddle → paddleocr → torch → vietocr
+numpy==1.26.4
+opencv-python>=4.8.0
+paddlepaddle==2.6.2
+paddleocr==2.9.1
+# PyTorch CPU (Text Recognition với VietOCR):
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.3.1+cpu
+torchvision==0.18.1+cpu
+vietocr==0.3.13

@@ -1,0 +1,52 @@
+{
+  "active_version": "v5",
+  "benchmarks": {
+    "v5": {
+      "csv": "qa_benchmark.csv",
+      "jsonl": "qa_benchmark.jsonl",
+      "record_count": 2141,
+      "status": "rule_verified_tiered_no_expert",
+      "derived_from": "v4",
+      "created_date": "2026-11-08",
+      "expert_validated": false,
+      "label_validation": "rule_based_independent_rederivation_plus_label_text_adjudication",
+      "evaluation_use": "use_tier_core_for_primary_comparison; silver_secondary; excluded_tiers_not_for_scoring",
+      "tier_distribution": {
+        "core": 1498,
+        "silver": 643
+      },
+      "label_v5_distribution": {
+        "PERMITTED_LISTED": 433,
+        "UNSAFE": 387,
+        "NOT_DECLARED": 156,
+        "ABSTAIN": 351,
+        "SAFE": 326,
+        "CAUTION": 379,
+        "CRITICAL_ALERT": 109
+      },
+      "fix_list": "build/qa_fix_list.csv",
+      "build_script": "scripts_research/create_benchmark_v5.py",
+      "new_label_values": [
+        "PERMITTED_LISTED",
+        "NOT_DECLARED"
+      ],
+      "scored_record_count": 2141,
+      "activation_report": "build/qa_activation_report.json",
+      "full_audit_file": "build/qa_build_full.jsonl",
+      "gold_safety_label_distribution": {
+        "SAFE": 759,
+        "UNSAFE": 387,
+        "CAUTION": 535,
+        "ABSTAIN": 351,
+        "CRITICAL_ALERT": 109
+      },
+      "split_group_field": "split_group (one photo = one group; split and bootstrap by it)",
+      "template_id_field": "template_id (question template within domain; report per template)",
+      "tier_usage": {
+        "core": "primary comparison score",
+        "silver": "secondary, reported separately (authority-flag / threshold answers; includes all vulnerable_groups)"
+      },
+      "report_script": "scripts_research/benchmark_report.py"
+    }
+  }
+}

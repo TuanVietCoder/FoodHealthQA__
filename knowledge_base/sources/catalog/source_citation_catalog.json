@@ -1,0 +1,1423 @@
+{
+  "VN_TT24_2019#PhuLuc1_Bang1": {
+    "citation_id": "VN_TT24_2019",
+    "title": "Thông tư 24/2019/TT-BYT & VBHN 09/VBHN-BYT 2024 - Quản lý và sử dụng phụ gia thực phẩm",
+    "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/9/09-vbhn-byt.pdf",
+    "scope": "Phụ lục 1, Bảng 1: Danh mục phụ gia thực phẩm được phép sử dụng tại Việt Nam (Positive List)."
+  },
+  "CODEX_STAN_192_1995#Table3_GMP": {
+    "citation_id": "CODEX_STAN_192_1995",
+    "title": "Codex General Standard for Food Additives CXS 192-1995 (Adopted 1995, Revised 2023)",
+    "url": "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/en/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXS%2B192-1995%252FCXS_192e.pdf",
+    "scope": "Table 3: Additives Permitted for Use in Food in General in Accordance with GMP.",
+    "verified_against": "knowledge_base/sources/raw/external/cxs_192e.pdf (membership per code: knowledge_base/sources/derived/codex_192_ins_codes.json)"
+  },
+  "CODEX_CXS_1_1985#Sec4.2.1.4": {
+    "citation_id": "CODEX_CXS_1_1985",
+    "title": "Codex General Standard for the Labelling of Prepackaged Foods CXS 1-1985 (Rev. 1-1991)",
+    "url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+    "scope": "s.4.2.1.4: foods always declared as allergenic (cereals containing gluten - wheat, rye, barley; crustacea; eggs; fish; peanuts; milk; sesame; six specific tree nuts). s.4.2.1.5: foods that may also be required (includes soybean, oats). Annex (2026): guidelines on precautionary allergen labelling.",
+    "verified_against": "knowledge_base/sources/raw/external/cxs_001e.pdf"
+  },
+  "CODEX_CXG_36_1989#ClassNames_INS": {
+    "citation_id": "CODEX_CXG_36_1989",
+    "title": "Codex Class Names and the International Numbering System for Food Additives CXG 36-1989",
+    "url": "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/en/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXG%2B36-1989%252FCXG_036e.pdf",
+    "scope": "Section 1-3: Functional classes and INS numbering system.",
+    "verified_against": "knowledge_base/sources/raw/external/cxg_036e.pdf"
+  },
+  "US_FDA_FALCPA_2004#Sec203": {
+    "citation_id": "US_FDA_FALCPA",
+    "title": "US FDA Food Allergen Labeling and Consumer Protection Act of 2004 (FALCPA) & FASTER Act 2021",
+    "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies",
+    "scope": "FALCPA 2004 labelling provisions. The list of major food allergens is defined in 21 U.S.C. 321(qq) (see US_CODE_21_321#qq_major_food_allergen)."
+  },
+  "US_FDA_21CFR172.804#b": {
+    "citation_id": "US_FDA_21CFR172_804",
+    "title": "21 CFR 172.804 - Aspartame (label statement for phenylketonurics)",
+    "url": "https://www.law.cornell.edu/cfr/text/21/172.804",
+    "scope": "Paragraph (d)(2): label must bear 'PHENYLKETONURICS: CONTAINS PHENYLALANINE'. (Key keeps the old '#b' suffix for backward compatibility; the statement is in (d)(2).)",
+    "verified_against": "knowledge_base/sources/raw/external/US_CFR_21_172_804.html"
+  },
+  "FAO_WHO_JEMRA_2021_PART1#PriorityAllergens": {
+    "citation_id": "WHO_JEMRA_PRIORITY_ALLERGENS",
+    "title": "FAO/WHO JEMRA Food Allergen Risk Assessment: Part 1 - Review and validation of Codex priority allergen list",
+    "url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+    "scope": "Part 1 summary: recommended global priority allergens = cereals containing gluten, crustacea, eggs, fish, milk, peanuts, sesame, specific tree nuts (almond, cashew, hazelnut, pecan, pistachio, walnut). Soybean, oats, molluscs are not global priority allergens. (Threshold doses are Part 2, not Part 1.)",
+    "verified_against": "knowledge_base/sources/raw/external/JEMRA_2021_PART1_SUMMARY.pdf"
+  },
+  "FAO_WHO_JEMRA_2021_PART3#PAL_Guidance": {
+    "citation_id": "FAO_WHO_JEMRA_PART_3",
+    "title": "FAO/WHO Risk assessment of food allergens, Part 3: review and establish precautionary labelling in foods of the priority allergens (meeting report, 2023)",
+    "url": "https://www.who.int/publications/i/item/9789240072510",
+    "scope": "Review of precautionary allergen labelling (PAL): current PAL systems were found neither uniform nor informative. Full meeting report: 104 pages (Food safety and food quality series No. 16, WHO/FAO 2023, ISBN 978-92-4-007251-0).",
+    "verified_against": "knowledge_base/sources/raw/external/JEMRA_PART3.pdf"
+  },
+  "EFSA_ANS_2021_6585#E171_NotSafe": {
+    "citation_id": "EFSA_2021_TITANIUM_DIOXIDE_E171",
+    "title": "EFSA Journal 2021;19(5):6585 - Safety assessment of titanium dioxide (E171)",
+    "url": "https://www.efsa.europa.eu/en/efsajournal/pub/6585",
+    "scope": "Genotoxicity concern; titanium dioxide can no longer be considered safe.",
+    "verified_against": "knowledge_base/sources/raw/external/efsa_2021_6585.pdf (full text)"
+  },
+  "USDA_FDC#NutrientThresholds": {
+    "citation_id": "USDA_FDC",
+    "title": "USDA FoodData Central Nutrient Profiles & Daily Value Reference Thresholds",
+    "url": "https://fdc.nal.usda.gov/",
+    "scope": "Standard reference nutrient database and daily value nutritional criteria. [WARNING: USDA FoodData Central holds composition data, not nutrient-claim thresholds; thresholds are in 21 CFR 101.54/101.61 and are per RACC.]"
+  },
+  "EFSA_ANS_2019_5674#Phosphates_ADI40": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates (E 338-341, E 450-452)",
+    "url": "https://doi.org/10.2903/j.efsa.2019.5674",
+    "scope": "Group ADI 40 mg/kg bw/day expressed as phosphorus (E 338-341, E 343, E 450-452): protective for healthy adults; does not apply to humans with moderate to severe reduction in renal function.",
+    "verified_against": "knowledge_base/sources/raw/external/efsa_2019_5674.pdf (full text)"
+  },
+  "EFSA_ANS_2008_852#AzoDyes_Hyperactivity_Children": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2008;6(3):660 - Assessment of the results of the study by McCann et al. (2007) on the effect of some colours and sodium benzoate on children's behaviour",
+    "url": "https://doi.org/10.2903/j.efsa.2008.660",
+    "scope": "Evaluates effect of E102, E104, E110, E122, E124, E129 on child activity/attention; basis for EU mandatory warning. [Corrected 2026-11-08: the previous DOI ...2008.852 is an unrelated xylitol health-claim opinion; the key keeps its legacy '852' name for compatibility.]",
+    "verified_against": "knowledge_base/sources/raw/external/efsa_2008_660.pdf (full text)"
+  },
+  "EFSA_ANS_2017_4786#Nitrite_Methemoglobin": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2017;15(6):4786 - Re-evaluation of sodium nitrite (E 250) and potassium nitrite (E 249)",
+    "url": "https://www.efsa.europa.eu/en/efsajournal/pub/4786",
+    "scope": "ADI 0.07 mg/kg bw/day; highlights methemoglobinemia risk in young infants and vulnerable groups.",
+    "verified_against": "knowledge_base/sources/raw/external/efsa_2017_4786.pdf (full text)"
+  },
+  "EFSA_ANS_2017_4910#Glutamates_ADI30": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2017;15(7):4910 - Re-evaluation of glutamic acid and glutamates (E 620-625)",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009848/",
+    "scope": "Establishes group ADI 30 mg/kg bw/day expressed as glutamic acid."
+  },
+  "EFSA_ANS_2017_4911#ModifiedStarches_NoADI": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2017;15(10):4911 - Re-evaluation of modified starches",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009865/",
+    "scope": "No numerical ADI necessary; no safety concern at reported use levels."
+  },
+  "EFSA_ANS_2022_7594#Sulfites_Safety": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2022;20(11):7594 - Follow-up on the re-evaluation of sulfur dioxide and sulfites",
+    "url": "https://www.efsa.europa.eu/en/efsajournal/pub/7594",
+    "scope": "Reaffirms sensitivity in asthmatic individuals and exposure concerns."
+  },
+  "EFSA_ANS_2011_2392#BHA_ADI1.0": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2011;9(10):2392 - Re-evaluation of butylated hydroxyanisole - BHA (E 320)",
+    "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2392",
+    "scope": "Increases ADI from 0.5 to 1.0 mg/kg bw/day based on new toxicological data."
+  },
+  "EFSA_ANS_2011_2004#CaramelIV_Exposure": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2011;9(3):2004 - Scientific Opinion on the re-evaluation of caramel colours",
+    "url": "https://www.efsa.europa.eu/en/efsajournal/pub/2004",
+    "scope": "Group ADI 300 mg/kg bw/day; 4-MEI exposure within acceptable toxicological limits."
+  },
+  "EFSA_FAP_2025_9317#AcesulfameK_Reevaluation": {
+    "citation_id": "EFSA_OPINIONS",
+    "title": "EFSA Journal 2025 - Re-evaluation of acesulfame K (E 950)",
+    "url": "https://doi.org/10.2903/j.efsa.2025.9317",
+    "scope": "Reaffirms ADI 0-9 mg/kg bw/day."
+  },
+  "WHO_FAO_JECFA_2023#Chemical62_Aspartame": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Aspartame (INS 951)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/62",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-40 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2434_AcesulfamePotassium": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Acesulfame potassium (INS 950)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2434",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-15 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2340_Sucralose": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SUCRALOSE (INS 955)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2340",
+    "scope": "Latest evaluation 1990: ADI 0-15 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2340.html"
+  },
+  "WHO_FAO_JECFA#Chemical2605_SteviolGlycosides": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Steviol glycosides (INS 960)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2605",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw (as steviol)."
+  },
+  "WHO_FAO_JECFA#Chemical2339_Neotame": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Neotame (INS 961)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2339",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-2 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1889_Sorbitol_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sorbitol (INS 420)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1889",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1909_MonosodiumGlutamate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Monosodium L-glutamate (INS 621)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1909",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1907_DisodiumGuanylate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Disodium 5'-guanylate (INS 627)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1907",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1908_DisodiumInosinate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Disodium 5'-inosinate (INS 631)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1908",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1910_SodiumBenzoate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium benzoate (INS 211)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-5 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2443_PotassiumSorbate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Potassium sorbate (INS 202)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-25 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2018_SulfurDioxide": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sulfur dioxide (INS 220)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2018",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.7 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2019_SodiumSulfite": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium sulfite (INS 221)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2019",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.7 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2444_SodiumNitrite": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium nitrite (INS 250)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2444",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.07 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical2445_SodiumNitrate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium nitrate (INS 251)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2445",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-3.7 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1845_AscorbicAcid_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Ascorbic acid (INS 300)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1845",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1847_BHA": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Butylated hydroxyanisole (BHA) (INS 320)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1847",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.5 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1848_BHT": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Butylated hydroxytoluene (BHT) (INS 321)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1848",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.3 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1849_Lecithin_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Lecithin (INS 322)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1849",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1850_CitricAcid_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Citric acid (INS 330)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1850",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1912_TrisodiumCitrate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Trisodium citrate (INS 331(III))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1912",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1893_SodiumHydrogenCarbonate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium hydrogen carbonate (INS 500(II))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1893",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1894_AmmoniumHydrogenCarbonate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Ammonium hydrogen carbonate (INS 503(II))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1894",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1891_SodiumAcetate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium acetate (INS 262(I))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1891",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1870_SodiumAlginate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium alginate (INS 401)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1870",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1872_Carrageenan_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Carrageenan (INS 407)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1872",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1874_CarobBeanGum_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Carob bean gum (INS 410)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1874",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1875_GuarGum_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Guar gum (INS 412)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1875",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1876_GumArabic_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Gum arabic (INS 414)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1876",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1877_XanthanGum_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Xanthan gum (INS 415)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1877",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1878_Pectin_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Pectins (INS 440)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1878",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1880_MonoDiglycerides_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Mono- and diglycerides of fatty acids (INS 471)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1880",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1897_SiliconDioxide_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Silicon dioxide, amorphous (INS 551)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1897",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1900_StarchAcetate_GMP": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Starch acetate (INS 1420)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1900",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
+  },
+  "WHO_FAO_JECFA#Chemical1852_CaramelIV": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Caramel IV - sulfite ammonia caramel (INS 150D)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1852",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-200 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1854_Tartrazine": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Tartrazine (INS 102)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1854",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-10 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1856_QuinolineYellow": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Quinoline Yellow (INS 104)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1856",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-3 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1857_SunsetYellow": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sunset Yellow FCF (INS 110)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1857",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1859_Azorubine": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Azorubine (INS 122)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1859",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1860_Ponceau4R": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Ponceau 4R (INS 124)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1860",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1862_AlluraRed": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Allura Red AC (INS 129)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1862",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-7 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1863_BrilliantBlue": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Brilliant Blue FCF (INS 133)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1863",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-6 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1866_TitaniumDioxide": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Titanium dioxide (INS 171)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1866",
+    "scope": "Chemical identity and toxicological evaluation; ADI: ADI not limited."
+  },
+  "WHO_FAO_JECFA#BetaCarotenes_Evaluation": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Beta-carotenes (INS 160A)",
+    "url": "https://cdn.who.int/media/docs/default-source/food-safety/jecfa/summary-and-conclusions/jecfa87_4-13-june-2019_summary-and-conclusion.pdf",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-5 mg/kg bw."
+  },
+  "WHO_FAO_JECFA#Chemical1890_PhosphoricAcid_MTDI70": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Phosphoric acid (INS 338)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1890",
+    "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
+  },
+  "WHO_FAO_JECFA#Chemical1915_SodiumPhosphates_MTDI70": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium dihydrogen phosphate (INS 339(I))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1915",
+    "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
+  },
+  "WHO_FAO_JECFA#Chemical1916_CalciumPhosphates_MTDI70": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Calcium dihydrogen phosphate (INS 341(I))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1916",
+    "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
+  },
+  "WHO_FAO_JECFA#Chemical1917_Diphosphates_MTDI70": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Disodium diphosphate (INS 450(I))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1917",
+    "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
+  },
+  "WHO_FAO_JECFA#Chemical1918_Polyphosphates_MTDI70": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO/FAO JECFA Chemical Monograph - Sodium polyphosphate (INS 452(I))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1918",
+    "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
+  },
+  "WHO_FAO_JECFA#Compendium_Additives_ADI": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "FAO/WHO JECFA Combined Compendium of Food Additive Specifications & Evaluations",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
+    "scope": "General JECFA toxicological monographs and ADI evaluations for approved food additives."
+  },
+  "US_CODE_21_321#qq_major_food_allergen": {
+    "citation_id": "US_FDA_FALCPA",
+    "title": "21 U.S.C. 321(qq) - definition of 'major food allergen' (added by FALCPA 2004, sesame added by the FASTER Act)",
+    "url": "https://www.law.cornell.edu/uscode/text/21/321",
+    "scope": "(qq)(1): milk, egg, fish, crustacean shellfish, tree nuts, wheat, peanuts, soybeans and sesame. Molluscs are not included.",
+    "verified_against": "knowledge_base/sources/raw/external/US_CODE_21_321.html"
+  },
+  "WHO_FAO_JECFA#Chemical59_AscorbicAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ASCORBIC ACID (INS 300)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/59",
+    "scope": "Latest evaluation 1981: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_59.html"
+  },
+  "WHO_FAO_JECFA#Chemical1477_Lecithin": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - LECITHIN (INS 322(i))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1477",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1477.html"
+  },
+  "WHO_FAO_JECFA#Chemical3594_CitricAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CITRIC ACID (INS 330)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3594",
+    "scope": "Latest evaluation 2014: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3594.html"
+  },
+  "WHO_FAO_JECFA#Chemical1823_SodiumAlginate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM ALGINATE (INS 401)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1823",
+    "scope": "Latest evaluation 1992: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1823.html"
+  },
+  "WHO_FAO_JECFA#Chemical377_Carrageenan": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARRAGEENAN (INS 407)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/377",
+    "scope": "Latest evaluation 2014: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_377.html"
+  },
+  "WHO_FAO_JECFA#Chemical3043_Pectins": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PECTINS (INS 440)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3043",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3043.html"
+  },
+  "WHO_FAO_JECFA#Chemical1892_SodiumHydrogenCarbonate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM HYDROGEN CARBONATE (INS 500(ii))",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1892",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1892.html"
+  },
+  "WHO_FAO_JECFA#Chemical2461_Silica": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SILICA (INS 551)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2461",
+    "scope": "Latest evaluation 2017: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2461.html"
+  },
+  "WHO_FAO_JECFA#Chemical822_Disodium5Guanylate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DISODIUM 5'-GUANYLATE (INS 627)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/822",
+    "scope": "Latest evaluation 1993: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_822.html"
+  },
+  "WHO_FAO_JECFA#Chemical802_XanthanGum": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - XANTHAN GUM (INS 415)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/802",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_802.html"
+  },
+  "WHO_FAO_JECFA#Chemical2512_Disodium5Inosinate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DISODIUM 5'-INOSINATE (INS 631)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2512",
+    "scope": "Latest evaluation 1993: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2512.html"
+  },
+  "WHO_FAO_JECFA#Chemical863_GuarGum": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GUAR GUM (INS 412)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/863",
+    "scope": "Latest evaluation 1975: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_863.html"
+  },
+  "CODEX_STAN_192_1995#TableOne_TableThree": {
+    "citation_id": "CODEX_STAN_192_1995",
+    "title": "Codex CXS 192-1995 General Standard for Food Additives (2026 revision) - Table One and Table Three",
+    "url": "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/en/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXS%2B192-1995%252FCXS_192e.pdf",
+    "scope": "Table One: provisions by additive and food category (conditional use). Table Three: additives permitted in food in general under GMP, unless otherwise specified. An INS code absent from Table Three (e.g. 211, 202, 951) is not permitted in food in general.",
+    "verified_against": "knowledge_base/sources/raw/external/cxs_192e.pdf; INS code sets in knowledge_base/sources/derived/codex_192_ins_codes.json"
+  },
+  "US_CFR_21_101_61#sodium_claims": {
+    "citation_id": "US_FDA_21CFR101_61",
+    "title": "21 CFR 101.61 - Nutrient content claims for the sodium content of food",
+    "url": "https://www.law.cornell.edu/cfr/text/21/101.61",
+    "scope": "Sodium free <5 mg, very low <=35 mg, low <=140 mg - each per reference amount customarily consumed (RACC); not per 100 g or label serving.",
+    "verified_against": "knowledge_base/sources/raw/external/US_CFR_21_101_61.html"
+  },
+  "US_CFR_21_101_54#high_good_source": {
+    "citation_id": "US_FDA_21CFR101_54",
+    "title": "21 CFR 101.54 - Nutrient content claims for 'good source', 'high', 'more'",
+    "url": "https://www.law.cornell.edu/cfr/text/21/101.54",
+    "scope": "'High' = 20 percent or more of the RDI/DRV per reference amount customarily consumed.",
+    "verified_against": "knowledge_base/sources/raw/external/US_CFR_21_101_54.html"
+  },
+  "FDA_BENZENE_QA#beverages": {
+    "citation_id": "US_FDA_BENZENE_QA",
+    "title": "FDA Q&A on the occurrence of benzene in soft drinks and other beverages",
+    "url": "https://www.fda.gov/food/chemicals/questions-and-answers-occurrence-benzene-soft-drinks-and-other-beverages",
+    "scope": "Benzene can form at ppb levels in some beverages containing benzoate salts and ascorbic acid. Covers beverages only.",
+    "verified_against": "knowledge_base/sources/raw/external/FDA_BENZENE_QA.html"
+  },
+  "CODEX_CAC_GL_23_1997#Table_Sodium": {
+    "citation_id": "CODEX_CAC_GL_23_1997",
+    "title": "Codex Guidelines for Use of Nutrition and Health Claims CAC/GL 23-1997 (adopted 1997, amended through 2013)",
+    "url": "https://www.fao.org/input/download/standards/351/CXG_023e.pdf",
+    "scope": "Table of conditions for nutrient content claims: sodium low <= 0.12 g per 100 g, very low <= 0.04 g per 100 g, free <= 0.005 g per 100 g. Thresholds are per 100 g, so they can be applied to label values that are stated (or can be converted) per 100 g/100 ml; the FDA thresholds in 21 CFR 101.61 are per reference amount customarily consumed instead.",
+    "verified_against": "knowledge_base/sources/raw/external/cxg_023e.pdf"
+  },
+  "WHO_FAO_JECFA#Chemical1355_Curcumin": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CURCUMIN (INS 100i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1355",
+    "scope": "Latest evaluation 2003: ADI 0-3 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1355.html"
+  },
+  "WHO_FAO_JECFA#Chemical252_PowderedTurmeric": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POWDERED TURMERIC (INS 100ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/252",
+    "scope": "Latest evaluation 1986: ADI NO ADI ALLOCATED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_252.html"
+  },
+  "WHO_FAO_JECFA#Chemical4092_RiboflavinFromBacillusSubtilis": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - RIBOFLAVIN from BACILLUS SUBTILIS (INS 101iii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4092",
+    "scope": "Latest evaluation 2021: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4092.html"
+  },
+  "WHO_FAO_JECFA#Chemical3885_Tartrazine": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - TARTRAZINE (INS 102)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3885",
+    "scope": "Latest evaluation 2016: ADI 0–10 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3885.html"
+  },
+  "WHO_FAO_JECFA#Chemical1079_Carmines": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARMINES (INS 120)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1079",
+    "scope": "Latest evaluation 2000: ADI 0-5 mg/kg bw (1982).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1079.html"
+  },
+  "WHO_FAO_JECFA#Chemical3389_ModifiedPolydextroses": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - MODIFIED POLYDEXTROSES (INS 1200)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3389",
+    "scope": "Latest evaluation 1987: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3389.html"
+  },
+  "WHO_FAO_JECFA#Chemical3740_Erythrosine": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ERYTHROSINE (INS 127)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3740",
+    "scope": "Latest evaluation 2018: ADI 0-0.1 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3740.html"
+  },
+  "WHO_FAO_JECFA#Chemical2361_AlluraRedAc": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ALLURA RED AC (INS 129)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2361",
+    "scope": "Latest evaluation 2016: ADI 0–7 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2361.html"
+  },
+  "WHO_FAO_JECFA#Chemical3309_BrilliantBlueFcf": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - BRILLIANT BLUE FCF (INS 133)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3309",
+    "scope": "Latest evaluation 2017: ADI 0–6 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3309.html"
+  },
+  "WHO_FAO_JECFA#Chemical4486_PaprikaOleoresin": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PAPRIKA OLEORESIN (INS 160ci)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4486",
+    "scope": "Latest evaluation 2000: ADI No safety concern at current levels of intake when used as a flavouring agent.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4486.html"
+  },
+  "WHO_FAO_JECFA#Chemical5866_PaprikaExtract": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PAPRIKA extract (INS 160cii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5866",
+    "scope": "Latest evaluation 2014: ADI 0–1.5 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_5866.html"
+  },
+  "WHO_FAO_JECFA#Chemical877_BeetRed": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - BEET RED (INS 162)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/877",
+    "scope": "Latest evaluation 1987: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_877.html"
+  },
+  "WHO_FAO_JECFA#Chemical6197_GardeniaYellow": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GARDENIA YELLOW  (INS 164)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/6197",
+    "scope": "Latest evaluation 2014: ADI NOT ALLOCATED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_6197.html"
+  },
+  "WHO_FAO_JECFA#Chemical457_CalciumCarbonate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM CARBONATE (INS 170i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/457",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_457.html"
+  },
+  "WHO_FAO_JECFA#Chemical2443_SorbicAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SORBIC ACID (INS 200)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
+    "scope": "Latest evaluation 1973: ADI 0-25 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2443.html"
+  },
+  "WHO_FAO_JECFA#Chemical2724_PotassiumSorbate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POTASSIUM SORBATE (INS 202)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2724",
+    "scope": "Latest evaluation 1973: ADI 0-25 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2724.html"
+  },
+  "WHO_FAO_JECFA#Chemical1098_SodiumBenzoate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM BENZOATE (INS 211)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1098",
+    "scope": "Latest evaluation 2021: ADI 0–20 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1098.html"
+  },
+  "WHO_FAO_JECFA#Chemical2821_DisodiumSulfite": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DISODIUM SULFITE (INS 221)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2821",
+    "scope": "Latest evaluation 1998: ADI 0-0.7 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2821.html"
+  },
+  "WHO_FAO_JECFA#Chemical1824_SodiumMetabisulfite": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM METABISULFITE (INS 223)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1824",
+    "scope": "Latest evaluation 1998: ADI 0-0.7 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1824.html"
+  },
+  "WHO_FAO_JECFA#Chemical572_NisinA": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - NISIN A (INS 234)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/572",
+    "scope": "Latest evaluation 2024: ADI 0-2 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_572.html"
+  },
+  "WHO_FAO_JECFA#Chemical2970_SodiumAcetate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM ACETATE (INS 262i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2970",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2970.html"
+  },
+  "WHO_FAO_JECFA#Chemical2804_CalciumAcetate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM ACETATE (INS 263)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2804",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2804.html"
+  },
+  "WHO_FAO_JECFA#Chemical3999_SodiumPropionate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM PROPIONATE (INS 281)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3999",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3999.html"
+  },
+  "WHO_FAO_JECFA#Chemical2163_CalciumPropionate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM PROPIONATE (INS 282)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2163",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2163.html"
+  },
+  "WHO_FAO_JECFA#Chemical592_CarbonDioxide": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARBON DIOXIDE (INS 290)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/592",
+    "scope": "Latest evaluation 1985: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_592.html"
+  },
+  "WHO_FAO_JECFA#Chemical2372_SodiumAscorbate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM ASCORBATE (INS 301)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2372",
+    "scope": "Latest evaluation 1981: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2372.html"
+  },
+  "WHO_FAO_JECFA#Chemical60_AscorbylPalmitate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ASCORBYL PALMITATE (INS 304)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/60",
+    "scope": "Latest evaluation 2025: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_60.html"
+  },
+  "WHO_FAO_JECFA#Chemical1272_PropylGallate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PROPYL GALLATE (INS 310)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1272",
+    "scope": "Latest evaluation 1996: ADI 0-1.4 mg/kg bw (1993).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1272.html"
+  },
+  "WHO_FAO_JECFA#Chemical2641_SodiumErythorbate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM ERYTHORBATE (INS 316)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2641",
+    "scope": "Latest evaluation 1990: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2641.html"
+  },
+  "WHO_FAO_JECFA#Chemical1552_SodiumLactateSolution": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM LACTATE (solution) (INS 325)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1552",
+    "scope": "Latest evaluation 1974: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1552.html"
+  },
+  "WHO_FAO_JECFA#Chemical2777_PotassiumLactateSolution": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POTASSIUM LACTATE (solution) (INS 326)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2777",
+    "scope": "Latest evaluation 1974: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2777.html"
+  },
+  "WHO_FAO_JECFA#Chemical88_CalciumLactate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM LACTATE (INS 327)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/88",
+    "scope": "Latest evaluation 1974: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_88.html"
+  },
+  "WHO_FAO_JECFA#Chemical2709_SodiumDihydrogenCitrate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM DIHYDROGEN CITRATE (INS 331i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2709",
+    "scope": "Latest evaluation 1979: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2709.html"
+  },
+  "WHO_FAO_JECFA#Chemical349_TrisodiumCitrate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - TRISODIUM CITRATE (INS 331iii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/349",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED (\"Not specified\").",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_349.html"
+  },
+  "WHO_FAO_JECFA#Chemical959_PotassiumDihydrogenCitrate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POTASSIUM DIHYDROGEN CITRATE (INS 332i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/959",
+    "scope": "Latest evaluation 1979: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_959.html"
+  },
+  "WHO_FAO_JECFA#Chemical366_TripotassiumCitrate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - TRIPOTASSIUM CITRATE (INS 332ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/366",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_366.html"
+  },
+  "WHO_FAO_JECFA#Chemical607_TricalciumPhosphate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - TRICALCIUM PHOSPHATE (INS 341iii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/607",
+    "scope": "Latest evaluation 2026: ADI Group MTDI for phosphorus from all sources, expressed as P.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_607.html"
+  },
+  "WHO_FAO_JECFA#Chemical2056_GellanGum": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GELLAN GUM (INS 418)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2056",
+    "scope": "Latest evaluation 2025: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2056.html"
+  },
+  "WHO_FAO_JECFA#Chemical829_DSorbitol": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - D-SORBITOL (INS 420i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/829",
+    "scope": "Latest evaluation 1982: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_829.html"
+  },
+  "WHO_FAO_JECFA#Chemical3856_SorbitolSyrup": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SORBITOL SYRUP (INS 420ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3856",
+    "scope": "Latest evaluation 2018: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3856.html"
+  },
+  "WHO_FAO_JECFA#Chemical3547_KonjacFlour": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - KONJAC FLOUR (INS 425)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3547",
+    "scope": "Latest evaluation 1996: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3547.html"
+  },
+  "WHO_FAO_JECFA#Chemical2507_Polyoxyethylene20SorbitanMonooleate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POLYOXYETHYLENE (20) SORBITAN MONOOLEATE (INS 433)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2507",
+    "scope": "Latest evaluation 2026: ADI Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2507.html"
+  },
+  "WHO_FAO_JECFA#Chemical3585_Polyoxyethylene20SorbitanMonostearate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POLYOXYETHYLENE (20) SORBITAN MONOSTEARATE (INS 435)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3585",
+    "scope": "Latest evaluation 2026: ADI Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3585.html"
+  },
+  "WHO_FAO_JECFA#Chemical2181_PentasodiumTriphosphate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PENTASODIUM TRIPHOSPHATE (INS 451i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2181",
+    "scope": "Latest evaluation 2023: ADI MTDI 70 mg/kg bw (as P); Group MTDI for phosphorus from all sources, expressed as P.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2181.html"
+  },
+  "WHO_FAO_JECFA#Chemical251_PowderedCellulose": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POWDERED CELLULOSE (INS 460ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/251",
+    "scope": "Latest evaluation 1976: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_251.html"
+  },
+  "WHO_FAO_JECFA#Chemical700_MethylCellulose": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - METHYL CELLULOSE (INS 461)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/700",
+    "scope": "Latest evaluation 1989: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_700.html"
+  },
+  "WHO_FAO_JECFA#Chemical3773_SodiumCarboxymethylCellulose": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM CARBOXYMETHYL CELLULOSE (INS 466)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3773",
+    "scope": "Latest evaluation 1989: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3773.html"
+  },
+  "WHO_FAO_JECFA#Chemical4275_MagnesiumStearate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - MAGNESIUM STEARATE (INS 470iii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4275",
+    "scope": "Latest evaluation 2020: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4275.html"
+  },
+  "WHO_FAO_JECFA#Chemical4009_PolyglycerolEstersOfInteresterifiedRicinoleicAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POLYGLYCEROL ESTERS of INTERESTERIFIED RICINOLEIC ACID (INS 476)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4009",
+    "scope": "Latest evaluation 1973: ADI 0-7.5 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4009.html"
+  },
+  "WHO_FAO_JECFA#Chemical2271_SorbitanMonostearate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SORBITAN MONOSTEARATE (INS 491)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2271",
+    "scope": "Latest evaluation 2026: ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2271.html"
+  },
+  "WHO_FAO_JECFA#Chemical3983_SorbitanTristearate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SORBITAN TRISTEARATE (INS 492)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3983",
+    "scope": "Latest evaluation 2026: ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3983.html"
+  },
+  "WHO_FAO_JECFA#Chemical3008_SorbitanMonooleate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SORBITAN MONOOLEATE (INS 494)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3008",
+    "scope": "Latest evaluation 2026: ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3008.html"
+  },
+  "WHO_FAO_JECFA#Chemical3252_SodiumCarbonate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM CARBONATE (INS 500i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3252",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3252.html"
+  },
+  "WHO_FAO_JECFA#Chemical2711_PotassiumCarbonate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POTASSIUM CARBONATE (INS 501i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2711",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2711.html"
+  },
+  "WHO_FAO_JECFA#Chemical1215_AmmoniumCarbonate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - AMMONIUM CARBONATE (INS 503i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1215",
+    "scope": "Latest evaluation 1982: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1215.html"
+  },
+  "WHO_FAO_JECFA#Chemical1874_PotassiumChloride": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POTASSIUM CHLORIDE (INS 508)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1874",
+    "scope": "Latest evaluation 1979: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1874.html"
+  },
+  "WHO_FAO_JECFA#Chemical458_CalciumChloride": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM CHLORIDE (INS 509)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/458",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_458.html"
+  },
+  "WHO_FAO_JECFA#Chemical1360_CalciumSulfate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM SULFATE (INS 516)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1360",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1360.html"
+  },
+  "WHO_FAO_JECFA#Chemical3939_SodiumHydroxide": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM HYDROXIDE (INS 524)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3939",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3939.html"
+  },
+  "WHO_FAO_JECFA#Chemical82_CalciumHydroxide": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM HYDROXIDE (INS 526)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/82",
+    "scope": "Latest evaluation 1965: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_82.html"
+  },
+  "WHO_FAO_JECFA#Chemical939_CarnaubaWax": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARNAUBA WAX (INS 903)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/939",
+    "scope": "Latest evaluation 1992: ADI 0-7 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_939.html"
+  },
+  "WHO_FAO_JECFA#Chemical926_AcesulfamePotassium": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACESULFAME POTASSIUM (INS 950)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/926",
+    "scope": "Latest evaluation 1990: ADI 0-15 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_926.html"
+  },
+  "WHO_FAO_JECFA#Chemical62_Aspartame": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ASPARTAME (INS 951)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/62",
+    "scope": "Latest evaluation 2023: ADI 0–40 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_62.html"
+  },
+  "WHO_FAO_JECFA#Chemical837_CalciumCyclamate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM CYCLAMATE (INS 952ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/837",
+    "scope": "Latest evaluation 1982: ADI 0-11 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_837.html"
+  },
+  "WHO_FAO_JECFA#Chemical4276_Maltitol": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - MALTITOL (INS 965i)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4276",
+    "scope": "Latest evaluation 1993: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4276.html"
+  },
+  "WHO_FAO_JECFA#Chemical2132_DriedMaltitolSyrup": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DRIED MALTITOL SYRUP (INS 965ii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2132",
+    "scope": "Latest evaluation 1997: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2132.html"
+  },
+  "WHO_FAO_JECFA#Chemical2928_AlphaAmylaseFromAspergillusOryzaeVar": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - alpha-AMYLASE from ASPERGILLUS ORYZAE, VAR. (INS 1100)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2928",
+    "scope": "Latest evaluation 1987: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2928.html"
+  },
+  "WHO_FAO_JECFA#Chemical1186_AspergillusOryzaeVarLipase": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ASPERGILLUS ORYZAE, VAR. LIPASE (INS 1104)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1186",
+    "scope": "Latest evaluation 1974: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1186.html"
+  },
+  "WHO_FAO_JECFA#Chemical2119_FoodGreenS": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - FOOD GREEN S (INS 142)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2119",
+    "scope": "Latest evaluation 1974: ADI NO ADI ALLOCATED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2119.html"
+  },
+  "WHO_FAO_JECFA#Chemical423_CaramelColourClassI": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARAMEL COLOUR, Class I (INS 150a)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/423",
+    "scope": "Latest evaluation 1985: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_423.html"
+  },
+  "WHO_FAO_JECFA#Chemical436_AmmoniaCaramel": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - AMMONIA CARAMEL (INS 150c)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/436",
+    "scope": "Latest evaluation 1985: ADI 0-200 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_436.html"
+  },
+  "WHO_FAO_JECFA#Chemical1668_CaramelColourClassIv": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CARAMEL COLOUR, Class IV (INS 150d)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1668",
+    "scope": "Latest evaluation 1985: ADI 0-200 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1668.html"
+  },
+  "WHO_FAO_JECFA#Chemical2323_VegetableCarbon": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - VEGETABLE CARBON (INS 153)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2323",
+    "scope": "Latest evaluation 1987: ADI NO ADI ALLOCATED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2323.html"
+  },
+  "WHO_FAO_JECFA#Chemical2706_AnnattoExtracts": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ANNATTO EXTRACTS (INS 160b)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2706",
+    "scope": "Latest evaluation 2006: ADI BIXIN: 0-12 mg/kg bw; NORBIXIN AND ITS SODIUM AND POTASSIUM SALT: 0-0.6 mg/kg bw (group ADI, expressed as norbixin).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2706.html"
+  },
+  "WHO_FAO_JECFA#Chemical2876_Lycopene": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - LYCOPENE (INS 160d)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2876",
+    "scope": "Latest evaluation 2009: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2876.html"
+  },
+  "WHO_FAO_JECFA#Chemical5572_LycopeneSynthetic": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - LYCOPENE (synthetic) (INS 160di)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5572",
+    "scope": "Latest evaluation 2023: ADI 0-0.5 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_5572.html"
+  },
+  "WHO_FAO_JECFA#Chemical5880_LycopeneExtractFromTomato": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - LYCOPENE EXTRACT from TOMATO (INS 160dii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5880",
+    "scope": "Latest evaluation 2009: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_5880.html"
+  },
+  "WHO_FAO_JECFA#Chemical2269_SodiumHydrogenSulfite": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SODIUM HYDROGEN SULFITE (INS 222)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2269",
+    "scope": "Latest evaluation 1998: ADI 0-0.7 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2269.html"
+  },
+  "WHO_FAO_JECFA#Chemical5163_DlMalicAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DL-MALIC ACID (INS 296)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5163",
+    "scope": "Latest evaluation 1969: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_5163.html"
+  },
+  "WHO_FAO_JECFA#Chemical236_TertiaryButylhydroquinone": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - TERTIARY BUTYLHYDROQUINONE (INS 319)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/236",
+    "scope": "Latest evaluation 1997: ADI 0-0.7 mg/kg bw Intake: 1998, TRS 891-JECFA 51/132,159; FAS 42-JECFA 51/453. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.7 mg/kg bw for mean intake for the three Member States that submitted such data. In national data submitted by four Member States, estimates of mean intake of TBHQ did not exceed the ADI. The potential exists for consumers of high levels of TBHQ to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI..",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_236.html"
+  },
+  "WHO_FAO_JECFA#Chemical4746_LTartaricAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - L(+)-TARTARIC ACID (INS 334)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4746",
+    "scope": "Latest evaluation 2017: ADI 0-30 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4746.html"
+  },
+  "WHO_FAO_JECFA#Chemical3883_CalciumDisodiumEdta": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CALCIUM DISODIUM EDTA (INS 385)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3883",
+    "scope": "Latest evaluation 1973: ADI 0-2.5 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3883.html"
+  },
+  "WHO_FAO_JECFA#Chemical585_PropyleneGlycolAlginate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PROPYLENE GLYCOL ALGINATE (INS 405)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/585",
+    "scope": "Latest evaluation 1993: ADI 0-70 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_585.html"
+  },
+  "WHO_FAO_JECFA#Chemical1163_Agar": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - AGAR (INS 406)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1163",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1163.html"
+  },
+  "WHO_FAO_JECFA#Chemical4387_ProcessedEucheumaSeaweed": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - Processed EUCHEUMA SEAWEED (INS 407a)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4387",
+    "scope": "Latest evaluation 2007: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4387.html"
+  },
+  "WHO_FAO_JECFA#Chemical1133_AcaciaGum": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACACIA GUM (INS 414)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1133",
+    "scope": "Latest evaluation 1989: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1133.html"
+  },
+  "WHO_FAO_JECFA#Chemical434_AceticAndFattyAcidEstersOfGlycerol": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACETIC and FATTY ACID ESTERS of  GLYCEROL (INS 472a)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/434",
+    "scope": "Latest evaluation 1973: ADI NOT LIMITED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_434.html"
+  },
+  "WHO_FAO_JECFA#Chemical3561_PolyglycerolEstersOfFattyAcids": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - POLYGLYCEROL ESTERS of FATTY ACIDS (INS 475)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3561",
+    "scope": "Latest evaluation 2024: ADI 0-25 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3561.html"
+  },
+  "WHO_FAO_JECFA#Chemical683_PropyleneGlycolEstersOfFattyAcids": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - PROPYLENE GLYCOL ESTERS of FATTY ACIDS (INS 477)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/683",
+    "scope": "Latest evaluation 1973: ADI 0-25 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_683.html"
+  },
+  "WHO_FAO_JECFA#Chemical1370_GluconoDeltaLactone": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GLUCONO delta-LACTONE (INS 575)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1370",
+    "scope": "Latest evaluation 1998: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1370.html"
+  },
+  "WHO_FAO_JECFA#Chemical2257_MonosodiumLGlutamate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - MONOSODIUM L-GLUTAMATE (INS 621)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2257",
+    "scope": "Latest evaluation 1987: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2257.html"
+  },
+  "WHO_FAO_JECFA#Chemical4140_Disodium5Ribonucleotides": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DISODIUM 5'-RIBONUCLEOTIDES (INS 635)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4140",
+    "scope": "Latest evaluation 1974: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4140.html"
+  },
+  "WHO_FAO_JECFA#Chemical168_Beeswax": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - BEESWAX (INS 901)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/168",
+    "scope": "Latest evaluation 2005: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_168.html"
+  },
+  "WHO_FAO_JECFA#Chemical619_BleachedShellac": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - BLEACHED SHELLAC (INS 904)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/619",
+    "scope": "Latest evaluation 1992: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_619.html"
+  },
+  "WHO_FAO_JECFA#Chemical1040_Nitrogen": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - NITROGEN (INS 941)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1040",
+    "scope": "Latest evaluation 1980: ADI NO ADI NECESSARY.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1040.html"
+  },
+  "WHO_FAO_JECFA#Chemical720_HydrogenatedIsomaltulose": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - HYDROGENATED ISOMALTULOSE (INS 953)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/720",
+    "scope": "Latest evaluation 1985: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_720.html"
+  },
+  "WHO_FAO_JECFA#Chemical3281_DistarchPhosphate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DISTARCH PHOSPHATE (INS 1412)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3281",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3281.html"
+  },
+  "WHO_FAO_JECFA#Chemical1765_AcetylatedDistarchPhosphate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACETYLATED DISTARCH PHOSPHATE (INS 1414)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1765",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1765.html"
+  },
+  "WHO_FAO_JECFA#Chemical4292_StarchAcetate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - STARCH ACETATE (INS 1420)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4292",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4292.html"
+  },
+  "WHO_FAO_JECFA#Chemical78_AcetylatedDistarchAdipate": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACETYLATED DISTARCH ADIPATE (INS 1422)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/78",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_78.html"
+  },
+  "WHO_FAO_JECFA#Chemical3694_HydroxypropylStarch": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - HYDROXYPROPYL STARCH (INS 1440)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3694",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3694.html"
+  },
+  "WHO_FAO_JECFA#Chemical178_AcetylatedOxidizedStarch": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACETYLATED OXIDIZED STARCH (INS 1451)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/178",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_178.html"
+  },
+  "WHO_FAO_JECFA#Chemical2855_GlycerolEsterOfWoodRosin": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GLYCEROL ESTER of WOOD ROSIN (INS 445iii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2855",
+    "scope": "Latest evaluation 2013: ADI 0–25 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2855.html"
+  },
+  "WHO_FAO_JECFA#Chemical2553_DextrinsWhiteAndYellowRoastedStarch": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DEXTRINS, WHITE and YELLOW, ROASTED STARCH (INS 1400)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2553",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2553.html"
+  },
+  "WHO_FAO_JECFA#Chemical889_OxidizedStarch": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - OXIDIZED STARCH (INS 1404)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/889",
+    "scope": "Latest evaluation 2016: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_889.html"
+  },
+  "WHO_FAO_JECFA#Chemical1514_BetaCaroteneSynthetic": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - beta-CAROTENE (synthetic) (INS 160ai)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1514",
+    "scope": "Latest evaluation 2019: ADI WITHDRAWN.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1514.html"
+  },
+  "WHO_FAO_JECFA#Chemical1320_CarotenesVegetable": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CAROTENES (vegetable) (INS 160aii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1320",
+    "scope": "Latest evaluation 1993: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1320.html"
+  },
+  "WHO_FAO_JECFA#Chemical942_BetaBetaCarotene": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - beta,beta-CAROTENE (INS 160aiii)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/942",
+    "scope": "Latest evaluation 2019: ADI WITHDRAWN.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_942.html"
+  },
+  "WHO_FAO_JECFA#Chemical742_CarotenesAlgae": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CAROTENES (ALGAE) (INS 160aiv)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/742",
+    "scope": "Latest evaluation 2017: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_742.html"
+  },
+  "WHO_FAO_JECFA#Chemical4785_AceticAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - ACETIC ACID (INS 260)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4785",
+    "scope": "Latest evaluation 2004: ADI No safety concern at current levels of intake when used as a flavouring agent.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_4785.html"
+  },
+  "WHO_FAO_JECFA#Chemical3367_LacticAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - LACTIC ACID (INS 270)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3367",
+    "scope": "Latest evaluation 2001: ADI NOT LIMITED (1973).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_3367.html"
+  },
+  "WHO_FAO_JECFA#Chemical1565_Glycerol": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - GLYCEROL (INS 422)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1565",
+    "scope": "Latest evaluation 2002: ADI NOT SPECIFIED (1976).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1565.html"
+  },
+  "WHO_FAO_JECFA#Chemical900_CelluloseGel": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - CELLULOSE GEL (INS 460)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/900",
+    "scope": "Latest evaluation 1997: ADI NOT SPECIFIED.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_900.html"
+  },
+  "WHO_FAO_JECFA#Chemical1126_DiacetyltartaricAndFattyAcidEstersOfGlycerol": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - DIACETYLTARTARIC and FATTY ACID ESTERS of GLYCEROL (INS 472e)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1126",
+    "scope": "Latest evaluation 2003: ADI 0-50 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_1126.html"
+  },
+  "WHO_FAO_JECFA#Chemical2736_SucroseEstersOfFattyAcids": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - SUCROSE ESTERS of FATTY ACIDS (INS 473)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2736",
+    "scope": "Latest evaluation 1997: ADI 0-30 mg/kg bw.",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_2736.html"
+  },
+  "WHO_FAO_JECFA#Chemical668_LGlutamicAcid": {
+    "citation_id": "JECFA_EVALUATIONS",
+    "title": "WHO JECFA database - L-GLUTAMIC ACID (INS 620)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/668",
+    "scope": "Latest evaluation 2004: ADI NOT SPECIFIED (1987).",
+    "verified_against": "knowledge_base/sources/raw/external/jecfa/Chemical_668.html"
+  },
+  "US_FDA_ALLERGEN_QA_ED5#D9_RefinedOils": {
+    "citation_id": "US_FDA_ALLERGEN_QA_ED5",
+    "title": "US FDA Guidance for Industry: Questions and Answers Regarding Food Allergens, Including the Food Allergen Labeling Requirements of the FD&C Act (Edition 5, January 2025)",
+    "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-questions-and-answers-regarding-food-allergen-labeling-edition-5",
+    "scope": "Non-binding guidance. D.9: highly refined oils derived from major food allergens are exempt from section 403(w); oils that are not highly refined must declare the source. Also D.5/D.6 (Contains statement must list all major allergens), D.11-D.14 (cross-contact and advisory statements).",
+    "verified_against": "knowledge_base/sources/raw/external/FDA_ALLERGEN_QA_ED5.pdf"
+  },
+  "EU_REG_1333_2008#AnnexV_ColourWarning": {
+    "citation_id": "EU_REG_1333_2008_ANNEX_V",
+    "title": "Regulation (EC) No 1333/2008 (consolidated text), Annex V",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R1333-20260818",
+    "scope": "Annex V: list of food colours (E 102, E 104, E 110, E 122, E 124, E 129) for which the labelling of foods shall include additional information; exceptions for meat/egg marking and drinks above 1.2% alcohol."
+  },
+  "US_FR_2025_00830#Red3_Revocation": {
+    "citation_id": "US_FDA_RED3_REVOCATION",
+    "title": "Federal Register Vol. 90 No. 10 (16 Jan 2025), FR Doc. 2025-00830: revocation of FD&C Red No. 3 listing for food and ingested drugs",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-01-16/pdf/2025-00830.pdf",
+    "scope": "Final order repealing 21 CFR 74.303 uses in food and ingested drugs on the basis of the Delaney Clause; effective 15 Jan 2027 (74.1303 removal 18 Jan 2028)."
+  },
+  "IARC_MONOGRAPHS_V134#Aspartame_Group2B": {
+    "citation_id": "IARC_MONOGRAPHS_V134",
+    "title": "IARC Monographs Volume 134: Aspartame, methyleugenol, and isoeugenol",
+    "url": "https://monographs.iarc.who.int/",
+    "scope": "Section 6 (Aspartame): limited evidence in humans, experimental animals and mechanisms; overall evaluation Group 2B (possibly carcinogenic to humans); classification describes strength of evidence, not risk."
+  },
+  "CODEX_CXS_1_1985#Sec4.2.1.7": {
+    "citation_id": "CODEX_CXS_1_1985",
+    "title": "Codex CXS 1-1985 General Standard for the Labelling of Prepackaged Foods, section 4.2.1.7",
+    "url": "https://www.fao.org/fao-who-codexalimentarius/",
+    "scope": "Sulphite at 10 mg/kg or more (as SO2) shall always be declared using the specified name sulphite or sulfite."
+  },
+  "WHO_NSS_GUIDELINE_2023#Pregnancy": {
+    "citation_id": "WHO_NSS_GUIDELINE_2023",
+    "title": "WHO guideline: Use of non-sugar sweeteners (2023) - recommendation, remarks and pregnant-women evidence",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK592245/",
+    "scope": "Conditional recommendation against NSS for weight control/NCD risk, relevant for everyone including pregnant and lactating women (not people with diabetes); pregnancy evidence limited: preterm birth OR 1.25 (95% CI 1.07-1.46, low certainty), no association with gestational diabetes; polyols are not NSS."
+  },
+  "CODEX_CAC_GL_23_1997#Table_Sugars": {
+    "citation_id": "CODEX_CAC_GL_23_1997",
+    "title": "Codex Guidelines for Use of Nutrition and Health Claims CAC/GL 23-1997 (adopted 1997, amended through 2013)",
+    "url": "https://www.fao.org/input/download/standards/351/CXG_023e.pdf",
+    "scope": "Table of nutrient content claims: sugars free = not more than 0.5 g per 100 g (solids) or 0.5 g per 100 ml (liquids).",
+    "verified_against": "knowledge_base/sources/raw/external/cxg_023e.pdf"
+  },
+  "WHO_NSS_GUIDELINE_2023#Children": {
+    "citation_id": "WHO_NSS_GUIDELINE_2023",
+    "title": "WHO guideline: Use of non-sugar sweeteners (2023) - recommendation, remarks and evidence for children",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK592245/",
+    "scope": "Conditional recommendation against NSS for weight control/NCD risk, relevant for children as for adults (not people with diabetes); direct child evidence is limited (one RCT: reduced body fatness, no BMI z-score effect when pooled; observational studies: no significant association; overall certainty low); the guideline does not replace existing safe-intake guidance; polyols are not NSS.",
+    "verified_against": "knowledge_base/sources/raw/external/Bookshelf_NBK592258.pdf"
+  },
+  "EFSA_CAFFEINE_2015#Children": {
+    "citation_id": "EFSA_CAFFEINE_2015",
+    "title": "EFSA NDA Panel (2015) Scientific Opinion on the safety of caffeine. EFSA Journal 2015;13(5):4102",
+    "url": "https://doi.org/10.2903/j.efsa.2015.4102",
+    "scope": "For children and adolescents the available information is insufficient to derive a safe caffeine intake; the adult acute no-concern level (3 mg/kg bw) may serve as a basis for these subgroups; main dietary sources are coffee, tea, caffeinated soft drinks (incl. energy drinks) and chocolate.",
+    "verified_against": "knowledge_base/sources/raw/external/EFSA_Journal_2015_Scientific_Opinion_safety_caffeine.pdf"
+  }
+}

@@ -2,10 +2,10 @@
 Chạy batch evaluation qua 3 cấu hình ablation:
   A: LLM-only (không RAG, không evidence)
   B: Ground Truth text + RAG (evidence từ KB, không qua OCR)
-  C: OCR + RAG + LLM (full pipeline)
+  C: OCR + RAG (ảnh bao bì -> OCR -> RAG)
 
 Đầu vào:
-  - Gold benchmark: data/qa_benchmark_gold.jsonl (hoặc merged_draft.jsonl)
+  - Default benchmark: phiên bản active trong data/benchmark_manifest.json
   - Prediction files: data/predictions_config_A.jsonl, _B.jsonl, _C.jsonl
     Mỗi dòng: {"id": "...", "answer": "...", "safety_label": "...", ...}
 
@@ -14,14 +14,14 @@ Chạy batch evaluation qua 3 cấu hình ablation:
   - In bảng so sánh + confusion matrix ra console
 
 Chạy: python scripts/run_evaluation.py
-       python scripts/run_evaluation.py --gold data/qa_benchmark_gold.jsonl
+       python scripts/run_evaluation.py --gold data/foodhealthqa_eval_set.jsonl
        python scripts/run_evaluation.py --pred-a answers_a.jsonl --pred-b answers_b.jsonl --pred-c answers_c.jsonl
 """
 
 import argparse
+from collections import Counter
 import json
 import os
-import random
 import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +29,13 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 sys.stdout.reconfigure(encoding="utf-8")
+
+from modules.benchmark_manifest import (
+    get_active_benchmark_path,
+    get_default_eval_benchmark_path,
+    is_evaluation_eligible,
+    load_benchmark_manifest,
+)
 
 try:
     from scripts_research.evaluation import (
@@ -56,103 +63,146 @@ def _load_jsonl(path):
     return records
 
 
-def _generate_baseline_predictions(references, config, seed=42):
-    """
-    Tạo baseline predictions khi chưa có file prediction thật.
-    Config A (LLM-only): trả lời generic, label mặc định SAFE (lower bound)
-    Config B (GT+RAG):   dùng reference_answer làm answer (upper bound)
-    Config C (OCR+RAG):  reference_answer + nhiễu OCR mô phỏng (~15% token flip, ~10% label noise)
-    """
-    rng = random.Random(seed)
-    predictions = []
-    for ref in references:
-        pred = {"id": ref["id"]}
-
-        if config == "A":
-            pred["answer"] = (
-                f"Thông tin về {ref.get('domain', 'chủ đề này')} "
-                "cần được xác minh thêm từ nguồn chuyên môn."
-            )
-            pred["safety_label"] = "SAFE"
-        elif config == "B":
-            pred["answer"] = ref.get("reference_answer", "")
-            pred["safety_label"] = ref.get("gold_safety_label", "SAFE")
-        elif config == "C":
-            answer = ref.get("reference_answer", "")
-            words = answer.split()
-            if len(words) > 5 and rng.random() < 0.15:
-                idx = rng.randint(1, len(words) - 2)
-                words[idx] = words[idx][::-1]
-                answer = " ".join(words)
-            pred["answer"] = answer
-            label = ref.get("gold_safety_label", "SAFE")
-            if rng.random() < 0.10:
-                label = rng.choice(["SAFE", "CAUTION"])
-            pred["safety_label"] = label
-        else:
-            pred["answer"] = ""
-            pred["safety_label"] = "SAFE"
-
-        predictions.append(pred)
-    return predictions
+def _prediction_integrity(references, predictions, expected_config=None):
+    gold_ids = {record["id"] for record in references}
+    raw_prediction_ids = [record.get("id") for record in predictions]
+    prediction_ids = set(raw_prediction_ids)
+    duplicates = sorted(
+        record_id for record_id, count in Counter(raw_prediction_ids).items()
+        if record_id is not None and count > 1
+    )
+    missing = sorted(gold_ids - prediction_ids)
+    extra = sorted(prediction_ids - gold_ids)
+    failed = [record.get("id") for record in predictions if record.get("error")]
+    empty = [record.get("id") for record in predictions if not str(record.get("answer", "")).strip()]
+    non_real = [
+        record.get("id") for record in predictions
+        if record.get("evaluation_type") != "real"
+    ]
+    wrong_config = [
+        record.get("id") for record in predictions
+        if expected_config and record.get("config") != expected_config
+    ]
+    return {
+        "missing": missing,
+        "extra": extra,
+        "duplicates": duplicates,
+        "failed": failed,
+        "empty": empty,
+        "non_real": non_real,
+        "wrong_config": wrong_config,
+        "complete": not (
+            missing or extra or duplicates or failed or empty or non_real or wrong_config
+        ),
+    }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--gold",
-        default=os.path.join(DATA_DIR, "qa_benchmark_gold.jsonl"),
-        help="Gold benchmark JSONL (fallback: merged_draft.jsonl)",
+        default=get_default_eval_benchmark_path(DATA_DIR, "jsonl"),
+        help="Reference benchmark JSONL (mặc định: data/foodhealthqa_eval_set.jsonl)",
     )
-    parser.add_argument("--pred-a", default=None, help="Config A predictions JSONL")
-    parser.add_argument("--pred-b", default=None, help="Config B predictions JSONL")
-    parser.add_argument("--pred-c", default=None, help="Config C predictions JSONL")
+    parser.add_argument(
+        "--eval-750",
+        action="store_true",
+        help="Sử dụng bộ đánh giá phân tầng chuẩn 750 câu (data/foodhealthqa_eval_set.jsonl)",
+    )
+    parser.add_argument("--pred-a", default=os.path.join(DATA_DIR, "predictions_config_a.jsonl"), help="Config A predictions JSONL")
+    parser.add_argument("--pred-b", default=os.path.join(DATA_DIR, "predictions_config_b.jsonl"), help="Config B predictions JSONL")
+    parser.add_argument("--pred-c", default=os.path.join(DATA_DIR, "predictions_config_c.jsonl"), help="Config C predictions JSONL")
     parser.add_argument(
         "--output",
-        default=os.path.join(DATA_DIR, "evaluation_results.json"),
-        help="Output JSON file",
+        default=None,
+        help="Output JSON file (mặc định: data/evaluation_results.json)",
     )
     parser.add_argument(
-        "--baseline", action="store_true",
-        help="Tạo baseline predictions giả lập nếu chưa có file prediction thật",
+        "--allow-incomplete", action="store_true",
+        help="Chỉ dùng để debug; cho phép đánh giá prediction thiếu/lỗi",
+    )
+    parser.add_argument(
+        "--include-pending",
+        action="store_true",
+        help="Debug only: include records still waiting for manual verification",
+    )
+    parser.add_argument(
+        "--run-dir",
+        default=None,
+        help="Thư mục kết quả của một lần chạy (vd data/runs/gemini): tự lấy predictions_config_{a,b,c}.jsonl "
+             "trong đó và ghi evaluation_results.json vào cùng thư mục",
     )
     args = parser.parse_args()
 
+    if args.run_dir:
+        args.pred_a = os.path.join(args.run_dir, "predictions_config_a.jsonl")
+        args.pred_b = os.path.join(args.run_dir, "predictions_config_b.jsonl")
+        args.pred_c = os.path.join(args.run_dir, "predictions_config_c.jsonl")
+        if not args.output:
+            args.output = os.path.join(args.run_dir, "evaluation_results.json")
+
+    if args.eval_750:
+        args.gold = os.path.join(DATA_DIR, "foodhealthqa_eval_set.jsonl")
     gold_path = args.gold
     if not os.path.isfile(gold_path):
-        fallback = os.path.join(DATA_DIR, "qa_benchmark_merged_draft.jsonl")
-        if os.path.isfile(fallback):
-            print(f"[INFO] Gold file không tồn tại, dùng fallback: {fallback}")
-            gold_path = fallback
-        else:
-            print(f"[ERROR] Không tìm thấy gold benchmark: {gold_path}")
-            sys.exit(1)
+        print(f"[ERROR] Không tìm thấy reference benchmark: {gold_path}")
+        sys.exit(1)
 
     references = _load_jsonl(gold_path)
-    print(f"Loaded {len(references)} gold benchmark records từ {gold_path}")
+    if not args.include_pending:
+        references = [record for record in references if is_evaluation_eligible(record)]
+    manifest = load_benchmark_manifest(DATA_DIR)
+    active_version = manifest.get("active_version", "")
+    benchmark_metadata = manifest.get("benchmarks", {}).get(active_version, {})
+    is_active_benchmark = os.path.abspath(gold_path) == os.path.abspath(
+        get_default_eval_benchmark_path(DATA_DIR, "jsonl")
+    )
+    reference_status = (
+        benchmark_metadata.get("status", "unspecified")
+        if is_active_benchmark
+        else "external_reference_status_unspecified"
+    )
+    gold_validated = bool(benchmark_metadata.get("expert_validated", False)) if is_active_benchmark else False
+    print(
+        f"Loaded {len(references)} reference benchmark records "
+        f"({reference_status}; expert_validated={gold_validated}) from {gold_path}"
+    )
 
     configs = {}
+    integrity_by_config = {}
     config_files = {
         "A_LLM_Only": args.pred_a,
         "B_GT_RAG": args.pred_b,
-        "C_OCR_RAG_LLM": args.pred_c,
+        "C_OCR_RAG": args.pred_c,
     }
 
     for name, path in config_files.items():
         if path and os.path.isfile(path):
             configs[name] = _load_jsonl(path)
             print(f"Loaded {len(configs[name])} predictions cho {name}")
-        elif args.baseline:
-            tag = name[0]
-            configs[name] = _generate_baseline_predictions(references, tag)
-            print(f"Generated {len(configs[name])} baseline predictions cho {name}")
+        else:
+            print(f"[ERROR] Thiếu prediction file cho {name}: {path}")
 
-    if not configs:
-        print("\n[WARNING] Không có prediction files. Dùng --baseline để tạo baseline.")
-        print("Ví dụ: python scripts/run_evaluation.py --baseline")
-        print("\nHoặc chỉ định prediction files:")
-        print("  python scripts/run_evaluation.py --pred-a pred_a.jsonl --pred-b pred_b.jsonl --pred-c pred_c.jsonl")
+    if len(configs) != 3:
+        print("\n[ERROR] Đánh giá chính yêu cầu đủ cả A, B và C.")
         sys.exit(1)
+
+    for name, predictions in configs.items():
+        integrity = _prediction_integrity(references, predictions, expected_config=name[0])
+        integrity_by_config[name] = integrity
+        if not integrity["complete"]:
+            print(
+                f"[ERROR] {name} không đầy đủ: missing={len(integrity['missing'])}, "
+                f"extra={len(integrity['extra'])}, duplicates={len(integrity['duplicates'])}, "
+                f"failed={len(integrity['failed'])}, empty={len(integrity['empty'])}, "
+                f"non_real={len(integrity['non_real'])}, "
+                f"wrong_config={len(integrity['wrong_config'])}"
+            )
+    if not args.allow_incomplete and not all(
+        item["complete"] for item in integrity_by_config.values()
+    ):
+        print("Dừng để không công bố số liệu một phần. Dùng --allow-incomplete chỉ khi debug.")
+        sys.exit(2)
 
     all_results = []
     for config_name, predictions in configs.items():
@@ -194,9 +244,20 @@ def main():
     print(f"{'='*60}")
     print(format_results_table(all_results))
 
+    is_complete = all(item["complete"] for item in integrity_by_config.values())
     output_data = {
-        "gold_benchmark": gold_path,
-        "gold_count": len(references),
+        "evaluation_type": "real",
+        "complete": bool(is_complete),
+        "reference_dataset": gold_path,
+        "reference_dataset_status": reference_status,
+        "gold_validated": gold_validated,
+        "score_interpretation": (
+            "Exploratory weak-label metrics; not gold-standard performance."
+            if not gold_validated
+            else "Gold-standard metrics."
+        ),
+        "reference_count": len(references),
+        "prediction_integrity": integrity_by_config,
         "configs": {},
     }
     for result in all_results:
@@ -209,10 +270,11 @@ def main():
         }
         output_data["configs"][result["config"]] = serializable
 
-    os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
-    with open(args.output, "w", encoding="utf-8") as f:
+    output_path = args.output or os.path.join(DATA_DIR, "evaluation_results.json")
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
-    print(f"\n✅ Kết quả chi tiết đã lưu: {args.output}")
+    print(f"\n✅ Kết quả chi tiết đã lưu: {output_path}")
 
 
 if __name__ == "__main__":

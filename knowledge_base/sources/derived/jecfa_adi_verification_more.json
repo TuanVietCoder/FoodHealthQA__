@@ -1,0 +1,2675 @@
+{
+  "100i": {
+    "chemical_id": 1355,
+    "jecfa_name": "CURCUMIN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1355",
+    "file": "Chemical_1355.html",
+    "sha256": "5216758e2d562d81ec4f93483d1f105e5770e1a76fc1ddafd70f1a3b5afb7cde",
+    "ins_on_page": [
+      "100i"
+    ],
+    "latest_evaluation_year": "2003",
+    "latest_adi": "0-3 mg/kg bw",
+    "retrieved_utc": "2026-11-09T05:58:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "100ii": {
+    "chemical_id": 252,
+    "jecfa_name": "POWDERED TURMERIC",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/252",
+    "file": "Chemical_252.html",
+    "sha256": "bf041450be456bbfa026ee2bd6ef0e0d0d67de828ac3a6685afc056e6e120b03",
+    "ins_on_page": [
+      "100ii"
+    ],
+    "latest_evaluation_year": "1986",
+    "latest_adi": "NO ADI ALLOCATED",
+    "retrieved_utc": "2026-11-09T05:58:24+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "101iii": {
+    "chemical_id": 4092,
+    "jecfa_name": "RIBOFLAVIN from BACILLUS SUBTILIS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4092",
+    "file": "Chemical_4092.html",
+    "sha256": "cc92353db6eb560d0b77bb9c2daab714096429489eb62d32f36f9b7484d92f96",
+    "ins_on_page": [
+      "101iii"
+    ],
+    "latest_evaluation_year": "2021",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T05:58:30+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "102": {
+    "chemical_id": 3885,
+    "jecfa_name": "TARTRAZINE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3885",
+    "file": "Chemical_3885.html",
+    "sha256": "b5d7bec532615f33f3cf5d4beeee15ffdd72687c1361f4d97617fb082c3b6e07",
+    "ins_on_page": [
+      "102"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "0–10 mg/kg bw",
+    "retrieved_utc": "2026-11-09T05:58:34+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "120": {
+    "chemical_id": 1079,
+    "jecfa_name": "CARMINES",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1079",
+    "file": "Chemical_1079.html",
+    "sha256": "617db8cc6c1d7d0cb4696e22c78e6c68685edf652e08cb18328388b1c57e69e4",
+    "ins_on_page": [
+      "120"
+    ],
+    "latest_evaluation_year": "2000",
+    "latest_adi": "0-5 mg/kg bw (1982)",
+    "retrieved_utc": "2026-11-09T05:59:03+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "1200": {
+    "chemical_id": 3389,
+    "jecfa_name": "MODIFIED POLYDEXTROSES",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3389",
+    "file": "Chemical_3389.html",
+    "sha256": "e54c30c384c71cc85c987fcdf6ac98fe34310689f040be44257066d4848168ee",
+    "ins_on_page": [
+      "1200"
+    ],
+    "latest_evaluation_year": "1987",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T05:59:07+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "127": {
+    "chemical_id": 3740,
+    "jecfa_name": "ERYTHROSINE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3740",
+    "file": "Chemical_3740.html",
+    "sha256": "7364fd53779e60e7be68ad50651981696b278a0b722187728c473e2adb567ea9",
+    "ins_on_page": [
+      "127"
+    ],
+    "latest_evaluation_year": "2018",
+    "latest_adi": "0-0.1 mg/kg bw",
+    "retrieved_utc": "2026-11-09T05:59:14+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "129": {
+    "chemical_id": 2361,
+    "jecfa_name": "ALLURA RED AC",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2361",
+    "file": "Chemical_2361.html",
+    "sha256": "2a5fe83670704873a84bf3a4396fbc8f853134412280ad7b4cbb7e61b6c28b20",
+    "ins_on_page": [
+      "129"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "0–7 mg/kg bw",
+    "retrieved_utc": "2026-11-09T05:59:17+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "133": {
+    "chemical_id": 3309,
+    "jecfa_name": "BRILLIANT BLUE FCF",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3309",
+    "file": "Chemical_3309.html",
+    "sha256": "edca735daf786d4502ff9040af701340a53efaf399ef6936382a6ce124f0d24d",
+    "ins_on_page": [
+      "133"
+    ],
+    "latest_evaluation_year": "2017",
+    "latest_adi": "0–6 mg/kg bw",
+    "retrieved_utc": "2026-11-09T05:59:20+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "1412": {
+    "chemical_id": 3281,
+    "jecfa_name": "DISTARCH PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3281",
+    "file": "Chemical_3281.html",
+    "sha256": "accb5fd3e1b1bdce156765f49e1ff1c3290fe3d0ae03a05fd69662c7135c66ab",
+    "ins_on_page": [
+      "1412"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:46+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1414": {
+    "chemical_id": 1765,
+    "jecfa_name": "ACETYLATED DISTARCH PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1765",
+    "file": "Chemical_1765.html",
+    "sha256": "e54543d7b3d83cffd0634db8bdd7ae681eadd630bc1eded2365bce17ca75a005",
+    "ins_on_page": [
+      "1414"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:49+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1420": {
+    "chemical_id": 4292,
+    "jecfa_name": "STARCH ACETATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4292",
+    "file": "Chemical_4292.html",
+    "sha256": "806622b89ed24715083f00f83d933eb43a0fe3cbf3aafd22fa9ebb7747c67dba",
+    "ins_on_page": [
+      "1420"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:56+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1422": {
+    "chemical_id": 78,
+    "jecfa_name": "ACETYLATED DISTARCH ADIPATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/78",
+    "file": "Chemical_78.html",
+    "sha256": "4d4a062c6fbb8af0ecc7825c5188dd54bc6ea04c0f35caad5bb49aff45f9de4a",
+    "ins_on_page": [
+      "1422"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:59+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1440": {
+    "chemical_id": 3694,
+    "jecfa_name": "HYDROXYPROPYL STARCH",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3694",
+    "file": "Chemical_3694.html",
+    "sha256": "f10b3a0046b8384aa81edf68205eb21c199f31310cdcba322039f42ad2ea0a60",
+    "ins_on_page": [
+      "1440"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:44:02+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1451": {
+    "chemical_id": 178,
+    "jecfa_name": "ACETYLATED OXIDIZED STARCH",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/178",
+    "file": "Chemical_178.html",
+    "sha256": "bd1b8a1d5676fb6bdad9dba15707c63c65a7b27f320600b120002d3dcd00aebb",
+    "ins_on_page": [
+      "1451"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:44:09+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160ci": {
+    "chemical_id": 4486,
+    "jecfa_name": "PAPRIKA OLEORESIN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4486",
+    "file": "Chemical_4486.html",
+    "sha256": "8165f174a7502624be1fbf1c3606bddd373f8bd59654fd73df16b5982f119ef9",
+    "ins_on_page": [
+      "160ci"
+    ],
+    "latest_evaluation_year": "2000",
+    "latest_adi": "No safety concern at current levels of intake when used as a flavouring agent",
+    "retrieved_utc": "2026-11-09T06:00:47+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160cii": {
+    "chemical_id": 5866,
+    "jecfa_name": "PAPRIKA extract",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5866",
+    "file": "Chemical_5866.html",
+    "sha256": "86fb06536da19170a4d70ccf1f063766fbe743180d8b2a3503eb4ae1349f33cb",
+    "ins_on_page": [
+      "160cii"
+    ],
+    "latest_evaluation_year": "2014",
+    "latest_adi": "0–1.5 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:00:50+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "162": {
+    "chemical_id": 877,
+    "jecfa_name": "BEET RED",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/877",
+    "file": "Chemical_877.html",
+    "sha256": "0771f59c708f00462e4fcdcefb548807b8ca51c11e062a36fc7aad51c66e47aa",
+    "ins_on_page": [
+      "162"
+    ],
+    "latest_evaluation_year": "1987",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:01:06+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "164": {
+    "chemical_id": 6197,
+    "jecfa_name": "GARDENIA YELLOW ",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/6197",
+    "file": "Chemical_6197.html",
+    "sha256": "097aeffb0c18c8562ca7415bb1e5efedef597ee15c44106a0b1241aa67e337e9",
+    "ins_on_page": [
+      "164"
+    ],
+    "latest_evaluation_year": "2014",
+    "latest_adi": "NOT ALLOCATED",
+    "retrieved_utc": "2026-11-09T06:01:08+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "170i": {
+    "chemical_id": 457,
+    "jecfa_name": "CALCIUM CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/457",
+    "file": "Chemical_457.html",
+    "sha256": "72a72229bf68c1c2069b13232be4c319e53f7b6961bd601f06759d7bd567cd72",
+    "ins_on_page": [
+      "170i"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:01:13+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "200": {
+    "chemical_id": 2443,
+    "jecfa_name": "SORBIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
+    "file": "Chemical_2443.html",
+    "sha256": "181b18b9f39183bd75154c0e01659b8e65fabc731698d2f92afff18361c17c64",
+    "ins_on_page": [
+      "200"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "0-25 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:25+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "202": {
+    "chemical_id": 2724,
+    "jecfa_name": "POTASSIUM SORBATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2724",
+    "file": "Chemical_2724.html",
+    "sha256": "a137260291b15ef29fd1715c65a15b254c24e5b83622719bbc8913fd1d7c8a16",
+    "ins_on_page": [
+      "202"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "0-25 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:29+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "211": {
+    "chemical_id": 1098,
+    "jecfa_name": "SODIUM BENZOATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1098",
+    "file": "Chemical_1098.html",
+    "sha256": "098a0ad5e71795f5a826ba9af37c9697aab90591f2f7823be0120fbf05cb2127",
+    "ins_on_page": [
+      "211"
+    ],
+    "latest_evaluation_year": "2021",
+    "latest_adi": "0–20 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:33+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "221": {
+    "chemical_id": 2821,
+    "jecfa_name": "DISODIUM SULFITE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2821",
+    "file": "Chemical_2821.html",
+    "sha256": "76e35cde25f726c18df1cf1d6113be1b42f705c945e3109cbe4b2ff4e807afaf",
+    "ins_on_page": [
+      "221"
+    ],
+    "latest_evaluation_year": "1998",
+    "latest_adi": "0-0.7 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:37+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "223": {
+    "chemical_id": 1824,
+    "jecfa_name": "SODIUM METABISULFITE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1824",
+    "file": "Chemical_1824.html",
+    "sha256": "a89ff12a2d041bccbce669888e56f75466d1e5e0655589691be454d86ecbdf95",
+    "ins_on_page": [
+      "223"
+    ],
+    "latest_evaluation_year": "1998",
+    "latest_adi": "0-0.7 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:43+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "234": {
+    "chemical_id": 572,
+    "jecfa_name": "NISIN A",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/572",
+    "file": "Chemical_572.html",
+    "sha256": "96c5c8ef55d89bb7ba648aff22d11b80f2d984d4f773d3b3a15c7c08a231dc87",
+    "ins_on_page": [
+      "234"
+    ],
+    "latest_evaluation_year": "2024",
+    "latest_adi": "0-2 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:01:53+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "262i": {
+    "chemical_id": 2970,
+    "jecfa_name": "SODIUM ACETATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2970",
+    "file": "Chemical_2970.html",
+    "sha256": "0659ebb86f58c59dd854b441c4f7699c85b2802f0aa4ecc03d9d6dc42f560b5f",
+    "ins_on_page": [
+      "262i"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:01:59+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "263": {
+    "chemical_id": 2804,
+    "jecfa_name": "CALCIUM ACETATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2804",
+    "file": "Chemical_2804.html",
+    "sha256": "594b6f450c5b32e484dd6ae77af6da2cbd1086f8a8ee51796a502be8b577bdc3",
+    "ins_on_page": [
+      "263"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:02:03+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "281": {
+    "chemical_id": 3999,
+    "jecfa_name": "SODIUM PROPIONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3999",
+    "file": "Chemical_3999.html",
+    "sha256": "ead5d3f15170d71f5e0003b94b05110cf02f3ef843d76243a7c3fcc76f6f6225",
+    "ins_on_page": [
+      "281"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:02:09+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "282": {
+    "chemical_id": 2163,
+    "jecfa_name": "CALCIUM PROPIONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2163",
+    "file": "Chemical_2163.html",
+    "sha256": "62815ad896b9ed2c5806507c9fa36a19dff2a0bf295733d412acdcbd7d04e5c5",
+    "ins_on_page": [
+      "282"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:02:13+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "290": {
+    "chemical_id": 592,
+    "jecfa_name": "CARBON DIOXIDE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/592",
+    "file": "Chemical_592.html",
+    "sha256": "0c5284da2652d5c3adc5f2c098ac7dfe7eeb74c8ae49be8ffaac07f02aaf3a92",
+    "ins_on_page": [
+      "290"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:02:16+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "301": {
+    "chemical_id": 2372,
+    "jecfa_name": "SODIUM ASCORBATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2372",
+    "file": "Chemical_2372.html",
+    "sha256": "d0f8f9e7fb8809977aa88fb4add67ad6681b62587910f2f0ba01faf470cf6a74",
+    "ins_on_page": [
+      "301"
+    ],
+    "latest_evaluation_year": "1981",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:02:22+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "304": {
+    "chemical_id": 60,
+    "jecfa_name": "ASCORBYL PALMITATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/60",
+    "file": "Chemical_60.html",
+    "sha256": "514b3c6ef84907f9c1f376af10e7e3d90c39f463c5ab3cea36e5fe1b553ea4f5",
+    "ins_on_page": [
+      "304"
+    ],
+    "latest_evaluation_year": "2025",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:02:26+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "310": {
+    "chemical_id": 1272,
+    "jecfa_name": "PROPYL GALLATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1272",
+    "file": "Chemical_1272.html",
+    "sha256": "5eb2a2a08c34874002155c37173bebb6f50055416ec9e30252c3eea13cddc165",
+    "ins_on_page": [
+      "310"
+    ],
+    "latest_evaluation_year": "1996",
+    "latest_adi": "0-1.4 mg/kg bw (1993)",
+    "retrieved_utc": "2026-11-09T06:02:37+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "316": {
+    "chemical_id": 2641,
+    "jecfa_name": "SODIUM ERYTHORBATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2641",
+    "file": "Chemical_2641.html",
+    "sha256": "3211d43c4161690179a6c9c8ffb9b64816586a19d8a21fe96d4897244550f54f",
+    "ins_on_page": [
+      "316"
+    ],
+    "latest_evaluation_year": "1990",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:02:41+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "322": {
+    "chemical_id": 1478,
+    "jecfa_name": "LECITHIN, partially hydrolyzed",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1478",
+    "file": "Chemical_1478.html",
+    "sha256": "6f174a3798c6c1d21abf8592e8a678b1b751a87fc357169b7553a8b069cbc210",
+    "ins_on_page": [
+      "322"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:46:52+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "325": {
+    "chemical_id": 1552,
+    "jecfa_name": "SODIUM LACTATE (solution)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1552",
+    "file": "Chemical_1552.html",
+    "sha256": "ce76907adc8159e74c67585d552c4b68a5dc4e244e106ec429103e8c2dabcbeb",
+    "ins_on_page": [
+      "325"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:00+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "326": {
+    "chemical_id": 2777,
+    "jecfa_name": "POTASSIUM LACTATE (solution)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2777",
+    "file": "Chemical_2777.html",
+    "sha256": "7a788953a1e2925fb1db439736073e1dfed9614e4b0dc933d99731c56634cdee",
+    "ins_on_page": [
+      "326"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:08+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "327": {
+    "chemical_id": 88,
+    "jecfa_name": "CALCIUM LACTATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/88",
+    "file": "Chemical_88.html",
+    "sha256": "a6db18069a01eb77522a5ca7070ea8123702f135e27a1e30940540434420d3bd",
+    "ins_on_page": [
+      "327"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:11+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "331i": {
+    "chemical_id": 2709,
+    "jecfa_name": "SODIUM DIHYDROGEN CITRATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2709",
+    "file": "Chemical_2709.html",
+    "sha256": "0661a6689ffb901c592e84b78e7509f3002f4a801624179fa3087b14981e5bbc",
+    "ins_on_page": [
+      "331i"
+    ],
+    "latest_evaluation_year": "1979",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "331iii": {
+    "chemical_id": 349,
+    "jecfa_name": "TRISODIUM CITRATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/349",
+    "file": "Chemical_349.html",
+    "sha256": "d02b618f739aa9bfe2e867d6bec028ac7c56cae4dd78eb5e2a5b18f48cdb8040",
+    "ins_on_page": [
+      "331iii"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED (\"Not specified\")",
+    "retrieved_utc": "2026-11-09T06:03:24+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "332i": {
+    "chemical_id": 959,
+    "jecfa_name": "POTASSIUM DIHYDROGEN CITRATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/959",
+    "file": "Chemical_959.html",
+    "sha256": "11965e92793ecb37bbc40ce8d45c8a3d23909c11c078e9d82df75f3101666d0c",
+    "ins_on_page": [
+      "332i"
+    ],
+    "latest_evaluation_year": "1979",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:28+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "332ii": {
+    "chemical_id": 366,
+    "jecfa_name": "TRIPOTASSIUM CITRATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/366",
+    "file": "Chemical_366.html",
+    "sha256": "da3319451653dd7ba53053222f3847967e00389c06d9c247748fb4a83804a524",
+    "ins_on_page": [
+      "332ii"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:03:32+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "338": {
+    "chemical_id": 1777,
+    "jecfa_name": "ORTHOPHOSPHORIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1777",
+    "file": "Chemical_1777.html",
+    "sha256": "802cebdf87a72cd53c9c32eb4876c4f2c84fe7b0e2f937874f443848f00944a6",
+    "ins_on_page": [
+      "338"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:48:10+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "339ii": {
+    "chemical_id": 823,
+    "jecfa_name": "DISODIUM HYDROGEN PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/823",
+    "file": "Chemical_823.html",
+    "sha256": "5703ea616cd6a2b0afa85b63ae09311290f1d4042d1c820fede645120a09a0ca",
+    "ins_on_page": [
+      "339ii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:48:49+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "339iii": {
+    "chemical_id": 2989,
+    "jecfa_name": "TRISODIUM PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2989",
+    "file": "Chemical_2989.html",
+    "sha256": "a1cf079d32c29daab8e941168cc873149c41df2d5c2ecf0811652d82db4dfc37",
+    "ins_on_page": [
+      "339iii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:48:53+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "340i": {
+    "chemical_id": 1532,
+    "jecfa_name": "POTASSIUM DIHYDROGEN PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1532",
+    "file": "Chemical_1532.html",
+    "sha256": "4011da7e421d8c7f8104104b587fb857b020da1ad2f91fa50894bd8dbcde6c87",
+    "ins_on_page": [
+      "340i"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:48:57+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "340ii": {
+    "chemical_id": 1802,
+    "jecfa_name": "DIPOTASSIUM HYDROGEN PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1802",
+    "file": "Chemical_1802.html",
+    "sha256": "f68c1b17ec6f38e7c67cfe95b4744bd8a212d33be5e92fdabd17cf33d3aabe9f",
+    "ins_on_page": [
+      "340ii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:49:01+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "341i": {
+    "chemical_id": 3792,
+    "jecfa_name": "CALCIUM DIHYDROGEN PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3792",
+    "file": "Chemical_3792.html",
+    "sha256": "9f34014c7ce3fd45068d939073af4facf1046791c0fd05e27723147f0417d1e0",
+    "ins_on_page": [
+      "341i"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:49:42+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "341iii": {
+    "chemical_id": 607,
+    "jecfa_name": "TRICALCIUM PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/607",
+    "file": "Chemical_607.html",
+    "sha256": "35aad37818ad14825933a9ded53917d1b3a7df6f6224c51b2563ded6e58a535a",
+    "ins_on_page": [
+      "341iii"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Group MTDI for phosphorus from all sources, expressed as P",
+    "retrieved_utc": "2026-11-09T06:04:27+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "418": {
+    "chemical_id": 2056,
+    "jecfa_name": "GELLAN GUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2056",
+    "file": "Chemical_2056.html",
+    "sha256": "7cb5b1c258d764ea9c2698bc31456b18712c5e34fa5fe2d9839626041a046a04",
+    "ins_on_page": [
+      "418"
+    ],
+    "latest_evaluation_year": "2025",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:04:45+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "420i": {
+    "chemical_id": 829,
+    "jecfa_name": "D-SORBITOL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/829",
+    "file": "Chemical_829.html",
+    "sha256": "fc10a50f28cc386ae7a1417d425e5b0ba37cbb20ec2339d3c85b916e1625b49e",
+    "ins_on_page": [
+      "420i"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:04:48+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "420ii": {
+    "chemical_id": 3856,
+    "jecfa_name": "SORBITOL SYRUP",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3856",
+    "file": "Chemical_3856.html",
+    "sha256": "c9ce34e3b76cef8649683ca1d53987e67bdf365e087c22ff9aa1b879be58d512",
+    "ins_on_page": [
+      "420ii"
+    ],
+    "latest_evaluation_year": "2018",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:04:51+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "425": {
+    "chemical_id": 3547,
+    "jecfa_name": "KONJAC FLOUR",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3547",
+    "file": "Chemical_3547.html",
+    "sha256": "b465b7596ec0c34c5470d7ef502df47cfec771a4435908e3761e504011f7334e",
+    "ins_on_page": [
+      "425"
+    ],
+    "latest_evaluation_year": "1996",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:05:14+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "433": {
+    "chemical_id": 2507,
+    "jecfa_name": "POLYOXYETHYLENE (20) SORBITAN MONOOLEATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2507",
+    "file": "Chemical_2507.html",
+    "sha256": "941397c4e2f30244e13eaa5f1a23ac3b0bbbd52c5f559fd9253ff3df885ded22",
+    "ins_on_page": [
+      "433"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "retrieved_utc": "2026-11-09T06:05:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "435": {
+    "chemical_id": 3585,
+    "jecfa_name": "POLYOXYETHYLENE (20) SORBITAN MONOSTEARATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3585",
+    "file": "Chemical_3585.html",
+    "sha256": "a3d6e45ea31591949436a44176e4f355b6aeb8821cab3b05b4cc1e399682a4a5",
+    "ins_on_page": [
+      "435"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "retrieved_utc": "2026-11-09T06:05:21+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "445iii": {
+    "chemical_id": 2855,
+    "jecfa_name": "GLYCEROL ESTER of WOOD ROSIN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2855",
+    "file": "Chemical_2855.html",
+    "sha256": "146e63352bd99b5ff6e4f0af770f831d8e3cda65d4b85c81593b630e227a57c2",
+    "ins_on_page": [
+      "445iii"
+    ],
+    "latest_evaluation_year": "2013",
+    "latest_adi": "0–25 mg/kg bw",
+    "retrieved_utc": "2026-11-09T07:50:05+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "450ii": {
+    "chemical_id": 3616,
+    "jecfa_name": "TRISODIUM DIPHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3616",
+    "file": "Chemical_3616.html",
+    "sha256": "68c9b5876dcafdfdb945dc24b106bde49c3400a913a30bd19d9af8f45ff86780",
+    "ins_on_page": [
+      "450ii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:50:09+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "450iii": {
+    "chemical_id": 4481,
+    "jecfa_name": "TETRASODIUM DIPHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4481",
+    "file": "Chemical_4481.html",
+    "sha256": "fab8ed01a95dc07a793cd589cee17dae6cadd094b42a2f81946daa53d94243b3",
+    "ins_on_page": [
+      "450iii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:50:13+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "450v": {
+    "chemical_id": 247,
+    "jecfa_name": "TETRAPOTASSIUM DIPHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/247",
+    "file": "Chemical_247.html",
+    "sha256": "9dca01db16e73dedf53fbd14b0b9a5a3859756e549358d0bd1771dcdf2c8fda5",
+    "ins_on_page": [
+      "450v"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:50:16+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "451i": {
+    "chemical_id": 2181,
+    "jecfa_name": "PENTASODIUM TRIPHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2181",
+    "file": "Chemical_2181.html",
+    "sha256": "ce93c9e3ccbd180d07fcdf86cc25f8772a0feddbbe25ebc4183aef28f22ea0cb",
+    "ins_on_page": [
+      "451i"
+    ],
+    "latest_evaluation_year": "2023",
+    "latest_adi": "MTDI 70 mg/kg bw (as P); Group MTDI for phosphorus from all sources, expressed as P",
+    "retrieved_utc": "2026-11-09T06:05:41+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "452i": {
+    "chemical_id": 4669,
+    "jecfa_name": "SODIUM POLYPHOSPHATES, glassy",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4669",
+    "file": "Chemical_4669.html",
+    "sha256": "eaa2f50fed14ff0903ee7416dd57cd93c2da7d1fc0dac1f48b7471c1be9cebb7",
+    "ins_on_page": [
+      "452i"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:51:03+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "452ii": {
+    "chemical_id": 2400,
+    "jecfa_name": "POTASSIUM POLYPHOSPHATES",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2400",
+    "file": "Chemical_2400.html",
+    "sha256": "319a86ffe43ab3eba36009a73594bfda77c36f1e2ec7e4a23c55f1ae6d8f4579",
+    "ins_on_page": [
+      "452ii"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:51:07+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "460ii": {
+    "chemical_id": 251,
+    "jecfa_name": "POWDERED CELLULOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/251",
+    "file": "Chemical_251.html",
+    "sha256": "a2f30f4cc64c88d64ba8da0f1d164b45494989014f2153791994be62f5d66734",
+    "ins_on_page": [
+      "460ii"
+    ],
+    "latest_evaluation_year": "1976",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:06:06+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "461": {
+    "chemical_id": 700,
+    "jecfa_name": "METHYL CELLULOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/700",
+    "file": "Chemical_700.html",
+    "sha256": "73732066352d23fc440c65f53aa34320913c19cc603b359a6e7f0fe29988f02e",
+    "ins_on_page": [
+      "461"
+    ],
+    "latest_evaluation_year": "1989",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:06:17+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "466": {
+    "chemical_id": 3773,
+    "jecfa_name": "SODIUM CARBOXYMETHYL CELLULOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3773",
+    "file": "Chemical_3773.html",
+    "sha256": "8fab5d3c47efaeadfadd9bc58fe76252cf3c16b5ce1ddb05dbe80081371d8fbd",
+    "ins_on_page": [
+      "466"
+    ],
+    "latest_evaluation_year": "1989",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:06:22+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "470iii": {
+    "chemical_id": 4275,
+    "jecfa_name": "MAGNESIUM STEARATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4275",
+    "file": "Chemical_4275.html",
+    "sha256": "918ec8476e6b693c4c21d4ccc3165d8d218a7adc871467bc3af03697d9e82551",
+    "ins_on_page": [
+      "470iii"
+    ],
+    "latest_evaluation_year": "2020",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:06:31+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "476": {
+    "chemical_id": 4009,
+    "jecfa_name": "POLYGLYCEROL ESTERS of INTERESTERIFIED RICINOLEIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4009",
+    "file": "Chemical_4009.html",
+    "sha256": "9126853ed9f5e390655368336f79391e3b72dd5dbab88e8ed7f78d3457d08467",
+    "ins_on_page": [
+      "476"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "0-7.5 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:06:46+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "491": {
+    "chemical_id": 2271,
+    "jecfa_name": "SORBITAN MONOSTEARATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2271",
+    "file": "Chemical_2271.html",
+    "sha256": "4877db93170b160750005b3a2fabec74028a6da5b459e746ccb262441a72cf53",
+    "ins_on_page": [
+      "491"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "retrieved_utc": "2026-11-09T06:06:56+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "492": {
+    "chemical_id": 3983,
+    "jecfa_name": "SORBITAN TRISTEARATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3983",
+    "file": "Chemical_3983.html",
+    "sha256": "7c4adbd509489cf91dd84e315c7e9a7139e4b10dfaed97602199d575bba47c06",
+    "ins_on_page": [
+      "492"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "retrieved_utc": "2026-11-09T06:07:01+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "494": {
+    "chemical_id": 3008,
+    "jecfa_name": "SORBITAN MONOOLEATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3008",
+    "file": "Chemical_3008.html",
+    "sha256": "64a3ac299f3d348d30a1d03a0112135cb2404be93d6c6581f924666cf9df6809",
+    "ins_on_page": [
+      "494"
+    ],
+    "latest_evaluation_year": "2026",
+    "latest_adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "retrieved_utc": "2026-11-09T06:07:07+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "500i": {
+    "chemical_id": 3252,
+    "jecfa_name": "SODIUM CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3252",
+    "file": "Chemical_3252.html",
+    "sha256": "429c650199ee00e97a4d68e8d8af8cc35f496d8f8d578799cc52d6feb82697b4",
+    "ins_on_page": [
+      "500i"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "501i": {
+    "chemical_id": 2711,
+    "jecfa_name": "POTASSIUM CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2711",
+    "file": "Chemical_2711.html",
+    "sha256": "e2bf6aa93720fceee27512d3acee35d965a44400483042d30277f2358ed74852",
+    "ins_on_page": [
+      "501i"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:24+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "503i": {
+    "chemical_id": 1215,
+    "jecfa_name": "AMMONIUM CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1215",
+    "file": "Chemical_1215.html",
+    "sha256": "5de8ec27d2f24ca095a0d8eee7868bd0740dd37ecbedcc619f0405ba10de5599",
+    "ins_on_page": [
+      "503i"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:07:32+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "508": {
+    "chemical_id": 1874,
+    "jecfa_name": "POTASSIUM CHLORIDE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1874",
+    "file": "Chemical_1874.html",
+    "sha256": "10f866fc0e5f74b510dacf10876bbc21f97d538b600fbe57024586c7f42cb343",
+    "ins_on_page": [
+      "508"
+    ],
+    "latest_evaluation_year": "1979",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:36+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "509": {
+    "chemical_id": 458,
+    "jecfa_name": "CALCIUM CHLORIDE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/458",
+    "file": "Chemical_458.html",
+    "sha256": "7495e7d2a156758416b9f2df89b6e9c21c0368cf79e783698428bd59a585beff",
+    "ins_on_page": [
+      "509"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:40+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "516": {
+    "chemical_id": 1360,
+    "jecfa_name": "CALCIUM SULFATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1360",
+    "file": "Chemical_1360.html",
+    "sha256": "4eba902298b1772b8a657132a7a1819e27c30f32ebb16702e051d46633586834",
+    "ins_on_page": [
+      "516"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:46+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "518": {
+    "chemical_id": 3645,
+    "jecfa_name": "MAGNESIUM SULFATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3645",
+    "file": "Chemical_3645.html",
+    "sha256": "4a6d52438ba5d74f0707ffa2a8d0fd806865ce3108b85ed870ab2b8e2a138f18",
+    "ins_on_page": [
+      "518"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-09T07:52:24+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "524": {
+    "chemical_id": 3939,
+    "jecfa_name": "SODIUM HYDROXIDE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3939",
+    "file": "Chemical_3939.html",
+    "sha256": "a9f847d5d3173f784d583d883a874de61f141a5c98b540d1f216d3db4b7ed5bc",
+    "ins_on_page": [
+      "524"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:53+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "526": {
+    "chemical_id": 82,
+    "jecfa_name": "CALCIUM HYDROXIDE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/82",
+    "file": "Chemical_82.html",
+    "sha256": "2793e252e30c7183f35947079fba997535890093377b3290a688bce0a8a1291a",
+    "ins_on_page": [
+      "526"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:07:56+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "903": {
+    "chemical_id": 939,
+    "jecfa_name": "CARNAUBA WAX",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/939",
+    "file": "Chemical_939.html",
+    "sha256": "b9403142562d27791ad8eda362eb2a7d6c376046cec56cdf70992ac2e55a53a1",
+    "ins_on_page": [
+      "903"
+    ],
+    "latest_evaluation_year": "1992",
+    "latest_adi": "0-7 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:08:33+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "950": {
+    "chemical_id": 926,
+    "jecfa_name": "ACESULFAME POTASSIUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/926",
+    "file": "Chemical_926.html",
+    "sha256": "c67c7bab0b6dea2cea3f992c87980c6e50248b07669c0c40a2443ee05f9bbf44",
+    "ins_on_page": [
+      "950"
+    ],
+    "latest_evaluation_year": "1990",
+    "latest_adi": "0-15 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:08:40+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "951": {
+    "chemical_id": 62,
+    "jecfa_name": "ASPARTAME",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/62",
+    "file": "Chemical_62.html",
+    "sha256": "d1a092883a77adb69d8e5b14256f5641dee31a4de5c50acae8965d9c8c34e407",
+    "ins_on_page": [
+      "951"
+    ],
+    "latest_evaluation_year": "2023",
+    "latest_adi": "0–40 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:08:44+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "952ii": {
+    "chemical_id": 837,
+    "jecfa_name": "CALCIUM CYCLAMATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/837",
+    "file": "Chemical_837.html",
+    "sha256": "0c08511a4478ef3be787822469ecef5c58f485e97e6bf3e9b0ce5d3dd55ab9df",
+    "ins_on_page": [
+      "952ii"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "0-11 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:08:48+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "965i": {
+    "chemical_id": 4276,
+    "jecfa_name": "MALTITOL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4276",
+    "file": "Chemical_4276.html",
+    "sha256": "ba0a87549c7a713c846ef01222721255063d210acf94637ba4a17ed0a54ffb47",
+    "ins_on_page": [
+      "965i"
+    ],
+    "latest_evaluation_year": "1993",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:09:07+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "965ii": {
+    "chemical_id": 2132,
+    "jecfa_name": "DRIED MALTITOL SYRUP",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2132",
+    "file": "Chemical_2132.html",
+    "sha256": "46b9033ad104cf5d6e3d7022827655d657c6690a3120694c2e9b0080d6de6a12",
+    "ins_on_page": [
+      "965ii"
+    ],
+    "latest_evaluation_year": "1997",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:09:11+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "101i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Riboflavin, tổng hợp Riboflavin, synthetic",
+      "hợp Riboflavin, synthetic"
+    ]
+  },
+  "1100": {
+    "chemical_id": 2928,
+    "jecfa_name": "alpha-AMYLASE from ASPERGILLUS ORYZAE, VAR.",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2928",
+    "file": "Chemical_2928.html",
+    "sha256": "0ae37f78425819a8905cefa719f37c3ccfd084d688dfe3c1aa94ff661bef289f",
+    "ins_on_page": [
+      "1100"
+    ],
+    "latest_evaluation_year": "1987",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:17:31+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1100i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "alpha-Amylase từ Aspergillus orysee var. alpha-Amylase from Aspergillus oryzae var.",
+      "alpha-Amylase from Aspergillus oryzae var."
+    ]
+  },
+  "1100ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      339,
+      1049
+    ],
+    "keywords": [
+      "alpha-Amylase từ Bacillus stearothermophilus alpha-Amylase from Bacillus stearothermophilus",
+      "alpha-Amylase from Bacillus stearothermophilus"
+    ]
+  },
+  "1100iii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "alpha-Amylase từ Aspergillus orysee var. alpha-Amylase from Aspergillus oryzae var.",
+      "alpha-Amylase from Aspergillus oryzae var."
+    ]
+  },
+  "1100v": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1049
+    ],
+    "keywords": [
+      "alpha-Amylase từ Bacillus stearothermophilus expressed in Bacillus subtilis alpha-Amylase from Bacillus stearothermophilus expressed in Bacillus subtilis",
+      "alpha-Amylase from Bacillus stearothermophilus expressed in Bacillus subtilis"
+    ]
+  },
+  "1101": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2034,
+      1851,
+      2543,
+      1025,
+      972,
+      1958,
+      960,
+      2669,
+      198,
+      3492
+    ],
+    "keywords": [
+      "protease",
+      "Protease từ Aspergillus orysee var. Protease from Aspergillus oryzae var.",
+      "Protease from Aspergillus oryzae var."
+    ]
+  },
+  "1101i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Protease từ Aspergillus orysee var. Protease from Aspergillus oryzae var.",
+      "Protease from Aspergillus oryzae var."
+    ]
+  },
+  "1104": {
+    "chemical_id": 1186,
+    "jecfa_name": "ASPERGILLUS ORYZAE, VAR. LIPASE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1186",
+    "file": "Chemical_1186.html",
+    "sha256": "355dfc2df84ac17f208d02763c4d9a249b9c4a15e6a93117ec8bb1b6f590dfc7",
+    "ins_on_page": [
+      "1104"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:18:11+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "120i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "1210": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Natri polyacrylat Sodium polyacrylate",
+      "Sodium polyacrylate"
+    ]
+  },
+  "1400": {
+    "chemical_id": 2553,
+    "jecfa_name": "DEXTRINS, WHITE and YELLOW, ROASTED STARCH",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2553",
+    "file": "Chemical_2553.html",
+    "sha256": "a9ec9ee0a31ca737b9b87d56754a3303fb6ddaf999898367a006eb59e83aa6c2",
+    "ins_on_page": [
+      "1400"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:32+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1401": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "acid-treated starch",
+      "Tinh bột đã được xử lý bằng acid Acid-treated starch",
+      "lý bằng acid Acid-treated starch"
+    ]
+  },
+  "1404": {
+    "chemical_id": 889,
+    "jecfa_name": "OXIDIZED STARCH",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/889",
+    "file": "Chemical_889.html",
+    "sha256": "614cbb22ea95028651a68839521623a33bdee94aaafb6fcc3c4d6210f557d6f9",
+    "ins_on_page": [
+      "1404"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:43:42+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "141i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Phức đồng clorophyll Chlorophyll copper complexes",
+      "Chlorophyll copper complexes"
+    ]
+  },
+  "141ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Phức đồng clorophyllin (muối natri, kali của nó) Chlorophyllins, copper complexes, sodium and potassium salts",
+      "nó) Chlorophyllins, copper complexes, sodium and potassium salts"
+    ]
+  },
+  "142": {
+    "chemical_id": 2119,
+    "jecfa_name": "FOOD GREEN S",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2119",
+    "file": "Chemical_2119.html",
+    "sha256": "f37f277b6e51acf6c4aa270e2968959f15cc5073151dbdb9da0dee4c24186cab",
+    "ins_on_page": [
+      "142"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NO ADI ALLOCATED",
+    "retrieved_utc": "2026-11-09T06:18:35+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "1450": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "starch sodium octenyl succinate",
+      "Starch natri octenyl succinat Starch sodium octenyl succinate",
+      "Starch sodium octenyl succinate"
+    ]
+  },
+  "150a": {
+    "chemical_id": 423,
+    "jecfa_name": "CARAMEL COLOUR, Class I",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/423",
+    "file": "Chemical_423.html",
+    "sha256": "546dd512e9139a11fcea3a048ba1d7d022de789d2e293b041c4fa2ef783866aa",
+    "ins_on_page": [
+      "150a"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:18:43+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "150c": {
+    "chemical_id": 436,
+    "jecfa_name": "AMMONIA CARAMEL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/436",
+    "file": "Chemical_436.html",
+    "sha256": "e207eea003d4c593a5aa23929fbc309724eaa4c202a7b965d52e33dc620b249d",
+    "ins_on_page": [
+      "150c"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "0-200 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:18:47+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "150d": {
+    "chemical_id": 1668,
+    "jecfa_name": "CARAMEL COLOUR, Class IV",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1668",
+    "file": "Chemical_1668.html",
+    "sha256": "7a4bfbdd5e32ba8e357079fe643fd9d87aafecaf4ad38ffcaa5c8c7ca60abdb7",
+    "ins_on_page": [
+      "150d"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "0-200 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:18:57+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "1520": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2381,
+      3726,
+      3789,
+      3405,
+      5999,
+      3725,
+      5998,
+      1237,
+      2013,
+      2087
+    ],
+    "keywords": [
+      "propylene glycol",
+      "Propylen glycol Propylene glycol",
+      "Propylene glycol"
+    ]
+  },
+  "153": {
+    "chemical_id": 2323,
+    "jecfa_name": "VEGETABLE CARBON",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2323",
+    "file": "Chemical_2323.html",
+    "sha256": "b12271e975b55773712c3931ede456442966d61a827c248cb3540e6cce2cd95b",
+    "ins_on_page": [
+      "153"
+    ],
+    "latest_evaluation_year": "1987",
+    "latest_adi": "NO ADI ALLOCATED",
+    "retrieved_utc": "2026-11-09T06:19:19+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160ai": {
+    "chemical_id": 1514,
+    "jecfa_name": "beta-CAROTENE (synthetic)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1514",
+    "file": "Chemical_1514.html",
+    "sha256": "8199f7c455d5b63d490a579c2d382efcdeeeeb56df4e81e33e3d670e8e6841fe",
+    "ins_on_page": [
+      "160ai"
+    ],
+    "latest_evaluation_year": "2019",
+    "latest_adi": "WITHDRAWN",
+    "retrieved_utc": "2026-11-09T07:44:31+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160aii": {
+    "chemical_id": 1320,
+    "jecfa_name": "CAROTENES (vegetable)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1320",
+    "file": "Chemical_1320.html",
+    "sha256": "c9d77a8e6746d3f50c91e31fd0398687c03b4a502c7ac8c99531e7606c02bdd8",
+    "ins_on_page": [
+      "160aii"
+    ],
+    "latest_evaluation_year": "1993",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:44:44+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160aiii": {
+    "chemical_id": 942,
+    "jecfa_name": "beta,beta-CAROTENE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/942",
+    "file": "Chemical_942.html",
+    "sha256": "ecf37fa8382781f9aa859ce401d3d1bbd7fbca6875cf12ef48614688eea6b578",
+    "ins_on_page": [
+      "160aiii"
+    ],
+    "latest_evaluation_year": "2019",
+    "latest_adi": "WITHDRAWN",
+    "retrieved_utc": "2026-11-09T07:44:46+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160aiv": {
+    "chemical_id": 742,
+    "jecfa_name": "CAROTENES (ALGAE)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/742",
+    "file": "Chemical_742.html",
+    "sha256": "c2b9413632536abcbf554e2371c73c54d541f251e0ee1f362e0b7b8454a63b7f",
+    "ins_on_page": [
+      "160aiv"
+    ],
+    "latest_evaluation_year": "2017",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:44:56+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160b": {
+    "chemical_id": 2706,
+    "jecfa_name": "ANNATTO EXTRACTS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2706",
+    "file": "Chemical_2706.html",
+    "sha256": "2d0ebdfd5a69dec50f790e31d4d16b955816980bb99fbb22bd851e94531696d5",
+    "ins_on_page": [
+      "160b"
+    ],
+    "latest_evaluation_year": "2006",
+    "latest_adi": "BIXIN: 0-12 mg/kg bw; NORBIXIN AND ITS SODIUM AND POTASSIUM SALT: 0-0.6 mg/kg bw (group ADI, expressed as norbixin)",
+    "retrieved_utc": "2026-11-09T06:19:51+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160bi": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2706,
+      4744,
+      4373,
+      3655,
+      3653,
+      3445,
+      4372,
+      3652,
+      3654,
+      4743,
+      3898
+    ],
+    "keywords": [
+      "annatto extracts",
+      "annatto"
+    ]
+  },
+  "160bii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2706,
+      4744,
+      4373,
+      3655,
+      3653,
+      3445,
+      4372,
+      3652,
+      3654,
+      4743,
+      3898
+    ],
+    "keywords": [
+      "annatto extracts",
+      "annatto"
+    ]
+  },
+  "160biii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2706,
+      4744,
+      4373,
+      3655,
+      3653,
+      3445,
+      4372,
+      3652,
+      3654,
+      4743,
+      3898
+    ],
+    "keywords": [
+      "annatto extracts",
+      "annatto"
+    ]
+  },
+  "160c": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      5866,
+      4486,
+      2626
+    ],
+    "keywords": [
+      "paprika oleoresin",
+      "paprika",
+      "Paprika oleoresin",
+      "Paprika oleoresin Paprika oleoresin"
+    ]
+  },
+  "160ciii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      5866,
+      4486,
+      2626
+    ],
+    "keywords": [
+      "paprika oleoresin",
+      "paprika",
+      "Paprika oleoresin",
+      "Paprika oleoresin Paprika oleoresin"
+    ]
+  },
+  "160d": {
+    "chemical_id": 2876,
+    "jecfa_name": "LYCOPENE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2876",
+    "file": "Chemical_2876.html",
+    "sha256": "7fd7403cb6c72b12b7d9fdbd0ce0e2e1d3d80793cbf43b0ab1aa9e63ac4ea035",
+    "ins_on_page": [
+      "160d"
+    ],
+    "latest_evaluation_year": "2009",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:21:11+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160di": {
+    "chemical_id": 5572,
+    "jecfa_name": "LYCOPENE (synthetic)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5572",
+    "file": "Chemical_5572.html",
+    "sha256": "60fa0b38bc581bc2d1277de0dd882e4846d4fafd4314980330d07098cdd14740",
+    "ins_on_page": [
+      "160di"
+    ],
+    "latest_evaluation_year": "2023",
+    "latest_adi": "0-0.5 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:21:15+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "160dii": {
+    "chemical_id": 5880,
+    "jecfa_name": "LYCOPENE EXTRACT from TOMATO",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5880",
+    "file": "Chemical_5880.html",
+    "sha256": "14473b8b2edefd4b1db9a0194680f5fb8661049242b8820463c4780bbaf3ef6d",
+    "ins_on_page": [
+      "160dii"
+    ],
+    "latest_evaluation_year": "2009",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:21:20+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "222": {
+    "chemical_id": 2269,
+    "jecfa_name": "SODIUM HYDROGEN SULFITE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2269",
+    "file": "Chemical_2269.html",
+    "sha256": "ba23b66cc56dbc1c5925678f6f22c0cde80c453e1e6dd2828d62e8e1382d913a",
+    "ins_on_page": [
+      "222"
+    ],
+    "latest_evaluation_year": "1998",
+    "latest_adi": "0-0.7 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:21:23+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "260": {
+    "chemical_id": 4785,
+    "jecfa_name": "ACETIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4785",
+    "file": "Chemical_4785.html",
+    "sha256": "425053d855e53f6af57cb4618ae493c5006be8deec0f7132c4a0a3a9e0bccb34",
+    "ins_on_page": [
+      "260"
+    ],
+    "latest_evaluation_year": "2004",
+    "latest_adi": "No safety concern at current levels of intake when used as a flavouring agent",
+    "retrieved_utc": "2026-11-09T07:46:32+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "270": {
+    "chemical_id": 3367,
+    "jecfa_name": "LACTIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3367",
+    "file": "Chemical_3367.html",
+    "sha256": "97b10b835a30d8e3968d25c1e326f0b7c324434950b975a15725a9b1c664e7f3",
+    "ins_on_page": [
+      "270"
+    ],
+    "latest_evaluation_year": "2001",
+    "latest_adi": "NOT LIMITED (1973)",
+    "retrieved_utc": "2026-11-09T07:46:40+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "296": {
+    "chemical_id": 5163,
+    "jecfa_name": "DL-MALIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5163",
+    "file": "Chemical_5163.html",
+    "sha256": "8cc189dca12a616da2d45e47a691c0a71017a71a983ab5cc81517f5b4951c649",
+    "ins_on_page": [
+      "296"
+    ],
+    "latest_evaluation_year": "1969",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:22:06+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "307a": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "d-alpha-Tocopherol Tocopherol, d-alpha",
+      "Tocopherol, d-alpha"
+    ]
+  },
+  "307b": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Tocopherol concentrat (dạng hỗn hợp) Tocopherol concentrate, mixed",
+      "hợp) Tocopherol concentrate, mixed"
+    ]
+  },
+  "307c": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "dl-alpha- Tocopherol Tocopherol, dl- alpha-",
+      "Tocopherol, dl- alpha-"
+    ]
+  },
+  "319": {
+    "chemical_id": 236,
+    "jecfa_name": "TERTIARY BUTYLHYDROQUINONE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/236",
+    "file": "Chemical_236.html",
+    "sha256": "270c534edd9a75af9386f739df4cde1bd3650d97cfdf344d59b5c71a856280af",
+    "ins_on_page": [
+      "319"
+    ],
+    "latest_evaluation_year": "1997",
+    "latest_adi": "0-0.7 mg/kg bw Intake: 1998, TRS 891-JECFA 51/132,159; FAS 42-JECFA 51/453. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.7 mg/kg bw for mean intake for the three Member States that submitted such data. In national data submitted by four Member States, estimates of mean intake of TBHQ did not exceed the ADI. The potential exists for consumers of high levels of TBHQ to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI.",
+    "retrieved_utc": "2026-11-09T06:22:16+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "322ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2353,
+      1477,
+      1478,
+      5867
+    ],
+    "keywords": [
+      "Lecithin",
+      "Lecithin Lecithin"
+    ]
+  },
+  "331": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1811,
+      1649,
+      1650,
+      2709,
+      349,
+      102,
+      2687,
+      2688,
+      40,
+      135,
+      2938,
+      3197,
+      1775,
+      2860,
+      2344
+    ],
+    "keywords": [
+      "sodium citrate",
+      "citrate",
+      "Natri dihydro citrat Sodium dihydrogen citrate",
+      "Sodium dihydrogen citrate"
+    ]
+  },
+  "331ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Dinatri monohydro citrat Disodium monohydrogen citrate",
+      "Disodium monohydrogen citrate"
+    ]
+  },
+  "332iii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      959
+    ],
+    "keywords": [
+      "Kali dihydro citrat Potassium dihydrogen citrate",
+      "Potassium dihydrogen citrate"
+    ]
+  },
+  "334": {
+    "chemical_id": 4746,
+    "jecfa_name": "L(+)-TARTARIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4746",
+    "file": "Chemical_4746.html",
+    "sha256": "3cf0021bf9cb913dd4833e7490e9d74bfada12d52cb8ba37adb0fae225ceaf5b",
+    "ins_on_page": [
+      "334"
+    ],
+    "latest_evaluation_year": "2017",
+    "latest_adi": "0-30 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:23:07+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "337": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      808,
+      809,
+      1362,
+      1400,
+      1294,
+      195,
+      501,
+      3852,
+      574,
+      1224
+    ],
+    "keywords": [
+      "potassium sodium tartrate",
+      "tartrate",
+      "Kali natri L(+)- tartrat Potassium sodium L(+)- tartrate",
+      "Potassium sodium L(+)- tartrate"
+    ]
+  },
+  "339": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2145,
+      823,
+      4138,
+      1364,
+      4023,
+      2639,
+      4668,
+      506,
+      2989,
+      6175,
+      1765,
+      815,
+      1230,
+      2032,
+      2035,
+      2037,
+      6507,
+      6594,
+      680
+    ],
+    "keywords": [
+      "sodium phosphate",
+      "phosphate",
+      "Natri dihydro phosphat Sodium dihydrogen phosphate",
+      "Sodium dihydrogen phosphate"
+    ]
+  },
+  "340iii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Trikali hydro phosphat Tripotassium hydrogen phosphate",
+      "Tripotassium hydrogen phosphate"
+    ]
+  },
+  "341": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1044,
+      3792,
+      80,
+      2751,
+      656,
+      1393,
+      2170,
+      37,
+      1245,
+      3663,
+      6175,
+      1765,
+      815,
+      1230,
+      2032,
+      2035,
+      2037,
+      6507,
+      6594,
+      680
+    ],
+    "keywords": [
+      "calcium phosphate",
+      "phosphate",
+      "Calci dihydro phosphat Calcium dihydrogen phosphate",
+      "Calcium dihydrogen phosphate"
+    ]
+  },
+  "341ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Dicalci hydro phosphat Dicalcium hydrogen phosphate",
+      "Dicalcium hydrogen phosphate"
+    ]
+  },
+  "364ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Dinatri succinat Disodium succinate",
+      "Disodium succinate"
+    ]
+  },
+  "385": {
+    "chemical_id": 3883,
+    "jecfa_name": "CALCIUM DISODIUM EDTA",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3883",
+    "file": "Chemical_3883.html",
+    "sha256": "a2a3099a6b7bf2be8fd4e922fc4418d9f75af2069fe25275ea4c5caa0b4d029f",
+    "ins_on_page": [
+      "385"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "0-2.5 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:24:50+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "405": {
+    "chemical_id": 585,
+    "jecfa_name": "PROPYLENE GLYCOL ALGINATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/585",
+    "file": "Chemical_585.html",
+    "sha256": "75e23ad73d0c6a1bd3f3cb2e30cca9d6d78b4b216c8e153a40e39d62f894e3fe",
+    "ins_on_page": [
+      "405"
+    ],
+    "latest_evaluation_year": "1993",
+    "latest_adi": "0-70 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:24:52+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "406": {
+    "chemical_id": 1163,
+    "jecfa_name": "AGAR",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1163",
+    "file": "Chemical_1163.html",
+    "sha256": "68f0a6e5ab24c9521e0d1038ef85e5bc2811264e5ef8c11c6614eb4beed6ece2",
+    "ins_on_page": [
+      "406"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:24:55+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "407a": {
+    "chemical_id": 4387,
+    "jecfa_name": "Processed EUCHEUMA SEAWEED",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4387",
+    "file": "Chemical_4387.html",
+    "sha256": "8d11d452b6b97bc8b050c9d11b9cf547c17685464cfa1f09c48c200d82ef85a7",
+    "ins_on_page": [
+      "407a"
+    ],
+    "latest_evaluation_year": "2007",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:24:58+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "414": {
+    "chemical_id": 1133,
+    "jecfa_name": "ACACIA GUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1133",
+    "file": "Chemical_1133.html",
+    "sha256": "6e82c9cf0bf96e939c8b165f75a3a0cd818b82b0202a43500a48fe19fd123a59",
+    "ins_on_page": [
+      "414"
+    ],
+    "latest_evaluation_year": "1989",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:25:01+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "415i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "418i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "418ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "422": {
+    "chemical_id": 1565,
+    "jecfa_name": "GLYCEROL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1565",
+    "file": "Chemical_1565.html",
+    "sha256": "31a5cad9e982440a32158eea7603f7d9a0b7fcfa2d58d2f6e3b7a9905725d47b",
+    "ins_on_page": [
+      "422"
+    ],
+    "latest_evaluation_year": "2002",
+    "latest_adi": "NOT SPECIFIED (1976)",
+    "retrieved_utc": "2026-11-09T07:50:01+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "425i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "452": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2670,
+      2162,
+      2834,
+      2835,
+      2181,
+      4642,
+      2400,
+      2383,
+      2370,
+      984,
+      6175,
+      1765,
+      815,
+      1230,
+      2032,
+      2035,
+      2037,
+      6507,
+      6594,
+      680,
+      3571,
+      4670,
+      4669
+    ],
+    "keywords": [
+      "polyphosphate",
+      "phosphate",
+      "Natri polyphosphat Sodium polyphosphate",
+      "Sodium polyphosphate"
+    ]
+  },
+  "460": {
+    "chemical_id": 900,
+    "jecfa_name": "CELLULOSE GEL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/900",
+    "file": "Chemical_900.html",
+    "sha256": "f7eab75df52128a17ff7358c8554f8b56cb189877a1efa58d22c519ef644d1d9",
+    "ins_on_page": [
+      "460"
+    ],
+    "latest_evaluation_year": "1997",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T07:51:14+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "460i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Cellulose vi tinh thể Microcrystalline cellulose Chất độn, chất chống đông vón, chất mang, chất làm bóng, chất nhũ hóa, chất tạo bọt, chất ổn định, chất làm dày",
+      "chất làm bóng, chất nhũ hóa, chất tạo bọt, chất ổn định, chất làm dày"
+    ]
+  },
+  "470i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Muối của acid myristic, palmitic và stearic (NH4, Ca, K và Na) Salts of myristic, palmitic and stearic acids with ammonia, calcium, potassium and sodium",
+      "Salts of myristic, palmitic and stearic acids with ammonia, calcium, potassium and sodium"
+    ]
+  },
+  "470ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Muối của acid oleic (Ca, Na và K) Salts of oleic acid with calcium, potassium and sodium",
+      "Salts of oleic acid with calcium, potassium and sodium"
+    ]
+  },
+  "472a": {
+    "chemical_id": 434,
+    "jecfa_name": "ACETIC and FATTY ACID ESTERS of  GLYCEROL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/434",
+    "file": "Chemical_434.html",
+    "sha256": "0db94c096982947c37f7c7e4a277ef5253f038398c754c378b40d276127a10b5",
+    "ins_on_page": [
+      "472a"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-09T06:26:19+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "472e": {
+    "chemical_id": 1126,
+    "jecfa_name": "DIACETYLTARTARIC and FATTY ACID ESTERS of GLYCEROL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1126",
+    "file": "Chemical_1126.html",
+    "sha256": "36779d848728cd894eb6a0569ee6470c38f4259f150ac953aecf88d0e573bbcd",
+    "ins_on_page": [
+      "472e",
+      "f"
+    ],
+    "latest_evaluation_year": "2003",
+    "latest_adi": "0-50 mg/kg bw",
+    "retrieved_utc": "2026-11-09T07:51:24+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "473": {
+    "chemical_id": 2736,
+    "jecfa_name": "SUCROSE ESTERS of FATTY ACIDS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2736",
+    "file": "Chemical_2736.html",
+    "sha256": "3e7712668f5ebe990878f15825ef11df3313f81920333d4e110641c16b73c0e9",
+    "ins_on_page": [
+      "473"
+    ],
+    "latest_evaluation_year": "1997",
+    "latest_adi": "0-30 mg/kg bw",
+    "retrieved_utc": "2026-11-09T07:51:26+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "473a": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Oligoeste typ 1 và typ 2 của sucrose Sucrose oligoesters type I and type II",
+      "sucrose Sucrose oligoesters type I and type II"
+    ]
+  },
+  "475": {
+    "chemical_id": 3561,
+    "jecfa_name": "POLYGLYCEROL ESTERS of FATTY ACIDS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3561",
+    "file": "Chemical_3561.html",
+    "sha256": "b88e76f240203a8526bf29597e65b631c0df2220d31df14e5736896c3a59c2e5",
+    "ins_on_page": [
+      "475"
+    ],
+    "latest_evaluation_year": "2024",
+    "latest_adi": "0-25 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:26:33+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "477": {
+    "chemical_id": 683,
+    "jecfa_name": "PROPYLENE GLYCOL ESTERS of FATTY ACIDS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/683",
+    "file": "Chemical_683.html",
+    "sha256": "05ea5d938f5f8a119ffd342a8a9cd2ad5b4150c233213f440a3eb8416196f4b4",
+    "ins_on_page": [
+      "477"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "0-25 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:26:36+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "481i": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Natri stearoyl lactylat Sodium stearoyl lactylate Chất nhũ hóa, chất xử lý bột, chất tạo bọt, chất ổn định",
+      "chất xử lý bột, chất tạo bọt, chất ổn định"
+    ]
+  },
+  "500": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      3252,
+      1404,
+      3772,
+      5231,
+      2381,
+      2208,
+      4374,
+      2544,
+      1215,
+      133,
+      1912,
+      457,
+      1528,
+      5425
+    ],
+    "keywords": [
+      "sodium carbonate",
+      "carbonate",
+      "Natri carbonat Sodium carbonate",
+      "Sodium carbonate"
+    ]
+  },
+  "500iii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Natri sesquicarbonat Sodium sesquicarbonate Chất điều chỉnh độ acid, chất chống đông vón, chất tạo xốp",
+      "acid, chất chống đông vón, chất tạo xốp"
+    ]
+  },
+  "503": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1215,
+      2381,
+      2208,
+      4374,
+      2544,
+      133,
+      1912,
+      457,
+      1528,
+      5425
+    ],
+    "keywords": [
+      "ammonium carbonate",
+      "carbonate",
+      "Amoni carbonat Ammonium carbonate",
+      "Ammonium carbonate"
+    ]
+  },
+  "514ii": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Natri hydro sulfat Sodium hydrogen sulfate Chất điều chỉnh độ acid",
+      "sulfate Chất điều chỉnh độ acid"
+    ]
+  },
+  "575": {
+    "chemical_id": 1370,
+    "jecfa_name": "GLUCONO delta-LACTONE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1370",
+    "file": "Chemical_1370.html",
+    "sha256": "5419c5398b450b5cf41030add65d2e998bc0e9a5f84f3288772f1ece974b8861",
+    "ins_on_page": [
+      "575"
+    ],
+    "latest_evaluation_year": "1998",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:27:31+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "620": {
+    "chemical_id": 668,
+    "jecfa_name": "L-GLUTAMIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/668",
+    "file": "Chemical_668.html",
+    "sha256": "669744e24a4c8fc661ff9c25475a071899c42abf66a86e9859b0149a55e5a8ae",
+    "ins_on_page": [
+      "620"
+    ],
+    "latest_evaluation_year": "2004",
+    "latest_adi": "NOT SPECIFIED (1987)",
+    "retrieved_utc": "2026-11-09T07:52:28+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "621": {
+    "chemical_id": 2257,
+    "jecfa_name": "MONOSODIUM L-GLUTAMATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2257",
+    "file": "Chemical_2257.html",
+    "sha256": "423637f3d4f30778cadbdc1ce078c4def5ff45ce4c802859ad80e8aebfd34e3a",
+    "ins_on_page": [
+      "621"
+    ],
+    "latest_evaluation_year": "1987",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:27:53+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "6305v": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "635": {
+    "chemical_id": 4140,
+    "jecfa_name": "DISODIUM 5'-RIBONUCLEOTIDES",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4140",
+    "file": "Chemical_4140.html",
+    "sha256": "577436f66c2898223953d9fc517eaa140b7fe48a48f28ced0bda993938b14168",
+    "ins_on_page": [
+      "635"
+    ],
+    "latest_evaluation_year": "1974",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:27:59+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "640": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      6517,
+      5736,
+      5380,
+      6095,
+      5426,
+      6461,
+      6094,
+      5795,
+      5826
+    ],
+    "keywords": [
+      "glycine",
+      "Glycin Glycine",
+      "Glycine"
+    ]
+  },
+  "8100": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "900": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1211,
+      2755
+    ],
+    "keywords": [
+      "dimethylpolysiloxane",
+      "polydimethylsiloxane",
+      "Polydimethyl siloxan Polydimethyl siloxane",
+      "Polydimethyl siloxane"
+    ]
+  },
+  "900a": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": [
+      "Polydimethyl siloxan Polydimethyl siloxane",
+      "Polydimethyl siloxane"
+    ]
+  },
+  "901": {
+    "chemical_id": 168,
+    "jecfa_name": "BEESWAX",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/168",
+    "file": "Chemical_168.html",
+    "sha256": "9ad5d39c34a48c172ad59d2fbba7cb0d2a8a27a23b0e928a10ca939c17310c7b",
+    "ins_on_page": [
+      "901"
+    ],
+    "latest_evaluation_year": "2005",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:28:31+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "904": {
+    "chemical_id": 619,
+    "jecfa_name": "BLEACHED SHELLAC",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/619",
+    "file": "Chemical_619.html",
+    "sha256": "0cb631c9a05365c197645f4c2759905fc2d9aa1dd2bba3c38a30968671b7af82",
+    "ins_on_page": [
+      "904"
+    ],
+    "latest_evaluation_year": "1992",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:28:34+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "941": {
+    "chemical_id": 1040,
+    "jecfa_name": "NITROGEN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1040",
+    "file": "Chemical_1040.html",
+    "sha256": "77f172976536c733a7503a085599fbe39264d0ef7dbfcbf35983fe65f46ea21c",
+    "ins_on_page": [
+      "941"
+    ],
+    "latest_evaluation_year": "1980",
+    "latest_adi": "NO ADI NECESSARY",
+    "retrieved_utc": "2026-11-09T06:28:39+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "953": {
+    "chemical_id": 720,
+    "jecfa_name": "HYDROGENATED ISOMALTULOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/720",
+    "file": "Chemical_720.html",
+    "sha256": "1fa90457cb13e144e62f20381345b3191f2eda60a2758dee935afd4be9c07b5a",
+    "ins_on_page": [
+      "953"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-09T06:28:41+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "955": {
+    "chemical_id": 2340,
+    "jecfa_name": "SUCRALOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2340",
+    "file": "Chemical_2340.html",
+    "sha256": "6857c1f8a7a8d8e123f1822550be845081ef12258536fc925139ea5d9a92faa7",
+    "ins_on_page": [
+      "955"
+    ],
+    "latest_evaluation_year": "1990",
+    "latest_adi": "0-15 mg/kg bw",
+    "retrieved_utc": "2026-11-09T06:28:44+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "960d": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [],
+    "keywords": []
+  },
+  "964": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      3167
+    ],
+    "keywords": [
+      "polyglycitol syrup",
+      "Siro polyglycitol Polyglycitol syrup",
+      "Polyglycitol syrup"
+    ]
+  },
+  "965": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      2132,
+      4276,
+      4277
+    ],
+    "keywords": [
+      "maltitol",
+      "Maltitol",
+      "Maltitol Maltitol"
+    ]
+  },
+  "968": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      961
+    ],
+    "keywords": [
+      "erythritol",
+      "Erythritol",
+      "Erythritol Erythritol"
+    ]
+  }
+}

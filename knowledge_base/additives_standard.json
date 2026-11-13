@@ -202,7 +202,7 @@
       "tartrazin"
     ],
     "function": "Phẩm màu tổng hợp (Azo Dye Color)",
-    "adi_value": "EFSA (2009, khong thay doi so voi JECFA/SCF): ADI 0-7.5 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2009, không thay đổi so với JECFA/SCF): ADI 0-7.5 mg/kg thể trọng/ngày",
     "adi_upper": 7.5,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1331",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 102: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 102: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -262,7 +262,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2009, khong thay doi so voi JECFA/SCF): ADI 0-7.5 mg/kg the trong/ngay",
+      "display_text": "EFSA (2009, không thay đổi so với JECFA/SCF): ADI 0-7.5 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 7.5,
       "authority": "JECFA/SCF (lich su) / EFSA 2009 (khong doi)",
       "source_id": "EFSA_TARTRAZINE_2009",
@@ -307,7 +307,7 @@
       "chất nhũ hóa 322"
     ],
     "function": "Chất nhũ hóa (Emulsifier)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 322(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -358,7 +358,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_LECITHIN",
@@ -396,7 +396,7 @@
       "chất điều chỉnh độ chua 330"
     ],
     "function": "Chất điều chỉnh độ acid (Acidity regulator)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 330: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 330: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -447,7 +447,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_CITRIC_ACID",
@@ -486,7 +486,7 @@
       "E211"
     ],
     "function": "Chất bảo quản chống nấm men & vi khuẩn (Preservative)",
-    "adi_value": "JECFA (2021, TANG tu 5 len 20, rut bo gia tri 1996): Group ADI 0-20 mg/kg the trong/ngay (tinh theo acid benzoic)",
+    "adi_value": "JECFA (2021, TANG tu 5 len 20, rut bo gia tri 1996): Group ADI 0-20 mg/kg thể trọng/ngày (tính theo acid benzoic)",
     "adi_upper": 20.0,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 211: 2 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 211: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -548,12 +548,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (2021, TANG tu 5 len 20, rut bo gia tri 1996): Group ADI 0-20 mg/kg the trong/ngay (tinh theo acid benzoic)",
+      "display_text": "JECFA (2021, TANG tu 5 len 20, rut bo gia tri 1996): Group ADI 0-20 mg/kg thể trọng/ngày (tính theo acid benzoic)",
       "numeric_upper_mg_per_kg_bw_day": 20.0,
       "authority": "JECFA 2021 (rut bo group ADI 1996 la 5mg/kg)",
       "source_id": "JECFA_BENZOATES_2021",
       "source_url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
-      "source_locator": "JECFA tai danh gia 2021 (JECFA 92nd/93rd meeting era). RUT BO group ADI 1996 (0-5mg/kg, ky hop 27) va thiet lap group ADI MOI 0-20mg/kg bw/day (tinh theo acid benzoic) cho acid benzoic + cac muoi Ca/K/Na benzoat + mot so hop chat benzyl lien quan, dung he so dieu chinh dac thu hoa chat = 2 (thay he so mac dinh 4). SUA LOI: KB cu ghi '0-5mg/kg' - day la gia tri CU DA BI RUT BO nam 2021; gia tri HIEN HANH la 20mg/kg (cao hon, it han che hon truoc).",
+      "source_locator": "JECFA tai danh gia 2021 (JECFA 92nd/93rd meeting era). RUT BO group ADI 1996 (0-5mg/kg, ky hop 27) va thiet lap group ADI MOI 0-20mg/kg bw/day (tính theo acid benzoic) cho acid benzoic + cac muoi Ca/K/Na benzoat + mot so hop chat benzyl lien quan, dung he so dieu chinh dac thu hoa chat = 2 (thay he so mac dinh 4). SUA LOI: KB cu ghi '0-5mg/kg' - day la gia tri CU DA BI RUT BO nam 2021; gia tri HIEN HANH la 20mg/kg (cao hon, it han che hon truoc).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 3). Re-check periodically for newer re-evaluations."
@@ -572,7 +572,7 @@
         "id": "JECFA_BENZOATES_2021",
         "title": "JECFA re-evaluation (2021) of benzoates - WHO/FAO JECFA Database Chemical record 1910",
         "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
-        "locator": "JECFA tai danh gia 2021 (JECFA 92nd/93rd meeting era). RUT BO group ADI 1996 (0-5mg/kg, ky hop 27) va thiet lap group ADI MOI 0-20mg/kg bw/day (tinh theo acid benzoic) cho acid benzoic + cac muoi Ca/K/Na benzoat + mot so hop chat benzyl lien quan, dung he so dieu chinh dac thu hoa chat = 2 (thay he so mac dinh 4). SUA LOI: KB cu ghi '0-5mg/kg' - day la gia tri CU DA BI RUT BO nam 2021; gia tri HIEN HANH la 20mg/kg (cao hon, it han che hon truoc)."
+        "locator": "JECFA tai danh gia 2021 (JECFA 92nd/93rd meeting era). RUT BO group ADI 1996 (0-5mg/kg, ky hop 27) va thiet lap group ADI MOI 0-20mg/kg bw/day (tính theo acid benzoic) cho acid benzoic + cac muoi Ca/K/Na benzoat + mot so hop chat benzyl lien quan, dung he so dieu chinh dac thu hoa chat = 2 (thay he so mac dinh 4). SUA LOI: KB cu ghi '0-5mg/kg' - day la gia tri CU DA BI RUT BO nam 2021; gia tri HIEN HANH la 20mg/kg (cao hon, it han che hon truoc)."
       },
       {
         "id": "FDA_BENZENE_BENZOATE_2006",
@@ -593,7 +593,7 @@
       "natri bicacbonat"
     ],
     "function": "Chất tạo xốp & điều chỉnh độ acid (Raising agent)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 500(ii): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 500(ii): 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -637,7 +637,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_SODIUM_BICARBONATE",
@@ -676,7 +676,7 @@
       "E503ii"
     ],
     "function": "Chất tạo xốp (Raising agent)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 503(ii): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -720,7 +720,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_AMMONIUM_BICARBONATE",
@@ -759,7 +759,7 @@
       "diglyceride"
     ],
     "function": "Chất nhũ hóa và làm ổn định (Emulsifier & Stabilizer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 471: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 471: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -803,7 +803,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_MONODIGLYCERIDES",
@@ -925,7 +925,7 @@
       "E150d"
     ],
     "function": "Phẩm màu (Color)",
-    "adi_value": "EFSA (2011, nhom 4 loai caramen): Group ADI 0-300 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2011, nhóm 4 loại caramen): Group ADI 0-300 mg/kg thể trọng/ngày",
     "adi_upper": 300.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/2004",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 150d: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -976,7 +976,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2011, nhom 4 loai caramen): Group ADI 0-300 mg/kg the trong/ngay",
+      "display_text": "EFSA (2011, nhóm 4 loại caramen): Group ADI 0-300 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 300.0,
       "authority": "EFSA 2011 (group ADI, thay the JECFA 160-200mg/kg rieng le cu)",
       "source_id": "EFSA_CARAMEL_COLOURS_2011",
@@ -1020,7 +1020,7 @@
       "disodium inosinate"
     ],
     "function": "Chất điều vị (Flavor enhancer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 631: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1064,7 +1064,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_DISODIUM_INOSINATE",
@@ -1102,7 +1102,7 @@
       "disodium guanylate"
     ],
     "function": "Chất điều vị (Flavor enhancer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 627: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1146,7 +1146,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_DISODIUM_GUANYLATE",
@@ -1184,7 +1184,7 @@
       "E110"
     ],
     "function": "Phẩm màu tổng hợp (Azo Dye Color)",
-    "adi_value": "EFSA (2014, dua tren danh gia JECFA 2011): ADI 0-4 mg/kg the trong/ngay (thay the ADI tam thoi 1 mg/kg cua EFSA 2009)",
+    "adi_value": "EFSA (2014, dua tren danh gia JECFA 2011): ADI 0-4 mg/kg thể trọng/ngày (thay the ADI tam thoi 1 mg/kg cua EFSA 2009)",
     "adi_upper": 4.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/3765",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 110: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1244,7 +1244,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2014, dua tren danh gia JECFA 2011): ADI 0-4 mg/kg the trong/ngay (thay the ADI tam thoi 1 mg/kg cua EFSA 2009)",
+      "display_text": "EFSA (2014, dua tren danh gia JECFA 2011): ADI 0-4 mg/kg thể trọng/ngày (thay the ADI tam thoi 1 mg/kg cua EFSA 2009)",
       "numeric_upper_mg_per_kg_bw_day": 4.0,
       "authority": "EFSA 2014 (informed by JECFA 2011)",
       "source_id": "EFSA_SUNSET_YELLOW_2014",
@@ -1289,7 +1289,7 @@
       "E129"
     ],
     "function": "Phẩm màu tổng hợp (Azo Dye Color)",
-    "adi_value": "JECFA (1980) va EFSA (2009, khang dinh lai): ADI 0-7 mg/kg the trong/ngay",
+    "adi_value": "JECFA (1980) va EFSA (2009, khang dinh lai): ADI 0-7 mg/kg thể trọng/ngày",
     "adi_upper": 7.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1327",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 129: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1349,7 +1349,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (1980) va EFSA (2009, khang dinh lai): ADI 0-7 mg/kg the trong/ngay",
+      "display_text": "JECFA (1980) va EFSA (2009, khang dinh lai): ADI 0-7 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 7.0,
       "authority": "JECFA 1980 / EFSA 2009 (re-evaluation)",
       "source_id": "EFSA_ALLURA_RED_2009",
@@ -1394,7 +1394,7 @@
       "E202"
     ],
     "function": "Chất bảo quản (Preservative)",
-    "adi_value": "JECFA (1973, ky hop 17): Group ADI 0-25 mg/kg the trong/ngay (tinh theo acid sorbic, gom ca cac muoi Ca/K/Na)",
+    "adi_value": "JECFA (1973, ky hop 17): Group ADI 0-25 mg/kg thể trọng/ngày (tinh theo acid sorbic, gom ca cac muoi Ca/K/Na)",
     "adi_upper": 25.0,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 202: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 202: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -1438,7 +1438,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (1973, ky hop 17): Group ADI 0-25 mg/kg the trong/ngay (tinh theo acid sorbic, gom ca cac muoi Ca/K/Na)",
+      "display_text": "JECFA (1973, ky hop 17): Group ADI 0-25 mg/kg thể trọng/ngày (tinh theo acid sorbic, gom ca cac muoi Ca/K/Na)",
       "numeric_upper_mg_per_kg_bw_day": 25.0,
       "authority": "JECFA 1973 (ky hop 17)",
       "source_id": "JECFA_SORBATES_1973",
@@ -1477,7 +1477,7 @@
       "E950"
     ],
     "function": "Chất tạo ngọt tổng hợp (Sweetener)",
-    "adi_value": "JECFA (1991) va EFSA (2025, tai danh gia): ADI 0-15 mg/kg the trong/ngay",
+    "adi_value": "JECFA (1991) va EFSA (2025, tai danh gia): ADI 0-15 mg/kg thể trọng/ngày",
     "adi_upper": 15.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2025.9317",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 950: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 950: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -1528,7 +1528,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (1991) va EFSA (2025, tai danh gia): ADI 0-15 mg/kg the trong/ngay",
+      "display_text": "JECFA (1991) va EFSA (2025, tai danh gia): ADI 0-15 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 15.0,
       "authority": "JECFA 1991 / EFSA 2025 (tai khang dinh, thay the SCF 1985 la 9mg/kg)",
       "source_id": "EFSA_ACESULFAME_K_2025",
@@ -1567,7 +1567,7 @@
       "E415"
     ],
     "function": "Chất làm dày và ổn định (Thickener & Stabilizer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 415: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1611,7 +1611,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_XANTHAN_GUM",
@@ -1650,7 +1650,7 @@
       "E412"
     ],
     "function": "Chất làm dày và ổn định (Thickener & Stabilizer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 412: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1694,7 +1694,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_GUAR_GUM",
@@ -1732,7 +1732,7 @@
       "E407"
     ],
     "function": "Chất làm dày và tạo gel (Thickener & Gelling agent)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 407: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1776,7 +1776,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_CARRAGEENAN",
@@ -1815,7 +1815,7 @@
       "E331"
     ],
     "function": "Chất điều chỉnh độ acid (Acidity regulator)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 331(iii): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -1859,7 +1859,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_TRISODIUM_CITRATE",
@@ -1988,7 +1988,7 @@
       "E300"
     ],
     "function": "Chất chống oxy hóa (Antioxidant)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 300: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 300: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -2039,7 +2039,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_ASCORBIC_ACID",
@@ -2078,7 +2078,7 @@
       "E551"
     ],
     "function": "Chất chống đóng vón (Anti-caking agent)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 551: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -2122,7 +2122,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_SILICON_DIOXIDE",
@@ -2161,7 +2161,7 @@
       "E420"
     ],
     "function": "Chất tạo ngọt (Sweetener - Sugar alcohol)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. ",
@@ -2221,7 +2221,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_SORBITOL",
@@ -2476,7 +2476,7 @@
       "muối diêm"
     ],
     "function": "Chất bảo quản, ổn định màu thịt chế biến (Preservative, color fixative)",
-    "adi_value": "EFSA (2017): ADI 0.07 mg nitrit ion/kg the trong/ngay (phuong phap BMD)",
+    "adi_value": "EFSA (2017): ADI 0.07 mg nitrit ion/kg thể trọng/ngày (phuong phap BMD)",
     "adi_upper": 0.07,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/4786",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 250: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 250: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -2536,7 +2536,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2017): ADI 0.07 mg nitrit ion/kg the trong/ngay (phuong phap BMD)",
+      "display_text": "EFSA (2017): ADI 0.07 mg nitrit ion/kg thể trọng/ngày (phuong phap BMD)",
       "numeric_upper_mg_per_kg_bw_day": 0.07,
       "authority": "EFSA 2017 (re-evaluation)",
       "source_id": "EFSA_NITRITE_2017",
@@ -2581,7 +2581,7 @@
       "muối diêm tiêu"
     ],
     "function": "Chất bảo quản thịt (Preservative)",
-    "adi_value": "SCF (1997)/JECFA (2002), EFSA (2017) khong rut bo: ADI 0-3.7 mg/kg the trong/ngay (tinh theo ion nitrat)",
+    "adi_value": "SCF (1997)/JECFA (2002), EFSA (2017) khong rut bo: ADI 0-3.7 mg/kg thể trọng/ngày (tinh theo ion nitrat)",
     "adi_upper": 3.7,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/4787",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 251: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -2634,7 +2634,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "SCF (1997)/JECFA (2002), EFSA (2017) khong rut bo: ADI 0-3.7 mg/kg the trong/ngay (tinh theo ion nitrat)",
+      "display_text": "SCF (1997)/JECFA (2002), EFSA (2017) khong rut bo: ADI 0-3.7 mg/kg thể trọng/ngày (tinh theo ion nitrat)",
       "numeric_upper_mg_per_kg_bw_day": 3.7,
       "authority": "SCF 1997 / JECFA 2002, EFSA 2017 (khong rut bo)",
       "source_id": "EFSA_NITRATE_2017",
@@ -2767,7 +2767,7 @@
       "butylhydroxytoluen"
     ],
     "function": "Chất chống oxy hóa tổng hợp (Synthetic antioxidant)",
-    "adi_value": "JECFA: ADI 0-0.3 mg/kg the trong/ngay",
+    "adi_value": "JECFA: ADI 0-0.3 mg/kg thể trọng/ngày",
     "adi_upper": 0.3,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 321: 2 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -2818,7 +2818,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI 0-0.3 mg/kg the trong/ngay",
+      "display_text": "JECFA: ADI 0-0.3 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 0.3,
       "authority": "JECFA",
       "source_id": "JECFA_BHT",
@@ -2857,7 +2857,7 @@
       "acid orthophosphoric"
     ],
     "function": "Chất điều chỉnh độ chua, hương liệu (Acidity regulator)",
-    "adi_value": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+    "adi_value": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
     "adi_upper": 40.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2019.5674",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 338: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 338: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -2917,12 +2917,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+      "display_text": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
       "numeric_upper_mg_per_kg_bw_day": 40.0,
       "authority": "EFSA 2019 (thay the MTDI 70mg/kg cu)",
       "source_id": "EFSA_PHOSPHATES_2019",
       "source_url": "https://doi.org/10.2903/j.efsa.2019.5674",
-      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
+      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 2). Re-check periodically for newer re-evaluations."
@@ -2941,7 +2941,7 @@
         "id": "EFSA_PHOSPHATES_2019",
         "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates group",
         "url": "https://doi.org/10.2903/j.efsa.2019.5674",
-        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
+        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
       },
       {
         "id": "KDOQI_2020_NUTRITION_CKD",
@@ -2961,7 +2961,7 @@
       "MSP"
     ],
     "function": "Chất điều chỉnh độ chua, chất nhũ hóa (Acidity regulator, emulsifier)",
-    "adi_value": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+    "adi_value": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
     "adi_upper": 40.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2019.5674",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 339(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 339(i): 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -3021,12 +3021,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+      "display_text": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
       "numeric_upper_mg_per_kg_bw_day": 40.0,
       "authority": "EFSA 2019 (thay the MTDI 70mg/kg cu)",
       "source_id": "EFSA_PHOSPHATES_2019",
       "source_url": "https://doi.org/10.2903/j.efsa.2019.5674",
-      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
+      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 2). Re-check periodically for newer re-evaluations."
@@ -3045,7 +3045,7 @@
         "id": "EFSA_PHOSPHATES_2019",
         "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates group",
         "url": "https://doi.org/10.2903/j.efsa.2019.5674",
-        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
+        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
       },
       {
         "id": "KDOQI_2020_NUTRITION_CKD",
@@ -3066,7 +3066,7 @@
       "chất tạo gel"
     ],
     "function": "Chất tạo gel, chất làm dày, chất ổn định (Gelling agent, thickener)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 440: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3102,7 +3102,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_PECTIN",
@@ -3141,7 +3141,7 @@
       "dinatri pyrophosphat"
     ],
     "function": "Chất nở, chất nhũ hóa, chất giữ ẩm (Raising agent, emulsifier)",
-    "adi_value": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+    "adi_value": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
     "adi_upper": 40.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2019.5674",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 450(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 450(i): 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -3201,12 +3201,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+      "display_text": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
       "numeric_upper_mg_per_kg_bw_day": 40.0,
       "authority": "EFSA 2019 (thay the MTDI 70mg/kg cu)",
       "source_id": "EFSA_PHOSPHATES_2019",
       "source_url": "https://doi.org/10.2903/j.efsa.2019.5674",
-      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
+      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 2). Re-check periodically for newer re-evaluations."
@@ -3225,7 +3225,7 @@
         "id": "EFSA_PHOSPHATES_2019",
         "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates group",
         "url": "https://doi.org/10.2903/j.efsa.2019.5674",
-        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
+        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
       },
       {
         "id": "KDOQI_2020_NUTRITION_CKD",
@@ -3246,7 +3246,7 @@
       "SHMP"
     ],
     "function": "Chất nhũ hóa, chất giữ nước trong thịt chế biến (Emulsifier, moisture retention)",
-    "adi_value": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+    "adi_value": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
     "adi_upper": 40.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2019.5674",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 452(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3299,12 +3299,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+      "display_text": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
       "numeric_upper_mg_per_kg_bw_day": 40.0,
       "authority": "EFSA 2019 (thay the MTDI 70mg/kg cu)",
       "source_id": "EFSA_PHOSPHATES_2019",
       "source_url": "https://doi.org/10.2903/j.efsa.2019.5674",
-      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
+      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 2). Re-check periodically for newer re-evaluations."
@@ -3323,7 +3323,7 @@
         "id": "EFSA_PHOSPHATES_2019",
         "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates group",
         "url": "https://doi.org/10.2903/j.efsa.2019.5674",
-        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
+        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
       },
       {
         "id": "KDOQI_2020_NUTRITION_CKD",
@@ -3344,7 +3344,7 @@
       "chất tạo ngọt 955"
     ],
     "function": "Chất tạo ngọt nhân tạo (Sweetener)",
-    "adi_value": "JECFA (1990, ky hop 37) xac nhan boi SCF (2000): ADI 0-15 mg/kg the trong/ngay",
+    "adi_value": "JECFA (1990, ky hop 37) xac nhan boi SCF (2000): ADI 0-15 mg/kg thể trọng/ngày",
     "adi_upper": 15.0,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2340",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 955: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3395,7 +3395,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (1990, ky hop 37) xac nhan boi SCF (2000): ADI 0-15 mg/kg the trong/ngay",
+      "display_text": "JECFA (1990, ky hop 37) xac nhan boi SCF (2000): ADI 0-15 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 15.0,
       "authority": "JECFA 1990 (ky hop 37), tai khang dinh SCF 2000",
       "source_id": "JECFA_SUCRALOSE_1990",
@@ -3435,7 +3435,7 @@
       "chất tạo ngọt stevia"
     ],
     "function": "Chất tạo ngọt tự nhiên (Natural sweetener)",
-    "adi_value": "JECFA (2000-2009) va EFSA (2010, tai khang dinh 2021/2024): ADI 0-4 mg/kg the trong/ngay (tinh theo steviol)",
+    "adi_value": "JECFA (2000-2009) va EFSA (2010, tai khang dinh 2021/2024): ADI 0-4 mg/kg thể trọng/ngày (tinh theo steviol)",
     "adi_upper": 4.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1537",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 960a: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3479,7 +3479,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (2000-2009) va EFSA (2010, tai khang dinh 2021/2024): ADI 0-4 mg/kg the trong/ngay (tinh theo steviol)",
+      "display_text": "JECFA (2000-2009) va EFSA (2010, tai khang dinh 2021/2024): ADI 0-4 mg/kg thể trọng/ngày (tinh theo steviol)",
       "numeric_upper_mg_per_kg_bw_day": 4.0,
       "authority": "JECFA 2000-2009 / EFSA 2010 (khong doi qua 2021, 2024)",
       "source_id": "EFSA_STEVIOL_GLYCOSIDES_2010",
@@ -3517,7 +3517,7 @@
       "neotam"
     ],
     "function": "Chất tạo ngọt tổng hợp, ngọt gấp 8000 lần đường (Sweetener)",
-    "adi_value": "EFSA (2025, tang tu 2 len 10): ADI 0-10 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2025, tang tu 2 len 10): ADI 0-10 mg/kg thể trọng/ngày",
     "adi_upper": 10.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/9480",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 961: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3561,7 +3561,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2025, tang tu 2 len 10): ADI 0-10 mg/kg the trong/ngay",
+      "display_text": "EFSA (2025, tang tu 2 len 10): ADI 0-10 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 10.0,
       "authority": "EFSA 2025 (thay the ADI 2007 la 2mg/kg)",
       "source_id": "EFSA_NEOTAME_2025",
@@ -3601,7 +3601,7 @@
       "hạt nêm"
     ],
     "function": "Hỗn hợp chất điều vị tăng cường umami (Flavor enhancer blend)",
-    "adi_value": "Theo ADI tung thanh phan rieng: MSG/621 (EFSA group ADI 30mg/kg, tinh theo glutamic acid), IMP/631 va GMP/627 (JECFA: ADI khong xac dinh)",
+    "adi_value": "Theo ADI từng thành phần riêng: MSG/621 (EFSA group ADI 30 mg/kg, tính theo axit glutamic), IMP/631 và GMP/627 (JECFA: ADI không xác định - an toàn theo GMP)",
     "adi_upper": null,
     "adi_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7009848/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 621: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 631: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 627: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3645,7 +3645,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "Theo ADI tung thanh phan rieng: MSG/621 (EFSA group ADI 30mg/kg, tinh theo glutamic acid), IMP/631 va GMP/627 (JECFA: ADI khong xac dinh)",
+      "display_text": "Theo ADI từng thành phần riêng: MSG/621 (EFSA group ADI 30 mg/kg, tính theo axit glutamic), IMP/631 và GMP/627 (JECFA: ADI không xác định - an toàn theo GMP)",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "Tong hop tu danh gia rieng cua 621 (EFSA), 631 va 627 (JECFA)",
       "source_id": "COMBO_621_631_627",
@@ -3683,7 +3683,7 @@
       "algin"
     ],
     "function": "Chất làm dày, chất tạo gel, chất ổn định (Thickener, gelling agent)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 401: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3727,7 +3727,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_SODIUM_ALGINATE",
@@ -3766,7 +3766,7 @@
       "gôm carob"
     ],
     "function": "Chất làm dày, chất ổn định (Thickener, stabilizer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 410: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3802,7 +3802,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_LOCUST_BEAN_GUM",
@@ -3841,7 +3841,7 @@
       "gôm A-rập"
     ],
     "function": "Chất nhũ hóa, chất ổn định, chất làm dày (Emulsifier, stabilizer)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 414: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 414: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -3877,7 +3877,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_GUM_ARABIC",
@@ -3916,7 +3916,7 @@
       "brilliant blue"
     ],
     "function": "Phẩm màu tổng hợp (Synthetic color)",
-    "adi_value": "EFSA (2010, GIAM tu 12.5 xuong 6): ADI 0-6 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2010, GIAM tu 12.5 xuong 6): ADI 0-6 mg/kg thể trọng/ngày",
     "adi_upper": 6.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1853",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 133: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -3967,7 +3967,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2010, GIAM tu 12.5 xuong 6): ADI 0-6 mg/kg the trong/ngay",
+      "display_text": "EFSA (2010, GIAM tu 12.5 xuong 6): ADI 0-6 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 6.0,
       "authority": "EFSA 2010 (giam ADI tu JECFA/SCF 12.5mg/kg cu), xac nhan lai boi JECFA 2017",
       "source_id": "EFSA_BRILLIANT_BLUE_2010",
@@ -4006,7 +4006,7 @@
       "đỏ azo 122"
     ],
     "function": "Phẩm màu tổng hợp azo (Synthetic azo color)",
-    "adi_value": "JECFA (1983)/SCF (1984), EFSA (2009) khong doi: ADI 0-4 mg/kg the trong/ngay",
+    "adi_value": "JECFA (1983)/SCF (1984), EFSA (2009) khong doi: ADI 0-4 mg/kg thể trọng/ngày",
     "adi_upper": 4.0,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1332",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 122: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 122: 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -4066,7 +4066,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA (1983)/SCF (1984), EFSA (2009) khong doi: ADI 0-4 mg/kg the trong/ngay",
+      "display_text": "JECFA (1983)/SCF (1984), EFSA (2009) khong doi: ADI 0-4 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 4.0,
       "authority": "JECFA 1983 / SCF 1984, khong doi qua EFSA 2009",
       "source_id": "EFSA_AZORUBINE_2009",
@@ -4111,7 +4111,7 @@
       "đỏ ponceau"
     ],
     "function": "Phẩm màu tổng hợp azo (Synthetic azo color)",
-    "adi_value": "EFSA (2009, GIAM tu 4 xuong 0.7): ADI 0-0.7 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2009, GIAM tu 4 xuong 0.7): ADI 0-0.7 mg/kg thể trọng/ngày",
     "adi_upper": 0.7,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1328",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 124: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -4171,7 +4171,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2009, GIAM tu 4 xuong 0.7): ADI 0-0.7 mg/kg the trong/ngay",
+      "display_text": "EFSA (2009, GIAM tu 4 xuong 0.7): ADI 0-0.7 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 0.7,
       "authority": "EFSA 2009 (giam ADI tu JECFA 4mg/kg cu)",
       "source_id": "EFSA_PONCEAU4R_2009",
@@ -4215,7 +4215,7 @@
       "vàng quinoline"
     ],
     "function": "Phẩm màu tổng hợp (Synthetic color)",
-    "adi_value": "EFSA (2009, GIAM tu 10 xuong 0.5): ADI 0-0.5 mg/kg the trong/ngay",
+    "adi_value": "EFSA (2009, GIAM tu 10 xuong 0.5): ADI 0-0.5 mg/kg thể trọng/ngày",
     "adi_upper": 0.5,
     "adi_source": "https://www.efsa.europa.eu/en/efsajournal/pub/1329",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 104: 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -4268,7 +4268,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2009, GIAM tu 10 xuong 0.5): ADI 0-0.5 mg/kg the trong/ngay",
+      "display_text": "EFSA (2009, GIAM tu 10 xuong 0.5): ADI 0-0.5 mg/kg thể trọng/ngày",
       "numeric_upper_mg_per_kg_bw_day": 0.5,
       "authority": "EFSA 2009 (giam ADI tu JECFA/SCF 10mg/kg cu)",
       "source_id": "EFSA_QUINOLINE_YELLOW_2009",
@@ -4418,7 +4418,7 @@
       "natri axetat"
     ],
     "function": "Chất điều chỉnh độ chua, chất bảo quản (Acidity regulator, preservative)",
-    "adi_value": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+    "adi_value": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
     "adi_upper": null,
     "adi_source": "https://apps.who.int/food-additives-contaminants-jecfa-database/",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 262(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA)",
@@ -4462,7 +4462,7 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "JECFA: ADI khong xac dinh (Not Specified) - an toan o muc su dung thong thuong theo GMP",
+      "display_text": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
       "numeric_upper_mg_per_kg_bw_day": null,
       "authority": "JECFA (Not Specified category)",
       "source_id": "JECFA_SODIUM_ACETATE",
@@ -4501,7 +4501,7 @@
       "bột nở"
     ],
     "function": "Chất nở, chất điều chỉnh độ chua (Raising agent, acidity regulator)",
-    "adi_value": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+    "adi_value": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
     "adi_upper": 40.0,
     "adi_source": "https://doi.org/10.2903/j.efsa.2019.5674",
     "vn_regulation": "Co trong Phu luc 1 (danh muc phu gia duoc phep su dung) cua TT 24/2019/TT-BYT. 341(i): 1 nhom ML trong Phu luc 2A (hai hoa Codex GSFA); 341(i): 1 nhom ML trong Phu luc 2B (muc rieng cua Viet Nam, CHUA theo Codex STAN 192-1995)",
@@ -4554,12 +4554,12 @@
       "use_for_compliance_decision": false
     },
     "adi_assessment": {
-      "display_text": "EFSA (2019, nhom phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg the trong/ngay (tinh theo phosphorus)",
+      "display_text": "EFSA (2019, nhóm phosphat E338-341/343/450-452): Group ADI 0-40 mg/kg thể trọng/ngày (tính theo phosphorus)",
       "numeric_upper_mg_per_kg_bw_day": 40.0,
       "authority": "EFSA 2019 (thay the MTDI 70mg/kg cu)",
       "source_id": "EFSA_PHOSPHATES_2019",
       "source_url": "https://doi.org/10.2903/j.efsa.2019.5674",
-      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
+      "source_locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng).",
       "verification_status": "source_checked",
       "use_for_numeric_compliance": true,
       "review_note": "Verified against primary EFSA/JECFA source on 2026-10-31 (batch 2). Re-check periodically for newer re-evaluations."
@@ -4578,7 +4578,7 @@
         "id": "EFSA_PHOSPHATES_2019",
         "title": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphoric acid-phosphates group",
         "url": "https://doi.org/10.2903/j.efsa.2019.5674",
-        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tinh theo phosphorus) cho nhom phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
+        "locator": "EFSA Journal 2019;17(6):5674, DOI 10.2903/j.efsa.2019.5674. Group ADI 40mg/kg bw/day (tính theo phosphorus) cho nhóm phosphat E338-341, E343, E450-452; thay the MTDI 70mg/kg truoc do. CANH BAO QUAN TRONG: uoc tinh phoi nhiem VUOT ADI nay o tre so sinh, tre nho va mot phan thieu nien (ca muc trung binh va cao); KHONG ap dung ADI nay cho nguoi suy giam chuc nang than muc trung binh-nang (nhom de bi ton thuong rieng)."
       },
       {
         "id": "KDOQI_2020_NUTRITION_CKD",

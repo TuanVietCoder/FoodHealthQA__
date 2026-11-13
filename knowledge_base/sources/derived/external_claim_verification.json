@@ -1,0 +1,2601 @@
+{
+  "FALCPA_321qq_NINE_ALLERGENS": {
+    "description": "21 U.S.C. 321(qq)(1) defines major food allergen = milk, egg, fish, crustacean shellfish, tree nuts, wheat, peanuts, soybeans, sesame (molluscs are NOT included)",
+    "source_file": "US_CODE_21_321.html",
+    "sha256": "67798e10fed09586deb3ae630043651c031382ada60318323671c8553b845918",
+    "passed": true,
+    "evidence": {
+      "qq_1": "milk , egg, fish (e.g., bass, flounder, or cod), crustacean shellfish (e.g., crab, lobster, or shrimp), tree nuts (e.g., almonds, pecans, or walnuts), wheat, peanuts, soybeans, and sesame. (2) a food ingredient that contains protein derived from a food specifi"
+    }
+  },
+  "CFR_172_804_PKU_STATEMENT": {
+    "description": "21 CFR 172.804 requires 'PHENYLKETONURICS: CONTAINS PHENYLALANINE' on foods containing aspartame",
+    "source_file": "US_CFR_21_172_804.html",
+    "sha256": "8f2a64cac19274927513c5fe24dfda3e6d390635a413cecd3b144932ad35e99f",
+    "passed": true,
+    "evidence": {
+      "statement": "rmation panel, the following statement: PHENYLKETONURICS: CONTAINS PHENYLALANINE The statement shall appear in the labeling prominently and conspicuously as compared to other words, statements, designs or devices and in bold type and on clear contrasting backg"
+    }
+  },
+  "JEMRA1_PRIORITY_LIST": {
+    "description": "JEMRA 2021 Part 1 priority list = cereals containing gluten, crustacea, eggs, fish, milk, peanuts, sesame, specific tree nuts (almond, cashew, hazelnut, pecan, pistachio, walnut)",
+    "source_file": "JEMRA_2021_PART1_SUMMARY.pdf",
+    "sha256": "32a1cddb4d0c5c0d9cd76af3569827a07b4a8e8d7a315c042f0aae26a4e0c29e",
+    "passed": true,
+    "evidence": {
+      "list": "cereals containing gluten (i.e., wheat and other triticum species, rye and other secale species, barley and other hordeum species and their hybridized strains), crustacea, eggs, fish, milk, peanuts, sesame, specific tree nuts (almond, cashew, hazelnut, pecan, pistachio and walnut)"
+    },
+    "evidence_pages": {
+      "list": 4
+    },
+    "pages_located": true
+  },
+  "JEMRA1_SOY_AND_OATS_NOT_GLOBAL": {
+    "description": "JEMRA 2021 Part 1: soybean and oats are NOT global priority allergens (may be listed nationally)",
+    "source_file": "JEMRA_2021_PART1_SUMMARY.pdf",
+    "sha256": "32a1cddb4d0c5c0d9cd76af3569827a07b4a8e8d7a315c042f0aae26a4e0c29e",
+    "passed": true,
+    "evidence": {
+      "not_global": "ded that some of the allergens, such as buckwheat, celery, lupin, mustard, oats, soybean and tree nuts (Brazil nut, macadamia, pine nuts), should not be listed as global priority allergens but may be considered for inclusion on priority allergen lists in indiv"
+    },
+    "evidence_pages": {
+      "not_global": 4
+    },
+    "pages_located": true
+  },
+  "JEMRA3_PAL_REPORT": {
+    "description": "FAO/WHO Part 3 is the PAL report; it found current PAL systems neither uniform nor informative",
+    "source_file": "JEMRA_PART3.pdf",
+    "sha256": "06463a2922df54ef4946300b7577431050b3a2dc5f85732f4dc3db61435c3ff7",
+    "passed": true,
+    "evidence": {
+      "finding": "uses of PAL and unanimously agreed that current PAL systems used in many countries needed to be improved as they were neither uniform nor informative and were not consistently risk-based on amount and frequency of UAP found in food products. The Expert Committ"
+    },
+    "evidence_pages": {
+      "finding": [
+        31,
+        104
+      ]
+    },
+    "pages_located": true
+  },
+  "EFSA_2021_TIO2_NOT_SAFE": {
+    "description": "EFSA 2021: genotoxicity concern for TiO2 cannot be ruled out; E171 no longer considered safe as an additive",
+    "source_file": "EFSA_2021_TIO2_NEWS.html",
+    "sha256": "b72cab754409403f05fa8530793f5ce5664fad34a7ccd7363987a5d74d51101c",
+    "passed": true,
+    "evidence": {
+      "cannot_rule_out": "cientific evidence, EFSA concluded that a concern for genotoxicity of TiO 2 particles cannot be ruled out. Based on this concern, EFSA’s experts no longer consider titanium dioxide safe when used as a food additive. This means that an Acceptable Daily Intake A",
+      "not_safe": ". Based on this concern, EFSA’s experts no longer consider titanium dioxide safe when used as a food additive. This means that an Acceptable Daily Intake An estimate of the amount of a substance in food or drinking water that can be consumed daily over a lifet"
+    }
+  },
+  "CFR_101_61_SODIUM_PER_RACC": {
+    "description": "21 CFR 101.61: sodium claim thresholds (free <5 mg, very low <=35 mg, low <=140 mg) are per reference amount customarily consumed (RACC), not per 100 g or per label serving",
+    "source_file": "US_CFR_21_101_61.html",
+    "sha256": "c1d063a1c89a5da7d2b8d629dcf5ec952907a00c6710da6f4984e70e1d5e6c8e",
+    "passed": true,
+    "evidence": {
+      "very_low": "greater than 2 tablespoons and contains 35 mg or less sodium per reference amount customarily consumed; or (B) The food has a reference amount customarily consumed of 30 g or less or 2 tablespoons or less and contains 35 mg or less sodium per reference amount",
+      "free": ", provided that: (i) The food contains less than 5 milligrams (mg) of sodium per reference amount customarily consumed and per labeled serving or, in the case of a meal product or a main dish product, less than 5 mg of sodium per labeled serving; and (ii) The",
+      "low": "greater than 2 tablespoons and contains 140 mg or less sodium per reference amount customarily consumed; or (B) The food has a reference amount customarily consumed of 30 g or less or 2 tablespoons or less and contains 140 mg or less sodium per reference amoun"
+    }
+  },
+  "CFR_101_54_HIGH_20PCT_DV": {
+    "description": "21 CFR 101.54: 'high' = 20 percent or more of the RDI/DRV per reference amount customarily consumed",
+    "source_file": "US_CFR_21_101_54.html",
+    "sha256": "c3b7a860d661b2ca62faad8f74e7908d207302c2334634ef723b4b7d2bca4c9b",
+    "passed": true,
+    "evidence": {
+      "high": "in § 101.13(m) , provided that the food contains 20 percent or more of the RDI or the DRV per reference amount customarily consumed. (2) The terms defined in paragraph (b)(1) of this section may be used on the label and in the labeling of meal products as defi"
+    }
+  },
+  "FDA_BENZENE_BEVERAGES_ONLY": {
+    "description": "FDA Q&A: benzene can form at ppb levels in some BEVERAGES containing benzoate + ascorbic acid; the page says nothing about bakery products",
+    "source_file": "FDA_BENZENE_QA.html",
+    "sha256": "b281af923a2cec6e3ff62ea94844746790e817131e32180807503700871a4d2a",
+    "passed": true,
+    "evidence": {
+      "beverages": "y. How does benzene get into beverages? Benzene can form at very low levels (ppb level) in some beverages that contain both benzoate salts and ascorbic acid (vitamin C) or erythorbic acid (a closely related substance (isomer) also known as d-ascorbic acid). Ex"
+    }
+  },
+  "EFSA_OPINION_2019_PHOSPHATES": {
+    "description": "EFSA 2019 (5674): group ADI 40 mg/kg bw/day as phosphorus protects healthy adults but does NOT apply to humans with moderate to severe reduction in renal function; group = E 338-341, E 343, E 450-452",
+    "source_file": "efsa_2019_5674.pdf",
+    "sha256": "dc2b495da5f8253bcf58c81774823269005102f327560615877b3d3adb34c84c",
+    "passed": true,
+    "evidence": {
+      "title": "une 2019* doi: 10.2903/j.efsa.2019.5674 Re-evaluation of phosphoric acid-phosphates - di-, tri- and polyphosphates (E 338-341, E 343, E 450-452) as food additives and the safety of proposed extension of use EFSA Panel on Food Additives and Flavourings (FAF), M",
+      "adi": "el (2005). The Panel concluded that the group ADI of 40 mg/kg bw per day, expressed as phosphorus, is protective for healthy adults because it is below the doses at which clinically relevant adverse effects were reported in short-term and long-term studies in",
+      "ckd": "d long-term studies in humans. However, this ADI does not apply to humans with moderate to severe reduction in renal function. Ten per cent of general population might have chronic kidney disease with reduced renal function and they may not tolerate the amount"
+    },
+    "evidence_pages": {
+      "adi": [
+        4,
+        92
+      ],
+      "ckd": [
+        4,
+        92
+      ]
+    },
+    "pages_located": true
+  },
+  "EFSA_OPINION_2008_MCCANN": {
+    "description": "EFSA 2008 (660): McCann study tested mixtures of E102, E104, E110, E122, E124, E129 and sodium benzoate E211 in 3-year-old and 8-9-year-old children; limited evidence of a small effect on activity and attention, not attributable to individual compounds, not a basis for altering ADIs",
+    "source_file": "efsa_2008_660.pdf",
+    "sha256": "fa94e0443d061d8fb2c7a7b7810fd3b913c83184903d9099f41c56494dd245bd",
+    "passed": true,
+    "evidence": {
+      "compounds": "tudy the effects of two combinations of Tartrazine (E102), Quinoline Yellow (E104), Sunset Yellow FCF (E110), Ponceau 4R (E124), Allura Red AC (E129), Carmoisine (E122) and sodium benzoate (E211) on children's behaviour were studied. Five of the six food colou",
+      "ages": "d as a preservative. The study involved one hundred and fifty three 3-year old and one hundred and forty four 8- to 9-year old children, selected to represent a broad range of behaviour in the general population including children with normal to high level beh",
+      "limited": "concludes that the McCann et al. study provides limited evidence that the two different mixtures of synthetic colours and sodium benzoate tested had a small and statistically significant effect on activity and attention in children selected from the general p",
+      "individual": "e tested in the study by McCann et al., it is not possible to ascribe the observed effects to any of the individual compounds. The clinical significance of the observed effects also remains unclear. In the context of the overall weight of evidence and in view",
+      "adi": "oncludes that the findings of the study cannot be used as a basis for altering the ADI of the respective food colours or sodium benzoate. Key words: Hyperactivity, ADHD, children's behaviour, Southampton study, McCann, food additives, food colours. Tartrazine,"
+    },
+    "evidence_pages": {
+      "compounds": [
+        2,
+        8,
+        31
+      ],
+      "ages": [
+        2,
+        11
+      ],
+      "limited": [
+        3,
+        4,
+        32,
+        34
+      ],
+      "individual": [
+        4,
+        34
+      ],
+      "adi": [
+        4,
+        34
+      ]
+    },
+    "pages_located": true
+  },
+  "EFSA_OPINION_2017_NITRITE": {
+    "description": "EFSA 2017 (4786): ADI 0.07 mg nitrite ion/kg bw/day (methaemoglobin); slight exceedance in children at the highest percentile; quotes the Nordic Council listing pregnant women among more sensitive groups",
+    "source_file": "efsa_2017_4786.pdf",
+    "sha256": "d2d79a29950cc99ecf02be6c2f5552bfb45f9be785a8baebac102e087849762b",
+    "passed": true,
+    "evidence": {
+      "adi": "e ADI. The Panel, using a BMD approach, derived an ADI of 0.07 mg nitrite ion/kg bw per day. The exposure to nitrite resulting from its use as food additive did not exceed this ADI for the general population, except for a slight exceedance in children at the h",
+      "exposure": "resulting from its use as food additive did not exceed this ADI for the general population, except for a slight exceedance in children at the highest percentile. The Panel assessed the endogenous formation of nitrosamines from nitrites based on the theoretical",
+      "nordic": "moglobin-forming potential of nitrites. The Nordic Council identified these groups as including: pregnant women, individuals with metabolic disorders and adults with reduced gastric acidity. Health Canada has published a document on nitrate and nitrite in drin"
+    },
+    "evidence_pages": {
+      "adi": 1,
+      "exposure": 1
+    },
+    "pages_located": true
+  },
+  "EFSA_2021_TIO2_FULLTEXT": {
+    "description": "EFSA 2021 (6585) full text: genotoxicity concern could not be ruled out; E 171 can no longer be considered safe when used as a food additive",
+    "source_file": "efsa_2021_6585.pdf",
+    "sha256": "f5642d18ce37a22a932195b27cbf5f5a2745fbd6c966f816f65ee499b6790ca4",
+    "passed": true,
+    "evidence": {
+      "conclusion": "s. Based on all the evidence available, a concern for genotoxicity could not be ruled out, and given the many uncertainties, the Panel concluded that E 171 can no longer be considered as safe when used as a food additive. © 2021 European Food Safety Authority."
+    },
+    "evidence_pages": {
+      "conclusion": 1
+    },
+    "pages_located": true
+  },
+  "TT24_PHULUC1_LISTS_INS_AND_NAME": {
+    "description": "TT24 Phụ lục 1 lists permitted additives by INS code and name",
+    "source_file": "TT24_2019_TT-BYT_phu_luc_full.pdf",
+    "sha256": "00818276c311b6e7bbd6df601a6d2b61fdf0cc8218ed14d2dbe1c60fd91d7c00",
+    "passed": true,
+    "evidence": {
+      "title": "PHỤ LỤC 1 DANH MỤC PHỤ GIA THỰC PHẨM ĐƯỢC PHÉP SỬ DỤNG TRONG THỰC PHẨM (Ban hành kèm theo Thông tư số 24/2019/TT-BYT ngày 30 tháng 8 năm 2019) STT INS Tên phụ gia Chức năng Tiếng Việt Tiếng Anh 1. 100(i) Curcumin Curcumin Phẩm màu",
+      "columns": "4/2019/TT-BYT ngày 30 tháng 8 năm 2019) STT INS Tên phụ gia Chức năng Tiếng Việt Tiếng Anh 1. 100(i) Curcumin Curcumin Phẩm màu 2. 100(ii) Turmeric Turmeric Phẩm màu 3. 101(i) Riboflavin, tổng hợp Riboflavin, synthetic Phẩm màu 4. 101(ii) Natri Riboflavin 5'-"
+    },
+    "evidence_pages": {
+      "title": 1,
+      "columns": 1
+    },
+    "pages_located": true
+  },
+  "TT24_ML_IN_MG_PER_KG": {
+    "description": "TT24 Phụ lục 2 expresses maximum levels (ML) in mg/kg of food",
+    "source_file": "TT24_2019_TT-BYT_phu_luc_full.pdf",
+    "sha256": "00818276c311b6e7bbd6df601a6d2b61fdf0cc8218ed14d2dbe1c60fd91d7c00",
+    "passed": true,
+    "evidence": {
+      "ml_header": "rcumin Mã nhóm thực phẩm Nhóm thực phẩm ML (mg/ kg) Ghi chú 01.1.4 Đồ uống từ sữa dạng lỏng có hương vị 150 52, 402 12.5 Viên xúp và nước thịt 50 99 RIBOFLAVINS INS Tên phụ gia 101(i) Riboflavin, tổng hợp 101(ii) Natri Riboflavin 5'-phosphat 101(iii) Riboflavi"
+    },
+    "evidence_pages": {
+      "ml_header": 22
+    },
+    "pages_located": true
+  },
+  "JECFA_ADI_300": {
+    "description": "JECFA database: INS 300 = ASCORBIC ACID, latest evaluation 1981, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_59.html",
+    "sha256": "f0be10c3dfb7bf2c877040f3fe6e9c16fac920e66e39fa5b797d278574cd8625",
+    "passed": true,
+    "jecfa_name": "ASCORBIC ACID",
+    "chemical_id": 59,
+    "adi": "NOT SPECIFIED",
+    "year": "1981",
+    "evidence": {
+      "ins_on_page": [
+        "300"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_322(i)": {
+    "description": "JECFA database: INS 322(i) = LECITHIN, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1477.html",
+    "sha256": "32af8d27c26b4f48e954405d17b744c962a5193f32dab38f052e4471952fcf72",
+    "passed": true,
+    "jecfa_name": "LECITHIN",
+    "chemical_id": 1477,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "322i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_330": {
+    "description": "JECFA database: INS 330 = CITRIC ACID, latest evaluation 2014, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_3594.html",
+    "sha256": "a606f39f6ac353e2607445b2806f0498617577fd9b7e4065310e4228d826cfe1",
+    "passed": true,
+    "jecfa_name": "CITRIC ACID",
+    "chemical_id": 3594,
+    "adi": "NOT LIMITED",
+    "year": "2014",
+    "evidence": {
+      "ins_on_page": [
+        "330"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_401": {
+    "description": "JECFA database: INS 401 = SODIUM ALGINATE, latest evaluation 1992, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1823.html",
+    "sha256": "c443a94da45a6b5056ece0a5b3539ec93f1c85c2a53f47519eca61e770a8c8de",
+    "passed": true,
+    "jecfa_name": "SODIUM ALGINATE",
+    "chemical_id": 1823,
+    "adi": "NOT SPECIFIED",
+    "year": "1992",
+    "evidence": {
+      "ins_on_page": [
+        "401"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_407": {
+    "description": "JECFA database: INS 407 = CARRAGEENAN, latest evaluation 2014, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_377.html",
+    "sha256": "efeed44da4a0702c835f96547985399fe7830ddd1370cb3fc630172c2c1c53df",
+    "passed": true,
+    "jecfa_name": "CARRAGEENAN",
+    "chemical_id": 377,
+    "adi": "NOT SPECIFIED",
+    "year": "2014",
+    "evidence": {
+      "ins_on_page": [
+        "407"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_440": {
+    "description": "JECFA database: INS 440 = PECTINS, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3043.html",
+    "sha256": "b72ef5512e77344e7f0402008067fe78f7b6ed81cdd78d333d348ba030b0ffd6",
+    "passed": true,
+    "jecfa_name": "PECTINS",
+    "chemical_id": 3043,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "440"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_500(ii)": {
+    "description": "JECFA database: INS 500(ii) = SODIUM HYDROGEN CARBONATE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1892.html",
+    "sha256": "72b05f27077fba742aa55783f1cc2d8a9ac94b8913682ee067aeadb405329e36",
+    "passed": true,
+    "jecfa_name": "SODIUM HYDROGEN CARBONATE",
+    "chemical_id": 1892,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "500ii"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_551": {
+    "description": "JECFA database: INS 551 = SILICA, latest evaluation 2017, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2461.html",
+    "sha256": "8369f4566b76031bc03d40fb2fc0d84996e19343e1e978c4754dead5331689bd",
+    "passed": true,
+    "jecfa_name": "SILICA",
+    "chemical_id": 2461,
+    "adi": "NOT SPECIFIED",
+    "year": "2017",
+    "evidence": {
+      "ins_on_page": [
+        "551"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_627": {
+    "description": "JECFA database: INS 627 = DISODIUM 5'-GUANYLATE, latest evaluation 1993, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_822.html",
+    "sha256": "b7f662ef9fcadac96ff93f7b1d8c32b85bf7a45b1084aa418090603c20b92b1c",
+    "passed": true,
+    "jecfa_name": "DISODIUM 5'-GUANYLATE",
+    "chemical_id": 822,
+    "adi": "NOT SPECIFIED",
+    "year": "1993",
+    "evidence": {
+      "ins_on_page": [
+        "627"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_631": {
+    "description": "JECFA database: INS 631 = DISODIUM 5'-INOSINATE, latest evaluation 1993, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2512.html",
+    "sha256": "e7f6fc1736fd7253bfe68ae76ca9d769f32919dc9cc142ad0ef3429d754eb6cc",
+    "passed": true,
+    "jecfa_name": "DISODIUM 5'-INOSINATE",
+    "chemical_id": 2512,
+    "adi": "NOT SPECIFIED",
+    "year": "1993",
+    "evidence": {
+      "ins_on_page": [
+        "631"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_412": {
+    "description": "JECFA database: INS 412 = GUAR GUM, latest evaluation 1975, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_863.html",
+    "sha256": "8b382d5020b8876dfca2ee33d901b72db231b6fa5699464e9159754b3d994c8d",
+    "passed": true,
+    "jecfa_name": "GUAR GUM",
+    "chemical_id": 863,
+    "adi": "NOT SPECIFIED",
+    "year": "1975",
+    "evidence": {
+      "ins_on_page": [
+        "412"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_415": {
+    "description": "JECFA database: INS 415 = XANTHAN GUM, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_802.html",
+    "sha256": "3f959a7088ee2cd24fac6864db6ec5c351f5c2038d2d4ff495de3b911f3b4cda",
+    "passed": true,
+    "jecfa_name": "XANTHAN GUM",
+    "chemical_id": 802,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "415"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_100i": {
+    "description": "JECFA database: INS 100i = CURCUMIN, latest evaluation 2003, ADI 0-3 mg/kg bw",
+    "source_file": "jecfa/Chemical_1355.html",
+    "sha256": "5216758e2d562d81ec4f93483d1f105e5770e1a76fc1ddafd70f1a3b5afb7cde",
+    "passed": true,
+    "jecfa_name": "CURCUMIN",
+    "chemical_id": 1355,
+    "adi": "0-3 mg/kg bw",
+    "year": "2003",
+    "evidence": {
+      "ins_on_page": [
+        "100i"
+      ],
+      "adi": "0-3 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_100ii": {
+    "description": "JECFA database: INS 100ii = POWDERED TURMERIC, latest evaluation 1986, ADI NO ADI ALLOCATED",
+    "source_file": "jecfa/Chemical_252.html",
+    "sha256": "bf041450be456bbfa026ee2bd6ef0e0d0d67de828ac3a6685afc056e6e120b03",
+    "passed": true,
+    "jecfa_name": "POWDERED TURMERIC",
+    "chemical_id": 252,
+    "adi": "NO ADI ALLOCATED",
+    "year": "1986",
+    "evidence": {
+      "ins_on_page": [
+        "100ii"
+      ],
+      "adi": "NO ADI ALLOCATED"
+    }
+  },
+  "JECFA_ADI_101iii": {
+    "description": "JECFA database: INS 101iii = RIBOFLAVIN from BACILLUS SUBTILIS, latest evaluation 2021, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4092.html",
+    "sha256": "cc92353db6eb560d0b77bb9c2daab714096429489eb62d32f36f9b7484d92f96",
+    "passed": true,
+    "jecfa_name": "RIBOFLAVIN from BACILLUS SUBTILIS",
+    "chemical_id": 4092,
+    "adi": "NOT SPECIFIED",
+    "year": "2021",
+    "evidence": {
+      "ins_on_page": [
+        "101iii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_102": {
+    "description": "JECFA database: INS 102 = TARTRAZINE, latest evaluation 2016, ADI 0–10 mg/kg bw",
+    "source_file": "jecfa/Chemical_3885.html",
+    "sha256": "b5d7bec532615f33f3cf5d4beeee15ffdd72687c1361f4d97617fb082c3b6e07",
+    "passed": true,
+    "jecfa_name": "TARTRAZINE",
+    "chemical_id": 3885,
+    "adi": "0–10 mg/kg bw",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "102"
+      ],
+      "adi": "0–10 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_120": {
+    "description": "JECFA database: INS 120 = CARMINES, latest evaluation 2000, ADI 0-5 mg/kg bw (1982)",
+    "source_file": "jecfa/Chemical_1079.html",
+    "sha256": "617db8cc6c1d7d0cb4696e22c78e6c68685edf652e08cb18328388b1c57e69e4",
+    "passed": true,
+    "jecfa_name": "CARMINES",
+    "chemical_id": 1079,
+    "adi": "0-5 mg/kg bw (1982)",
+    "year": "2000",
+    "evidence": {
+      "ins_on_page": [
+        "120"
+      ],
+      "adi": "0-5 mg/kg bw (1982)"
+    }
+  },
+  "JECFA_ADI_1200": {
+    "description": "JECFA database: INS 1200 = MODIFIED POLYDEXTROSES, latest evaluation 1987, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3389.html",
+    "sha256": "e54c30c384c71cc85c987fcdf6ac98fe34310689f040be44257066d4848168ee",
+    "passed": true,
+    "jecfa_name": "MODIFIED POLYDEXTROSES",
+    "chemical_id": 3389,
+    "adi": "NOT SPECIFIED",
+    "year": "1987",
+    "evidence": {
+      "ins_on_page": [
+        "1200"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_127": {
+    "description": "JECFA database: INS 127 = ERYTHROSINE, latest evaluation 2018, ADI 0-0.1 mg/kg bw",
+    "source_file": "jecfa/Chemical_3740.html",
+    "sha256": "7364fd53779e60e7be68ad50651981696b278a0b722187728c473e2adb567ea9",
+    "passed": true,
+    "jecfa_name": "ERYTHROSINE",
+    "chemical_id": 3740,
+    "adi": "0-0.1 mg/kg bw",
+    "year": "2018",
+    "evidence": {
+      "ins_on_page": [
+        "127"
+      ],
+      "adi": "0-0.1 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_129": {
+    "description": "JECFA database: INS 129 = ALLURA RED AC, latest evaluation 2016, ADI 0–7 mg/kg bw",
+    "source_file": "jecfa/Chemical_2361.html",
+    "sha256": "2a5fe83670704873a84bf3a4396fbc8f853134412280ad7b4cbb7e61b6c28b20",
+    "passed": true,
+    "jecfa_name": "ALLURA RED AC",
+    "chemical_id": 2361,
+    "adi": "0–7 mg/kg bw",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "129"
+      ],
+      "adi": "0–7 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_133": {
+    "description": "JECFA database: INS 133 = BRILLIANT BLUE FCF, latest evaluation 2017, ADI 0–6 mg/kg bw",
+    "source_file": "jecfa/Chemical_3309.html",
+    "sha256": "edca735daf786d4502ff9040af701340a53efaf399ef6936382a6ce124f0d24d",
+    "passed": true,
+    "jecfa_name": "BRILLIANT BLUE FCF",
+    "chemical_id": 3309,
+    "adi": "0–6 mg/kg bw",
+    "year": "2017",
+    "evidence": {
+      "ins_on_page": [
+        "133"
+      ],
+      "adi": "0–6 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_1412": {
+    "description": "JECFA database: INS 1412 = DISTARCH PHOSPHATE, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3281.html",
+    "sha256": "accb5fd3e1b1bdce156765f49e1ff1c3290fe3d0ae03a05fd69662c7135c66ab",
+    "passed": true,
+    "jecfa_name": "DISTARCH PHOSPHATE",
+    "chemical_id": 3281,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1412"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1414": {
+    "description": "JECFA database: INS 1414 = ACETYLATED DISTARCH PHOSPHATE, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1765.html",
+    "sha256": "e54543d7b3d83cffd0634db8bdd7ae681eadd630bc1eded2365bce17ca75a005",
+    "passed": true,
+    "jecfa_name": "ACETYLATED DISTARCH PHOSPHATE",
+    "chemical_id": 1765,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1414"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1420": {
+    "description": "JECFA database: INS 1420 = STARCH ACETATE, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4292.html",
+    "sha256": "806622b89ed24715083f00f83d933eb43a0fe3cbf3aafd22fa9ebb7747c67dba",
+    "passed": true,
+    "jecfa_name": "STARCH ACETATE",
+    "chemical_id": 4292,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1420"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1422": {
+    "description": "JECFA database: INS 1422 = ACETYLATED DISTARCH ADIPATE, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_78.html",
+    "sha256": "4d4a062c6fbb8af0ecc7825c5188dd54bc6ea04c0f35caad5bb49aff45f9de4a",
+    "passed": true,
+    "jecfa_name": "ACETYLATED DISTARCH ADIPATE",
+    "chemical_id": 78,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1422"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1440": {
+    "description": "JECFA database: INS 1440 = HYDROXYPROPYL STARCH, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3694.html",
+    "sha256": "f10b3a0046b8384aa81edf68205eb21c199f31310cdcba322039f42ad2ea0a60",
+    "passed": true,
+    "jecfa_name": "HYDROXYPROPYL STARCH",
+    "chemical_id": 3694,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1440"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1451": {
+    "description": "JECFA database: INS 1451 = ACETYLATED OXIDIZED STARCH, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_178.html",
+    "sha256": "bd1b8a1d5676fb6bdad9dba15707c63c65a7b27f320600b120002d3dcd00aebb",
+    "passed": true,
+    "jecfa_name": "ACETYLATED OXIDIZED STARCH",
+    "chemical_id": 178,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1451"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_160ci": {
+    "description": "JECFA database: INS 160ci = PAPRIKA OLEORESIN, latest evaluation 2000, ADI No safety concern at current levels of intake when used as a flavouring agent",
+    "source_file": "jecfa/Chemical_4486.html",
+    "sha256": "8165f174a7502624be1fbf1c3606bddd373f8bd59654fd73df16b5982f119ef9",
+    "passed": true,
+    "jecfa_name": "PAPRIKA OLEORESIN",
+    "chemical_id": 4486,
+    "adi": "No safety concern at current levels of intake when used as a flavouring agent",
+    "year": "2000",
+    "evidence": {
+      "ins_on_page": [
+        "160ci"
+      ],
+      "adi": "No safety concern at current levels of intake when used as a flavouring agent"
+    }
+  },
+  "JECFA_ADI_160cii": {
+    "description": "JECFA database: INS 160cii = PAPRIKA extract, latest evaluation 2014, ADI 0–1.5 mg/kg bw",
+    "source_file": "jecfa/Chemical_5866.html",
+    "sha256": "86fb06536da19170a4d70ccf1f063766fbe743180d8b2a3503eb4ae1349f33cb",
+    "passed": true,
+    "jecfa_name": "PAPRIKA extract",
+    "chemical_id": 5866,
+    "adi": "0–1.5 mg/kg bw",
+    "year": "2014",
+    "evidence": {
+      "ins_on_page": [
+        "160cii"
+      ],
+      "adi": "0–1.5 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_162": {
+    "description": "JECFA database: INS 162 = BEET RED, latest evaluation 1987, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_877.html",
+    "sha256": "0771f59c708f00462e4fcdcefb548807b8ca51c11e062a36fc7aad51c66e47aa",
+    "passed": true,
+    "jecfa_name": "BEET RED",
+    "chemical_id": 877,
+    "adi": "NOT SPECIFIED",
+    "year": "1987",
+    "evidence": {
+      "ins_on_page": [
+        "162"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_164": {
+    "description": "JECFA database: INS 164 = GARDENIA YELLOW , latest evaluation 2014, ADI NOT ALLOCATED",
+    "source_file": "jecfa/Chemical_6197.html",
+    "sha256": "097aeffb0c18c8562ca7415bb1e5efedef597ee15c44106a0b1241aa67e337e9",
+    "passed": true,
+    "jecfa_name": "GARDENIA YELLOW ",
+    "chemical_id": 6197,
+    "adi": "NOT ALLOCATED",
+    "year": "2014",
+    "evidence": {
+      "ins_on_page": [
+        "164"
+      ],
+      "adi": "NOT ALLOCATED"
+    }
+  },
+  "JECFA_ADI_170i": {
+    "description": "JECFA database: INS 170i = CALCIUM CARBONATE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_457.html",
+    "sha256": "72a72229bf68c1c2069b13232be4c319e53f7b6961bd601f06759d7bd567cd72",
+    "passed": true,
+    "jecfa_name": "CALCIUM CARBONATE",
+    "chemical_id": 457,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "170i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_200": {
+    "description": "JECFA database: INS 200 = SORBIC ACID, latest evaluation 1973, ADI 0-25 mg/kg bw",
+    "source_file": "jecfa/Chemical_2443.html",
+    "sha256": "181b18b9f39183bd75154c0e01659b8e65fabc731698d2f92afff18361c17c64",
+    "passed": true,
+    "jecfa_name": "SORBIC ACID",
+    "chemical_id": 2443,
+    "adi": "0-25 mg/kg bw",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "200"
+      ],
+      "adi": "0-25 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_202": {
+    "description": "JECFA database: INS 202 = POTASSIUM SORBATE, latest evaluation 1973, ADI 0-25 mg/kg bw",
+    "source_file": "jecfa/Chemical_2724.html",
+    "sha256": "a137260291b15ef29fd1715c65a15b254c24e5b83622719bbc8913fd1d7c8a16",
+    "passed": true,
+    "jecfa_name": "POTASSIUM SORBATE",
+    "chemical_id": 2724,
+    "adi": "0-25 mg/kg bw",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "202"
+      ],
+      "adi": "0-25 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_211": {
+    "description": "JECFA database: INS 211 = SODIUM BENZOATE, latest evaluation 2021, ADI 0–20 mg/kg bw",
+    "source_file": "jecfa/Chemical_1098.html",
+    "sha256": "098a0ad5e71795f5a826ba9af37c9697aab90591f2f7823be0120fbf05cb2127",
+    "passed": true,
+    "jecfa_name": "SODIUM BENZOATE",
+    "chemical_id": 1098,
+    "adi": "0–20 mg/kg bw",
+    "year": "2021",
+    "evidence": {
+      "ins_on_page": [
+        "211"
+      ],
+      "adi": "0–20 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_221": {
+    "description": "JECFA database: INS 221 = DISODIUM SULFITE, latest evaluation 1998, ADI 0-0.7 mg/kg bw",
+    "source_file": "jecfa/Chemical_2821.html",
+    "sha256": "76e35cde25f726c18df1cf1d6113be1b42f705c945e3109cbe4b2ff4e807afaf",
+    "passed": true,
+    "jecfa_name": "DISODIUM SULFITE",
+    "chemical_id": 2821,
+    "adi": "0-0.7 mg/kg bw",
+    "year": "1998",
+    "evidence": {
+      "ins_on_page": [
+        "221"
+      ],
+      "adi": "0-0.7 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_223": {
+    "description": "JECFA database: INS 223 = SODIUM METABISULFITE, latest evaluation 1998, ADI 0-0.7 mg/kg bw",
+    "source_file": "jecfa/Chemical_1824.html",
+    "sha256": "a89ff12a2d041bccbce669888e56f75466d1e5e0655589691be454d86ecbdf95",
+    "passed": true,
+    "jecfa_name": "SODIUM METABISULFITE",
+    "chemical_id": 1824,
+    "adi": "0-0.7 mg/kg bw",
+    "year": "1998",
+    "evidence": {
+      "ins_on_page": [
+        "223"
+      ],
+      "adi": "0-0.7 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_234": {
+    "description": "JECFA database: INS 234 = NISIN A, latest evaluation 2024, ADI 0-2 mg/kg bw",
+    "source_file": "jecfa/Chemical_572.html",
+    "sha256": "96c5c8ef55d89bb7ba648aff22d11b80f2d984d4f773d3b3a15c7c08a231dc87",
+    "passed": true,
+    "jecfa_name": "NISIN A",
+    "chemical_id": 572,
+    "adi": "0-2 mg/kg bw",
+    "year": "2024",
+    "evidence": {
+      "ins_on_page": [
+        "234"
+      ],
+      "adi": "0-2 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_262i": {
+    "description": "JECFA database: INS 262i = SODIUM ACETATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2970.html",
+    "sha256": "0659ebb86f58c59dd854b441c4f7699c85b2802f0aa4ecc03d9d6dc42f560b5f",
+    "passed": true,
+    "jecfa_name": "SODIUM ACETATE",
+    "chemical_id": 2970,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "262i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_263": {
+    "description": "JECFA database: INS 263 = CALCIUM ACETATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2804.html",
+    "sha256": "594b6f450c5b32e484dd6ae77af6da2cbd1086f8a8ee51796a502be8b577bdc3",
+    "passed": true,
+    "jecfa_name": "CALCIUM ACETATE",
+    "chemical_id": 2804,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "263"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_281": {
+    "description": "JECFA database: INS 281 = SODIUM PROPIONATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_3999.html",
+    "sha256": "ead5d3f15170d71f5e0003b94b05110cf02f3ef843d76243a7c3fcc76f6f6225",
+    "passed": true,
+    "jecfa_name": "SODIUM PROPIONATE",
+    "chemical_id": 3999,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "281"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_282": {
+    "description": "JECFA database: INS 282 = CALCIUM PROPIONATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2163.html",
+    "sha256": "62815ad896b9ed2c5806507c9fa36a19dff2a0bf295733d412acdcbd7d04e5c5",
+    "passed": true,
+    "jecfa_name": "CALCIUM PROPIONATE",
+    "chemical_id": 2163,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "282"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_290": {
+    "description": "JECFA database: INS 290 = CARBON DIOXIDE, latest evaluation 1985, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_592.html",
+    "sha256": "0c5284da2652d5c3adc5f2c098ac7dfe7eeb74c8ae49be8ffaac07f02aaf3a92",
+    "passed": true,
+    "jecfa_name": "CARBON DIOXIDE",
+    "chemical_id": 592,
+    "adi": "NOT SPECIFIED",
+    "year": "1985",
+    "evidence": {
+      "ins_on_page": [
+        "290"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_301": {
+    "description": "JECFA database: INS 301 = SODIUM ASCORBATE, latest evaluation 1981, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2372.html",
+    "sha256": "d0f8f9e7fb8809977aa88fb4add67ad6681b62587910f2f0ba01faf470cf6a74",
+    "passed": true,
+    "jecfa_name": "SODIUM ASCORBATE",
+    "chemical_id": 2372,
+    "adi": "NOT SPECIFIED",
+    "year": "1981",
+    "evidence": {
+      "ins_on_page": [
+        "301"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_304": {
+    "description": "JECFA database: INS 304 = ASCORBYL PALMITATE, latest evaluation 2025, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_60.html",
+    "sha256": "514b3c6ef84907f9c1f376af10e7e3d90c39f463c5ab3cea36e5fe1b553ea4f5",
+    "passed": true,
+    "jecfa_name": "ASCORBYL PALMITATE",
+    "chemical_id": 60,
+    "adi": "NOT SPECIFIED",
+    "year": "2025",
+    "evidence": {
+      "ins_on_page": [
+        "304"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_310": {
+    "description": "JECFA database: INS 310 = PROPYL GALLATE, latest evaluation 1996, ADI 0-1.4 mg/kg bw (1993)",
+    "source_file": "jecfa/Chemical_1272.html",
+    "sha256": "5eb2a2a08c34874002155c37173bebb6f50055416ec9e30252c3eea13cddc165",
+    "passed": true,
+    "jecfa_name": "PROPYL GALLATE",
+    "chemical_id": 1272,
+    "adi": "0-1.4 mg/kg bw (1993)",
+    "year": "1996",
+    "evidence": {
+      "ins_on_page": [
+        "310"
+      ],
+      "adi": "0-1.4 mg/kg bw (1993)"
+    }
+  },
+  "JECFA_ADI_316": {
+    "description": "JECFA database: INS 316 = SODIUM ERYTHORBATE, latest evaluation 1990, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2641.html",
+    "sha256": "3211d43c4161690179a6c9c8ffb9b64816586a19d8a21fe96d4897244550f54f",
+    "passed": true,
+    "jecfa_name": "SODIUM ERYTHORBATE",
+    "chemical_id": 2641,
+    "adi": "NOT SPECIFIED",
+    "year": "1990",
+    "evidence": {
+      "ins_on_page": [
+        "316"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_325": {
+    "description": "JECFA database: INS 325 = SODIUM LACTATE (solution), latest evaluation 1974, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1552.html",
+    "sha256": "ce76907adc8159e74c67585d552c4b68a5dc4e244e106ec429103e8c2dabcbeb",
+    "passed": true,
+    "jecfa_name": "SODIUM LACTATE (solution)",
+    "chemical_id": 1552,
+    "adi": "NOT LIMITED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "325"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_326": {
+    "description": "JECFA database: INS 326 = POTASSIUM LACTATE (solution), latest evaluation 1974, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2777.html",
+    "sha256": "7a788953a1e2925fb1db439736073e1dfed9614e4b0dc933d99731c56634cdee",
+    "passed": true,
+    "jecfa_name": "POTASSIUM LACTATE (solution)",
+    "chemical_id": 2777,
+    "adi": "NOT LIMITED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "326"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_327": {
+    "description": "JECFA database: INS 327 = CALCIUM LACTATE, latest evaluation 1974, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_88.html",
+    "sha256": "a6db18069a01eb77522a5ca7070ea8123702f135e27a1e30940540434420d3bd",
+    "passed": true,
+    "jecfa_name": "CALCIUM LACTATE",
+    "chemical_id": 88,
+    "adi": "NOT LIMITED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "327"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_331i": {
+    "description": "JECFA database: INS 331i = SODIUM DIHYDROGEN CITRATE, latest evaluation 1979, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2709.html",
+    "sha256": "0661a6689ffb901c592e84b78e7509f3002f4a801624179fa3087b14981e5bbc",
+    "passed": true,
+    "jecfa_name": "SODIUM DIHYDROGEN CITRATE",
+    "chemical_id": 2709,
+    "adi": "NOT LIMITED",
+    "year": "1979",
+    "evidence": {
+      "ins_on_page": [
+        "331i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_331iii": {
+    "description": "JECFA database: INS 331iii = TRISODIUM CITRATE, latest evaluation 1973, ADI NOT LIMITED (\"Not specified\")",
+    "source_file": "jecfa/Chemical_349.html",
+    "sha256": "d02b618f739aa9bfe2e867d6bec028ac7c56cae4dd78eb5e2a5b18f48cdb8040",
+    "passed": true,
+    "jecfa_name": "TRISODIUM CITRATE",
+    "chemical_id": 349,
+    "adi": "NOT LIMITED (\"Not specified\")",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "331iii"
+      ],
+      "adi": "NOT LIMITED (\"Not specified\")"
+    }
+  },
+  "JECFA_ADI_332i": {
+    "description": "JECFA database: INS 332i = POTASSIUM DIHYDROGEN CITRATE, latest evaluation 1979, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_959.html",
+    "sha256": "11965e92793ecb37bbc40ce8d45c8a3d23909c11c078e9d82df75f3101666d0c",
+    "passed": true,
+    "jecfa_name": "POTASSIUM DIHYDROGEN CITRATE",
+    "chemical_id": 959,
+    "adi": "NOT LIMITED",
+    "year": "1979",
+    "evidence": {
+      "ins_on_page": [
+        "332i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_332ii": {
+    "description": "JECFA database: INS 332ii = TRIPOTASSIUM CITRATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_366.html",
+    "sha256": "da3319451653dd7ba53053222f3847967e00389c06d9c247748fb4a83804a524",
+    "passed": true,
+    "jecfa_name": "TRIPOTASSIUM CITRATE",
+    "chemical_id": 366,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "332ii"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_341iii": {
+    "description": "JECFA database: INS 341iii = TRICALCIUM PHOSPHATE, latest evaluation 2026, ADI Group MTDI for phosphorus from all sources, expressed as P",
+    "source_file": "jecfa/Chemical_607.html",
+    "sha256": "35aad37818ad14825933a9ded53917d1b3a7df6f6224c51b2563ded6e58a535a",
+    "passed": true,
+    "jecfa_name": "TRICALCIUM PHOSPHATE",
+    "chemical_id": 607,
+    "adi": "Group MTDI for phosphorus from all sources, expressed as P",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "341iii"
+      ],
+      "adi": "Group MTDI for phosphorus from all sources, expressed as P"
+    }
+  },
+  "JECFA_ADI_418": {
+    "description": "JECFA database: INS 418 = GELLAN GUM, latest evaluation 2025, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2056.html",
+    "sha256": "7cb5b1c258d764ea9c2698bc31456b18712c5e34fa5fe2d9839626041a046a04",
+    "passed": true,
+    "jecfa_name": "GELLAN GUM",
+    "chemical_id": 2056,
+    "adi": "NOT SPECIFIED",
+    "year": "2025",
+    "evidence": {
+      "ins_on_page": [
+        "418"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_420i": {
+    "description": "JECFA database: INS 420i = D-SORBITOL, latest evaluation 1982, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_829.html",
+    "sha256": "fc10a50f28cc386ae7a1417d425e5b0ba37cbb20ec2339d3c85b916e1625b49e",
+    "passed": true,
+    "jecfa_name": "D-SORBITOL",
+    "chemical_id": 829,
+    "adi": "NOT SPECIFIED",
+    "year": "1982",
+    "evidence": {
+      "ins_on_page": [
+        "420i"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_420ii": {
+    "description": "JECFA database: INS 420ii = SORBITOL SYRUP, latest evaluation 2018, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3856.html",
+    "sha256": "c9ce34e3b76cef8649683ca1d53987e67bdf365e087c22ff9aa1b879be58d512",
+    "passed": true,
+    "jecfa_name": "SORBITOL SYRUP",
+    "chemical_id": 3856,
+    "adi": "NOT SPECIFIED",
+    "year": "2018",
+    "evidence": {
+      "ins_on_page": [
+        "420ii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_425": {
+    "description": "JECFA database: INS 425 = KONJAC FLOUR, latest evaluation 1996, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3547.html",
+    "sha256": "b465b7596ec0c34c5470d7ef502df47cfec771a4435908e3761e504011f7334e",
+    "passed": true,
+    "jecfa_name": "KONJAC FLOUR",
+    "chemical_id": 3547,
+    "adi": "NOT SPECIFIED",
+    "year": "1996",
+    "evidence": {
+      "ins_on_page": [
+        "425"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_433": {
+    "description": "JECFA database: INS 433 = POLYOXYETHYLENE (20) SORBITAN MONOOLEATE, latest evaluation 2026, ADI Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "source_file": "jecfa/Chemical_2507.html",
+    "sha256": "941397c4e2f30244e13eaa5f1a23ac3b0bbbd52c5f559fd9253ff3df885ded22",
+    "passed": true,
+    "jecfa_name": "POLYOXYETHYLENE (20) SORBITAN MONOOLEATE",
+    "chemical_id": 2507,
+    "adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "433"
+      ],
+      "adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters"
+    }
+  },
+  "JECFA_ADI_435": {
+    "description": "JECFA database: INS 435 = POLYOXYETHYLENE (20) SORBITAN MONOSTEARATE, latest evaluation 2026, ADI Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "source_file": "jecfa/Chemical_3585.html",
+    "sha256": "a3d6e45ea31591949436a44176e4f355b6aeb8821cab3b05b4cc1e399682a4a5",
+    "passed": true,
+    "jecfa_name": "POLYOXYETHYLENE (20) SORBITAN MONOSTEARATE",
+    "chemical_id": 3585,
+    "adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "435"
+      ],
+      "adi": "Group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters"
+    }
+  },
+  "JECFA_ADI_445iii": {
+    "description": "JECFA database: INS 445iii = GLYCEROL ESTER of WOOD ROSIN, latest evaluation 2013, ADI 0–25 mg/kg bw",
+    "source_file": "jecfa/Chemical_2855.html",
+    "sha256": "146e63352bd99b5ff6e4f0af770f831d8e3cda65d4b85c81593b630e227a57c2",
+    "passed": true,
+    "jecfa_name": "GLYCEROL ESTER of WOOD ROSIN",
+    "chemical_id": 2855,
+    "adi": "0–25 mg/kg bw",
+    "year": "2013",
+    "evidence": {
+      "ins_on_page": [
+        "445iii"
+      ],
+      "adi": "0–25 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_451i": {
+    "description": "JECFA database: INS 451i = PENTASODIUM TRIPHOSPHATE, latest evaluation 2023, ADI MTDI 70 mg/kg bw (as P); Group MTDI for phosphorus from all sources, expressed as P",
+    "source_file": "jecfa/Chemical_2181.html",
+    "sha256": "ce93c9e3ccbd180d07fcdf86cc25f8772a0feddbbe25ebc4183aef28f22ea0cb",
+    "passed": true,
+    "jecfa_name": "PENTASODIUM TRIPHOSPHATE",
+    "chemical_id": 2181,
+    "adi": "MTDI 70 mg/kg bw (as P); Group MTDI for phosphorus from all sources, expressed as P",
+    "year": "2023",
+    "evidence": {
+      "ins_on_page": [
+        "451i"
+      ],
+      "adi": "MTDI 70 mg/kg bw (as P); Group MTDI for phosphorus from all sources, expressed as P"
+    }
+  },
+  "JECFA_ADI_460ii": {
+    "description": "JECFA database: INS 460ii = POWDERED CELLULOSE, latest evaluation 1976, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_251.html",
+    "sha256": "a2f30f4cc64c88d64ba8da0f1d164b45494989014f2153791994be62f5d66734",
+    "passed": true,
+    "jecfa_name": "POWDERED CELLULOSE",
+    "chemical_id": 251,
+    "adi": "NOT SPECIFIED",
+    "year": "1976",
+    "evidence": {
+      "ins_on_page": [
+        "460ii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_461": {
+    "description": "JECFA database: INS 461 = METHYL CELLULOSE, latest evaluation 1989, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_700.html",
+    "sha256": "73732066352d23fc440c65f53aa34320913c19cc603b359a6e7f0fe29988f02e",
+    "passed": true,
+    "jecfa_name": "METHYL CELLULOSE",
+    "chemical_id": 700,
+    "adi": "NOT SPECIFIED",
+    "year": "1989",
+    "evidence": {
+      "ins_on_page": [
+        "461"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_466": {
+    "description": "JECFA database: INS 466 = SODIUM CARBOXYMETHYL CELLULOSE, latest evaluation 1989, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_3773.html",
+    "sha256": "8fab5d3c47efaeadfadd9bc58fe76252cf3c16b5ce1ddb05dbe80081371d8fbd",
+    "passed": true,
+    "jecfa_name": "SODIUM CARBOXYMETHYL CELLULOSE",
+    "chemical_id": 3773,
+    "adi": "NOT SPECIFIED",
+    "year": "1989",
+    "evidence": {
+      "ins_on_page": [
+        "466"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_470iii": {
+    "description": "JECFA database: INS 470iii = MAGNESIUM STEARATE, latest evaluation 2020, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4275.html",
+    "sha256": "918ec8476e6b693c4c21d4ccc3165d8d218a7adc871467bc3af03697d9e82551",
+    "passed": true,
+    "jecfa_name": "MAGNESIUM STEARATE",
+    "chemical_id": 4275,
+    "adi": "NOT SPECIFIED",
+    "year": "2020",
+    "evidence": {
+      "ins_on_page": [
+        "470iii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_476": {
+    "description": "JECFA database: INS 476 = POLYGLYCEROL ESTERS of INTERESTERIFIED RICINOLEIC ACID, latest evaluation 1973, ADI 0-7.5 mg/kg bw",
+    "source_file": "jecfa/Chemical_4009.html",
+    "sha256": "9126853ed9f5e390655368336f79391e3b72dd5dbab88e8ed7f78d3457d08467",
+    "passed": true,
+    "jecfa_name": "POLYGLYCEROL ESTERS of INTERESTERIFIED RICINOLEIC ACID",
+    "chemical_id": 4009,
+    "adi": "0-7.5 mg/kg bw",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "476"
+      ],
+      "adi": "0-7.5 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_491": {
+    "description": "JECFA database: INS 491 = SORBITAN MONOSTEARATE, latest evaluation 2026, ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "source_file": "jecfa/Chemical_2271.html",
+    "sha256": "4877db93170b160750005b3a2fabec74028a6da5b459e746ccb262441a72cf53",
+    "passed": true,
+    "jecfa_name": "SORBITAN MONOSTEARATE",
+    "chemical_id": 2271,
+    "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "491"
+      ],
+      "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters"
+    }
+  },
+  "JECFA_ADI_492": {
+    "description": "JECFA database: INS 492 = SORBITAN TRISTEARATE, latest evaluation 2026, ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "source_file": "jecfa/Chemical_3983.html",
+    "sha256": "7c4adbd509489cf91dd84e315c7e9a7139e4b10dfaed97602199d575bba47c06",
+    "passed": true,
+    "jecfa_name": "SORBITAN TRISTEARATE",
+    "chemical_id": 3983,
+    "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "492"
+      ],
+      "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters"
+    }
+  },
+  "JECFA_ADI_494": {
+    "description": "JECFA database: INS 494 = SORBITAN MONOOLEATE, latest evaluation 2026, ADI Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "source_file": "jecfa/Chemical_3008.html",
+    "sha256": "64a3ac299f3d348d30a1d03a0112135cb2404be93d6c6581f924666cf9df6809",
+    "passed": true,
+    "jecfa_name": "SORBITAN MONOOLEATE",
+    "chemical_id": 3008,
+    "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters",
+    "year": "2026",
+    "evidence": {
+      "ins_on_page": [
+        "494"
+      ],
+      "adi": "Temporary group ADI of 0-25 mg/kg bw as total polyoxyethylene (20) sorbitan esters"
+    }
+  },
+  "JECFA_ADI_500i": {
+    "description": "JECFA database: INS 500i = SODIUM CARBONATE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_3252.html",
+    "sha256": "429c650199ee00e97a4d68e8d8af8cc35f496d8f8d578799cc52d6feb82697b4",
+    "passed": true,
+    "jecfa_name": "SODIUM CARBONATE",
+    "chemical_id": 3252,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "500i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_501i": {
+    "description": "JECFA database: INS 501i = POTASSIUM CARBONATE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_2711.html",
+    "sha256": "e2bf6aa93720fceee27512d3acee35d965a44400483042d30277f2358ed74852",
+    "passed": true,
+    "jecfa_name": "POTASSIUM CARBONATE",
+    "chemical_id": 2711,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "501i"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_503i": {
+    "description": "JECFA database: INS 503i = AMMONIUM CARBONATE, latest evaluation 1982, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1215.html",
+    "sha256": "5de8ec27d2f24ca095a0d8eee7868bd0740dd37ecbedcc619f0405ba10de5599",
+    "passed": true,
+    "jecfa_name": "AMMONIUM CARBONATE",
+    "chemical_id": 1215,
+    "adi": "NOT SPECIFIED",
+    "year": "1982",
+    "evidence": {
+      "ins_on_page": [
+        "503i"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_508": {
+    "description": "JECFA database: INS 508 = POTASSIUM CHLORIDE, latest evaluation 1979, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1874.html",
+    "sha256": "10f866fc0e5f74b510dacf10876bbc21f97d538b600fbe57024586c7f42cb343",
+    "passed": true,
+    "jecfa_name": "POTASSIUM CHLORIDE",
+    "chemical_id": 1874,
+    "adi": "NOT LIMITED",
+    "year": "1979",
+    "evidence": {
+      "ins_on_page": [
+        "508"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_509": {
+    "description": "JECFA database: INS 509 = CALCIUM CHLORIDE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_458.html",
+    "sha256": "7495e7d2a156758416b9f2df89b6e9c21c0368cf79e783698428bd59a585beff",
+    "passed": true,
+    "jecfa_name": "CALCIUM CHLORIDE",
+    "chemical_id": 458,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "509"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_516": {
+    "description": "JECFA database: INS 516 = CALCIUM SULFATE, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1360.html",
+    "sha256": "4eba902298b1772b8a657132a7a1819e27c30f32ebb16702e051d46633586834",
+    "passed": true,
+    "jecfa_name": "CALCIUM SULFATE",
+    "chemical_id": 1360,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "516"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_524": {
+    "description": "JECFA database: INS 524 = SODIUM HYDROXIDE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_3939.html",
+    "sha256": "a9f847d5d3173f784d583d883a874de61f141a5c98b540d1f216d3db4b7ed5bc",
+    "passed": true,
+    "jecfa_name": "SODIUM HYDROXIDE",
+    "chemical_id": 3939,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "524"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_526": {
+    "description": "JECFA database: INS 526 = CALCIUM HYDROXIDE, latest evaluation 1965, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_82.html",
+    "sha256": "2793e252e30c7183f35947079fba997535890093377b3290a688bce0a8a1291a",
+    "passed": true,
+    "jecfa_name": "CALCIUM HYDROXIDE",
+    "chemical_id": 82,
+    "adi": "NOT LIMITED",
+    "year": "1965",
+    "evidence": {
+      "ins_on_page": [
+        "526"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_903": {
+    "description": "JECFA database: INS 903 = CARNAUBA WAX, latest evaluation 1992, ADI 0-7 mg/kg bw",
+    "source_file": "jecfa/Chemical_939.html",
+    "sha256": "b9403142562d27791ad8eda362eb2a7d6c376046cec56cdf70992ac2e55a53a1",
+    "passed": true,
+    "jecfa_name": "CARNAUBA WAX",
+    "chemical_id": 939,
+    "adi": "0-7 mg/kg bw",
+    "year": "1992",
+    "evidence": {
+      "ins_on_page": [
+        "903"
+      ],
+      "adi": "0-7 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_950": {
+    "description": "JECFA database: INS 950 = ACESULFAME POTASSIUM, latest evaluation 1990, ADI 0-15 mg/kg bw",
+    "source_file": "jecfa/Chemical_926.html",
+    "sha256": "c67c7bab0b6dea2cea3f992c87980c6e50248b07669c0c40a2443ee05f9bbf44",
+    "passed": true,
+    "jecfa_name": "ACESULFAME POTASSIUM",
+    "chemical_id": 926,
+    "adi": "0-15 mg/kg bw",
+    "year": "1990",
+    "evidence": {
+      "ins_on_page": [
+        "950"
+      ],
+      "adi": "0-15 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_951": {
+    "description": "JECFA database: INS 951 = ASPARTAME, latest evaluation 2023, ADI 0–40 mg/kg bw",
+    "source_file": "jecfa/Chemical_62.html",
+    "sha256": "d1a092883a77adb69d8e5b14256f5641dee31a4de5c50acae8965d9c8c34e407",
+    "passed": true,
+    "jecfa_name": "ASPARTAME",
+    "chemical_id": 62,
+    "adi": "0–40 mg/kg bw",
+    "year": "2023",
+    "evidence": {
+      "ins_on_page": [
+        "951"
+      ],
+      "adi": "0–40 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_952ii": {
+    "description": "JECFA database: INS 952ii = CALCIUM CYCLAMATE, latest evaluation 1982, ADI 0-11 mg/kg bw",
+    "source_file": "jecfa/Chemical_837.html",
+    "sha256": "0c08511a4478ef3be787822469ecef5c58f485e97e6bf3e9b0ce5d3dd55ab9df",
+    "passed": true,
+    "jecfa_name": "CALCIUM CYCLAMATE",
+    "chemical_id": 837,
+    "adi": "0-11 mg/kg bw",
+    "year": "1982",
+    "evidence": {
+      "ins_on_page": [
+        "952ii"
+      ],
+      "adi": "0-11 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_965i": {
+    "description": "JECFA database: INS 965i = MALTITOL, latest evaluation 1993, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4276.html",
+    "sha256": "ba0a87549c7a713c846ef01222721255063d210acf94637ba4a17ed0a54ffb47",
+    "passed": true,
+    "jecfa_name": "MALTITOL",
+    "chemical_id": 4276,
+    "adi": "NOT SPECIFIED",
+    "year": "1993",
+    "evidence": {
+      "ins_on_page": [
+        "965i"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_965ii": {
+    "description": "JECFA database: INS 965ii = DRIED MALTITOL SYRUP, latest evaluation 1997, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2132.html",
+    "sha256": "46b9033ad104cf5d6e3d7022827655d657c6690a3120694c2e9b0080d6de6a12",
+    "passed": true,
+    "jecfa_name": "DRIED MALTITOL SYRUP",
+    "chemical_id": 2132,
+    "adi": "NOT SPECIFIED",
+    "year": "1997",
+    "evidence": {
+      "ins_on_page": [
+        "965ii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1100": {
+    "description": "JECFA database: INS 1100 = alpha-AMYLASE from ASPERGILLUS ORYZAE, VAR., latest evaluation 1987, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2928.html",
+    "sha256": "0ae37f78425819a8905cefa719f37c3ccfd084d688dfe3c1aa94ff661bef289f",
+    "passed": true,
+    "jecfa_name": "alpha-AMYLASE from ASPERGILLUS ORYZAE, VAR.",
+    "chemical_id": 2928,
+    "adi": "NOT SPECIFIED",
+    "year": "1987",
+    "evidence": {
+      "ins_on_page": [
+        "1100"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1104": {
+    "description": "JECFA database: INS 1104 = ASPERGILLUS ORYZAE, VAR. LIPASE, latest evaluation 1974, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1186.html",
+    "sha256": "355dfc2df84ac17f208d02763c4d9a249b9c4a15e6a93117ec8bb1b6f590dfc7",
+    "passed": true,
+    "jecfa_name": "ASPERGILLUS ORYZAE, VAR. LIPASE",
+    "chemical_id": 1186,
+    "adi": "NOT SPECIFIED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "1104"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1400": {
+    "description": "JECFA database: INS 1400 = DEXTRINS, WHITE and YELLOW, ROASTED STARCH, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2553.html",
+    "sha256": "a9ec9ee0a31ca737b9b87d56754a3303fb6ddaf999898367a006eb59e83aa6c2",
+    "passed": true,
+    "jecfa_name": "DEXTRINS, WHITE and YELLOW, ROASTED STARCH",
+    "chemical_id": 2553,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1400"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_1404": {
+    "description": "JECFA database: INS 1404 = OXIDIZED STARCH, latest evaluation 2016, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_889.html",
+    "sha256": "614cbb22ea95028651a68839521623a33bdee94aaafb6fcc3c4d6210f557d6f9",
+    "passed": true,
+    "jecfa_name": "OXIDIZED STARCH",
+    "chemical_id": 889,
+    "adi": "NOT SPECIFIED",
+    "year": "2016",
+    "evidence": {
+      "ins_on_page": [
+        "1404"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_142": {
+    "description": "JECFA database: INS 142 = FOOD GREEN S, latest evaluation 1974, ADI NO ADI ALLOCATED",
+    "source_file": "jecfa/Chemical_2119.html",
+    "sha256": "f37f277b6e51acf6c4aa270e2968959f15cc5073151dbdb9da0dee4c24186cab",
+    "passed": true,
+    "jecfa_name": "FOOD GREEN S",
+    "chemical_id": 2119,
+    "adi": "NO ADI ALLOCATED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "142"
+      ],
+      "adi": "NO ADI ALLOCATED"
+    }
+  },
+  "JECFA_ADI_150a": {
+    "description": "JECFA database: INS 150a = CARAMEL COLOUR, Class I, latest evaluation 1985, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_423.html",
+    "sha256": "546dd512e9139a11fcea3a048ba1d7d022de789d2e293b041c4fa2ef783866aa",
+    "passed": true,
+    "jecfa_name": "CARAMEL COLOUR, Class I",
+    "chemical_id": 423,
+    "adi": "NOT SPECIFIED",
+    "year": "1985",
+    "evidence": {
+      "ins_on_page": [
+        "150a"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_150c": {
+    "description": "JECFA database: INS 150c = AMMONIA CARAMEL, latest evaluation 1985, ADI 0-200 mg/kg bw",
+    "source_file": "jecfa/Chemical_436.html",
+    "sha256": "e207eea003d4c593a5aa23929fbc309724eaa4c202a7b965d52e33dc620b249d",
+    "passed": true,
+    "jecfa_name": "AMMONIA CARAMEL",
+    "chemical_id": 436,
+    "adi": "0-200 mg/kg bw",
+    "year": "1985",
+    "evidence": {
+      "ins_on_page": [
+        "150c"
+      ],
+      "adi": "0-200 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_150d": {
+    "description": "JECFA database: INS 150d = CARAMEL COLOUR, Class IV, latest evaluation 1985, ADI 0-200 mg/kg bw",
+    "source_file": "jecfa/Chemical_1668.html",
+    "sha256": "7a4bfbdd5e32ba8e357079fe643fd9d87aafecaf4ad38ffcaa5c8c7ca60abdb7",
+    "passed": true,
+    "jecfa_name": "CARAMEL COLOUR, Class IV",
+    "chemical_id": 1668,
+    "adi": "0-200 mg/kg bw",
+    "year": "1985",
+    "evidence": {
+      "ins_on_page": [
+        "150d"
+      ],
+      "adi": "0-200 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_153": {
+    "description": "JECFA database: INS 153 = VEGETABLE CARBON, latest evaluation 1987, ADI NO ADI ALLOCATED",
+    "source_file": "jecfa/Chemical_2323.html",
+    "sha256": "b12271e975b55773712c3931ede456442966d61a827c248cb3540e6cce2cd95b",
+    "passed": true,
+    "jecfa_name": "VEGETABLE CARBON",
+    "chemical_id": 2323,
+    "adi": "NO ADI ALLOCATED",
+    "year": "1987",
+    "evidence": {
+      "ins_on_page": [
+        "153"
+      ],
+      "adi": "NO ADI ALLOCATED"
+    }
+  },
+  "JECFA_ADI_160ai": {
+    "description": "JECFA database: INS 160ai = beta-CAROTENE (synthetic), latest evaluation 2019, ADI WITHDRAWN",
+    "source_file": "jecfa/Chemical_1514.html",
+    "sha256": "8199f7c455d5b63d490a579c2d382efcdeeeeb56df4e81e33e3d670e8e6841fe",
+    "passed": true,
+    "jecfa_name": "beta-CAROTENE (synthetic)",
+    "chemical_id": 1514,
+    "adi": "WITHDRAWN",
+    "year": "2019",
+    "evidence": {
+      "ins_on_page": [
+        "160ai"
+      ],
+      "adi": "WITHDRAWN"
+    }
+  },
+  "JECFA_ADI_160aii": {
+    "description": "JECFA database: INS 160aii = CAROTENES (vegetable), latest evaluation 1993, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1320.html",
+    "sha256": "c9d77a8e6746d3f50c91e31fd0398687c03b4a502c7ac8c99531e7606c02bdd8",
+    "passed": true,
+    "jecfa_name": "CAROTENES (vegetable)",
+    "chemical_id": 1320,
+    "adi": "NOT SPECIFIED",
+    "year": "1993",
+    "evidence": {
+      "ins_on_page": [
+        "160aii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_160aiii": {
+    "description": "JECFA database: INS 160aiii = beta,beta-CAROTENE, latest evaluation 2019, ADI WITHDRAWN",
+    "source_file": "jecfa/Chemical_942.html",
+    "sha256": "ecf37fa8382781f9aa859ce401d3d1bbd7fbca6875cf12ef48614688eea6b578",
+    "passed": true,
+    "jecfa_name": "beta,beta-CAROTENE",
+    "chemical_id": 942,
+    "adi": "WITHDRAWN",
+    "year": "2019",
+    "evidence": {
+      "ins_on_page": [
+        "160aiii"
+      ],
+      "adi": "WITHDRAWN"
+    }
+  },
+  "JECFA_ADI_160aiv": {
+    "description": "JECFA database: INS 160aiv = CAROTENES (ALGAE), latest evaluation 2017, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_742.html",
+    "sha256": "c2b9413632536abcbf554e2371c73c54d541f251e0ee1f362e0b7b8454a63b7f",
+    "passed": true,
+    "jecfa_name": "CAROTENES (ALGAE)",
+    "chemical_id": 742,
+    "adi": "NOT SPECIFIED",
+    "year": "2017",
+    "evidence": {
+      "ins_on_page": [
+        "160aiv"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_160b": {
+    "description": "JECFA database: INS 160b = ANNATTO EXTRACTS, latest evaluation 2006, ADI BIXIN: 0-12 mg/kg bw; NORBIXIN AND ITS SODIUM AND POTASSIUM SALT: 0-0.6 mg/kg bw (group ADI, expressed as norbixin)",
+    "source_file": "jecfa/Chemical_2706.html",
+    "sha256": "2d0ebdfd5a69dec50f790e31d4d16b955816980bb99fbb22bd851e94531696d5",
+    "passed": true,
+    "jecfa_name": "ANNATTO EXTRACTS",
+    "chemical_id": 2706,
+    "adi": "BIXIN: 0-12 mg/kg bw; NORBIXIN AND ITS SODIUM AND POTASSIUM SALT: 0-0.6 mg/kg bw (group ADI, expressed as norbixin)",
+    "year": "2006",
+    "evidence": {
+      "ins_on_page": [
+        "160b"
+      ],
+      "adi": "BIXIN: 0-12 mg/kg bw; NORBIXIN AND ITS SODIUM AND POTASSIUM SALT: 0-0.6 mg/kg bw (group ADI, expressed as norbixin)"
+    }
+  },
+  "JECFA_ADI_160d": {
+    "description": "JECFA database: INS 160d = LYCOPENE, latest evaluation 2009, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2876.html",
+    "sha256": "7fd7403cb6c72b12b7d9fdbd0ce0e2e1d3d80793cbf43b0ab1aa9e63ac4ea035",
+    "passed": true,
+    "jecfa_name": "LYCOPENE",
+    "chemical_id": 2876,
+    "adi": "NOT SPECIFIED",
+    "year": "2009",
+    "evidence": {
+      "ins_on_page": [
+        "160d"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_160di": {
+    "description": "JECFA database: INS 160di = LYCOPENE (synthetic), latest evaluation 2023, ADI 0-0.5 mg/kg bw",
+    "source_file": "jecfa/Chemical_5572.html",
+    "sha256": "60fa0b38bc581bc2d1277de0dd882e4846d4fafd4314980330d07098cdd14740",
+    "passed": true,
+    "jecfa_name": "LYCOPENE (synthetic)",
+    "chemical_id": 5572,
+    "adi": "0-0.5 mg/kg bw",
+    "year": "2023",
+    "evidence": {
+      "ins_on_page": [
+        "160di"
+      ],
+      "adi": "0-0.5 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_160dii": {
+    "description": "JECFA database: INS 160dii = LYCOPENE EXTRACT from TOMATO, latest evaluation 2009, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_5880.html",
+    "sha256": "14473b8b2edefd4b1db9a0194680f5fb8661049242b8820463c4780bbaf3ef6d",
+    "passed": true,
+    "jecfa_name": "LYCOPENE EXTRACT from TOMATO",
+    "chemical_id": 5880,
+    "adi": "NOT SPECIFIED",
+    "year": "2009",
+    "evidence": {
+      "ins_on_page": [
+        "160dii"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_222": {
+    "description": "JECFA database: INS 222 = SODIUM HYDROGEN SULFITE, latest evaluation 1998, ADI 0-0.7 mg/kg bw",
+    "source_file": "jecfa/Chemical_2269.html",
+    "sha256": "ba23b66cc56dbc1c5925678f6f22c0cde80c453e1e6dd2828d62e8e1382d913a",
+    "passed": true,
+    "jecfa_name": "SODIUM HYDROGEN SULFITE",
+    "chemical_id": 2269,
+    "adi": "0-0.7 mg/kg bw",
+    "year": "1998",
+    "evidence": {
+      "ins_on_page": [
+        "222"
+      ],
+      "adi": "0-0.7 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_260": {
+    "description": "JECFA database: INS 260 = ACETIC ACID, latest evaluation 2004, ADI No safety concern at current levels of intake when used as a flavouring agent",
+    "source_file": "jecfa/Chemical_4785.html",
+    "sha256": "425053d855e53f6af57cb4618ae493c5006be8deec0f7132c4a0a3a9e0bccb34",
+    "passed": true,
+    "jecfa_name": "ACETIC ACID",
+    "chemical_id": 4785,
+    "adi": "No safety concern at current levels of intake when used as a flavouring agent",
+    "year": "2004",
+    "evidence": {
+      "ins_on_page": [
+        "260"
+      ],
+      "adi": "No safety concern at current levels of intake when used as a flavouring agent"
+    }
+  },
+  "JECFA_ADI_270": {
+    "description": "JECFA database: INS 270 = LACTIC ACID, latest evaluation 2001, ADI NOT LIMITED (1973)",
+    "source_file": "jecfa/Chemical_3367.html",
+    "sha256": "97b10b835a30d8e3968d25c1e326f0b7c324434950b975a15725a9b1c664e7f3",
+    "passed": true,
+    "jecfa_name": "LACTIC ACID",
+    "chemical_id": 3367,
+    "adi": "NOT LIMITED (1973)",
+    "year": "2001",
+    "evidence": {
+      "ins_on_page": [
+        "270"
+      ],
+      "adi": "NOT LIMITED (1973)"
+    }
+  },
+  "JECFA_ADI_296": {
+    "description": "JECFA database: INS 296 = DL-MALIC ACID, latest evaluation 1969, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_5163.html",
+    "sha256": "8cc189dca12a616da2d45e47a691c0a71017a71a983ab5cc81517f5b4951c649",
+    "passed": true,
+    "jecfa_name": "DL-MALIC ACID",
+    "chemical_id": 5163,
+    "adi": "NOT SPECIFIED",
+    "year": "1969",
+    "evidence": {
+      "ins_on_page": [
+        "296"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_319": {
+    "description": "JECFA database: INS 319 = TERTIARY BUTYLHYDROQUINONE, latest evaluation 1997, ADI 0-0.7 mg/kg bw Intake: 1998, TRS 891-JECFA 51/132,159; FAS 42-JECFA 51/453. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.7 mg/kg bw for mean intake for the three Member States that submitted such data. In national data submitted by four Member States, estimates of mean intake of TBHQ did not exceed the ADI. The potential exists for consumers of high levels of TBHQ to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI.",
+    "source_file": "jecfa/Chemical_236.html",
+    "sha256": "270c534edd9a75af9386f739df4cde1bd3650d97cfdf344d59b5c71a856280af",
+    "passed": true,
+    "jecfa_name": "TERTIARY BUTYLHYDROQUINONE",
+    "chemical_id": 236,
+    "adi": "0-0.7 mg/kg bw Intake: 1998, TRS 891-JECFA 51/132,159; FAS 42-JECFA 51/453. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.7 mg/kg bw for mean intake for the three Member States that submitted such data. In national data submitted by four Member States, estimates of mean intake of TBHQ did not exceed the ADI. The potential exists for consumers of high levels of TBHQ to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI.",
+    "year": "1997",
+    "evidence": {
+      "ins_on_page": [
+        "319"
+      ],
+      "adi": "0-0.7 mg/kg bw Intake: 1998, TRS 891-JECFA 51/132,159; FAS 42-JECFA 51/453. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.7 mg/kg bw for mean intake for the three Member States that submitted such data. In national data submitted by four Member States, estimates of mean intake of TBHQ did not exceed the ADI. The potential exists for consumers of high levels of TBHQ to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI."
+    }
+  },
+  "JECFA_ADI_334": {
+    "description": "JECFA database: INS 334 = L(+)-TARTARIC ACID, latest evaluation 2017, ADI 0-30 mg/kg bw",
+    "source_file": "jecfa/Chemical_4746.html",
+    "sha256": "3cf0021bf9cb913dd4833e7490e9d74bfada12d52cb8ba37adb0fae225ceaf5b",
+    "passed": true,
+    "jecfa_name": "L(+)-TARTARIC ACID",
+    "chemical_id": 4746,
+    "adi": "0-30 mg/kg bw",
+    "year": "2017",
+    "evidence": {
+      "ins_on_page": [
+        "334"
+      ],
+      "adi": "0-30 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_385": {
+    "description": "JECFA database: INS 385 = CALCIUM DISODIUM EDTA, latest evaluation 1973, ADI 0-2.5 mg/kg bw",
+    "source_file": "jecfa/Chemical_3883.html",
+    "sha256": "a2a3099a6b7bf2be8fd4e922fc4418d9f75af2069fe25275ea4c5caa0b4d029f",
+    "passed": true,
+    "jecfa_name": "CALCIUM DISODIUM EDTA",
+    "chemical_id": 3883,
+    "adi": "0-2.5 mg/kg bw",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "385"
+      ],
+      "adi": "0-2.5 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_405": {
+    "description": "JECFA database: INS 405 = PROPYLENE GLYCOL ALGINATE, latest evaluation 1993, ADI 0-70 mg/kg bw",
+    "source_file": "jecfa/Chemical_585.html",
+    "sha256": "75e23ad73d0c6a1bd3f3cb2e30cca9d6d78b4b216c8e153a40e39d62f894e3fe",
+    "passed": true,
+    "jecfa_name": "PROPYLENE GLYCOL ALGINATE",
+    "chemical_id": 585,
+    "adi": "0-70 mg/kg bw",
+    "year": "1993",
+    "evidence": {
+      "ins_on_page": [
+        "405"
+      ],
+      "adi": "0-70 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_406": {
+    "description": "JECFA database: INS 406 = AGAR, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_1163.html",
+    "sha256": "68f0a6e5ab24c9521e0d1038ef85e5bc2811264e5ef8c11c6614eb4beed6ece2",
+    "passed": true,
+    "jecfa_name": "AGAR",
+    "chemical_id": 1163,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "406"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_407a": {
+    "description": "JECFA database: INS 407a = Processed EUCHEUMA SEAWEED, latest evaluation 2007, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4387.html",
+    "sha256": "8d11d452b6b97bc8b050c9d11b9cf547c17685464cfa1f09c48c200d82ef85a7",
+    "passed": true,
+    "jecfa_name": "Processed EUCHEUMA SEAWEED",
+    "chemical_id": 4387,
+    "adi": "NOT SPECIFIED",
+    "year": "2007",
+    "evidence": {
+      "ins_on_page": [
+        "407a"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_414": {
+    "description": "JECFA database: INS 414 = ACACIA GUM, latest evaluation 1989, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1133.html",
+    "sha256": "6e82c9cf0bf96e939c8b165f75a3a0cd818b82b0202a43500a48fe19fd123a59",
+    "passed": true,
+    "jecfa_name": "ACACIA GUM",
+    "chemical_id": 1133,
+    "adi": "NOT SPECIFIED",
+    "year": "1989",
+    "evidence": {
+      "ins_on_page": [
+        "414"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_422": {
+    "description": "JECFA database: INS 422 = GLYCEROL, latest evaluation 2002, ADI NOT SPECIFIED (1976)",
+    "source_file": "jecfa/Chemical_1565.html",
+    "sha256": "31a5cad9e982440a32158eea7603f7d9a0b7fcfa2d58d2f6e3b7a9905725d47b",
+    "passed": true,
+    "jecfa_name": "GLYCEROL",
+    "chemical_id": 1565,
+    "adi": "NOT SPECIFIED (1976)",
+    "year": "2002",
+    "evidence": {
+      "ins_on_page": [
+        "422"
+      ],
+      "adi": "NOT SPECIFIED (1976)"
+    }
+  },
+  "JECFA_ADI_460": {
+    "description": "JECFA database: INS 460 = CELLULOSE GEL, latest evaluation 1997, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_900.html",
+    "sha256": "f7eab75df52128a17ff7358c8554f8b56cb189877a1efa58d22c519ef644d1d9",
+    "passed": true,
+    "jecfa_name": "CELLULOSE GEL",
+    "chemical_id": 900,
+    "adi": "NOT SPECIFIED",
+    "year": "1997",
+    "evidence": {
+      "ins_on_page": [
+        "460"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_472a": {
+    "description": "JECFA database: INS 472a = ACETIC and FATTY ACID ESTERS of  GLYCEROL, latest evaluation 1973, ADI NOT LIMITED",
+    "source_file": "jecfa/Chemical_434.html",
+    "sha256": "0db94c096982947c37f7c7e4a277ef5253f038398c754c378b40d276127a10b5",
+    "passed": true,
+    "jecfa_name": "ACETIC and FATTY ACID ESTERS of  GLYCEROL",
+    "chemical_id": 434,
+    "adi": "NOT LIMITED",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "472a"
+      ],
+      "adi": "NOT LIMITED"
+    }
+  },
+  "JECFA_ADI_472e": {
+    "description": "JECFA database: INS 472e = DIACETYLTARTARIC and FATTY ACID ESTERS of GLYCEROL, latest evaluation 2003, ADI 0-50 mg/kg bw",
+    "source_file": "jecfa/Chemical_1126.html",
+    "sha256": "36779d848728cd894eb6a0569ee6470c38f4259f150ac953aecf88d0e573bbcd",
+    "passed": true,
+    "jecfa_name": "DIACETYLTARTARIC and FATTY ACID ESTERS of GLYCEROL",
+    "chemical_id": 1126,
+    "adi": "0-50 mg/kg bw",
+    "year": "2003",
+    "evidence": {
+      "ins_on_page": [
+        "472e",
+        "f"
+      ],
+      "adi": "0-50 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_473": {
+    "description": "JECFA database: INS 473 = SUCROSE ESTERS of FATTY ACIDS, latest evaluation 1997, ADI 0-30 mg/kg bw",
+    "source_file": "jecfa/Chemical_2736.html",
+    "sha256": "3e7712668f5ebe990878f15825ef11df3313f81920333d4e110641c16b73c0e9",
+    "passed": true,
+    "jecfa_name": "SUCROSE ESTERS of FATTY ACIDS",
+    "chemical_id": 2736,
+    "adi": "0-30 mg/kg bw",
+    "year": "1997",
+    "evidence": {
+      "ins_on_page": [
+        "473"
+      ],
+      "adi": "0-30 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_475": {
+    "description": "JECFA database: INS 475 = POLYGLYCEROL ESTERS of FATTY ACIDS, latest evaluation 2024, ADI 0-25 mg/kg bw",
+    "source_file": "jecfa/Chemical_3561.html",
+    "sha256": "b88e76f240203a8526bf29597e65b631c0df2220d31df14e5736896c3a59c2e5",
+    "passed": true,
+    "jecfa_name": "POLYGLYCEROL ESTERS of FATTY ACIDS",
+    "chemical_id": 3561,
+    "adi": "0-25 mg/kg bw",
+    "year": "2024",
+    "evidence": {
+      "ins_on_page": [
+        "475"
+      ],
+      "adi": "0-25 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_477": {
+    "description": "JECFA database: INS 477 = PROPYLENE GLYCOL ESTERS of FATTY ACIDS, latest evaluation 1973, ADI 0-25 mg/kg bw",
+    "source_file": "jecfa/Chemical_683.html",
+    "sha256": "05ea5d938f5f8a119ffd342a8a9cd2ad5b4150c233213f440a3eb8416196f4b4",
+    "passed": true,
+    "jecfa_name": "PROPYLENE GLYCOL ESTERS of FATTY ACIDS",
+    "chemical_id": 683,
+    "adi": "0-25 mg/kg bw",
+    "year": "1973",
+    "evidence": {
+      "ins_on_page": [
+        "477"
+      ],
+      "adi": "0-25 mg/kg bw"
+    }
+  },
+  "JECFA_ADI_575": {
+    "description": "JECFA database: INS 575 = GLUCONO delta-LACTONE, latest evaluation 1998, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_1370.html",
+    "sha256": "5419c5398b450b5cf41030add65d2e998bc0e9a5f84f3288772f1ece974b8861",
+    "passed": true,
+    "jecfa_name": "GLUCONO delta-LACTONE",
+    "chemical_id": 1370,
+    "adi": "NOT SPECIFIED",
+    "year": "1998",
+    "evidence": {
+      "ins_on_page": [
+        "575"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_620": {
+    "description": "JECFA database: INS 620 = L-GLUTAMIC ACID, latest evaluation 2004, ADI NOT SPECIFIED (1987)",
+    "source_file": "jecfa/Chemical_668.html",
+    "sha256": "669744e24a4c8fc661ff9c25475a071899c42abf66a86e9859b0149a55e5a8ae",
+    "passed": true,
+    "jecfa_name": "L-GLUTAMIC ACID",
+    "chemical_id": 668,
+    "adi": "NOT SPECIFIED (1987)",
+    "year": "2004",
+    "evidence": {
+      "ins_on_page": [
+        "620"
+      ],
+      "adi": "NOT SPECIFIED (1987)"
+    }
+  },
+  "JECFA_ADI_621": {
+    "description": "JECFA database: INS 621 = MONOSODIUM L-GLUTAMATE, latest evaluation 1987, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_2257.html",
+    "sha256": "423637f3d4f30778cadbdc1ce078c4def5ff45ce4c802859ad80e8aebfd34e3a",
+    "passed": true,
+    "jecfa_name": "MONOSODIUM L-GLUTAMATE",
+    "chemical_id": 2257,
+    "adi": "NOT SPECIFIED",
+    "year": "1987",
+    "evidence": {
+      "ins_on_page": [
+        "621"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_635": {
+    "description": "JECFA database: INS 635 = DISODIUM 5'-RIBONUCLEOTIDES, latest evaluation 1974, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_4140.html",
+    "sha256": "577436f66c2898223953d9fc517eaa140b7fe48a48f28ced0bda993938b14168",
+    "passed": true,
+    "jecfa_name": "DISODIUM 5'-RIBONUCLEOTIDES",
+    "chemical_id": 4140,
+    "adi": "NOT SPECIFIED",
+    "year": "1974",
+    "evidence": {
+      "ins_on_page": [
+        "635"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_901": {
+    "description": "JECFA database: INS 901 = BEESWAX, latest evaluation 2005, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_168.html",
+    "sha256": "9ad5d39c34a48c172ad59d2fbba7cb0d2a8a27a23b0e928a10ca939c17310c7b",
+    "passed": true,
+    "jecfa_name": "BEESWAX",
+    "chemical_id": 168,
+    "adi": "NOT SPECIFIED",
+    "year": "2005",
+    "evidence": {
+      "ins_on_page": [
+        "901"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_904": {
+    "description": "JECFA database: INS 904 = BLEACHED SHELLAC, latest evaluation 1992, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_619.html",
+    "sha256": "0cb631c9a05365c197645f4c2759905fc2d9aa1dd2bba3c38a30968671b7af82",
+    "passed": true,
+    "jecfa_name": "BLEACHED SHELLAC",
+    "chemical_id": 619,
+    "adi": "NOT SPECIFIED",
+    "year": "1992",
+    "evidence": {
+      "ins_on_page": [
+        "904"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_941": {
+    "description": "JECFA database: INS 941 = NITROGEN, latest evaluation 1980, ADI NO ADI NECESSARY",
+    "source_file": "jecfa/Chemical_1040.html",
+    "sha256": "77f172976536c733a7503a085599fbe39264d0ef7dbfcbf35983fe65f46ea21c",
+    "passed": true,
+    "jecfa_name": "NITROGEN",
+    "chemical_id": 1040,
+    "adi": "NO ADI NECESSARY",
+    "year": "1980",
+    "evidence": {
+      "ins_on_page": [
+        "941"
+      ],
+      "adi": "NO ADI NECESSARY"
+    }
+  },
+  "JECFA_ADI_953": {
+    "description": "JECFA database: INS 953 = HYDROGENATED ISOMALTULOSE, latest evaluation 1985, ADI NOT SPECIFIED",
+    "source_file": "jecfa/Chemical_720.html",
+    "sha256": "1fa90457cb13e144e62f20381345b3191f2eda60a2758dee935afd4be9c07b5a",
+    "passed": true,
+    "jecfa_name": "HYDROGENATED ISOMALTULOSE",
+    "chemical_id": 720,
+    "adi": "NOT SPECIFIED",
+    "year": "1985",
+    "evidence": {
+      "ins_on_page": [
+        "953"
+      ],
+      "adi": "NOT SPECIFIED"
+    }
+  },
+  "JECFA_ADI_955": {
+    "description": "JECFA database: INS 955 = SUCRALOSE, latest evaluation 1990, ADI 0-15 mg/kg bw",
+    "source_file": "jecfa/Chemical_2340.html",
+    "sha256": "6857c1f8a7a8d8e123f1822550be845081ef12258536fc925139ea5d9a92faa7",
+    "passed": true,
+    "jecfa_name": "SUCRALOSE",
+    "chemical_id": 2340,
+    "adi": "0-15 mg/kg bw",
+    "year": "1990",
+    "evidence": {
+      "ins_on_page": [
+        "955"
+      ],
+      "adi": "0-15 mg/kg bw"
+    }
+  },
+  "CODEX192_TABLE1_TABLE3_PARSED": {
+    "description": "CXS 192-1995 (2026 revision): INS codes in Table One (provisions by food category) and in Table Three (permitted in food in general under GMP)",
+    "source_file": "cxs_192e.pdf",
+    "sha256": "e264ef5142bb19d3ae36dea308f7111e8507ed39e0fca51985d4075af6515220",
+    "passed": true,
+    "n_table_one": 322,
+    "n_table_three": 192,
+    "evidence": {
+      "revisions": "2006, 2007, 2008, 2009, 2010, ",
+      "300_in_table3": true,
+      "211_only_table1": true
+    },
+    "evidence_pages": {},
+    "pages_located": false
+  },
+  "CODEX_CXG36_INS_AND_CLASS_NAMES": {
+    "description": "CXG 36-1989 assigns INS numbers and technological class names (e.g. 300 = Ascorbic acid, L-: acidity regulator, antioxidant, flour treatment agent, sequestrant)",
+    "source_file": "cxg_036e.pdf",
+    "sha256": "658caf6ad82412dfe8910e531c43e131894642bcfcdad49e763a56fe2cd417bb",
+    "passed": true,
+    "evidence": {
+      "row": "300 / Ascorbic acid, L-"
+    },
+    "evidence_pages": {},
+    "pages_located": false
+  },
+  "CXS1_4214_MANDATORY_ALLERGEN_LIST": {
+    "description": "CXS 1-1985 s.4.2.1.4: cereals containing gluten (wheat, rye, barley), crustacea, eggs, fish, peanuts, milk, sesame, six specific tree nuts. Soy and molluscs are NOT in this list",
+    "source_file": "cxs_001e.pdf",
+    "sha256": "5f27c9fae7e4652dae918f4bc4b99ea6dfe1fd895a00b8f67d8be664bc50de64",
+    "passed": true,
+    "evidence": {
+      "list": "4.2.1.4 the following foods and ingredients are known to trigger food allergy or coeliac disease and shall always be declared as allergenic foods using the specified name in addition to or as part of the ingredient name,ii when intentionally present in the food: foods and ingredients specified name cereals containing glutena − wheat and other triticum species − rye and other secale species − barle"
+    },
+    "evidence_pages": {
+      "list": 6
+    },
+    "pages_located": true
+  },
+  "CXS1_4215_OPTIONAL_LIST_SOY_OATS": {
+    "description": "CXS 1-1985 s.4.2.1.5: soybean and oats are in the list of foods whose declaration 'may also be required' based on risk assessment data for the respective population",
+    "source_file": "cxs_001e.pdf",
+    "sha256": "5f27c9fae7e4652dae918f4bc4b99ea6dfe1fd895a00b8f67d8be664bc50de64",
+    "passed": true,
+    "evidence": {
+      "list": "4.2.1.5 in addition to the foods and ingredients listed in section 4.2.1.4, the declaration of any other foods and ingredients as allergenic foods, including those listed below, may also be required,iii using a specified name in addition to or as part of the ingredient name.iv this shall be based on"
+    },
+    "evidence_pages": {
+      "list": 7
+    },
+    "pages_located": true
+  },
+  "CXS1_PAL_ANNEX_DEFINITION": {
+    "description": "CXS 1-1985 Annex (2026): PAL definition (risk of unintended presence due to cross-contact, identified by a risk assessment) and use restricted to what cannot be prevented or controlled",
+    "source_file": "cxs_001e.pdf",
+    "sha256": "5f27c9fae7e4652dae918f4bc4b99ea6dfe1fd895a00b8f67d8be664bc50de64",
+    "passed": true,
+    "evidence": {
+      "definition": true,
+      "restricted": true
+    },
+    "evidence_pages": {},
+    "pages_located": false
+  },
+  "CODEX_GL23_SODIUM_PER_100G": {
+    "description": "Codex CAC/GL 23-1997 Table (nutrient content claims): sodium low = 0.12 g per 100 g, very low = 0.04 g per 100 g, free = 0.005 g per 100 g",
+    "source_file": "cxg_023e.pdf",
+    "sha256": "3294ea985375fd9752d2ba6dce5bbd99ae654a7959ac7395fcd29883f92ef61a",
+    "passed": true,
+    "evidence": {
+      "table": "0 g (solids) 0.5 g per 100 ml (liquids) Sodium Low 0.12 g per 100 g Very Low 0.04 g per 100 g Free 0.005 g per 100 g COMPONENT CLAIM CONDITIONS (not less than) Protein Source 10% of NRV per 100 g (solids) 5% of NRV per 100 ml (liquids) or 5% of NRV per 100 kca",
+      "title": "1 Nutrition and Health Claims (CAC/GL 23-1997) Adopted in 1997. Revised in 2004. Amended in 2001, 2008, 2009, 2010, 2011, 2012 and 2013. Annex adopted 2009. GUIDELINES FOR USE OF NUTRITION AND HEALTH CLAIMS CAC/GL 23-1997"
+    },
+    "evidence_pages": {
+      "table": 3,
+      "title": 1
+    },
+    "pages_located": true
+  },
+  "CODEX_GL23_SUGARS_FREE_PER_100G": {
+    "description": "Codex CAC/GL 23-1997 Table (nutrient content claims): sugars free = 0.5 g per 100 g (solids) / 0.5 g per 100 ml (liquids)",
+    "source_file": "cxg_023e.pdf",
+    "sha256": "3294ea985375fd9752d2ba6dce5bbd99ae654a7959ac7395fcd29883f92ef61a",
+    "passed": true,
+    "evidence": {
+      "table": "s) and 10% of energy from saturated fat Sugars Free 0.5 g per 100 g (solids) 0.5 g per 100 ml (liquids) Sodium Low 0.12 g per 100 g Very Low 0.04 g per 100 g Free 0.005 g per 100 g COMPONENT CLAIM CONDITIONS (not less than) Protein Source 10% of NRV per 100 g",
+      "title": "1 Nutrition and Health Claims (CAC/GL 23-1997) Adopted in 1997. Revised in 2004. Amended in 2001, 2008, 2009, 2010, 2011, 2012 and 2013. Annex adopted 2009. GUIDELINES FOR USE OF NUTRITION AND HEALTH CLAIMS CAC/GL 23-1997"
+    },
+    "evidence_pages": {
+      "table": 3,
+      "title": 1
+    },
+    "pages_located": true
+  },
+  "FDA_QA5_REFINED_OIL_EXEMPT": {
+    "description": "FDA Q&A on food allergens (Edition 5, 2025) D.9: highly refined oils derived from major food allergens are exempt from section 403(w); an oil that is not highly refined must declare its source",
+    "source_file": "FDA_ALLERGEN_QA_ED5.pdf",
+    "sha256": "318ea92e04f05258619558a3a32b71ec1f9e22099a0e2868650bc7be2bd4acd2",
+    "passed": true,
+    "evidence": {
+      "exempt": "ils derived from a major food allergen? Highly refined oils, which are intended to signify refined, bleached, deodorized oils, that are derived from major food allergens are exempt from section 403(w) of the FD&C Act. However, under the general ingredient labeling requirements, the source of all oils (whether highly refined Contains Nonbinding Recommendations 21 or not) must be included as part of the common or usual name of the oil in",
+      "not_refined": "abeling requirement under the FD&C Act. If an oil that is derived from a major food allergen is not highly refined, then the source of the oil must be declared on the label in accordance with section 403(w) of the FD&C Act. Such labeling can be accomplished by either declaring the oil by its common or usual name in the ingredient list or",
+      "edition": "he Federal Food, Drug, and Cosmetic Act (Edition 5): Guidance for Industry You can comment on any guidance at any time (see 21 CFR 10.115(g)(5)). Submit electronic comments to https://www.regulations.gov. Submit written comments to the Dockets Management Staff"
+    },
+    "evidence_pages": {
+      "exempt": 20,
+      "not_refined": 21,
+      "edition": 1
+    },
+    "pages_located": true
+  },
+  "EU_ANNEXV_COLOURS_WARNING": {
+    "description": "EU Reg 1333/2008 Annex V: foods containing E110, E104, E122, E129, E102 or E124 must carry the warning 'may have an adverse effect on activity and attention in children'; exceptions for meat/egg marking and >1.2% alcohol drinks",
+    "source_file": "EU_REG_1333_2008_ANNEX_V.pdf",
+    "sha256": "f7dc3221d560a880b67e969a490e58bee91570900d3186bf15db95537461a194",
+    "passed": true,
+    "evidence": {
+      "list": "R1333 — EN — 18.08.2026 — 066.001 — 365 ANNEX V List of the food colours referred to in Article 24 for which the labelling of foods shall include additional information Foods containing one or more of the following food colours Information Sunset yellow (E 110) (*) ‘name or E number of the colour(s)’: may have an adverse effect on activity and attention in children. Quinoline yellow (E 104) (*) Carmoisine (E 122) (*) Allura red (E 129) (*) Tartrazine (E 102) (*) Ponceau 4R (E 124) (*) (*) ►M1 With the exception of: (a) foods where the",
+      "wording": "*) ‘name or E number of the colour(s)’: may have an adverse effect on activity and attention in children. Quinoline yellow (E 104) (*) Carmoisine (E 122) (*) Allura red (E 129) (*) Tartrazine (E 102) (*) Ponceau 4R (E 124) (*) (*) ►M1 With the exception of: (a) foods where the colour(s) has been used for the purposes of health or other marking on meat products or for stamping or decorative colouring on eggshells; and (b) beverages containing more than 1,2 % by volume of alcohol. ◄ ▼B 02008R1333 — EN — 18.08.2026 — 066.001 — 366",
+      "exception_a": "ur(s) has been used for the purposes of health or other marking on meat products or for stamping or decorative colouring on eggshells; and (b) beverages containing more than 1,2 % by volume of alcohol. ◄ ▼B 02008R1333 — EN — 18.08.2026 — 066.001 — 366",
+      "exception_b": "orative colouring on eggshells; and (b) beverages containing more than 1,2 % by volume of alcohol. ◄ ▼B 02008R1333 — EN — 18.08.2026 — 066.001 — 366"
+    },
+    "evidence_pages": {
+      "list": 366,
+      "wording": 366,
+      "exception_a": 366,
+      "exception_b": 366
+    },
+    "pages_located": true
+  },
+  "FDA_RED3_REVOKED_FOOD": {
+    "description": "FDA final order (FR 2025-00830, 16 Jan 2025): authorisation of FD&C Red No. 3 in food repealed because it induces cancer in male rats (Delaney Clause); effective 15 Jan 2027",
+    "source_file": "FR_RED3_REVOCATION.pdf",
+    "sha256": "eecbd1234d26f7afb51755e5b957480d9671012c0ec283a96f80630f2e3e4ede",
+    "passed": true,
+    "evidence": {
+      "order": "and Drug Administration (FDA or we) is granting a color additive petition submitted by Center for Science in the Public Interest, et al., by repealing the color additive regulations that permit the use of FD&C Red No. 3 in foods (including dietary supplements) and in ingested drugs. The petitioners provided data demonstrating that this additive induces cancer in male rats. Therefore, FDA is revoking the authorized uses in food and ingested drugs of FD&C Red No. 3 in the color additive regulations. DATES: This order is effective Janua",
+      "reason": "d data demonstrating that this additive induces cancer in male rats. Therefore, FDA is revoking the authorized uses in food and ingested drugs of FD&C Red No. 3 in the color additive regulations. DATES: This order is effective January 15, 2027, except for amendatory instruction 4, which is effective January 18, 2028. If any provisions are delayed or stayed by the filing of proper objections, FDA will publish such notification in the Federal Register. Submit either electronic or written objections and requests for a hearing on the orde",
+      "date": "itive regulations. DATES: This order is effective January 15, 2027, except for amendatory instruction 4, which is effective January 18, 2028. If any provisions are delayed or stayed by the filing of proper objections, FDA will publish such notification in the Federal Register. Submit either electronic or written objections and requests for a hearing on the order by February 18, 2025. See VerDate Sep<11>2014 17:12 Jan 15, 2025 Jkt 265001 PO 00000 Frm 00044 Fmt 4700 Sfmt 4700 E:\\FR\\FM\\16JAR1.SGM 16JAR1 ddrumheller on DSK120RN23PROD with",
+      "delaney": "the FD&C Act, often referred to as the Delaney Clause, deems color additives unsafe under certain circumstances. The Delaney Clause consists of two parts. The first part (section 721(b)(5)(B)(i) of the FD&C Act) pertains specifically to ingested color additives. The second part (section 721(b)(5)(B)(ii) of the FD&C Act) applies to noningested color additives. For purposes of our review of this petition, we reviewed these uses of FD&C Red No. 3 under the first part because these uses result in ingestion. Section 721(b)(5)(B)(i) of the",
+      "no_risk_weighing": "r when ingested by humans or animals, ‘‘regardless of the probability, or risk, of cancer associated with exposure to the additive or of the extent to which the experimental conditions of the animal study or the carcinogenic mode of action provide insight into the health effects of human consumption and use of the additive in question’’ (83 FR 50490 at 50492, October 9, 2018). Section 721(d) of the FD&C Act provides for the issuance, amendment, or repeal of regulations authorizing the use of a color additive, and, among other things,"
+    },
+    "evidence_pages": {
+      "order": 1,
+      "reason": 1,
+      "date": 1,
+      "delaney": 3,
+      "no_risk_weighing": [
+        3,
+        5
+      ]
+    },
+    "pages_located": true
+  },
+  "CXS1_4217_SULPHITE_DECLARATION": {
+    "description": "Codex CXS 1-1985 s.4.2.1.7: sulphite at 10 mg/kg or more (as SO2) shall always be declared using the specified name 'sulphite' or 'sulfite'",
+    "source_file": "cxs_001e.pdf",
+    "sha256": "5f27c9fae7e4652dae918f4bc4b99ea6dfe1fd895a00b8f67d8be664bc50de64",
+    "passed": true,
+    "evidence": {
+      "rule": "ty of the allergenic food derivative.vi 4.2.1.7 Sulphite when present in concentrations of 10 mg/kg or more in a food,vii shall always be declared using the specified name “sulphite” or “sulfite” in addition to or as part of the ingredient name. 4.2.1.8 Added water shall be declared in the list of ingredients except when the water forms part of an ingredient such as brine, syrup or broth used in a compound food and declared as such in the list of ingredients. Water or other volatile ingredients evaporated in the course of manufacture",
+      "so2_basis": "ns https://doi.org/10.4060/cc9554en vii Sulphite measured on a sulphur dioxide (SO2) equivalents basis. - Oats can be tolerated by most but not all people who are intolerant to gluten. Therefore, the allowance of oats that are not contaminated with wheat, rye or barley in foods covered by this standard may be determined at the national level. 6 CODEX ALIMENTARIUS STANDARD 4.2.3 The presence in any food or food ingredients obtained through biotechnology of a food allergen transferred from any of the foods and ingredients listed in Sect"
+    },
+    "evidence_pages": {
+      "rule": 7,
+      "so2_basis": 7
+    },
+    "pages_located": true
+  },
+  "IARC_V134_ASPARTAME_2B": {
+    "description": "IARC Monographs Vol. 134 (2023): aspartame is possibly carcinogenic to humans (Group 2B); limited evidence; the classification describes the strength of evidence, not the risk of cancer from particular exposures",
+    "source_file": "IARC_V134_ASPARTAME.pdf",
+    "sha256": "c369b509aad4ec08cae24b4e0b63dc51c45c05ca235bb0811e754772022bb054",
+    "passed": true,
+    "evidence": {
+      "overall": "There is limited mechanistic evidence. 6.4 Overall evaluation Aspartame is possibly carcinogenic to humans (Group 2B). 6.5 Rationale The Group 2B evaluation for aspartame is based on limited evidence for cancer in humans. There is also limited evidence for cancer in experimental animals and limited mechanistic evidence. There is limited evidence that aspartame causes liver cancer (hepatocellular carcinoma) in humans. Among the available studies of cancer in humans, only three studies (including four cohorts) on the consumption of art",
+      "humans": "ion and Rationale 6.1. Cancer in humans There is limited evidence in humans for the carcinogenicity of aspartame. Positive associa tions have been observed between aspartame and cancer of the liver (hepatocellular carcinoma). 6.2 Cancer in experimental animals There is limited evidence in experimental animals for the carcinogenicity of aspartame. 6.3. Mechanistic evidence There is limited mechanistic evidence. 6.4 Overall evaluation Aspartame is possibly carcinogenic to humans (Group 2B). 6.5 Rationale The Group 2B evaluation for aspa",
+      "hazard_not_risk": "ce that an exposure is carcinogenic and not to the risk of cancer from particular exposures. The terms probably car cinogenic and possibly carcinogenic have no quan titative significance and are used as descriptors of different strengths of evidence of carcinogen icity in humans; probably carcinogenic signi fies a greater strength of evidence than possibly carcinogenic. (a) Carcinogenicity in humans Based on the principles outlined in Part B, Section 2, the evidence relevant to carcinogeni city from studies in humans is classified int"
+    },
+    "evidence_pages": {
+      "overall": 498,
+      "humans": 498,
+      "hazard_not_risk": 42
+    },
+    "pages_located": true
+  },
+  "WHO_NSS_2023_PREGNANCY": {
+    "description": "WHO guideline on non-sugar sweeteners (2023): conditional recommendation against using NSS for weight control or NCD risk reduction, relevant for everyone including pregnant women (not people with diabetes); limited evidence that higher NSS use in pregnancy is associated with preterm birth (OR 1.25, low certainty); no association with gestational diabetes; polyols are not NSS",
+    "source_file": "Bookshelf_NBK592258.pdf",
+    "sha256": "eac9098f235dc4b3a6079865aadf9515990d415974f864e8593b6096a6b7d0e3",
+    "passed": true,
+    "evidence": {
+      "recommendation": "odium and potassium. WHO recommendation WHO suggests that non-sugar sweeteners not be used as a means of achieving weight control or reducing the risk of noncommunicable diseases (conditional recommendation). 1 These include desirable and undesirable effects of the intervention, priority of the problem that the recommendation addresses, values and preferences related to the recommendation in different settings, the cost of the options available to public health officials and programme managers in different settings, feasibility and ac",
+      "applies_to_pregnant": "viduals with diabetes (as noted below), this recommendation is relevant for everyone: children and adults of any age, including pregnant and lactating women. ▶▶ The objective of this guideline is to provide guidance on the use of NSS in efforts to prevent unhealthy weight gain and diet-related NCDs, in the context of reducing free sugars intake. Assessing the health effects of NSS on individuals with pre-existing diabetes with the aim of providing guidance on disease management was beyond the scope of the guideline. Consequently, in t",
+      "diabetes_excluded": "sugars intake without the need for NSS, the recommendation does not apply to individuals with existing diabetes. ▶▶ The recommendation is relevant for all NSS, which are defined in this guideline as all synthetic and naturally occurring or modified non-nutritive sweeteners that are not classified as sugars. Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing cal",
+      "preterm": "use in pregnant women was also limited. Higher intakes of NSS were associated with a 25% increase in risk of preterm birth, as assessed by meta-analyses of three prospective cohort studies (odds ratio [OR] 1.25; 95% CI: 1.07 to 1.46; 129 009 pregnant women). A dose–response relationship was observed in the two studies that reported a significant association. Additional analyses suggested that the association was primarily for late preterm delivery (34–37 weeks), not early preterm delivery (<32 weeks), and that the observed risk was si",
+      "preterm_certainty": "spective observational studies found an increased risk of preterm birth with higher NSS use during pregnancy (low certainty evidence), but associations between birth weight or weight of offspring later in life and NSS use during pregnancy were inconsistent (very low certainty evidence). Other individual prospective observational studies reported associations between NSS use during pregnancy and outcomes in offspring, including increased risk of asthma and allergies, and poorer cognitive function (very low certainty evidence). No assoc",
+      "gdm": "function (very low certainty evidence). No associations were observed between NSS use and risk of gestational diabetes. ▶▶ The lack of evidence for long-term benefit of NSS use on measures of body fatness assessed in RCTs and potential long-term effects of NSS use observed for adults in prospective observational studies were considered to be relevant for women during pregnancy, and were reasonably expected to be relevant for children and adolescents as well. Therefore, in addition to the limited direct evidence for children and pregna",
+      "reverse_causation": "% CI: 1.07 to 1.46) It is possible that reverse causation and confounding by body weight or other residual confounding contributes significantly to the associations observed in prospective cohort studies for adults and pregnant women. However, efforts taken by the authors to address reverse causation and confounding in most studies suggest that these phenomena are not the sole causes of observed associations and may not even play a significant role in many of the studies. a An increase in the total cholesterol:HDL cholesterol ratio wa",
+      "definition": "ners that are not classified as sugars. Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Ma",
+      "polyols_excluded": "stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Many medications, and personal care and hygiene products contain NSS in small amounts to make them more palatable. The recommendation in th"
+    },
+    "evidence_pages": {
+      "recommendation": [
+        10,
+        34
+      ],
+      "applies_to_pregnant": [
+        13,
+        37
+      ],
+      "diabetes_excluded": [
+        13,
+        37
+      ],
+      "preterm": 26,
+      "preterm_certainty": [
+        12,
+        36
+      ],
+      "gdm": [
+        12,
+        26,
+        36
+      ],
+      "reverse_causation": 78,
+      "definition": [
+        13,
+        15,
+        37
+      ],
+      "polyols_excluded": [
+        13,
+        37
+      ]
+    },
+    "pages_located": true
+  },
+  "WHO_NSS_2023_CHILDREN": {
+    "description": "WHO guideline on non-sugar sweeteners (2023), children: conditional recommendation against NSS for weight control or NCD risk reduction applies to children (not people with diabetes); direct child evidence is limited (one RCT with reduced body fatness but no BMI z-score effect when pooled; observational studies no significant association; overall certainty low); the guideline does not replace existing safe-intake guidance",
+    "source_file": "Bookshelf_NBK592258.pdf",
+    "sha256": "eac9098f235dc4b3a6079865aadf9515990d415974f864e8593b6096a6b7d0e3",
+    "passed": true,
+    "evidence": {
+      "recommendation": "odium and potassium. WHO recommendation WHO suggests that non-sugar sweeteners not be used as a means of achieving weight control or reducing the risk of noncommunicable diseases (conditional recommendation). 1 These include desirable and undesirable effects of the intervention, priority of the problem that the recommendation addresses, values and preferences related to the recommendation in different settings, the cost of the options available to public health officials and programme managers in different settings, feasibility and ac",
+      "applies_to_children": "viduals with diabetes (as noted below), this recommendation is relevant for everyone: children and adults of any age, including pregnant and lactating women. ▶▶ The objective of this guideline is to provide guidance on the use of NSS in efforts to prevent unhealthy weight gain and diet-related NCDs, in the context of reducing free sugars intake. Assessing the health effects of NSS on individuals with pre-existing diabetes with the aim of providing guidance on disease management was beyond the scope of the guideline. Consequently, in t",
+      "diabetes_excluded": "sugars intake without the need for NSS, the recommendation does not apply to individuals with existing diabetes. ▶▶ The recommendation is relevant for all NSS, which are defined in this guideline as all synthetic and naturally occurring or modified non-nutritive sweeteners that are not classified as sugars. Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing cal",
+      "child_rct": "(very low certainty evidence). Children One RCT conducted in children reported a reduction in several measures of body fatness when sugar- sweetened beverages were replaced with those containing NSS (91) (moderate certainty evidence). However, when results for BMI z-score1 were combined with those from a second trial (92), no effect was observed (moderate certainty evidence), and results from prospective observational studies did not suggest any significant associations between NSS use and measures of body fatness (very low certainty",
+      "child_bmi": "(moderate certainty evidence). However, when results for BMI z-score1 were combined with those from a second trial (92), no effect was observed (moderate certainty evidence), and results from prospective observational studies did not suggest any significant associations between NSS use and measures of body fatness (very low certainty evidence). All other identified studies reported no significant associations between NSS use and prioritized health outcomes in children. 1 BMI z-scores are adjusted for sex and age relative to standardiz",
+      "child_observational": "rved (moderate certainty evidence), and results from prospective observational studies did not suggest any significant associations between NSS use and measures of body fatness (very low certainty evidence). All other identified studies reported no significant associations between NSS use and prioritized health outcomes in children. Pregnant women Meta-analysis of three prospective observational studies found an increased risk of preterm birth with higher NSS use during pregnancy (low certainty evidence), but associations between birt",
+      "child_certainty": "e 3. In formulating the recommendation, because both adult data and child data were considered for children, the overall certainty in the available evidence across both groups was assessed as low. Pregnant women Evidence for health effects of NSS use in pregnant women was also limited. Higher intakes of NSS were associated with a 25% increase in risk of preterm birth, as assessed by meta-analyses of three prospective cohort studies (odds ratio [OR] 1.25; 95% CI: 1.07 to 1.46; 129 009 pregnant women). A dose–response relationship was o",
+      "not_safety_limit": "t women. The guidance in this guideline is based on evidence of health effects of NSS use at levels already considered safe by JECFA)1, and is not intended to update or replace existing guidance on safe or maximal levels of intake. Safe levels of intake are based on toxicological assessments of individual NSS, which are undertaken by authoritative bodies before individual NSS are approved for commercial use.2 Because the work of the Nutrition Guidance Expert Advisory Group (NUGAG) Subgroup on Diet and Health is focused on providing gu",
+      "definition": "ners that are not classified as sugars. Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Ma",
+      "polyols_excluded": "stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Many medications, and personal care and hygiene products contain NSS in small amounts to make them more palatable. The recommendation in th"
+    },
+    "evidence_pages": {
+      "recommendation": [
+        10,
+        34
+      ],
+      "applies_to_children": [
+        13,
+        37
+      ],
+      "diabetes_excluded": [
+        13,
+        37
+      ],
+      "child_rct": [
+        10,
+        12,
+        35
+      ],
+      "child_bmi": 35,
+      "child_observational": [
+        10,
+        12,
+        35
+      ],
+      "child_certainty": 26,
+      "not_safety_limit": [
+        9,
+        16
+      ],
+      "definition": [
+        13,
+        15,
+        37
+      ],
+      "polyols_excluded": [
+        13,
+        37
+      ]
+    },
+    "pages_located": true
+  },
+  "EFSA_CAFFEINE_2015_CHILDREN": {
+    "description": "EFSA NDA Panel (2015) opinion on the safety of caffeine: for children and adolescents the information is insufficient to derive a safe caffeine intake; the adult acute no-concern level (3 mg/kg bw) may serve as a basis for these subgroups; main dietary sources are coffee, tea, caffeinated soft drinks and chocolate",
+    "source_file": "EFSA_Journal_2015_Scientific_Opinion_safety_caffeine.pdf",
+    "sha256": "805596fc33dcc2f6e9987caa603cad66b659e33a95c6b7a2ee9b9227e2b75b63",
+    "passed": true,
+    "evidence": {
+      "title": "oducts, Nutrition and Allergies), 2015. Scientific Opinion on the safety of caffeine. EFSA Journal 2015;13(5):4102, 120 pp. doi:10.2903/j.efsa.2015.4102 Available online: www.efsa.europa.eu/efsajournal © European Food Safety Authority, 2015 SCIENTIFIC OPINION Scientific Opinion on the safety of caffeine1 EFSA Panel on Dietetic Products, Nutrition and Allergies (NDA)2,3 European Food Safety Authority (EFSA), Parma, Italy ABSTRACT Following a request from the European Commission, the EFSA Panel on Dietetic Products, Nutrition and Allerg",
+      "doi": ". EFSA Journal 2015;13(5):4102, 120 pp. doi:10.2903/j.efsa.2015.4102 Available online: www.efsa.europa.eu/efsajournal © European Food Safety Authority, 2015 SCIENTIFIC OPINION Scientific Opinion on the safety of caffeine1 EFSA Panel on Dietetic Products, Nutrition and Allergies (NDA)2,3 European Food Safety Authority (EFSA), Parma, Italy ABSTRACT Following a request from the European Commission, the EFSA Panel on Dietetic Products, Nutrition and Allergies was asked to deliver a scientific opinion on the safety of caffeine, providing a",
+      "child_insufficient": "safety concerns for breastfed infants. For children and adolescents, the information available is insufficient to derive a safe caffeine intake. The Panel considers that caffeine intakes of no concern derived for acute caffeine consumption by adults (3 mg/kg bw per day) may serve as a basis to derive single doses of caffeine and daily caffeine intakes of no concern for these population subgroups. © European Food Safety Authority, 2015 KEY WORDS caffeine, taurine, D-glucurono-γ-lactone, p-synephrine, alcohol, physical activity, “energ",
+      "adult_basis": "ffeine intake. The Panel considers that caffeine intakes of no concern derived for acute caffeine consumption by adults (3 mg/kg bw per day) may serve as a basis to derive single doses of caffeine and daily caffeine intakes of no concern for these population subgroups. © European Food Safety Authority, 2015 KEY WORDS caffeine, taurine, D-glucurono-γ-lactone, p-synephrine, alcohol, physical activity, “energy drinks” 1 On request from the European Commission, Question No EFSA-Q-2013-00220, adopted on 23 April 2015. 2 Panel members: Carl",
+      "sources": ".1. Dietary sources and occurrence data The main sources of caffeine in the diet include coffee, tea, caffeinated soft drinks (including “energy drinks”) and chocolate. Caffeine concentrations in these foods and beverages as reported in different publications and European dietary surveys are depicted in Table 1. In order to calculate dietary intakes of caffeine, data from a survey conducted in the UK were used whenever available (Fitt et al., 2013). Information on caffeine concentrations of 400 samples of teas (e.g. loose leaves, bags"
+    },
+    "evidence_pages": {
+      "title": 1,
+      "doi": 1,
+      "child_insufficient": 1,
+      "adult_basis": 1,
+      "sources": 20
+    },
+    "pages_located": true
+  }
+}

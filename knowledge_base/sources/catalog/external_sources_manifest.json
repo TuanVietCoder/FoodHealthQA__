@@ -1,0 +1,177 @@
+{
+  "downloaded": [
+    {
+      "source_id": "US_CFR_21_172_804",
+      "url": "https://www.law.cornell.edu/cfr/text/21/172.804",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 37331,
+      "sha256": "8f2a64cac19274927513c5fe24dfda3e6d390635a413cecd3b144932ad35e99f",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:04+00:00",
+      "file": "US_CFR_21_172_804.html"
+    },
+    {
+      "source_id": "US_CODE_21_321",
+      "url": "https://www.law.cornell.edu/uscode/text/21/321",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 292236,
+      "sha256": "67798e10fed09586deb3ae630043651c031382ada60318323671c8553b845918",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:06+00:00",
+      "file": "US_CODE_21_321.html"
+    },
+    {
+      "source_id": "JEMRA_2021_PART1_SUMMARY",
+      "url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+      "http_status": "200",
+      "content_type": "application/pdf",
+      "bytes": 306851,
+      "sha256": "32a1cddb4d0c5c0d9cd76af3569827a07b4a8e8d7a315c042f0aae26a4e0c29e",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:08+00:00",
+      "file": "JEMRA_2021_PART1_SUMMARY.pdf"
+    },
+    {
+      "source_id": "JEMRA_PART3",
+      "url": "https://www.who.int/publications/i/item/9789240072510",
+      "http_status": "200",
+      "content_type": "application/pdf",
+      "bytes": 5171468,
+      "sha256": "06463a2922df54ef4946300b7577431050b3a2dc5f85732f4dc3db61435c3ff7",
+      "ok": true,
+      "retrieved_utc": "2026-11-11T18:00:00+00:00",
+      "file": "JEMRA_PART3.pdf"
+    },
+    {
+      "source_id": "JEMRA_PART3_WHO_PAGE",
+      "url": "https://www.who.int/publications/i/item/9789240072510",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 91749,
+      "sha256": "c1551b2f364087e380f453b954a45432d6a7d4743cade3a1d2b0de3faefe5be2",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:09+00:00",
+      "file": "JEMRA_PART3_WHO_PAGE.html"
+    },
+    {
+      "source_id": "EFSA_2021_TIO2_NEWS",
+      "url": "https://www.efsa.europa.eu/en/news/titanium-dioxide-e171-no-longer-considered-safe-when-used-food-additive",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 88192,
+      "sha256": "b72cab754409403f05fa8530793f5ce5664fad34a7ccd7363987a5d74d51101c",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:12+00:00",
+      "file": "EFSA_2021_TIO2_NEWS.html"
+    },
+    {
+      "source_id": "EFSA_2021_TIO2_PUBMED",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33976718/",
+      "http_status": "203",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 5590,
+      "sha256": "18e223c3bd09346ecee31c77845233466f037daef681394ac54c5effce27eb60",
+      "ok": false,
+      "retrieved_utc": "2026-11-08T10:44:13+00:00",
+      "file": ""
+    },
+    {
+      "source_id": "US_CFR_21_101_54",
+      "url": "https://www.law.cornell.edu/cfr/text/21/101.54",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 49858,
+      "sha256": "c3b7a860d661b2ca62faad8f74e7908d207302c2334634ef723b4b7d2bca4c9b",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:15+00:00",
+      "file": "US_CFR_21_101_54.html"
+    },
+    {
+      "source_id": "US_CFR_21_101_61",
+      "url": "https://www.law.cornell.edu/cfr/text/21/101.61",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 47231,
+      "sha256": "c1d063a1c89a5da7d2b8d629dcf5ec952907a00c6710da6f4984e70e1d5e6c8e",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:16+00:00",
+      "file": "US_CFR_21_101_61.html"
+    },
+    {
+      "source_id": "FDA_BENZENE_QA",
+      "url": "https://www.fda.gov/food/chemicals/questions-and-answers-occurrence-benzene-soft-drinks-and-other-beverages",
+      "http_status": "200",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 41765,
+      "sha256": "b281af923a2cec6e3ff62ea94844746790e817131e32180807503700871a4d2a",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:18+00:00",
+      "file": "FDA_BENZENE_QA.html"
+    },
+    {
+      "source_id": "WHO_SUGARS_2015_PAGE",
+      "url": "https://www.who.int/publications/i/item/9789241549028",
+      "http_status": "200",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 91485,
+      "sha256": "25fe0a516cbb4771c1f114367ec94d6f03e598e913dd7c3b302a50df37f148f3",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:44:18+00:00",
+      "file": "WHO_SUGARS_2015_PAGE.html"
+    }
+  ],
+  "unobtainable": {},
+  "manually_downloaded": [
+    {
+      "file": "cxs_192e.pdf",
+      "description": "Codex CXS 192-1995 General Standard for Food Additives (2026 revision)",
+      "bytes": 4106159,
+      "sha256": "e264ef5142bb19d3ae36dea308f7111e8507ed39e0fca51985d4075af6515220",
+      "obtained": "downloaded manually by the user (fao.org blocks automated clients)"
+    },
+    {
+      "file": "cxg_036e.pdf",
+      "description": "Codex CXG 36-1989 Class names and the International Numbering System (2026 revision)",
+      "bytes": 1776386,
+      "sha256": "658caf6ad82412dfe8910e531c43e131894642bcfcdad49e763a56fe2cd417bb",
+      "obtained": "downloaded manually by the user (fao.org blocks automated clients)"
+    },
+    {
+      "file": "cxs_001e.pdf",
+      "description": "Codex CXS 1-1985 General Standard for the Labelling of Pre-packaged Foods (2026 amendment, with PAL annex)",
+      "bytes": 484926,
+      "sha256": "5f27c9fae7e4652dae918f4bc4b99ea6dfe1fd895a00b8f67d8be664bc50de64",
+      "obtained": "downloaded manually by the user (fao.org blocks automated clients)"
+    },
+    {
+      "file": "efsa_2008_660.pdf",
+      "description": "EFSA Journal 2008;6(3):660 - McCann et al. (2007) colours, sodium benzoate and children behaviour",
+      "bytes": 2110645,
+      "sha256": "fa94e0443d061d8fb2c7a7b7810fd3b913c83184903d9099f41c56494dd245bd",
+      "obtained": "downloaded manually by the user (Wiley blocks automated clients)"
+    },
+    {
+      "file": "efsa_2019_5674.pdf",
+      "description": "EFSA Journal 2019;17(6):5674 - Re-evaluation of phosphates E 338-341, E 343, E 450-452",
+      "bytes": 16167195,
+      "sha256": "dc2b495da5f8253bcf58c81774823269005102f327560615877b3d3adb34c84c",
+      "obtained": "downloaded manually by the user (Wiley blocks automated clients)"
+    },
+    {
+      "file": "efsa_2017_4786.pdf",
+      "description": "EFSA Journal 2017;15(6):4786 - Re-evaluation of potassium nitrite E 249 and sodium nitrite E 250",
+      "bytes": 16503242,
+      "sha256": "d2d79a29950cc99ecf02be6c2f5552bfb45f9be785a8baebac102e087849762b",
+      "obtained": "downloaded manually by the user (Wiley blocks automated clients)"
+    },
+    {
+      "file": "efsa_2021_6585.pdf",
+      "description": "EFSA Journal 2021;19(5):6585 - Safety assessment of titanium dioxide E171",
+      "bytes": 14504159,
+      "sha256": "f5642d18ce37a22a932195b27cbf5f5a2745fbd6c966f816f65ee499b6790ca4",
+      "obtained": "downloaded manually by the user (Wiley blocks automated clients)"
+    }
+  ]
+}

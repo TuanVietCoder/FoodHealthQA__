@@ -1,0 +1,47 @@
+{
+  "source_records": 2311,
+  "subset_records": 1203,
+  "photos": 463,
+  "templates": 249,
+  "max_template_share": 0.025,
+  "by_label": {
+    "SAFE": 306,
+    "CAUTION": 380,
+    "ABSTAIN": 101,
+    "UNSAFE": 321,
+    "CRITICAL_ALERT": 95
+  },
+  "by_domain": {
+    "additive_regulation": 195,
+    "allergen_detection": 538,
+    "insufficient_data": 130,
+    "vulnerable_groups": 340
+  },
+  "by_persona": {
+    "healthy_adult": 286,
+    "allergy_patient": 577,
+    "ckd_stage3": 63,
+    "child_5yo": 113,
+    "pku_patient": 41,
+    "diabetes_hypertension": 75,
+    "pregnant_woman": 48
+  },
+  "majority_baseline_by_domain_before": {
+    "additive_regulation": 0.747,
+    "allergen_detection": 0.61,
+    "insufficient_data": 0.798,
+    "vulnerable_groups": 0.507
+  },
+  "majority_baseline_by_domain_after": {
+    "additive_regulation": 0.544,
+    "allergen_detection": 0.591,
+    "insufficient_data": 0.546,
+    "vulnerable_groups": 0.524
+  },
+  "cells_too_small_for_per_label_metrics": {
+    "insufficient_data|CRITICAL_ALERT": 1,
+    "insufficient_data|UNSAFE": 3,
+    "vulnerable_groups|CRITICAL_ALERT": 17
+  },
+  "note": "derived view of data/qa_benchmark.jsonl; silver, no expert validation"
+}

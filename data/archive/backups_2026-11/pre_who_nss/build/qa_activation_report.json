@@ -1,0 +1,33 @@
+{
+  "gates": {
+    "D1_every_eligible_record_passes_all_gates": true,
+    "D2_no_unresolved_quarantine_or_needs_review": true,
+    "D3_ids_and_questions_unique": true,
+    "D4_every_eligible_label_in_consumer_label_set": true,
+    "D5_each_label_has_min_30_eligible": true,
+    "D6_eligible_at_least_1000": true,
+    "D8_all_external_claims_passed": true,
+    "D9_scored_records_cite_only_verified_tags": true,
+    "D7_no_expert_claim": true
+  },
+  "all_pass": true,
+  "eligible": 1870,
+  "eligible_by_label": {
+    "SAFE": 613,
+    "UNSAFE": 387,
+    "CAUTION": 416,
+    "ABSTAIN": 345,
+    "CRITICAL_ALERT": 109
+  },
+  "eligible_by_domain": {
+    "additive_regulation": 532,
+    "allergen_detection": 629,
+    "insufficient_data": 359,
+    "vulnerable_groups": 350
+  },
+  "eligible_by_verification_level": {
+    "label_and_primary_source_text_verified": 1836,
+    "label_only_no_regulatory_assertion": 34
+  },
+  "not_scored_by_reason": {}
+}

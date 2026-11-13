@@ -2,3 +2,12 @@
 __pycache__/
 venv/
 *.pyc
+models/vietocr/*.pth
+models/vietocr/*.part-*
+data/ocr_cache_config_c.json
+data/ocr_cache_config_c.json.tmp
+
+# Danh sach khoa API Gemini (bi mat) va bo dem su dung
+gemini_keys.txt
+data/runs/gemini_key_usage.json
+venv_py315_old/

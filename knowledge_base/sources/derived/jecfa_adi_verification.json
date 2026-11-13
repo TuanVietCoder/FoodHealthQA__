@@ -1,0 +1,243 @@
+{
+  "300": {
+    "chemical_id": 59,
+    "jecfa_name": "ASCORBIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/59",
+    "file": "Chemical_59.html",
+    "sha256": "f0be10c3dfb7bf2c877040f3fe6e9c16fac920e66e39fa5b797d278574cd8625",
+    "ins_on_page": [
+      "300"
+    ],
+    "latest_evaluation_year": "1981",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:28:15+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "322(i)": {
+    "chemical_id": 1477,
+    "jecfa_name": "LECITHIN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1477",
+    "file": "Chemical_1477.html",
+    "sha256": "32af8d27c26b4f48e954405d17b744c962a5193f32dab38f052e4471952fcf72",
+    "ins_on_page": [
+      "322i"
+    ],
+    "latest_evaluation_year": "1973",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-08T10:28:19+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "330": {
+    "chemical_id": 3594,
+    "jecfa_name": "CITRIC ACID",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3594",
+    "file": "Chemical_3594.html",
+    "sha256": "a606f39f6ac353e2607445b2806f0498617577fd9b7e4065310e4228d826cfe1",
+    "ins_on_page": [
+      "330"
+    ],
+    "latest_evaluation_year": "2014",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-08T10:28:22+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "401": {
+    "chemical_id": 1823,
+    "jecfa_name": "SODIUM ALGINATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1823",
+    "file": "Chemical_1823.html",
+    "sha256": "c443a94da45a6b5056ece0a5b3539ec93f1c85c2a53f47519eca61e770a8c8de",
+    "ins_on_page": [
+      "401"
+    ],
+    "latest_evaluation_year": "1992",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:28:24+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "407": {
+    "chemical_id": 377,
+    "jecfa_name": "CARRAGEENAN",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/377",
+    "file": "Chemical_377.html",
+    "sha256": "efeed44da4a0702c835f96547985399fe7830ddd1370cb3fc630172c2c1c53df",
+    "ins_on_page": [
+      "407"
+    ],
+    "latest_evaluation_year": "2014",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:28:27+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "440": {
+    "chemical_id": 3043,
+    "jecfa_name": "PECTINS",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3043",
+    "file": "Chemical_3043.html",
+    "sha256": "b72ef5512e77344e7f0402008067fe78f7b6ed81cdd78d333d348ba030b0ffd6",
+    "ins_on_page": [
+      "440"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:28:38+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "471": {
+    "passed": false,
+    "adi_not_specified": false,
+    "candidates_tried": [
+      1243,
+      434,
+      1972,
+      2701,
+      71,
+      1126,
+      3528,
+      733,
+      2411,
+      3176,
+      1275,
+      1349,
+      2973,
+      1391,
+      2339,
+      2684,
+      79,
+      2822,
+      4749,
+      1565,
+      2700,
+      221,
+      222,
+      1477,
+      4275
+    ]
+  },
+  "500(ii)": {
+    "chemical_id": 1892,
+    "jecfa_name": "SODIUM HYDROGEN CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1892",
+    "file": "Chemical_1892.html",
+    "sha256": "72b05f27077fba742aa55783f1cc2d8a9ac94b8913682ee067aeadb405329e36",
+    "ins_on_page": [
+      "500ii"
+    ],
+    "latest_evaluation_year": "1965",
+    "latest_adi": "NOT LIMITED",
+    "retrieved_utc": "2026-11-08T10:29:26+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "551": {
+    "chemical_id": 2461,
+    "jecfa_name": "SILICA",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2461",
+    "file": "Chemical_2461.html",
+    "sha256": "8369f4566b76031bc03d40fb2fc0d84996e19343e1e978c4754dead5331689bd",
+    "ins_on_page": [
+      "551"
+    ],
+    "latest_evaluation_year": "2017",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:29:28+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "627": {
+    "chemical_id": 822,
+    "jecfa_name": "DISODIUM 5'-GUANYLATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/822",
+    "file": "Chemical_822.html",
+    "sha256": "b7f662ef9fcadac96ff93f7b1d8c32b85bf7a45b1084aa418090603c20b92b1c",
+    "ins_on_page": [
+      "627"
+    ],
+    "latest_evaluation_year": "1993",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:29:34+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "1442": {
+    "chemical_id": 2343,
+    "jecfa_name": "HYDROXYPROPYL DISTARCH PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2343",
+    "file": "Chemical_2343.html",
+    "sha256": "276d494d5d4d493eee9277c59a13cabda6c0a53115c56502e7c7b827b3aa0aff",
+    "ins_on_page": [
+      "1442"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-08T10:29:37+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "631": {
+    "chemical_id": 2512,
+    "jecfa_name": "DISODIUM 5'-INOSINATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2512",
+    "file": "Chemical_2512.html",
+    "sha256": "e7f6fc1736fd7253bfe68ae76ca9d769f32919dc9cc142ad0ef3429d754eb6cc",
+    "ins_on_page": [
+      "631"
+    ],
+    "latest_evaluation_year": "1993",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:29:44+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "412": {
+    "chemical_id": 863,
+    "jecfa_name": "GUAR GUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/863",
+    "file": "Chemical_863.html",
+    "sha256": "8b382d5020b8876dfca2ee33d901b72db231b6fa5699464e9159754b3d994c8d",
+    "ins_on_page": [
+      "412"
+    ],
+    "latest_evaluation_year": "1975",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:29:47+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "415": {
+    "chemical_id": 802,
+    "jecfa_name": "XANTHAN GUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/802",
+    "file": "Chemical_802.html",
+    "sha256": "3f959a7088ee2cd24fac6864db6ec5c351f5c2038d2d4ff495de3b911f3b4cda",
+    "ins_on_page": [
+      "415"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-08T10:29:49+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "450(i)": {
+    "chemical_id": 383,
+    "jecfa_name": "DISODIUM DIHYDROGEN DIPHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/383",
+    "file": "Chemical_383.html",
+    "sha256": "270a674256ac13eff97ed63a6a6602f4b25c4cf6928c4eef76b530007e6d7390",
+    "ins_on_page": [
+      "450i"
+    ],
+    "latest_evaluation_year": "",
+    "latest_adi": "",
+    "retrieved_utc": "2026-11-08T10:29:55+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  }
+}

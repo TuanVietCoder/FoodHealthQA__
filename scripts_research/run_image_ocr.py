@@ -1,6 +1,7 @@
 """Run reproducible local OCR predictions for the packaging-image collection."""
 
 import argparse
+import csv
 import json
 import os
 import sys
@@ -60,7 +61,6 @@ def run_ocr(images_dir, output_path, limit=None, start_index=0):
         "allergens_json",
         "ocr_confidence",
         "ocr_engine",
-        "gemini_spell_correction_used",
         "ocr_error",
     ]
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
@@ -73,11 +73,7 @@ def run_ocr(images_dir, output_path, limit=None, start_index=0):
 
         for row in selected_rows:
             image_path = os.path.join(PROJECT_ROOT, row["image_path"])
-            result = extract_with_paddle_ocr(
-                image_path,
-                sample_key="custom",
-                use_gemini_correction=False,
-            )
+            result = extract_with_paddle_ocr(image_path, sample_key="custom")
             mentions = result.get("mentions", [])
             raw_mentions = parse_ingredients_from_ocr(
                 result.get("raw_text_before_norm", "")
@@ -121,7 +117,6 @@ def run_ocr(images_dir, output_path, limit=None, start_index=0):
                 "allergens_json": _json(allergens),
                 "ocr_confidence": result.get("avg_confidence", 0.0),
                 "ocr_engine": result.get("engine_name", ""),
-                "gemini_spell_correction_used": result.get("llm_spell_used", False),
                 "ocr_error": result.get("ocr_error", ""),
             })
             target.flush()

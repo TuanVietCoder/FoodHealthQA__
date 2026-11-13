@@ -224,7 +224,8 @@ def run_error_propagation_study(benchmark_rows, kb_additives, personas_dict,
         # Cấu hình C: Noisy OCR -> Post-OCR Correction -> Linking -> Guardrail
         ocr_noisy = _simulate_ocr_noise(gt_text, p=noise_level)
         corrected_ocr = post_process_ocr_spelling(ocr_noisy)
-        c_mentions = parse_ingredients_from_ocr(f"Thành phần: {corrected_ocr}")
+        c_text = corrected_ocr["final"] if isinstance(corrected_ocr, dict) else str(corrected_ocr)
+        c_mentions = parse_ingredients_from_ocr(f"Thành phần: {c_text}")
         c_linked = [foodontorag_entity_linking(m, kb_additives) for m in c_mentions]
         c_eval = evaluate_safety_and_guardrail(c_linked, persona, row.get("question", ""), avg_ocr_conf=0.88, all_mentions=c_mentions)
 

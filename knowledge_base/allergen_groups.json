@@ -12,8 +12,6 @@
       "barley",
       "lúa mạch",
       "rye",
-      "oat",
-      "yến mạch",
       "spelt",
       "mì sợi",
       "mì ống",
@@ -26,7 +24,7 @@
       "bột mì": "ALLERGEN_RISK",
       "wheat": "ALLERGEN_RISK"
     },
-    "note": "Codex & JEMRA 2021 global priority: wheat and other Triticum species, rye, barley and hybridized strains.",
+    "note": "Codex & JEMRA 2021 global priority: cereals containing gluten = wheat and other Triticum species, rye, barley and hybridized strains (oats are NOT part of this group). Oats are kept as a precaution only: Codex CXS 1-1985 notes that people with coeliac disease may react to oats because of cross-contact with wheat, barley or rye.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -77,7 +75,12 @@
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
     "jemra_priority": "GLOBAL_PRIORITY",
     "immune_mechanism": "IgE_and_coeliac_autoimmune",
-    "clinical_severity": "High (Coeliac enteropathy & IgE anaphylaxis)"
+    "clinical_severity": "High (Coeliac enteropathy & IgE anaphylaxis)",
+    "precaution_keywords": [
+      "oat",
+      "oats",
+      "yến mạch"
+    ]
   },
   {
     "id": "milk",
@@ -291,7 +294,7 @@
       "đậu nành": "ALLERGEN_RISK",
       "soy": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 recommended soybean as regional priority due to lower prevalence of severe reactions and lower potency.",
+    "note": "JEMRA 2021 Part 1: soybean should not be listed as a global priority allergen but may be considered for national lists. The summary gives one reason for the whole set of foods it did not list globally: lack of data on prevalence, severity and/or potency, or regional consumption. It gives no figures for this food. Soybean remains on the US FDA major food allergen list (FALCPA) and in Codex CXS 1-1985 section 4.2.1.5, so it is still screened.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -341,10 +344,10 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "JEMRA (2021) Part 1: soybean should not be listed as a global priority allergen but may be considered for inclusion on priority allergen lists in individual countries.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
@@ -352,7 +355,7 @@
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
     "jemra_priority": "REGIONAL_PRIORITY",
     "immune_mechanism": "IgE_mediated",
-    "clinical_severity": "Moderate (Lower severity and potency compared to peanuts and tree nuts)"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "peanut",
@@ -459,7 +462,15 @@
       "brazil nut",
       "hạt thông",
       "pine nut",
-      "chestnut"
+      "chestnut",
+      "hạt dẻ cười",
+      "hồ đào",
+      "hạt phỉ",
+      "filbert",
+      "hạt mắc ca",
+      "mắc ca",
+      "hạt brazil",
+      "heartnut"
     ],
     "negation_rules": {
       "hạnh nhân": "ALLERGEN_RISK",
@@ -468,7 +479,7 @@
       "cashew": "ALLERGEN_RISK",
       "hạt cây": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 specified 6 global priority tree nuts: almond, cashew, hazelnut, pecan, pistachio, walnut. Brazil nut, macadamia, and pine nuts are regional.",
+    "note": "JEMRA 2021 specified 6 global priority tree nuts: almond, cashew, hazelnut, pecan, pistachio, walnut. Brazil nut, macadamia, and pine nuts are regional. FDA Q&A Ed.5 Table 1 lists the tree nuts that are major allergens (almond, walnuts, Brazil nut, cashew, hazelnut, heartnut, macadamia, pecan, pine nut, pistachio); chestnut/coconut are not on it, chestnut is kept here only as a precaution for users who list it.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -728,7 +739,7 @@
       "cần tây": "ALLERGEN_RISK",
       "celery": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 regional priority allergen.",
+    "note": "JEMRA 2021 Part 1: celery should not be listed as a global priority allergen but may be considered for national lists. The summary gives one reason for the whole set of foods it did not list globally: lack of data on prevalence, severity and/or potency, or regional consumption. It gives no figures for this food.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -766,10 +777,10 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "JEMRA (2021) Part 1: celery should not be listed as a global priority allergen but may be considered for inclusion on priority allergen lists in individual countries.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
@@ -777,7 +788,7 @@
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
     "jemra_priority": "REGIONAL_PRIORITY",
     "immune_mechanism": "IgE_mediated",
-    "clinical_severity": "Moderate (High regional prevalence in central Europe)"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "mustard",
@@ -795,7 +806,7 @@
       "mù tạt": "ALLERGEN_RISK",
       "mustard": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 regional priority allergen.",
+    "note": "JEMRA 2021 Part 1: mustard should not be listed as a global priority allergen but may be considered for national lists. The summary gives one reason for the whole set of foods it did not list globally: lack of data on prevalence, severity and/or potency, or regional consumption. It gives no figures for this food.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -833,10 +844,10 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "JEMRA (2021) Part 1: mustard should not be listed as a global priority allergen but may be considered for inclusion on priority allergen lists in individual countries.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
@@ -844,7 +855,7 @@
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
     "jemra_priority": "REGIONAL_PRIORITY",
     "immune_mechanism": "IgE_mediated",
-    "clinical_severity": "Moderate (Regional prevalence)"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "sesame",
@@ -926,6 +937,142 @@
     "jemra_priority": "GLOBAL_PRIORITY",
     "immune_mechanism": "IgE_mediated_high_potency",
     "clinical_severity": "High (Severe systemic allergic reactions confirmed by JEMRA 2021)"
+  },
+  {
+    "id": "buckwheat",
+    "name_vi": "Kiều mạch",
+    "name_en": "Buckwheat and buckwheat products",
+    "severity": "warning",
+    "keywords": [
+      "kiều mạch",
+      "buckwheat",
+      "soba",
+      "mì soba",
+      "bột kiều mạch",
+      "mạch ba góc"
+    ],
+    "negation_rules": {
+      "kiều mạch": "ALLERGEN_RISK",
+      "buckwheat": "ALLERGEN_RISK",
+      "soba": "ALLERGEN_RISK"
+    },
+    "note": "JEMRA 2021 Part 1: buckwheat should not be listed as a global priority allergen but may be considered for national priority lists. Buckwheat is not a cereal containing gluten.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "JEMRA (2021) Part 1: buckwheat should not be listed as a global priority allergen but may be considered for national priority lists.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
+  },
+  {
+    "id": "oats",
+    "name_vi": "Yến mạch",
+    "name_en": "Oats and other Avena species (and their hybridized strains)",
+    "severity": "warning",
+    "keywords": [
+      "yến mạch",
+      "oat",
+      "oats",
+      "bột yến mạch",
+      "oatmeal",
+      "rolled oats"
+    ],
+    "negation_rules": {
+      "yến mạch": "ALLERGEN_RISK",
+      "oat": "ALLERGEN_RISK",
+      "oats": "ALLERGEN_RISK"
+    },
+    "note": "JEMRA 2021 Part 1: oats should not be listed as a global priority allergen but may be considered for national lists. Codex CXS 1-1985 section 4.2.1.5 lists oats separately from cereals containing gluten and says oats can be tolerated by most, but not all, people who are intolerant to gluten.",
+    "enabled_for_allergen_screening": true,
+    "verification_status": "source_linked_category_scope_aliases_pending_review",
+    "source_ids": [
+      "CODEX_CXS_1_1985",
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": "Oats and other Avena species and products thereof are listed in Codex CXS 1-1985 section 4.2.1.5 (foods whose declaration may be determined nationally).",
+        "source_id": "CODEX_CXS_1_1985",
+        "source_url": "https://www.fao.org/input/download/standards/32/CXS_001e.pdf",
+        "source_locator": "CXS 1-1985, section 4.2.1.5",
+        "verification_status": "source_checked_against_linked_text",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "JEMRA (2021) Part 1: oats should not be listed as a global priority allergen but may be considered for national priority lists.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
+    "jemra_priority": "REGIONAL_PRIORITY",
+    "immune_mechanism": "IgE_mediated",
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "sulfites",
@@ -1038,7 +1185,7 @@
       "lupin": "ALLERGEN_RISK",
       "lupine": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 regional priority allergen.",
+    "note": "JEMRA 2021 Part 1: lupin should not be listed as a global priority allergen but may be considered for national lists. The summary gives one reason for the whole set of foods it did not list globally: lack of data on prevalence, severity and/or potency, or regional consumption. It gives no figures for this food.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -1076,10 +1223,10 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "JEMRA (2021) Part 1: lupin should not be listed as a global priority allergen but may be considered for inclusion on priority allergen lists in individual countries.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
@@ -1087,7 +1234,7 @@
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
     "jemra_priority": "REGIONAL_PRIORITY",
     "immune_mechanism": "IgE_mediated",
-    "clinical_severity": "Moderate (Cross-reactivity with peanut)"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "molluscs",
@@ -1121,7 +1268,7 @@
       "squid": "ALLERGEN_RISK",
       "oyster": "ALLERGEN_RISK"
     },
-    "note": "JEMRA 2021 regional priority allergen.",
+    "note": "Listed in Regulation (EU) No 1169/2011, Annex II item 14. The JEMRA 2021 Part 1 summary reviewed molluscs among foods found on national or regional priority lists but states no conclusion for them: they are neither in the global priority list nor among the regional examples it names.",
     "enabled_for_allergen_screening": true,
     "verification_status": "source_linked_category_scope_aliases_pending_review",
     "source_ids": [
@@ -1159,18 +1306,18 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "JEMRA (2021) Part 1 summary lists molluscs among the foods reviewed from national/regional priority lists; it states no conclusion (global, regional or excluded) for molluscs.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 2nd and 3rd paragraphs",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
     },
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review",
-    "jemra_priority": "REGIONAL_PRIORITY",
+    "jemra_priority": "NOT_CONCLUDED_IN_PART1_SUMMARY",
     "immune_mechanism": "IgE_mediated",
-    "clinical_severity": "Moderate to High"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "beef",
@@ -1194,7 +1341,7 @@
       "bò": "ALLERGEN_RISK",
       "beef": "ALLERGEN_RISK"
     },
-    "note": "Non-priority allergen unless alpha-gal syndrome or regional condition.",
+    "note": "Beef is not mentioned in the JEMRA 2021 Part 1 summary. Kept only as a food ingredient term; not used for allergen screening (possible alpha-gal syndrome is outside this source).",
     "enabled_for_allergen_screening": false,
     "verification_status": "unsupported_as_major_label_allergen",
     "source_ids": [
@@ -1230,18 +1377,18 @@
         "use_for_compliance_decision": false
       },
       "fao_who_jemra": {
-        "claim": "Evaluated in FAO/WHO JEMRA (2021) Part 1 as REGIONAL_PRIORITY.",
+        "claim": "Beef is not mentioned in the JEMRA (2021) Part 1 summary.",
         "source_id": "FAO_WHO_JEMRA_2021",
         "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
-        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions",
+        "source_locator": "JEMRA Summary Report 10 May 2021 (whole summary)",
         "verification_status": "source_checked",
         "use_for_compliance_decision": false
       }
     },
     "keyword_vocabulary_status": "not_used_for_allergen_screening",
-    "jemra_priority": "REGIONAL_PRIORITY",
+    "jemra_priority": "NOT_ASSESSED_IN_PART1_SUMMARY",
     "immune_mechanism": "IgE_or_alpha_gal",
-    "clinical_severity": "Low to Moderate"
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   },
   {
     "id": "lactose",
@@ -1288,5 +1435,186 @@
       }
     },
     "keyword_vocabulary_status": "curated_aliases_pending_expert_review"
+  },
+  {
+    "id": "watch_pulses",
+    "name_vi": "Các loại đậu (watch list)",
+    "name_en": "Pulses (watch list)",
+    "severity": "not_an_allergen_alert",
+    "keywords": [
+      "đậu lăng",
+      "đậu gà",
+      "lentil",
+      "chickpea"
+    ],
+    "negation_rules": {},
+    "note": "JEMRA 2021 Part 1 put pulses, insects and other foods such as kiwi on a watch list, to be evaluated when data on prevalence, severity and potency become available. Not used for allergen alerts.",
+    "enabled_for_allergen_screening": false,
+    "verification_status": "watch_list_not_used_for_alerts",
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "JEMRA (2021) Part 1 recommended that pulses, insects and other foods such as kiwi fruits be included in a watch list.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "not_used_for_allergen_screening",
+    "jemra_priority": "WATCH_LIST",
+    "immune_mechanism": "Not stated in the JEMRA 2021 Part 1 summary",
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
+  },
+  {
+    "id": "watch_insects",
+    "name_vi": "Côn trùng (watch list)",
+    "name_en": "Insects (watch list)",
+    "severity": "not_an_allergen_alert",
+    "keywords": [
+      "côn trùng",
+      "dế",
+      "insect",
+      "cricket"
+    ],
+    "negation_rules": {},
+    "note": "JEMRA 2021 Part 1 put pulses, insects and other foods such as kiwi on a watch list, to be evaluated when data on prevalence, severity and potency become available. Not used for allergen alerts.",
+    "enabled_for_allergen_screening": false,
+    "verification_status": "watch_list_not_used_for_alerts",
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "JEMRA (2021) Part 1 recommended that pulses, insects and other foods such as kiwi fruits be included in a watch list.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "not_used_for_allergen_screening",
+    "jemra_priority": "WATCH_LIST",
+    "immune_mechanism": "Not stated in the JEMRA 2021 Part 1 summary",
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
+  },
+  {
+    "id": "watch_kiwi",
+    "name_vi": "Kiwi (watch list)",
+    "name_en": "Kiwi fruit (watch list)",
+    "severity": "not_an_allergen_alert",
+    "keywords": [
+      "kiwi",
+      "quả kiwi"
+    ],
+    "negation_rules": {},
+    "note": "JEMRA 2021 Part 1 put pulses, insects and other foods such as kiwi on a watch list, to be evaluated when data on prevalence, severity and potency become available. Not used for allergen alerts.",
+    "enabled_for_allergen_screening": false,
+    "verification_status": "watch_list_not_used_for_alerts",
+    "source_ids": [
+      "FAO_WHO_JEMRA_2021"
+    ],
+    "source_urls": [
+      "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf"
+    ],
+    "screening_limit": "Keyword match is a possible label mention only; verify the full ingredient phrase, source, processing and cross-contact. Absence of a keyword is not proof of absence.",
+    "regulatory_claims": {
+      "codex": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "eu": {
+        "claim": null,
+        "source_id": null,
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "not_assessed",
+        "use_for_compliance_decision": false
+      },
+      "vietnam": {
+        "claim": null,
+        "source_id": "VN_TT24_2019",
+        "source_url": null,
+        "source_locator": null,
+        "verification_status": "pending_official_text_and_amendment_check",
+        "use_for_compliance_decision": false
+      },
+      "fao_who_jemra": {
+        "claim": "JEMRA (2021) Part 1 recommended that pulses, insects and other foods such as kiwi fruits be included in a watch list.",
+        "source_id": "FAO_WHO_JEMRA_2021",
+        "source_url": "https://cdn.who.int/media/docs/default-source/food-safety/jemra/1st-allergen-summary-report-10may2021.pdf",
+        "source_locator": "JEMRA Summary Report 10 May 2021, Section: Conclusions, 3rd paragraph",
+        "verification_status": "source_checked",
+        "use_for_compliance_decision": false
+      }
+    },
+    "keyword_vocabulary_status": "not_used_for_allergen_screening",
+    "jemra_priority": "WATCH_LIST",
+    "immune_mechanism": "Not stated in the JEMRA 2021 Part 1 summary",
+    "clinical_severity": "Not stated in the JEMRA 2021 Part 1 summary"
   }
 ]

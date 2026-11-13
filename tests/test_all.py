@@ -9,7 +9,15 @@ Kiểm tra:
 import os
 import sys
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
+
 # Đảm bảo import đúng module
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from modules.ocr_extractor import (
@@ -48,16 +56,17 @@ def run_tests():
     assert "INS 322i" in corrected, "Lỗi: Không chuẩn hóa được mã INS 322i"
     print("✅ TEST 1 THÀNH CÔNG: Đã khôi phục chuẩn xác toàn bộ dấu thanh và mã INS!")
 
-    # 2. Test Bóc tách thành phần
+    # 2. Test Trích xuất thành phần
     mentions = parse_ingredients_from_ocr(corrected)
-    print(f"\n[TEST 2] Bóc tách thành phần (Mentions: {len(mentions)}):")
+    print(f"\n[TEST 2] Trích xuất thành phần (Mentions: {len(mentions)}):")
     for idx, m in enumerate(mentions, 1):
         print(f"  {idx}. {m['raw_mention']} ({m['category']})")
-    assert len(mentions) >= 5, "Lỗi: Bóc tách thành phần quá ít"
-    print("✅ TEST 2 THÀNH CÔNG: Bóc tách danh sách thành phần và dị nguyên hoàn hảo!")
+    assert len(mentions) >= 5, "Lỗi: Trích xuất thành phần quá ít"
+    print("✅ TEST 2 THÀNH CÔNG: Trích xuất danh sách thành phần và dị nguyên hoàn hảo!")
 
     # 3. Test nạp Knowledge Base & Personas
-    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_dir = os.path.join(project_root, "data")
     kb = load_knowledge_base(data_dir)
     personas = load_personas(data_dir)
     foodon_catalog = load_foodon_entities(data_dir)

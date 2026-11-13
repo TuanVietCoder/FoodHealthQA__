@@ -22,9 +22,11 @@ Kế thừa kiến trúc:
 """
 
 import os
+import time
 import json
 import logging
 import re
+from copy import deepcopy
 import pandas as pd
 from modules.ocr_extractor import (
     extract_with_paddle_ocr,
@@ -34,7 +36,10 @@ from modules.ocr_extractor import (
 )
 from modules.file_resolver import find_data_file, read_table_flexibly
 from modules.foodon import enrich_additive_foodon_curie, load_foodon_entities
-from modules.benchmark import validate_citations
+from modules import abstention
+from modules import dynamic_qa
+from modules import llm_keys
+from modules.benchmark import validate_citations, canonicalize_citation, is_recognized_citation, extract_citations
 from modules.hybrid_retriever import foodontorag_4agent_linking
 from modules.constraint_model import (
     contains_label_term,
@@ -50,6 +55,9 @@ from modules.constraint_model import (
     evaluate_efsa_risk,
     evaluate_regulatory_compliance,
     ALLERGEN_KEYWORDS,
+    strip_allergen_noise,
+    allergen_priority_info,
+    PRECAUTION_KEYWORDS,
     _ALLERGEN_GROUPS,
 )
 
@@ -646,8 +654,19 @@ def enrich_persona_with_nhanes(persona, data_dir="data", biomarkers_cache=None):
     conditions = list(persona.get("conditions", []))
     existing_conditions = set(c.lower() for c in conditions)
 
-    # Xác định nhóm NHANES phù hợp dựa trên persona
-    persona_id = persona.get("id", "")
+    # Xác định nhóm NHANES phù hợp dựa trên persona (hỗ trợ cả persona mẫu lẫn persona tự chỉnh)
+    persona_id = str(persona.get("id", "")).lower()
+    conds_lower = set(str(c).lower() for c in conditions)
+    demographics = persona.get("demographics", {})
+    user_age = demographics.get("age")
+    is_preg = bool(demographics.get("pregnant") or "pregnant" in conds_lower or "pregnancy" in conds_lower or "pregnant" in persona_id)
+    has_diabetes = "diabetes" in conds_lower or "diabetes" in persona_id
+    has_hypertension = "hypertension" in conds_lower or "hypertension" in persona_id
+    has_ckd = any("ckd" in c or "kidney" in c for c in conds_lower) or "ckd" in persona_id
+    has_obesity = "obesity" in conds_lower or "obese" in persona_id
+    is_child = (user_age is not None and user_age < 18) or "child" in persona_id or "children" in persona_id
+    is_healthy = "healthy" in persona_id or (conds_lower == {"healthy"} and not is_preg and not is_child)
+
     matched_seqns = []
 
     for seqn, data in biomarkers.items():
@@ -655,23 +674,53 @@ def enrich_persona_with_nhanes(persona, data_dir="data", biomarkers_cache=None):
         if age is None:
             continue
 
-        if "child" in persona_id or "children" in persona_id:
-            if age < 18:
-                matched_seqns.append((seqn, data))
-        elif "pregnant" in persona_id:
+        matched = False
+        if is_child:
+            if (user_age and user_age < 6 and age < 6) or (age < 18):
+                matched = True
+        elif is_preg:
             if data.get("pregnant"):
-                matched_seqns.append((seqn, data))
-        elif "hypertension" in persona_id:
-            sbp = data.get("systolic_bp")
-            if sbp and float(sbp) >= 140:
-                matched_seqns.append((seqn, data))
-        elif "diabetes" in persona_id:
+                matched = True
+        elif has_diabetes:
             hba1c = data.get("hba1c_pct")
-            if hba1c and float(hba1c) >= 6.5:
-                matched_seqns.append((seqn, data))
-        elif "healthy" in persona_id:
+            glu = data.get("glucose_fasting_mgdl")
+            try:
+                if (hba1c and float(hba1c) >= 6.5) or (glu and float(glu) >= 126):
+                    matched = True
+            except (ValueError, TypeError):
+                pass
+        elif has_hypertension:
+            sbp = data.get("systolic_bp")
+            dbp = data.get("diastolic_bp")
+            try:
+                if (sbp and float(sbp) >= 140) or (dbp and float(dbp) >= 90):
+                    matched = True
+            except (ValueError, TypeError):
+                pass
+        elif has_ckd:
+            bun = data.get("bun_mmol")
+            creat = data.get("creatinine_umol")
+            try:
+                if (bun and float(bun) > 7.1) or (creat and float(creat) > 115):
+                    matched = True
+            except (ValueError, TypeError):
+                pass
+        elif has_obesity:
+            bmi = data.get("bmi")
+            try:
+                if bmi and float(bmi) >= 30:
+                    matched = True
+            except (ValueError, TypeError):
+                pass
+        elif is_healthy:
             if 18 <= age <= 40:
-                matched_seqns.append((seqn, data))
+                matched = True
+        else:
+            if user_age and abs(age - user_age) <= 10:
+                matched = True
+
+        if matched:
+            matched_seqns.append((seqn, data))
 
     if not matched_seqns:
         return persona
@@ -1315,25 +1364,56 @@ def _match_fndds(product_name, fndds_list):
     return best_item, best_score
 
 
-def evaluate_nutritional_risk(product_name, fndds_list, persona):
+def evaluate_nutritional_risk(product_name, fndds_list, persona,
+                              label_nutrition=None):
     """
     Đối soát ràng buộc dinh dưỡng định lượng với ngưỡng bệnh lý NHANES User Persona.
-    Chiến lược: Tra Bảng TPTP Việt Nam trước → FNDDS USDA sau → chọn nguồn tốt nhất.
+    Chiến lược ưu tiên nguồn dữ liệu:
+      1. label_nutrition (bảng dinh dưỡng từ nhãn sản phẩm thực tế / OCR) — chính xác nhất
+      2. Bảng TPTP Việt Nam (VCNDD) — ước tính cho món Việt
+      3. FNDDS USDA — ước tính cho loại thực phẩm tương tự
+
+    Nếu dùng nguồn 2 hoặc 3, đánh dấu is_estimate=True và ghi rõ disclaimer.
     """
-    if not fndds_list and not _VN_FOOD_COMPOSITION_DB:
+    if not fndds_list and not _VN_FOOD_COMPOSITION_DB and not label_nutrition:
         return None, [], []
 
-    vn_item = _match_vn_food(product_name)
-    fndds_item, fndds_score = _match_fndds(product_name, fndds_list) if fndds_list else (None, -1)
-
-    if vn_item and (fndds_score <= 0 or vn_item.get("source") == "VCNDD"):
-        best_item = vn_item
-    elif fndds_item:
-        best_item = fndds_item
-    elif vn_item:
-        best_item = vn_item
+    # Ưu tiên 1: Dữ liệu từ nhãn sản phẩm thực tế
+    if label_nutrition and any(v for v in label_nutrition.values() if v):
+        best_item = dict(label_nutrition)
+        best_item["data_source_type"] = "product_label"
+        best_item["is_estimate"] = False
     else:
-        best_item = None
+        vn_item = _match_vn_food(product_name)
+        fndds_item, fndds_score = _match_fndds(product_name, fndds_list) if fndds_list else (None, -1)
+
+        if vn_item and (fndds_score <= 0 or vn_item.get("source") == "VCNDD"):
+            best_item = vn_item
+            best_item["data_source_type"] = "vcndd_reference"
+            best_item["is_estimate"] = True
+            best_item["estimate_disclaimer"] = (
+                "Số liệu tham chiếu từ Bảng TPTP Việt Nam cho loại thực phẩm tương tự, "
+                "không phải giá trị chính xác của sản phẩm đang xét."
+            )
+        elif fndds_item:
+            best_item = fndds_item
+            best_item["data_source_type"] = "fndds_reference"
+            best_item["is_estimate"] = True
+            best_item["estimate_disclaimer"] = (
+                "Số liệu tham chiếu từ USDA FNDDS cho loại thực phẩm tương tự, "
+                "không phải giá trị chính xác của sản phẩm đang xét. "
+                "Không nên dùng để kết luận định lượng chính xác về natri, đường "
+                "hoặc các chất dinh dưỡng khác của sản phẩm."
+            )
+        elif vn_item:
+            best_item = vn_item
+            best_item["data_source_type"] = "vcndd_reference"
+            best_item["is_estimate"] = True
+            best_item["estimate_disclaimer"] = (
+                "Số liệu tham chiếu từ Bảng TPTP Việt Nam, không phải giá trị chính xác."
+            )
+        else:
+            best_item = None
 
     if not best_item:
         return None, [], []
@@ -1343,6 +1423,12 @@ def evaluate_nutritional_risk(product_name, fndds_list, persona):
     )
 
     warnings = [w["message"] for w in constraint_warnings]
+
+    # Thêm disclaimer vào warnings nếu là dữ liệu ước tính
+    if best_item.get("is_estimate") and warnings:
+        disclaimer = best_item.get("estimate_disclaimer", "")
+        if disclaimer:
+            warnings.insert(0, f"⚠️ LƯU Ý: {disclaimer}")
 
     return best_item, warnings, constraint_details
 
@@ -1364,7 +1450,26 @@ def foodontorag_entity_linking(mention, kb_additives):
     return foodontorag_4agent_linking(mention, kb_additives)
 
 
-def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_conf=0.95, all_mentions=None):
+_ADDITIVE_ENTITY_CATEGORIES = {
+    "flavor_enhancer",
+    "preservative",
+    "color",
+    "sweetener",
+    "acidity_regulator",
+    "emulsifier",
+    "raising_agent",
+    "thickener",
+    "stabilizer",
+    "antioxidant",
+    "additive",
+}
+
+
+def _is_additive_link_candidate(item):
+    return bool(item.get("matched_entity")) or item.get("category") in _ADDITIVE_ENTITY_CATEGORIES
+
+
+def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, all_mentions=None):
     """
     Tầng 4: Đánh giá an toàn, tính điểm tin cậy kép và kích hoạt Guardrail an toàn y tế.
     Tích hợp Negation Constraint Modeling: gán nhãn PERMITTED/RESTRICTED/CONTRAINDICATED/ALLERGEN_RISK.
@@ -1373,11 +1478,15 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
     linked_results = apply_negation_constraints(linked_results, persona)
 
     s_perception = max(0.0, min(float(avg_ocr_conf), 1.0))
+    additive_link_results = [
+        item for item in linked_results if _is_additive_link_candidate(item)
+    ]
     retrieval_scores = [
         max(0.0, min(float(item.get("retrieval_confidence", 0.0)), 1.0))
-        for item in linked_results
+        for item in additive_link_results
     ]
-    s_retrieval = sum(retrieval_scores) / len(retrieval_scores) if retrieval_scores else 0.0
+    # A label with no additive candidate does not have a retrieval failure.
+    s_retrieval = sum(retrieval_scores) / len(retrieval_scores) if retrieval_scores else 1.0
     s_total = 0.5 * s_perception + 0.5 * s_retrieval
     insufficient_evidence = s_total < 0.65
     confidence_metrics = {
@@ -1410,8 +1519,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 alert_item = {
                     "additive": f"{entity['canonical_name']} ({entity.get('ins_code', '')})",
                     "message": msg,
-                    "regulation": "Quy định Việt Nam chưa được xác minh cho claim này",
-                    "codex": "Giới hạn Codex cần kiểm tra theo phụ gia và nhóm thực phẩm",
+                    "regulation": entity.get("vn_regulation") or "VN_TT24_2019",
+                    "codex": entity.get("codex_standard") or "CODEX_STAN_192_1995",
                 }
                 if sev == "CRITICAL":
                     critical_alerts.append(alert_item)
@@ -1437,6 +1546,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         label = f"{entity_name} ({ins_code})" if ins_code else entity_name
         rule_desc = f" (Quy tắc: {crule[0]} -> {crule[1]})" if crule else ""
 
+        reg_default = "US_FDA_FALCPA" if ctype in (CONSTRAINT_ALLERGEN_RISK, CONSTRAINT_PRECAUTIONARY_RISK) else (entity.get("vn_regulation") if entity else "VN_TT24_2019")
+        codex_default = "CODEX_CXS_1_1985" if ctype in (CONSTRAINT_ALLERGEN_RISK, CONSTRAINT_PRECAUTIONARY_RISK) else (entity.get("codex_standard") if entity else "CODEX_STAN_192_1995")
         constraint_alert = {
             "additive": label,
             "message": (
@@ -1447,8 +1558,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 else f"Quy tắc sàng lọc [{ctype}] khớp với '{item['raw_mention']}'. "
                 "Cần xác minh nguồn, phạm vi và ngữ cảnh trước khi diễn giải."
             ),
-            "regulation": "Quy định Việt Nam chưa được xác minh cho claim này",
-            "codex": "Giới hạn Codex cần kiểm tra theo phụ gia và nhóm thực phẩm",
+            "regulation": reg_default,
+            "codex": codex_default,
         }
         if ctype == CONSTRAINT_CONTRAINDICATED:
             critical_alerts.append(constraint_alert)
@@ -1461,7 +1572,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 f"Nhãn ghi nhận nguy cơ nhiễm chéo hoặc có thể chứa vết của dị nguyên '{item['raw_mention']}'. "
                 "Theo khuyến nghị FAO/WHO JEMRA Part 3 (2023), đối tượng có tiền sử dị ứng thực phẩm nghiêm trọng cần thận trọng."
             )
-            pal_alert["regulation"] = "FAO/WHO JEMRA Part 3 (Precautionary Allergen Labelling)"
+            pal_alert["regulation"] = "FAO_WHO_JEMRA_PART_3"
+            pal_alert["codex"] = "CODEX_CXS_1_1985"
             warning_alerts.append(pal_alert)
         elif ctype == CONSTRAINT_RESTRICTED:
             caution_alerts.append(constraint_alert)
@@ -1483,26 +1595,29 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                     all_texts_to_scan.append(txt)
                     seen_texts.add(txt.lower())
 
+        pal_indicators = ["có thể chứa", "may contain", "vết của", "sản xuất trên", "chế biến trên"]
+        has_any_pal_on_label = any(any(p in t.lower() for p in pal_indicators) for t in all_texts_to_scan)
+
         for raw_text in all_texts_to_scan:
             raw_text_lower = raw_text.lower()
             # Miễn trừ dầu tinh luyện hoàn toàn theo US FDA FALCPA Sec 203
             if is_exempt_refined_oil(raw_text_lower):
                 continue
 
-            is_prec_text = any(
-                p in raw_text_lower for p in ["có thể chứa", "may contain", "vết của", "sản xuất trên", "chế biến trên"]
-            )
+            is_prec_text = any(p in raw_text_lower for p in pal_indicators)
+            _text_is_prec = is_prec_text
             for allergy in user_allergies:
+                is_prec_text = _text_is_prec
                 keywords = list(ALLERGEN_KEYWORDS.get(allergy, [allergy]))
                 derivatives = DERIVATIVE_ALLERGEN_MAP.get(allergy, [])
                 combined_terms = keywords + [d for d in derivatives if d not in keywords]
 
-                if any(contains_label_term(raw_text_lower, kw) for kw in combined_terms):
-                    reg_source = (
-                        "FAO/WHO JEMRA Part 3 (Precautionary Allergen Labelling)"
-                        if is_prec_text else
-                        "US FDA FALCPA & FAO/WHO JEMRA 2021 Part 1"
-                    )
+                precaution_hit = (not any(contains_label_term(strip_allergen_noise(raw_text_lower, allergy), kw) for kw in combined_terms)
+                                  and any(contains_label_term(raw_text_lower, kw) for kw in PRECAUTION_KEYWORDS.get(allergy, [])))
+                if precaution_hit:
+                    is_prec_text = True
+                if precaution_hit or any(contains_label_term(strip_allergen_noise(raw_text_lower, allergy), kw) for kw in combined_terms):
+                    reg_source = "FAO_WHO_JEMRA_PART_3" if is_prec_text else "US_FDA_FALCPA"
                     allergen_alert = {
                         "additive": f"Dị nguyên: {raw_text}",
                         "message": (
@@ -1513,8 +1628,13 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                             "hãy kiểm tra nhãn đầy đủ và hỏi chuyên gia y tế nếu cần."
                         ),
                         "regulation": reg_source,
-                        "codex": "Codex General Standard for the Labelling of Prepackaged Foods (CXS 1-1985)"
+                        "codex": "CODEX_CXS_1_1985",
+                        "allergen_key": allergy,
                     }
+                    tier_info = allergen_priority_info(allergy)
+                    if tier_info:
+                        allergen_alert.update(tier_info)
+                        allergen_alert["message"] += f" ({tier_info['priority_text']}.)"
                     warning_alerts.append(allergen_alert)
                     break
 
@@ -1537,8 +1657,8 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                     "Theo FAO/WHO JEMRA 2021, đây là tình trạng thiếu hụt enzyme lactase đường tiêu hóa, "
                     "không phải dị ứng đạm sữa qua trung gian IgE và không gây sốc phản vệ."
                 ),
-                "regulation": "FAO/WHO JEMRA 2021 Part 1 & US FDA FAQ",
-                "codex": "Codex CXS 1-1985"
+                "regulation": "WHO_JEMRA_PRIORITY_ALLERGENS",
+                "codex": "CODEX_CXS_1_1985"
             }
             caution_alerts.append(lactose_caution)
 
@@ -1550,16 +1670,68 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         entity = item.get("matched_entity")
         if not entity or entity.get("ins_code", "").startswith("FOODON"):
             continue
-        reg = evaluate_regulatory_compliance(entity, persona, body_weight)
+        reg = evaluate_regulatory_compliance(entity, persona, body_weight_kg=body_weight)
         regulatory_assessments.append(reg)
         if reg.get("efsa"):
             efsa_warnings.append(reg["efsa"])
 
+    # Kiểm tra thiếu dữ liệu cho cơ chế từ chối 2 loại
+    unlinked_count = sum(
+        1 for item in additive_link_results if not item.get("matched_entity")
+    )
+    total_count = len(additive_link_results)
+    kb_coverage_low = total_count > 0 and (unlinked_count / total_count) > 0.5
+    has_insufficient_adi = any(
+        reg.get("adi", {}).get("compliance_status")
+        in {"INSUFFICIENT_DATA", "SOURCE_REVIEW_REQUIRED"}
+        for reg in regulatory_assessments
+    )
+
+    abstention_reasons = []
+    if insufficient_evidence:
+        abstention_reasons.append(
+            "Độ tin cậy OCR hoặc độ phù hợp truy xuất dưới ngưỡng an toàn (S_total < 0.65)."
+        )
+    if kb_coverage_low:
+        abstention_reasons.append(
+            f"Hệ thống không tìm thấy đủ thực thể trong KB ({unlinked_count}/{total_count} "
+            "khai báo phụ gia không khớp). Cần tên hoặc mã phụ gia cụ thể hơn."
+        )
+
+    q_fold = str(question or "").casefold()
+    asks_permission = any(k in q_fold for k in ("được phép", "danh mục", "theo thông tư", "có trong"))
+    dose_kw = ("vượt", "vuot", "adi", "tích lũy", "liều", "hàm lượng", "mg/kg")  # a dose question, even if it says "cho phép"
+    quantity_kw = dose_kw + ("mỗi ngày", "hằng ngày", "hàng ngày", "thường xuyên")
+    effect_kw = ("an toàn", "an toan", "gây hại", "có hại", "ảnh hưởng", "lo ngại")
+    generic_user = not set(c.lower() for c in persona.get("conditions", [])) - {"healthy", "healthy_adult"} and not persona.get("allergies")
+    # a permission-list question is answered from the list; a question tied to the user's own condition is answered
+    # by that condition's rules; only generic exposure / health-effect questions need a dose that the label lacks
+    exposure_question = any(k in q_fold for k in dose_kw) or (not asks_permission) and (
+        any(k in q_fold for k in quantity_kw) or (generic_user and any(k in q_fold for k in effect_kw)))
+    if has_insufficient_adi and exposure_question:
+        abstention_reasons.append(
+            "Đã định danh được phụ gia nhưng thiếu hàm lượng, khẩu phần hoặc nhóm thực phẩm "
+            "để đối chiếu ML/ADI; cần bổ sung dữ liệu định lượng thay vì mã định danh."
+        )
+
+    def _collect_canonical_citations(alert_list, include_codex=True):
+        cits = []
+        for a in alert_list:
+            r = canonicalize_citation(a.get("regulation", ""))
+            if r and is_recognized_citation(r) and r not in cits:
+                cits.append(r)
+            if include_codex:
+                c = canonicalize_citation(a.get("codex", ""))
+                if c and is_recognized_citation(c) and c not in cits:
+                    cits.append(c)
+        return cits
+
     if critical_alerts:
         return {
             "status": "CRITICAL_ALERT",
+            "safety_label": "CRITICAL_ALERT",
             "badge_color": "red",
-            "title": "🔴 CẢNH BÁO MỨC CAO — CẦN XÁC MINH VỚI CHUYÊN GIA",
+            "title": "🔴 CẦN XÁC MINH VỚI CHUYÊN GIA",
             "alerts": critical_alerts,
             "cautions": caution_alerts,
             "advice": (
@@ -1567,14 +1739,30 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 "nguy cơ cá nhân; hãy kiểm tra nhãn và trao đổi với chuyên gia y tế trước "
                 "khi quyết định sử dụng."
             ),
-            "citations": list(set([a["regulation"] for a in critical_alerts] + [a["codex"] for a in critical_alerts])),
+            "citations": (_collect_canonical_citations(critical_alerts) + (["CODEX_CXS_1_1985"] if user_allergies and "CODEX_CXS_1_1985" not in _collect_canonical_citations(critical_alerts) else [])),
             **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
     elif warning_alerts:
+        warn_cits = _collect_canonical_citations(warning_alerts)
+        if user_allergies:
+            pal_on_label = locals().get("has_any_pal_on_label", False)
+            if pal_on_label:
+                if "FAO_WHO_JEMRA_PART_3" not in warn_cits:
+                    warn_cits.append("FAO_WHO_JEMRA_PART_3")
+                if "US_FDA_FALCPA" not in warn_cits:
+                    warn_cits.append("US_FDA_FALCPA")
+            else:
+                if "US_FDA_FALCPA" not in warn_cits:
+                    warn_cits.append("US_FDA_FALCPA")
+                if "WHO_JEMRA_PRIORITY_ALLERGENS" not in warn_cits:
+                    warn_cits.append("WHO_JEMRA_PRIORITY_ALLERGENS")
+            if "CODEX_CXS_1_1985" not in warn_cits:
+                warn_cits.append("CODEX_CXS_1_1985")
         return {
             "status": "WARNING",
+            "safety_label": "UNSAFE",
             "badge_color": "orange",
             "title": "🟡 CẢNH BÁO — CÓ THUẬT NGỮ CẦN KIỂM TRA",
             "alerts": warning_alerts,
@@ -1584,14 +1772,24 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 "thành phần, dị ứng cá nhân hay mức nguy hiểm; hãy kiểm tra nhãn đầy đủ "
                 "và hỏi chuyên gia y tế nếu cần."
             ),
-            "citations": list(set([a["regulation"] for a in warning_alerts] + [a["codex"] for a in warning_alerts])),
+            "citations": warn_cits,
             **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
     elif caution_alerts:
+        caut_cits = _collect_canonical_citations(caution_alerts, include_codex=True)
+        if efsa_warnings:
+            has_e171 = any("171" in str(ew.get("substance", "")) or "titanium" in str(ew.get("substance", "")).lower() for ew in efsa_warnings)
+            target_efsa = "EFSA_2021_TITANIUM_DIOXIDE_E171" if has_e171 else "EFSA_OPINIONS"
+            if target_efsa not in caut_cits:
+                caut_cits.append(target_efsa)
+        if any(reg.get("adi", {}).get("source") == "JECFA" for reg in regulatory_assessments):
+            if "JECFA_EVALUATIONS" not in caut_cits:
+                caut_cits.append("JECFA_EVALUATIONS")
         return {
             "status": "CAUTION",
+            "safety_label": "CAUTION",
             "badge_color": "yellow",
             "title": "🟡 LƯU Ý — CẦN THÊM THÔNG TIN VỀ LIỀU LƯỢNG",
             "alerts": caution_alerts,
@@ -1600,57 +1798,197 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
                 "Có thông tin cần lưu ý nhưng dữ liệu nhãn không đủ để xác định mức phơi nhiễm "
                 "hoặc đưa ra khuyến nghị cá nhân."
             ),
-            "citations": list(set([a["regulation"] for a in caution_alerts])),
+            "citations": caut_cits,
             **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
     else:
-        if insufficient_evidence:
+        if abstention_reasons:
+            abstain_cits = []
+            q_lower = str(question or "").lower()
+            is_additive_query = any(
+                k in q_lower for k in ["phụ gia", "adi", "liều lượng", "hàm lượng", "ins", "e-", "ngưỡng", "tích lũy"]
+            ) or any("phụ gia" in str(r).lower() or "adi" in str(r).lower() or "định lượng" in str(r).lower() for r in abstention_reasons)
+            if is_additive_query and (any(item.get("matched_entity") and item["matched_entity"].get("ins_code") for item in linked_results) or regulatory_assessments):
+                for c in ["VN_TT24_2019", "CODEX_STAN_192_1995"]:
+                    if c not in abstain_cits:
+                        abstain_cits.append(c)
+                if any(reg.get("adi", {}).get("source") == "JECFA" for reg in regulatory_assessments):
+                    if "JECFA_EVALUATIONS" not in abstain_cits:
+                        abstain_cits.append("JECFA_EVALUATIONS")
+
+            is_allergen_query = bool(user_allergies) or any(
+                "dị nguyên" in str(r).lower() or "dị ứng" in str(r).lower() for r in abstention_reasons
+            ) or any(
+                k in q_lower for k in ["dị ứng", "dị nguyên", "nhiễm chéo"]
+            )
+            if is_allergen_query:
+                for c in ["US_FDA_FALCPA", "FAO_WHO_JEMRA_PART_3", "CODEX_CXS_1_1985"]:
+                    if c not in abstain_cits:
+                        abstain_cits.append(c)
             return {
                 "status": "ABSTAIN",
+                "safety_label": "ABSTAIN",
                 "badge_color": "gray",
-                "title": "⚪ TỪ CHỐI TƯ VẤN (KHÔNG ĐỦ CĂN CỨ)",
+                "title": "⚪ TỪ CHỐI TƯ VẤN — CHƯA ĐỦ DỮ LIỆU",
+                "abstention_type": "insufficient_data",
+                "abstention_reasons": abstention_reasons,
                 "message": (
-                    "Độ tin cậy OCR hoặc độ phù hợp của kết quả truy xuất dưới ngưỡng "
-                    "an toàn (S_total < 0.65). Hệ thống không kết luận an toàn khi thiếu căn cứ."
+                    "Hệ thống chưa đủ dữ liệu để đưa ra khuyến nghị đáng tin cậy. "
+                    + " ".join(abstention_reasons)
+                    + " Đề nghị chụp lại nhãn rõ hơn hoặc bổ sung thông tin còn thiếu "
+                    "(hàm lượng/khẩu phần, thông tin dị nguyên, bảng dinh dưỡng)."
                 ),
                 "alerts": [],
                 "cautions": [],
-                "citations": [],
+                "citations": abstain_cits,
                 **confidence_metrics,
                 "regulatory": regulatory_assessments,
                 "efsa_warnings": efsa_warnings,
             }
+
+        insufficient_data_notes = []
+        if has_insufficient_adi:
+            insufficient_data_notes.append(
+                "Một số phụ gia chưa đủ dữ liệu định lượng để đánh giá mức phơi nhiễm ADI."
+            )
+
+        safe_citations = []
+        if user_allergies:
+            safe_citations.extend(["US_FDA_FALCPA", "WHO_JEMRA_PRIORITY_ALLERGENS", "CODEX_CXS_1_1985"])
+        if any(item.get("matched_entity") and item["matched_entity"].get("ins_code") for item in linked_results):
+            for c in ["CODEX_STAN_192_1995", "VN_TT24_2019"]:
+                if c not in safe_citations:
+                    safe_citations.append(c)
         return {
             "status": "SCREENED_NO_ALERT",
+            "safety_label": "SAFE",
             "badge_color": "blue",
             "title": "⚪ CHƯA PHÁT HIỆN CẢNH BÁO TRONG DỮ LIỆU ĐÃ SÀNG LỌC",
             "alerts": [],
             "cautions": [],
             "benefits": matched_benefits,
+            "insufficient_data_notes": insufficient_data_notes,
             "advice": (
                 "Không tìm thấy cảnh báo phù hợp trong các thành phần đã nhận diện. Điều này "
                 "không chứng minh sản phẩm an toàn, không xác nhận toàn bộ nhãn và không phải "
-                "kết luận tuân thủ pháp luật; hãy kiểm tra bao bì đầy đủ."
+                "kết luận tuân thủ pháp luật; hãy kiểm tra bao bì đầy đủ và tham khảo "
+                "ý kiến chuyên gia nếu có bệnh nền."
             ),
-            "citations": [],
+            "citations": safe_citations,
             **confidence_metrics,
             "regulatory": regulatory_assessments,
             "efsa_warnings": efsa_warnings,
         }
 
 
-_LLM_ANSWER_PROMPT = """Bạn là chuyên gia tư vấn an toàn thực phẩm Việt Nam. Dựa trên bằng chứng khoa học bên dưới, hãy trả lời câu hỏi của người dùng bằng tiếng Việt.
+def _question_allergies(question):
+    """Allergen groups the user names in the question; the quoted product name is ignored."""
+    q = re.sub(r"'.*?'(?=\s|$|[?,.;:])", " ", str(question or "")).lower()
+    return [a for a, kws in ALLERGEN_KEYWORDS.items() if any(contains_label_term(q, kw) for kw in kws)]
 
-## Yêu cầu:
-- Trả lời ngắn gọn, rõ ràng, dễ hiểu cho người tiêu dùng.
-- Mỗi câu phải kết thúc bằng trích dẫn nguồn có trong danh sách nguồn được cung cấp.
-- Chỉ dùng chính xác tên nguồn trong danh sách; không tự tạo nguồn, năm xuất bản, URL hoặc mã trích dẫn.
-- Nếu có chống chỉ định hoặc dị ứng, cảnh báo rõ ràng và khuyên tham vấn bác sĩ.
+
+def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_conf=0.95, all_mentions=None,
+                                  extra_gaps=None):
+    """Guardrail with two-type abstention (see modules/abstention.py).
+
+    1. Missing data (insufficient_data): the label lacks what the question needs -> ask to re-photograph the
+       label or supply the missing information. Independent of OCR confidence, so Config B can abstain too.
+    2. Out of scope (out_of_scope): the question asks for diagnosis / treatment / medication decisions
+       -> refer to a doctor, pharmacist or dietitian.
+    A CRITICAL_ALERT is never downgraded; it only gets the data gaps / referral attached. A direct allergen hit is
+    kept as a warning (the label already shows the allergen), with the gaps attached.
+    """
+    stated = _question_allergies(question)
+    if stated:  # allergens the user states in the question are added to the profile, never replacing it
+        persona = {**persona, "allergies": list(dict.fromkeys(list(persona.get("allergies", [])) + stated))}
+    result = _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=avg_ocr_conf, all_mentions=all_mentions)
+    scope = abstention.detect_out_of_scope(question)
+    stated_terms = [kw for a in stated for kw in ALLERGEN_KEYWORDS.get(a, [])]
+    gaps = abstention.detect_data_gaps(question, linked_results, all_mentions, allergen_terms=stated_terms)
+    gaps = gaps + list(extra_gaps or [])  # khoảng trống tri thức do tầng QA động phát hiện (dynamic_qa)
+    status = result.get("status")
+    types = list(dict.fromkeys(
+        ([abstention.INSUFFICIENT_DATA] if gaps or (status == "ABSTAIN") else [])
+        + ([abstention.OUT_OF_SCOPE] if scope else [])))
+    result["data_gaps"] = gaps
+    result["scope_issues"] = scope
+    if not types:
+        return result
+
+    # a direct allergen hit keeps its warning; when the question names the allergen, only a hit on that one counts
+    direct_allergen = any(
+        a.get("regulation") == "US_FDA_FALCPA" and (not stated or a.get("allergen_key") in stated)
+        for a in result.get("alerts", []))
+    only_data_gap = types == [abstention.INSUFFICIENT_DATA]
+    keep_alert = status == "CRITICAL_ALERT" or (only_data_gap and direct_allergen and status != "ABSTAIN")
+    if keep_alert:
+        extra = abstention.describe(types, gaps, scope)
+        result["abstention_types"] = types
+        result["advice"] = (result.get("advice", "") + " " + extra["message"]).strip()
+        return result
+
+    core_reasons = result.get("abstention_reasons", []) if status == "ABSTAIN" else []
+    desc = abstention.describe(types, gaps, scope, core_reasons)
+    other = [a["additive"] for a in result.get("alerts", []) if a.get("additive")][:3]
+    if other:
+        desc["message"] += " Lưu ý: nhãn còn khớp mục khác trong hồ sơ của bạn (" + "; ".join(other) + ") — hãy tự kiểm tra nhãn."
+
+    # Tách bạch nguồn trích dẫn đúng theo từng miền vấn đề (domain-aware citations), tránh gán bừa bãi
+    all_reasons_text = " ".join(core_reasons + [g.get("reason", "") for g in gaps] + scope).lower()
+    q_text = str(question or "").lower()
+    is_additive_gap = any("ADDITIVE" in g.get("code", "") for g in gaps) or any(
+        k in q_text for k in ["phụ gia", "adi", "liều lượng", "hàm lượng", "ins", "e-", "ngưỡng", "tích lũy"]
+    ) or any(k in all_reasons_text for k in ["phụ gia", "adi", "định lượng"])
+    is_allergen_gap = any(g.get("code") == "CROSS_CONTACT_STATEMENT" for g in gaps) or bool(stated) or any(
+        k in q_text for k in ["dị ứng", "dị nguyên", "nhiễm chéo"]
+    ) or any(k in all_reasons_text for k in ["dị nguyên", "dị ứng", "nhiễm chéo"])
+
+    guard_cits = []
+    if is_allergen_gap:
+        for c in ["US_FDA_FALCPA", "WHO_JEMRA_PRIORITY_ALLERGENS", "CODEX_CXS_1_1985", "FAO_WHO_JEMRA_PART_3"]:
+            if c not in guard_cits:
+                guard_cits.append(c)
+    if is_additive_gap:
+        for c in ["VN_TT24_2019", "CODEX_STAN_192_1995"]:
+            if c not in guard_cits:
+                guard_cits.append(c)
+        if any(reg.get("adi", {}).get("source") == "JECFA" for reg in result.get("regulatory", [])):
+            if "JECFA_EVALUATIONS" not in guard_cits:
+                guard_cits.append("JECFA_EVALUATIONS")
+
+    final_cits = guard_cits if guard_cits else result.get("citations", [])
+
+    return {
+        **result,
+        "status": "ABSTAIN",
+        "safety_label": "ABSTAIN",
+        "badge_color": "gray",
+        "title": desc["title"],
+        "abstention_type": types[0] if len(types) == 1 else "+".join(types),
+        "abstention_types": types,
+        "abstention_reasons": core_reasons + [g["reason"] for g in gaps] + scope,
+        "message": desc["message"],
+        "citations": final_cits,
+        "suppressed_status": status if status != "ABSTAIN" else None,
+    }
+
+
+_LLM_ANSWER_PROMPT = """Bạn là trợ lý tra cứu an toàn thực phẩm Việt Nam. Dựa trên bằng chứng khoa học bên dưới, hãy trả lời câu hỏi của người dùng bằng tiếng Việt.
+
+## Yêu cầu bắt buộc:
+- Hệ thống chỉ cung cấp thông tin tham khảo và gợi ý, KHÔNG thay thế tư vấn y khoa chuyên nghiệp.
+- Sử dụng ngôn ngữ khuyến nghị: "nên cân nhắc", "khuyến nghị tham khảo ý kiến bác sĩ", "có thể cần thận trọng" — KHÔNG dùng giọng kết luận tuyệt đối như "cấm dùng", "không được ăn", "chắc chắn an toàn".
+- Trích dẫn quy chuẩn: Mỗi nhận định rủi ro hoặc an toàn PHẢI kèm mã trích dẫn trong ngoặc vuông từ danh sách nguồn được cung cấp (ví dụ: [US_FDA_FALCPA], [FAO_WHO_JEMRA_PART_3], [VN_TT24_2019]). KHÔNG thêm chữ 'Nguồn:' hoặc link bên trong ngoặc vuông (viết [MÃ_NGUỒN] thay vì [Nguồn: MÃ_NGUỒN]).
+- Chỉ dùng chính xác mã nguồn trong danh sách; không tự tạo nguồn, năm xuất bản, URL hoặc mã trích dẫn ngoài danh sách.
 - Không bịa thêm thông tin ngoài bằng chứng được cung cấp.
-- Nếu không có bằng chứng liên quan để trả lời, hãy nói rõ chưa đủ dữ liệu và không suy đoán.
+- Nếu bằng chứng không đủ để trả lời:
+  + Thiếu dữ liệu nhãn/thành phần: đề nghị chụp lại nhãn rõ hơn hoặc bổ sung thông tin.
+  + Vượt phạm vi hệ thống: đề nghị trao đổi với chuyên gia dinh dưỡng hoặc bác sĩ phù hợp.
+- Nếu dữ liệu dinh dưỡng là ước tính từ FNDDS (không phải từ nhãn sản phẩm), phải nêu rõ đây là số liệu tham chiếu cho loại thực phẩm tương tự, không phải giá trị chính xác của sản phẩm.
 - Không lặp lại nguyên văn bằng chứng, hãy tổng hợp thành câu trả lời mạch lạc.
+- Dòng cuối cùng bắt buộc ghi nhãn an toàn chuẩn hóa: SAFETY_LABEL: {status} (chọn đúng 1 trong 5 nhãn sau: SAFE, CAUTION, UNSAFE, CRITICAL_ALERT, ABSTAIN; KHÔNG dùng nhãn WARNING).
 
 ## Hồ sơ người dùng:
 {persona_info}
@@ -1658,24 +1996,314 @@ _LLM_ANSWER_PROMPT = """Bạn là chuyên gia tư vấn an toàn thực phẩm V
 ## Câu hỏi:
 {question}
 
-## Trạng thái đánh giá: {status}
+## Trạng thái đánh giá quy chuẩn: {status}
 
 ## Bằng chứng thu thập được:
 {evidence}
 
-## Câu trả lời tư vấn:
+## Câu trả lời (mang tính gợi ý, khuyến nghị — kèm mã trích dẫn [MÃ_NGUỒN]):
 """
+
+
+def _get_gemini_api_key():
+    """Lấy API key cho Gemini: GEMINI_API_KEY/GOOGLE_API_KEY, hoặc khóa đầu tiên trong danh sách GEMINI_API_KEYS / gemini_keys.txt."""
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        keys = llm_keys.load_keys()  # tự nạp .env
+        api_key = keys[0] if keys else None
+    return api_key
+
+
+PREFERRED_GEMINI_MODELS = [
+    "gemini-3.5-flash-lite",
+    "gemini-flash-lite-latest",
+    "gemini-3.5-flash",
+    "gemini-3.8-flash",
+    "gemini-3.1-flash-lite",
+]
+
+
+_LAST_LLM_MODEL = None
+
+
+def get_last_llm_model():
+    """Tên model đã thực sự trả lời ở lần gọi LLM gần nhất (để ghi vào file dự đoán)."""
+    return _LAST_LLM_MODEL
+
+
+def _call_gemini_with_fallback(prompt, temperature=0.3, max_output_tokens=4096, api_key=None):
+    """
+    Gọi Gemini với chuỗi model dự phòng và danh sách khóa (modules.llm_keys).
+
+    Dùng lần lượt từng khóa; khi mọi model của khóa hiện tại đều báo hết hạn mức ngày thì chuyển khóa kế.
+    Hết toàn bộ khóa: ở chế độ strict ném LLMQuotaExhausted (để dừng batch, mai chạy tiếp với --resume),
+    ngoài chế độ strict trả None như trước.
+    """
+    global _LAST_LLM_MODEL
+    pool = llm_keys.get_pool(extra_key=api_key)
+    if not pool.keys:
+        return None
+
+    try:
+        from google import genai
+    except ImportError:
+        _LOGGER.warning("Thư viện google-genai chưa được cài đặt.")
+        return None
+
+    models_to_try = []
+    custom_model = os.environ.get("GEMINI_MODEL")
+    if custom_model:
+        models_to_try.append(custom_model.strip())
+    for m in PREFERRED_GEMINI_MODELS:
+        if m not in models_to_try:
+            models_to_try.append(m)
+
+    last_error = None
+    while True:
+        key = pool.acquire()
+        if key is None:
+            break
+        try:
+            client = genai.Client(api_key=key)
+        except Exception as e:
+            _LOGGER.error("Không thể khởi tạo Google GenAI Client: %s", e)
+            pool.mark_exhausted(key)
+            continue
+
+        daily_hits = 0
+        for model_name in models_to_try:
+            for attempt in range(3):  # thử lại khi chỉ là giới hạn theo phút
+                pool.record_request(key)
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config={"temperature": temperature, "max_output_tokens": max_output_tokens},
+                    )
+                    text = (response.text or "").strip()
+                    if text and len(text) > 20:
+                        _LAST_LLM_MODEL = model_name
+                        return text
+                    _LOGGER.warning("Model '%s' trả về nội dung rỗng hoặc quá ngắn.", model_name)
+                    break
+                except Exception as e:
+                    last_error = e
+                    kind = llm_keys.classify_error(e)
+                    if kind == "daily":
+                        daily_hits += 1
+                        break
+                    if kind == "rate" and attempt < 2:
+                        delay = llm_keys.retry_delay_seconds(e)
+                        _LOGGER.warning("Gemini '%s' bị giới hạn theo phút, chờ %.0fs rồi thử lại.", model_name, delay)
+                        time.sleep(delay)
+                        continue
+                    _LOGGER.warning("Gemini model '%s' thất bại: %s. Đang chuyển sang model tiếp theo...", model_name, e)
+                    break
+        if daily_hits and daily_hits >= len(models_to_try):
+            _LOGGER.warning("Khóa Gemini %s đã hết hạn mức ngày, chuyển sang khóa kế tiếp.", llm_keys.fingerprint(key))
+            pool.mark_exhausted(key)
+            continue
+        break  # lỗi không phải do hạn mức: không đốt thêm khóa khác
+
+    if pool.acquire() is None and llm_keys.is_strict():
+        raise llm_keys.LLMQuotaExhausted("Tất cả khóa Gemini đã hết hạn mức hôm nay.")
+    _LOGGER.error("Toàn bộ danh sách model Gemini đều thất bại. Lỗi cuối cùng: %s", last_error)
+    return None
+
+
+# ---------------------------------------------------------------------
+# Chọn nhà cung cấp LLM: Gemini (mặc định, giữ nguyên) hoặc Qwen2.5 cục bộ qua Ollama.
+# Chọn bằng biến môi trường LLM_PROVIDER=gemini|ollama hoặc set_llm_provider() khi chạy.
+# ---------------------------------------------------------------------
+LLM_PROVIDERS = {
+    "gemini": "Gemini (Google API)",
+    "ollama": "Qwen2.5 (Ollama, chạy cục bộ)",
+}
+_LLM_PROVIDER = None  # None → đọc từ biến môi trường
+
+
+def set_llm_provider(provider):
+    """Đặt nhà cung cấp LLM cho các lần gọi sau ('gemini' | 'ollama'; None = theo env)."""
+    global _LLM_PROVIDER
+    if provider is not None and provider not in LLM_PROVIDERS:
+        raise ValueError(f"LLM provider phải thuộc {sorted(LLM_PROVIDERS)}, nhận: {provider!r}")
+    _LLM_PROVIDER = provider
+
+
+def get_llm_provider():
+    if _LLM_PROVIDER:
+        return _LLM_PROVIDER
+    env = (os.environ.get("LLM_PROVIDER") or "gemini").strip().lower()
+    return env if env in LLM_PROVIDERS else "gemini"
+
+
+def get_ollama_model():
+    return (os.environ.get("OLLAMA_MODEL") or "qwen2.5:latest").strip()
+
+
+def ollama_status():
+    """(ok, thông báo) — Ollama đang chạy và đã có model đã chọn chưa."""
+    import json as _json
+    import urllib.request
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    try:
+        with urllib.request.urlopen(f"{host}/api/tags", timeout=3) as resp:
+            names = [m.get("name", "") for m in _json.loads(resp.read()).get("models", [])]
+    except Exception as exc:
+        return False, f"Không kết nối được Ollama tại {host}: {exc}"
+    model = get_ollama_model()
+    if model not in names and not any(n.split(":")[0] == model.split(":")[0] and ":" not in model for n in names):
+        return False, f"Ollama chưa có model '{model}'. Hãy chạy: ollama pull {model}"
+    return True, f"Ollama sẵn sàng ({model})"
+
+
+def _llm_ready():
+    """True nếu nhà cung cấp LLM đang chọn có thể được gọi."""
+    if get_llm_provider() == "ollama":
+        return True  # lỗi kết nối được xử lý khi gọi, trả None
+    return bool(llm_keys.load_keys())
+
+
+def _call_ollama(prompt, temperature=0.3, max_output_tokens=4096):
+    """Gọi Ollama /api/chat (Qwen2.5). Trả về text hoặc None nếu lỗi."""
+    import json as _json
+    import urllib.error
+    import urllib.request
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    model = get_ollama_model()
+    body = _json.dumps({
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}],
+        "stream": False,
+        "options": {
+            "temperature": temperature,
+            "num_predict": max_output_tokens,
+            "num_ctx": int(os.environ.get("OLLAMA_NUM_CTX", "8192")),
+        },
+    }).encode("utf-8")
+    req = urllib.request.Request(f"{host}/api/chat", data=body, headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=int(os.environ.get("OLLAMA_TIMEOUT", "600"))) as resp:
+            data = _json.loads(resp.read())
+        text = ((data.get("message") or {}).get("content") or "").strip()
+        if text and len(text) > 20:
+            global _LAST_LLM_MODEL
+            _LAST_LLM_MODEL = model
+            return text
+        _LOGGER.warning("Ollama model '%s' trả về nội dung rỗng hoặc quá ngắn.", model)
+    except urllib.error.URLError as exc:
+        if llm_keys.is_strict() and not isinstance(exc, urllib.error.HTTPError):
+            raise llm_keys.LLMUnavailable(f"Không kết nối được Ollama tại {host}: {exc}") from exc
+        _LOGGER.error("Gọi Ollama (%s) thất bại: %s", model, exc)
+    except Exception as exc:
+        _LOGGER.error("Gọi Ollama (%s) thất bại: %s", model, exc)
+    return None
+
+
+def _call_llm(prompt, temperature=0.3, max_output_tokens=4096, api_key=None):
+    """Điểm gọi LLM duy nhất cho Config A/B/C: định tuyến theo nhà cung cấp đang chọn."""
+    if get_llm_provider() == "ollama":
+        return _call_ollama(prompt, temperature=temperature, max_output_tokens=max_output_tokens)
+    return _call_gemini_with_fallback(
+        prompt, temperature=temperature, max_output_tokens=max_output_tokens, api_key=api_key,
+    )
+
+
+def clean_llm_citations_and_label(text, expected_label=None):
+    """
+    Chuẩn hóa câu trả lời của LLM:
+    1. Loại bỏ các chuỗi rác (ví dụ: '[Nguồn: Quy định Việt Nam chưa được xác minh...]').
+    2. Chuẩn hóa các trích dẫn dài/viết tay thành mã quy chuẩn chuẩn hóa [MÃ_NGUỒN]
+       (ví dụ: '[Nguồn: US FDA FALCPA & Codex (CXS 1-1985)]' -> '[US_FDA_FALCPA] [CODEX_CXS_1_1985]').
+    3. Giữ lại [CODEX_CXS_1_1985] gọn gàng trong ngoặc vuông.
+    4. Chuẩn hóa dòng cuối: SAFETY_LABEL: <nhãn hợp lệ> (không dùng WARNING).
+    """
+    if not text:
+        return text
+
+    # 1. Xóa bỏ hoàn toàn các chuỗi rác chưa được xác minh
+    text = re.sub(
+        r'\[\s*(?:Nguồn:?\s*)?[^\]]*chưa được xác minh[^\]]*\]',
+        '',
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(
+        r'\[\s*(?:Nguồn:?\s*)?[^\]]*quy định việt nam chưa[^\]]*\]',
+        '',
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    # 2. Chuẩn hóa các trích dẫn trong ngoặc vuông
+    def _canon_bracket(match):
+        inner = match.group(1).strip()
+        inner_no_prefix = re.sub(r'^(?:Nguồn|Source|Ref):\s*', '', inner, flags=re.IGNORECASE).strip()
+
+        # Nhận diện các mã quy chuẩn có trong cụm text
+        found = []
+        if re.search(r'FALCPA', inner_no_prefix, re.I):
+            found.append('US_FDA_FALCPA')
+        if re.search(r'FASTER\s*ACT', inner_no_prefix, re.I):
+            found.append('US_FDA_FASTER_ACT_2023')
+        if re.search(r'JEMRA.*Part\s*3|PAL|precautionary', inner_no_prefix, re.I):
+            found.append('FAO_WHO_JEMRA_PART_3')
+        elif re.search(r'JEMRA', inner_no_prefix, re.I):
+            found.append('WHO_JEMRA_PRIORITY_ALLERGENS')
+        if re.search(r'CXS\s*1[-_]1985|Codex.*1985|Codex.*Labelling', inner_no_prefix, re.I):
+            found.append('CODEX_CXS_1_1985')
+        if re.search(r'STAN\s*192|GSFA', inner_no_prefix, re.I):
+            found.append('CODEX_STAN_192_1995')
+        if re.search(r'TT24|24/2019', inner_no_prefix, re.I):
+            found.append('VN_TT24_2019')
+        if re.search(r'EFSA.*171|titanium', inner_no_prefix, re.I):
+            found.append('EFSA_2021_TITANIUM_DIOXIDE_E171')
+        elif re.search(r'EFSA', inner_no_prefix, re.I):
+            found.append('EFSA_OPINIONS')
+        if re.search(r'JECFA', inner_no_prefix, re.I):
+            found.append('JECFA_EVALUATIONS')
+        if re.search(r'USDA|FDC|FNDDS', inner_no_prefix, re.I):
+            found.append('USDA_FDC')
+
+        if found:
+            # Khử trùng lặp giữ nguyên thứ tự
+            seen = set()
+            dedup = [c for c in found if not (c in seen or seen.add(c))]
+            return ' '.join(f'[{c}]' for c in dedup)
+
+        canon = canonicalize_citation(inner_no_prefix)
+        if canon and is_recognized_citation(canon):
+            return f'[{canon}]'
+
+        return f'[{inner_no_prefix}]'
+
+    text = re.sub(r'\[([^\]]+)\]', _canon_bracket, text)
+
+    # 3. Làm sạch khoảng trắng thừa và dấu chấm phẩy liền kề
+    text = re.sub(r'\s+([,.\)])', r'\1', text)
+    text = re.sub(r'[ \t]{2,}', ' ', text)
+
+    # 4. Chuẩn hóa nhãn an toàn dòng cuối
+    if expected_label:
+        norm_exp = guardrail_status_to_safety_label(expected_label)
+        text = re.sub(r'SAFETY_LABEL:\s*WARNING', f'SAFETY_LABEL: {norm_exp}', text, flags=re.IGNORECASE)
+    else:
+        text = re.sub(r'SAFETY_LABEL:\s*WARNING', 'SAFETY_LABEL: UNSAFE', text, flags=re.IGNORECASE)
+
+    return text.strip()
 
 
 def generate_llm_answer(evaluation, linked_results, persona, question,
                         detected_hazards=None, matched_fndds=None,
-                        nutri_warnings=None):
+                        nutri_warnings=None, qa_context="", passages=None):
     """
     Gọi Gemini Flash sinh câu trả lời tự nhiên có trích dẫn từ bằng chứng RAG.
+    `passages`: các đoạn bằng chứng đã truy xuất (modules.passage_retriever), có thể None.
     Trả về string câu trả lời, hoặc None nếu không có API key / lỗi.
+    Nhà cung cấp LLM: xem set_llm_provider() (Gemini hoặc Qwen2.5 qua Ollama).
     """
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    if not api_key:
+    api_key = _get_gemini_api_key()
+    if not _llm_ready():
         return None
 
     conditions = ", ".join(persona.get("conditions", [])) or "Không có"
@@ -1691,7 +2319,10 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     if alerts:
         evidence_parts.append("### Cảnh báo rủi ro:")
         for a in alerts:
-            evidence_parts.append(f"- {a['additive']}: {a['message']} [Nguồn: {a.get('regulation', '')}, {a.get('codex', '')}]")
+            reg = canonicalize_citation(a.get("regulation", ""))
+            codex = canonicalize_citation(a.get("codex", ""))
+            c_tags = " ".join(f"[{c}]" for c in [reg, codex] if c and is_recognized_citation(c))
+            evidence_parts.append(f"- {a['additive']}: {a['message']} {c_tags}".strip())
 
     entity_lines = []
     for item in linked_results:
@@ -1716,7 +2347,18 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
             evidence_parts.append(f"- [{h.get('severity', '')}] {h.get('title', '')} — Tác nhân: {h.get('hazard', '')}")
 
     if matched_fndds:
-        evidence_parts.append(f"### Dinh dưỡng (USDA FNDDS): {matched_fndds.get('food_description', '')}")
+        source_type = matched_fndds.get("data_source_type", "fndds_reference")
+        is_estimate = matched_fndds.get("is_estimate", True)
+        source_label = {
+            "product_label": "Nhãn sản phẩm",
+            "vcndd_reference": "Bảng TPTP Việt Nam (ước tính)",
+            "fndds_reference": "USDA FNDDS (ước tính)",
+        }.get(source_type, "Tham chiếu")
+        evidence_parts.append(f"### Dinh dưỡng ({source_label}): {matched_fndds.get('food_description', '')}")
+        if is_estimate:
+            disclaimer = matched_fndds.get("estimate_disclaimer", "")
+            if disclaimer:
+                evidence_parts.append(f"**LƯU Ý**: {disclaimer}")
         for key in ["calories_kcal", "sodium_mg", "sugars_g", "fat_g", "protein_g"]:
             val = matched_fndds.get(key)
             if val:
@@ -1724,54 +2366,101 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     if nutri_warnings:
         for nw in nutri_warnings:
             evidence_parts.append(f"- Cảnh báo dinh dưỡng: {nw}")
+    if qa_context:
+        evidence_parts.append(qa_context)
+    if passages:
+        from modules.passage_retriever import render_passages
+        evidence_parts.append(render_passages(passages))
 
     citations = evaluation.get("citations", [])
-    if citations:
-        evidence_parts.append("### Nguồn trích dẫn:")
-        for c in citations:
-            evidence_parts.append(f"- {c}")
+    canonical_citations = []
+    for c in citations:
+        canon = canonicalize_citation(c)
+        if canon and is_recognized_citation(canon) and canon not in canonical_citations:
+            canonical_citations.append(canon)
+
+    for p_ in passages or []:  # cite only sources that were actually retrieved
+        canon = canonicalize_citation(p_.get("citation_id", ""))
+        if canon and is_recognized_citation(canon) and canon not in canonical_citations:
+            canonical_citations.append(canon)
+
+    if matched_fndds:
+        for nc in ["CODEX_CXS_1_1985", "USDA_FDC"]:
+            if nc not in canonical_citations:
+                canonical_citations.append(nc)
+
+    if evaluation.get("efsa_warnings") or any("efsa" in str(item.get("matched_entity") or {}).lower() for item in linked_results):
+        has_e171 = any("171" in str(ew.get("substance", "")) or "titanium" in str(ew.get("substance", "")).lower() for ew in evaluation.get("efsa_warnings", []))
+        target_efsa = "EFSA_2021_TITANIUM_DIOXIDE_E171" if has_e171 else "EFSA_OPINIONS"
+        if target_efsa not in canonical_citations:
+            canonical_citations.append(target_efsa)
+
+    if any((item.get("matched_entity") or {}).get("jecfa_adi") for item in linked_results) or any((reg.get("adi") or {}).get("source") == "JECFA" for reg in evaluation.get("regulatory", [])):
+        if "JECFA_EVALUATIONS" not in canonical_citations:
+            canonical_citations.append("JECFA_EVALUATIONS")
+
+    if canonical_citations:
+        evidence_parts.append("### Danh sách mã nguồn quy chuẩn bắt buộc (hãy trích dẫn đúng mã này trong ngoặc vuông [MÃ_NGUỒN]):")
+        for c in canonical_citations:
+            evidence_parts.append(f"- [{c}]")
 
     evidence_text = "\n".join(evidence_parts)
+
+    canonical_safety_status = evaluation.get("safety_label") or guardrail_status_to_safety_label(evaluation.get("status", ""))
 
     prompt = _LLM_ANSWER_PROMPT.format(
         persona_info=persona_info,
         question=question or "Sản phẩm này có an toàn cho tôi không?",
-        status=evaluation.get("status", ""),
+        status=canonical_safety_status,
         evidence=evidence_text,
     )
 
-    try:
-        from google import genai
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=prompt,
-            config={"temperature": 0.3, "max_output_tokens": 4096},
+    result = _call_llm(
+        prompt,
+        temperature=0.3,
+        max_output_tokens=4096,
+        api_key=api_key,
+    )
+    if result and get_llm_provider() == "ollama" and canonical_citations \
+            and not extract_citations(clean_llm_citations_and_label(result, expected_label=canonical_safety_status)):
+        # Model cục bộ nhỏ hay quên trích dẫn: gọi lại một lần với nhắc nhở, không tự chèn nguồn thay model.
+        retry_prompt = (
+            prompt
+            + "\n\nNHẮC LẠI BẮT BUỘC: sau MỖI nhận định phải có mã nguồn trong ngoặc vuông, chỉ dùng các mã: "
+            + ", ".join(f"[{c}]" for c in canonical_citations)
+            + ". Ví dụ: \"Natri benzoat có ADI 0–5 mg/kg [JECFA_EVALUATIONS].\" Kết thúc bằng dòng SAFETY_LABEL."
         )
-        result = (response.text or "").strip()
-        if result and len(result) > 20:
-            citation_check = validate_citations(
-                result,
-                citations,
-                require_each_sentence=False,
-            )
-            if citation_check["valid"]:
-                return result
-            _LOGGER.warning(
-                "Citation check did not pass (returning answer anyway): %s",
-                citation_check,
-            )
+        retried = _call_llm(retry_prompt, temperature=0.2, max_output_tokens=4096, api_key=api_key)
+        if retried:
+            result = retried
+    if result:
+        result = clean_llm_citations_and_label(result, expected_label=canonical_safety_status)
+        citation_check = validate_citations(
+            result,
+            canonical_citations or citations,
+            require_each_sentence=False,
+        )
+        if citation_check["valid"]:
             return result
-        _LOGGER.warning("Gemini returned an empty or too-short answer.")
-    except Exception:
-        _LOGGER.exception("Gemini answer generation failed.")
-        pass
+        _LOGGER.warning(
+            "Citation check did not pass (returning answer anyway): %s",
+            citation_check,
+        )
+        return result
+    _LOGGER.warning("Gemini returned an empty or too-short answer.")
     return None
 
 
 _LLM_ONLY_PROMPT = """Bạn là chuyên gia tư vấn an toàn thực phẩm.
 Người dùng cung cấp danh sách thành phần đọc từ nhãn bao bì thực phẩm.
-Hãy trả lời câu hỏi của họ DỰA TRÊN KIẾN THỨC CỦA BẠN (không có cơ sở dữ liệu tra cứu).
+Hãy trả lời câu hỏi của họ DỰA TRÊN KIẾN THỨC CỦA BẠN (không có cơ sở dữ liệu tra cứu bên ngoài).
+
+## Lưu ý quan trọng:
+- Bạn KHÔNG có cơ sở dữ liệu quy chuẩn, y văn hay bằng chứng khoa học để tra cứu.
+- Câu trả lời chỉ mang tính gợi ý dựa trên kiến thức tổng quát, KHÔNG phải kết luận y khoa.
+- Sử dụng ngôn ngữ khuyến nghị: "nên cân nhắc", "khuyến nghị tham khảo ý kiến bác sĩ".
+- Nếu không chắc chắn, hãy nêu rõ và khuyên tham vấn chuyên gia.
+- Dòng cuối cùng bắt buộc ghi nhãn an toàn chuẩn hóa: SAFETY_LABEL: SAFE|CAUTION|UNSAFE|CRITICAL_ALERT|ABSTAIN (KHÔNG dùng WARNING)
 
 ## Hồ sơ người dùng:
 {persona_info}
@@ -1782,17 +2471,18 @@ Hãy trả lời câu hỏi của họ DỰA TRÊN KIẾN THỨC CỦA BẠN (kh
 ## Câu hỏi:
 {question}
 
-## Trả lời (tiếng Việt, ngắn gọn, thực tế):
+## Trả lời (tiếng Việt, ngắn gọn, mang tính gợi ý, không kết luận tuyệt đối):
 """
 
 
 def generate_llm_only_answer(raw_text, persona, question):
     """
-    Cấu hình LLM-only: Gemini trả lời trực tiếp từ OCR text, không tra cứu RAG.
-    Dùng cho ablation study — so sánh với pipeline có RAG.
+    Cấu hình A — Baseline LLM không truy xuất:
+    Gemini nhận thành phần sản phẩm + hồ sơ persona + câu hỏi, nhưng KHÔNG tra cứu KB/RAG.
+    Dùng cho ablation study — đo giá trị của retrieval (so sánh A vs B).
     """
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    if not api_key:
+    api_key = _get_gemini_api_key()
+    if not _llm_ready():
         return None
 
     conditions = ", ".join(persona.get("conditions", [])) or "Không có"
@@ -1801,21 +2491,323 @@ def generate_llm_only_answer(raw_text, persona, question):
 
     prompt = _LLM_ONLY_PROMPT.format(
         persona_info=persona_info,
-        ingredients_text=raw_text or "(không có)",
+        ingredients_text=raw_text or "(không có thông tin thành phần)",
         question=question or "Sản phẩm này có an toàn cho tôi không?",
     )
 
-    try:
-        from google import genai
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model="gemini-3.8-flash",
-            contents=prompt,
-            config={"temperature": 0.3, "max_output_tokens": 4096},
+    return _call_llm(
+        prompt,
+        temperature=0.3,
+        max_output_tokens=4096,
+        api_key=api_key,
+    )
+
+
+_SAFETY_LABEL_PATTERN = re.compile(
+    r"\b(SAFE|CAUTION|WARNING|UNSAFE|CRITICAL_ALERT|ABSTAIN)\b",
+    re.IGNORECASE,
+)
+
+
+def extract_safety_label(answer_text, default="ABSTAIN"):
+    """Bóc nhãn an toàn ở dòng SAFETY_LABEL; không tự suy diễn SAFE khi thiếu nhãn."""
+    if not answer_text:
+        return default
+    for line in reversed(str(answer_text).strip().splitlines()):
+        if "SAFETY_LABEL" not in line.upper():
+            continue
+        match = _SAFETY_LABEL_PATTERN.search(line)
+        if match:
+            return match.group(1).upper()
+    return default
+
+
+def guardrail_status_to_safety_label(status):
+    """Chuẩn hóa trạng thái máy luật về tập nhãn benchmark."""
+    normalized = str(status or "").strip().upper()
+    mapping = {
+        "SCREENED_NO_ALERT": "SAFE",
+        "SAFE": "SAFE",
+        "CAUTION": "CAUTION",
+        # Benchmark v3 gộp cảnh báo nguy cơ cao vào UNSAFE; WARNING vẫn được
+        # giữ nguyên trong evaluation.status để UI trình bày mức cảnh báo.
+        "WARNING": "UNSAFE",
+        "UNSAFE": "UNSAFE",
+        "CRITICAL_ALERT": "CRITICAL_ALERT",
+        "ABSTAIN": "ABSTAIN",
+    }
+    return mapping.get(normalized, "ABSTAIN")
+
+
+def build_persona_from_benchmark_record(record, personas=None):
+    """
+    Ánh xạ persona theo persona_id của benchmark, không đoán bằng từ khóa câu hỏi.
+
+    `personas` chỉ cung cấp metadata nền; các persona tổng hợp CKD và
+    diabetes+hypertension được dựng rõ ràng để cả UI và batch runner dùng chung.
+    """
+    record = record or {}
+    pid = str(record.get("persona_id", "healthy_adult")).strip().lower()
+    pname = str(record.get("persona_name", "")).strip()
+    available = {}
+    for persona in personas or []:
+        for key in (persona.get("id"), persona.get("persona_id")):
+            if key:
+                available[str(key).strip().lower()] = persona
+
+    candidate_ids = {
+        "healthy_adult": ("healthy_adult", "user_clinical_007"),
+        "pregnant_woman": ("pregnant_woman", "user_clinical_004"),
+        "child_5yo": ("child_5yo", "user_clinical_003"),
+        "allergy_patient": ("allergy_patient", "user_clinical_006"),
+        "pku_patient": ("pku_allergy_patient", "pku_patient", "user_clinical_001"),
+        "ckd_stage3": ("ckd_stage3", "user_clinical_005"),
+        "diabetes_hypertension": (
+            "diabetes_hypertension",
+            "diabetes_type2",
+            "user_clinical_002",
+        ),
+    }
+
+    base = None
+    for candidate in candidate_ids.get(pid, (pid,)):
+        if candidate in available:
+            base = deepcopy(available[candidate])
+            break
+    if base is None:
+        base = {
+            "id": pid,
+            "persona_id": pid,
+            "name": pname or pid,
+            "description": "",
+            "conditions": [],
+            "allergies": [],
+        }
+
+    exact_profiles = {
+        "healthy_adult": {
+            "conditions": ["healthy", "healthy_adult"],
+            "allergies": [],
+        },
+        "pregnant_woman": {
+            "conditions": ["pregnancy", "pregnancy_second_trimester"],
+            "allergies": [],
+        },
+        "child_5yo": {
+            "conditions": ["children_adhd", "children_under_6"],
+            "allergies": [],
+            "weight_kg": 18.0,
+        },
+        "ckd_stage3": {
+            "conditions": ["chronic_kidney_disease_stage_3", "ckd", "impaired_renal_filtration"],
+            "allergies": [],
+        },
+        "diabetes_hypertension": {
+            "conditions": ["diabetes", "hypertension", "cardiovascular_risk"],
+            "allergies": [],
+        },
+        "pku_patient": {
+            "conditions": ["phenylketonuria_pku"],
+            "allergies": ["phenylalanine"],
+        },
+    }
+    if pid in exact_profiles:
+        base.update(deepcopy(exact_profiles[pid]))
+
+    if pid == "allergy_patient":
+        condition_text = str(record.get("persona_conditions", "")).casefold()
+        question_text = str(record.get("question", "")).casefold()
+        combined = f"{condition_text} {question_text}"
+        condition_code_map = {
+            "soy_allergy": "soy",
+            "milk_allergy": "milk",
+            "egg_allergy": "egg",
+            "wheat_allergy": "wheat",
+            "gluten_allergy": "wheat",
+            "peanut_allergy": "peanut",
+            "treenut_allergy": "tree_nut",
+            "tree_nut_allergy": "tree_nut",
+            "sesame_allergy": "sesame",
+            "fish_allergy": "fish",
+            "shrimp_allergy": "shellfish",
+            "crab_allergy": "shellfish",
+            "seafood_allergy": "shellfish",
+            "shellfish_allergy": "shellfish",
+        }
+        condition_codes = {
+            item.strip() for item in re.split(r"[,;]", condition_text) if item.strip()
+        }
+        allergies = [
+            allergen for code, allergen in condition_code_map.items()
+            if code in condition_codes
+        ]
+        allergen_terms = {
+            "soy": ("soy_allergy", "đậu nành", "đậu tương", "soy", "lecithin"),
+            "milk": ("milk_allergy", "sữa", "milk", "casein", "whey"),
+            "egg": ("egg_allergy", "trứng", "egg", "albumin"),
+            "wheat": ("wheat_allergy", "gluten_allergy", "gluten", "lúa mì", "wheat", "bột mì"),
+            "peanut": ("peanut_allergy", "đậu phộng", "peanut", "lạc"),
+            "tree_nut": ("treenut_allergy", "tree_nut_allergy", "hạt cây", "tree nut"),
+            "sesame": ("sesame_allergy", "mè", "vừng", "sesame"),
+            "fish": ("fish_allergy", "cá", "fish"),
+            "shellfish": (
+                "shellfish_allergy", "seafood_allergy", "shrimp_allergy",
+                "hải sản", "shellfish", "tôm", "cua", "mực",
+            ),
+        }
+        if not allergies:
+            allergies = [
+                name for name, terms in allergen_terms.items()
+                if any(
+                    re.search(rf"(?<!\w){re.escape(term)}(?!\w)", combined)
+                    for term in terms
+                )
+            ]
+        allergies = list(dict.fromkeys(allergies))
+        if not allergies:
+            allergies = list(base.get("allergies", []))
+        base["allergies"] = allergies
+        base["conditions"] = ["severe_food_allergies"] + [f"{item}_allergy" for item in allergies]
+
+    base["benchmark_persona_id"] = pid
+    base["name"] = pname or base.get("name") or pid
+    benchmark_conditions_vi = str(record.get("persona_conditions_vi", "")).strip()
+    if benchmark_conditions_vi:
+        base["description"] = f"Hồ sơ benchmark: {benchmark_conditions_vi}."
+    base.setdefault("id", pid)
+    base.setdefault("persona_id", base["id"])
+    base.setdefault("conditions", [])
+    base.setdefault("allergies", [])
+    return base
+
+
+def run_grounded_pipeline(
+    mentions,
+    avg_ocr_conf,
+    product_name,
+    persona,
+    question,
+    kb_additives,
+    hazards_list,
+    fndds_list,
+    off_products,
+    generate_answer=True,
+    dynamic_qa_enabled=True,
+    passage_retrieval_enabled=True,
+    passage_top_k=5,
+    passage_mode=None,
+):
+    """
+    Downstream chuẩn dùng chung tuyệt đối cho Config B và Config C.
+
+    Hai cấu hình chỉ được phép khác nguồn mentions/confidence trước hàm này:
+    B dùng Ground Truth text, C dùng ảnh qua OCR + lexical normalization.
+    """
+    mentions = list(mentions or [])
+    linked_results = [foodontorag_entity_linking(item, kb_additives) for item in mentions]
+    # Tầng QA động: hiểu câu hỏi → tra KB theo phụ gia mà câu hỏi nhắc tới → phát hiện khoảng trống tri thức.
+    qa_plan, question_additives, qa_gaps = None, [], []
+    if dynamic_qa_enabled:
+        qa_plan = dynamic_qa.understand_question(question, persona)
+        question_additives = dynamic_qa.lookup_question_additives(qa_plan, kb_additives, linked_results)
+        qa_gaps = dynamic_qa.knowledge_gaps(question_additives)
+    evaluation = evaluate_safety_and_guardrail(
+        linked_results,
+        persona,
+        question,
+        avg_ocr_conf=avg_ocr_conf,
+        all_mentions=mentions,
+        extra_gaps=qa_gaps,
+    )
+    detected_hazards = check_food_hazards(product_name, mentions, hazards_list)
+    matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(
+        product_name,
+        fndds_list,
+        persona,
+    )
+    has_nutri_conditions = any(
+        any(k in str(c).lower() for k in ["tiểu đường", "cao huyết áp", "diabetes", "hypertension", "ckd", "suy thận", "gout", "thận", "tim mạch"])
+        for c in persona.get("conditions", [])
+    ) or any(
+        k in str(question).lower() for k in ["dinh dưỡng", "đường", "muối", "natri", "calo", "béo", "sugar", "sodium", "salt", "fat"]
+    )
+    if matched_fndds and (nutri_warnings or has_nutri_conditions):
+        cits = evaluation.setdefault("citations", [])
+        for c in ["CODEX_CXS_1_1985", "USDA_FDC"]:
+            if c not in cits:
+                cits.append(c)
+    if nutri_warnings and evaluation.get("status") == "SCREENED_NO_ALERT":
+        evaluation["status"] = "CAUTION"
+        evaluation["safety_label"] = "CAUTION"
+        evaluation["badge_color"] = "yellow"
+        evaluation["title"] = "🟡 LƯU Ý — VƯỢT NGƯỠNG DINH DƯỠNG KHUYẾN NGHỊ"
+        evaluation["advice"] = (
+            "Chỉ số dinh dưỡng vượt ngưỡng khuyến nghị cho hồ sơ bệnh lý; "
+            "hãy cân nhắc liều lượng và tham khảo ý kiến chuyên gia."
         )
-        result = (response.text or "").strip()
-        if result and len(result) > 20:
-            return result
-    except Exception:
-        pass
-    return None
+    off_cross_ref = cross_reference_openfoodfacts(product_name, mentions, off_products)
+    qa_summary, qa_context = None, ""
+    if dynamic_qa_enabled:
+        cits = evaluation.setdefault("citations", [])
+        for c in dynamic_qa.extra_citations(question_additives):
+            if c not in cits:
+                cits.append(c)
+        qa_trace = dynamic_qa.build_trace(
+            qa_plan, question_additives, linked_results, evaluation,
+            detected_hazards, matched_fndds, nutri_warnings,
+        )
+        qa_summary = dynamic_qa.summarize(qa_plan, qa_trace, qa_gaps)
+        qa_context = dynamic_qa.render_context(qa_plan, qa_trace)
+    retrieved_passages = []
+    if passage_retrieval_enabled:
+        # Truy xuất đoạn bằng chứng: câu hỏi + mã INS đã liên kết từ nhãn (B: văn bản chuẩn, C: OCR).
+        try:
+            from modules.passage_retriever import get_passage_retriever
+            linked_ins = [
+                (it.get("matched_entity") or {}).get("ins_code", "")
+                for it in linked_results if it.get("matched_entity")
+            ]
+            linked_ins = [c for c in dict.fromkeys(linked_ins) if c]
+            retriever = get_passage_retriever()
+            query = f"{question or ''} " + " ".join(linked_ins)
+            # mặc định: có dense (PASSAGE_EMBEDDING=bge-m3) → hybrid_dense_exact, không thì hybrid_exact
+            mode = passage_mode or ("hybrid_dense_exact" if retriever.has_dense else "hybrid_exact")
+            retrieved_passages = retriever.retrieve(
+                query, top_k=passage_top_k, mode=mode, ins_codes=linked_ins or None,
+            )
+        except Exception as exc:  # retrieval must never break the answer path
+            _LOGGER.warning("Passage retrieval failed: %s", exc)
+    llm_answer = None
+    citation_validation = None
+    if generate_answer:
+        llm_answer = generate_llm_answer(
+            evaluation,
+            linked_results,
+            persona,
+            question,
+            detected_hazards=detected_hazards,
+            matched_fndds=matched_fndds,
+            nutri_warnings=nutri_warnings,
+            qa_context=qa_context,
+            passages=retrieved_passages,
+        )
+        if llm_answer:
+            citation_validation = validate_citations(
+                llm_answer,
+                evaluation.get("citations", []),
+                require_each_sentence=False,
+            )
+    return {
+        "linked_results": linked_results,
+        "evaluation": evaluation,
+        "detected_hazards": detected_hazards,
+        "matched_fndds": matched_fndds,
+        "nutri_warnings": nutri_warnings,
+        "constraint_details": constraint_details,
+        "off_cross_ref": off_cross_ref,
+        "llm_answer": llm_answer,
+        "citation_validation": citation_validation,
+        "qa": qa_summary,
+        "retrieved_passages": retrieved_passages,
+        "safety_label": guardrail_status_to_safety_label(evaluation.get("status")),
+    }

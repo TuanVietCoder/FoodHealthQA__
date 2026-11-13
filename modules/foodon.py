@@ -26,16 +26,29 @@ class FoodOnCatalog:
     """Immutable ontology terms with indexes for exact, prefix, and token searches."""
 
     def __init__(self, entities):
+        if hasattr(entities, "entities"):
+            entities = entities.entities
         self.entities = tuple(entities)
         self.by_curie = {}
         labels_by_normalized = {}
         self._label_prefixes = []
         self._label_tokens = {}
+        self.parents = {}
+        self.children = {}
 
         for entity in self.entities:
             curie = str(entity["curie"]).strip().upper()
             label = str(entity["label"]).strip()
             self.by_curie[curie] = entity
+
+            raw_parents = entity.get("parents") or []
+            parent_curies = tuple(
+                str(p).strip().upper() for p in raw_parents if str(p).strip()
+            )
+            self.parents[curie] = parent_curies
+            for p in parent_curies:
+                self.children.setdefault(p, []).append(curie)
+
             if label.casefold().startswith("obsolete:"):
                 continue
 
@@ -57,6 +70,178 @@ class FoodOnCatalog:
 
     def __len__(self):
         return len(self.entities)
+
+    def __iter__(self):
+        return iter(self.entities)
+
+    def __getitem__(self, index_or_key):
+        if isinstance(index_or_key, (int, slice)):
+            return self.entities[index_or_key]
+        if isinstance(index_or_key, str):
+            key_upper = index_or_key.strip().upper()
+            if key_upper in self.by_curie:
+                return self.by_curie[key_upper]
+            normalized = _normalize_label(index_or_key)
+            if normalized in self.by_normalized_label:
+                return self.by_normalized_label[normalized]
+            raise KeyError(index_or_key)
+        return self.entities[index_or_key]
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except (KeyError, IndexError, TypeError):
+            return default
+
+    def __contains__(self, item):
+        if isinstance(item, str):
+            key_upper = item.strip().upper()
+            if key_upper in self.by_curie:
+                return True
+            normalized = _normalize_label(item)
+            if normalized in self.by_normalized_label:
+                return True
+            return False
+        return item in self.entities
+
+    def __bool__(self):
+        return bool(self.entities)
+
+    def _resolve_curie(self, item):
+        """Resolve a CURIE string, entity dict, or name to canonical uppercase CURIE."""
+        if not item:
+            return None
+        if isinstance(item, dict):
+            return str(item.get("curie", "")).strip().upper() or None
+        item_str = str(item).strip()
+        item_upper = item_str.upper()
+        if item_upper in self.by_curie:
+            return item_upper
+        normalized = _normalize_label(item_str)
+        if normalized in self.by_normalized_label:
+            return self.by_normalized_label[normalized]["curie"]
+        return item_upper if item_upper.startswith("FOODON:") else None
+
+    def get_parents(self, curie_or_query):
+        """Return tuple of parent CURIEs for the given entity."""
+        curie = self._resolve_curie(curie_or_query)
+        return self.parents.get(curie, ())
+
+    def get_children(self, curie_or_query):
+        """Return list of direct child CURIEs for the given entity."""
+        curie = self._resolve_curie(curie_or_query)
+        return self.children.get(curie, [])
+
+    def get_ancestor_curies(self, curie_or_query, max_depth=10, include_self=False):
+        """Traverse the DAG upwards via BFS to collect all ancestor CURIEs."""
+        curie = self._resolve_curie(curie_or_query)
+        if not curie:
+            return set()
+        visited = set()
+        if include_self:
+            visited.add(curie)
+        queue = [(curie, 0)]
+        while queue:
+            curr, depth = queue.pop(0)
+            if depth >= max_depth:
+                continue
+            for p in self.parents.get(curr, ()):
+                if p not in visited:
+                    visited.add(p)
+                    queue.append((p, depth + 1))
+        return visited
+
+    def get_descendant_curies(self, curie_or_query, max_depth=10, include_self=False):
+        """Traverse the DAG downwards via BFS to collect all descendant CURIEs."""
+        curie = self._resolve_curie(curie_or_query)
+        if not curie:
+            return set()
+        visited = set()
+        if include_self:
+            visited.add(curie)
+        queue = [(curie, 0)]
+        while queue:
+            curr, depth = queue.pop(0)
+            if depth >= max_depth:
+                continue
+            for ch in self.children.get(curr, ()):
+                if ch not in visited:
+                    visited.add(ch)
+                    queue.append((ch, depth + 1))
+        return visited
+
+    def get_ancestors(self, curie_or_query, max_depth=10, include_self=False):
+        """Return list of entity dicts for all ancestors."""
+        curies = self.get_ancestor_curies(curie_or_query, max_depth=max_depth, include_self=include_self)
+        return [self.by_curie[c] for c in curies if c in self.by_curie]
+
+    def get_descendants(self, curie_or_query, max_depth=10, include_self=False):
+        """Return list of entity dicts for all descendants."""
+        curies = self.get_descendant_curies(curie_or_query, max_depth=max_depth, include_self=include_self)
+        return [self.by_curie[c] for c in curies if c in self.by_curie]
+
+    def is_subclass_of(self, child_curie_or_query, parent_curie_or_query, max_depth=10):
+        """Return True if child is identical to parent or a descendant of parent on FoodOn DAG."""
+        child = self._resolve_curie(child_curie_or_query)
+        parent = self._resolve_curie(parent_curie_or_query)
+        if not child or not parent:
+            return False
+        if child == parent:
+            return True
+        return parent in self.get_ancestor_curies(child, max_depth=max_depth)
+
+    def find_common_ancestors(self, curie_a, curie_b, max_depth=10):
+        """Return set of common ancestor CURIEs between two entities."""
+        anc_a = self.get_ancestor_curies(curie_a, max_depth=max_depth, include_self=True)
+        anc_b = self.get_ancestor_curies(curie_b, max_depth=max_depth, include_self=True)
+        return anc_a.intersection(anc_b)
+
+    def find_lowest_common_ancestor(self, curie_a, curie_b, max_depth=10):
+        """Find the common ancestor deepest in the DAG (farthest from roots)."""
+        common = self.find_common_ancestors(curie_a, curie_b, max_depth=max_depth)
+        if not common:
+            return None
+        best = None
+        best_depth = -1
+        for curie in common:
+            depth = len(self.get_ancestor_curies(curie, max_depth=max_depth))
+            if depth > best_depth:
+                best_depth = depth
+                best = curie
+        return self.by_curie.get(best) if best else None
+
+    def get_lineage(self, curie_or_query, max_depth=8):
+        """Return ordered list of entity dictionaries from root down to node along canonical shortest path."""
+        curie = self._resolve_curie(curie_or_query)
+        if not curie or curie not in self.by_curie:
+            return []
+        path = [curie]
+        curr = curie
+        for _ in range(max_depth):
+            par_list = self.parents.get(curr, ())
+            if not par_list:
+                break
+            curr = par_list[0]
+            path.append(curr)
+        path.reverse()
+        return [self.by_curie[c] for c in path if c in self.by_curie]
+
+    def get_graph_neighborhood(self, curie_or_query):
+        """Return local 1-hop subgraph: parents, children, and current entity."""
+        curie = self._resolve_curie(curie_or_query)
+        if not curie or curie not in self.by_curie:
+            return None
+        ent = self.by_curie[curie]
+        par_entities = [self.by_curie[p] for p in self.get_parents(curie) if p in self.by_curie]
+        child_curies = self.get_children(curie)
+        child_entities = [self.by_curie[ch] for ch in child_curies[:20] if ch in self.by_curie]
+        return {
+            "curie": curie,
+            "label": ent.get("label", ""),
+            "parents": par_entities,
+            "children": child_entities,
+            "total_children": len(child_curies),
+        }
 
 
 @lru_cache(maxsize=4)
@@ -87,6 +272,10 @@ def load_foodon_entities(data_dir):
 
 
 def _as_catalog(entities):
+    if hasattr(entities, "by_normalized_label"):
+        return entities
+    if hasattr(entities, "entities"):
+        return entities
     if isinstance(entities, FoodOnCatalog):
         return entities
     return FoodOnCatalog(entities)
@@ -180,3 +369,39 @@ def enrich_additive_foodon_curie(additives, entities):
         )
 
     return additives
+
+
+def is_foodon_subclass_of(child, parent, entities, max_depth=10):
+    """Check if child is subclass/descendant of parent on FoodOn DAG."""
+    catalog = _as_catalog(entities)
+    return catalog.is_subclass_of(child, parent, max_depth=max_depth)
+
+
+def get_foodon_ancestors(curie, entities, max_depth=10, include_self=False):
+    """Get ancestor CURIEs for curie on FoodOn DAG."""
+    catalog = _as_catalog(entities)
+    return catalog.get_ancestor_curies(curie, max_depth=max_depth, include_self=include_self)
+
+
+def get_foodon_descendants(curie, entities, max_depth=10, include_self=False):
+    """Get descendant CURIEs for curie on FoodOn DAG."""
+    catalog = _as_catalog(entities)
+    return catalog.get_descendant_curies(curie, max_depth=max_depth, include_self=include_self)
+
+
+def get_foodon_lineage(curie, entities, max_depth=8):
+    """Get readable hierarchical lineage list from root down to curie."""
+    catalog = _as_catalog(entities)
+    return catalog.get_lineage(curie, max_depth=max_depth)
+
+
+def find_foodon_common_ancestor(curie_a, curie_b, entities, max_depth=10):
+    """Find lowest common ancestor between two CURIEs on FoodOn DAG."""
+    catalog = _as_catalog(entities)
+    return catalog.find_lowest_common_ancestor(curie_a, curie_b, max_depth=max_depth)
+
+
+def get_foodon_graph_neighborhood(curie, entities):
+    """Get 1-hop neighborhood: parents, children, and entity."""
+    catalog = _as_catalog(entities)
+    return catalog.get_graph_neighborhood(curie)

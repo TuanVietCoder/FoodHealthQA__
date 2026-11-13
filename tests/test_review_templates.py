@@ -24,12 +24,6 @@ def _read_csv(name):
 
 
 class ReviewTemplateTests(unittest.TestCase):
-    def test_source_grounded_qa_review_queue_preserves_draft_status(self):
-        rows = _read_csv("qa_benchmark_merged_review.csv")
-        self.assertGreaterEqual(len(rows), 700)
-        self.assertTrue(any(row["review_status"] == "approved" for row in rows))
-        self.assertTrue(all(row["review_status"] in {"approved", "draft_needs_review"} for row in rows))
-
     def test_source_review_queue_marks_claims_pending(self):
         rows = _read_csv("knowledge_base_source_review_template.csv")
         self.assertGreaterEqual(len(rows), 100)

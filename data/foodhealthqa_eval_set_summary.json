@@ -1,0 +1,50 @@
+{
+  "dataset_name": "FoodHealthQA Evaluation Benchmark Subset",
+  "total_records": 750,
+  "target_range": "500-1000",
+  "seed": 42,
+  "distribution_by_pillar": {
+    "An toàn phụ gia": 166,
+    "Dị ứng & Dị nguyên": 165,
+    "Trẻ em": 120,
+    "Bệnh nền": 112,
+    "Thai phụ": 105,
+    "Dinh dưỡng": 82
+  },
+  "distribution_by_safety_label": {
+    "SAFE": 285,
+    "CAUTION": 277,
+    "UNSAFE": 85,
+    "ABSTAIN": 72,
+    "CRITICAL_ALERT": 31
+  },
+  "distribution_by_persona": {
+    "healthy_adult": 166,
+    "allergy_patient": 165,
+    "child_5yo": 120,
+    "pregnant_woman": 105,
+    "diabetes_hypertension": 82,
+    "ckd_stage3": 81,
+    "pku_patient": 31
+  },
+  "distribution_by_tier": {
+    "silver": 411,
+    "core": 339
+  },
+  "diversity_metrics": {
+    "unique_packaging_photos": 376,
+    "max_questions_per_photo": 4,
+    "unique_question_templates": 150,
+    "max_template_share": 85
+  },
+  "mandatory_fields_coverage": {
+    "question_populated_pct": 100.0,
+    "answer_populated_pct": 100.0,
+    "citations_populated_pct": 100.0,
+    "domain_label_populated_pct": 100.0
+  },
+  "files": {
+    "jsonl": "data\\foodhealthqa_eval_set.jsonl",
+    "csv": "data\\foodhealthqa_eval_set.csv"
+  }
+}

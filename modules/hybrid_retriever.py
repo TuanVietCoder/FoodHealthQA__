@@ -15,6 +15,7 @@ import re
 import math
 import numpy as np
 from collections import Counter
+from modules.additive_linker import link_additive_name, normalize_ins_key
 
 # Thử nạp thư viện nâng cao, fallback nếu không có
 _HAS_WHOOSH = False
@@ -27,19 +28,19 @@ try:
     from whoosh.qparser import MultifieldParser
     from whoosh import scoring
     _HAS_WHOOSH = True
-except ImportError:
+except Exception:  # ImportError or OSError (blocked DLLs)
     pass
 
 try:
     import faiss
     _HAS_FAISS = True
-except ImportError:
+except Exception:  # ImportError or OSError (blocked DLLs)
     pass
 
 try:
     from sentence_transformers import SentenceTransformer
     _HAS_SBERT = True
-except ImportError:
+except Exception:  # ImportError or OSError (blocked DLLs)
     pass
 
 
@@ -522,6 +523,45 @@ def foodontorag_4agent_linking(mention, kb_additives):
       Agent 4: Synonym Generator & Feedback Loop (nếu τ < 0.70)
     """
     raw_text = mention["raw_mention"]
+
+    # Deterministic identity registry comes before statistical retrieval.
+    # This resolves labels that declare an exact additive name but omit the
+    # INS/E-number.  Identity-only records must not be interpreted as proof of
+    # food-category permission, ML compliance, exposure, or safety.
+    deterministic = link_additive_name(raw_text)
+    if deterministic is not None:
+        registry_entity = deterministic["matched_entity"]
+        registry_key = normalize_ins_key(registry_entity.get("ins_code", ""))
+        rich_entity = next(
+            (
+                additive
+                for additive in kb_additives
+                if normalize_ins_key(additive.get("ins_code", "")) == registry_key
+            ),
+            None,
+        )
+        entity = dict(rich_entity or registry_entity)
+        entity.setdefault("identity_only", rich_entity is None)
+        source = deterministic.get("source", {})
+        rationale = (
+            f"Liên kết định danh {deterministic['match_method']}: "
+            f"{deterministic.get('matched_alias') or raw_text} → "
+            f"{entity.get('ins_code', '')}. "
+            "Mã dùng để định danh; việc tuân thủ ML/ADI cần dữ liệu riêng."
+        )
+        return {
+            "raw_mention": raw_text,
+            "category": mention.get("category", "ingredient"),
+            "matched_entity": entity,
+            "confidence_tau": deterministic["confidence"],
+            "retrieval_confidence": deterministic["confidence"],
+            "rationale": rationale,
+            "retrieval_engine": "Deterministic additive identity registry",
+            "match_method": deterministic["match_method"],
+            "code_origin": deterministic["code_origin"],
+            "identity_source": source,
+        }
+
     retriever = get_hybrid_retriever(kb_additives)
 
     # === Agent 1: Hybrid Retrieval ===
@@ -611,4 +651,6 @@ def foodontorag_4agent_linking(mention, kb_additives):
         "retrieval_confidence": best_retrieval_confidence if best_additive else 0.0,
         "rationale": rationale,
         "retrieval_engine": engine_info,
+        "match_method": "hybrid_retrieval" if best_additive else "unlinked",
+        "code_origin": "retrieved_from_kb" if best_additive else "unresolved",
     }

@@ -1,0 +1,85 @@
+{
+  "data": "D:\\FoodHealthQA__\\data\\qa_eval_balanced.jsonl",
+  "linking": "oracle",
+  "n_corpus": 1095,
+  "corpus_kinds": {
+    "additive_identity": 50,
+    "vn_regulation": 50,
+    "tt24_positive_list": 51,
+    "tt24_usage_limits": 178,
+    "jecfa_adi": 201,
+    "codex_membership": 514,
+    "external_claim": 30,
+    "allergen_group": 21
+  },
+  "runs": {
+    "hybrid": {
+      "@1": {
+        "ins_hit": 0.0863,
+        "citation_recall": 0.2501,
+        "locator_hit": 0.4505,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@3": {
+        "ins_hit": 0.2389,
+        "citation_recall": 0.2945,
+        "locator_hit": 0.5968,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@5": {
+        "ins_hit": 0.3164,
+        "citation_recall": 0.3041,
+        "locator_hit": 0.6151,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@10": {
+        "ins_hit": 0.5133,
+        "citation_recall": 0.3365,
+        "locator_hit": 0.6559,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      }
+    },
+    "hybrid_exact": {
+      "@1": {
+        "ins_hit": 0.9779,
+        "citation_recall": 0.1786,
+        "locator_hit": 0.1347,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@3": {
+        "ins_hit": 0.9945,
+        "citation_recall": 0.2161,
+        "locator_hit": 0.2303,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@5": {
+        "ins_hit": 0.9945,
+        "citation_recall": 0.2252,
+        "locator_hit": 0.2577,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      },
+      "@10": {
+        "ins_hit": 0.9945,
+        "citation_recall": 0.3766,
+        "locator_hit": 0.6958,
+        "n_ins": 904,
+        "n_cit": 1203,
+        "n_loc": 1203
+      }
+    }
+  }
+}

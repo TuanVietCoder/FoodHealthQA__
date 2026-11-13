@@ -1,0 +1,58 @@
+{
+  "product_name": "Bánh gạo ICHI",
+  "ingredient": [
+    "Gạo Japonica (60%)",
+    "dầu thực vật",
+    "Đường kính trắng",
+    "Xì dầu (đậu nành, lúa mì)",
+    "mật ong (1.1%)",
+    "tinh bột biến tính",
+    "chất điều vị (621)"
+  ],
+  "additive": [
+    "chất điều vị (621)"
+  ],
+  "warning": [
+    "Chất gây dị ứng có trong thành phần: Đậu nành, lúa mì.",
+    "Trong xưởng sản xuất sản phẩm này có sản xuất các sản phẩm có liên quan đến: Sữa, tôm, cá.",
+    "Gói hút ẩm để trong bao bì không ăn được, lưu ý để xa tầm tay của trẻ em."
+  ],
+  "nutrition": [
+    {
+      "name": "Khẩu phần",
+      "value": "100g"
+    },
+    {
+      "name": "Năng lượng",
+      "value": "577 kcal/100g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "38.5g 68.8%"
+    },
+    {
+      "name": "Chất béo bão hòa",
+      "value": "17.5g 87.5%"
+    },
+    {
+      "name": "Carbohydrat",
+      "value": "53.0g 16.3%"
+    },
+    {
+      "name": "Đường tổng số",
+      "value": "10.3g"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "4.5g 9.0%"
+    },
+    {
+      "name": "Natri",
+      "value": "426mg 21.3%"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": null,
+  "mfg_date": null,
+  "expiry_date": null
+}

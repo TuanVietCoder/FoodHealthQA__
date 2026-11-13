@@ -1,8 +1,10 @@
-# Tiêu chí Gán Nhãn Gold Standard — FoodHealthQA
+# Quy tắc Gán Nhãn Thử nghiệm — FoodHealthQA
 
 **Phiên bản:** 1.0  
 **Ngày:** 2026-11-01  
-**Mục đích:** Tài liệu hóa tiêu chí quyết định label cho mọi QA record để đảm bảo nhất quán và có thể bảo vệ mà không cần chuyên gia trực tiếp.
+**Mục đích:** Mô tả heuristic gán nhãn để xây dựng bộ dữ liệu silver/pre-gold. Tài liệu này chưa được chuyên gia độc lập xác nhận và không chứng minh nhãn, đáp án hay kết luận sức khỏe là đúng.
+
+> **Giới hạn sử dụng:** Không gọi các bản ghi tạo theo quy tắc này là expert-validated gold. `SAFE`, `UNSAFE`, `CAUTION`, `CRITICAL_ALERT` là nhãn đầu ra của tác vụ, không phải chẩn đoán hay đảm bảo sản phẩm an toàn. Chỉ kết luận điều quan sát được trên nhãn; nếu thiếu dữ liệu thì dùng `ABSTAIN`. Kết quả đánh giá trên bộ này chỉ là exploratory weak-label metrics.
 
 ---
 
@@ -51,6 +53,8 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
 
 **Chú ý:** "Được phép theo luật" là điều kiện cần nhưng KHÔNG đủ nếu có T1/T2 concern.
 
+`SAFE` trong bộ dữ liệu chỉ có thể có nghĩa là không phát hiện yếu tố kích hoạt theo quy tắc và thông tin nhãn đang có. Không được diễn giải thành bảo đảm không có dị nguyên ẩn, không có nhiễm chéo, phù hợp với mọi cá nhân hoặc tuân thủ mức sử dụng pháp lý.
+
 ---
 
 ### CAUTION
@@ -78,6 +82,8 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
 - Allergen được **khai báo trực tiếp** trong danh sách thành phần của sản phẩm (không phải trong cảnh báo nhiễm chéo)
 - Allergen phù hợp với nhóm dị ứng của persona được hỏi
 - Nguồn: WHO JEMRA, FAO JEMRA, US FDA FALCPA
+
+Đây là phân loại dựa trên thành phần được khai báo, không phải đánh giá ngưỡng phản ứng dị ứng của cá nhân. Không suy diễn rằng không thấy khai báo nghĩa là không có dị nguyên.
 
 **Phân biệt với CRITICAL_ALERT:** Allergen xuất hiện trong thành phần chính (ingredient list) → UNSAFE. Allergen chỉ xuất hiện trong câu cảnh báo nhiễm chéo → CRITICAL_ALERT.
 
@@ -186,7 +192,7 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
 
 ---
 
-## 5. Quy trình tạo QA record mới (không cần chuyên gia)
+## 5. Quy trình tạo QA record thử nghiệm
 
 ```
 1. Chọn sản phẩm + đọc thành phần
@@ -199,9 +205,10 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
    - CAUTION: "phụ gia X được phép NHƯNG [source] ghi nhận [concern] — cần lưu ý"
    - UNSAFE: "sản phẩm chứa [allergen] trực tiếp trong thành phần"
    - CRITICAL_ALERT: "cảnh báo nhiễm chéo [allergen] trong dây chuyền sản xuất"
-7. gold_label = derived_label (không gán tay)
+7. Gán nhãn theo quy tắc, nhưng ghi trạng thái `machine_screened_pre_gold`, không gọi là gold
 8. source_citations = sources đã dùng trong rule engine
-9. Xác thực ngẫu nhiên: 10% records/domain, kiểm tra thủ công
+9. Ghi rõ đây là sàng lọc tự động; không gán `approved`, `answer_correct=yes` hoặc `expert_*` nếu chưa có người thực sự kiểm tra
+10. Khi chưa có chuyên gia, chỉ dùng cho kiểm thử nội bộ / exploratory weak-label evaluation. Với câu hỏi cần đánh giá lâm sàng hoặc pháp lý, thu hẹp thành câu hỏi kiểm tra nhãn hoặc trả `ABSTAIN`; không phát hành kết luận như dữ kiện gold.
 ```
 
 ---
@@ -212,3 +219,7 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
 - Không dùng "có trong TT24 = SAFE" khi T1 có kết luận bảo vệ mạnh hơn
 - Không thêm `condition=general_population` cho health concern vốn chỉ liên quan đến nhóm đặc thù (ví dụ: nitrite → trẻ nhỏ, phosphate → CKD)
 - Không để `note` rỗng khi có health concern — phải ghi rõ cơ chế và nguồn
+- Không ghi trạng thái tự động hoặc kế thừa là chuyên gia đã duyệt
+- Không dùng rule-engine match như bằng chứng độc lập cho tính đúng của rule hoặc nhãn
+- Không gọi vắng dị nguyên trên nhãn là bằng chứng sản phẩm không có nguy cơ dị nguyên/nhiễm chéo
+- Không kết luận sản phẩm tuân thủ ML/ADI khi thiếu loại thực phẩm, hàm lượng và phơi nhiễm cần thiết

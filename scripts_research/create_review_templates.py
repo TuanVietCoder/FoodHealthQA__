@@ -11,6 +11,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from modules.benchmark import load_benchmark
+from modules.benchmark_manifest import get_active_benchmark_path
 
 
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
@@ -84,7 +85,7 @@ def create_image_benchmark_mapping_template():
 
 
 def create_qa_review_template():
-    target = os.path.join(DATA_DIR, "qa_benchmark_merged_review.csv")
+    target = get_active_benchmark_path(DATA_DIR, "csv")
     if os.path.isfile(target):
         with open(target, "r", encoding="utf-8-sig", newline="") as source:
             rows = list(csv.DictReader(source))

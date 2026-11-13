@@ -1,0 +1,11 @@
+# Sao chép file này thành gemini_keys.txt (đã được .gitignore) rồi dán khóa thật vào, mỗi dòng một khóa.
+# Hệ thống dùng lần lượt từng khóa cho đến khi hết hạn mức ngày, rồi chuyển sang khóa kế tiếp.
+# Hạn mức tính theo project Google Cloud: các khóa trong CÙNG một project dùng chung hạn mức.
+# Dòng bắt đầu bằng '#' là chú thích.
+#
+# AIzaSy...khoa_1
+# AIzaSy...khoa_2
+# AIzaSy...khoa_3
+#
+# Cách khác: đặt trong .env  ->  GEMINI_API_KEYS=khoa_1,khoa_2,khoa_3
+# Giới hạn chủ động mỗi khóa mỗi ngày (tùy chọn):  GEMINI_DAILY_LIMIT_PER_KEY=1000

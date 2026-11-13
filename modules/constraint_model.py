@@ -21,6 +21,23 @@ import os
 import re
 
 
+# Filled by _load_allergen_groups(): keywords that are only a cross-contact precaution for a group (e.g. oats for gluten) and
+# the JEMRA 2021 Part 1 priority tier of each group.
+PRECAUTION_KEYWORDS = {}
+PRIORITY_TIER = {}
+_TIER_TEXT_VI = {
+    "GLOBAL_PRIORITY": "Dị nguyên ưu tiên toàn cầu (FAO/WHO JEMRA 2021)",
+    "REGIONAL_PRIORITY": "Dị nguyên ưu tiên theo khu vực/quốc gia (JEMRA 2021: không thuộc danh sách toàn cầu)",
+}
+
+
+def allergen_priority_info(allergy):
+    """Tier of an allergen group in the JEMRA 2021 Part 1 summary; {} when the group has no stated tier."""
+    key = str(allergy or "").lower().replace(" ", "_").replace("_allergy", "")
+    tier = PRIORITY_TIER.get(key, "")
+    return {"priority_tier": tier, "priority_text": _TIER_TEXT_VI[tier]} if tier in _TIER_TEXT_VI else {}
+
+
 def _load_allergen_groups():
     """Load source-linked allergen label categories enabled for screening."""
     kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge_base", "allergen_groups.json")
@@ -32,6 +49,8 @@ def _load_allergen_groups():
             if group.get("enabled_for_allergen_screening", True)
         ]
     keywords = {g["id"]: g["keywords"] for g in groups}
+    PRECAUTION_KEYWORDS.update({g["id"]: list(g.get("precaution_keywords", [])) for g in groups})
+    PRIORITY_TIER.update({g["id"]: g.get("jemra_priority", "") for g in groups})
     negation = {}
     for g in groups:
         key = f"{g['id']}_allergy"
@@ -49,6 +68,28 @@ def contains_label_term(text, term):
     if not text or not term:
         return False
     return bool(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text, re.IGNORECASE))
+
+
+# FDA Q&A Ed.5 (D.13, B.7): plant "milks" and voluntary "milk-free" claims are not milk-derived allergen evidence.
+_PLANT_MILK = re.compile(
+    r"sữa\s+(chiết\s+(xuất\s+)?từ\s+)?(đậu nành|đậu tương|dừa|hạnh nhân|gạo|yến mạch|hạt|óc chó|ngũ cốc|mè|vừng)"
+    r"|(soy|soya|coconut|almond|oat|rice|cashew|hemp)\s+milk|nước cốt dừa|nước dừa", re.IGNORECASE)
+_NEG_MILK_CLAIM = re.compile(
+    r"(không|ko|non|free)[\s-]*(có\s+|chứa\s+|thêm\s+)?(sữa|dairy|milk)|(sữa|milk|dairy)[\s-]*free", re.IGNORECASE)
+
+
+# "điều" is cashew, but also the first word of "điều vị" (flavour enhancer), "điều chỉnh độ acid", "điều hòa"...
+_NOT_CASHEW = re.compile(r"(?<!\w)điều\s+(vị|chỉnh|hòa|hoà|chế|kiện|khoản|tiết)(?!\w)", re.IGNORECASE)
+
+
+def strip_allergen_noise(text, allergy):
+    """Remove wording that mentions an allergen without being that ingredient (plant/negated milk; 'điều vị' vs cashew)."""
+    text = str(text or "")
+    if str(allergy or "").lower().replace(" ", "_").replace("_allergy", "") in ("nuts", "nut", "tree_nut", "tree_nuts", "hạt_cây"):
+        text = _NOT_CASHEW.sub(" ", text)
+    if str(allergy or "").lower().replace(" ", "_").replace("_allergy", "") in ("milk", "sữa", "dairy"):
+        return _NEG_MILK_CLAIM.sub(" ", _PLANT_MILK.sub(" ", text))
+    return text
 
 
 # =====================================================================
@@ -105,10 +146,9 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Natri", upper=600.0, unit="mg/100g", severity="WARNING",
             message_template=(
-                "Hàm lượng Natri cao ({value:.0f} {unit}) — "
-                "Vượt ngưỡng khuyến nghị AHA cho người tăng huyết áp (<1.500 mg/ngày, "
-                "tương đương <{upper:.0f} {unit} mỗi khẩu phần). "
-                "I_g(Na) = 0: Vi phạm ràng buộc khoảng."
+                "Hàm lượng Natri ({value:.0f} {unit}) vượt ngưỡng tham chiếu AHA "
+                "cho người tăng huyết áp (<1.500 mg/ngày, tương đương <{upper:.0f} {unit} "
+                "mỗi khẩu phần). Khuyến nghị tham khảo ý kiến bác sĩ về mức nạp natri phù hợp."
             )
         ),
     ],
@@ -116,15 +156,15 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Natri", upper=700.0, unit="mg/100g", severity="WARNING",
             message_template=(
-                "Hàm lượng Natri ({value:.0f} {unit}) — Nguy cơ tim mạch: "
-                "cần giảm tổng natri nạp vào. I_g(Na) = 0."
+                "Hàm lượng Natri ({value:.0f} {unit}) — Đối với người có nguy cơ tim mạch, "
+                "nên cân nhắc giảm tổng natri nạp vào. Khuyến nghị trao đổi với bác sĩ."
             )
         ),
         ConstraintRange(
             "Chất béo bão hòa", upper=5.0, unit="g/100g", severity="CAUTION",
             message_template=(
-                "Chất béo bão hòa ({value:.1f} {unit}) — Khuyến nghị giảm "
-                "để bảo vệ mạch vành. I_g(SatFat) = 0."
+                "Chất béo bão hòa ({value:.1f} {unit}) — Khuyến nghị cân nhắc giảm "
+                "chất béo bão hòa để hỗ trợ sức khỏe mạch vành."
             )
         ),
     ],
@@ -132,15 +172,16 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Natri", upper=500.0, unit="mg/100g", severity="CRITICAL",
             message_template=(
-                "Natri ({value:.0f} {unit}) — NGUY HIỂM cho CKD giai đoạn 3: "
-                "gánh nặng lọc thận nghiêm trọng. I_g(Na) = 0."
+                "Natri ({value:.0f} {unit}) — Mức cao đối với bệnh nhân CKD giai đoạn 3, "
+                "có thể tăng gánh nặng lọc thận. Khuyến nghị tham khảo bác sĩ thận học "
+                "trước khi sử dụng sản phẩm có hàm lượng natri này."
             )
         ),
         ConstraintRange(
             "Protein", upper=8.0, unit="g/100g", severity="CAUTION",
             message_template=(
-                "Protein ({value:.1f} {unit}) — Cần kiểm soát lượng protein "
-                "để giảm gánh nặng lọc thận. I_g(Protein) = 0."
+                "Protein ({value:.1f} {unit}) — Khuyến nghị kiểm soát lượng protein "
+                "để giảm gánh nặng lọc thận. Nên trao đổi với bác sĩ về khẩu phần phù hợp."
             )
         ),
     ],
@@ -148,15 +189,16 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Đường", upper=10.0, unit="g/100g", severity="WARNING",
             message_template=(
-                "Hàm lượng đường cao ({value:.1f} {unit}) — Nguy cơ tăng đường huyết "
-                "sau ăn. I_g(Sugar) = 0: Vi phạm ràng buộc khoảng pFoodReQ."
+                "Hàm lượng đường ({value:.1f} {unit}) vượt ngưỡng tham chiếu cho "
+                "người tiểu đường. Khuyến nghị cân nhắc hạn chế khẩu phần hoặc "
+                "tham khảo ý kiến bác sĩ về mức đường phù hợp."
             )
         ),
         ConstraintRange(
             "Calo", upper=300.0, unit="kcal/100g", severity="CAUTION",
             message_template=(
-                "Mật độ năng lượng cao ({value:.0f} {unit}). "
-                "Cần kiểm soát khẩu phần cho người tiểu đường. I_g(Cal) = 0."
+                "Mật độ năng lượng ({value:.0f} {unit}) khá cao. "
+                "Khuyến nghị kiểm soát khẩu phần cho người tiểu đường."
             )
         ),
     ],
@@ -164,14 +206,16 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Calo", upper=250.0, unit="kcal/100g", severity="WARNING",
             message_template=(
-                "Mật độ năng lượng ({value:.0f} {unit}) vượt ngưỡng kiểm soát cân nặng "
-                "(<{upper:.0f} {unit}). I_g(Cal) = 0."
+                "Mật độ năng lượng ({value:.0f} {unit}) vượt ngưỡng tham chiếu cho "
+                "kiểm soát cân nặng (<{upper:.0f} {unit}). Khuyến nghị cân nhắc "
+                "giảm khẩu phần hoặc chọn sản phẩm thay thế ít calo hơn."
             )
         ),
         ConstraintRange(
             "Chất béo", upper=15.0, unit="g/100g", severity="CAUTION",
             message_template=(
-                "Chất béo ({value:.1f} {unit}) — Cần giảm chất béo tổng. I_g(Fat) = 0."
+                "Chất béo ({value:.1f} {unit}) — Khuyến nghị cân nhắc giảm "
+                "chất béo tổng để hỗ trợ kiểm soát cân nặng."
             )
         ),
     ],
@@ -179,8 +223,9 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Protein", upper=10.0, unit="g/100g", severity="CAUTION",
             message_template=(
-                "Protein ({value:.1f} {unit}) — Cần kiểm soát lượng purine "
-                "cho người bệnh gút. I_g(Protein) = 0."
+                "Protein ({value:.1f} {unit}) — Đối với người bệnh gút, "
+                "nên cân nhắc kiểm soát lượng purine nạp vào. "
+                "Khuyến nghị trao đổi với bác sĩ về chế độ ăn phù hợp."
             )
         ),
     ],
@@ -188,8 +233,8 @@ _NUTRITION_CONSTRAINTS = {
         ConstraintRange(
             "Natri", upper=800.0, unit="mg/100g", severity="CAUTION",
             message_template=(
-                "Natri ({value:.0f} {unit}) — Cần thận trọng cho người viêm loét "
-                "dạ dày. I_g(Na) = 0."
+                "Natri ({value:.0f} {unit}) — Nên thận trọng với thực phẩm nhiều natri "
+                "đối với người viêm loét dạ dày. Khuyến nghị tham khảo ý kiến bác sĩ."
             )
         ),
     ],
@@ -456,6 +501,77 @@ _NEGATION_RULES = {
     **_ALLERGEN_NEGATION_RULES,
 }
 
+_FOODON_CATALOG_CACHE = None
+
+
+def get_foodon_catalog():
+    """Lazy-load and cache the FoodOn catalog for graph traversal."""
+    global _FOODON_CATALOG_CACHE
+    if _FOODON_CATALOG_CACHE is None:
+        try:
+            from modules.foodon import load_foodon_entities
+            data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+            _FOODON_CATALOG_CACHE = load_foodon_entities(data_dir)
+        except Exception:
+            _FOODON_CATALOG_CACHE = None
+    return _FOODON_CATALOG_CACHE
+
+
+# Mapping các dị nguyên lâm sàng tới nút tổ tiên trên Đồ thị FoodOn
+FOODON_ALLERGEN_GRAPH_ROOTS = {
+    "peanut": [
+        ("FOODON:00002099", "Đậu phộng / Lạc (FoodOn: peanut food product)"),
+    ],
+    "nuts": [
+        ("FOODON:00001172", "Hạt có vỏ cứng (FoodOn: nut food product)"),
+        ("FOODON:03460177", "Hạt giống hoặc hạt cây (FoodOn: plant seed or nut)"),
+    ],
+    "tree_nuts": [
+        ("FOODON:00001172", "Hạt có vỏ cứng (FoodOn: nut food product)"),
+    ],
+    "soy": [
+        ("FOODON:00002266", "Đậu nành (FoodOn: soybean food product)"),
+    ],
+    "milk": [
+        ("FOODON:03400148", "Sữa và chế phẩm từ sữa (FoodOn: milk product)"),
+        ("FOODON:03315150", "Sữa động vật có vú (FoodOn: mammalian milk)"),
+    ],
+    "egg": [
+        ("FOODON:00001274", "Trứng (FoodOn: egg food product)"),
+    ],
+    "fish": [
+        ("FOODON:00001248", "Cá (FoodOn: fish food product)"),
+        ("FOODON:00001055", "Cá biển (FoodOn: sea water fish)"),
+    ],
+    "crustaceans": [
+        ("FOODON:00001792", "Giáp xác (FoodOn: crustacean food product)"),
+        ("FOODON:03411374", "Động vật giáp xác (FoodOn: crustacean)"),
+    ],
+    "shellfish": [
+        ("FOODON:00001792", "Giáp xác / Động vật có vỏ (FoodOn: crustacean)"),
+        ("FOODON:00002044", "Thân mềm (FoodOn: mollusc food product)"),
+    ],
+    "wheat": [
+        ("FOODON:00001141", "Lúa mì (FoodOn: wheat food product)"),
+    ],
+    "gluten": [
+        ("FOODON:00001141", "Lúa mì chứa gluten (FoodOn: wheat food product)"),
+        ("FOODON:00001017", "Ngũ cốc hạt (FoodOn: cereal grain food product)"),
+    ],
+    "sesame": [
+        ("FOODON:00002232", "Mè / Vừng (FoodOn: sesame food product)"),
+    ],
+    "celery": [
+        ("FOODON:00001704", "Cần tây (FoodOn: celery food product)"),
+    ],
+    "mustard": [
+        ("FOODON:00002053", "Mù tạt (FoodOn: mustard food product)"),
+    ],
+    "molluscs": [
+        ("FOODON:00002044", "Thân mềm (FoodOn: mollusc food product)"),
+    ],
+}
+
 
 def classify_constraint_type(mention_text, additive, persona, is_precautionary=False):
     """
@@ -488,7 +604,7 @@ def classify_constraint_type(mention_text, additive, persona, is_precautionary=F
     for condition in all_conditions:
         rules = _NEGATION_RULES.get(condition, {})
         for keyword, ctype in rules.items():
-            if contains_label_term(mention_lower, keyword) or contains_label_term(ins_code, keyword):
+            if contains_label_term(strip_allergen_noise(mention_lower, condition), keyword) or contains_label_term(ins_code, keyword):
                 actual_ctype = CONSTRAINT_PRECAUTIONARY_RISK if (is_precautionary and ctype == CONSTRAINT_ALLERGEN_RISK) else ctype
                 if _severity_rank(actual_ctype) > _severity_rank(constraint_type):
                     constraint_type = actual_ctype
@@ -501,16 +617,52 @@ def classify_constraint_type(mention_text, additive, persona, is_precautionary=F
         combined_terms = keywords + [d for d in derivatives if d not in keywords]
 
         for kw in combined_terms:
-            if contains_label_term(mention_lower, kw) or (ins_code and contains_label_term(ins_code.lower(), kw)):
+            if contains_label_term(strip_allergen_noise(mention_lower, allergy), kw) or (ins_code and contains_label_term(ins_code.lower(), kw)):
                 new_type = CONSTRAINT_PRECAUTIONARY_RISK if is_precautionary else CONSTRAINT_ALLERGEN_RISK
                 if _severity_rank(new_type) > _severity_rank(constraint_type):
                     constraint_type = new_type
                     matched_rule = (f"{allergy}_allergy", kw)
 
+    # 3. Precaution-only keywords (e.g. oats for gluten): possible cross-contact, never a direct allergen hit
+    if matched_rule is None or constraint_type == CONSTRAINT_PERMITTED:
+        for allergy in user_allergies:
+            for kw in PRECAUTION_KEYWORDS.get(allergy, []):
+                if contains_label_term(mention_lower, kw) and _severity_rank(CONSTRAINT_PRECAUTIONARY_RISK) > _severity_rank(constraint_type):
+                    constraint_type = CONSTRAINT_PRECAUTIONARY_RISK
+                    matched_rule = (f"{allergy}_allergy_precaution", kw)
+
+    # 4. Quét suy diễn phả hệ qua Đồ thị Bản thể học FoodOn (FoodOn Graph Subsumption)
+    if (constraint_type == CONSTRAINT_PERMITTED or _severity_rank(constraint_type) < _severity_rank(CONSTRAINT_ALLERGEN_RISK)) and user_allergies:
+        catalog = get_foodon_catalog()
+        if catalog:
+            curie_to_check = None
+            if additive and additive.get("foodon_curie") and additive.get("foodon_curie") != "FOODON:00000000":
+                curie_to_check = additive["foodon_curie"]
+            elif mention_lower:
+                resolved = catalog.get(mention_lower)
+                if resolved:
+                    curie_to_check = resolved.get("curie")
+
+            if curie_to_check:
+                ancestor_curies = catalog.get_ancestor_curies(curie_to_check, max_depth=10, include_self=True)
+                for allergy in user_allergies:
+                    roots = FOODON_ALLERGEN_GRAPH_ROOTS.get(allergy, [])
+                    for root_curie, root_desc in roots:
+                        if root_curie in ancestor_curies:
+                            new_type = CONSTRAINT_PRECAUTIONARY_RISK if is_precautionary else CONSTRAINT_ALLERGEN_RISK
+                            if _severity_rank(new_type) > _severity_rank(constraint_type):
+                                constraint_type = new_type
+                                matched_rule = (f"{allergy}_allergy_foodon_graph", root_desc)
+                                break
+
+    info = {}
+    if matched_rule:
+        info = allergen_priority_info(str(matched_rule[0]).replace("_precaution", ""))
     return {
         "constraint_type": constraint_type,
         "matched_rule": matched_rule,
         "is_refined_oil_exempt": False,
+        **info,
     }
 
 
@@ -543,6 +695,9 @@ def apply_negation_constraints(linked_results, persona):
         enriched_item = dict(item)
         enriched_item["constraint_type"] = constraint_info["constraint_type"]
         enriched_item["constraint_rule"] = constraint_info["matched_rule"]
+        if constraint_info.get("priority_tier"):
+            enriched_item["priority_tier"] = constraint_info["priority_tier"]
+            enriched_item["priority_text"] = constraint_info["priority_text"]
         if constraint_info.get("is_refined_oil_exempt"):
             enriched_item["is_refined_oil_exempt"] = True
         enriched.append(enriched_item)
@@ -593,10 +748,12 @@ def parse_ml_value(codex_str):
     return None
 
 
-def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
+def evaluate_adi_compliance(additive_entity, body_weight_kg=None,
+                            concentration_mg_kg=None, serving_size_g=None):
     """
     Tính toán ngưỡng ADI (Acceptable Daily Intake) theo JECFA/EFSA.
-    Trả về dict với thông tin tuân thủ ADI dựa trên cân nặng người dùng.
+    Chỉ tính toán định lượng khi có đủ dữ liệu: body_weight_kg, concentration_mg_kg,
+    serving_size_g. Nếu thiếu, trả về INSUFFICIENT_DATA thay vì cố tính.
     Công thức: Lượng nạp tối đa/ngày = ADI_upper × body_weight_kg (mg/ngày)
     """
     assessment = additive_entity.get("adi_assessment") or {}
@@ -610,10 +767,16 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
         "adi_raw": adi_str,
         "adi_parsed": None,
         "max_daily_intake_mg": None,
+        "estimated_intake_mg": None,
         "ml_value": None,
         "compliance_status": "UNKNOWN",
         "source": assessment.get("source_id", ""),
         "detail": "",
+        "data_completeness": {
+            "body_weight_kg": body_weight_kg is not None,
+            "concentration_mg_kg": concentration_mg_kg is not None,
+            "serving_size_g": serving_size_g is not None,
+        },
     }
 
     if not assessment or assessment.get("verification_status") != "source_checked":
@@ -644,9 +807,6 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
     adi = parse_adi_value(adi_str)
     if adi:
         result["adi_parsed"] = {"lower": adi[0], "upper": adi[1], "unit": "mg/kg bw/day"}
-        max_daily = adi[1] * body_weight_kg
-        result["max_daily_intake_mg"] = max_daily
-        result["compliance_status"] = "SPECIFIED"
 
         source_parts = []
         if "JECFA" in adi_str.upper():
@@ -655,10 +815,35 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
             source_parts.append("EFSA")
         result["source"] = " / ".join(source_parts) if source_parts else "Codex Alimentarius"
 
-        result["detail"] = (
-            f"ADI: {adi[0]:.0f}–{adi[1]:.0f} mg/kg bw/ngày → "
-            f"Lượng nạp tối đa cho người {body_weight_kg:.0f} kg: {max_daily:.0f} mg/ngày"
-        )
+        if body_weight_kg is not None and body_weight_kg > 0:
+            max_daily = adi[1] * body_weight_kg
+            result["max_daily_intake_mg"] = max_daily
+
+            if concentration_mg_kg is not None and serving_size_g is not None:
+                estimated_intake = concentration_mg_kg * serving_size_g / 1000.0
+                result["estimated_intake_mg"] = estimated_intake
+                result["compliance_status"] = "SPECIFIED"
+                result["detail"] = (
+                    f"ADI: {adi[0]:.0f}–{adi[1]:.0f} mg/kg bw/ngày → "
+                    f"Giới hạn cho người {body_weight_kg:.0f} kg: {max_daily:.0f} mg/ngày. "
+                    f"Ước tính nạp vào: {estimated_intake:.1f} mg/khẩu phần."
+                )
+            else:
+                result["compliance_status"] = "INSUFFICIENT_DATA"
+                result["detail"] = (
+                    f"ADI: {adi[0]:.0f}–{adi[1]:.0f} mg/kg bw/ngày → "
+                    f"Giới hạn cho người {body_weight_kg:.0f} kg: {max_daily:.0f} mg/ngày. "
+                    "Chưa đủ dữ liệu định lượng (hàm lượng phụ gia trong sản phẩm, "
+                    "kích thước khẩu phần) để đánh giá mức phơi nhiễm thực tế — "
+                    "không thể kết luận vượt hay không vượt ADI."
+                )
+        else:
+            result["compliance_status"] = "INSUFFICIENT_DATA"
+            result["detail"] = (
+                f"ADI: {adi[0]:.0f}–{adi[1]:.0f} mg/kg bw/ngày. "
+                "Chưa có thông tin cân nặng người dùng để tính giới hạn cá nhân — "
+                "không thể kết luận vượt hay không vượt ADI."
+            )
     else:
         if assessment:
             result["compliance_status"] = "SOURCE_REVIEW_REQUIRED"
@@ -669,11 +854,17 @@ def evaluate_adi_compliance(additive_entity, body_weight_kg=60.0):
         elif "GMP" in adi_str.upper() or "GMP" in codex_str.upper():
             result["compliance_status"] = "GMP"
             result["source"] = "Codex STAN 192-1995 (GMP)"
-            result["detail"] = "Sử dụng theo nguyên tắc GMP — không giới hạn ADI cụ thể"
+            result["detail"] = (
+                "Sử dụng theo nguyên tắc GMP — không có giới hạn ADI số cụ thể. "
+                "Khuyến nghị sử dụng ở mức cần thiết tối thiểu."
+            )
         else:
             result["compliance_status"] = "NOT_ESTABLISHED"
             result["source"] = "JECFA"
-            result["detail"] = "Chưa xác định ngưỡng ADI — cần thận trọng khi sử dụng"
+            result["detail"] = (
+                "Chưa xác định ngưỡng ADI — khuyến nghị thận trọng khi sử dụng "
+                "và tham khảo ý kiến chuyên gia nếu có bệnh nền."
+            )
 
     ml = parse_ml_value(codex_str)
     if ml == "GMP":
@@ -874,7 +1065,7 @@ def get_vn_regulation(ins_code):
     }
 
 
-def evaluate_regulatory_compliance(additive_entity, persona=None, body_weight_kg=60.0):
+def evaluate_regulatory_compliance(additive_entity, persona=None, body_weight_kg=None):
     """
     Đánh giá tuân thủ quy chuẩn tổng hợp: JECFA ADI + EFSA + TT 24/2019/TT-BYT.
     Trả về dict chi tiết về tình trạng pháp lý và an toàn.
@@ -883,7 +1074,7 @@ def evaluate_regulatory_compliance(additive_entity, persona=None, body_weight_kg
     name = additive_entity.get("canonical_name", "")
     label = f"{name} ({ins_code})" if ins_code else name
 
-    adi_info = evaluate_adi_compliance(additive_entity, body_weight_kg)
+    adi_info = evaluate_adi_compliance(additive_entity, body_weight_kg=body_weight_kg)
 
     efsa_info = None
     if persona:
