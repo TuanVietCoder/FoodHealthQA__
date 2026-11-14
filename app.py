@@ -38,20 +38,14 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 
 
-try:
-
-    import paddle
-
-    paddle.set_flags({'FLAGS_use_mkldnn': False})
-
-except Exception:
-
-    pass
+# paddle/PaddleOCR/VietOCR KHÔNG import ở đây (mất ~12 giây): modules/ocr_extractor nạp chúng khi cần,
+# và luồng nền start_background_loads() khởi tạo sẵn ngay khi server bật.
 
 
 
 import streamlit as st
 
+import importlib
 import json
 import re
 import html
@@ -789,21 +783,45 @@ def load_all_system_data(data_dir):
 
     hazards = load_food_hazards(data_dir)
 
-    fndds = load_fndds_nutrition(data_dir)
-
     off = load_openfoodfacts_vietnam(data_dir)
 
     foodon = load_foodon_entities(data_dir)
 
-    biomarkers = load_nhanes_biomarkers(data_dir)
+    return kb, personas, hazards, off, foodon
 
-    return kb, personas, hazards, fndds, off, foodon, biomarkers
+
+@st.cache_resource(show_spinner=False)
+def start_background_loads(data_dir):
+    """Chạy nền (một lần cho cả server) các bước nặng chỉ cần khi phân tích ảnh:
+    khởi tạo OCR (~12 s import + nạp model), đọc NHANES (~5 s) và USDA FNDDS (~1,5 s).
+    Giao diện hiện ngay; lúc người dùng gửi ảnh/câu hỏi đầu tiên thì thường đã nạp xong."""
+    from concurrent.futures import ThreadPoolExecutor
+    from modules.ocr_extractor import warm_up_ocr
+    pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix="fh-preload")
+    return {
+        "ocr": pool.submit(warm_up_ocr),
+        "nhanes": pool.submit(load_nhanes_biomarkers, data_dir),
+        "fndds": pool.submit(load_fndds_nutrition, data_dir),
+    }
+
+
+def background_result(name):
+    """Lấy kết quả nạp nền (chờ nếu chưa xong). Lỗi nạp nền → nạp lại trực tiếp như cách cũ."""
+    try:
+        return _BG_LOADS[name].result()
+    except Exception:
+        if name == "nhanes":
+            return load_nhanes_biomarkers(DATA_DIR)
+        if name == "fndds":
+            return load_fndds_nutrition(DATA_DIR)
+        return None
 
 
 
 # Nạp dữ liệu đa nguồn thông minh từ DATA_DIR (được cache trong RAM, không load lại khi tương tác UI)
 
-kb_additives, personas_list, hazards_list, fndds_list, off_products, foodon_entities, nhanes_biomarkers_cache = load_all_system_data(DATA_DIR)
+kb_additives, personas_list, hazards_list, off_products, foodon_entities = load_all_system_data(DATA_DIR)
+_BG_LOADS = start_background_loads(DATA_DIR)
 
 
 
@@ -1221,6 +1239,33 @@ paddle_ready = is_paddleocr_available()
 
 
 
+def _ocr_status_html():
+    """Trạng thái OCR (PaddleOCR + VietOCR): khởi tạo nền ngay lần chạy trang đầu, dùng chung cho cả hai tab và mọi phiên."""
+    fut = _BG_LOADS["ocr"]
+    if not paddle_ready:
+        dot, txt = " off", "Chưa cài"
+    elif not fut.done():
+        dot, txt = " off", "Đang khởi tạo…"
+    else:
+        try:
+            state = fut.result()
+        except Exception:
+            state = {}
+        if state.get("paddleocr") and state.get("vietocr"):
+            dot, txt = "", "Sẵn sàng"
+        elif state.get("paddleocr"):
+            dot, txt = "", "Sẵn sàng (không VietOCR)"
+        else:
+            dot, txt = " off", "Lỗi khởi tạo"
+    return f'<div class="fh-stat"><span class="fh-dot{dot}"></span>PaddleOCR + VietOCR<span class="v tag">{txt}</span></div>'
+
+
+@st.fragment(run_every=3)
+def _ocr_status_fragment():
+    # tự làm mới để "Đang khởi tạo…" chuyển sang "Sẵn sàng" mà không cần tải lại trang
+    st.markdown(_ocr_status_html(), unsafe_allow_html=True)
+
+
 # ── Sidebar Điều Hướng & Trạng Thái Hệ Thống ──
 
 with st.sidebar:
@@ -1235,11 +1280,9 @@ with st.sidebar:
 
     st.markdown('<div class="fh-label">⚙️ Trạng thái hệ thống</div>', unsafe_allow_html=True)
 
-    _ocr_dot = "" if paddle_ready else " off"
-    _ocr_txt = "Sẵn sàng" if paddle_ready else "Dự phòng"
+    _ocr_status_fragment()
     _n_rec = f"{BENCHMARK_RECORDS:,}".replace(",", ".")
     st.markdown(
-        f'<div class="fh-stat"><span class="fh-dot{_ocr_dot}"></span>PaddleOCR<span class="v tag">{_ocr_txt}</span></div>'
         f'<div class="fh-stat">🎯 Bộ đánh giá (câu hỏi)<span class="v idx">{_n_rec}</span></div>'
         f'<div class="fh-stat">🏷️ Ảnh nhãn trong bộ đánh giá<span class="v tl">{BENCHMARK_IMAGES}</span></div>',
         unsafe_allow_html=True,
@@ -1331,6 +1374,29 @@ def render_source_list(sources):
     st.markdown("".join(cards), unsafe_allow_html=True)
 
 
+def render_nli_faithfulness_widget(cited, evaluation, alerts=None, regs=None):
+    """Hiển thị huy hiệu và kết quả thẩm định độ trung thực ngữ nghĩa NLI."""
+    if not cited or not cited.get("text"):
+        return None
+    try:
+        from modules.nli_verifier import verify_answer_faithfulness
+        alerts = alerts or []
+        regs = regs or []
+        evidence_parts = [
+            evaluation.get("advice", ""),
+            evaluation.get("message", ""),
+            "\n".join(f"- {a['additive']}: {a['message']}" for a in alerts if isinstance(a, dict)),
+            "\n".join(f"- {r['additive']}: ADI {r.get('adi', {}).get('detail', '')}" for r in regs if isinstance(r, dict)),
+            "\n".join(f"- EFSA: {ew.get('substance', '')} {ew.get('key_finding', '')}" for ew in evaluation.get("efsa_warnings", []) if isinstance(ew, dict))
+        ]
+        ev_text = "\n".join(p for p in evidence_parts if p.strip())
+        nli_res = verify_answer_faithfulness(cited["text"], ev_text, trigger_only=True)
+        st.markdown(nli_res["badge_html"], unsafe_allow_html=True)
+        return nli_res
+    except Exception:
+        return None
+
+
 def build_normalization_rows(linked_results):
     rows = []
     for r in linked_results:
@@ -1408,6 +1474,20 @@ CHAT_CSS = """
 .fh-ctx span{font-size:.74rem;font-weight:500;color:#334155;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:4px 12px}
 .fh-ctx span.miss{color:#92400e;background:#fffbeb;border-color:#fde68a}
 .fh-ctx span.ok{color:#065f46;background:#ecfdf5;border-color:#a7f3d0}
+.st-key-fh_inputbar{position:relative}
+.st-key-fh_inputbar [data-testid="stChatInput"] textarea{padding-right:150px!important}
+.st-key-llm_provider_select{position:absolute!important;right:58px;bottom:9px;z-index:20;width:140px!important}
+.st-key-llm_provider_select div[data-baseweb="select"] > div{background:transparent!important;border:none!important;box-shadow:none!important;
+  min-height:34px!important;border-radius:999px!important;cursor:pointer}
+.st-key-llm_provider_select div[data-baseweb="select"] > div:hover{background:#f1f5f9!important}
+.st-key-llm_provider_select div[data-baseweb="select"] *{font-size:.86rem!important;font-weight:600;color:#1f2937!important;justify-content:flex-end}
+.fh-hint{text-align:center;font-size:.72rem;color:#64748b;margin-top:6px}
+.fh-hint b{color:#334155}
+.fh-prod{display:flex;align-items:center;gap:12px;padding:10px 12px;margin:0 0 10px 0;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0}
+.fh-prod img{width:56px;height:56px;object-fit:cover;border-radius:10px;border:1px solid #e2e8f0}
+.fh-prod .t{font-size:.84rem;line-height:1.45;color:#334155}
+.fh-prod .t b{color:#0f172a}
+.fh-prod .t small{display:block;color:#64748b;font-size:.74rem}
 </style>
 """
 st.markdown(CHAT_CSS, unsafe_allow_html=True)
@@ -1417,6 +1497,7 @@ def _new_ctx():
     return {
         "image": None, "image_name": "", "sample_key": "custom", "product_name": "",
         "ocr_result": None, "mentions": [], "profile": m_chat.empty_profile(), "pending_question": "",
+        "image_no": 0, "image_thumb": None, "display_name": "", "image_count": 0, "awaiting_image_choice": False,
     }
 
 
@@ -1439,38 +1520,471 @@ def _thumb_bytes(img, size=480):
         return None
 
 
-# ── Sidebar: mô hình, ảnh mẫu, hồ sơ hiện tại ──
-_ls_products = get_label_studio_product_list(ASSETS_DIR) or []
+# ── Sidebar: chế độ làm việc (Hỏi đáp / Báo cáo nghiên cứu) ──
+WORKSPACE_DEMO = "💬 Hỏi đáp nhãn thực phẩm"
+WORKSPACE_REPORT = "🔬 Báo cáo nghiên cứu"
 with st.sidebar:
     st.markdown("---")
-    st.markdown('<div class="fh-label">🤖 Mô hình sinh câu trả lời</div>', unsafe_allow_html=True)
-    _provider_keys = list(m_pipeline.LLM_PROVIDERS)
-    _provider_key = st.selectbox(
-        "Mô hình:", _provider_keys,
-        index=_provider_keys.index(m_pipeline.get_llm_provider()),
-        format_func=lambda k: m_pipeline.LLM_PROVIDERS[k],
-        key="llm_provider_select", label_visibility="collapsed",
-        help="Gemini gọi API Google; Qwen2.5 chạy trên máy qua Ollama (không cần API key).",
+    app_mode = st.radio(
+        "Chế độ:", [WORKSPACE_DEMO, WORKSPACE_REPORT],
+        key="app_mode", label_visibility="collapsed",
+        help="Hỏi đáp: trò chuyện với hệ thống trên ảnh nhãn. Báo cáo nghiên cứu: kết quả đánh giá 3 cấu hình A/B/C.",
     )
-    m_pipeline.set_llm_provider(_provider_key)
-    if _provider_key == "ollama":
-        _ok, _msg = m_pipeline.ollama_status()
-        (st.caption if _ok else st.warning)(("🟢 " if _ok else "") + _msg)
 
-    if _ls_products:
-        st.markdown('<div class="fh-label" style="margin-top:14px">🖼️ Chưa có ảnh? Dùng ảnh nhãn mẫu</div>', unsafe_allow_html=True)
-        _sample_opts = {f"[{p['filename']}] {p['label']}": p for p in _ls_products}
-        _sample_choice = st.selectbox("Ảnh mẫu:", list(_sample_opts), key="sample_pick", label_visibility="collapsed")
-        if st.button("📎 Đính kèm ảnh mẫu vào trò chuyện", width="stretch"):
-            st.session_state["attach_sample"] = _sample_opts[_sample_choice]
+# ═════════════════════════════════════════════════════════════════════════
+# TAB "🔬 Báo cáo nghiên cứu": giao diện của commit f2694d50 (chọn ảnh mẫu/tải ảnh, hồ sơ, câu hỏi → kết quả 4 tab).
+# Giữ nguyên mã giao diện và xử lý của commit đó; chỉ lấy NHANES/FNDDS từ bản nạp nền. Không có thanh nhập chat.
+# ═════════════════════════════════════════════════════════════════════════
+REPORT_CSS = """
+<style>
+[data-testid="stMainBlockContainer"],.main .block-container{max-width:100%!important;padding-bottom:2.5rem!important}
+</style>
+"""
 
-    st.markdown('<div class="fh-label" style="margin-top:14px">👤 Hồ sơ đang áp dụng</div>', unsafe_allow_html=True)
-    st.caption(m_chat.profile_summary(ctx["profile"]))
-    _c1, _c2 = st.columns(2)
-    if _c1.button("🧹 Xóa hồ sơ", width="stretch", disabled=not ctx["profile"].get("declared")):
-        ctx["profile"] = m_chat.empty_profile()
-        st.rerun()
-    if _c2.button("✨ Trò chuyện mới", width="stretch"):
+
+def render_report_workspace():
+
+
+    # ── TIÊU ĐỀ DEMO ──
+
+    render_hero(
+        "FoodHealthQA: Hỏi đáp Phụ gia &amp; Dị nguyên từ Ảnh Nhãn",
+        "Tải ảnh nhãn bao bì, hệ thống đọc thành phần bằng OCR, chuẩn hóa phụ gia/dị nguyên, truy xuất quy chuẩn rồi trả lời kèm nguồn dẫn chứng.",
+        "🥗",
+        ("📷 OCR nhãn", "🧪 Phụ gia &amp; dị nguyên", "📚 Dẫn chứng nguồn"),
+        badge="Hỏi đáp phụ gia &amp; dị nguyên từ ảnh nhãn",
+    )
+
+    render_pipeline_flow("Luồng xử lý", [
+        ("Ảnh bao bì", ""),
+        ("✓ OCR (PaddleOCR + VietOCR ➔ phục hồi chính tả)", "ok"),
+        ("✓ Chuẩn hóa phụ gia/dị nguyên (INS · FoodOn)", "ok"),
+        ("✓ Truy xuất quy chuẩn (Codex, JECFA, TT 24/2019, EFSA)", "ok"),
+        ("✓ Guardrail &amp; từ chối khi thiếu bằng chứng", "ok"),
+        ("✓ Sinh câu trả lời có trích dẫn (Gemini hoặc Qwen2.5)", "final"),
+    ])
+
+    # Bố cục 2 cột chính
+    col_left, col_right = st.columns([5, 7], gap="medium")
+
+    pipeline_mode = "[C] Cấu hình C: Pipeline quang học OCR + RAG (Full Pipeline)"
+    img_display = None
+    image_input_to_process = None
+    sample_key = "custom"
+    selected_prod_name = "Sản phẩm thực phẩm"
+
+    with col_left:
+        with st.container(key="fh_card_input"):
+            _hdr_in = st.empty()
+            input_source = st.radio(
+                "Nguồn ảnh bao bì thực phẩm:",
+                ["Chọn ảnh nhãn mẫu có sẵn", "Tải ảnh từ máy tính"],
+                horizontal=True,
+                key="image_input_source",
+            )
+            if input_source.startswith("Chọn"):
+                ls_products = get_label_studio_product_list(ASSETS_DIR)
+                if not ls_products:
+                    st.warning("Không tìm thấy dữ liệu nhãn sản phẩm mẫu trong thư mục assets/labels/.")
+                    st.stop()
+                _opts = {f"[{p['filename']}] {p['label']}": p for p in ls_products}
+                sample_option = st.selectbox(
+                    f"Chọn ảnh sản phẩm ({len(ls_products)} ảnh mẫu):", list(_opts),
+                    help="Ảnh nhãn bao bì thực phẩm Việt Nam có sẵn để thử nghiệm.",
+                )
+                ls_match = _opts[sample_option]
+                sample_key = ls_match["filename"]
+                selected_prod_name = ls_match["product_name"]
+                img_path = os.path.join(ASSETS_DIR, ls_match["image_ref"])
+                if os.path.exists(img_path):
+                    img_display = Image.open(img_path)
+                    image_input_to_process = img_path
+                    render_label_image(img_display, sample_key, f"Ảnh mẫu: <b>{_html.escape(str(selected_prod_name))}</b>")
+            else:
+                uploaded_file = st.file_uploader("Tải ảnh nhãn bảng thành phần (JPEG, PNG):", type=["jpg", "png", "jpeg"])
+                if uploaded_file:
+                    img_display = Image.open(uploaded_file)
+                    image_input_to_process = img_display
+                    sample_key = "custom"
+                    selected_prod_name = st.text_input(
+                        "Tên sản phẩm (tùy chọn):", value="",
+                        placeholder="VD: Bánh quy bơ, Mì ăn liền, Sữa tươi...",
+                    ).strip() or uploaded_file.name
+                    render_label_image(img_display, uploaded_file.name,
+                                       f"Ảnh nhãn tải lên: <b>{_html.escape(uploaded_file.name)}</b>", "Ảnh tải lên")
+            _hdr_in.markdown(
+                card_header_html("<span>📸</span>1. Ảnh nhãn &amp; Câu hỏi",
+                                 (f"mẫu {sample_key.split('.')[0]}" if sample_key != "custom" else "ảnh tải lên")),
+                unsafe_allow_html=True,
+            )
+
+        selected_persona_raw = None
+        user_query = ""
+
+        with st.container(key="fh_card_setup"):
+            render_card_header("<span>⚙️</span>Hồ sơ Sức khỏe &amp; Câu hỏi")
+
+            # 1. Thiết lập Hồ sơ sức khỏe người dùng (Đặt TRƯỚC câu hỏi)
+            selected_persona_raw = m_persona_builder.render_persona_selector_ui(
+                "normal_persona",
+                personas_list,
+                foodon_catalog=foodon_entities,
+            )
+
+            # 2. Câu hỏi tư vấn an toàn thực phẩm (Đặt SAU hồ sơ sức khỏe)
+            render_prompt_label(right="Hỏi về phụ gia / dị nguyên trên nhãn")
+            user_query = st.text_area(
+                "💬 Câu hỏi về phụ gia hoặc dị nguyên:",
+                label_visibility="collapsed",
+                value="",
+                height=110,
+                key="query_input_custom",
+                placeholder="VD: Sản phẩm này có chứa dị nguyên nào không? Aspartame (INS 951) có an toàn cho trẻ 5 tuổi không?",
+            )
+
+            _provider_keys = list(m_pipeline.LLM_PROVIDERS)
+            _provider_default = _provider_keys.index(m_pipeline.get_llm_provider())
+            _provider_key = st.selectbox(
+                "🤖 Mô hình sinh câu trả lời:",
+                _provider_keys,
+                index=_provider_default,
+                format_func=lambda k: m_pipeline.LLM_PROVIDERS[k],
+                key="llm_provider_select",
+                help="Gemini gọi API Google; Qwen2.5 chạy trên máy qua Ollama (không cần API key).",
+            )
+            m_pipeline.set_llm_provider(_provider_key)
+            if _provider_key == "ollama":
+                _ok, _msg = m_pipeline.ollama_status()
+                (st.caption if _ok else st.warning)(("🟢 " if _ok else "") + _msg)
+
+            current_input_sig = (
+                sample_key,
+                pipeline_mode,
+                m_pipeline.get_llm_provider(),
+                (f"{selected_persona_raw.get('id', '')}:{selected_persona_raw.get('name', '')}:{selected_persona_raw.get('description', '')}") if selected_persona_raw else "",
+                user_query.strip(),
+            )
+
+            _saved_res = st.session_state.get("analysis_result")
+            _already_ana = bool(_saved_res and _saved_res.get("input_sig") == current_input_sig)
+            is_running = bool(st.session_state.get("is_running", False))
+            btn_disabled = bool(_already_ana or is_running)
+            if is_running:
+                btn_label, btn_help = "⏳ Đang phân tích...", "Hệ thống đang xử lý, vui lòng chờ."
+            elif _already_ana:
+                btn_label, btn_help = "✅ Đã phân tích (đổi lựa chọn để chạy lại)", "Kết quả đã hiển thị bên phải."
+            else:
+                btn_label, btn_help = "🚀 Phân tích nhãn & trả lời", "Chạy OCR, chuẩn hóa, truy xuất và sinh câu trả lời."
+
+            btn_run = st.button(btn_label, type="primary", width="stretch", disabled=btn_disabled, help=btn_help)
+
+
+    with col_right:
+        render_card_header("<span>📊</span>2. Kết quả", "OCR → chuẩn hóa → truy xuất → trả lời", "gray", marker=True)
+
+        if btn_run:
+            if not user_query.strip():
+                st.error("⚠️ Vui lòng nhập câu hỏi trước khi bấm Phân tích.")
+            elif not img_display or not image_input_to_process:
+                st.error("⚠️ Vui lòng chọn ảnh mẫu hoặc tải ảnh bao bì trước khi bấm Phân tích.")
+            else:
+                st.session_state["is_running"] = True
+                try:
+                    selected_persona = enrich_persona_with_nhanes(selected_persona_raw, DATA_DIR, biomarkers_cache=background_result("nhanes"))
+                    with st.spinner("Đang đọc nhãn (OCR), chuẩn hóa thành phần, truy xuất quy chuẩn và sinh câu trả lời..."):
+                        ocr_result = run_perception_pipeline(image_input_to_process, sample_key=sample_key, force_real_ocr=True)
+                        if ocr_result.get("is_ocr_unavailable"):
+                            st.error(
+                                "Không thể đọc ảnh này vì OCR không khả dụng hoặc không nhận diện được chữ. "
+                                "Hãy cài/khởi động PaddleOCR hoặc thử ảnh rõ hơn."
+                            )
+                            st.stop()
+                        raw_text = ocr_result["full_text"]
+                        mentions = parse_ingredients_from_ocr(raw_text, include_allergen_statements=True)
+                        avg_ocr_conf = ocr_result["avg_confidence"]
+                        annotated_img = ocr_result["annotated_image"]
+
+                        if selected_prod_name in ("Sản phẩm thực phẩm",) or selected_prod_name.endswith((".jpg", ".png", ".jpeg")):
+                            ingredient_text = " ".join(m.get("raw_mention", "") for m in mentions[:3])
+                            if ingredient_text.strip():
+                                selected_prod_name = ingredient_text[:80]
+
+                        grounded = run_grounded_pipeline(
+                            mentions, avg_ocr_conf, selected_prod_name, selected_persona,
+                            user_query, kb_additives, hazards_list, background_result("fndds"), off_products,
+                        )
+                        st.session_state["analysis_result"] = {
+                            "raw_text": raw_text,
+                            "mentions": mentions,
+                            "avg_ocr_conf": avg_ocr_conf,
+                            "annotated_img": annotated_img,
+                            "linked_results": grounded["linked_results"],
+                            "evaluation": grounded["evaluation"],
+                            "detected_hazards": grounded["detected_hazards"],
+                            "matched_fndds": grounded["matched_fndds"],
+                            "nutri_warnings": grounded["nutri_warnings"],
+                            "constraint_details": grounded["constraint_details"],
+                            "off_cross_ref": grounded["off_cross_ref"],
+                            "llm_answer": grounded["llm_answer"],
+                            "qa": grounded.get("qa"),
+                            "passages": grounded.get("retrieved_passages", []),
+                            "ocr_result": ocr_result,
+                            "selected_persona": selected_persona,
+                            "user_query": user_query,
+                            "selected_prod_name": selected_prod_name,
+                            "input_sig": current_input_sig,
+                        }
+                finally:
+                    st.session_state["is_running"] = False
+                st.rerun()
+
+        res = st.session_state.get("analysis_result")
+        has_valid_result = res is not None and res.get("input_sig") == current_input_sig
+
+        if has_valid_result:
+            raw_text = res["raw_text"]
+            mentions = res["mentions"]
+            annotated_img = res["annotated_img"]
+            linked_results = res["linked_results"]
+            evaluation = res["evaluation"]
+            detected_hazards = res["detected_hazards"]
+            matched_fndds = res["matched_fndds"]
+            nutri_warnings = res["nutri_warnings"]
+            constraint_details = res["constraint_details"]
+            off_cross_ref = res["off_cross_ref"]
+            llm_answer = res["llm_answer"]
+            qa_info = res.get("qa")
+            ocr_result = res["ocr_result"]
+
+            passages = res.get("passages") or []
+            selected_persona = res.get("selected_persona") or {}
+            focus = focus_terms(qa_info, evaluation)
+            regs = evaluation.get("regulatory") or []
+            rel_regs = [r for r in regs if focus["codes"] and _matches_focus(r.get("additive", ""), focus)]
+            rel_hazards = [
+                h for h in (detected_hazards or [])
+                if (focus["codes"] or focus["allergen_words"])
+                and _matches_focus(f"{h.get('title', '')} {h.get('hazard', '')}", focus)
+            ]
+            linked_ins = [
+                (it.get("matched_entity") or {}).get("ins_code", "")
+                for it in linked_results if it.get("matched_entity")
+            ]
+            cited = m_evidence.build_cited_answer(llm_answer, passages, linked_ins) if llm_answer else None
+            domain_code, domain_vi = m_evidence.classify_domain(qa_info, evaluation, selected_persona)
+            gap_reasons = m_evidence.insufficiency_reasons(evaluation, ocr_result, linked_results, passages, qa_info)
+
+            # ── Hệ thống Tab kết quả phân tích trực quan, tránh cuộn dài ──
+            nli_res = None
+            tab_ans, tab_ocr, tab_kb, tab_tech = st.tabs([
+                "💡 Kết quả & Dẫn chứng",
+                "🏷️ Bóc tách & Chuẩn hóa nhãn",
+                "📚 Tra cứu Tri thức & Quy chuẩn",
+                "🔬 Chi tiết Kỹ thuật",
+            ])
+
+            # ═════ TAB 1: KẾT QUẢ & DẪN CHỨNG (Tư vấn an toàn & Nguồn gốc) ═════
+            with tab_ans:
+                if gap_reasons:
+                    st.warning(
+                        "⚠️ **Chưa đủ bằng chứng để kết luận chắc chắn.** Lý do:\n\n"
+                        + "\n".join(f"- {r}" for r in gap_reasons)
+                        + "\n\n*Gợi ý: chụp lại ảnh rõ hơn, đủ phần thành phần/cảnh báo dị nguyên, hoặc hỏi cụ thể về một phụ gia/dị nguyên.*"
+                    )
+
+                if evaluation["status"] == "CRITICAL_ALERT":
+                    st.error(f"### {evaluation['title']}")
+                elif evaluation["status"] in ("WARNING", "CAUTION"):
+                    st.warning(f"### {evaluation['title']}")
+                elif evaluation["status"] == "SAFE":
+                    st.success(f"### {evaluation['title']}")
+                else:
+                    st.info(f"### {evaluation['title']}")
+
+                _bench_label = evaluation.get("safety_label") or m_pipeline.guardrail_status_to_safety_label(evaluation.get("status"))
+                st.caption(f"Đánh giá an toàn tự động: **{_bench_label}** (Mức an toàn theo chuẩn kiểm định 4 cấp độ)")
+
+                st.markdown(
+                    f'<span class="fh-chip2">🏷️ Lĩnh vực: {_html.escape(domain_vi)}</span> '
+                    f'<span class="fh-chip2 gray">{_html.escape(domain_code)}</span>',
+                    unsafe_allow_html=True,
+                )
+
+                if cited:
+                    render_cited_answer(cited)
+                    nli_res = render_nli_faithfulness_widget(cited, evaluation, alerts=rel_alerts, regs=regs)
+                else:
+                    st.info("Chưa gọi được mô hình ngôn ngữ (Gemini: kiểm tra API key/hạn mức; Qwen2.5: kiểm tra Ollama). Đang hiển thị kết luận từ luật và dữ liệu có sẵn.")
+                    st.write(evaluation.get("advice", evaluation.get("message", "")))
+
+                if focus["labels"]:
+                    st.caption("🎯 Đối tượng được hỏi: " + ", ".join(dict.fromkeys(focus["labels"])))
+
+                alerts = evaluation.get("alerts") or []
+                rel_alerts = [a for a in alerts if not focus["from_question"] or _matches_focus(a.get("additive", ""), focus)]
+                if rel_alerts:
+                    st.markdown("##### ⚠️ Cảnh báo sức khỏe trọng tâm")
+                    for alert in rel_alerts:
+                        st.warning(f"**{alert['additive']}:** {alert['message']}")
+
+                if rel_hazards:
+                    st.markdown("##### 🚨 Cảnh báo sự cố thu hồi liên quan")
+                    for h in rel_hazards[:3]:
+                        st.error(f"**[{h['hazard_category']}]** {h['title']} — *Tác nhân: {h['hazard']}*")
+
+                c1, c2, c3 = st.columns(3)
+                c1.metric("Độ tin cậy OCR", f"{evaluation['s_perception']:.2f}")
+                c2.metric("Độ khớp truy xuất", f"{evaluation['s_retrieval']:.2f}")
+                c3.metric("Điểm tin cậy tổng", f"{evaluation['s_total']:.2f}")
+
+                if cited and cited["sources"]:
+                    st.markdown("##### 📜 Danh sách nguồn dẫn chứng")
+                    render_source_list(cited["sources"])
+                elif llm_answer:
+                    st.caption("Câu trả lời không có thẻ nguồn nào thuộc danh mục được công nhận.")
+
+            # ═════ TAB 2: BÓC TÁCH & CHUẨN HÓA NHÃN (OCR & Thực thể) ═════
+            with tab_ocr:
+                st.markdown("##### 📸 Vùng chữ OCR nhận diện trên bao bì")
+                st.image(annotated_img, caption="Khung xanh là vùng chữ OCR nhận diện được", width="stretch")
+
+                st.markdown("##### 📝 Văn bản đọc từ nhãn (sau phục hồi chính tả)")
+                st.text_area("Văn bản đọc từ nhãn:", raw_text, height=120, disabled=True, key="ocr_final_text", label_visibility="collapsed")
+                ocr_raw = ocr_result.get("raw_text_before_norm", "")
+                if ocr_raw and ocr_raw != raw_text:
+                    with st.expander("🔍 So sánh văn bản OCR thô và sau từ điển thực phẩm", expanded=False):
+                        oc1, oc2 = st.columns(2)
+                        oc1.text_area("OCR thô ban đầu", ocr_raw, height=140, disabled=True, key="ocr_raw")
+                        oc2.text_area("Sau từ điển thực phẩm", ocr_result.get("text_after_ocr_dict", ""), height=140,
+                                      disabled=True, key="ocr_dict")
+
+                st.markdown("##### 🧬 Thành phần đã chuẩn hóa (Tên trên nhãn ➔ INS / FoodOn)")
+                norm_rows = build_normalization_rows(linked_results)
+                if norm_rows:
+                    st.dataframe(pd.DataFrame(norm_rows), width="stretch", hide_index=True)
+                else:
+                    st.info("Chưa nhận diện được phụ gia/dị nguyên nào để chuẩn hóa.")
+
+                with st.expander(f"📋 Các cụm thành phần bóc tách ({len(mentions)} mục)", expanded=False):
+                    for idx, m in enumerate(mentions, 1):
+                        st.markdown(f"- **[{idx:02d}]** `{m['raw_mention']}` *({m.get('category', 'chưa phân loại')})*")
+
+            # ═════ TAB 3: TRA CỨU TRI THỨC & QUY CHUẨN (QA Động & Tiêu chuẩn) ═════
+            with tab_kb:
+                st.markdown("##### 🔎 Tri thức đã tra cứu theo nội dung câu hỏi")
+                render_qa_trace(qa_info)
+
+                if rel_regs:
+                    st.markdown("##### 📐 Quy chuẩn & ngưỡng an toàn của phụ gia được hỏi")
+                    st.dataframe(pd.DataFrame(regulatory_table_rows(rel_regs)), width="stretch", hide_index=True)
+
+                other_regs = [r for r in regs if r not in rel_regs]
+                if other_regs:
+                    with st.expander(f"📑 Quy chuẩn của các phụ gia còn lại trên nhãn ({len(other_regs)} chất)", expanded=False):
+                        st.dataframe(pd.DataFrame(regulatory_table_rows(other_regs)), width="stretch", hide_index=True)
+
+                efsa_list = evaluation.get("efsa_warnings") or []
+                if efsa_list:
+                    st.markdown("##### 🏛️ Đánh giá khoa học chuyên sâu EFSA")
+                    for ew in efsa_list:
+                        if focus["from_question"] and not _matches_focus(ew.get("substance", ""), focus):
+                            continue
+                        with st.expander(f"📋 EFSA: {ew['substance']} ({ew['year']})"):
+                            st.markdown(f"**Phát hiện chính:** {ew['key_finding']}")
+                            st.caption(f"Tài liệu: {ew['reference']}")
+
+                if constraint_details or nutri_warnings or matched_fndds:
+                    st.markdown("##### 🥗 Dinh dưỡng định lượng & Bệnh lý (WSDM '21)")
+                    if matched_fndds:
+                        st.caption(f"Đối chiếu dinh dưỡng USDA FNDDS: {matched_fndds.get('food_description', 'N/A')}")
+                    for nw in (nutri_warnings or []):
+                        st.warning(f"⚠️ {nw}")
+                    if constraint_details:
+                        st.dataframe(pd.DataFrame([
+                            {
+                                "Bệnh lý": cd["condition"], "Chỉ số": cd["nutrient"],
+                                "Giá trị": f"{cd['value']:.1f} {cd['unit']}",
+                                "Ngưỡng trên": f"{cd['upper_bound']:.1f} {cd['unit']}" if cd.get("upper_bound") else "—",
+                                "I_g(v)": cd["I_g"],
+                            } for cd in constraint_details
+                        ]), width="stretch", hide_index=True)
+
+                other_hazards = [h for h in (detected_hazards or []) if h not in rel_hazards]
+                if other_hazards:
+                    with st.expander(f"🚨 Sự cố thực phẩm tương tự sản phẩm ({len(other_hazards)})", expanded=False):
+                        for h in other_hazards[:5]:
+                            st.markdown(f"- ⚠️ **[{h['hazard_category']}]** {h['title']} — *{h['hazard']}*")
+
+            # ═════ TAB 4: CHI TIẾT KỸ THUẬT (FoodOntoRAG & OCR Logs) ═════
+            with tab_tech:
+                st.markdown(f"**Engine OCR:** `{ocr_result.get('engine_name', 'Mặc định')}`")
+
+                with st.expander("📄 Từng dòng OCR kèm độ tin cậy nhận diện", expanded=False):
+                    for idx, line in enumerate(ocr_result.get("lines", []), 1):
+                        st.markdown(f"- `[{idx:02d}]` (Conf: **{line['confidence']}**): {line['text']}")
+
+                if linked_results:
+                    st.markdown("##### 🌐 Bảng Chuẩn hóa Đầy đủ 4-Agent FoodOntoRAG (FoodOn 29.255 nút)")
+                    full_rows = []
+                    for r in linked_results:
+                        e = r["matched_entity"]
+                        curie_val = (e or {}).get("foodon_curie") or "FOODON:00000000"
+                        lineage_str = "—"
+                        if curie_val != "FOODON:00000000" and hasattr(foodon_entities, "get_lineage"):
+                            lin = foodon_entities.get_lineage(curie_val, max_depth=4)
+                            if lin:
+                                lineage_str = " ➔ ".join(item.get("label", "") for item in lin[-3:])
+                        full_rows.append({
+                            "Mention": r["raw_mention"],
+                            "Thực thể": e["canonical_name"] if e else "Không rõ / Nông sản",
+                            "INS / E": e["ins_code"] if e else "N/A",
+                            "FoodOn": curie_val,
+                            "Phả hệ DAG": lineage_str,
+                            "Chức năng": e["function"] if e else "Thành phần tự nhiên",
+                            "Ràng buộc": r.get("constraint_type", "PERMITTED"),
+                            "τ": f"{r['confidence_tau']:.3f}",
+                            "Rationale": r["rationale"],
+                        })
+                    st.dataframe(pd.DataFrame(full_rows), width="stretch")
+                    st.caption(
+                        f"Retrieval engine: `{linked_results[0].get('retrieval_engine', '')}` · "
+                        "Selector ưu tiên khớp chính xác mã INS/E và tên cụ thể hơn lớp chung; "
+                        "Scorer hiệu chuẩn độ tin cậy τ, τ < 0,70 kích hoạt sinh từ đồng nghĩa và tìm lại."
+                    )
+
+                if passages:
+                    with st.expander(f"📑 Đoạn trích bằng chứng đã truy xuất ({len(passages)} đoạn)", expanded=False):
+                        for p in passages:
+                            st.caption(f"**`{p.get('locator', '')}`** — {m_evidence._clip(p.get('text', ''), 200)}")
+
+                if nli_res and nli_res.get("claims"):
+                    st.markdown("##### 🛡️ Chi tiết Kiểm định Ngữ nghĩa NLI (Claim Verification)")
+                    nli_table_rows = []
+                    for c in nli_res["claims"]:
+                        badge_lbl = "🟢 ENTAILMENT" if c["label"] == "ENTAILMENT" else ("🔴 CONTRADICTION" if c["label"] == "CONTRADICTION" else "🟡 NEUTRAL")
+                        nli_table_rows.append({
+                            "Khẳng định của AI (Hypothesis)": c["text"],
+                            "Trạng thái NLI": badge_lbl,
+                            "Căn cứ / Giải trình": c["reason"],
+                            "Độ tin cậy": f"{c['confidence']:.2f}"
+                        })
+                    st.dataframe(pd.DataFrame(nli_table_rows), width="stretch", hide_index=True)
+
+                for acr in (off_cross_ref.get("allergen_cross_ref") or []):
+                    st.caption(f"Open Food Facts VN: {acr['allergen']} — {acr['note']} (Nguồn: {acr['source']})")
+        elif not img_display:
+            st.warning("👈 Vui lòng chọn hoặc tải ảnh bao bì thực phẩm bên trái để bắt đầu.")
+        else:
+            st.info("👈 Nhập câu hỏi và bấm **'🚀 Phân tích nhãn & trả lời'** để xem kết quả.")
+
+
+if app_mode == WORKSPACE_REPORT:
+    st.markdown(REPORT_CSS, unsafe_allow_html=True)
+    render_report_workspace()
+    st.stop()
+
+with st.sidebar:
+    if st.button("✨ Trò chuyện mới", width="stretch"):
         st.session_state["chat"] = []
         st.session_state["ctx"] = _new_ctx()
         st.rerun()
@@ -1492,26 +2006,32 @@ def _load_image_into_ctx(img, name, sample_key, product_name, blocks, source=Non
                        f"Ảnh **{name}** đọc được chữ nhưng không tìm thấy danh sách **thành phần** — có thể đây không phải "
                        "nhãn thực phẩm hoặc chưa chụp đúng mặt có bảng thành phần. Vui lòng gửi ảnh khác."))
         return False
-    if not product_name or product_name.lower().endswith((".jpg", ".jpeg", ".png")):
+    if not product_name or product_name.lower().endswith(m_chat.PICKER_IMAGE_EXT):
+        # tên dùng cho pipeline (đối chiếu sự cố/dinh dưỡng) giữ nguyên cách cũ: ghép 3 thành phần đầu
         guess = " ".join(m.get("raw_mention", "") for m in mentions[:3]).strip()
         product_name = guess[:80] or "Sản phẩm thực phẩm"
+    ctx["image_count"] = int(ctx.get("image_count", 0)) + 1
+    label_name = m_chat.guess_product_name(ocr["full_text"])
     ctx.update({
         "image": img, "image_name": name, "sample_key": sample_key, "product_name": product_name,
-        "ocr_result": ocr, "mentions": mentions,
+        "ocr_result": ocr, "mentions": mentions, "image_no": ctx["image_count"],
+        "image_thumb": _thumb_bytes(img, 160), "awaiting_image_choice": False,
+        "display_name": label_name,
     })
-    blocks.append(("success", f"Đã nhận ảnh **{_html.escape(name)}** — đọc được {len(mentions)} cụm thành phần "
-                              f"(độ tin cậy OCR {ocr.get('avg_confidence', 0):.2f})."))
+    blocks.append(("success", f"Đã nhận **ảnh #{ctx['image_no']}** ({_html.escape(name)})"
+                              + (f" — sản phẩm: **{_html.escape(label_name)}**" if label_name else "")
+                              + f". Đọc được {len(mentions)} cụm thành phần (độ tin cậy OCR {ocr.get('avg_confidence', 0):.2f})."))
     return True
 
 
-def _run_analysis(question):
+def _run_analysis(question, reused=False):
     persona_raw = m_chat.profile_to_persona(ctx["profile"])
-    persona = enrich_persona_with_nhanes(persona_raw, DATA_DIR, biomarkers_cache=nhanes_biomarkers_cache)
+    persona = enrich_persona_with_nhanes(persona_raw, DATA_DIR, biomarkers_cache=background_result("nhanes"))
     ocr = ctx["ocr_result"]
     with st.spinner("Đang chuẩn hóa thành phần, truy xuất quy chuẩn và sinh câu trả lời..."):
         grounded = run_grounded_pipeline(
             ctx["mentions"], ocr["avg_confidence"], ctx["product_name"], persona,
-            question, kb_additives, hazards_list, fndds_list, off_products,
+            question, kb_additives, hazards_list, background_result("fndds"), off_products,
         )
     return {
         "raw_text": ocr["full_text"],
@@ -1535,51 +2055,74 @@ def _run_analysis(question):
         "user_query": question,
         "selected_prod_name": ctx["product_name"],
         "image_name": ctx["image_name"],
+        "image_no": ctx.get("image_no", 0),
+        "image_thumb": ctx.get("image_thumb"),
+        "display_name": ctx.get("display_name", ""),
+        "reused_image": reused,
     }
 
+
+_PROFILE_PROMPT = (
+    "Để đánh giá đúng cho bạn, vui lòng cho biết **hồ sơ sức khỏe** của người sẽ dùng sản phẩm — "
+    "tuổi, giới tính, bệnh nền, dị ứng, mang thai/cho con bú. Ví dụ: *“Tôi 40 tuổi, nữ, bị tăng huyết áp, dị ứng tôm”*.\n\n"
+    "Nếu không có bệnh nền và không dị ứng, hãy trả lời **“không có”** (hoặc **“bỏ qua”**)."
+)
 
 _HELP_TEXT = (
     "Mình là **FoodHealthQA** — trợ lý sàng lọc **phụ gia, dị nguyên và dinh dưỡng** từ ảnh nhãn thực phẩm.\n\n"
     "Bạn chỉ cần gõ vào ô bên dưới (có thể gộp trong một tin nhắn hoặc gửi từng phần):\n"
-    "1. **Ảnh nhãn** — bấm nút đính kèm trong ô nhập (hoặc dùng *ảnh mẫu* ở thanh bên).\n"
+    "1. **Ảnh nhãn** — bấm nút đính kèm trong ô nhập (" + m_chat.IMAGE_FORMAT_HINT + ").\n"
     "2. **Câu hỏi về sản phẩm** — vd *“Sản phẩm này có chứa dị nguyên nào không?”*\n"
-    "3. **Hồ sơ sức khỏe** *(tùy chọn)* — vd *“Tôi 40 tuổi, bị tăng huyết áp, dị ứng tôm”*.\n\n"
-    "Lệnh nhanh: *“xóa hồ sơ”*, *“xóa ảnh”*, *“làm mới”*."
+    "3. **Hồ sơ sức khỏe** — vd *“Tôi 40 tuổi, bị tăng huyết áp, dị ứng tôm”*.\n\n"
+    "Câu hỏi không kèm ảnh mới sẽ được hiểu là hỏi trên **ảnh gửi gần nhất**.\n\n"
+    "Lệnh nhanh: *“xóa hồ sơ”*, *“xóa ảnh”*, *“dùng ảnh cũ”*, *“làm mới”*."
 )
 
 
-def handle_turn(text, files):
+def _image_label():
+    name = ctx.get("display_name")
+    return f"ảnh #{ctx.get('image_no', 0)} — {name}" if name else f"ảnh #{ctx.get('image_no', 0)} ({ctx.get('image_name', '')})"
+
+
+def handle_turn(text, files, use_old_image=False):
     text = (text or "").strip()
     user_msg = {"role": "user", "text": text, "thumbs": []}
     blocks = []          # (loại, nội dung markdown) cho tin nhắn trả lời
     result = None
+    choice = False
 
     parsed = m_chat.parse_message(text, foodon_entities) if text else None
     kind = parsed["kind"] if parsed else "empty"
+    if kind == "use_old_image":
+        use_old_image = True
 
     if kind == "reset":
         st.session_state["chat"] = []
         st.session_state["ctx"] = _new_ctx()
         return
 
-    # 1. Ảnh đính kèm
     images = list(files or [])
     for f in images:
-        if isinstance(f, dict):  # ảnh mẫu
-            user_msg["thumbs"].append(f["thumb"])
-        else:
-            try:
-                user_msg["thumbs"].append(_thumb_bytes(Image.open(io.BytesIO(f.getvalue()))))
-            except Exception:
-                user_msg["thumbs"].append(None)
-                user_msg["text"] = (user_msg["text"] + f"\n\n📎 {f.name}").strip()
+        try:
+            user_msg["thumbs"].append(_thumb_bytes(Image.open(io.BytesIO(f.getvalue()))))
+        except Exception:
+            user_msg["thumbs"].append(None)
+            user_msg["text"] = (user_msg["text"] + f"\n\n📎 {f.name}").strip()
+    if use_old_image and not text:
+        user_msg["text"] = "✅ Dùng ảnh cũ"
     chat.append(user_msg)
 
+    profile_changed = False
     if kind == "clear_profile":
         ctx["profile"] = m_chat.empty_profile()
-        blocks.append(("info", "Đã xóa hồ sơ sức khỏe. Các câu hỏi tiếp theo sẽ đánh giá cho người trưởng thành không bệnh nền."))
+        blocks.append(("info", "Đã xóa hồ sơ sức khỏe. Trước câu hỏi tiếp theo, hệ thống sẽ đề nghị bạn khai báo lại hồ sơ."))
+    elif kind == "skip_profile":
+        ctx["profile"], _ = m_chat.merge_profile(m_chat.empty_profile(), {"healthy": True, "no_allergy": True})
+        profile_changed = True
+        blocks.append(("success", "Đã ghi nhận: **không có bệnh nền, không dị ứng**."))
     elif kind == "clear_image":
-        ctx.update({k: v for k, v in _new_ctx().items() if k not in ("profile", "pending_question")})
+        keep = ("profile", "pending_question", "image_count")
+        ctx.update({k: v for k, v in _new_ctx().items() if k not in keep})
         blocks.append(("info", "Đã bỏ ảnh nhãn hiện tại. Hãy đính kèm ảnh mới để tiếp tục."))
     elif kind == "greeting":
         blocks.append(("markdown", "Xin chào 👋 " + _HELP_TEXT))
@@ -1588,22 +2131,19 @@ def handle_turn(text, files):
     elif kind == "help":
         blocks.append(("markdown", _HELP_TEXT))
 
+    # 1. Ảnh đính kèm: ảnh lỗi → báo lỗi; không tự ý trả lời bằng ảnh cũ
     new_image = False
+    image_failed = False
     if images:
         if len(images) > 1:
             blocks.append(("warning", f"Bạn gửi {len(images)} ảnh — hệ thống chỉ phân tích **một nhãn mỗi lần**, đang dùng ảnh đầu tiên."))
         first = images[0]
-        source = None
-        if isinstance(first, dict):  # ảnh mẫu từ thanh bên
-            img, err = first["image"], None
-            name, sample_key, prod, source = first["name"], first["sample_key"], first["product_name"], first["path"]
-        else:
-            img, err = m_chat.validate_image(first.getvalue(), first.name)
-            name, sample_key, prod = first.name, "custom", ""
+        img, err = m_chat.validate_image(first.getvalue(), first.name)
         if err:
             blocks.append(("error", err))
         else:
-            new_image = _load_image_into_ctx(img, name, sample_key, prod, blocks, source=source)
+            new_image = _load_image_into_ctx(img, first.name, "custom", "", blocks)
+        image_failed = not new_image
 
     # 2. Văn bản: lỗi nhập liệu → báo lỗi, không áp dụng gì từ tin nhắn này
     question = ""
@@ -1615,37 +2155,74 @@ def handle_turn(text, files):
         if not parsed["errors"]:
             upd = parsed["profile"]["update"]
             if upd:
+                before = m_chat.profile_summary(ctx["profile"]) if ctx["profile"].get("declared") else ""
                 ctx["profile"], notes = m_chat.merge_profile(ctx["profile"], upd)
-                blocks.append(("success", "Đã cập nhật hồ sơ: " + m_chat.profile_summary(ctx["profile"])))
+                after = m_chat.profile_summary(ctx["profile"])
+                profile_changed = True
                 for n in notes:
-                    blocks.append(("info", n))
+                    blocks.append(("warning", n))
+                if notes or not before:
+                    blocks.append(("success", "Hồ sơ đang áp dụng: " + after))
+                elif before != after:
+                    blocks.append(("success", f"Đã cập nhật hồ sơ: ~~{_html.escape(before)}~~ → **{_html.escape(after)}**"))
+                else:
+                    blocks.append(("info", "Hồ sơ không thay đổi: " + after))
             question = parsed["question"]
 
     # 3. Quyết định bước tiếp theo
-    if not question and ctx["pending_question"] and new_image:
+    if use_old_image:
+        ctx["awaiting_image_choice"] = False
+        if ctx["ocr_result"] is None:
+            blocks.append(("error", "Chưa có ảnh nào được gửi trước đó. Vui lòng đính kèm ảnh nhãn sản phẩm."))
+        elif not question and not ctx["pending_question"]:
+            blocks.append(("info", f"Tiếp tục dùng **{_html.escape(_image_label())}**. Bạn muốn hỏi gì về sản phẩm này?"))
+    if not question and ctx["pending_question"] and (new_image or profile_changed or use_old_image):
         question = ctx["pending_question"]
-        blocks.append(("info", f"Trả lời câu hỏi đang chờ: *“{_html.escape(question)}”*"))
-    has_image = ctx["ocr_result"] is not None
+        blocks.append(("info", f"Tiếp tục câu hỏi đang chờ: *“{_html.escape(question)}”*"))
+    if question and not image_failed and not new_image and ctx.get("awaiting_image_choice"):
+        ctx["awaiting_image_choice"] = False   # hỏi tiếp mà không gửi ảnh mới → hiểu là hỏi trên ảnh cũ
+    has_old_image = ctx["ocr_result"] is not None
+    has_image = has_old_image and not image_failed
+    has_profile = bool(ctx["profile"].get("declared"))
     oos = m_chat.abstention.detect_out_of_scope(question) if question else []
-    action = m_chat.next_action(has_image, question, oos)
+    action = m_chat.next_action(has_image, question, oos, has_profile=has_profile)
+    if action in ("need_image", "need_profile", "need_image_profile"):
+        ctx["pending_question"] = question
     if action == "run":
         ctx["pending_question"] = ""
-        result = _run_analysis(question)
+        result = _run_analysis(question, reused=not new_image)
     elif action == "out_of_scope_no_image":
         blocks.append(("warning", m_chat.out_of_scope_reply(question)))
+    elif action in ("need_image", "need_image_profile") and image_failed and has_old_image:
+        # ảnh mới lỗi nhưng đã có ảnh trước đó → hỏi người dùng muốn dùng ảnh cũ hay gửi ảnh khác
+        ctx["awaiting_image_choice"] = True
+        choice = True
+        blocks.append(("info", f"Câu hỏi *“{_html.escape(question)}”* đã được giữ lại. Bạn muốn trả lời trên "
+                               f"**{_html.escape(_image_label())}** đã gửi trước đó, hay gửi ảnh khác?"))
+    elif action in ("need_image", "need_image_profile") and image_failed:
+        blocks.append(("info", "Câu hỏi đã được giữ lại. Vui lòng gửi **ảnh nhãn khác** (" + m_chat.IMAGE_FORMAT_HINT + ")."
+                       + (" Đồng thời cho biết **hồ sơ sức khỏe** của bạn." if action == "need_image_profile" else "")))
     elif action == "need_image":
-        ctx["pending_question"] = question
-        blocks.append(("info", "Đã nhận câu hỏi. Vui lòng **đính kèm ảnh nhãn sản phẩm** (nút đính kèm trong ô nhập, "
-                               "hoặc *ảnh mẫu* ở thanh bên) — hệ thống sẽ trả lời ngay khi có ảnh."))
-    elif (new_image or (parsed and parsed["profile"]["update"] and not parsed["errors"])) and not blocks_has_error(blocks):
-        blocks.append(("info", "Bạn muốn hỏi gì về sản phẩm? Ví dụ: *“Có chứa dị nguyên nào không?”*, "
-                               "*“Phụ gia nào cần lưu ý với tôi?”*, *“Có an toàn cho trẻ 5 tuổi không?”*"
-                       if has_image else
-                       "Đã ghi nhận. Hãy **đính kèm ảnh nhãn** và đặt câu hỏi về sản phẩm để bắt đầu phân tích."))
+        blocks.append(("info", "Đã nhận câu hỏi. Vui lòng **đính kèm ảnh nhãn sản phẩm** bằng nút đính kèm trong ô nhập ("
+                               + m_chat.IMAGE_FORMAT_HINT + ") — hệ thống sẽ trả lời ngay khi có ảnh."))
+    elif action in ("need_profile", "need_image_profile"):
+        missing_img = "\n\nNgoài ra, hãy **đính kèm ảnh nhãn sản phẩm**." if action == "need_image_profile" else ""
+        blocks.append(("info", _PROFILE_PROMPT + missing_img))
+    elif (new_image or profile_changed) and not blocks_has_error(blocks):
+        if not has_image:
+            blocks.append(("info", "Đã ghi nhận. Hãy **đính kèm ảnh nhãn** và đặt câu hỏi về sản phẩm để bắt đầu phân tích."))
+        else:
+            blocks.append(("info", "Bạn muốn hỏi gì về sản phẩm? Ví dụ: *“Có chứa dị nguyên nào không?”*, "
+                                   "*“Phụ gia nào cần lưu ý với tôi?”*, *“Có an toàn cho trẻ 5 tuổi không?”*"
+                           + ("" if has_profile else "\n\n" + _PROFILE_PROMPT)))
+    elif image_failed and not question and not ctx["pending_question"]:
+        if has_old_image:
+            blocks.append(("info", f"Ảnh trước đó (**{_html.escape(_image_label())}**) vẫn được giữ. "
+                                   "Bạn có thể hỏi tiếp trên ảnh đó hoặc gửi ảnh khác."))
     elif not blocks:
         blocks.append(("info", "Hãy nhập câu hỏi hoặc đính kèm ảnh nhãn để bắt đầu."))
 
-    chat.append({"role": "assistant", "blocks": blocks, "result": result})
+    chat.append({"role": "assistant", "blocks": blocks, "result": result, "choice": choice})
 
 
 def blocks_has_error(blocks):
@@ -1686,11 +2263,20 @@ def render_analysis(res, key):
     domain_code, domain_vi = m_evidence.classify_domain(qa_info, evaluation, selected_persona)
     gap_reasons = m_evidence.insufficiency_reasons(evaluation, ocr_result, linked_results, passages, qa_info)
 
-    st.caption(f"🖼️ Ảnh: **{res.get('image_name', '')}** · 👤 Hồ sơ: {res.get('profile_text', '')}")
-    if not res.get("profile_declared"):
-        st.caption("💡 Chưa có hồ sơ sức khỏe — bạn có thể bổ sung, vd: *“Tôi 35 tuổi, bị tiểu đường, dị ứng đậu phộng”* "
-                   "để được đánh giá cá nhân hóa.")
+    _thumb = res.get("image_thumb")
+    _img_html = (f'<img src="data:image/jpeg;base64,{base64.b64encode(_thumb).decode("ascii")}" alt="Ảnh nhãn"/>'
+                 if _thumb else "")
+    _reuse = ('<small>↩️ Dùng ảnh đã gửi trước đó — nếu bạn hỏi về sản phẩm khác, hãy đính kèm ảnh mới.</small>'
+              if res.get("reused_image") else "")
+    st.markdown(
+        f'<div class="fh-prod">{_img_html}<div class="t">📦 Đang trả lời về <b>{_html.escape(res.get("display_name") or "sản phẩm trong ảnh này")}</b>'
+        f' (ảnh #{res.get("image_no", "?")} · {_html.escape(str(res.get("image_name", "")))})'
+        f'<small>❓ {_html.escape(res.get("user_query", ""))}</small>'
+        f'<small>👤 Hồ sơ: {_html.escape(res.get("profile_text", ""))}</small>{_reuse}</div></div>',
+        unsafe_allow_html=True,
+    )
 
+    nli_res = None
     tab_ans, tab_ocr, tab_kb, tab_tech = st.tabs([
         "💡 Kết quả & Dẫn chứng",
         "🏷️ Bóc tách & Chuẩn hóa nhãn",
@@ -1726,6 +2312,7 @@ def render_analysis(res, key):
 
         if cited:
             render_cited_answer(cited)
+            nli_res = render_nli_faithfulness_widget(cited, evaluation, alerts=rel_alerts, regs=regs)
         else:
             st.info("Chưa gọi được mô hình ngôn ngữ (Gemini: kiểm tra API key/hạn mức; Qwen2.5: kiểm tra Ollama). Đang hiển thị kết luận từ luật và dữ liệu có sẵn.")
             st.write(evaluation.get("advice", evaluation.get("message", "")))
@@ -1867,6 +2454,19 @@ def render_analysis(res, key):
                 for p in passages:
                     st.caption(f"**`{p.get('locator', '')}`** — {m_evidence._clip(p.get('text', ''), 200)}")
 
+        if nli_res and nli_res.get("claims"):
+            st.markdown("##### 🛡️ Chi tiết Kiểm định Ngữ nghĩa NLI (Claim Verification)")
+            nli_table_rows = []
+            for c in nli_res["claims"]:
+                badge_lbl = "🟢 ENTAILMENT" if c["label"] == "ENTAILMENT" else ("🔴 CONTRADICTION" if c["label"] == "CONTRADICTION" else "🟡 NEUTRAL")
+                nli_table_rows.append({
+                    "Khẳng định của AI (Hypothesis)": c["text"],
+                    "Trạng thái NLI": badge_lbl,
+                    "Căn cứ / Giải trình": c["reason"],
+                    "Độ tin cậy": f"{c['confidence']:.2f}"
+                })
+            st.dataframe(pd.DataFrame(nli_table_rows), width="stretch", hide_index=True)
+
         for acr in (off_cross_ref.get("allergen_cross_ref") or []):
             st.caption(f"Open Food Facts VN: {acr['allergen']} — {acr['note']} (Nguồn: {acr['source']})")
 
@@ -1878,22 +2478,33 @@ def render_message(msg, i):
                 if t:
                     st.image(t, width=220)
             if msg.get("text"):
-                st.markdown(_html.escape(msg["text"]))
+                _t = msg["text"]
+                if len(_t) > 600:
+                    _t = _t[:600] + f"… *(đã rút gọn, tổng {len(msg['text'])} ký tự)*"
+                st.markdown(_html.escape(_t))
         return
     with st.chat_message("assistant", avatar="🥗"):
-        for kind, body in msg.get("blocks") or []:
-            {"error": st.error, "warning": st.warning, "info": st.info, "success": st.success}.get(kind, st.markdown)(body)
+        _icons = {"error": "❌ ", "warning": "⚠️ ", "success": "✅ "}
+        _parts = [_icons.get(kind, "") + body for kind, body in (msg.get("blocks") or []) if body]
+        if _parts:
+            st.markdown("\n\n".join(_parts))
+        if msg.get("choice") and i == len(chat) - 1 and ctx.get("awaiting_image_choice"):
+            b1, b2 = st.columns(2)
+            if b1.button(f"✅ Dùng {_image_label()}", key=f"use_old_{i}", width="stretch", type="primary"):
+                st.session_state["image_choice"] = "old"
+            if b2.button("📎 Gửi ảnh khác", key=f"new_img_{i}", width="stretch"):
+                st.session_state["image_choice"] = "new"
         if msg.get("result"):
             render_analysis(msg["result"], i)
 
 
 def render_context_chips():
-    img_chip = (f'<span class="ok">🖼️ Ảnh: {_html.escape(ctx["image_name"])}</span>' if ctx["ocr_result"] is not None
+    img_chip = (f'<span class="ok">🖼️ Đang hỏi trên {_html.escape(_image_label())}</span>' if ctx["ocr_result"] is not None
                 else '<span class="miss">🖼️ Chưa có ảnh nhãn</span>')
     prof = ctx["profile"]
     prof_chip = (f'<span class="ok">👤 {_html.escape(m_chat.profile_summary(prof))}</span>' if prof.get("declared")
-                 else '<span>👤 Chưa khai báo hồ sơ (tùy chọn)</span>')
-    pend = (f'<span class="miss">❓ Câu hỏi chờ ảnh: {_html.escape(ctx["pending_question"][:60])}</span>'
+                 else '<span class="miss">👤 Chưa khai báo hồ sơ</span>')
+    pend = (f'<span class="miss">❓ Câu hỏi đang chờ: {_html.escape(ctx["pending_question"][:60])}</span>'
             if ctx["pending_question"] else "")
     st.markdown(f'<div class="fh-ctx">{img_chip}{prof_chip}{pend}</div>', unsafe_allow_html=True)
 
@@ -1902,48 +2513,68 @@ def render_context_chips():
 if not chat:
     st.markdown(
         '<div class="fh-greet"><div class="hi">Xin chào, mình là FoodHealthQA</div>'
-        '<div class="sub">Bạn muốn kiểm tra sản phẩm nào hôm nay?</div></div>'
+        '<div class="sub">Bạn muốn tư vấn sản phẩm nào hôm nay?</div></div>'
         '<div class="fh-tips">'
-        '<div class="fh-tip"><b>📎 Đính kèm ảnh nhãn</b>Bấm nút đính kèm trong ô nhập, chụp rõ phần <i>Thành phần</i>.</div>'
+        '<div class="fh-tip"><b>📎 Đính kèm ảnh nhãn</b>Bấm nút đính kèm trong ô nhập, chụp rõ phần <i>Thành phần</i>.'
+        f'<br><small>{_html.escape(m_chat.IMAGE_FORMAT_HINT)}</small></div>'
         '<div class="fh-tip"><b>💬 Đặt câu hỏi</b><i>“Sản phẩm này có chứa dị nguyên nào không?”</i></div>'
-        '<div class="fh-tip"><b>👤 Hồ sơ (tùy chọn)</b><i>“Tôi 40 tuổi, bị tăng huyết áp, dị ứng tôm.”</i></div>'
+        '<div class="fh-tip"><b>👤 Hồ sơ sức khỏe</b><i>“Tôi 40 tuổi, bị tăng huyết áp, dị ứng tôm.”</i></div>'
         '</div>',
         unsafe_allow_html=True,
     )
-    st.caption("Có thể gửi cả ba trong một tin nhắn, hoặc từng phần — hệ thống sẽ hỏi lại phần còn thiếu. "
-               "Chưa có ảnh? Chọn **ảnh nhãn mẫu** ở thanh bên.")
+    st.caption("Có thể gửi cả ba trong một tin nhắn, hoặc từng phần — hệ thống sẽ hỏi lại phần còn thiếu.")
 
 for _i, _msg in enumerate(chat):
     render_message(_msg, _i)
 
 render_context_chips()
 
-_prompt = st.chat_input(
-    "Hỏi FoodHealthQA — đính kèm ảnh nhãn, nhập câu hỏi và hồ sơ sức khỏe…",
-    accept_file=True,
-    file_type=["jpg", "jpeg", "png"],
-    max_chars=m_chat.MAX_MESSAGE_CHARS,
-    max_upload_size=m_chat.MAX_IMAGE_MB,
-    key="fh_chat_input",
-)
+# ── Thanh nhập kiểu Gemini: ô chat + bộ chọn mô hình ngay cạnh nút gửi + gợi ý định dạng ảnh ──
+_provider_keys = list(m_pipeline.LLM_PROVIDERS)
+_PROVIDER_SHORT = {"gemini": "Gemini", "ollama": "Qwen2.5"}
+with st.bottom:
+    with st.container(key="fh_inputbar"):
+        _prompt = st.chat_input(
+            "Hỏi FoodHealthQA — đính kèm ảnh nhãn, nhập câu hỏi và hồ sơ sức khỏe…",
+            accept_file=True,
+            file_type=list(m_chat.PICKER_IMAGE_EXT),
+            max_upload_size=m_chat.UPLOAD_HARD_LIMIT_MB,
+            key="fh_chat_input",
+        )
+        _provider_key = st.selectbox(
+            "Mô hình sinh câu trả lời", _provider_keys,
+            index=_provider_keys.index(m_pipeline.get_llm_provider()),
+            format_func=lambda k: _PROVIDER_SHORT.get(k, k),
+            key="llm_provider_select", label_visibility="collapsed",
+            help="Mô hình sinh câu trả lời — Gemini: gọi API Google · Qwen2.5: chạy cục bộ qua Ollama.",
+        )
+    m_pipeline.set_llm_provider(_provider_key)
+    _ollama_note = ""
+    if _provider_key == "ollama":
+        _ok, _msg = m_pipeline.ollama_status()
+        _ollama_note = "" if _ok else f" · ⚠️ {_html.escape(_msg)}"
+    st.markdown(f'<div class="fh-hint">📎 <b>{_html.escape(m_chat.IMAGE_FORMAT_HINT)}</b> · '
+                f'Mô hình: {_html.escape(m_pipeline.LLM_PROVIDERS[_provider_key])}{_ollama_note}</div>',
+                unsafe_allow_html=True)
 
-_sample = st.session_state.pop("attach_sample", None)
-if _prompt is not None or _sample is not None:
-    if _prompt is not None:
-        _text, _files = (_prompt.text or ""), list(_prompt.files or [])
-    else:
-        _text, _files = "", []
-        _sp = os.path.join(ASSETS_DIR, _sample["image_ref"])
-        if os.path.exists(_sp):
-            _img = Image.open(_sp)
-            _files = [{"image": _img, "name": _sample["filename"], "sample_key": _sample["filename"], "path": _sp,
-                       "product_name": _sample["product_name"], "thumb": _thumb_bytes(_img)}]
-    if _text.strip() or _files:
-        with st.chat_message("assistant", avatar="🥗"):
-            try:
-                handle_turn(_text, _files)
-            except Exception as _exc:  # không để lỗi pipeline làm vỡ cuộc trò chuyện
-                st.session_state["chat"].append({"role": "assistant", "blocks": [
-                    ("error", f"Đã xảy ra lỗi khi xử lý: `{_html.escape(str(_exc))[:300]}`. Vui lòng thử lại hoặc gửi ảnh khác.")
-                ], "result": None})
-        st.rerun()
+_choice = st.session_state.pop("image_choice", None)
+if _prompt is not None or _choice is not None:
+    with st.chat_message("assistant", avatar="🥗"):
+        try:
+            if _choice == "old":
+                handle_turn("", [], use_old_image=True)
+            elif _choice == "new":
+                ctx["awaiting_image_choice"] = False
+                chat.append({"role": "user", "text": "📎 Gửi ảnh khác", "thumbs": []})
+                chat.append({"role": "assistant", "result": None, "blocks": [(
+                    "info", "Hãy bấm nút đính kèm trong ô nhập và chọn ảnh nhãn mới (" + m_chat.IMAGE_FORMAT_HINT
+                    + "). Câu hỏi đang chờ sẽ được trả lời ngay khi ảnh hợp lệ.")]})
+            else:
+                _text, _files = (_prompt.text or ""), list(_prompt.files or [])
+                if _text.strip() or _files:
+                    handle_turn(_text, _files)
+        except Exception as _exc:  # không để lỗi pipeline làm vỡ cuộc trò chuyện
+            st.session_state["chat"].append({"role": "assistant", "result": None, "blocks": [
+                ("error", f"Đã xảy ra lỗi khi xử lý: `{_html.escape(str(_exc))[:300]}`. Vui lòng thử lại hoặc gửi ảnh khác.")
+            ]})
+    st.rerun()

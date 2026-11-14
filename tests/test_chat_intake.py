@@ -85,6 +85,9 @@ class TestChatIntake(unittest.TestCase):
         self.assertEqual(ci.next_action(True, "Có chứa dị nguyên không?"), "run")
         self.assertEqual(ci.next_action(False, "Có chứa dị nguyên không?"), "need_image")
         self.assertEqual(ci.next_action(True, ""), "need_question")
+        # chưa khai báo hồ sơ → hỏi hồ sơ, không tự gán mặc định
+        self.assertEqual(ci.next_action(True, "Có chứa dị nguyên không?", has_profile=False), "need_profile")
+        self.assertEqual(ci.next_action(False, "Có chứa dị nguyên không?", has_profile=False), "need_image_profile")
         q = "Tôi có nên ngừng uống thuốc huyết áp không?"
         self.assertEqual(ci.next_action(False, q, ci.abstention.detect_out_of_scope(q)), "out_of_scope_no_image")
         self.assertIn("VƯỢT PHẠM VI", ci.out_of_scope_reply(q))
@@ -100,7 +103,68 @@ class TestChatIntake(unittest.TestCase):
         self.assertEqual(persona["conditions"], ["healthy"])
         self.assertFalse(persona["is_declared"])
 
+    def test_skip_profile_reply(self):
+        for t in ["không có", "bỏ qua", "khỏe mạnh"]:
+            self.assertEqual(self.parse(t)["kind"], "skip_profile", t)
+
+    def test_profile_additions_are_merged(self):
+        p, _ = ci.merge_profile(ci.empty_profile(), self.parse("Tôi 40 tuổi, bị tiểu đường")["profile"]["update"])
+        p, notes = ci.merge_profile(p, self.parse("Tôi dị ứng tôm")["profile"]["update"])
+        self.assertEqual(notes, [])
+        self.assertIn("diabetes", p["conditions"])
+        self.assertEqual(p["age"], 40)
+        self.assertEqual(p["allergens"][0]["key"], "shellfish")
+
+    def test_conflicting_profile_replaces_old_one(self):
+        p, _ = ci.merge_profile(ci.empty_profile(), self.parse("Tôi 40 tuổi, nam, bị tiểu đường")["profile"]["update"])
+        p, notes = ci.merge_profile(p, self.parse("Con tôi 4 tuổi dị ứng sữa, ăn được không?")["profile"]["update"])
+        self.assertTrue(notes and "thay mới" in notes[0])
+        self.assertEqual(p["age"], 4)
+        self.assertNotIn("diabetes", p["conditions"])   # không gộp bệnh của người trước
+        self.assertIsNone(p["gender"])
+        self.assertEqual([a["key"] for a in p["allergens"]], ["milk"])
+
+    def test_pronoun_after_allergen_list_is_not_an_allergen(self):
+        upd = self.parse("Con tôi 4 tuổi dị ứng đậu phộng, bé ăn được không?")["profile"]["update"]
+        self.assertEqual([a["key"] for a in upd["allergens_add"]], ["peanut"])
+
+    def test_age_group_counts_as_profile(self):
+        r = self.parse("sản phẩm này có an toàn cho người trưởng thành")
+        self.assertEqual(r["question"], "sản phẩm này có an toàn cho người trưởng thành")
+        p, _ = ci.merge_profile(ci.empty_profile(), r["profile"]["update"])
+        self.assertTrue(p["declared"])
+        self.assertEqual(p["age_group"], "adult")
+        self.assertIn("người trưởng thành", ci.profile_summary(p))
+        self.assertEqual(ci.profile_to_persona(p)["demographics"]["age"], 30)
+        p2, _ = ci.merge_profile(ci.empty_profile(), self.parse("Bố tôi là người cao tuổi")["profile"]["update"])
+        self.assertEqual(ci.profile_to_persona(p2)["demographics"]["age"], 65)
+        self.assertEqual(self.parse("người trưởng thành 5 tuổi")["kind"], "invalid")
+        # đổi nhóm tuổi → hồ sơ thay mới
+        p3, notes = ci.merge_profile(p, self.parse("Còn người cao tuổi thì sao?")["profile"]["update"])
+        self.assertEqual(p3["age_group"], "elderly")
+        self.assertTrue(notes)
+
+    def test_too_long_message_rejected(self):
+        r = self.parse("Sản phẩm này có an toàn không? " * 60)
+        self.assertEqual(r["kind"], "invalid")
+        self.assertIn("quá dài", r["errors"][0])
+
+    def test_use_old_image_command(self):
+        for t in ["dùng ảnh cũ", "ảnh cũ", "dùng lại ảnh trước", "dung anh cu"]:
+            self.assertEqual(self.parse(t)["kind"], "use_old_image", t)
+
+    def test_guess_product_name(self):
+        text = "BÁNH QUY BƠ DANISA\nKhối lượng tịnh: 200g\nThành phần: bột mì, bơ, đường"
+        self.assertEqual(ci.guess_product_name(text), "BÁNH QUY BƠ DANISA")
+        self.assertEqual(ci.guess_product_name("Thành phần: bột mì, đường"), "")
+        one_line = ("Convertive Nở với 1 Bánh xốp ong Deka Jumbo cá phê trắng White Coffee Tổng số phần ăn: 10; "
+                    "Thành phần: Bột mì (34,242%), Đường")
+        self.assertEqual(ci.guess_product_name(one_line), "Bánh xốp ong Deka Jumbo cá phê trắng")
+
     def test_validate_image(self):
+        self.assertIn("không được hỗ trợ", ci.validate_image(_png(), "label.gif")[1])
+        self.assertIn("không được hỗ trợ", ci.validate_image(b"%PDF", "label.pdf")[1])
+        self.assertIsNone(ci.validate_image(_png(), "label.webp")[1])  # webp: tên đuôi hợp lệ, nội dung PNG vẫn mở được
         img, err = ci.validate_image(_png(), "ok.png")
         self.assertIsNotNone(img)
         self.assertIsNone(err)

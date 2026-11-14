@@ -11,3 +11,4 @@ Thư mục này chứa tập dữ liệu gốc 2.311 câu hỏi được sinh ra
 - `qa_benchmark.jsonl`: Bản nguồn đầy đủ 2.311 bản ghi định dạng JSON Lines.
 - `qa_benchmark.csv`: Bản nguồn định dạng CSV.
 - `qa_benchmark_persona_conditions.csv`: Bảng mapping điều kiện lâm sàng / persona trung gian trong quá trình xây dựng v5.
+

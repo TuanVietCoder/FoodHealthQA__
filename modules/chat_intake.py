@@ -24,6 +24,13 @@ from modules import persona_builder as pb
 MAX_MESSAGE_CHARS = 1500
 MAX_IMAGE_MB = 10
 MIN_IMAGE_SIDE = 120
+ALLOWED_IMAGE_EXT = ("jpg", "jpeg", "png", "webp", "bmp")
+# Hộp chọn tệp của ô chat chỉ hiện các loại ảnh này; loại nào ngoài ALLOWED_IMAGE_EXT sẽ được báo lỗi tiếng Việt.
+PICKER_IMAGE_EXT = ALLOWED_IMAGE_EXT + ("gif", "tif", "tiff", "heic", "heif", "avif")
+IMAGE_FORMAT_HINT = "Chỉ nhận ảnh nhãn: " + ", ".join(e.upper() for e in ALLOWED_IMAGE_EXT if e != "jpeg") + f" · tối đa {MAX_IMAGE_MB} MB · 1 ảnh mỗi lần"
+# Giới hạn tải lên của ô chat đặt rộng hơn giới hạn thật, để file quá cỡ/định dạng sai vẫn tới được app
+# và được báo lỗi rõ ràng trong cuộc trò chuyện (thay vì bị trình duyệt chặn âm thầm).
+UPLOAD_HARD_LIMIT_MB = 50
 
 # ---------------------------------------------------------------------------
 # Chuẩn hóa văn bản
@@ -104,6 +111,13 @@ _CLEAR_PROFILE = re.compile(r"^\s*(xoa|huy|bo|dat lai|reset)\s+(ho so|thong tin 
 _CLEAR_IMAGE = re.compile(r"^\s*(xoa|huy|bo)\s+(anh|hinh)( nhan)?\s*[.!]*\s*$")
 _GREETING = re.compile(r"^\s*(xin chao|chao( ban| em| anh| chi)?|hello|hi|hey|alo|halo)\b")
 _THANKS = re.compile(r"^\s*(cam on|thank|thanks|tks)\b")
+# trả lời khi được hỏi có dùng lại ảnh đã gửi trước đó không
+_USE_OLD_IMAGE = re.compile(r"^\s*((dung|su dung|giu|lay|hoi tren)( lai)?\s+)?(anh|hinh) (cu|truoc|truoc do|lan truoc|cu di|cu nhe)\s*[.!]*\s*$")
+# trả lời khi được hỏi hồ sơ: xác nhận không có bệnh nền / dị ứng
+_SKIP_PROFILE = re.compile(
+    r"^\s*(bo qua|skip|khong|khong co|khong can|khong co gi|khong co ho so|khong benh gi|khoe manh|binh thuong|"
+    r"toi khoe manh|toi binh thuong|khong co benh( nen)? (va|hay|hoac) di ung( gi)?)\s*[.!]*\s*$"
+)
 _HELP = re.compile(r"\b(huong dan|help|tro giup|ban la ai|ban lam duoc gi|ban giup duoc gi|cach (dung|su dung))\b")
 
 
@@ -133,6 +147,19 @@ _HEALTHY = re.compile(r"\b(khoe manh|khong (co )?benh( nen)?|khong mac benh|binh
 _PREGNANT = re.compile(r"mang thai|co thai|\bmang bau\b|\bdang bau\b|ba bau|thai ky|thai \d+ (tuan|thang)")
 _LACTATING = re.compile(r"cho con bu|nuoi con bang sua me|dang cho bu")
 _AGE = re.compile(r"(?<![\d.,])(\d{1,3})\s*(tuoi|t\b)")
+# nhóm tuổi nêu bằng lời (không có số tuổi): "người trưởng thành", "người cao tuổi"…
+_ELDERLY = re.compile(r"\bnguoi (gia|cao tuoi|lon tuoi|cao nien)\b|\bcao tuoi\b")
+_ADULT = re.compile(r"\bnguoi (truong thanh|lon|da truong thanh)\b|\bnguoi truong thanh\b")
+AGE_GROUP_LABEL = {"adult": "người trưởng thành", "elderly": "người cao tuổi"}
+AGE_GROUP_DEFAULT_AGE = {"adult": 30, "elderly": 65}
+
+
+def age_group_of(age):
+    if age is None:
+        return None
+    return "elderly" if age >= 60 else "adult" if age >= 18 else "child"
+
+
 _AGE_MONTHS = re.compile(r"(?<![\d.,])(\d{1,2})\s*thang tuoi")
 # giới tính: kiểm tra trên chữ có dấu vì "nam" (bỏ dấu) trùng "năm"
 _MALE = re.compile(r"(?<!việt )\b(nam giới|giới tính\s*:?\s*nam|là nam|đàn ông|con trai|bé trai|nam,|nam\.|nam$)", re.I)
@@ -146,7 +173,8 @@ _ALLERGY_NOT_STATEMENT = re.compile(r"(gay|nguy co|chat|tac nhan|phan ung|thanh 
 _ALLERGY_SELF_BEFORE = re.compile(r"(toi|minh|em|tui|tao|con|be|chau|vo|chong|bo|me|ba|ong|nguoi|benh nhan|ho so)\s+(\w+\s+){0,3}(bi\s+|co\s+)?$")
 _ALLERGY_STOP = re.compile(
     r"\b(thi|nen|co the|co nen|co an|co uong|an|uong|san pham|mon|khong|nhung|ma|vay|lieu|duoc|hay|nay|vi|nhe|nang|rat|"
-    r"lam|bi|mac|tuoi|mang thai|benh|dang|cho|hoi|xin|giup|kiem tra|phan tich)\b"
+    r"lam|bi|mac|tuoi|mang thai|benh|dang|cho|hoi|xin|giup|kiem tra|phan tich|"
+    r"be|con|chau|toi|minh|em|tui|nguoi|vo|chong|bo|ba|ong)\b"  # đại từ chủ ngữ mở mệnh đề mới
 )
 _ALLERGY_SPLIT = re.compile(r",|;|/|\+|\bva\b|\bhoac\b|\bvoi\b|\bcung\b")
 _ALLERGY_FILLER = {"gi", "nao", "do", "cai gi", "thu gi", "gi het", "gi ca", "a", "ca", "nhieu thu"}
@@ -158,6 +186,7 @@ def empty_profile() -> Dict[str, Any]:
         "conditions": [],      # mã bệnh nền (khóa trong CONDITION_CHOICES)
         "allergens": [],       # kết quả resolve_custom_allergen_term (status valid / valid_raw)
         "age": None,
+        "age_group": None,     # adult | elderly | child (suy từ tuổi hoặc từ cụm "người trưởng thành"…)
         "gender": None,        # "Nam" | "Nữ"
         "pregnant": False,
         "lactating": False,
@@ -230,6 +259,17 @@ def extract_profile(text: str, foodon_catalog=None) -> Dict[str, Any]:
                 upd["age"] = age
             if len({int(a.group(1)) for a in ages}) > 1:
                 warnings.append("Tin nhắn có nhiều độ tuổi khác nhau; hệ thống dùng độ tuổi đầu tiên.")
+
+    # nhóm tuổi bằng lời
+    m_group = _ELDERLY.search(folded) or _ADULT.search(folded)
+    if m_group:
+        spans.append(m_group.span())
+        group = "elderly" if _ELDERLY.search(folded) else "adult"
+        age_val = upd.get("age")
+        if age_val is not None and age_group_of(age_val) != group:
+            errors.append(f"Thông tin mâu thuẫn: **{age_val} tuổi** nhưng lại là **{AGE_GROUP_LABEL[group]}** — vui lòng kiểm tra lại.")
+        elif age_val is None:
+            upd["age_group"] = group
 
     # giới tính
     male = bool(_MALE.search(nfc) or _MALE_FOLD.search(folded))
@@ -308,6 +348,10 @@ def _extract_allergens(text, folded, idx, foodon_catalog):
             if status in ("symptom_warning", "drug_warning"):
                 warnings.append(f"**'{res.get('term', raw)}'**: {res['warning']} Mục này được bỏ qua.")
             elif status in ("valid", "valid_raw"):
+                if res.get("source") == "foodon_search" and len(term_fold.replace(" ", "")) <= 3:
+                    # từ quá ngắn chỉ khớp mờ trên FoodOn (vd 'bé' → 'Béchamel sauce') → không tin cậy
+                    warnings.append(f"Không chắc **'{raw}'** là dị nguyên nào — mục này được bỏ qua, vui lòng ghi rõ tên thực phẩm.")
+                    continue
                 if not any(_same_allergen(f, res) for f in found):
                     found.append(res)
     return found, warnings, errors, spans
@@ -318,13 +362,34 @@ def _same_allergen(a: Dict[str, Any], b: Dict[str, Any]) -> bool:
 
 
 def merge_profile(profile: Dict[str, Any], update: Dict[str, Any]) -> Tuple[Dict[str, Any], List[str]]:
-    """Gộp thông tin mới vào hồ sơ đang có (thông tin mới ghi đè). Trả về (hồ sơ, ghi chú thay đổi)."""
-    p = dict(profile or empty_profile())
-    p["conditions"] = list(p.get("conditions", []))
-    p["allergens"] = list(p.get("allergens", []))
+    """Cập nhật hồ sơ theo thông tin mới. Trả về (hồ sơ, ghi chú thay đổi).
+
+    - Thông tin mới mâu thuẫn hồ sơ cũ (khác tuổi hoặc giới tính) → coi là người khác: THAY MỚI toàn bộ hồ sơ,
+      không gộp bệnh nền/dị ứng của người trước.
+    - Ngược lại → BỔ SUNG vào hồ sơ đang có (thêm/bớt bệnh nền, dị ứng; cập nhật thai kỳ…).
+    """
+    old = profile or empty_profile()
     notes = []
     if not update:
+        p = dict(old)
+        p["conditions"], p["allergens"] = list(old.get("conditions", [])), list(old.get("allergens", []))
         return p, notes
+    conflict = []
+    new_group = age_group_of(update["age"]) if update.get("age") is not None else update.get("age_group")
+    old_group = age_group_of(old["age"]) if old.get("age") is not None else old.get("age_group")
+    if new_group and old_group and new_group != old_group and not (update.get("age") is not None and old.get("age") is not None):
+        conflict.append(f"nhóm tuổi {AGE_GROUP_LABEL.get(old_group, 'trẻ em')} → {AGE_GROUP_LABEL.get(new_group, 'trẻ em')}")
+    if update.get("age") is not None and old.get("age") is not None and update["age"] != old["age"]:
+        conflict.append(f"tuổi {old['age']} → {update['age']}")
+    if update.get("gender") and old.get("gender") and update["gender"] != old["gender"]:
+        conflict.append(f"giới tính {old['gender']} → {update['gender']}")
+    if conflict and old.get("declared"):
+        notes.append("Thông tin mới khác hồ sơ trước (" + ", ".join(conflict) + ") nên hồ sơ được **thay mới**, "
+                     "không gộp với hồ sơ cũ: " + profile_summary(old) + ".")
+        old = empty_profile()
+    p = dict(old)
+    p["conditions"] = list(old.get("conditions", []))
+    p["allergens"] = list(old.get("allergens", []))
     p["declared"] = True
     if update.get("healthy"):
         p["conditions"], p["healthy"] = [], True
@@ -341,11 +406,14 @@ def merge_profile(profile: Dict[str, Any], update: Dict[str, Any]) -> Tuple[Dict
         if not any(_same_allergen(x, a) for x in p["allergens"]):
             p["allergens"].append(a)
         p["no_allergy"] = False
+    if update.get("age_group"):
+        p["age_group"] = update["age_group"]
+        if p.get("age") is not None and age_group_of(p["age"]) != update["age_group"]:
+            p["age"] = None
     if "age" in update:
+        p["age_group"] = age_group_of(update["age"])
         p["age"] = update["age"]
     if "gender" in update:
-        if p.get("gender") and p["gender"] != update["gender"]:
-            notes.append(f"Đã đổi giới tính trong hồ sơ: {p['gender']} → {update['gender']}.")
         p["gender"] = update["gender"]
     for flag in ("pregnant", "lactating"):
         if flag in update:
@@ -368,7 +436,7 @@ def profile_to_persona(profile: Dict[str, Any]) -> Dict[str, Any]:
         selected_conditions=labels,
         selected_common_allergens=[],
         custom_allergen_terms=list(p.get("allergens", [])),
-        age=int(p["age"]) if p.get("age") else 30,
+        age=int(p["age"]) if p.get("age") else AGE_GROUP_DEFAULT_AGE.get(p.get("age_group"), 30),
         gender=p.get("gender") or "Khác",
         is_pregnant=bool(p.get("pregnant")),
         is_lactating=bool(p.get("lactating")),
@@ -381,10 +449,12 @@ def profile_to_persona(profile: Dict[str, Any]) -> Dict[str, Any]:
 def profile_summary(profile: Dict[str, Any]) -> str:
     p = profile or empty_profile()
     if not p.get("declared"):
-        return "Chưa khai báo (đánh giá cho người trưởng thành, không bệnh nền, không dị ứng)"
+        return "Chưa khai báo"
     parts = []
     if p.get("age"):
         parts.append(f"{p['age']} tuổi")
+    elif p.get("age_group") in AGE_GROUP_LABEL:
+        parts.append(AGE_GROUP_LABEL[p["age_group"]])
     if p.get("gender"):
         parts.append(p["gender"])
     if p.get("pregnant"):
@@ -402,6 +472,8 @@ def profile_summary(profile: Dict[str, Any]) -> str:
         parts.append("dị ứng: " + ", ".join(a.get("label") or a.get("term", "") for a in p["allergens"]))
     elif p.get("no_allergy"):
         parts.append("không dị ứng")
+    if not (conds or p.get("healthy") or p.get("allergens") or p.get("no_allergy")):
+        parts.append("chưa nêu bệnh nền/dị ứng")
     return "; ".join(parts) or "Đã khai báo (không có thông tin đặc biệt)"
 
 
@@ -430,9 +502,16 @@ def _split_sentences(text: str) -> List[str]:
     return [p.strip() for p in parts if p and p.strip()]
 
 
+# câu hỏi không có dấu "?" và không kết thúc bằng từ hỏi: "sản phẩm này có an toàn cho người trưởng thành"
+_QUESTION_INNER = re.compile(
+    r"\bco (an toan|nen|duoc|chua|gay|phu hop|hai|tot|sao|van de)\b|\b(an|uong|dung|su dung) duoc\b|"
+    r"\ban toan (cho|voi|khong)\b|\bphu hop (cho|voi)\b"
+)
+
+
 def _is_question(sentence_fold: str) -> bool:
     return bool(_QUESTION_MARK.search(sentence_fold) or _QUESTION_START.search(sentence_fold)
-                or _IMPERATIVE.search(sentence_fold))
+                or _IMPERATIVE.search(sentence_fold) or _QUESTION_INNER.search(sentence_fold))
 
 
 def _is_profile_only(clause_fold: str, foodon_catalog=None) -> bool:
@@ -511,6 +590,12 @@ def parse_message(text: str, foodon_catalog=None) -> Dict[str, Any]:
     if _HELP.search(f) and words <= 10:
         result["kind"] = "help"
         return result
+    if _USE_OLD_IMAGE.match(f):
+        result["kind"] = "use_old_image"
+        return result
+    if _SKIP_PROFILE.match(f):
+        result["kind"] = "skip_profile"
+        return result
 
     profile = extract_profile(raw, foodon_catalog)
     result["profile"] = profile
@@ -564,10 +649,58 @@ def parse_message(text: str, foodon_catalog=None) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
+_NOT_NAME = re.compile(
+    r"thanh phan|ingredient|nsx|hsd|han su dung|ngay san xuat|khoi luong|the tich|cong ty|dia chi|san xuat tai|"
+    r"phan phoi|chiu trach nhiem|huong dan|bao quan|dien thoai|www|http|@|ma vach|so lo|xuat xu|net|kcal|gia tri dinh duong"
+)
+
+
+_PRODUCT_TYPE = re.compile(
+    r"\b(banh|keo|sua|mi|mien|pho|bun|chao|nuoc|tra|ca phe|cafe|coffee|snack|xuc xich|lap xuong|cha|gio|pate|"
+    r"nuoc mam|nuoc tuong|tuong|dau an|dau|hat nem|bot nem|gia vi|sot|mut|thach|kem|socola|chocolate|ngu coc|"
+    r"yen mach|bia|ruou|nuoc ngot|nuoc ep|sua chua|pho mai|bo|ca hop|thit hop|rong bien|khoai tay|bim bim)\b"
+)
+_NAME_STOP = re.compile(r"[:;.!?\d]|\b(tong so|khoi luong|kich co|the tich|net|thanh phan|nsx|hsd|san xuat)\b")
+
+
+def guess_product_name(ocr_text: str, max_len: int = 60, max_words: int = 8) -> str:
+    """Đoán tên sản phẩm từ phần chữ đứng TRƯỚC 'Thành phần' trên nhãn ('' nếu không đoán được).
+
+    1) cụm bắt đầu bằng từ chỉ loại sản phẩm (bánh, kẹo, sữa, mì…) — dùng được cả khi OCR trả về một dòng liền;
+    2) nếu không có: dòng chữ có nghĩa đầu tiên.
+    """
+    text = str(ocr_text or "")
+    folded, idx = _fold_map(text)
+    head_end = re.search(r"thanh\s*phan|ingredients?", folded)
+    head = folded[: head_end.start()] if head_end else folded[:300]
+    m = _PRODUCT_TYPE.search(head)
+    if m:
+        stop = _NAME_STOP.search(head, m.start() + 1)
+        end = stop.start() if stop else len(head)
+        name = _orig_slice(text, idx, m.start(), end).strip(" -,|")
+        name = " ".join(name.split()[:max_words])[:max_len].strip()
+        if len(name.split()) >= 2:
+            return name
+    lines = [l.strip(" -:•*|") for l in text.splitlines()]
+    for line in lines:
+        f = fold(line)
+        if re.search(r"thanh\s*phan|ingredients?", f):
+            break
+        words = re.findall(r"[^\W\d_]{2,}", line)
+        if len(words) < 2 or _NOT_NAME.search(f) or is_gibberish(line):
+            continue
+        return line[:max_len].strip()
+    return ""
+
+
 def validate_image(data: bytes, name: str = "") -> Tuple[Optional[Any], Optional[str]]:
     """Mở và kiểm tra ảnh nhãn. Trả về (PIL.Image, None) hoặc (None, thông báo lỗi)."""
     from PIL import Image, ImageStat, UnidentifiedImageError
 
+    ext = name.rsplit(".", 1)[-1].lower() if "." in (name or "") else ""
+    if name and ext not in ALLOWED_IMAGE_EXT:
+        return None, (f"Tệp **{name}** không được hỗ trợ (định dạng *.{ext or '?'}*). "
+                      "Vui lòng gửi ảnh nhãn dạng **" + ", ".join(e.upper() for e in ALLOWED_IMAGE_EXT if e != "jpeg") + "**.")
     if not data:
         return None, f"Tệp **{name or 'ảnh'}** rỗng — vui lòng chọn ảnh khác."
     if len(data) > MAX_IMAGE_MB * 1024 * 1024:
@@ -578,7 +711,7 @@ def validate_image(data: bytes, name: str = "") -> Tuple[Optional[Any], Optional
         img = Image.open(io.BytesIO(data))
         img.load()
     except (UnidentifiedImageError, OSError, SyntaxError, ValueError):
-        return None, f"Không đọc được tệp **{name or 'ảnh'}** — tệp hỏng hoặc không phải ảnh JPEG/PNG."
+        return None, f"Không đọc được tệp **{name or 'ảnh'}** — tệp hỏng hoặc không phải ảnh " + ", ".join(e.upper() for e in ALLOWED_IMAGE_EXT if e != "jpeg") + "."
     img = img.convert("RGB")
     w, h = img.size
     if min(w, h) < MIN_IMAGE_SIDE:
@@ -594,15 +727,24 @@ def validate_image(data: bytes, name: str = "") -> Tuple[Optional[Any], Optional
 # ---------------------------------------------------------------------------
 
 
-def next_action(has_image: bool, question: str, out_of_scope: Optional[List[str]] = None) -> str:
-    """run | need_image | need_question | out_of_scope_no_image"""
-    if question and has_image:
-        return "run"
-    if question and out_of_scope:
+def next_action(has_image: bool, question: str, out_of_scope: Optional[List[str]] = None,
+                has_profile: bool = True) -> str:
+    """run | need_image | need_profile | need_image_profile | need_question | out_of_scope_no_image
+
+    Không tự gán hồ sơ mặc định: chưa khai báo hồ sơ thì giữ câu hỏi lại và đề nghị người dùng bổ sung
+    (hoặc trả lời "bỏ qua" / "không có" để xác nhận không bệnh nền, không dị ứng).
+    """
+    if not question:
+        return "need_question"
+    if out_of_scope and not has_image:
         return "out_of_scope_no_image"
-    if question:
+    if not has_image and not has_profile:
+        return "need_image_profile"
+    if not has_image:
         return "need_image"
-    return "need_question"
+    if not has_profile:
+        return "need_profile"
+    return "run"
 
 
 def out_of_scope_reply(question: str) -> Optional[str]:

@@ -27,28 +27,43 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 # Không gọi PyPI để kiểm tra phiên bản mỗi lần Albumentations được import.
 os.environ.setdefault("NO_ALBUMENTATIONS_UPDATE", "1")
 
-try:
-    import paddle
-    paddle.set_flags({'FLAGS_use_mkldnn': False})
-except Exception:
-    pass
-
+import importlib.util
 import re
+import threading
 import unicodedata
 import cv2
 import numpy as np
 from PIL import Image
 
+# Thư viện OCR (paddle, PaddleOCR, VietOCR + torch) rất nặng (~12 giây import). Chỉ nạp khi thật sự cần OCR,
+# để mở ứng dụng và các phần không dùng OCR (parse thành phần, script nghiên cứu, test) không phải chờ.
 _PADDLE_AVAILABLE = False
 _OCR_ENGINE = None
 _INIT_ERROR = None
+PaddleOCR = None
+_OCR_LOCK = threading.RLock()   # luồng khởi động nền và luồng người dùng không khởi tạo trùng
 
-try:
-    from paddleocr import PaddleOCR
-    _PADDLE_AVAILABLE = True
-except Exception as e:
-    _PADDLE_AVAILABLE = False
-    _INIT_ERROR = str(e)
+
+def _load_paddleocr():
+    """Import paddle + PaddleOCR (một lần). Trả về True nếu dùng được."""
+    global _PADDLE_AVAILABLE, _INIT_ERROR, PaddleOCR
+    with _OCR_LOCK:
+        if _PADDLE_AVAILABLE:
+            return True
+        try:
+            import paddle
+            paddle.set_flags({'FLAGS_use_mkldnn': False})
+        except Exception:
+            pass
+        try:
+            from paddleocr import PaddleOCR as _PaddleOCR
+            PaddleOCR = _PaddleOCR
+            _PADDLE_AVAILABLE = True
+            _INIT_ERROR = None
+        except Exception as e:
+            _PADDLE_AVAILABLE = False
+            _INIT_ERROR = str(e)
+        return _PADDLE_AVAILABLE
 
 # ── VietOCR (Text Recognition tầng 2) ────────────────────────────────
 _VIETOCR_AVAILABLE = False
@@ -62,40 +77,40 @@ _VIETOCR_WEIGHTS_URL = "https://vocr.vn/data/vietocr/vgg_transformer.pth"
 _VIETOCR_WEIGHTS_SIZE = 151815373
 _VIETOCR_WEIGHTS_SHA256 = "380512193a8b6cbf6fad80deacdc9b6939d10d473d199892fc6408d13775ea59"
 
-try:
-    from vietocr.tool.predictor import Predictor as _VietOCRPredictor
-    from vietocr.tool.config import Cfg as _VietOCRCfg
-    _VIETOCR_AVAILABLE = True
-except Exception as _e:
-    _VIETOCR_INIT_ERROR = str(_e)
+_VietOCRPredictor = None
+_VietOCRCfg = None
 
 
 def is_paddleocr_available():
-    """Kiểm tra xem thư viện PaddleOCR đã được cài đặt và có thể nạp hay không."""
-    global _PADDLE_AVAILABLE, _INIT_ERROR, PaddleOCR
-    if not _PADDLE_AVAILABLE:
-        try:
-            from paddleocr import PaddleOCR
-            _PADDLE_AVAILABLE = True
-            _INIT_ERROR = None
-        except Exception as e:
-            _PADDLE_AVAILABLE = False
-            _INIT_ERROR = str(e)
-    return _PADDLE_AVAILABLE
+    """PaddleOCR đã cài chưa — chỉ kiểm tra gói có trên máy, KHÔNG import (import thật diễn ra khi khởi tạo OCR)."""
+    if _PADDLE_AVAILABLE:
+        return True
+    try:
+        return importlib.util.find_spec("paddleocr") is not None
+    except (ImportError, ValueError):
+        return False
 
 
 def is_vietocr_available():
-    """Kiểm tra VietOCR đã cài và có thể nạp hay không."""
+    """Kiểm tra VietOCR đã cài và nạp được không (import thật, chỉ một lần)."""
     global _VIETOCR_AVAILABLE, _VIETOCR_INIT_ERROR, _VietOCRPredictor, _VietOCRCfg
-    if not _VIETOCR_AVAILABLE:
-        try:
-            from vietocr.tool.predictor import Predictor as _VietOCRPredictor
-            from vietocr.tool.config import Cfg as _VietOCRCfg
-            _VIETOCR_AVAILABLE = True
-            _VIETOCR_INIT_ERROR = None
-        except Exception as _e:
-            _VIETOCR_INIT_ERROR = str(_e)
-    return _VIETOCR_AVAILABLE
+    with _OCR_LOCK:
+        if not _VIETOCR_AVAILABLE:
+            try:
+                from vietocr.tool.predictor import Predictor as _VietOCRPredictor
+                from vietocr.tool.config import Cfg as _VietOCRCfg
+                _VIETOCR_AVAILABLE = True
+                _VIETOCR_INIT_ERROR = None
+            except Exception as _e:
+                _VIETOCR_INIT_ERROR = str(_e)
+        return _VIETOCR_AVAILABLE
+
+
+def warm_up_ocr():
+    """Nạp thư viện và khởi tạo sẵn PaddleOCR + VietOCR (gọi từ luồng nền khi ứng dụng khởi động)."""
+    engine = get_ocr_engine()
+    predictor = get_vietocr_predictor()
+    return {"paddleocr": engine is not None, "vietocr": predictor is not None}
 
 
 def _vietocr_weights_path():
@@ -167,8 +182,14 @@ def _ensure_vietocr_weights():
 def get_vietocr_predictor():
     """Khởi tạo VietOCR từ config/model local; chỉ tải trọng số ở lần đầu."""
     global _VIETOCR_PREDICTOR, _VIETOCR_INIT_ERROR
-    if not _VIETOCR_AVAILABLE:
+    if not is_vietocr_available():
         return None
+    with _OCR_LOCK:
+        return _init_vietocr_predictor()
+
+
+def _init_vietocr_predictor():
+    global _VIETOCR_PREDICTOR, _VIETOCR_INIT_ERROR
     if _VIETOCR_PREDICTOR is None:
         try:
             if not os.path.isfile(_VIETOCR_CONFIG_PATH):
@@ -193,9 +214,14 @@ def get_ocr_engine():
     Khởi tạo PaddleOCR Engine tương thích linh hoạt mọi phiên bản PaddleOCR (v2, v3, PaddleX).
     Ưu tiên cấu hình tối ưu cho nhãn thực phẩm tiếng Việt.
     """
-    global _OCR_ENGINE, _INIT_ERROR
-    if not is_paddleocr_available():
+    if not _load_paddleocr():
         return None
+    with _OCR_LOCK:
+        return _init_ocr_engine()
+
+
+def _init_ocr_engine():
+    global _OCR_ENGINE, _INIT_ERROR
     if _OCR_ENGINE is None:
         configs = [
             # Cấu hình 1: Tối ưu cho nhãn thực phẩm (detection thresholds thấp hơn để bắt chữ nhỏ)
