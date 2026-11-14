@@ -13,7 +13,11 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts_research"))
 
 V5_FULL = ROOT / "data" / "build" / "qa_build_full.jsonl"
-V5_ACTIVE = ROOT / "data" / "qa_benchmark.jsonl"
+V5_ACTIVE = (
+    ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl"
+    if (ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl").exists()
+    else ROOT / "data" / "qa_benchmark.jsonl"
+)
 V4 = ROOT / "data" / "build" / "qa_input_source_verified.jsonl"
 
 

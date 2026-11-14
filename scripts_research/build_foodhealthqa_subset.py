@@ -33,7 +33,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = ROOT / "data" / "qa_benchmark.jsonl"
+DEFAULT_INPUT = (
+    ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl"
+    if (ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl").exists()
+    else ROOT / "data" / "qa_benchmark.jsonl"
+)
 DEFAULT_OUT_JSONL = ROOT / "data" / "foodhealthqa_eval_set.jsonl"
 DEFAULT_OUT_CSV = ROOT / "data" / "foodhealthqa_eval_set.csv"
 DEFAULT_OUT_SUMMARY = ROOT / "data" / "foodhealthqa_eval_set_summary.json"

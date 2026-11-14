@@ -72,7 +72,12 @@ def parse_page2(text: str) -> dict:
 
 
 def wanted_codes() -> list[str]:
-    rows = list(csv.DictReader(open(ROOT / "data" / "qa_benchmark.csv", encoding="utf-8-sig")))
+    _bench_csv = (
+        ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.csv"
+        if (ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.csv").exists()
+        else ROOT / "data" / "qa_benchmark.csv"
+    )
+    rows = list(csv.DictReader(open(_bench_csv, encoding="utf-8-sig")))
     codes = set()
     for r in rows:
         if r["eligible_for_scoring"] == "no" and r["domain"] != "vulnerable_groups":

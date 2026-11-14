@@ -122,7 +122,7 @@ class ActiveBenchmarkTests(unittest.TestCase):
         manifest = load_benchmark_manifest(ROOT / "data")
         active = Path(get_active_benchmark_path(ROOT / "data", "jsonl"))
         self.assertEqual(manifest["active_version"], "v5")
-        self.assertEqual(active.name, manifest["benchmarks"]["v5"]["jsonl"])
+        self.assertEqual(active.name, Path(manifest["benchmarks"]["v5"]["jsonl"]).name)
         self.assertTrue(active.exists())
         # one standard dataset: only v5 is registered
         self.assertEqual(list(manifest["benchmarks"]), ["v5"])

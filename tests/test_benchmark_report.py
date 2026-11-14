@@ -8,7 +8,12 @@ sys.path.insert(0, str(ROOT / "scripts_research"))
 
 import benchmark_report as br  # noqa: E402
 
-ROWS = br.load(ROOT / "data" / "qa_benchmark.jsonl")
+_qa_bench_path = (
+    ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl"
+    if (ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl").exists()
+    else ROOT / "data" / "qa_benchmark.jsonl"
+)
+ROWS = br.load(_qa_bench_path)
 
 
 class GroupFieldTests(unittest.TestCase):

@@ -2,8 +2,8 @@
   "active_version": "v5",
   "benchmarks": {
     "v5": {
-      "csv": "qa_benchmark.csv",
-      "jsonl": "qa_benchmark.jsonl",
+      "csv": "archive/master_benchmark_2311/qa_benchmark.csv",
+      "jsonl": "archive/master_benchmark_2311/qa_benchmark.jsonl",
       "record_count": 2311,
       "status": "rule_verified_tiered_no_expert",
       "derived_from": "v4",

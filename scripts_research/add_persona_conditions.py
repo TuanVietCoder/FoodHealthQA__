@@ -16,10 +16,15 @@ import sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(BASE, "data")
-SRC_JSONL = os.path.join(DATA, "qa_benchmark.jsonl")
-SRC_CSV = os.path.join(DATA, "qa_benchmark.csv")
-OUT_JSONL = os.path.join(DATA, "qa_benchmark_persona_conditions.jsonl")
-OUT_CSV = os.path.join(DATA, "qa_benchmark_persona_conditions.csv")
+SRC_DIR = (
+    os.path.join(DATA, "archive", "master_benchmark_2311")
+    if os.path.exists(os.path.join(DATA, "archive", "master_benchmark_2311", "qa_benchmark.jsonl"))
+    else DATA
+)
+SRC_JSONL = os.path.join(SRC_DIR, "qa_benchmark.jsonl")
+SRC_CSV = os.path.join(SRC_DIR, "qa_benchmark.csv")
+OUT_JSONL = os.path.join(SRC_DIR, "qa_benchmark_persona_conditions.jsonl")
+OUT_CSV = os.path.join(SRC_DIR, "qa_benchmark_persona_conditions.csv")
 
 # (từ khóa trong tên persona) -> mã điều kiện; mã nằm trong condition_code_map của pipeline
 KEYWORD_TO_CODE = [

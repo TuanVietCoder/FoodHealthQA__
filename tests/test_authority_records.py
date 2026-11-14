@@ -4,7 +4,12 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ROWS = [json.loads(l) for l in (ROOT / "data" / "qa_benchmark.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+_qa_bench_path = (
+    ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl"
+    if (ROOT / "data" / "archive" / "master_benchmark_2311" / "qa_benchmark.jsonl").exists()
+    else ROOT / "data" / "qa_benchmark.jsonl"
+)
+ROWS = [json.loads(l) for l in _qa_bench_path.read_text(encoding="utf-8").splitlines() if l.strip()]
 NEW = [r for r in ROWS if r.get("authority_topic")]
 CLAIMS = json.loads((ROOT / "knowledge_base" / "sources" / "derived" / "external_claim_verification.json").read_text(encoding="utf-8"))
 BASES = {"codex_sulphite_declaration": {"220", "221", "222", "223", "224", "225", "226", "227", "228"}, "eu_annex_v_colours": {"102", "104", "110", "122", "124", "129"}, "fda_red3_revoked": {"127"},

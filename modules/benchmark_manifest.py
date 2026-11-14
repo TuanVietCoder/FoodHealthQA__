@@ -28,9 +28,12 @@ def get_active_benchmark_path(data_dir: str | Path, extension: str = "jsonl") ->
     version = manifest.get("active_version", "v5")
     metadata = manifest.get("benchmarks", {}).get(version, {})
     filename = metadata.get(extension)
-    if not filename:
-        filename = f"qa_benchmark.{extension}"
-    return str(data_path / filename)
+    if filename and (data_path / filename).exists():
+        return str(data_path / filename)
+    archive_path = data_path / "archive" / "master_benchmark_2311" / f"qa_benchmark.{extension}"
+    if archive_path.exists():
+        return str(archive_path)
+    return str(data_path / f"qa_benchmark.{extension}")
 
 
 def get_default_eval_benchmark_path(data_dir: str | Path, extension: str = "jsonl") -> str:

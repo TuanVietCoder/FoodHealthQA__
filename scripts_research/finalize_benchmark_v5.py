@@ -27,8 +27,9 @@ sys.path.insert(0, str(ROOT / "scripts_research"))
 import verify_v5_answers as ver  # noqa: E402
 
 SRC = ROOT / "data" / "build" / "qa_build_full.jsonl"
-OUT_JSONL = ROOT / "data" / "qa_benchmark.jsonl"
-OUT_CSV = ROOT / "data" / "qa_benchmark.csv"
+OUT_DIR = ROOT / "data" / "archive" / "master_benchmark_2311"
+OUT_JSONL = OUT_DIR / "qa_benchmark.jsonl"
+OUT_CSV = OUT_DIR / "qa_benchmark.csv"
 REPORT = ROOT / "data" / "build" / "qa_activation_report.json"
 MANIFEST = ROOT / "data" / "benchmark_manifest.json"
 
