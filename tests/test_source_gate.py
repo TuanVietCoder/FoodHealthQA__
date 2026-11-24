@@ -47,6 +47,27 @@ class CheckAnswerSourcesTests(unittest.TestCase):
         self.assertFalse(pipeline.check_answer_sources("OK [JECFA_EVALUATIONS, EFSA_OPINIONS].", ALLOWED, "SAFE")[0])
 
 
+class LabelConsistencyTests(unittest.TestCase):
+    def test_llm_label_different_from_rule_label_is_rejected(self):
+        ok, reason = pipeline.check_answer_sources("Chất này ổn [JECFA_EVALUATIONS].\nSAFETY_LABEL: SAFE", ALLOWED, "UNSAFE")
+        self.assertFalse(ok)
+        self.assertIn("SAFE", reason)
+        self.assertIn("UNSAFE", reason)
+
+    def test_matching_label_passes(self):
+        self.assertTrue(pipeline.check_answer_sources("Cần lưu ý [JECFA_EVALUATIONS].\nSAFETY_LABEL: CAUTION", ALLOWED, "CAUTION")[0])
+
+    def test_stricter_label_is_accepted_only_when_explicitly_allowed(self):
+        text = "Chưa có dữ liệu cho bệnh này [JECFA_EVALUATIONS].\nSAFETY_LABEL: CAUTION"
+        self.assertFalse(pipeline.check_answer_sources(text, ALLOWED, "SAFE")[0])
+        self.assertTrue(pipeline.check_answer_sources(text, ALLOWED, "SAFE", ("CAUTION",))[0])
+        # cho phép CAUTION không có nghĩa cho phép nhãn khác
+        self.assertFalse(pipeline.check_answer_sources("Ổn [JECFA_EVALUATIONS].\nSAFETY_LABEL: UNSAFE", ALLOWED, "SAFE", ("CAUTION",))[0])
+
+    def test_missing_label_line_is_not_blocked(self):
+        self.assertTrue(pipeline.check_answer_sources("Cần lưu ý [JECFA_EVALUATIONS].", ALLOWED, "CAUTION")[0])
+
+
 class GenerateLlmAnswerGateTests(unittest.TestCase):
     """generate_llm_answer: thử lại đúng một lần rồi từ chối (trả None, ghi lý do), không trả câu trả lời không nguồn."""
 

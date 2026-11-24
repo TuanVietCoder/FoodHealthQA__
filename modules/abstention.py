@@ -134,9 +134,9 @@ _CONDITION_NAMES_VI = {
 }
 # Điều gì hệ thống VẪN xét cho bệnh đó dù chưa có lưu ý riêng về phụ gia (chỉ khi nhãn ghi số liệu định lượng)
 _CONDITION_NUTRIENT_SCOPE = {
-    "diabetes": "Hệ thống chỉ so lượng đường với điều kiện 'không đường' của Codex khi nhãn ghi số liệu đường.",
-    "hypertension": "Hệ thống chỉ so lượng natri với điều kiện 'natri thấp' của Codex khi nhãn ghi số liệu natri.",
-    "cardiovascular_risk": "Hệ thống chỉ so lượng natri với điều kiện 'natri thấp' của Codex khi nhãn ghi số liệu natri.",
+    "diabetes": "Riêng lượng đường, hệ thống chỉ đánh giá được khi trên nhãn có ghi số liệu đường.",
+    "hypertension": "Riêng lượng natri (muối), hệ thống chỉ đánh giá được khi trên nhãn có ghi số liệu natri.",
+    "cardiovascular_risk": "Riêng lượng natri (muối), hệ thống chỉ đánh giá được khi trên nhãn có ghi số liệu natri.",
 }
 # Không cần lưu ý này: không phải bệnh nền (khỏe mạnh), nhóm tuổi (có luật/lưu ý riêng), hoặc dị ứng/không dung nạp
 # (xử lý bằng bộ luật dị nguyên, không bằng lưu ý phụ gia)
@@ -175,9 +175,9 @@ def condition_notes(persona: dict | None, linked_results, covered_conditions) ->
             continue
         seen.add(key)
         name = _CONDITION_NAMES_VI.get(key, key.replace("_", " "))
-        text = (f"CHƯA CÓ DỮ LIỆU cho {name}: hệ thống không có thông tin nào về ảnh hưởng của các phụ gia trên nhãn đối với người "
-                f"{name}. Việc không có cảnh báo KHÔNG có nghĩa là sản phẩm an toàn hoặc không cần tránh đối với bạn — chỉ là hệ thống "
-                "không có căn cứ để cảnh báo. Hãy hỏi bác sĩ hoặc chuyên gia dinh dưỡng trước khi dùng.")
+        text = (f"Chưa có thông tin cho trường hợp {name}: các phụ gia trên nhãn chưa có dữ liệu về ảnh hưởng đến bệnh này, nên hệ thống "
+                "chưa thể cảnh báo gì. Không có cảnh báo KHÔNG có nghĩa là sản phẩm an toàn cho bạn. "
+                "Hãy hỏi bác sĩ hoặc chuyên gia dinh dưỡng trước khi dùng.")
         if key in _CONDITION_NUTRIENT_SCOPE:
             text += " " + _CONDITION_NUTRIENT_SCOPE[key]
         notes.append({"code": "CONDITION_NO_ADDITIVE_EVIDENCE", "group": name, "text": text})

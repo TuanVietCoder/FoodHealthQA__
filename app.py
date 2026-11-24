@@ -786,7 +786,9 @@ def _ocr_status_fragment():
     st.markdown(_ocr_status_html(), unsafe_allow_html=True)
 
 
-# ── Sidebar Điều Hướng & Trạng Thái Hệ Thống ──
+# ── Sidebar: chế độ làm việc, và (mục Báo cáo nghiên cứu) trạng thái hệ thống ──
+WORKSPACE_DEMO = "💬 Hỏi đáp nhãn thực phẩm"
+WORKSPACE_REPORT = "🔬 Báo cáo nghiên cứu"
 
 with st.sidebar:
 
@@ -796,25 +798,32 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    st.markdown("---")
-
-    st.markdown('<div class="fh-label">⚙️ Trạng thái hệ thống</div>', unsafe_allow_html=True)
-
-    _ocr_status_fragment()
-    _n_rec = f"{BENCHMARK_RECORDS:,}".replace(",", ".")
-    st.markdown(
-        f'<div class="fh-stat">🎯 Bộ đánh giá (câu hỏi)<span class="v idx">{_n_rec}</span></div>'
-        f'<div class="fh-stat">🏷️ Ảnh nhãn trong bộ đánh giá<span class="v tl">{BENCHMARK_IMAGES}</span></div>',
-        unsafe_allow_html=True,
+    # Chế độ làm việc: Hỏi đáp (khung chat + lịch sử) hoặc Báo cáo nghiên cứu (kèm trạng thái hệ thống)
+    app_mode = st.radio(
+        "Chế độ:", [WORKSPACE_DEMO, WORKSPACE_REPORT],
+        key="app_mode", label_visibility="collapsed",
+        help="Hỏi đáp: trò chuyện với hệ thống trên ảnh nhãn. Báo cáo nghiên cứu: kết quả đánh giá 3 cấu hình A/B/C.",
     )
+    if app_mode == WORKSPACE_REPORT:
+        st.markdown("---")
 
-    if not active_benchmark_metadata.get("expert_validated", False):
+        st.markdown('<div class="fh-label">⚙️ Trạng thái hệ thống</div>', unsafe_allow_html=True)
+
+        _ocr_status_fragment()
+        _n_rec = f"{BENCHMARK_RECORDS:,}".replace(",", ".")
         st.markdown(
-            '<div class="fh-note"><b>ℹ️ Lưu ý về bộ QA</b>'
-            'Bộ QA chưa được chuyên gia thẩm định. Các chỉ số mang tính tham khảo (exploratory), '
-            'không phải hiệu năng trên gold standard.</div>',
+            f'<div class="fh-stat">🎯 Bộ đánh giá (câu hỏi)<span class="v idx">{_n_rec}</span></div>'
+            f'<div class="fh-stat">🏷️ Ảnh nhãn trong bộ đánh giá<span class="v tl">{BENCHMARK_IMAGES}</span></div>',
             unsafe_allow_html=True,
         )
+
+        if not active_benchmark_metadata.get("expert_validated", False):
+            st.markdown(
+                '<div class="fh-note"><b>ℹ️ Lưu ý về bộ QA</b>'
+                'Bộ QA chưa được chuyên gia thẩm định. Các chỉ số mang tính tham khảo (exploratory), '
+                'không phải hiệu năng trên gold standard.</div>',
+                unsafe_allow_html=True,
+            )
 
 
 
@@ -1107,6 +1116,29 @@ CHAT_CSS = """
 .fh-prod .t{font-size:.84rem;line-height:1.45;color:#334155}
 .fh-prod .t b{color:#0f172a}
 .fh-prod .t small{display:block;color:#64748b;font-size:.74rem}
+/* tiêu đề mục: chữ nhỏ viết hoa + đường kẻ mảnh, dễ lướt mắt qua 3 mục */
+.fh-sec{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:.72rem;font-weight:700;letter-spacing:.06em;color:#475569}
+.fh-sec::after{content:"";flex:1;height:1px;background:#e2e8f0}
+/* thẻ kết luận: một khối lớn, màu theo mức độ */
+.fh-verdict{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;border:1px solid;border-left-width:6px;margin:4px 0 10px}
+.fh-verdict .ic{font-size:1.5rem;line-height:1.2}
+.fh-verdict .tt{font-size:1.02rem;font-weight:700;line-height:1.3}
+.fh-verdict .mm{font-size:.86rem;line-height:1.55;margin-top:3px}
+.fh-verdict.success{background:#f0fdf4;border-color:#86efac;color:#14532d}
+.fh-verdict.warning{background:#fffbeb;border-color:#fcd34d;color:#78350f}
+.fh-verdict.error{background:#fef2f2;border-color:#fca5a5;color:#7f1d1d}
+.fh-verdict.info{background:#f8fafc;border-color:#cbd5e1;color:#334155}
+/* câu "Tóm lại" cuối khung trả lời: nổi hơn chữ thường, màu theo mức độ */
+.fh-bottomline{margin:10px 0 2px;padding:11px 14px;border-radius:10px;font-size:.92rem;line-height:1.6;border-left:5px solid}
+.fh-bottomline.success{background:#f0fdf4;border-color:#22c55e;color:#14532d}
+.fh-bottomline.warning{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.fh-bottomline.error{background:#fef2f2;border-color:#ef4444;color:#7f1d1d}
+.fh-bottomline.info{background:#f1f5f9;border-color:#94a3b8;color:#334155}
+/* khung lưu ý ở cuối câu trả lời */
+.fh-notes{margin:16px 0 4px;padding:12px 16px;border-radius:12px;background:#fffbeb;border:1px solid #fde68a;color:#78350f;font-size:.82rem;line-height:1.6}
+.fh-notes .h{font-weight:700;margin-bottom:4px}
+.fh-notes ul{margin:0;padding-left:1.1rem}
+.fh-notes li{margin:3px 0}
 </style>
 """
 st.markdown(CHAT_CSS, unsafe_allow_html=True)
@@ -1144,17 +1176,6 @@ def _thumb_bytes(img, size=480):
         return None
 
 
-# ── Sidebar: chế độ làm việc (Hỏi đáp / Báo cáo nghiên cứu) ──
-WORKSPACE_DEMO = "💬 Hỏi đáp nhãn thực phẩm"
-WORKSPACE_REPORT = "🔬 Báo cáo nghiên cứu"
-with st.sidebar:
-    st.markdown("---")
-    app_mode = st.radio(
-        "Chế độ:", [WORKSPACE_DEMO, WORKSPACE_REPORT],
-        key="app_mode", label_visibility="collapsed",
-        help="Hỏi đáp: trò chuyện với hệ thống trên ảnh nhãn. Báo cáo nghiên cứu: kết quả đánh giá 3 cấu hình A/B/C.",
-    )
-
 # ═════════════════════════════════════════════════════════════════════════
 # TAB "🔬 Báo cáo nghiên cứu": giao diện của commit f2694d50 (chọn ảnh mẫu/tải ảnh, hồ sơ, câu hỏi → kết quả 4 tab).
 # Giữ nguyên mã giao diện và xử lý của commit đó; chỉ lấy NHANES/FNDDS từ bản nạp nền. Không có thanh nhập chat.
@@ -1170,11 +1191,71 @@ if app_mode == WORKSPACE_REPORT:
     m_report.render_research_report(DATA_DIR)
     st.stop()
 
+import modules.chat_history as m_history  # noqa: E402
+
+
+def _reset_view_state():
+    """Bỏ trạng thái 'Xem chi tiết' của cuộc trò chuyện trước (khóa theo số thứ tự tin nhắn)."""
+    for k in [k for k in st.session_state if str(k).startswith("detail_")]:
+        del st.session_state[k]
+
+
+def _start_new_chat():
+    st.session_state["chat"] = []
+    st.session_state["ctx"] = _new_ctx()
+    st.session_state["conv_id"] = None
+    _reset_view_state()
+
+
+def _open_conversation(conv_id):
+    loaded = m_history.load_conversation(conv_id)
+    if loaded is None:
+        st.session_state["history_error"] = "Không mở được cuộc trò chuyện này (file bị lỗi hoặc đã xóa)."
+        return
+    saved_chat, saved_ctx = loaded
+    st.session_state["chat"] = saved_chat
+    st.session_state["ctx"] = {**_new_ctx(), **saved_ctx}   # ảnh gốc không lưu; hỏi tiếp dùng chữ OCR đã lưu
+    st.session_state["conv_id"] = conv_id
+    st.session_state.pop("history_error", None)
+    _reset_view_state()
+
+
+def _persist_history():
+    """Lưu cuộc trò chuyện hiện tại vào data/chat_history/ (lỗi ghi file không được làm vỡ cuộc trò chuyện)."""
+    msgs = st.session_state.get("chat") or []
+    if not msgs:
+        return
+    try:
+        cid = st.session_state.get("conv_id") or m_history.new_id()
+        m_history.save_conversation(cid, msgs, st.session_state.get("ctx"))
+        st.session_state["conv_id"] = cid
+    except Exception as exc:  # noqa: BLE001
+        st.session_state["history_error"] = f"Chưa lưu được lịch sử: {exc}"
+
+
 with st.sidebar:
     if st.button("✨ Trò chuyện mới", width="stretch"):
-        st.session_state["chat"] = []
-        st.session_state["ctx"] = _new_ctx()
+        _start_new_chat()
         st.rerun()
+    _history = m_history.list_conversations(limit=30)
+    if _history:
+        st.markdown('<div class="fh-label">🕘 Lịch sử hỏi đáp</div>', unsafe_allow_html=True)
+        _current = st.session_state.get("conv_id")
+        for _item in _history:
+            _c1, _c2 = st.columns([6, 1], vertical_alignment="center")
+            _when = (_item["updated"] or "")[:16].replace("T", " ")
+            if _c1.button(("▸ " if _item["id"] == _current else "") + _item["title"], key=f"hist_open_{_item['id']}",
+                          width="stretch", help=f"{_when} · {_item['n_messages']} tin nhắn",
+                          type="primary" if _item["id"] == _current else "secondary"):
+                _open_conversation(_item["id"])
+                st.rerun()
+            if _c2.button("🗑", key=f"hist_del_{_item['id']}", help="Xóa cuộc trò chuyện này khỏi lịch sử"):
+                m_history.delete_conversation(_item["id"])
+                if _item["id"] == _current:
+                    _start_new_chat()
+                st.rerun()
+    if st.session_state.get("history_error"):
+        st.caption("⚠️ " + st.session_state["history_error"])
 
 
 # ── Xử lý một lượt hội thoại ──
@@ -1316,8 +1397,7 @@ def handle_turn(text, files, use_old_image=False):
         use_old_image = True
 
     if kind == "reset":
-        st.session_state["chat"] = []
-        st.session_state["ctx"] = _new_ctx()
+        _start_new_chat()
         return
 
     images = list(files or [])
@@ -1569,9 +1649,9 @@ def verdict_view(evaluation, nutri_warnings=None, allergies=None):
     gap = m_evidence.condition_gap_groups(evaluation)
     if gap:
         # bệnh nền được khai nhưng KB không có dữ liệu: KHÔNG hiện ô xanh "không thấy điểm cần lưu ý" (dễ bị hiểu là an toàn)
-        return ("⚠️", "Chưa có dữ liệu cho bệnh bạn đã khai",
-                f"Hệ thống không có thông tin về ảnh hưởng của các phụ gia trên nhãn đối với {_join_vi(gap)}. "
-                "Việc không có cảnh báo KHÔNG có nghĩa là an toàn cho bạn. Hãy hỏi bác sĩ hoặc chuyên gia dinh dưỡng.", "warning")
+        return ("⚠️", "Chưa có thông tin về bệnh bạn đã khai",
+                f"Hệ thống chưa có thông tin về việc các phụ gia trên nhãn có ảnh hưởng đến {_join_vi(gap)} hay không. "
+                "Không có cảnh báo KHÔNG có nghĩa là bạn dùng được. Hãy hỏi bác sĩ hoặc chuyên gia dinh dưỡng.", "warning")
     return ("🟢", "Không thấy điểm cần lưu ý",
             "Trong phần chữ đọc được từ nhãn, không có thành phần nào khớp với dị ứng hay bệnh bạn đã khai. "
             "Đây là kết quả sàng lọc, chưa phải xác nhận an toàn.", "success")
@@ -1588,6 +1668,15 @@ def _word_edits(before, after, limit=200):
             if len(out) >= limit:
                 break
     return out
+
+
+def _md_to_html(text):
+    """Chữ có **đậm** (markdown) → HTML an toàn, để đặt trong thẻ HTML tự dựng."""
+    return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", _html.escape(str(text or "")))
+
+
+def _section_title(icon, title):
+    st.markdown(f'<div class="fh-sec"><span>{icon}</span><span>{_html.escape(title)}</span></div>', unsafe_allow_html=True)
 
 
 def render_analysis(res, key, compact=False):
@@ -1639,38 +1728,50 @@ def render_analysis(res, key, compact=False):
         st.caption("🔗 Hiểu là hỏi tiếp về: **" + ", ".join(res["followup_terms"]) + "**")
 
     # ── PHẦN GỌN (luôn hiện), theo đúng 3 mục: [NHẬN DIỆN TỪ ẢNH] · [NỘI DUNG TRẢ LỜI] · [NGUỒN ĐỐI CHIẾU] ──
+    # Các dòng lưu ý/cảnh báo phụ gom về cuối cùng (khung "Lưu ý"); kết luận chính vẫn nằm ở đầu mục trả lời.
     _rec_rows = m_evidence.build_recognition_summary(linked_results)
-    st.markdown("**[NHẬN DIỆN TỪ ẢNH]**")
+    _section_title("🔎", "[NHẬN DIỆN TỪ ẢNH]")
     st.markdown(m_evidence.recognition_headline(
         mentions, _rec_rows, res.get("display_name") if res.get("name_from_label") else ""))
     render_recognition_summary(_rec_rows, key, compact)
 
-    st.markdown("**[NỘI DUNG TRẢ LỜI]**")
+    _section_title("💬", "[NỘI DUNG TRẢ LỜI]")
     _icon, _name, _meaning, _box = verdict_view(evaluation, nutri_warnings, (selected_persona or {}).get("allergies"))
     _rule_label = evaluation.get("safety_label") or m_pipeline.guardrail_status_to_safety_label(evaluation.get("status"))
     _llm_label = m_pipeline.extract_safety_label(llm_answer, default="") if llm_answer else ""
-    getattr(st, _box)(f"**{_name}** — {_meaning}", icon=_icon)
-    for _pn in evaluation.get("population_notes") or []:
-        if _pn.get("code") == "CONDITION_NO_ADDITIVE_EVIDENCE":
-            st.warning(_pn["text"], icon="⚠️")  # nổi bật, không phải dòng chữ nhỏ dễ bỏ qua
-        else:
-            st.caption(f"ℹ️ {_pn['text']}")
+    st.markdown(
+        f'<div class="fh-verdict {_box}"><div class="ic">{_icon}</div><div>'
+        f'<div class="tt">{_md_to_html(_name)}</div><div class="mm">{_md_to_html(_meaning)}</div></div></div>',
+        unsafe_allow_html=True)
+    _notes = []  # (nổi bật?, nội dung) — hiện ở khung Lưu ý cuối cùng
+    for _pn in sorted(evaluation.get("population_notes") or [], key=lambda n: n.get("code") != "CONDITION_NO_ADDITIVE_EVIDENCE"):
+        _notes.append((_pn.get("code") == "CONDITION_NO_ADDITIVE_EVIDENCE", _pn["text"]))
     if gap_reasons:
         more = f" (và {len(gap_reasons) - 1} lý do khác — xem chi tiết)" if len(gap_reasons) > 1 else ""
-        st.caption(f"⚠️ Chưa đủ bằng chứng để kết luận chắc chắn: {gap_reasons[0]}{more}")
-    if cited:
-        render_cited_answer(cited)
-    elif evaluation.get("answer_refusal"):
-        # câu trả lời của mô hình không bám nguồn → từ chối thay vì hiển thị (xem pipeline.check_answer_sources)
-        st.error("**Hệ thống từ chối trả lời tự do cho câu hỏi này** vì không đảm bảo câu trả lời có nguồn kiểm chứng: "
-                 f"{evaluation['answer_refusal']}. Nhãn ở trên là kết luận của bộ luật; hãy hỏi cụ thể hơn về một "
-                 "phụ gia/dị nguyên hoặc chụp lại nhãn rõ hơn.", icon="🚫")
-    else:
-        if not llm_answer:
-            st.caption("Chưa gọi được mô hình ngôn ngữ — đang hiển thị kết luận từ luật và dữ liệu có sẵn.")
-        st.write(evaluation.get("advice", evaluation.get("message", "")))
+        _notes.append((False, f"Chưa đủ bằng chứng để kết luận chắc chắn: {gap_reasons[0]}{more}"))
+    with st.container(border=True):
+        if cited:
+            render_cited_answer(cited)
+        elif evaluation.get("answer_refusal"):
+            # câu trả lời của mô hình không bám nguồn → không hiển thị (xem pipeline.check_answer_sources)
+            st.caption("Chưa có phần giải thích chi tiết cho câu hỏi này. Xem kết luận ở trên và mục Lưu ý bên dưới.")
+            _notes.append((True, "Chưa hiển thị phần giải thích chi tiết vì "
+                           f"{m_evidence.friendly_refusal_reason(evaluation['answer_refusal'])}. "
+                           "Bạn hãy xem kết luận ở trên, hoặc hỏi cụ thể hơn về một phụ gia hay một loại dị ứng."))
+        else:
+            if not llm_answer:
+                _notes.append((False, "Chưa gọi được mô hình ngôn ngữ — đang hiển thị kết luận từ luật và dữ liệu có sẵn."))
+            st.write(evaluation.get("advice", evaluation.get("message", "")))
+        # câu "Tóm lại" cuối khung: với ai · thấy gì · nên làm gì (dựng từ kết quả bộ luật, không do mô hình viết)
+        _allergies = [str(a) for a in (selected_persona or {}).get("allergies") or []]
+        _bottom = m_evidence.build_bottom_line(
+            evaluation, _rec_rows, res.get("profile_text", ""), bool(res.get("profile_declared")),
+            allergen_names=lambda group: _join_vi([
+                _allergen_vi(k) for a in group for k in (_allergy_hits(a, _allergies) or [])]))
+        st.markdown(f'<div class="fh-bottomline {_box}"><b>👉 Tóm lại:</b> {_md_to_html(_bottom)}</div>',
+                    unsafe_allow_html=True)
 
-    st.markdown("**[NGUỒN ĐỐI CHIẾU]**")
+    _section_title("📚", "[NGUỒN ĐỐI CHIẾU]")
     _refs = m_evidence.reference_lines(cited["sources"] if cited else [], _rec_rows)
     if _refs:
         st.markdown("\n".join(
@@ -1685,6 +1786,12 @@ def render_analysis(res, key, compact=False):
         with st.expander(f"📜 Mở nguồn: {_short}", expanded=False):
             render_source_list(cited["sources"], key)
 
+    if _notes:  # cuối cùng: mọi lưu ý và cảnh báo phụ
+        st.markdown(
+            '<div class="fh-notes"><div class="h">⚠️ Lưu ý</div><ul>'
+            + "".join(f"<li>{'<b>' if strong else ''}{_html.escape(text)}{'</b>' if strong else ''}</li>" for strong, text in _notes)
+            + "</ul></div>", unsafe_allow_html=True)
+
     if compact:
         return
 
@@ -1698,18 +1805,10 @@ def render_analysis(res, key, compact=False):
     ])
 
     with tab_ans:
-        if gap_reasons:
-            st.warning(
-                "⚠️ **Chưa đủ bằng chứng để kết luận chắc chắn.** Lý do:\n\n"
-                + "\n".join(f"- {r}" for r in gap_reasons)
-                + "\n\n*Gợi ý: chụp lại ảnh rõ hơn, đủ phần thành phần/cảnh báo dị nguyên, hoặc hỏi cụ thể về một phụ gia/dị nguyên.*"
-            )
         st.caption(f"❓ Câu hỏi: {res.get('user_query', '')}  ·  ảnh #{res.get('image_no', '?')} "
                    f"({_short_file(res.get('image_name', ''))})")
 
-        st.caption(f"Nhãn dùng khi chấm bộ QA: **{_rule_label}** — {QA_LABEL_MEANING.get(_rule_label, '')}"
-                   + (f" · nhãn LLM tự ghi: **{_llm_label}**" if _llm_label else "")
-                   + f" · trạng thái nội bộ của bộ luật: `{evaluation.get('status')}`")
+        st.caption(f"Kết luận của bộ luật: **{_rule_label}** — {QA_LABEL_MEANING.get(_rule_label, '')}")
 
         _inf = evaluation.get("infant_check")
         if _inf:
@@ -1757,10 +1856,22 @@ def render_analysis(res, key, compact=False):
                 st.error(f"**[{h['hazard_category']}]** {h['title']} — *Tác nhân: {h['hazard']}*")
 
         c1, c2, c3 = st.columns(3)
-        c1.metric("Độ tin cậy OCR", f"{evaluation['s_perception']:.2f}")
+        c1.metric("Độ tin cậy OCR", f"{evaluation['s_perception']:.2f}",
+                  help="Điểm trung bình mà bộ nhận dạng chữ tự chấm cho các dòng đọc được (0–1). "
+                       "Đây KHÔNG phải tỉ lệ đọc đúng; ảnh mờ vẫn có thể đọc sai mà điểm còn cao.")
         c2.metric("Liên kết phụ gia (S_retrieval)", _fmt_score(evaluation.get("s_retrieval")),
                   help=evaluation.get("s_retrieval_basis"))
-        c3.metric("Điểm tin cậy tổng", f"{evaluation['s_total']:.2f}")
+        c3.metric("Điểm đủ dữ liệu để kết luận", f"{evaluation['s_total']:.2f}",
+                  help="= 0,5 × độ tin cậy OCR + 0,5 × tỉ lệ phụ gia liên kết được với cơ sở tri thức (nếu nhãn không có "
+                       f"phụ gia thì chỉ lấy độ tin cậy OCR). Dưới ngưỡng {m_pipeline.CONFIDENCE_ABSTAIN_THRESHOLD:g} "
+                       "hệ thống từ chối kết luận. Đây là điểm theo công thức, KHÔNG phải xác suất kết luận đúng.")
+
+        if gap_reasons:  # cảnh báo đặt cuối tab
+            st.warning(
+                "⚠️ **Chưa đủ bằng chứng để kết luận chắc chắn.** Lý do:\n\n"
+                + "\n".join(f"- {r}" for r in gap_reasons)
+                + "\n\n*Gợi ý: chụp lại ảnh rõ hơn, đủ phần thành phần/cảnh báo dị nguyên, hoặc hỏi cụ thể về một phụ gia/dị nguyên.*"
+            )
 
     with tab_ocr:
         st.markdown("##### 📸 Vùng chữ OCR nhận diện trên bao bì")
@@ -1822,7 +1933,7 @@ def render_analysis(res, key, compact=False):
                     st.caption(f"Tài liệu: {ew['reference']}")
 
         if constraint_details or nutri_warnings or matched_fndds:
-            st.markdown("##### 🥗 Dinh dưỡng định lượng & Bệnh lý (WSDM '21)")
+            st.markdown("##### 🥗 Dinh dưỡng định lượng & Bệnh lý")
             if matched_fndds:
                 st.caption(f"Đối chiếu dinh dưỡng USDA FNDDS: {matched_fndds.get('food_description', 'N/A')}")
             for nw in (nutri_warnings or []):
@@ -1833,7 +1944,7 @@ def render_analysis(res, key, compact=False):
                         "Bệnh lý": cd["condition"], "Chỉ số": cd["nutrient"],
                         "Giá trị": f"{cd['value']:.1f} {cd['unit']}",
                         "Ngưỡng trên": f"{cd['upper_bound']:.1f} {cd['unit']}" if cd.get("upper_bound") else "—",
-                        "I_g(v)": cd["I_g"],
+                        "Trong ngưỡng (1 = có)": cd["I_g"],
                     } for cd in constraint_details
                 ]), width="stretch", hide_index=True)
 
@@ -1845,13 +1956,20 @@ def render_analysis(res, key, compact=False):
 
     with tab_tech:
         st.markdown(f"**Engine OCR:** `{ocr_result.get('engine_name', 'Mặc định')}`")
+        if evaluation.get("answer_refusal"):
+            st.caption(f"Lý do kỹ thuật khi từ chối giải thích: {evaluation['answer_refusal']}")
+        st.caption(f"Nhãn dùng khi chấm bộ QA: **{_rule_label}**"
+                   + (f" · nhãn mô hình ngôn ngữ tự ghi: **{_llm_label}**" if _llm_label else "")
+                   + f" · trạng thái nội bộ của bộ luật: `{evaluation.get('status')}`")
 
         with st.expander("📄 Từng dòng OCR kèm độ tin cậy nhận diện", expanded=False):
             for idx, line in enumerate(ocr_result.get("lines", []), 1):
                 st.markdown(f"- `[{idx:02d}]` (Conf: **{line['confidence']}**): {line['text']}")
 
         if linked_results:
-            st.markdown("##### 🌐 Bảng Chuẩn hóa Đầy đủ 4-Agent FoodOntoRAG (FoodOn 29.255 nút)")
+            _n_foodon = len(foodon_entities) if foodon_entities is not None else 0
+            st.markdown("##### 🌐 Bảng Chuẩn hóa Đầy đủ 4-Agent FoodOntoRAG"
+                        + (f" (FoodOn {_n_foodon:,} nút)".replace(",", ".") if _n_foodon else ""))
             full_rows = []
             for r in linked_results:
                 e = r["matched_entity"]
@@ -1906,9 +2024,14 @@ def render_analysis(res, key, compact=False):
 def render_message(msg, i):
     if msg["role"] == "user":
         with st.chat_message("user"):
+            # Nhúng ảnh trực tiếp (data URI) thay vì st.image: kho media của Streamlit xoá ảnh khi trang chạy lại
+            # (luồng chat luôn st.rerun() sau mỗi lượt) nên ảnh người dùng đính kèm bị mất/vỡ — xem _show_png.
             for t in msg.get("thumbs") or []:
                 if t:
-                    st.image(t, width=220)
+                    st.markdown(
+                        f'<img src="data:image/jpeg;base64,{base64.b64encode(t).decode("ascii")}" alt="Ảnh nhãn bạn gửi" '
+                        'style="width:220px;max-width:100%;border-radius:12px;border:1px solid #e2e8f0;display:block;margin:0 0 6px">',
+                        unsafe_allow_html=True)
             if msg.get("text"):
                 _t = msg["text"]
                 if len(_t) > 600:
@@ -1949,7 +2072,24 @@ def render_context_chips():
 
 
 # ── Màn hình chào (khi chưa có tin nhắn) ──
-if not chat:
+def _preview_user_message(prompt):
+    """Tin nhắn người dùng vừa gửi (ảnh thu nhỏ + chữ) để vẽ NGAY khi nhấn Enter, trước khi OCR/phân tích chạy xong."""
+    thumbs, text = [], (prompt.text or "").strip()
+    for f in list(prompt.files or []):
+        try:
+            thumbs.append(_thumb_bytes(Image.open(io.BytesIO(f.getvalue()))))
+        except Exception:
+            thumbs.append(None)
+            text = (text + f"\n\n📎 {f.name}").strip()
+    return {"role": "user", "text": text, "thumbs": thumbs}
+
+
+# Ô chat đã có giá trị ngay từ đầu lượt chạy này (khi vừa nhấn Enter): dùng để hiện tin nhắn lên trước khi xử lý
+_pending_prompt = st.session_state.get("fh_chat_input")
+if _pending_prompt is not None and not ((_pending_prompt.text or "").strip() or list(_pending_prompt.files or [])):
+    _pending_prompt = None
+
+if not chat and _pending_prompt is None:
     st.markdown(
         '<div class="fh-greet"><div class="hi">Xin chào, mình là FoodHealthQA</div>'
         '<div class="sub">Bạn muốn tư vấn sản phẩm nào hôm nay?</div></div>'
@@ -1965,6 +2105,9 @@ if not chat:
 
 for _i, _msg in enumerate(chat):
     render_message(_msg, _i)
+
+if _pending_prompt is not None:
+    render_message(_preview_user_message(_pending_prompt), len(chat))  # hiện ngay ảnh + câu hỏi vừa gửi
 
 render_context_chips()
 
@@ -1997,6 +2140,8 @@ _choice = st.session_state.pop("image_choice", None)
 
 if _prompt is not None or _choice is not None:
     with st.chat_message("assistant", avatar="🥗"):
+        _working = st.empty()
+        _working.caption("⏳ Đang xử lý tin nhắn của bạn…")  # có ngay, kể cả khoảng trước khi OCR bắt đầu
         try:
             if _choice == "old":
                 handle_turn("", [], use_old_image=True)
@@ -2014,4 +2159,5 @@ if _prompt is not None or _choice is not None:
             st.session_state["chat"].append({"role": "assistant", "result": None, "blocks": [
                 ("error", f"Đã xảy ra lỗi khi xử lý: `{_html.escape(str(_exc))[:300]}`. Vui lòng thử lại hoặc gửi ảnh khác.")
             ]})
+    _persist_history()  # lưu ngay sau mỗi lượt (kể cả lượt báo lỗi) vào data/chat_history/
     st.rerun()

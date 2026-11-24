@@ -2455,7 +2455,7 @@ def _is_source_like_tag(tag):
     return "_" in tag or tag.lower().startswith(("nguồn", "nguon", "source", "ref"))
 
 
-def check_answer_sources(text, allowed, label=None):
+def check_answer_sources(text, allowed, label=None, also_accept_labels=()):
     """Kiểm tra câu trả lời đã làm sạch có bám nguồn không. Trả về (đạt, lý do khi không đạt).
 
     Không đạt khi: (1) có mã nguồn nằm ngoài danh sách `allowed` (nguồn bịa hoặc không được truy xuất cho câu này);
@@ -2474,6 +2474,12 @@ def check_answer_sources(text, allowed, label=None):
     if not cited and label != "ABSTAIN":
         return False, ("câu trả lời không dẫn nguồn nào" if allowed_set
                        else "không truy xuất được nguồn nào cho câu hỏi này")
+    # (3) Nhãn LLM tự ghi phải trùng nhãn của bộ luật (bộ luật quyết định nhãn, LLM chỉ diễn đạt). Thiếu dòng nhãn
+    # thì không chặn (giữ hành vi cũ); chỉ chặn khi LLM ghi một nhãn KHÁC.
+    if label:
+        llm_label = extract_safety_label(text, default="")
+        if llm_label and llm_label != str(label).upper() and llm_label not in {str(a).upper() for a in also_accept_labels}:
+            return False, f"nhãn do mô hình ghi ({llm_label}) khác nhãn của bộ luật ({str(label).upper()})"
     return True, ""
 
 
@@ -2561,6 +2567,22 @@ def clean_llm_citations_and_label(text, expected_label=None):
     return text.strip()
 
 
+def drop_unrelated_jecfa_passages(passages, linked_results):
+    """Bỏ đoạn JECFA nói về phụ gia KHÔNG có trên nhãn. Truy xuất lấp chỗ trống bằng đoạn gần giống nhất, nên với phụ gia
+    không có dữ liệu JECFA (vd INS 307c) các đoạn JECFA của chất khác vẫn lọt vào và biến JECFA_EVALUATIONS thành
+    nguồn "được phép" cho câu trả lời về chất không có dữ liệu đó. Nguồn khác (Codex, TT 24…) giữ nguyên."""
+    from modules.passage_retriever import normalize_ins
+    on_label = {
+        normalize_ins((it.get("matched_entity") or {}).get("ins_code", ""))
+        for it in (linked_results or []) if it.get("matched_entity")
+    } - {""}
+    return [
+        p for p in (passages or [])
+        if p.get("citation_id") != "JECFA_EVALUATIONS"
+        or on_label & {normalize_ins(c) for c in p.get("ins_codes", [])}
+    ]
+
+
 def generate_llm_answer(evaluation, linked_results, persona, question,
                         detected_hazards=None, matched_fndds=None,
                         nutri_warnings=None, qa_context="", passages=None):
@@ -2577,6 +2599,7 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     conditions = ", ".join(persona.get("conditions", [])) or "Không có"
     allergies = ", ".join(persona.get("allergies", [])) or "Không có"
     persona_info = f"Bệnh lý: {conditions}. Dị ứng: {allergies}."
+    passages = drop_unrelated_jecfa_passages(passages, linked_results)
 
     evidence_parts = []
 
@@ -2695,6 +2718,10 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     evidence_text = "\n".join(evidence_parts)
 
     canonical_safety_status = evaluation.get("safety_label") or guardrail_status_to_safety_label(evaluation.get("status", ""))
+    # Bệnh nền chưa có dữ liệu: bộ luật giữ SAFE nhưng prompt cấm mô hình nói "an toàn" (xem LƯU Ý NHÓM NGƯỜI DÙNG),
+    # nên mô hình ghi CAUTION là đúng ý hệ thống, không phải mâu thuẫn.
+    _accept_labels = ("CAUTION",) if canonical_safety_status == "SAFE" and any(
+        n.get("code") == "CONDITION_NO_ADDITIVE_EVIDENCE" for n in evaluation.get("population_notes", [])) else ()
 
     prompt = _LLM_ANSWER_PROMPT.format(
         length_rule=ANSWER_LENGTH_RULE,
@@ -2728,13 +2755,13 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     if result:
         result = clean_llm_citations_and_label(result, expected_label=canonical_safety_status)
         if STRICT_SOURCE_GATE:
-            ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status)
+            ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status, _accept_labels)
             if not ok and canonical_citations and not retried:
                 # thử lại đúng một lần (mọi nhà cung cấp) trước khi từ chối
                 again = _call_llm(_retry_prompt(), temperature=0.2, max_output_tokens=4096, api_key=api_key)
                 if again:
                     result = clean_llm_citations_and_label(again, expected_label=canonical_safety_status)
-                    ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status)
+                    ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status, _accept_labels)
             if not ok:
                 _LOGGER.warning("Từ chối câu trả lời của LLM vì không bám nguồn: %s", reason)
                 evaluation["answer_refusal"] = reason  # pipeline trả ra cho giao diện và bộ đánh giá

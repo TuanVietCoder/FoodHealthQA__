@@ -1,6 +1,6 @@
 # Mô tả bộ đánh giá FoodHealthQA (750 câu)
 
-Bộ `data/foodhealthqa_eval_set.jsonl` (kèm `.csv` và `_summary.json`) là **bộ đánh giá duy nhất** của hệ thống: mọi script chấm điểm và giao diện demo đều dùng bộ này. Mọi số liệu dưới đây được tính trực tiếp từ file dữ liệu.
+Bộ `data/foodhealthqa_eval_set.jsonl` (kèm `.csv` và `_summary.json`) là **bộ đánh giá duy nhất** của hệ thống: mọi script chấm điểm đều dùng bộ này. Giao diện hỏi đáp **không** dùng bộ này làm tri thức hay ví dụ; chế độ "Báo cáo nghiên cứu" của giao diện chỉ đọc bộ này để hiển thị kết quả đã chấm. Mọi số liệu dưới đây được tính trực tiếp từ file dữ liệu.
 
 ## 1. Tổng quan
 

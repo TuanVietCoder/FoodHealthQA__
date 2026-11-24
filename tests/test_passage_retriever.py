@@ -60,6 +60,34 @@ class PassageRetrieverTests(unittest.TestCase):
         self.assertIn(f"[{hits[0]['citation_id']}]", text)
         self.assertEqual(render_passages([]), "")
 
+    def test_jecfa_passages_are_only_built_from_verified_records_with_adi(self):
+        """Bản ghi JECFA chưa tìm được trang (passed=false) không được thành đoạn bằng chứng rỗng "…gần nhất ?, ADI ?"."""
+        jecfa = [p for p in self.passages if p["kind"] == "jecfa_adi"]
+        self.assertTrue(jecfa)
+        for p in jecfa:
+            self.assertNotIn("?", p["text"], p["locator"])
+            self.assertIn("ADI ", p["text"], p["locator"])
+
+    def test_tocopherol_307_has_no_jecfa_passage(self):
+        """INS 307a/b/c: JECFA không có trang tương ứng → không có đoạn ADI của JECFA cho các mã này."""
+        for p in self.passages:
+            if p["kind"] == "jecfa_adi":
+                self.assertFalse({"307a", "307b", "307c"} & set(p.get("ins_codes", [])), p["locator"])
+
+    def test_unrelated_jecfa_passages_are_dropped_before_answer_generation(self):
+        """Truy xuất lấp chỗ trống bằng đoạn JECFA của chất khác → phải bị lọc, kẻo JECFA thành nguồn hợp lệ cho 307c."""
+        from modules.pipeline import drop_unrelated_jecfa_passages
+        hits = self.retriever.retrieve("INS 307c có an toàn không", top_k=5, mode="hybrid_exact", ins_codes=["307c"])
+        self.assertIn("JECFA_EVALUATIONS", [h["citation_id"] for h in hits])  # tiền đề: đoạn lạc có thật
+        linked = [{"matched_entity": {"ins_code": "INS 307c"}}]
+        kept = drop_unrelated_jecfa_passages(hits, linked)
+        self.assertNotIn("JECFA_EVALUATIONS", [p["citation_id"] for p in kept])
+        self.assertIn("CODEX_STAN_192_1995", [p["citation_id"] for p in kept])  # nguồn khác giữ nguyên
+        # chất CÓ trên nhãn và có dữ liệu JECFA thì đoạn JECFA được giữ
+        own = [p for p in self.passages if p["kind"] == "jecfa_adi" and "300" in p["ins_codes"]]
+        self.assertTrue(own)
+        self.assertEqual(drop_unrelated_jecfa_passages(own, [{"matched_entity": {"ins_code": "INS 300"}}]), own)
+
 
 if __name__ == "__main__":
     unittest.main()

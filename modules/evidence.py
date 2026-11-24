@@ -347,12 +347,20 @@ def resolve_source(citation_id: str, locator: str | None = None, ins_codes=None)
     if not entry and citation_id == "JECFA_EVALUATIONS":
         rec = next((_jecfa_records().get(_norm_code(c)) for c in (ins_codes or []) if _jecfa_records().get(_norm_code(c))), None)
         code = next(iter(ins_codes or []), "")
+        if rec and not rec.get("passed"):
+            # Chưa tìm được trang JECFA cho phụ gia này → không có tên/năm/ADI để dẫn; nói rõ thay vì in dấu "?"
+            return {"title": f"WHO/FAO JECFA (INS {code})",
+                    "scope": "Chưa có trang đánh giá JECFA đã kiểm chứng cho phụ gia này; không có giá trị ADI để dẫn.",
+                    "url": "", "verified": False, "local_file": ""}
         if rec:
             local = _RAW / "external" / "jecfa" / str(rec.get("file") or "")
+            name = str(rec.get("jecfa_name") or "").title()
+            year, adi = rec.get("latest_evaluation_year"), rec.get("latest_adi")
+            parts = ([f"Đánh giá JECFA gần nhất {year}"] if year else []) + ([f"ADI: {adi}"] if adi else [])
             return {
-                "title": f"WHO/FAO JECFA — {str(rec.get('jecfa_name', '')).title()} (INS {code})",
-                "scope": f"Đánh giá JECFA gần nhất {rec.get('latest_evaluation_year', '?')}; ADI: {rec.get('latest_adi', '?')}.",
-                "url": rec.get("url", ""), "verified": bool(rec.get("passed")),
+                "title": "WHO/FAO JECFA" + (f" — {name}" if name else "") + f" (INS {code})",
+                "scope": ("; ".join(parts) + ".") if parts else "Trang JECFA không ghi năm đánh giá hay ADI.",
+                "url": rec.get("url", ""), "verified": True,
                 "local_file": local.relative_to(_ROOT).as_posix() if local.is_file() else "",
             }
         return {"title": meta.get("title") or "JECFA — cơ sở dữ liệu đánh giá phụ gia (chưa có trang riêng cho phụ gia này)",
@@ -474,7 +482,8 @@ def _adi_source_view(adi: dict, code: str, adi_text: str) -> dict | None:
                 "quote": _clip(adi_text), "url": url, "local_file": local, "ins_codes": [code], "tier": tier,
                 "tier_label": tier_label, "verified": adi.get("verification_status") == "source_checked"}
     record = _jecfa_records().get(_norm_code(code))
-    if record and str(adi.get("authority") or "").upper().lstrip().startswith(("JECFA", "WHO")):
+    if record and record.get("passed") and record.get("latest_adi") \
+            and str(adi.get("authority") or "").upper().lstrip().startswith(("JECFA", "WHO")):
         return {**_source_view("JECFA_EVALUATIONS", None, code, quote=f"ADI: {record.get('latest_adi', '')}"), "role": "ADI"}
     return None
 
@@ -524,6 +533,85 @@ def condition_gap_groups(evaluation) -> list[str]:
     Dùng để KHÔNG hiển thị ô "an toàn/không thấy điểm cần lưu ý" như thể bệnh nền đã được xét."""
     return [n.get("group", "") for n in (evaluation or {}).get("population_notes") or []
             if n.get("code") == "CONDITION_NO_ADDITIVE_EVIDENCE"]
+
+
+def friendly_refusal_reason(reason: str) -> str:
+    """Lý do kỹ thuật khi cổng nguồn từ chối câu trả lời của mô hình → một mệnh đề dễ hiểu cho người dùng."""
+    r = str(reason or "")
+    if "khác nhãn của bộ luật" in r:
+        return "phần giải thích do mô hình viết chưa khớp với kết luận ở trên"
+    if "ngoài danh sách" in r:
+        return "phần giải thích dẫn tới tài liệu không nằm trong số tài liệu hệ thống đã tra cứu cho câu hỏi này"
+    if "không dẫn nguồn" in r or "không truy xuất được nguồn" in r:
+        return "phần giải thích không dẫn được tài liệu nào để kiểm chứng"
+    return "hệ thống chưa chắc phần giải thích này đáng tin"
+
+
+def _join_names(items, limit=3) -> str:
+    items = list(dict.fromkeys(str(i).strip() for i in items if i and str(i).strip()))
+    shown, rest = items[:limit], len(items) - limit
+    text = ", ".join(shown[:-1]) + " và " + shown[-1] if len(shown) > 1 else (shown[0] if shown else "")
+    return text + (f" (và {rest} chất khác)" if rest > 0 else "")
+
+
+def build_bottom_line(evaluation, rec_rows, profile_text="", declared=False, allergen_names=None) -> str:
+    """Câu "Tóm lại" cuối câu trả lời: VỚI AI · THẤY GÌ · NÊN LÀM GÌ, bằng lời thường, dựng từ kết quả bộ luật
+    (không do mô hình ngôn ngữ viết, nên luôn khớp với kết luận). `allergen_names(alerts)` → tên dị nguyên gọn ("sữa, tôm")."""
+    ev = evaluation or {}
+    status = str(ev.get("status") or "").upper()
+    alerts = ev.get("alerts") or []
+    rows = list(rec_rows or [])
+    who = f"Với hồ sơ của bạn ({profile_text})" if declared and profile_text else "Với thông tin hiện có"
+    names_of = lambda group: _join_names([a.get("additive", "") for a in group])  # noqa: E731
+    allergens = lambda group: (allergen_names(group) if allergen_names else "") or names_of(group)  # noqa: E731
+    doctor = "Nếu đã dùng và thấy khó chịu, hãy gặp bác sĩ."
+
+    if status == "CRITICAL_ALERT":
+        return (f"{who}: bạn **không nên dùng** sản phẩm này vì có {names_of(alerts) or 'một chất'} — chất mà quy chuẩn "
+                f"chống chỉ định với bệnh bạn đã khai. {doctor}")
+    if status == "WARNING":
+        age = [a for a in alerts if a.get("label_age_rule")]
+        rest = [a for a in alerts if not a.get("label_age_rule")]
+        pal = [a for a in rest if a.get("regulation") == "FAO_WHO_JEMRA_PART_3" or "PAL" in str(a.get("message", ""))]
+        direct = [a for a in rest if a not in pal]
+        if age:
+            return f"{who}: **không nên cho bé dùng** sản phẩm này vì nhà sản xuất ghi sản phẩm chưa dành cho độ tuổi của bé."
+        if direct:
+            return (f"{who}: bạn **không nên dùng** sản phẩm này vì trên nhãn có {allergens(direct)}, trùng với dị ứng bạn đã khai. "
+                    f"{doctor}")
+        return (f"{who}: nhãn ghi sản phẩm \"có thể chứa\" {allergens(pal)} do dây chuyền sản xuất. Nếu dị ứng nặng, "
+                "**tốt nhất không dùng**; nếu chỉ dị ứng nhẹ, hãy hỏi bác sĩ trước khi dùng.")
+    if status == "CAUTION":
+        infant = [a for a in alerts if a.get("infant_rule")]
+        if infant and len(infant) == len(alerts):
+            return (f"{who}: **chưa nên cho bé dưới 12 tháng dùng** vì có {names_of(infant)}, không nằm trong danh mục phụ gia "
+                    "được phép cho trẻ ở tuổi này. Hãy hỏi bác sĩ nhi khoa.")
+        if alerts:
+            return (f"{who}: có thể dùng nhưng **nên hạn chế**, vì có {names_of(alerts)} cần dè chừng với bạn. "
+                    "Không nên dùng thường xuyên hoặc với lượng lớn.")
+        return (f"{who}: **nên dùng ít** vì số liệu dinh dưỡng trên nhãn vượt mức khuyến nghị cho hồ sơ của bạn. "
+                "Hãy xem lại khẩu phần trong ngày.")
+    if status == "ABSTAIN":
+        needs = [g.get("need", "") for g in (ev.get("data_gaps") or []) if g.get("need")]
+        if ev.get("scope_issues"):
+            return ("**Chưa thể trả lời** vì câu hỏi cần ý kiến y khoa; hệ thống chỉ sàng lọc nhãn thực phẩm. "
+                    "Bạn hãy hỏi bác sĩ, dược sĩ hoặc chuyên gia dinh dưỡng.")
+        todo = "; ".join(dict.fromkeys(needs)) if needs else "chụp lại nhãn rõ hơn, đủ phần thành phần và cảnh báo dị nguyên"
+        return f"**Chưa thể kết luận** vì thông tin trên nhãn chưa đủ. Bạn có thể {todo}."
+    gap = condition_gap_groups(ev)
+    if gap:
+        return (f"**Chưa thể nói sản phẩm có hợp với {_join_names(gap)} hay không** vì hệ thống chưa có dữ liệu về bệnh này. "
+                "Bạn nên hỏi bác sĩ hoặc chuyên gia dinh dưỡng trước khi dùng.")
+    linked = [r for r in rows if r.get("status") == "linked"]
+    unlinked = [r for r in rows if r.get("status") != "linked"]
+    seen = _join_names([str(r.get("name", "")).split(" (")[0] for r in linked]) or ""
+    if not linked:
+        return (f"{who}: máy chưa nhận diện được phụ gia nào trên nhãn nên **chưa thấy gì cần tránh**, nhưng kết quả này "
+                "chưa chắc chắn. Hãy tự đọc lại phần thành phần trên bao bì.")
+    tail = (f" Có {len(unlinked)} cụm chữ máy chưa nhận diện được, bạn nên tự đối chiếu với nhãn." if unlinked else
+            " Máy có thể đọc nhầm chữ, nên hãy so lại với ảnh nhãn nếu bạn dị ứng nặng.")
+    return (f"{who}: trong {len(linked)} phụ gia máy đọc được ({seen}), **chưa thấy chất nào cần tránh**. "
+            f"Đây là kết quả sàng lọc, chưa phải bảo đảm an toàn.{tail}")
 
 
 NOT_CLEAR_ENOUGH = "Không đủ dữ liệu rõ nét"
@@ -601,7 +689,9 @@ def classify_domain(qa: dict | None, evaluation: dict | None, persona: dict | No
         code = "insufficient_data"
     elif ents.get("allergens") or "dị nguyên" in intents or persona.get("allergies"):
         code = "allergen_detection"
-    elif ents.get("populations") or persona.get("conditions"):
+    elif ents.get("populations") or (
+        {str(c).lower() for c in persona.get("conditions") or []} - {"healthy", "healthy_adult"}
+    ):
         code = "vulnerable_groups"
     else:
         code = "additive_regulation"

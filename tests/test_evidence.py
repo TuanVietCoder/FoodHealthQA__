@@ -57,6 +57,10 @@ class DomainTests(unittest.TestCase):
         self.assertEqual(evidence.classify_domain({"entities": {"allergens": ["soy"]}}, {}, {})[0], "allergen_detection")
         self.assertEqual(evidence.classify_domain({}, {}, {"conditions": ["suy thận"]})[0], "vulnerable_groups")
         self.assertEqual(evidence.classify_domain({"entities": {"additives": ["INS 951"]}}, {}, {})[0], "additive_regulation")
+        # người dùng khỏe mạnh (conditions chỉ có "healthy") không phải "nhóm dễ tổn thương"
+        for conds in (["healthy"], ["healthy", "healthy_adult"]):
+            self.assertEqual(evidence.classify_domain({"entities": {"additives": ["INS 951"]}}, {}, {"conditions": conds})[0],
+                             "additive_regulation")
 
 
 class InsufficiencyTests(unittest.TestCase):
@@ -119,6 +123,90 @@ class LocalSourceTests(unittest.TestCase):
             self.assertIn("Aspartame", evidence.local_text(html))
         if doc:  # .doc đã được chuyển sang PDF để xem theo trang
             self.assertTrue(doc.endswith(".pdf"))
+
+
+class BottomLineTests(unittest.TestCase):
+    ROWS = [{"status": "linked", "name": "Natri benzoat (Sodium benzoate)", "ins_code": "INS 211"},
+            {"status": "linked", "name": "Aspartam (Aspartame)", "ins_code": "INS 951"}]
+
+    def bl(self, evaluation, rows=None, declared=True, profile="40 tuổi, Nữ, tăng huyết áp", allergens=None):
+        return evidence.build_bottom_line(evaluation, self.ROWS if rows is None else rows, profile, declared, allergens)
+
+    def test_each_status_gives_a_concrete_recommendation(self):
+        crit = self.bl({"status": "CRITICAL_ALERT", "alerts": [{"additive": "Aspartame (INS 951)"}]})
+        self.assertIn("không nên dùng", crit)
+        self.assertIn("Aspartame (INS 951)", crit)
+        self.assertIn("40 tuổi, Nữ, tăng huyết áp", crit)
+        allergy = self.bl({"status": "WARNING", "alerts": [{"additive": "bột sữa, đường"}]}, allergens=lambda g: "sữa")
+        self.assertIn("không nên dùng", allergy)
+        self.assertIn("trên nhãn có sữa", allergy)
+        pal = self.bl({"status": "WARNING", "alerts": [{"additive": "x", "regulation": "FAO_WHO_JEMRA_PART_3"}]},
+                      allergens=lambda g: "đậu phộng")
+        self.assertIn("có thể chứa", pal)
+        self.assertIn("đậu phộng", pal)
+        caution = self.bl({"status": "CAUTION", "alerts": [{"additive": "Natri benzoat (INS 211)"}]})
+        self.assertIn("nên hạn chế", caution)
+        self.assertIn("Natri benzoat (INS 211)", caution)
+        self.assertIn("nên dùng ít", self.bl({"status": "CAUTION", "alerts": []}))
+        self.assertIn("không nên cho bé", self.bl({"status": "WARNING", "alerts": [{"additive": "x", "label_age_rule": True}]}))
+        self.assertIn("dưới 12 tháng", self.bl({"status": "CAUTION", "alerts": [{"additive": "INS 211", "infant_rule": True}]}))
+
+    def test_safe_names_what_was_read_and_is_not_a_guarantee(self):
+        text = self.bl({"status": "SCREENED_NO_ALERT", "population_notes": []})
+        self.assertIn("2 phụ gia", text)
+        self.assertIn("Natri benzoat", text)
+        self.assertIn("chưa thấy chất nào cần tránh", text)
+        self.assertIn("chưa phải bảo đảm an toàn", text)
+
+    def test_safe_with_unlinked_text_or_nothing_read_stays_cautious(self):
+        rows = self.ROWS + [{"status": "unlinked", "raw": "INS 33O"}]
+        self.assertIn("1 cụm chữ máy chưa nhận diện được", self.bl({"status": "SCREENED_NO_ALERT"}, rows=rows))
+        self.assertIn("chưa chắc chắn", self.bl({"status": "SCREENED_NO_ALERT"}, rows=[]))
+
+    def test_condition_without_data_never_sounds_like_a_pass(self):
+        ev = {"status": "SCREENED_NO_ALERT", "population_notes": [
+            {"code": "CONDITION_NO_ADDITIVE_EVIDENCE", "group": "tăng huyết áp", "text": "x"}]}
+        text = self.bl(ev)
+        self.assertIn("Chưa thể nói", text)
+        self.assertIn("tăng huyết áp", text)
+        self.assertNotIn("chưa thấy chất nào cần tránh", text)
+
+    def test_abstain_says_what_to_do_and_undeclared_profile_is_not_quoted(self):
+        text = self.bl({"status": "ABSTAIN", "data_gaps": [{"need": "chụp lại phần thành phần"}]}, declared=False)
+        self.assertIn("Chưa thể kết luận", text)
+        self.assertIn("chụp lại phần thành phần", text)
+        self.assertIn("Chưa thể trả lời", self.bl({"status": "ABSTAIN", "scope_issues": ["y khoa"]}))
+        self.assertIn("Với thông tin hiện có", self.bl({"status": "CAUTION", "alerts": [{"additive": "INS 211"}]}, declared=False))
+
+
+class FriendlyRefusalTests(unittest.TestCase):
+    def test_technical_reasons_become_plain_sentences(self):
+        for reason, key in [("nhãn do mô hình ghi (CAUTION) khác nhãn của bộ luật (SAFE)", "chưa khớp với kết luận"),
+                            ("câu trả lời dẫn nguồn ngoài danh sách bằng chứng đã truy xuất: X", "không nằm trong số tài liệu"),
+                            ("câu trả lời không dẫn nguồn nào", "không dẫn được tài liệu nào"),
+                            ("lý do lạ", "chưa chắc")]:
+            msg = evidence.friendly_refusal_reason(reason)
+            self.assertIn(key, msg)
+            for jargon in ("CAUTION", "SAFE", "bộ luật", "truy xuất"):
+                self.assertNotIn(jargon, msg)
+
+
+class JecfaSourceDisplayTests(unittest.TestCase):
+    def test_unverified_jecfa_record_shows_no_question_marks(self):
+        info = evidence.resolve_source("JECFA_EVALUATIONS", None, ["307c"])
+        self.assertFalse(info["verified"])
+        self.assertNotIn("?", info["title"] + info["scope"])
+        self.assertIn("Chưa có", info["scope"])
+
+    def test_verified_jecfa_record_shows_year_and_adi(self):
+        info = evidence.resolve_source("JECFA_EVALUATIONS", None, ["300"])
+        self.assertTrue(info["verified"])
+        self.assertIn("ADI:", info["scope"])
+        self.assertNotIn("?", info["scope"])
+
+    def test_verified_record_missing_fields_shows_only_what_exists(self):
+        info = evidence.resolve_source("JECFA_EVALUATIONS", None, ["450(i)"])
+        self.assertNotIn("?", info["title"] + info["scope"])
 
 
 class SourceResolutionTests(unittest.TestCase):

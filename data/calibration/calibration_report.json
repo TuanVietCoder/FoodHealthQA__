@@ -234,11 +234,11 @@
       },
       "linking_vs_gold_ins": {
         "tp": 2050,
-        "fp": 3432,
         "fn": 8,
-        "precision": 0.37395111273257936,
         "recall": 0.9961127308066083,
-        "f1": 0.5437665782493368,
+        "precision": null,
+        "f1": null,
+        "precision_note": "không áp dụng: gold_ins chỉ gồm mã được hỏi, không phải mọi mã trên nhãn",
         "records_with_gold_ins": 547
       }
     },
@@ -472,12 +472,20 @@
       },
       "linking_vs_gold_ins": {
         "tp": 1360,
-        "fp": 2545,
         "fn": 698,
-        "precision": 0.34827144686299616,
         "recall": 0.6608357628765792,
-        "f1": 0.4561462351165521,
-        "records_with_gold_ins": 547
+        "precision": null,
+        "f1": null,
+        "precision_note": "không áp dụng: gold_ins chỉ gồm mã được hỏi, không phải mọi mã trên nhãn",
+        "records_with_gold_ins": 547,
+        "vs_reference_label": {
+          "tp": 3631,
+          "fp": 274,
+          "fn": 1851,
+          "precision": 0.9298335467349552,
+          "recall": 0.6623495074790222,
+          "f1": 0.7736230957707467
+        }
       },
       "ocr_confidence_vs_cer": {
         "images": 376,

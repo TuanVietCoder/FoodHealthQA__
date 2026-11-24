@@ -180,11 +180,14 @@ def build_corpus(kb_dir: Path | None = None) -> list[dict]:
         data = _load_json(derived / fname)
         items = data.items() if isinstance(data, dict) else (data or [])
         for ins, rec in items:
-            if not isinstance(rec, dict):
+            # Bản ghi chưa tìm được trang JECFA (passed=false) hoặc không có ADI thì KHÔNG phải bằng chứng: không tạo
+            # đoạn (trước đây tạo đoạn rỗng "lần đánh giá gần nhất ?, ADI ?" rồi được truy xuất và trích dẫn như nguồn thật).
+            if not isinstance(rec, dict) or not rec.get("passed") or not rec.get("latest_adi"):
                 continue
+            year = rec.get("latest_evaluation_year")
             add("jecfa_adi",
-                f"JECFA {rec.get('jecfa_name', '')} (INS {ins}): lần đánh giá gần nhất "
-                f"{rec.get('latest_evaluation_year', '?')}, ADI {rec.get('latest_adi', '?')}.",
+                f"JECFA {rec.get('jecfa_name', '')} (INS {ins}): "
+                + (f"lần đánh giá gần nhất {year}, " if year else "") + f"ADI {rec.get('latest_adi')}.",
                 "JECFA_EVALUATIONS",
                 jecfa_loc.get(rec.get("chemical_id"), f"JECFA_EVALUATIONS#{normalize_ins(ins)}"), [ins])
 

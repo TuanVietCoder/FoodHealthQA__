@@ -36,10 +36,10 @@ class ConditionNotesTests(unittest.TestCase):
 
     def test_nutrient_scope_is_stated_for_conditions_with_a_codex_threshold(self):
         note = abstention.condition_notes({"conditions": ["diabetes"]}, WITH_ADDITIVE, COVERED)[0]
-        self.assertIn("không đường", note["text"])
+        self.assertIn("lượng đường", note["text"])
         self.assertNotIn("natri", note["text"])
         note = abstention.condition_notes({"conditions": ["hypertension"]}, WITH_ADDITIVE, COVERED)[0]
-        self.assertIn("natri thấp", note["text"])
+        self.assertIn("lượng natri", note["text"])
 
     def test_old_callers_without_the_new_arguments_are_unchanged(self):
         self.assertEqual(abstention.population_notes("q", {"conditions": ["gout"]}), [])
@@ -96,7 +96,7 @@ class PatientFacingWordingTests(unittest.TestCase):
 
     def test_the_note_says_plainly_that_no_warning_is_not_a_safety_statement(self):
         note = abstention.condition_notes({"conditions": ["gout"]}, WITH_ADDITIVE, COVERED)[0]
-        self.assertIn("CHƯA CÓ DỮ LIỆU", note["text"])
+        self.assertIn("Chưa có thông tin", note["text"])
         self.assertIn("KHÔNG có nghĩa là sản phẩm an toàn", note["text"])
         self.assertIn("bác sĩ", note["text"])
 
@@ -119,8 +119,8 @@ class PatientFacingWordingTests(unittest.TestCase):
         gap = scope["verdict_view"]({"status": "SCREENED_NO_ALERT", "population_notes": [
             {"code": "CONDITION_NO_ADDITIVE_EVIDENCE", "group": "bệnh gút"}]})
         self.assertEqual(plain[3], "success")
-        self.assertEqual((gap[1], gap[3]), ("Chưa có dữ liệu cho bệnh bạn đã khai", "warning"))
-        self.assertIn("KHÔNG có nghĩa là an toàn", gap[2])
+        self.assertEqual((gap[1], gap[3]), ("Chưa có thông tin về bệnh bạn đã khai", "warning"))
+        self.assertIn("KHÔNG có nghĩa là bạn dùng được", gap[2])
 
     def test_the_llm_is_told_never_to_call_the_product_safe_for_that_condition(self):
         from unittest import mock

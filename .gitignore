@@ -24,3 +24,6 @@ data/analysis/
 venv_train/
 venv*/
 models/vietocr/ft_run.json
+
+# Lich su hoi dap cua nguoi dung (ho so suc khoe, anh nhan): khong dua len git
+data/chat_history/

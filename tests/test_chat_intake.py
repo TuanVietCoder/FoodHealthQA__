@@ -98,10 +98,40 @@ class TestChatIntake(unittest.TestCase):
         persona = ci.profile_to_persona(p)
         self.assertEqual(persona["demographics"]["age"], 4)
 
+    def test_child_weight_18kg_only_for_ages_3_to_5(self):
+        for age, expected in ((2, None), (3, 18.0), (5, 18.0), (6, None), (30, None)):
+            p, _ = ci.merge_profile(ci.empty_profile(), {"age": age})
+            self.assertEqual(ci.profile_to_persona(p).get("weight_kg"), expected, age)
+        p, _ = ci.merge_profile(ci.empty_profile(), {"age": 1, "age_months": 8})
+        self.assertNotIn("weight_kg", ci.profile_to_persona(p))
+
     def test_undeclared_profile_is_healthy_persona(self):
         persona = ci.profile_to_persona(ci.empty_profile())
-        self.assertEqual(persona["conditions"], ["healthy"])
+        self.assertEqual(persona["conditions"], ["healthy", "healthy_adult"])
         self.assertFalse(persona["is_declared"])
+
+    def test_chat_persona_matches_benchmark_archetypes(self):
+        """Cùng một người, hai đường dựng persona (chat / hồ sơ mẫu bộ QA) phải ra cùng điều kiện và dị ứng."""
+        from modules.pipeline import build_persona_from_benchmark_record as bench
+        cases = {
+            "healthy_adult": "Tôi 30 tuổi, không có bệnh nền",
+            "child_5yo": "Con tôi 5 tuổi",
+            "pku_patient": "Tôi 30 tuổi, bị PKU",
+            "ckd_stage3": "Tôi 50 tuổi, bị suy thận",
+            "diabetes_hypertension": "Tôi 50 tuổi, bị tiểu đường, tăng huyết áp",
+            "pregnant_woman": "Tôi 30 tuổi, đang mang thai",
+        }
+        # khóa chỉ có ở hồ sơ mẫu và không có nơi nào trong code dùng đến
+        unused = {"pregnancy_second_trimester", "impaired_renal_filtration", "cardiovascular_risk"}
+        for pid, text in cases.items():
+            p, _ = ci.merge_profile(ci.empty_profile(), self.parse(text)["profile"]["update"])
+            if pid == "healthy_adult":
+                p["healthy"] = True
+            chat_p = ci.profile_to_persona(p)
+            ref = bench({"persona_id": pid})
+            # chat có thể thêm khóa alias (vd children, ckd), nhưng không được thiếu khóa nào của hồ sơ mẫu
+            self.assertLessEqual(set(ref["conditions"]) - unused, set(chat_p["conditions"]), pid)
+            self.assertEqual(set(chat_p["allergies"]), set(ref["allergies"]), pid)
 
     def test_skip_profile_reply(self):
         for t in ["không có", "bỏ qua", "khỏe mạnh"]:

@@ -448,6 +448,20 @@ def profile_to_persona(profile: Dict[str, Any]) -> Dict[str, Any]:
         is_pregnant=bool(p.get("pregnant")),
         is_lactating=bool(p.get("lactating")),
     )
+    # Cùng khóa điều kiện với hồ sơ mẫu của bộ QA (pipeline.build_persona_from_benchmark_record), để hai đường
+    # dựng persona cho cùng kết quả khi mô tả cùng một người.
+    conds = persona["conditions"]
+    extra = []
+    if conds == ["healthy"]:
+        extra.append("healthy_adult")
+    if _CHILD_KEY in conds:
+        extra.append("children_under_6")
+    if "phenylketonuria_pku" in conds:
+        persona["allergies"] = list(dict.fromkeys(list(persona.get("allergies", [])) + ["phenylalanine"]))
+    conds.extend(c for c in extra if c not in conds)
+    # Trẻ 3–5 tuổi dùng 18 kg như hồ sơ mẫu child_5yo của bộ QA (quyết định của người dùng); tuổi khác giữ mặc định của pipeline
+    if p.get("age_months") is None and p.get("age") and 3 <= int(p["age"]) <= 5:
+        persona["weight_kg"] = 18.0
     if p.get("age_months") is not None:
         persona.setdefault("demographics", {})["age_months"] = int(p["age_months"])
     persona["description"] = profile_summary(p)
