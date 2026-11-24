@@ -110,3 +110,30 @@ def test_dynamic_qa_never_reads_benchmark():
     assert "qa_benchmark" not in source
     assert "reference_answer" not in source
     assert "gold_safety_label" not in source
+
+
+def _intent_and_nutrients(question):
+    plan = dynamic_qa.understand_question(question)
+    return [i["code"] for i in plan["intents"]], [n["code"] for n in plan["nutrients"]], [a["ins_code"] for a in plan["additives"]]
+
+
+def test_sodium_inside_an_additive_name_is_not_a_nutrition_question():
+    for question, code in (("Tôi muốn biết về natri benzoat", "INS 211"), ("Natri nitrit có an toàn không?", "INS 250")):
+        intents, nutrients, additives = _intent_and_nutrients(question)
+        assert "nutrition" not in intents and nutrients == [], question
+        assert code in additives, question
+
+
+def test_sweetener_class_phrase_is_not_a_sugar_question():
+    intents, nutrients, additives = _intent_and_nutrients("Chất tạo ngọt aspartame có sao không?")
+    assert nutrients == [] and "additive_safety" in intents and "INS 951" in additives
+
+
+def test_real_nutrition_questions_are_still_recognised():
+    assert _intent_and_nutrients("Sản phẩm có nhiều natri không?")[:2] == (["nutrition"], ["sodium"])
+    assert _intent_and_nutrients("Lượng đường trong bánh này có cao không?")[:2] == (["nutrition"], ["sugar"])
+
+
+def test_additive_and_nutrient_in_the_same_question_are_both_kept():
+    intents, nutrients, additives = _intent_and_nutrients("Natri benzoat và lượng muối trong sản phẩm này thế nào?")
+    assert "nutrition" in intents and nutrients == ["sodium"] and additives == ["INS 211"]

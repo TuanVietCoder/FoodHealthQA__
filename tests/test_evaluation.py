@@ -184,7 +184,35 @@ class TestAggregateMetrics(unittest.TestCase):
         self.assertAlmostEqual(result["token_f1"], 0.8)
         self.assertAlmostEqual(result["safety_accuracy"], 1.0)
         self.assertAlmostEqual(result["unsafe_recall"], 1.0)
-        self.assertIn("safety_score", result)
+        self.assertAlmostEqual(result["false_safe_rate"], 0.0)
+        # điểm gộp 0,6/0,4 đã bỏ (trọng số tự chọn)
+        self.assertNotIn("safety_score", result)
+
+    def test_not_applicable_instead_of_zero(self):
+        items = [{
+            "exact_match": False, "token_f1": 0.1,
+            "citation_precision": None, "citation_recall": None,
+            "safety_correct": True, "gold_safety_label": "SAFE", "predicted_safety_label": "SAFE",
+            "groundedness": None, "faithfulness": None,
+        }]
+        result = aggregate_metrics(items)
+        self.assertIsNone(result["citation_precision"])
+        self.assertIsNone(result["unsafe_recall"])   # không có câu nguy hiểm
+        self.assertIsNone(result["false_safe_rate"])
+
+    def test_false_safe_and_invalid_label(self):
+        items = [
+            {"exact_match": False, "token_f1": 0.0, "citation_precision": None, "citation_recall": None,
+             "safety_correct": False, "gold_safety_label": "UNSAFE", "predicted_safety_label": "SAFE",
+             "groundedness": None, "faithfulness": None},
+            {"exact_match": False, "token_f1": 0.0, "citation_precision": None, "citation_recall": None,
+             "safety_correct": False, "invalid_label": True, "gold_safety_label": "SAFE",
+             "predicted_safety_label": "???", "groundedness": None, "faithfulness": None},
+        ]
+        result = aggregate_metrics(items)
+        self.assertAlmostEqual(result["false_safe_rate"], 1.0)
+        self.assertEqual(result["invalid_label_count"], 1)
+        self.assertAlmostEqual(result["safety_accuracy"], 0.0)
 
     def test_abstention_rate(self):
         items = [
@@ -239,6 +267,23 @@ class TestEvaluateConfig(unittest.TestCase):
         self.assertIn("confusion_matrix", result)
         self.assertIn("item_results", result)
         self.assertEqual(len(result["item_results"]), 2)
+
+    def test_invalid_label_not_counted_as_safe(self):
+        refs, preds = self._make_data()
+        preds[1] = {"id": "q2", "answer": "x", "safety_label": "KHÔNG RÕ"}
+        result = evaluate_config(refs, preds, "t")
+        self.assertEqual(result["confusion_matrix"]["WARNING"]["INVALID"], 1)
+        self.assertEqual(result["confusion_matrix"]["WARNING"]["SAFE"], 0)
+
+    def test_groundedness_uses_retrieved_passages(self):
+        refs, _ = self._make_data()
+        pred = {"id": "q1", "config": "B", "answer": "Aspartame được phép theo TT24",
+                "safety_label": "SAFE", "ground_truth_text": "Thành phần: đường",
+                "retrieved_passages": [{"text": "Aspartame được phép sử dụng theo TT24"}]}
+        result = evaluate_config(refs[:1], [pred], "t")
+        item = result["item_results"][0]
+        self.assertEqual(item["groundedness_method"], "lexical_overlap")
+        self.assertAlmostEqual(item["groundedness"], 1.0)
 
     def test_missing_predictions(self):
         refs, preds = self._make_data()

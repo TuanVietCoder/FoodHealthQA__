@@ -232,6 +232,7 @@ def export_subset(
         "reference_answer",
         "source_citations",
         "gold_safety_label",
+        "label_v5",
         "product_name",
         "persona_name",
         "domain_vi",

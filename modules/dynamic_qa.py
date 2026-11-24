@@ -78,19 +78,37 @@ def strip_product_name(question: str) -> str:
     return _QUOTED.sub(" ", str(question or ""))
 
 
+_SWEETENER_CLASS = re.compile(r"chất\s+(?:tạo|làm)\s+ngọt(?:\s+(?:nhân tạo|tổng hợp|tự nhiên))?")
+
+
+def _without_additive_names(folded_question: str, mentions) -> str:
+    """Câu hỏi (đã _fold) sau khi bỏ các tên phụ gia đã nhận diện, để từ như 'natri' trong 'natri benzoat' không bị hiểu là
+    chất dinh dưỡng. Chỉ bỏ đúng chuỗi alias mà bộ liên kết đã khớp."""
+    text = _SWEETENER_CLASS.sub(" ", folded_question)  # "chất tạo ngọt" là nhóm phụ gia, không phải hỏi về đường
+    aliases =sorted({_fold(m.get("matched_alias", "")).strip() for m in mentions or [] if m.get("matched_alias")}, key=len, reverse=True)
+    for alias in aliases:
+        if alias:
+            text = re.sub(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", " ", text)
+    return text
+
+
 # ---------------------------------------------------------------------------
 # 1. Hiểu câu hỏi
 # ---------------------------------------------------------------------------
 def understand_question(question: str, persona: dict | None = None) -> dict:
     """Trả về kế hoạch: ý định, thực thể được hỏi, đối tượng, và cờ ngoài phạm vi."""
     q = _fold(strip_product_name(question))
-    intents = [{"code": c, "label": d} for c, d, rx in _INTENTS if rx.search(q)]
+    mentions = link_additive_mentions(strip_product_name(question))
+    # Tên phụ gia chứa từ trùng chất dinh dưỡng ("natri" benzoat, "natri" nitrit, mononatri glutamat) không phải câu hỏi về
+    # dinh dưỡng: bỏ tên phụ gia khỏi câu trước khi nhận diện ý định dinh dưỡng và chất dinh dưỡng được hỏi.
+    q_nutrition = _without_additive_names(q, mentions)
+    intents = [{"code": c, "label": d} for c, d, rx in _INTENTS if rx.search(q_nutrition if c == "nutrition" else q)]
     scope = abstention.detect_out_of_scope(question)
     if not intents and not scope:
         intents = [{"code": "general_safety", "label": "Đánh giá an toàn tổng quát theo nhãn"}]
 
     additives = []
-    for item in link_additive_mentions(strip_product_name(question)):
+    for item in mentions:
         ent = item.get("matched_entity") or {}
         additives.append({
             "ins_code": ent.get("ins_code", ""),
@@ -113,7 +131,7 @@ def understand_question(question: str, persona: dict | None = None) -> dict:
         a for a, kws in ALLERGEN_KEYWORDS.items()
         if any(contains_label_term(q, kw) for kw in kws)
     ]
-    nutrients = [{"code": c, "label": d} for c, d, rx in _NUTRIENTS if rx.search(q)]
+    nutrients = [{"code": c, "label": d} for c, d, rx in _NUTRIENTS if rx.search(q_nutrition)]
     populations = [{"code": c, "label": d} for c, d, rx in _POPULATIONS if rx.search(q)]
 
     return {

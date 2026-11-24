@@ -191,7 +191,13 @@ def new_authority_claims(claims: dict) -> None:
          "reason": r"induces cancer in male rats",
          "date": r"effective January 15, 2027",
          "delaney": r"Delaney Clause",
-         "no_risk_weighing": r"regardless of the probability, or risk, of cancer"},
+         "no_risk_weighing": r"regardless of the probability, or risk, of cancer",
+         # 2026-11-24: kết luận của chính FDA (Response 6, tr. 4–5) — dùng trong đáp án INS 127 (tiêu chí 1.1)
+         "limited_relevance": r"FD&C Red No\. 3-induced thyroid tumors in male rats are of limited relevance to humans",
+         "no_harm": r"we conclude that FD&C Red No\. 3 meets the safety standard of a reasonable certainty of no harm",
+         "unlikely": r"the possibility of developing thyroid tumors in humans at low dietary exposure levels from the "
+                     r"current uses of FD&C Red No\. 3 is unlikely",
+         "matter_of_law": r"as a matter of law .{0,80}we must revoke the regulations authorizing the uses of FD&C Red No\. 3"},
         "FDA final order (FR 2025-00830, 16 Jan 2025): authorisation of FD&C Red No. 3 in food repealed because it "
         "induces cancer in male rats (Delaney Clause); effective 15 Jan 2027")
     add("CXS1_4217_SULPHITE_DECLARATION", "cxs_001e.pdf",
@@ -248,7 +254,11 @@ def new_authority_claims(claims: dict) -> None:
          "definition": r"Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, "
                        r"stevia and stevia derivatives",
          "polyols_excluded": r"low-calorie sugars and sugar alcohols \(polyols\) are sugars or sugar derivatives containing "
-                             r"calories, they are not considered NSS"},
+                             r"calories, they are not considered NSS",
+         # 2026-11-24: hai câu dùng trong đáp án trẻ em (tiêu chí 1.1 mục 2.2)
+         "adult_effects_relevant": r"No undesirable effects specific to children were identified; however, effects observed "
+                                   r"for adults are expected to also be relevant for children",
+         "young_children_focus": r"with a particular focus on infants and young children"},
         "WHO guideline on non-sugar sweeteners (2023), children: conditional recommendation against NSS for weight control "
         "or NCD risk reduction applies to children (not people with diabetes); direct child evidence is limited (one RCT "
         "with reduced body fatness but no BMI z-score effect when pooled; observational studies no significant "
@@ -324,6 +334,14 @@ def build() -> dict:
     add("CFR_172_804_PKU_STATEMENT", p, html_text(p.name),
         {"statement": r"PHENYLKETONURICS: CONTAINS PHENYLALANINE"},
         "21 CFR 172.804 requires 'PHENYLKETONURICS: CONTAINS PHENYLALANINE' on foods containing aspartame")
+    # FDA consumer page (content current as of 02/27/2025): what people with PKU should do
+    p = EXT / "FDA_SWEETENERS_IN_FOOD.html"
+    add("FDA_ASPARTAME_PKU_AVOID_OR_RESTRICT", p, html_text(p.name),
+        {"pku": r"people with difficulty metabolizing phenylalanine because of a rare genetic disorder called "
+                r"phenylketonuria \(PKU\) should avoid or restrict aspartame",
+         "label": r"must include a statement to inform people with PKU that the product contains phenylalanine"},
+        "FDA (Aspartame and Other Sweeteners in Food, 2025): people with phenylketonuria (PKU) should avoid or "
+        "restrict aspartame; labels must inform people with PKU that the product contains phenylalanine")
 
     # FAO/WHO JEMRA 2021 Part 1 summary: priority list and what it leaves out
     p = EXT / "JEMRA_2021_PART1_SUMMARY.pdf"
@@ -419,7 +437,11 @@ def build() -> dict:
         add("EFSA_OPINION_2017_NITRITE", p, efsa_text(p.name),
             {"adi": r"derived an ADI of 0\.07 mg nitrite ion/kg bw per day",
              "exposure": r"did not exceed this ADI for the general population, except for a slight exceedance in children at the highest percentile",
-             "nordic": r"The Nordic Council identified these groups as including: pregnant women"},
+             "nordic": r"The Nordic Council identified these groups as including: pregnant women",
+             # 2026-11-24: mục nhóm nhạy cảm của chính EFSA (không có thai phụ) — dùng trong đáp án nitrit/thai phụ
+             "susceptible_groups": r"Specific susceptible population groups Increased methaemoglobinaemia is reported to "
+                                   r"occur in patients with a genetic defect of cytochrome b5 reductase",
+             "infants": r"Neonates and infants have a reduced level of cytochrome b5 reductase"},
             "EFSA 2017 (4786): ADI 0.07 mg nitrite ion/kg bw/day (methaemoglobin); slight exceedance in children at the "
             "highest percentile; quotes the Nordic Council listing pregnant women among more sensitive groups")
     p = EXT / "efsa_2021_6585.pdf"
@@ -451,6 +473,22 @@ def build() -> dict:
                 "jecfa_name": r["jecfa_name"], "chemical_id": r["chemical_id"],
                 "adi": r["latest_adi"], "year": r["latest_evaluation_year"],
                 "evidence": {"ins_on_page": r["ins_on_page"], "adi": r["latest_adi"]}}
+    # Câu nguyên văn thêm cho nhận định JECFA khi đáp án dùng nhiều hơn con số ADI (2026-11-24). Không thấy câu thì
+    # nhận định không qua.
+    jecfa_extra = {
+        "951": {"no_adverse": r"JECFA concluded that there was no convincing evidence from experimental animal or human "
+                              r"data that aspartame has adverse effects after ingestion",
+                "reaffirmed": r"JECFA therefore reaffirmed the ADI of 0.40 mg/kg bw for aspartame"},
+    }
+    for code, pats in jecfa_extra.items():
+        c = claims.get(f"JECFA_ADI_{code}")
+        if not c:
+            continue
+        text = html_text(c["source_file"])
+        for key, pat in pats.items():
+            m = re.search(pat, text)
+            c["evidence"][key] = text[max(0, m.start() - 20): m.end() + 20] if m else None
+            c["passed"] = bool(c["passed"] and m)
     codex_claims(claims)
     codex_gl23_claim(claims)
     fda_allergen_qa_claims(claims)

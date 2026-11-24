@@ -7,6 +7,12 @@ Thực hiện kiểm chứng tính trung thực (Faithfulness & Claim Verificati
 - Đánh giá quan hệ logic 3 trạng thái: ENTAILMENT, CONTRADICTION, NEUTRAL.
 - Phát hiện hiện tượng "gian lận trích dẫn" (Citation Hallucination).
 - Hỗ trợ cả 2 chế độ: Fast Zero-Shot LLM NLI và Heuristic Deterministic Fallback.
+
+LƯU Ý VỀ TÍNH TRUNG THỰC CỦA SỐ LIỆU:
+- Khi KHÔNG truyền call_llm_fn, kết quả chỉ là ĐỐI CHIẾU TỪ KHÓA (trùng từ giữa nhận định và bằng chứng,
+  cộng vài luật mâu thuẫn "cấm/cho phép"). Đó không phải suy luận ngôn ngữ (NLI); kết quả ghi method="keyword_overlap"
+  và giao diện phải hiển thị đúng tên đó.
+- Không gán "confidence" cố định (0,85/0,90/0,92…) nữa: các con số đó không được hiệu chỉnh trên dữ liệu nào.
 """
 
 from __future__ import annotations
@@ -82,14 +88,14 @@ def _rule_based_nli_heuristic(claim_text: str, evidence_text: str) -> Dict[str, 
         if "không được phép" not in e_low and "cấm" not in e_low:
             return {
                 "label": "CONTRADICTION",
-                "confidence": 0.85,
+                "confidence": None,
                 "reason": "Nhận định nói 'cấm' nhưng bằng chứng ghi nhận được phép/cho phép."
             }
 
     if ("an toàn tuyệt đối" in c_low or "hoàn toàn an toàn" in c_low) and ("cannot establish adi" in e_low or "genotoxicity" in e_low or "nguy cơ" in e_low):
         return {
             "label": "CONTRADICTION",
-            "confidence": 0.90,
+            "confidence": None,
             "reason": "Nhận định nói an toàn tuyệt đối nhưng bằng chứng có cảnh báo độc tính/nguy cơ."
         }
 
@@ -105,13 +111,13 @@ def _rule_based_nli_heuristic(claim_text: str, evidence_text: str) -> Dict[str, 
     if ratio >= 0.4:
         return {
             "label": "ENTAILMENT",
-            "confidence": min(0.95, 0.6 + ratio * 0.4),
+            "confidence": None,
             "reason": f"Khớp từ vựng ngữ cảnh ({matches}/{len(meaningful_words)} từ khóa chính xác)."
         }
 
     return {
         "label": "NEUTRAL",
-        "confidence": 0.60,
+        "confidence": None,
         "reason": "Không đủ từ khóa đối soát trực tiếp trong bằng chứng."
     }
 
@@ -126,10 +132,10 @@ def classify_claim_nli(
     Trả về dict: {"label": "ENTAILMENT"|"CONTRADICTION"|"NEUTRAL", "confidence": float, "reason": str}
     """
     if not claim_text.strip():
-        return {"label": "NEUTRAL", "confidence": 0.0, "reason": "Câu rỗng"}
+        return {"label": "NEUTRAL", "confidence": None, "reason": "Câu rỗng"}
 
     if not evidence_text.strip():
-        return {"label": "NEUTRAL", "confidence": 0.5, "reason": "Thiếu bằng chứng đối soát"}
+        return {"label": "NEUTRAL", "confidence": None, "reason": "Thiếu bằng chứng đối soát", "source": "no_evidence"}
 
     # Nếu có LLM function: thực hiện Fast Zero-Shot NLI
     if call_llm_fn is not None:
@@ -158,7 +164,7 @@ def classify_claim_nli(
                     if lbl in {"ENTAILMENT", "CONTRADICTION", "NEUTRAL"}:
                         return {
                             "label": lbl,
-                            "confidence": 0.92 if lbl != "NEUTRAL" else 0.70,
+                            "confidence": None,
                             "reason": str(parsed.get("reason", "Phân tích ngữ nghĩa qua NLI")),
                             "source": "llm_nli"
                         }
@@ -167,7 +173,7 @@ def classify_claim_nli(
 
     # Fallback heuristic logic
     res = _rule_based_nli_heuristic(claim_text, evidence_text)
-    res["source"] = "heuristic_nli"
+    res["source"] = "keyword_overlap"
     return res
 
 
@@ -185,14 +191,16 @@ def verify_answer_faithfulness(
     claims = split_into_claims(answer_text)
     if not claims:
         return {
-            "status": "VERIFIED_SAFE",
-            "faithfulness_score": 1.0,
+            "status": "NO_CLAIMS",
+            "method": "none",
+            "faithfulness_score": None,  # không có nhận định nào → không áp dụng (trước đây = 1,0)
             "claims_count": 0,
             "verified_count": 0,
+            "entailment_count": 0,
             "contradiction_count": 0,
             "neutral_count": 0,
             "claims": [],
-            "badge_html": '<span class="fh-chip2" style="background:#E0F2FE;color:#0284C7;">🛡️ NLI: Chưa phát hiện nhận định cần xác thực</span>'
+            "badge_html": '<span class="fh-chip2 gray">Không có nhận định cần đối chiếu</span>'
         }
 
     # Chọn lọc câu để kiểm chứng
@@ -220,41 +228,56 @@ def verify_answer_faithfulness(
         results.append({
             "text": c["text"],
             "label": lbl,
-            "confidence": clf.get("confidence", 0.8),
+            "confidence": clf.get("confidence"),
             "reason": clf.get("reason", ""),
-            "source": clf.get("source", "heuristic_nli"),
+            "source": clf.get("source", "keyword_overlap"),
             "citations": c["citations"],
             "is_high_risk": c["is_high_risk"]
         })
 
     total_checked = len(results)
-    faithfulness = round(entail_cnt / total_checked, 2) if total_checked > 0 else 1.0
+    faithfulness = round(entail_cnt / total_checked, 2) if total_checked > 0 else None
+    sources = {r["source"] for r in results}
+    method = "llm_nli" if sources == {"llm_nli"} else ("keyword_overlap" if "llm_nli" not in sources else "mixed")
+    # Tên hiển thị phải đúng bản chất: đối chiếu từ khóa KHÔNG phải xác thực ngữ nghĩa.
+    method_name = {"llm_nli": "Kiểm tra bằng LLM (NLI)", "keyword_overlap": "Đối chiếu từ khóa",
+                   "mixed": "Đối chiếu từ khóa + LLM"}[method]
+    note = "" if method == "llm_nli" else " — trùng từ với bằng chứng, chưa phải xác thực ngữ nghĩa"
 
     if contra_cnt > 0:
         status = "CONTRADICTION_DETECTED"
         badge_html = (
             f'<div style="background:#FEE2E2; border:1px solid #FCA5A5; color:#991B1B; padding:8px 12px; border-radius:8px; font-size:13px; margin:8px 0;">'
-            f'🚨 <b>CẢNH BÁO XUNG ĐỘT NGỮ NGHĨA (NLI Guardrail):</b> Phát hiện <b>{contra_cnt} nhận định</b> mâu thuẫn trực tiếp với bằng chứng pháp lý/y khoa!'
+            f'🚨 <b>{method_name}: có {contra_cnt}/{total_checked} nhận định có dấu hiệu mâu thuẫn với bằng chứng</b>{note}. '
+            f'Hãy kiểm tra lại các nhận định này.'
             f'</div>'
         )
-    elif neutral_cnt > 0 and entail_cnt == 0:
-        status = "UNVERIFIED"
+    elif entail_cnt == total_checked:
+        status = "ALL_SUPPORTED"
+        badge_html = (
+            f'<div style="background:#DCFCE7; border:1px solid #86EFAC; color:#166534; padding:8px 12px; border-radius:8px; font-size:13px; margin:8px 0;">'
+            f'🛡️ <b>{method_name}: {entail_cnt}/{total_checked} nhận định được tìm thấy trong bằng chứng</b>{note}.'
+            f'</div>'
+        )
+    elif entail_cnt > 0:
+        status = "PARTIALLY_SUPPORTED"
         badge_html = (
             f'<div style="background:#FEF3C7; border:1px solid #FCD34D; color:#92400E; padding:8px 12px; border-radius:8px; font-size:13px; margin:8px 0;">'
-            f'⚠️ <b>LƯU Ý THẨM ĐỊNH (NLI Guardrail):</b> Các nhận định chưa tìm thấy căn cứ trực tiếp trong tài liệu ({total_checked} câu trung lập).'
+            f'⚠️ <b>{method_name}: {entail_cnt}/{total_checked} nhận định được tìm thấy trong bằng chứng; '
+            f'{neutral_cnt} nhận định chưa thấy căn cứ</b>{note}.'
             f'</div>'
         )
     else:
-        status = "VERIFIED_SAFE"
-        pct_str = f"{int(faithfulness * 100)}%"
+        status = "UNSUPPORTED"
         badge_html = (
-            f'<div style="background:#DCFCE7; border:1px solid #86EFAC; color:#166534; padding:8px 12px; border-radius:8px; font-size:13px; margin:8px 0;">'
-            f'🛡️ <b>ĐÃ XÁC THỰC NGỮ NGHĨA (NLI Faithfulness: {pct_str}):</b> Toàn bộ {entail_cnt}/{total_checked} luận điểm quan trọng đều khớp logic với văn bản thẩm quyền.'
+            f'<div style="background:#FEF3C7; border:1px solid #FCD34D; color:#92400E; padding:8px 12px; border-radius:8px; font-size:13px; margin:8px 0;">'
+            f'⚠️ <b>{method_name}: chưa tìm thấy căn cứ cho {total_checked} nhận định được kiểm tra</b>{note}.'
             f'</div>'
         )
 
     return {
         "status": status,
+        "method": method,
         "faithfulness_score": faithfulness,
         "claims_count": len(claims),
         "verified_count": total_checked,

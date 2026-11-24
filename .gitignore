@@ -11,3 +11,16 @@ data/ocr_cache_config_c.json.tmp
 gemini_keys.txt
 data/runs/gemini_key_usage.json
 venv_py315_old/
+venv_ocr3/
+data/ocr_candidate/
+
+# Archive va file sinh lai duoc: khong dua len git
+_archive_unused/
+data/archive/
+data/runs/
+data/cache/
+data/ocr_train/
+data/analysis/
+venv_train/
+venv*/
+models/vietocr/ft_run.json

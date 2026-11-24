@@ -132,7 +132,7 @@
   "WHO_FAO_JECFA#Chemical2434_AcesulfamePotassium": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Acesulfame potassium (INS 950)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2434",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/926",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-15 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical2340_Sucralose": {
@@ -145,277 +145,277 @@
   "WHO_FAO_JECFA#Chemical2605_SteviolGlycosides": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Steviol glycosides (INS 960)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2605",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/267",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw (as steviol)."
   },
   "WHO_FAO_JECFA#Chemical2339_Neotame": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Neotame (INS 961)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2339",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5107",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-2 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1889_Sorbitol_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sorbitol (INS 420)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1889",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/829",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1909_MonosodiumGlutamate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Monosodium L-glutamate (INS 621)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1909",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2257",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1907_DisodiumGuanylate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Disodium 5'-guanylate (INS 627)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1907",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/822",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1908_DisodiumInosinate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Disodium 5'-inosinate (INS 631)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1908",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2512",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1910_SodiumBenzoate": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium benzoate (INS 211)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
-    "scope": "Chemical identity and toxicological evaluation; ADI: 0-5 mg/kg bw."
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1098",
+    "scope": "Chemical identity and toxicological evaluation; ADI: 0-20 mg/kg bw (JECFA 2021; thay giá trị 0-5 của 1996)."
   },
   "WHO_FAO_JECFA#Chemical2443_PotassiumSorbate": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Potassium sorbate (INS 202)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2724",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-25 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical2018_SulfurDioxide": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sulfur dioxide (INS 220)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2018",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/985",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.7 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical2019_SodiumSulfite": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium sulfite (INS 221)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2019",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2821",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.7 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical2444_SodiumNitrite": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium nitrite (INS 250)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2444",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4792",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.07 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical2445_SodiumNitrate": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium nitrate (INS 251)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2445",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1569",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-3.7 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1845_AscorbicAcid_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Ascorbic acid (INS 300)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1845",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/59",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1847_BHA": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Butylated hydroxyanisole (BHA) (INS 320)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1847",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.5 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1848_BHT": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Butylated hydroxytoluene (BHT) (INS 321)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1848",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2142",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-0.3 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1849_Lecithin_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Lecithin (INS 322)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1849",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1477",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1850_CitricAcid_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Citric acid (INS 330)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1850",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3594",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1912_TrisodiumCitrate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Trisodium citrate (INS 331(III))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1912",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/349",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1893_SodiumHydrogenCarbonate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium hydrogen carbonate (INS 500(II))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1893",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1892",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1894_AmmoniumHydrogenCarbonate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Ammonium hydrogen carbonate (INS 503(II))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1894",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/133",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1891_SodiumAcetate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium acetate (INS 262(I))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1891",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2970",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1870_SodiumAlginate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium alginate (INS 401)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1870",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1823",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1872_Carrageenan_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Carrageenan (INS 407)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1872",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/377",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1874_CarobBeanGum_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Carob bean gum (INS 410)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1874",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/940",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1875_GuarGum_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Guar gum (INS 412)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1875",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/863",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1876_GumArabic_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Gum arabic (INS 414)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1876",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1133",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1877_XanthanGum_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Xanthan gum (INS 415)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1877",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/802",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1878_Pectin_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Pectins (INS 440)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1878",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3043",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1880_MonoDiglycerides_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Mono- and diglycerides of fatty acids (INS 471)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1880",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/917",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1897_SiliconDioxide_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Silicon dioxide, amorphous (INS 551)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1897",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2461",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1900_StarchAcetate_GMP": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Starch acetate (INS 1420)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1900",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4292",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not specified."
   },
   "WHO_FAO_JECFA#Chemical1852_CaramelIV": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Caramel IV - sulfite ammonia caramel (INS 150D)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1852",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1668",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-200 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1854_Tartrazine": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Tartrazine (INS 102)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1854",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3885",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-10 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1856_QuinolineYellow": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Quinoline Yellow (INS 104)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1856",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3466",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-3 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1857_SunsetYellow": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sunset Yellow FCF (INS 110)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1857",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2018",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1859_Azorubine": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Azorubine (INS 122)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1859",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1704",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1860_Ponceau4R": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Ponceau 4R (INS 124)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1860",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4941",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-4 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1862_AlluraRed": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Allura Red AC (INS 129)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1862",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2361",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-7 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1863_BrilliantBlue": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Brilliant Blue FCF (INS 133)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1863",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3309",
     "scope": "Chemical identity and toxicological evaluation; ADI: 0-6 mg/kg bw."
   },
   "WHO_FAO_JECFA#Chemical1866_TitaniumDioxide": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Titanium dioxide (INS 171)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1866",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2723",
     "scope": "Chemical identity and toxicological evaluation; ADI: ADI not limited."
   },
   "WHO_FAO_JECFA#BetaCarotenes_Evaluation": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Beta-carotenes (INS 160A)",
     "url": "https://cdn.who.int/media/docs/default-source/food-safety/jecfa/summary-and-conclusions/jecfa87_4-13-june-2019_summary-and-conclusion.pdf",
-    "scope": "Chemical identity and toxicological evaluation; ADI: 0-5 mg/kg bw."
+    "scope": "Chemical identity and toxicological evaluation; ADI: WITHDRAWN (JECFA 2019, kỳ họp 87; không còn ADI số)."
   },
   "WHO_FAO_JECFA#Chemical1890_PhosphoricAcid_MTDI70": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Phosphoric acid (INS 338)",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1890",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1777",
     "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
   },
   "WHO_FAO_JECFA#Chemical1915_SodiumPhosphates_MTDI70": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium dihydrogen phosphate (INS 339(I))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1915",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2639",
     "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
   },
   "WHO_FAO_JECFA#Chemical1916_CalciumPhosphates_MTDI70": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Calcium dihydrogen phosphate (INS 341(I))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1916",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3792",
     "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
   },
   "WHO_FAO_JECFA#Chemical1917_Diphosphates_MTDI70": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Disodium diphosphate (INS 450(I))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1917",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/383",
     "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
   },
   "WHO_FAO_JECFA#Chemical1918_Polyphosphates_MTDI70": {
     "citation_id": "JECFA_EVALUATIONS",
     "title": "WHO/FAO JECFA Chemical Monograph - Sodium polyphosphate (INS 452(I))",
-    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1918",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4669",
     "scope": "Chemical identity and toxicological evaluation; ADI: MTDI 70 mg/kg bw (as phosphorus)."
   },
   "WHO_FAO_JECFA#Compendium_Additives_ADI": {
@@ -1419,5 +1419,84 @@
     "url": "https://doi.org/10.2903/j.efsa.2015.4102",
     "scope": "For children and adolescents the available information is insufficient to derive a safe caffeine intake; the adult acute no-concern level (3 mg/kg bw) may serve as a basis for these subgroups; main dietary sources are coffee, tea, caffeinated soft drinks (incl. energy drinks) and chocolate.",
     "verified_against": "knowledge_base/sources/raw/external/EFSA_Journal_2015_Scientific_Opinion_safety_caffeine.pdf"
+  },
+  "VN_TT24_2019#PhuLuc2A_Nhom13.1_13.2": {
+    "citation_id": "VN_TT24_2019",
+    "title": "Thông tư 24/2019/TT-BYT & VBHN 09/VBHN-BYT 2024",
+    "url": "",
+    "scope": "Phụ lục 2A, các dòng nhóm thực phẩm 13.1.1, 13.1.2, 13.1.3, 13.2 (PDF trang 46–357): phụ gia và mức tối đa cho thực phẩm dành cho trẻ."
+  },
+  "VN_TT24_2019#PhuLuc3_Muc2_GMP": {
+    "citation_id": "VN_TT24_2019",
+    "title": "Thông tư 24/2019/TT-BYT & VBHN 09/VBHN-BYT 2024",
+    "url": "",
+    "scope": "Phụ lục 3 mục 2 (PDF trang 415–418): danh sách nhóm thực phẩm dùng phụ gia theo GMP không có nhóm 13.1 và 13.2."
+  },
+  "CODEX_STAN_192_1995#Table2_Cat13.1_13.2": {
+    "citation_id": "CODEX_STAN_192_1995",
+    "title": "Codex General Standard for Food Additives CXS 192-1995",
+    "url": "",
+    "scope": "Table Two, food categories 13.1.1, 13.1.2, 13.1.3, 13.2: additives permitted in foods for infants and young children."
+  },
+  "CODEX_STAN_192_1995#AnnexTable3_Excl13": {
+    "citation_id": "CODEX_STAN_192_1995",
+    "title": "Codex General Standard for Food Additives CXS 192-1995",
+    "url": "",
+    "scope": "Annex to Table Three (PDF page 493): categories 13.1 and 13.2 are excluded from the general GMP conditions of Table Three."
+  },
+  "QCVN_11_1_2012#Muc1.3.4": {
+    "citation_id": "VN_QCVN_11_1_2012",
+    "title": "QCVN 11-1:2012/BYT Sản phẩm dinh dưỡng công thức cho trẻ đến 12 tháng tuổi",
+    "url": "",
+    "scope": "Mục 1.3.4 (PDF trang 7–8): các dạng vitamin, chất khoáng bổ sung theo quy định Bộ Y tế, nếu chưa có thì theo CAC/GL 10-1979 (danh mục hợp chất vitamin và khoáng cho trẻ)."
+  },
+  "QCVN_11_1_2012#Muc6_PhuGia": {
+    "citation_id": "VN_QCVN_11_1_2012",
+    "title": "QCVN 11-1:2012/BYT Sản phẩm dinh dưỡng công thức cho trẻ đến 12 tháng tuổi",
+    "url": "",
+    "scope": "Mục 6 (PDF trang 11): phụ gia dùng trong sản phẩm dinh dưỡng công thức cho trẻ đến 12 tháng tuổi theo quy định của Bộ Y tế."
+  },
+  "QCVN_11_4_2012#Muc6_PhuGia": {
+    "citation_id": "VN_QCVN_11_4_2012",
+    "title": "QCVN 11-4:2012/BYT (TT 23/2012/TT-BYT) Sản phẩm dinh dưỡng chế biến từ ngũ cốc cho trẻ từ 6 đến 36 tháng tuổi",
+    "url": "",
+    "scope": "Mục 6: phụ gia dùng trong sản phẩm dinh dưỡng từ ngũ cốc cho trẻ 6–36 tháng tuổi theo quy định của Bộ Y tế."
+  },
+  "CODEX_CXS_72_1981#SecA3.4": {
+    "citation_id": "CODEX_CXS_72_1981",
+    "title": "Codex CXS 72-1981 Standard for Infant Formula and Formulas for Special Medical Purposes Intended for Infants (amended 2024)",
+    "url": "",
+    "scope": "Section A 3.4 (PDF page 9): vitamin compounds and mineral salts are selected from the advisory lists of nutrient compounds (CXG 10-1979)."
+  },
+  "CODEX_CXS_74_1981#Sec8.6.4": {
+    "citation_id": "CODEX_CXS_74_1981",
+    "title": "Codex STAN 074-1981, Rev. 1-2006 Processed Cereal-Based Foods for Infants and Young Children",
+    "url": "",
+    "scope": "Section 8.6.4 (PDF page 8): the label shall indicate clearly from which age the product is recommended; not less than six months."
+  },
+  "CODEX_CXS_74_1981#Sec8.3.2": {
+    "citation_id": "CODEX_CXS_74_1981",
+    "title": "Codex STAN 074-1981, Rev. 1-2006 Processed Cereal-Based Foods for Infants and Young Children",
+    "url": "",
+    "scope": "Section 8.3.2 (PDF page 8): the specific name shall be declared for ingredients and food additives."
+  },
+  "WHO_CF_2023#Rec2_Milks": {
+    "citation_id": "WHO_COMPLEMENTARY_FEEDING_2023",
+    "title": "WHO Guideline for complementary feeding of infants and young children 6-23 months of age (2023), ISBN 978-92-4-008186-4",
+    "url": "",
+    "scope": "Recommendation 2 and remarks (PDF page 12): sweetened milks are not appropriate for 6–23 months; flavoured or sweetened milks should not be used."
+  },
+  "WHO_CF_2023#Rec5_UnhealthyFoods": {
+    "citation_id": "WHO_COMPLEMENTARY_FEEDING_2023",
+    "title": "WHO Guideline for complementary feeding of infants and young children 6-23 months of age (2023), ISBN 978-92-4-008186-4",
+    "url": "",
+    "scope": "Recommendation 5 (PDF page 14): foods high in sugar, salt, trans fats, sugar-sweetened beverages and non-sugar sweeteners should not be consumed."
+  },
+  "US_FDA_ASPARTAME_SWEETENERS#PKU_AvoidOrRestrict": {
+    "citation_id": "US_FDA_ASPARTAME_SWEETENERS",
+    "title": "US FDA - Aspartame and Other Sweeteners in Food (content current as of 02/27/2025)",
+    "url": "https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food",
+    "scope": "People with phenylketonuria (PKU) should avoid or restrict aspartame; labels must inform people with PKU that the product contains phenylalanine.",
+    "verified_against": "knowledge_base/sources/raw/external/FDA_SWEETENERS_IN_FOOD.html"
   }
 }

@@ -1,0 +1,62 @@
+{
+  "1910": {
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
+    "file": "Chemical_1910.html",
+    "sha256": "1996e006b128fd5dac80f0fb34277ab375f3f06cbff7560075a585d5c6813fca",
+    "bytes": 35092,
+    "ins_on_page": [
+      "320"
+    ],
+    "latest_evaluation_year": "1988",
+    "latest_adi": "0-0.5 mg/kg bw Intake: 1998, TRS 891-JECFA 51/123,157; FAS 42-JECFA 51/415. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.5 mg/kg bw in the three Member States that submitted such data. In national data submitted by seven Member States, estimates of mean intake of BHA did not exceed the ADI. The potential exists for consumers of high levels of BHA to exceed the ADI, but the available data were insufficient to estimate the number of such consumers or the magnitude and duration of intake above the ADI.",
+    "retrieved_utc": "2026-11-22T04:26:45+00:00"
+  },
+  "2018": {
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2018",
+    "file": "Chemical_2018.html",
+    "sha256": "bdb8bd2010171ef2134b9aae1936768ca2f8d1b17514806d88fc44fdaa5be955",
+    "bytes": 35708,
+    "ins_on_page": [
+      "110"
+    ],
+    "latest_evaluation_year": "2011",
+    "latest_adi": "0–4 mg/kg bw",
+    "retrieved_utc": "2026-11-22T04:26:51+00:00"
+  },
+  "133": {
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/133",
+    "file": "Chemical_133.html",
+    "sha256": "d22bad449f44d306d0693db1137f9ab7f0ab1ca1665457c59860fa09cb7cbd9b",
+    "bytes": 34297,
+    "ins_on_page": [
+      "503ii"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-22T07:38:39+00:00"
+  },
+  "940": {
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/940",
+    "file": "Chemical_940.html",
+    "sha256": "3d07448254c693343d103088e00db42fb3bae609017c9150a74a09af5c9df56d",
+    "bytes": 38378,
+    "ins_on_page": [
+      "410"
+    ],
+    "latest_evaluation_year": "2025",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-22T07:38:41+00:00"
+  },
+  "2142": {
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2142",
+    "file": "Chemical_2142.html",
+    "sha256": "9cb53ba31a9f336c1306da52a0fc82f1c6779b96e3263964e062c1cd3407e93f",
+    "bytes": 34909,
+    "ins_on_page": [
+      "321"
+    ],
+    "latest_evaluation_year": "1995",
+    "latest_adi": "0-0.3 mg/kg bw Intake: 1998, TRS 891-JECFA 51/126,158; FAS 42-JECFA 51/429. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.3 mg/kg bw in the five Member States that submitted such data. In national data submitted by eight Member States, estimates of mean and high intake for consumers of BHT exceeded the ADI in only one country.",
+    "retrieved_utc": "2026-11-22T07:38:46+00:00"
+  }
+}

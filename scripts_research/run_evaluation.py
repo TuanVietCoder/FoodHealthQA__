@@ -97,6 +97,29 @@ def _prediction_integrity(references, predictions, expected_config=None):
     }
 
 
+def perception_summary(predictions, threshold=0.65, legacy_constant=0.85):
+    """Thống kê độ tin cậy OCR (S_perception) và điểm tổng của các dự đoán — để báo cáo cấu hình C dùng điểm thật."""
+    perc = [float(p["perception_confidence"]) for p in predictions if p.get("perception_confidence") is not None]
+    if not perc:
+        return None
+    totals = [float(p["total_confidence"]) for p in predictions if p.get("total_confidence") is not None]
+    srt = sorted(perc)
+    return {
+        "count": len(perc),
+        "mean": sum(perc) / len(perc),
+        "min": srt[0],
+        "p10": srt[int(0.1 * (len(srt) - 1))],
+        "median": srt[len(srt) // 2],
+        "max": srt[-1],
+        "below_threshold_total": sum(t < threshold for t in totals),
+        "threshold": threshold,
+        "legacy_constant_count": sum(abs(x - legacy_constant) < 1e-9 for x in perc),
+        "ocr_pipeline_versions": sorted({
+            str(p.get("ocr_pipeline_version") or ("legacy" if p.get("config") == "C" else "không dùng OCR"))
+            for p in predictions if p.get("perception_confidence") is not None}),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -261,6 +284,11 @@ def main():
         "configs": {},
     }
     for result in all_results:
+        perception = perception_summary(configs.get(result["config"], []))
+        if perception:
+            print(f"  [{result['config']}] S_perception: mean={perception['mean']:.3f} min={perception['min']:.3f} "
+                  f"· S_total<{perception['threshold']}: {perception['below_threshold_total']} câu "
+                  f"· còn hằng số 0,85 cũ: {perception['legacy_constant_count']}")
         serializable = {
             "overall": result["overall"],
             "per_domain": result["per_domain"],
@@ -268,6 +296,8 @@ def main():
             "missing_predictions": result["missing_predictions"],
             "extra_predictions": result["extra_predictions"],
         }
+        if perception:
+            serializable["perception"] = perception
         output_data["configs"][result["config"]] = serializable
 
     output_path = args.output or os.path.join(DATA_DIR, "evaluation_results.json")

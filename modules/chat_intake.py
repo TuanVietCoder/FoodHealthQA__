@@ -160,7 +160,9 @@ def age_group_of(age):
     return "elderly" if age >= 60 else "adult" if age >= 18 else "child"
 
 
-_AGE_MONTHS = re.compile(r"(?<![\d.,])(\d{1,2})\s*thang tuoi")
+# "8 tháng tuổi", hoặc "bé (nhà tôi) 8 tháng" — số tháng ngay sau bé/con/cháu/trẻ mới là tuổi ("dùng 8 tháng" thì không)
+_AGE_MONTHS = re.compile(r"(?<![\d.,])(\d{1,2})\s*thang tuoi|\b(?:be|con|chau|tre)(?:\s+(?:nha|toi|minh|em|cua|duoc|"
+                         r"moi|chi|tam|khoang|gan|da))*\s+(\d{1,2})\s*thang\b")
 # giới tính: kiểm tra trên chữ có dấu vì "nam" (bỏ dấu) trùng "năm"
 _MALE = re.compile(r"(?<!việt )\b(nam giới|giới tính\s*:?\s*nam|là nam|đàn ông|con trai|bé trai|nam,|nam\.|nam$)", re.I)
 _FEMALE = re.compile(r"\b(nữ giới|giới tính\s*:?\s*nữ|là nữ|phụ nữ|con gái|bé gái|nữ\b)", re.I)
@@ -186,6 +188,7 @@ def empty_profile() -> Dict[str, Any]:
         "conditions": [],      # mã bệnh nền (khóa trong CONDITION_CHOICES)
         "allergens": [],       # kết quả resolve_custom_allergen_term (status valid / valid_raw)
         "age": None,
+        "age_months": None,    # chỉ khi khai báo theo tháng ("8 tháng tuổi")
         "age_group": None,     # adult | elderly | child (suy từ tuổi hoặc từ cụm "người trưởng thành"…)
         "gender": None,        # "Nam" | "Nữ"
         "pregnant": False,
@@ -246,7 +249,10 @@ def extract_profile(text: str, foodon_catalog=None) -> Dict[str, Any]:
     m = _AGE_MONTHS.search(folded)
     if m:
         spans.append(m.span())
-        upd["age"] = 1
+        # "đang cho con bú, bé 3 tháng tuổi": số tháng là tuổi của con, không phải của người khai báo
+        if not upd.get("lactating") and not upd.get("pregnant"):
+            upd["age"] = 1
+            upd["age_months"] = int(m.group(1) or m.group(2))
     else:
         ages = [mm for mm in _AGE.finditer(folded)]
         if ages:
@@ -413,6 +419,7 @@ def merge_profile(profile: Dict[str, Any], update: Dict[str, Any]) -> Tuple[Dict
     if "age" in update:
         p["age_group"] = age_group_of(update["age"])
         p["age"] = update["age"]
+        p["age_months"] = update.get("age_months")  # khai báo tuổi theo năm thì bỏ số tháng cũ
     if "gender" in update:
         p["gender"] = update["gender"]
     for flag in ("pregnant", "lactating"):
@@ -441,6 +448,8 @@ def profile_to_persona(profile: Dict[str, Any]) -> Dict[str, Any]:
         is_pregnant=bool(p.get("pregnant")),
         is_lactating=bool(p.get("lactating")),
     )
+    if p.get("age_months") is not None:
+        persona.setdefault("demographics", {})["age_months"] = int(p["age_months"])
     persona["description"] = profile_summary(p)
     persona["is_declared"] = bool(p.get("declared"))
     return persona
@@ -451,7 +460,9 @@ def profile_summary(profile: Dict[str, Any]) -> str:
     if not p.get("declared"):
         return "Chưa khai báo"
     parts = []
-    if p.get("age"):
+    if p.get("age_months") is not None:
+        parts.append(f"{p['age_months']} tháng tuổi")
+    elif p.get("age"):
         parts.append(f"{p['age']} tuổi")
     elif p.get("age_group") in AGE_GROUP_LABEL:
         parts.append(AGE_GROUP_LABEL[p["age_group"]])
@@ -461,9 +472,10 @@ def profile_summary(profile: Dict[str, Any]) -> str:
         parts.append("đang mang thai")
     if p.get("lactating"):
         parts.append("đang cho con bú")
-    conds = [_CONDITION_SHORT.get(k, k) for k in p.get("conditions", []) if k != _CHILD_KEY]
+    # "Trẻ dưới 6 tuổi" do hệ thống suy ra từ tuổi (merge_profile) nên hiện ở dòng nhóm tuổi, không lẫn vào bệnh nền người dùng khai
     if _CHILD_KEY in p.get("conditions", []):
-        conds.append("Trẻ dưới 6 tuổi")
+        parts.append("nhóm tuổi: trẻ dưới 6 tuổi")
+    conds = [_CONDITION_SHORT.get(k, k) for k in p.get("conditions", []) if k != _CHILD_KEY]
     if conds:
         parts.append("bệnh nền/đối tượng: " + ", ".join(conds))
     elif p.get("healthy"):
@@ -597,6 +609,15 @@ def parse_message(text: str, foodon_catalog=None) -> Dict[str, Any]:
         result["kind"] = "skip_profile"
         return result
 
+    # câu sửa thông tin nhãn ("không có E621", "mã là E330 chứ không phải E33") → tách riêng, phần còn lại xử lý như cũ
+    correction, rest = detect_label_correction(raw)
+    if correction:
+        result["correction"] = correction
+        if not rest.strip():
+            result["kind"] = "correction"
+            return result
+        raw = rest
+
     profile = extract_profile(raw, foodon_catalog)
     result["profile"] = profile
     result["errors"].extend(profile["errors"])
@@ -651,7 +672,8 @@ def parse_message(text: str, foodon_catalog=None) -> Dict[str, Any]:
 
 _NOT_NAME = re.compile(
     r"thanh phan|ingredient|nsx|hsd|han su dung|ngay san xuat|khoi luong|the tich|cong ty|dia chi|san xuat tai|"
-    r"phan phoi|chiu trach nhiem|huong dan|bao quan|dien thoai|www|http|@|ma vach|so lo|xuat xu|net|kcal|gia tri dinh duong"
+    r"phan phoi|chiu trach nhiem|huong dan|bao quan|dien thoai|www|http|@|ma vach|so lo|xuat xu|net|kcal|gia tri dinh duong|"
+    r"su dung|danh cho|huong dan|bao quan|tre (tu|em|duoi|nho)|lac (deu|ky)|dung ngay|dung lien|pha voi|nha san xuat|xuat xu|cach dung|luu y|canh bao|khuyen cao"
 )
 
 
@@ -660,7 +682,15 @@ _PRODUCT_TYPE = re.compile(
     r"nuoc mam|nuoc tuong|tuong|dau an|dau|hat nem|bot nem|gia vi|sot|mut|thach|kem|socola|chocolate|ngu coc|"
     r"yen mach|bia|ruou|nuoc ngot|nuoc ep|sua chua|pho mai|bo|ca hop|thit hop|rong bien|khoai tay|bim bim)\b"
 )
-_NAME_STOP = re.compile(r"[:;.!?\d]|\b(tong so|khoi luong|kich co|the tich|net|thanh phan|nsx|hsd|san xuat)\b")
+_NAME_STOP = re.compile(r"[:;.!?\d]|\b(tong so|khoi luong|kich co|the tich|net|thanh phan|nsx|hsd|san xuat|su dung|danh cho|huong dan|bao quan|tre (tu|em|duoi|nho)|lac (deu|ky)|dung ngay|dung lien|pha voi|nha san xuat|xuat xu|cach dung|luu y|canh bao|khuyen cao)\b")
+
+
+def display_name_from_file(filename: str, max_len: int = 40) -> str:
+    """Tên file ảnh (bỏ đuôi) dùng làm tên sản phẩm khi không đoán được từ nhãn; tên quá dài rút gọn ở giữa."""
+    stem = str(filename or "").replace("\\", "/").rsplit("/", 1)[-1]
+    stem = stem.rsplit(".", 1)[0] if "." in stem else stem
+    stem = stem.strip() or "ảnh nhãn"
+    return stem if len(stem) <= max_len else stem[: max_len - 13] + "…" + stem[-12:]
 
 
 def guess_product_name(ocr_text: str, max_len: int = 60, max_words: int = 8) -> str:
@@ -725,6 +755,233 @@ def validate_image(data: bytes, name: str = "") -> Tuple[Optional[Any], Optional
 # ---------------------------------------------------------------------------
 # Quyết định bước tiếp theo
 # ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# Câu hỏi nối tiếp ("chất đó có an toàn không?")
+# ---------------------------------------------------------------------------
+
+# từ chỉ trỏ tới đối tượng đã nói ở câu trước (văn bản đã bỏ dấu)
+_REFERENCE = re.compile(
+    r"\b(chat|phu gia|thanh phan|di nguyen|ma|loai|cac chat|nhung chat|cac phu gia)\s+"
+    r"(do|nay|kia|ay|tren|vua roi|vua noi|vua hoi|vua neu|o tren)\b"
+    r"|\b(no|chung|chung no)\b"
+    r"|\bcon\b.{0,40}\bthi sao\b|\bthe con\b|\bvay con\b"
+)
+
+
+def focus_from_qa(qa: dict | None) -> list[str]:
+    """Đối tượng câu hỏi vừa được trả lời nhắc tới (để hiểu câu nối tiếp): mã phụ gia + dị nguyên (từ khóa tiếng Việt)."""
+    if not qa:
+        return []
+    ents = qa.get("entities") or {}
+    terms = [str(c) for c in ents.get("additives") or [] if c]
+    try:
+        from modules.constraint_model import ALLERGEN_KEYWORDS
+    except Exception:
+        ALLERGEN_KEYWORDS = {}
+    for a in ents.get("allergens") or []:
+        words = ALLERGEN_KEYWORDS.get(a) or [a]
+        terms.append(str(words[0]))
+    return list(dict.fromkeys(terms))
+
+
+# nhóm chức năng trong câu hỏi (đã bỏ dấu) → category của phụ gia đã liên kết
+_CLASS_WORDS = (
+    (r"tao ngot|chat ngot", {"sweetener"}),
+    (r"bao quan", {"preservative"}),
+    (r"tao mau|pham mau|mau tong hop|mau tu nhien", {"color", "colour"}),
+    (r"nhu hoa", {"emulsifier"}),
+    (r"dieu vi|bot ngot", {"flavor_enhancer", "flavour_enhancer"}),
+    (r"on dinh", {"stabilizer", "stabiliser"}),
+    (r"lam day|lam dac", {"thickener"}),
+    (r"chong oxy hoa|chong oxi hoa", {"antioxidant"}),
+    (r"dieu chinh do acid|dieu chinh do axit|acid|axit", {"acidity_regulator"}),
+    (r"tao xop|nang no", {"raising_agent", "leavening_agent"}),
+)
+
+
+def focus_from_turn(qa, question, linked_results=None, answer="", limit=12) -> list[str]:
+    """Đối tượng mà một lượt hỏi–đáp thực sự nói tới (để hiểu câu nối tiếp "chất đó…"):
+    1) phụ gia/dị nguyên nêu trong câu hỏi; 2) nếu câu hỏi chỉ nêu nhóm ("chất tạo ngọt") → các mã trên nhãn thuộc
+    nhóm đó; 3) nếu vẫn không có → các mã INS/E mà câu trả lời nêu ra."""
+    terms = focus_from_qa(qa)
+    if terms:
+        return terms[:limit]
+    q = fold(question)
+    cats = set()
+    for pattern, c in _CLASS_WORDS:
+        if re.search(pattern, q):
+            cats |= c
+    if cats:
+        codes = [str((it.get("matched_entity") or {}).get("ins_code") or "") for it in (linked_results or [])
+                 if it.get("matched_entity") and str(it.get("category") or "").lower() in cats]
+        codes = [c for c in dict.fromkeys(codes) if c]
+        if codes:
+            return codes[:limit]
+    from modules.additive_linker import _EXPLICIT_CODE_RE
+    codes = [f"INS {m.group('code').strip()}" for m in _EXPLICIT_CODE_RE.finditer(str(answer or ""))]
+    return list(dict.fromkeys(codes))[:limit]
+
+
+def resolve_followup(question: str, last_focus: list[str] | None) -> tuple[str, list[str]]:
+    """Câu hỏi không nêu đối tượng nhưng chỉ trỏ tới câu trước ("chất đó", "nó", "còn … thì sao") → ghép đối tượng
+    của câu trước vào câu hỏi gửi cho pipeline. Câu hỏi tự đủ nghĩa (đã nêu phụ gia/dị nguyên) thì giữ nguyên.
+    Trả về (câu hỏi gửi pipeline, danh sách đối tượng đã ghép — rỗng nếu không ghép)."""
+    question = str(question or "")
+    if not question.strip() or not last_focus:
+        return question, []
+    if not _REFERENCE.search(fold(question)):
+        return question, []
+    try:
+        from modules.dynamic_qa import understand_question
+        plan = understand_question(question)
+        if plan.get("additives") or plan.get("unknown_additive_codes") or plan.get("allergens"):
+            return question, []
+    except Exception:
+        pass
+    terms = list(dict.fromkeys(last_focus))[:12]
+    return f"{question} (đối tượng ở câu hỏi trước: {', '.join(terms)})", terms
+
+
+# ---------------------------------------------------------------------------
+# Người dùng sửa thông tin nhãn ngay trong chat ("không có E621", "mã là E330 chứ không phải E33",
+# "thành phần đúng là: …") — không hiện danh sách thành phần, không bắt xác nhận; câu sửa chỉ làm hệ thống
+# phân tích lại câu hỏi gần nhất với thành phần đã sửa.
+# ---------------------------------------------------------------------------
+
+_CODE = r"(?:e|ins)\s*-?\s*\d{2,4}[a-z]?"   # nhận cả 2 chữ số: mã OCR đọc cụt (E33 thay vì E330)
+_CORR_REPLACE = (
+    re.compile(rf"\b(?:ma\s+)?(?:dung\s+)?la\s+(?P<new>{_CODE})\s*,?\s*(?:chu\s+)?khong\s+phai\s+(?:la\s+)?(?P<old>{_CODE})\b"),
+    re.compile(rf"\bkhong\s+phai\s+(?:la\s+)?(?P<old>{_CODE})\s*,?\s*(?:ma\s+)?(?:phai\s+)?la\s+(?P<new>{_CODE})\b"),
+    re.compile(rf"\b(?:sua|doi)\s+(?P<old>{_CODE})\s+thanh\s+(?P<new>{_CODE})\b"),
+    re.compile(rf"\b(?P<old>{_CODE})\s*,?\s*(?:phai la|dung ra la|that ra la|chinh xac la|dung la)\s+(?P<new>{_CODE})\b"),
+)
+_CORR_LIST = re.compile(
+    r"^\s*(?:(?:dung ra|that ra|thuc ra)\s+)?(?:danh sach\s+)?thanh phan\s+(?:dung|chinh xac|that|that su|tren nhan)"
+    r"(?:\s+(?:la|ghi|gom))?\s*:?\s*(?=\S)"
+)
+_CORR_REMOVE = re.compile(
+    r"^\s*(?:(?:nhan|san pham(?: nay)?|sp|no|thanh phan|tren nhan|trong thanh phan)\s+)?"
+    r"(?:(?:that ra|thuc ra|thuc te)\s+)?(?:khong (?:he )?(?:co|chua|ghi)|khong he chua)\s+(?P<items>.+?)"
+    r"\s*(?:(?:tren|trong)\s+(?:nhan|thanh phan|san pham))?\s*(?:dau|ca|nhe|nha|ma)?\s*[.!]*\s*$"
+)
+_CORR_MISREAD = re.compile(r"^\s*(?:he thong\s+|ban\s+)?(?:doc|nhan dien|bat)\s+(?:sai|nham)\s+(?:ma\s+|chu\s+)?(?P<items>.+?)\s*[.!]*\s*$")
+_CORR_NOT_LABEL = re.compile(r"\b(di ung|benh|toi|minh|tui|em|con toi|be nha)\b")   # khai báo bản thân, không phải sửa nhãn
+_CORR_FILLER = {"gi", "nao", "dau", "ca", "chat", "thanh phan", "ma"}
+
+
+def _canon_code(code_fold: str) -> str:
+    m = re.search(r"(\d{2,4}[a-z]?)", code_fold)
+    return f"E{m.group(1)}" if m else code_fold.upper()
+
+
+def _correction_items(sentence, folded, idx, m):
+    items = []
+    start = m.start("items")
+    for part in re.finditer(r"[^,;/]+", folded[start:m.end("items")]):
+        for sub in re.split(r"\s+(?:va|hoac|cung nhu)\s+", part.group(0)):
+            s = sub.strip()
+            if not s or s in _CORR_FILLER:
+                continue
+            off = start + part.start() + part.group(0).find(s)
+            orig = _orig_slice(sentence, idx, off, off + len(s)).strip(" .!")
+            items.append(_canon_code(s) if re.fullmatch(_CODE, s) else orig)
+    return items
+
+
+def detect_label_correction(text: str) -> Tuple[Optional[Dict[str, Any]], str]:
+    """Tìm câu SỬA thông tin nhãn trong tin nhắn. Trả về (correction | None, phần còn lại của tin nhắn).
+
+    correction = {"remove": [thành phần/mã không có trên nhãn], "replace": [(mã cũ, mã mới)], "ingredients": "…"}.
+    Câu hỏi ("không có sữa phải không?") và câu khai báo bản thân ("tôi không có dị ứng") KHÔNG phải câu sửa.
+    """
+    raw = unicodedata.normalize("NFC", str(text or "")).strip()
+    folded, idx = _fold_map(raw)
+    m = _CORR_LIST.match(folded)
+    if m:
+        body = _orig_slice(raw, idx, m.end(), len(folded)).strip()
+        if body.count(",") >= 1:
+            return {"remove": [], "replace": [], "ingredients": body}, ""
+    corr = {"remove": [], "replace": [], "ingredients": ""}
+    rest = []
+    for sent in _split_sentences(raw):
+        sf, sidx = _fold_map(sent)
+        found = False
+        for pat in _CORR_REPLACE:
+            for rm in pat.finditer(sf):
+                corr["replace"].append((_canon_code(rm.group("old")), _canon_code(rm.group("new"))))
+                found = True
+        if not found and not _is_question(sf) and not _CORR_NOT_LABEL.search(sf):
+            rm = _CORR_REMOVE.match(sf) or _CORR_MISREAD.match(sf)
+            if rm:
+                items = _correction_items(sent, sf, sidx, rm)
+                if items:
+                    corr["remove"].extend(items)
+                    found = True
+        if not found:
+            rest.append(sent)
+    if not corr["remove"] and not corr["replace"]:
+        return None, raw
+    corr["remove"] = list(dict.fromkeys(corr["remove"]))
+    corr["replace"] = list(dict.fromkeys(corr["replace"]))
+    return corr, " ".join(rest)
+
+
+def _codes_of(text_fold: str) -> set:
+    codes = {m.group(1) for m in re.finditer(r"\b(?:e|ins)\s*-?\s*(\d{2,4}[a-z]?)\b", text_fold)}
+    codes |= {m.group(1) for m in re.finditer(r"\((?:[^()]*?[,;]\s*)?(\d{3,4}[a-z]?)(?=\s*[,;)])", text_fold)}
+    return codes
+
+
+def _code_pattern(code: str) -> re.Pattern:
+    digits = re.escape(_canon_code(fold(code))[1:])
+    return re.compile(rf"(?i)(?:\b(?:E|INS)\s*-?\s*{digits}|(?<![\w.,]){digits})(?!\w)")
+
+
+def apply_label_correction(mentions, correction, parse_fn=None):
+    """Áp câu sửa lên danh sách thành phần đã đọc. Trả về (thành phần mới, các việc đã làm, mục không tìm thấy)."""
+    mentions = [dict(m) for m in (mentions or [])]
+    done, missing = [], []
+    if correction.get("ingredients") and parse_fn is not None:
+        body = correction["ingredients"]
+        new = parse_fn(body if fold(body).startswith("thanh phan") else f"Thành phần: {body}",
+                       include_allergen_statements=True)
+        if new:
+            return new, [f"dùng danh sách thành phần bạn gửi ({len(new)} thành phần)"], []
+        missing.append("danh sách thành phần bạn gửi (không tách được thành phần nào)")
+    for old, new_code in correction.get("replace", []):
+        pat, hit = _code_pattern(old), False
+        for m in mentions:
+            if pat.search(m.get("raw_mention", "")):
+                m["raw_mention"] = pat.sub(new_code, m["raw_mention"])
+                hit = True
+        (done.append(f"đổi **{old} → {new_code}**") if hit else missing.append(old))
+    for term in correction.get("remove", []):
+        tf = fold(term)
+        is_code = bool(re.fullmatch(r"e\d{2,4}[a-z]?", tf))
+        kept, hit = [], False
+        for m in mentions:
+            mf = fold(m.get("raw_mention", ""))
+            if is_code:
+                codes = _codes_of(mf)
+                if tf[1:] in codes:
+                    hit = True
+                    if len(codes) > 1:   # nhóm nhiều mã → chỉ bỏ mã đó
+                        text = _code_pattern(term).sub("", m["raw_mention"])
+                        text = re.sub(r"\(\s*[,;]\s*", "(", text)
+                        text = re.sub(r"\s*[,;]\s*\)", ")", text)
+                        text = re.sub(r"([,;])\s*[,;]", r"\1", text)
+                        m["raw_mention"] = re.sub(r"\s{2,}", " ", text).strip()
+                        kept.append(m)
+                    continue
+            elif re.search(rf"(?<!\w){re.escape(tf)}(?!\w)", mf):
+                hit = True
+                continue
+            kept.append(m)
+        mentions = kept
+        (done.append(f"bỏ **{term}**") if hit else missing.append(term))
+    return mentions, done, missing
 
 
 def next_action(has_image: bool, question: str, out_of_scope: Optional[List[str]] = None,

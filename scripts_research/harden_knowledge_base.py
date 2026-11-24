@@ -563,7 +563,40 @@ def write_ingredient_catalog(groups):
     return records
 
 
-def main():
+def verified_data_reasons(additives):
+    """Những gì trong additives_standard.json đã được kiểm nguồn và SẼ BỊ GHI ĐÈ nếu chạy script này.
+
+    enrich_additives() đặt lại health_considerations = [], đưa regulatory_claim / codex_claim về trạng thái pending và
+    ghi đè các trường dẫn xuất khác; mọi kết quả rà soát nguồn trước đó (ADI, TT 24/2019, Codex GSFA, lưu ý sức khỏe) sẽ mất."""
+    reasons = []
+    counts = {
+        "health_considerations đã kiểm nguồn": sum(
+            1 for a in additives for h in a.get("health_considerations") or [] if h.get("verification_status") == "source_checked"),
+        "adi_assessment đã kiểm nguồn": sum(
+            1 for a in additives if (a.get("adi_assessment") or {}).get("verification_status") == "source_checked"),
+        "codex_claim đã đối chiếu GSFA": sum(
+            1 for a in additives if str((a.get("codex_claim") or {}).get("verification_status", "")).startswith("source_checked")),
+        "regulatory_claim đã kiểm nguồn": sum(
+            1 for a in additives if str((a.get("regulatory_claim") or {}).get("verification_status", "")).startswith("source_checked")),
+    }
+    for label, n in counts.items():
+        if n:
+            reasons.append(f"{n} {label}")
+    return reasons
+
+
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    force = "--force" in argv
+    kb_path = os.path.join(KB_DIR, "additives_standard.json")
+    if os.path.isfile(kb_path):
+        reasons = verified_data_reasons(_read_json(kb_path))
+        if reasons and not force:
+            print("DỪNG: chạy script này sẽ GHI ĐÈ dữ liệu đã kiểm nguồn trong additives_standard.json "
+                  "(" + "; ".join(reasons) + ").\n"
+                  "Script này chỉ dùng để dựng KB lần đầu. Nếu thật sự muốn ghi đè, sao lưu file rồi chạy lại với --force.",
+                  file=sys.stderr)
+            return 2
     additives = enrich_additives()
     allergens = enrich_allergens()
     ingredients = write_ingredient_catalog(allergens)
@@ -577,4 +610,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

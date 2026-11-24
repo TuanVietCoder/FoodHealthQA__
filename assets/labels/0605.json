@@ -1,0 +1,136 @@
+{
+  "product_name": "Sữa dinh dưỡng ngũ cốc - yến mạch Vinamilk ADM",
+  "ingredient": [
+    "Sữa (93,6%) (nước, sữa bột, chất béo sữa, sữa tươi)",
+    "Đường",
+    "Dầu thực vật",
+    "Ngũ cốc (9,8 g/l) (bột yến mạch, chiết xuất lúa mạch, bột chiết xuất gạo rang)",
+    "Natri ascorbat (Vitamin C)",
+    "Niacin (Vitamin B3)",
+    "Vitamin B1",
+    "Vitamin B5",
+    "Vitamin B6",
+    "Vitamin A",
+    "Acid folic (Vitamin B9)",
+    "Vitamin K1",
+    "Biotin (Vitamin B7)",
+    "Vitamin D3",
+    "Vitamin B12",
+    "Dầu cá giàu DHA",
+    "Muối ăn",
+    "Kẽm sulfat (khoáng chất)",
+    "Kali iodid (khoáng chất)",
+    "Natri selenit (khoáng chất)"
+  ],
+  "additive": [
+    "Chất ổn định (471) - Mono- và diglycerid của các acid béo",
+    "Chất ổn định (460(i)) - Cellulose vi tinh thể",
+    "Chất ổn định (407) - Carrageenan",
+    "Chất ổn định (466) - Natri carboxymethyl cellulose",
+    "Hương liệu tổng hợp dùng cho thực phẩm",
+    "Hỗn hợp tocopherol",
+    "Ascorbyl palmitat"
+  ],
+  "warning": [
+    "Có chứa sữa, gluten, đậu nành, dầu cá",
+    "Sản phẩm bổ sung 3,1 g/l bột yến mạch và hàm lượng vitamin, khoáng chất không thấp hơn 80% giá trị ghi trên nhãn"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "75,2 kcal"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "2,85 g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "3,0 g "
+    },
+    {
+      "name": "DHA (Docosahexaenoic acid)",
+      "value": "3,0 mg"
+    },
+    {
+      "name": "Hydrat cacbon",
+      "value": "9,2 g"
+    },
+    {
+      "name": "Lysin",
+      "value": "250 mg"
+    },
+    {
+      "name": "Calci",
+      "value": "100 mg"
+    },
+    {
+      "name": "Phospho",
+      "value": "80 mg"
+    },
+    {
+      "name": "Magnesi",
+      "value": "9 mg"
+    },
+    {
+      "name": "Iod",
+      "value": "13 μg"
+    },
+    {
+      "name": "Kẽm",
+      "value": "680 μg"
+    },
+    {
+      "name": "Selen",
+      "value": "2,8 μg"
+    },
+    {
+      "name": "Vitamin A",
+      "value": "150 IU"
+    },
+    {
+      "name": "Vitamin D3",
+      "value": "70 IU"
+    },
+    {
+      "name": "Vitamin K1",
+      "value": "2,3 μg"
+    },
+    {
+      "name": "Vitamin B1",
+      "value": "150 μg"
+    },
+    {
+      "name": "Vitamin B2",
+      "value": "130 μg"
+    },
+    {
+      "name": "Niacin",
+      "value": "1,2 mg"
+    },
+    {
+      "name": "Vitamin B5",
+      "value": "300 μg"
+    },
+    {
+      "name": "Vitamin B6",
+      "value": "100 μg"
+    },
+    {
+      "name": "Vitamin B12",
+      "value": "0,2 μg"
+    },
+    {
+      "name": "Acid folic",
+      "value": "17 μg"
+    },
+    {
+      "name": "Biotin",
+      "value": "2,0 μg"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": null,
+  "mfg_date": null,
+  "expiry_date": null
+}

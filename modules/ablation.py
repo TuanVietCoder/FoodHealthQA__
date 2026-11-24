@@ -97,19 +97,37 @@ def run_topk_ablation(records, additives, top_k_values=(1, 3, 5, 10), model_name
     return run_retrieval_ablation(records, additives, top_k_values=top_k_values, models={model_name: alpha})
 
 
+_DANGER = {"UNSAFE", "CRITICAL_ALERT", "WARNING"}
+
+
+def _gold_label(row):
+    return str(row.get("gold_safety_label") or "").upper().strip()
+
+
+def _rule_label(linked_results, mentions, persona, question, perception_confidence):
+    """Nhãn 5 lớp của tầng luật, quy đổi giống hệt khi chấm A/B/C (guardrail_status_to_safety_label)."""
+    from modules.pipeline import evaluate_safety_and_guardrail, guardrail_status_to_safety_label
+    evaluation = evaluate_safety_and_guardrail(
+        linked_results, persona, question, avg_ocr_conf=perception_confidence, all_mentions=mentions,
+    )
+    return evaluation, guardrail_status_to_safety_label(evaluation.get("status"))
+
+
 def run_knowledge_source_ablation(benchmark_rows, kb_additives, personas_dict,
                                   hazards_list, fndds_list, off_products,
                                   excluded_sources=None):
     """
-    Ablation loại bỏ từng nguồn tri thức (Leave-One-Out).
-    excluded_sources: tập hợp các nguồn muốn tắt, ví dụ: {'food_hazards', 'fndds_nutrition'}
+    Ablation bỏ từng nguồn tri thức (Leave-One-Out) trên TẦNG LUẬT với văn bản nhãn chuẩn.
+
+    Sửa so với bản cũ: độ tin cậy nhận diện = 1,0 (đầu vào là văn bản chuẩn, không có OCR — bản cũ gán cứng 0,99);
+    chấm đủ 5 nhãn như đánh giá chính (bản cũ quy CAUTION → SAFE và chỉ chấm SAFE/UNSAFE); liên kết nhiều mã/cụm.
+    Ablation có LLM (câu trả lời, trích dẫn) phải chạy bằng generate_predictions.py với nguồn tương ứng bị tắt.
     """
     from modules.pipeline import (
-        foodontorag_entity_linking,
-        evaluate_safety_and_guardrail,
         check_food_hazards,
         evaluate_nutritional_risk,
         cross_reference_openfoodfacts,
+        link_all_mentions,
     )
     from modules.ocr_extractor import parse_ingredients_from_ocr
 
@@ -122,54 +140,37 @@ def run_knowledge_source_ablation(benchmark_rows, kb_additives, personas_dict,
     active_off = [] if "openfoodfacts" in excluded else off_products
 
     for row in benchmark_rows:
-        persona_id = row.get("persona_id", "USER_CLINICAL_007")
-        persona = personas_dict.get(persona_id, personas_dict.get("USER_CLINICAL_007", {}))
+        persona = personas_dict.get(row.get("persona_id"), {}) or {}
         ingredients_text = row.get("product_ingredients", "")
         product_name = row.get("product_name", "")
         question = row.get("question", "")
         if not ingredients_text.strip():
             continue
 
-        full_text = f"Thành phần: {ingredients_text}"
-        mentions = parse_ingredients_from_ocr(full_text)
-
-        linked_results = [foodontorag_entity_linking(m, active_additives) for m in mentions]
-        evaluation = evaluate_safety_and_guardrail(
-            linked_results, persona, question, avg_ocr_conf=0.99, all_mentions=mentions,
-        )
+        mentions = parse_ingredients_from_ocr(f"Thành phần: {ingredients_text}", include_allergen_statements=True)
+        linked_results = link_all_mentions(mentions, active_additives)
+        evaluation, pred_label = _rule_label(linked_results, mentions, persona, question, 1.0)
         detected_hazards = check_food_hazards(product_name, mentions, active_hazards)
-        matched_fndds, nutri_warnings, _ = evaluate_nutritional_risk(
-            product_name, active_fndds, persona,
-        )
-        off_cross_ref = cross_reference_openfoodfacts(product_name, mentions, active_off)
+        matched_fndds, nutri_warnings, _ = evaluate_nutritional_risk(product_name, active_fndds, persona)
+        cross_reference_openfoodfacts(product_name, mentions, active_off)
 
-        status = evaluation.get("status", "UNKNOWN")
-        gold_safety = row.get("gold_safety_label", "").upper().strip()
-        status_map = {
-            "CRITICAL_ALERT": "UNSAFE",
-            "WARNING": "UNSAFE",
-            "CAUTION": "SAFE",
-            "SAFE": "SAFE",
-            "N/A": "UNKNOWN",
-        }
-        pred_label = status_map.get(status, "UNKNOWN")
-        safety_match = (pred_label == gold_safety) if gold_safety in ("SAFE", "UNSAFE") else None
-
+        gold = _gold_label(row)
         results.append({
             "id": row.get("id"),
             "domain": row.get("domain"),
-            "status": status,
-            "safety_match": safety_match,
+            "status": evaluation.get("status"),
+            "predicted_label": pred_label,
+            "gold_label": gold,
+            "safety_match": (pred_label == gold) if gold else None,
             "hazards_detected_count": len(detected_hazards),
             "nutrition_matched": bool(matched_fndds),
         })
 
     valid_matches = [r["safety_match"] for r in results if r["safety_match"] is not None]
-    acc = sum(valid_matches) / len(valid_matches) if valid_matches else 0.0
     return {
-        "excluded_sources": list(excluded),
+        "excluded_sources": sorted(excluded),
         "total_evaluated": len(results),
-        "safety_accuracy": acc,
+        "safety_accuracy": (sum(valid_matches) / len(valid_matches)) if valid_matches else None,
         "detail_records": results,
     }
 
@@ -178,30 +179,30 @@ def run_error_propagation_study(benchmark_rows, kb_additives, personas_dict,
                                 hazards_list, fndds_list, off_products,
                                 noise_level=0.15):
     """
-    Đo lường Lan truyền Sai số: So sánh Cấu hình B (Ground Truth) vs Cấu hình C (OCR).
-    - Cấu hình B: đầu vào là Ground Truth `product_ingredients` chuẩn.
-    - Cấu hình C: đầu vào có nhiễu OCR (ký tự bị méo, thiếu dấu, nhầm số INS).
+    THỬ ĐỘ BỀN VỚI NHIỄU NHÂN TẠO (synthetic noise robustness) — KHÔNG phải lan truyền lỗi OCR thật.
+
+    Văn bản nhãn chuẩn bị làm nhiễu ngẫu nhiên (bỏ dấu, cắt ký tự, "500"→"50O"), rồi so nhãn của tầng luật với bản
+    không nhiễu. Lan truyền lỗi OCR THẬT = so cấu hình B và C trong đánh giá chính (generate_predictions.py →
+    run_evaluation.py) và scripts_research/calibrate_confidence.py.
+
+    Sửa so với bản cũ: cả hai nhánh dùng độ tin cậy 1,0 (nhiễu nhân tạo không có điểm OCR — bản cũ gán cứng 0,88 làm
+    lẫn hiệu ứng ngưỡng vào kết quả); chấm 5 nhãn; false-safe tính trên đúng các dòng đã chấm (bản cũ ghép kết quả
+    với danh sách gốc nên lệch dòng khi có dòng bị bỏ qua); liên kết nhiều mã/cụm.
     """
     import random
-    from modules.pipeline import (
-        foodontorag_entity_linking,
-        evaluate_safety_and_guardrail,
-    )
+    from modules.pipeline import link_all_mentions
     from modules.ocr_extractor import parse_ingredients_from_ocr, post_process_ocr_spelling
 
     rng = random.Random(42)
-    b_records = []
-    c_records = []
 
-    def _simulate_ocr_noise(text, p=0.15):
-        tokens = text.split()
+    def _simulate_noise(text, p):
         noisy = []
-        for token in tokens:
+        for token in text.split():
             if rng.random() < p:
-                sub_choice = rng.choice(["drop_accent", "ins_confuse", "typo"])
-                if sub_choice == "ins_confuse" and "500" in token:
+                choice = rng.choice(["drop_accent", "ins_confuse", "typo"])
+                if choice == "ins_confuse" and "500" in token:
                     noisy.append(token.replace("500", "50O"))
-                elif sub_choice == "drop_accent":
+                elif choice == "drop_accent":
                     noisy.append("".join(c for c in unicodedata.normalize("NFD", token) if not unicodedata.combining(c)))
                 else:
                     noisy.append(token[:-1] if len(token) > 2 else token)
@@ -209,71 +210,63 @@ def run_error_propagation_study(benchmark_rows, kb_additives, personas_dict,
                 noisy.append(token)
         return " ".join(noisy)
 
+    clean_records, noisy_records = [], []
     for row in benchmark_rows:
-        persona_id = row.get("persona_id", "USER_CLINICAL_007")
-        persona = personas_dict.get(persona_id, personas_dict.get("USER_CLINICAL_007", {}))
+        persona = personas_dict.get(row.get("persona_id"), {}) or {}
         gt_text = row.get("product_ingredients", "")
         if not gt_text.strip():
             continue
+        question = row.get("question", "")
+        gold = _gold_label(row)
 
-        # Cấu hình B: Ground Truth
-        b_mentions = parse_ingredients_from_ocr(f"Thành phần: {gt_text}")
-        b_linked = [foodontorag_entity_linking(m, kb_additives) for m in b_mentions]
-        b_eval = evaluate_safety_and_guardrail(b_linked, persona, row.get("question", ""), avg_ocr_conf=1.0, all_mentions=b_mentions)
+        b_mentions = parse_ingredients_from_ocr(f"Thành phần: {gt_text}", include_allergen_statements=True)
+        b_linked = link_all_mentions(b_mentions, kb_additives)
+        b_eval, b_pred = _rule_label(b_linked, b_mentions, persona, question, 1.0)
 
-        # Cấu hình C: Noisy OCR -> Post-OCR Correction -> Linking -> Guardrail
-        ocr_noisy = _simulate_ocr_noise(gt_text, p=noise_level)
-        corrected_ocr = post_process_ocr_spelling(ocr_noisy)
-        c_text = corrected_ocr["final"] if isinstance(corrected_ocr, dict) else str(corrected_ocr)
-        c_mentions = parse_ingredients_from_ocr(f"Thành phần: {c_text}")
-        c_linked = [foodontorag_entity_linking(m, kb_additives) for m in c_mentions]
-        c_eval = evaluate_safety_and_guardrail(c_linked, persona, row.get("question", ""), avg_ocr_conf=0.88, all_mentions=c_mentions)
+        corrected = post_process_ocr_spelling(_simulate_noise(gt_text, noise_level))
+        c_text = corrected["final"] if isinstance(corrected, dict) else str(corrected)
+        c_mentions = parse_ingredients_from_ocr(f"Thành phần: {c_text}", include_allergen_statements=True)
+        c_linked = link_all_mentions(c_mentions, kb_additives)
+        c_eval, c_pred = _rule_label(c_linked, c_mentions, persona, question, 1.0)
 
-        gold_label = row.get("gold_safety_label", "SAFE").upper().strip()
-        status_map = {"CRITICAL_ALERT": "UNSAFE", "WARNING": "UNSAFE", "CAUTION": "SAFE", "SAFE": "SAFE", "N/A": "UNKNOWN"}
+        for store, pred, mentions, linked, ev in (
+            (clean_records, b_pred, b_mentions, b_linked, b_eval),
+            (noisy_records, c_pred, c_mentions, c_linked, c_eval),
+        ):
+            store.append({
+                "id": row.get("id"),
+                "gold_label": gold,
+                "predicted_label": pred,
+                "mentions_count": len(mentions),
+                "linked_count": sum(1 for x in linked if x.get("matched_entity")),
+                "safety_correct": (pred == gold) if gold else None,
+                "status": ev.get("status"),
+            })
 
-        b_pred = status_map.get(b_eval.get("status"), "UNKNOWN")
-        c_pred = status_map.get(c_eval.get("status"), "UNKNOWN")
+    def _acc(records):
+        vals = [r["safety_correct"] for r in records if r["safety_correct"] is not None]
+        return sum(vals) / len(vals) if vals else None
 
-        b_records.append({
-            "id": row.get("id"),
-            "mentions_count": len(b_mentions),
-            "linked_count": sum(1 for x in b_linked if x.get("matched_entity")),
-            "safety_correct": (b_pred == gold_label) if gold_label in ("SAFE", "UNSAFE") else None,
-            "status": b_eval.get("status"),
-        })
-        c_records.append({
-            "id": row.get("id"),
-            "mentions_count": len(c_mentions),
-            "linked_count": sum(1 for x in c_linked if x.get("matched_entity")),
-            "safety_correct": (c_pred == gold_label) if gold_label in ("SAFE", "UNSAFE") else None,
-            "status": c_eval.get("status"),
-        })
+    def _false_safe(records):
+        danger = [r for r in records if r["gold_label"] in _DANGER]
+        return (sum(r["predicted_label"] == "SAFE" for r in danger) / len(danger)) if danger else None
 
-    b_acc_list = [r["safety_correct"] for r in b_records if r["safety_correct"] is not None]
-    c_acc_list = [r["safety_correct"] for r in c_records if r["safety_correct"] is not None]
+    def _avg(records, key):
+        return sum(r[key] for r in records) / len(records) if records else None
 
-    b_acc = sum(b_acc_list) / len(b_acc_list) if b_acc_list else 0.0
-    c_acc = sum(c_acc_list) / len(c_acc_list) if c_acc_list else 0.0
-
-    b_linked_avg = sum(r["linked_count"] for r in b_records) / max(len(b_records), 1)
-    c_linked_avg = sum(r["linked_count"] for r in c_records) / max(len(c_records), 1)
-
-    # Đo False Safe Rate (nguy hiểm nhất trong y tế): Gold=UNSAFE nhưng Cấu hình C dự đoán SAFE
-    false_safe_count = sum(
-        1 for r_c, r_gt in zip(c_records, benchmark_rows)
-        if r_gt.get("gold_safety_label", "").upper().strip() == "UNSAFE" and r_c["status"] in ("SAFE", "CAUTION")
-    )
-    total_unsafe_gold = sum(1 for r_gt in benchmark_rows if r_gt.get("gold_safety_label", "").upper().strip() == "UNSAFE")
-    false_safe_rate = false_safe_count / total_unsafe_gold if total_unsafe_gold > 0 else 0.0
-
+    b_acc, c_acc = _acc(clean_records), _acc(noisy_records)
+    b_link, c_link = _avg(clean_records, "linked_count"), _avg(noisy_records, "linked_count")
     return {
-        "samples_evaluated": len(b_records),
+        "study": "synthetic_noise_robustness",
+        "note": "Nhiễu nhân tạo trên văn bản chuẩn; không phải lỗi OCR thật.",
+        "noise_level": noise_level,
+        "samples_evaluated": len(clean_records),
         "config_b_safety_acc": b_acc,
         "config_c_safety_acc": c_acc,
-        "delta_safety_acc": c_acc - b_acc,
-        "config_b_avg_linked_entities": b_linked_avg,
-        "config_c_avg_linked_entities": c_linked_avg,
-        "delta_linked_entities": c_linked_avg - b_linked_avg,
-        "false_safe_rate_in_config_c": false_safe_rate,
+        "delta_safety_acc": (c_acc - b_acc) if (b_acc is not None and c_acc is not None) else None,
+        "config_b_avg_linked_entities": b_link,
+        "config_c_avg_linked_entities": c_link,
+        "delta_linked_entities": (c_link - b_link) if (b_link is not None and c_link is not None) else None,
+        "false_safe_rate_in_config_c": _false_safe(noisy_records),
+        "false_safe_rate_in_config_b": _false_safe(clean_records),
     }

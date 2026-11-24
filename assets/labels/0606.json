@@ -1,0 +1,77 @@
+{
+  "product_name": "Sữa hạt Vinamilk 9 loại hạt ít đường",
+  "ingredient": [
+    "Sữa hạt (94,6%) (sữa chiết từ hạnh nhân nghiền, sữa chiết từ đậu nành nguyên hạt, nước, dầu thực vật, đậu phộng nghiền, chiết xuất đậu đỏ, bột yến mạch, chiết xuất hạt óc chó, chiết xuất đậu đen, chiết xuất đậu xanh, chiết xuất đậu trắng)",
+    "Đường (4,5%)",
+    "Khoáng chất (calci carbonat)",
+    "Muối ăn",
+    "Vitamin E",
+    "Vitamin B3 (Niacin)",
+    "Vitamin A",
+    "Vitamin D3"
+  ],
+  "additive": [
+    "Chất nhũ hóa (471) - Mono- và diglycerid của các acid béo (nguồn gốc thực vật)",
+    "Chất nhũ hóa (460(i)) - Cellulose vi tinh thể (nguồn gốc thực vật)",
+    "Chất nhũ hóa (466) - Natri carboxymethyl cellulose (nguồn gốc thực vật)",
+    "Hương liệu tổng hợp dùng cho thực phẩm",
+    "Chất điều chỉnh độ acid (500(ii)) - Natri hydro carbonat"
+  ],
+  "warning": [
+    "Có chứa đậu nành, đậu phộng (lạc), gluten, hạt óc chó, hạnh nhân"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "63,6 kcal"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "1,1 g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "4,4 g"
+    },
+    {
+      "name": "Carbohydrat",
+      "value": "4,9 g"
+    },
+    {
+      "name": "Đường tổng số",
+      "value": "4,7 g"
+    },
+    {
+      "name": "Calci",
+      "value": "60 mg"
+    },
+    {
+      "name": "Natri",
+      "value": "32 mg"
+    },
+    {
+      "name": "Vitamin A",
+      "value": "260 IU"
+    },
+    {
+      "name": "Vitamin D3",
+      "value": "60 IU"
+    },
+    {
+      "name": "Vitamin E",
+      "value": "1,0 mg"
+    },
+    {
+      "name": "Niacin (Vitamin B3)",
+      "value": "1,0 mg"
+    },
+    {
+      "name": "Acid Alpha-Linolenic (Omega 3)",
+      "value": "150 mg"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": "100ml",
+  "mfg_date": "Xem trên bao bì",
+  "expiry_date": "Xem trên bao bì"
+}

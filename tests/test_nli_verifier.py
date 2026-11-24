@@ -49,16 +49,26 @@ class NLIVerifierTests(unittest.TestCase):
             "Chất này được phép sử dụng theo Thông tư 24 với liều dùng cho phép."
         )
         res_clean = verify_answer_faithfulness(clean_answer, evidence, trigger_only=False)
-        self.assertIn(res_clean["status"], {"VERIFIED_SAFE", "UNVERIFIED"})
-        self.assertIn("ĐÃ XÁC THỰC", res_clean["badge_html"])
+        self.assertIn(res_clean["status"], {"ALL_SUPPORTED", "PARTIALLY_SUPPORTED", "UNSUPPORTED"})
+        # không có LLM → chỉ là đối chiếu từ khóa, không được gọi là "xác thực"
+        self.assertEqual(res_clean["method"], "keyword_overlap")
+        self.assertIn("Đối chiếu từ khóa", res_clean["badge_html"])
+        self.assertNotIn("XÁC THỰC", res_clean["badge_html"])
+        self.assertTrue(all(c["confidence"] is None for c in res_clean["claims"]))
 
         contradict_answer = (
             "Chất Aspartame INS 951 bị cấm hoàn toàn theo luật Việt Nam và không được phép dùng [VN_TT24_2019]."
         )
         res_contra = verify_answer_faithfulness(contradict_answer, evidence, trigger_only=False)
         self.assertEqual(res_contra["status"], "CONTRADICTION_DETECTED")
-        self.assertIn("CẢNH BÁO XUNG ĐỘT", res_contra["badge_html"])
+        self.assertIn("mâu thuẫn", res_contra["badge_html"])
+
+    def test_no_claims_is_not_applicable(self):
+        res = verify_answer_faithfulness("SAFETY_LABEL: SAFE", "bằng chứng", trigger_only=False)
+        self.assertEqual(res["status"], "NO_CLAIMS")
+        self.assertIsNone(res["faithfulness_score"])
 
 
 if __name__ == "__main__":
     unittest.main()
+

@@ -1,0 +1,54 @@
+{
+  "product_name": "Sữa chua có đường Vinamilk Star",
+  "ingredient": [
+    "Sữa (87,6%) (nước, sữa bột, whey bột, chất béo sữa, sữa tươi)",
+    "Đường (10%)",
+    "Dầu thực vật",
+    "Gelatin thực phẩm",
+    "Men Streptococcus thermophilus",
+    "Men Lactobacillus bulgaricus",
+    "Vitamin D3",
+    "Vitamin A"
+  ],
+  "additive": [
+    "Chất ổn định (1422) - Tinh bột biến tính (Acetylated distarch adipate)",
+    "Chất ổn định (471) - Mono- và diglycerid của các acid béo"
+  ],
+  "warning": [
+    "Có chứa sữa / Contains milk"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "97,7 kcal"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "3,5 g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "2,5 g"
+    },
+    {
+      "name": "Hydrat cacbon",
+      "value": "15,3 g"
+    },
+    {
+      "name": "Calci",
+      "value": "110 mg"
+    },
+    {
+      "name": "Vitamin A",
+      "value": "60 IU"
+    },
+    {
+      "name": "Vitamin D3",
+      "value": "25 IU"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": "100g",
+  "mfg_date": "Xem dưới đáy hộp",
+  "expiry_date": "Xem dưới đáy hộp"
+}

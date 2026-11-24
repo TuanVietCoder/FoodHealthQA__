@@ -60,7 +60,7 @@ def parse_page2(text: str) -> dict:
     if m:
         raw = m.group(1)
     else:
-        m = re.search(r"INS (.*?) (?:COE number|FEMA number|JECFA number|CAS number|Functional Class)", text)
+        m = re.search(r"\bINS (.*?) (?:COE number|FEMA number|JECFA number|CAS number|Functional Class)", text)
         raw = m.group(1) if m else ""
     ins_codes = [fj.norm(x) for x in re.split(r"[,;/]| and ", raw) if x.strip()]
     evals = re.findall(r"Evaluation year: (\d{4}) (?:Comments: .*?)?(?:ADI: (.*?) )?(?=Comments:|Meeting:)", text)

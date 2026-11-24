@@ -1,0 +1,218 @@
+{
+  "product_name": "Sữa Enfamil Nutramigen LGG (cho bé 0-12 tháng) 400g",
+  "ingredient": [
+    "Siro mật bắp",
+    "Dầu thực vật",
+    "Đạm thủy phân toàn phần",
+    "Tinh bột bắp",
+    "Calci phosphat (nguồn bổ sung khoáng)",
+    "Calci citrat (nguồn bổ sung khoáng)",
+    "Kali citrat (nguồn bổ sung khoáng)",
+    "Kali clorid (nguồn bổ sung khoáng)",
+    "Natri citrat (nguồn bổ sung khoáng)",
+    "Magnesi oxyd (nguồn bổ sung khoáng)",
+    "Sắt sulphat",
+    "Kẽm sulphat",
+    "Đồng sulphat",
+    "Mangan sulphat",
+    "Natri iodid",
+    "Natri molybdat",
+    "Crôm clorid",
+    "Natri selenit",
+    "Dầu đơn bào từ Mortierella alpina và Schizochytrium sp. (nguồn gốc của acid arachidonic (ARA) và acid docosahexaenoic (DHA))",
+    "Natri ascorbat (Vitamin C)",
+    "Cholin clorid",
+    "Alpha-tocopheryl acetat (Vitamin E)",
+    "Retinyl palmitat (Vitamin A)",
+    "Phytonadion (Vitamin K1)",
+    "Acid ascorbic (Vitamin C)",
+    "Niacinamid (Vitamin B3)",
+    "Cholecalciferol (Vitamin D3)",
+    "Calci pantothenat (Vitamin B5)",
+    "Biotin (Vitamin B7)",
+    "Cyanocobalamin (Vitamin B12)",
+    "Thiamin hydroclorid (Vitamin B1)",
+    "Riboflavin (Vitamin B2)",
+    "Pyridoxin hydroclorid (Vitamin B6)",
+    "Acid folic (Vitamin B9)",
+    "L-cystin",
+    "Inositol",
+    "L-tyrosin",
+    "L-tryptophan",
+    "Taurin",
+    "Lactobacillus rhamnosus GG (LGG)",
+    "L-carnitin"
+  ],
+  "additive": [],
+  "warning": [],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "500 kcal / 100g | 68 kcal / 100ml"
+    },
+    {
+      "name": "Đạm",
+      "value": "14 g / 100g | 1,91 g / 100ml"
+    },
+    {
+      "name": "Chất béo",
+      "value": "25 g / 100g | 3,4 g / 100ml"
+    },
+    {
+      "name": "Carbohydrat",
+      "value": "55 g / 100g | 7,5 g / 100ml"
+    },
+    {
+      "name": "Lactose",
+      "value": "0 g / 100g | 0 g / 100ml"
+    },
+    {
+      "name": "Acid Linoleic",
+      "value": "4500 mg / 100g | 610 mg / 100ml"
+    },
+    {
+      "name": "Acid α-Linolenic",
+      "value": "340 mg / 100g | 46 mg / 100ml"
+    },
+    {
+      "name": "Acid Arachidonic (ARA)",
+      "value": "170 mg / 100g | 23 mg / 100ml"
+    },
+    {
+      "name": "Acid Docosahexaenoic (DHA)",
+      "value": "85 mg / 100g | 11,6 mg / 100ml"
+    },
+    {
+      "name": "Vitamin A",
+      "value": "1500 IU / 100g | 200 IU / 100ml"
+    },
+    {
+      "name": "Vitamin D",
+      "value": "300 IU / 100g | 41 IU / 100ml"
+    },
+    {
+      "name": "Vitamin E",
+      "value": "10 IU / 100g | 1,36 IU / 100ml"
+    },
+    {
+      "name": "Vitamin K",
+      "value": "65 mcg / 100g | 8,9 mcg / 100ml"
+    },
+    {
+      "name": "Vitamin B1",
+      "value": "400 mcg / 100g | 55 mcg / 100ml"
+    },
+    {
+      "name": "Vitamin B2",
+      "value": "450 mcg / 100g | 61 mcg / 100ml"
+    },
+    {
+      "name": "Vitamin B6",
+      "value": "300 mcg / 100g | 41 mcg / 100ml"
+    },
+    {
+      "name": "Vitamin B12",
+      "value": "1,5 mcg / 100g | 0,2 mcg / 100ml"
+    },
+    {
+      "name": "Vitamin C",
+      "value": "105 mg / 100g | 14,3 mg / 100ml"
+    },
+    {
+      "name": "Niacin",
+      "value": "5000 mcg / 100g | 680 mcg / 100ml"
+    },
+    {
+      "name": "Acid Folic",
+      "value": "80 mcg / 100g | 10,9 mcg / 100ml"
+    },
+    {
+      "name": "Acid Pantothenic",
+      "value": "2500 mcg / 100g | 340 mcg / 100ml"
+    },
+    {
+      "name": "Biotin",
+      "value": "15 mcg / 100g | 2 mcg / 100ml"
+    },
+    {
+      "name": "Cholin",
+      "value": "120 mg / 100g | 16,4 mg / 100ml"
+    },
+    {
+      "name": "Inositol",
+      "value": "85 mg / 100g | 11,6 mg / 100ml"
+    },
+    {
+      "name": "Taurin",
+      "value": "30 mg / 100g | 4,1 mg / 100ml"
+    },
+    {
+      "name": "L-Carnitin",
+      "value": "12,5 mg / 100g | 1,7 mg / 100ml"
+    },
+    {
+      "name": "Calci",
+      "value": "570 mg / 100g | 77 mg / 100ml"
+    },
+    {
+      "name": "Phospho",
+      "value": "390 mg / 100g | 53 mg / 100ml"
+    },
+    {
+      "name": "Magnesi",
+      "value": "50 mg / 100g | 6,8 mg / 100ml"
+    },
+    {
+      "name": "Sắt",
+      "value": "9 mg / 100g | 1,23 mg / 100ml"
+    },
+    {
+      "name": "Kẽm",
+      "value": "3,5 mg / 100g | 0,48 mg / 100ml"
+    },
+    {
+      "name": "Mangan",
+      "value": "300 mcg / 100g | 41 mcg / 100ml"
+    },
+    {
+      "name": "Đồng",
+      "value": "380 mcg / 100g | 51 mcg / 100ml"
+    },
+    {
+      "name": "Iod",
+      "value": "105 mcg / 100g | 14,3 mcg / 100ml"
+    },
+    {
+      "name": "Natri",
+      "value": "240 mg / 100g | 32 mg / 100ml"
+    },
+    {
+      "name": "Kali",
+      "value": "610 mg / 100g | 83 mg / 100ml"
+    },
+    {
+      "name": "Clorid",
+      "value": "480 mg / 100g | 65 mg / 100ml"
+    },
+    {
+      "name": "Crom",
+      "value": "11 mcg / 100g | 1,5 mcg / 100ml"
+    },
+    {
+      "name": "Molypden",
+      "value": "28 mcg / 100g | 3,8 mcg / 100ml"
+    },
+    {
+      "name": "Selen",
+      "value": "11 mcg / 100g | 1,5 mcg / 100ml"
+    },
+    {
+      "name": "Lactobacillus Rhamnosus (LGG)",
+      "value": "1,0 x 10^8 cfu / 100g | 1,36 x 10^7 cfu / 100ml"
+    }
+  ],
+  "origin": "Hà Lan",
+  "net_weight": "400g",
+  "mfg_date": "Xem dưới đáy lon",
+  "expiry_date": "Xem dưới đáy lon"
+}

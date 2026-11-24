@@ -1,0 +1,658 @@
+{
+ "note": "72 tuyên bố sức khỏe cũ (chưa kiểm nguồn) đã gỡ khỏi additives_standard.json ngày 2026-11-22. covered = ý đúng đã có trong health_considerations; promoted = phần có nguồn đã đưa vào KB; removed = không có nguồn/nguồn không nói điều đó.",
+ "counts": {
+  "covered": 18,
+  "promoted": 1,
+  "removed": 53
+ },
+ "claims": [
+  {
+   "index": 1,
+   "ins_code": "INS 621",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Chứa 12.3% natri",
+   "decision": "removed",
+   "reason": "EFSA 2017 (glutamat) chỉ ghi huyết áp tăng ở một liều thử nghiệm trên động vật; không có khuyến cáo theo hàm lượng natri."
+  },
+  {
+   "index": 2,
+   "ins_code": "INS 621",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Thận trọng gánh nặng ion natri",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 3,
+   "ins_code": "INS 951",
+   "condition": "pku",
+   "severity": "CRITICAL",
+   "message": "CHỐNG CHỈ ĐỊNH TUYỆT ĐỐI cho người mắc Phenylketon niệu",
+   "decision": "covered",
+   "reason": "Đã có lưu ý PKU được kiểm nguồn; nay thêm trích nguyên văn quy định nhãn của 21 CFR 172.804."
+  },
+  {
+   "index": 4,
+   "ins_code": "INS 951",
+   "condition": "pregnancy",
+   "severity": "WARNING",
+   "message": "Thận trọng",
+   "decision": "removed",
+   "reason": "IARC V134 không có khuyến cáo riêng cho thai phụ."
+  },
+  {
+   "index": 5,
+   "ins_code": "INS 102",
+   "condition": "children_under_6 / adhd",
+   "severity": "WARNING",
+   "message": "Cảnh báo EFSA làm tăng hành vi hiếu động",
+   "decision": "covered",
+   "reason": "Đã có lưu ý 'children' (EU Reg 1333/2008 Annex V) cho 6 màu Southampton."
+  },
+  {
+   "index": 6,
+   "ins_code": "INS 102",
+   "condition": "asthma",
+   "severity": "WARNING",
+   "message": "Nguy cơ kích ứng",
+   "decision": "removed",
+   "reason": "EFSA 2009 chỉ nêu 'có thể gây phản ứng không dung nạp ở một phần nhỏ dân số'; không có kết luận riêng cho người hen."
+  },
+  {
+   "index": 7,
+   "ins_code": "INS 322(i)",
+   "condition": "soy_allergy",
+   "severity": "WARNING",
+   "message": "Nguy cơ dị ứng nếu chiết xuất từ đậu nành",
+   "decision": "covered",
+   "reason": "Đã có allergen_assessment (nguồn gốc lecithin quyết định nguy cơ) với nguồn JEMRA/Codex."
+  },
+  {
+   "index": 8,
+   "ins_code": "INS 322(i)",
+   "condition": "egg_allergy",
+   "severity": "WARNING",
+   "message": "Nguy cơ nếu từ trứng",
+   "decision": "covered",
+   "reason": "Như dòng 7."
+  },
+  {
+   "index": 9,
+   "ins_code": "INS 330",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "Rất an toàn",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe ('rất an toàn'); nhãn WARNING sai nghĩa."
+  },
+  {
+   "index": 10,
+   "ins_code": "INS 330",
+   "condition": "peptic_ulcer",
+   "severity": "WARNING",
+   "message": "Cân nhắc liều lượng lớn khi viêm loét dạ dày cấp",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 11,
+   "ins_code": "INS 211",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Tăng tải ion natri",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 12,
+   "ins_code": "INS 211",
+   "condition": "asthma",
+   "severity": "WARNING",
+   "message": "Nguy cơ quá mẫn khi kết hợp với Vitamin C",
+   "decision": "removed",
+   "reason": "Nguồn FDA nói về benzen hình thành khi benzoat gặp acid ascorbic, không phải quá mẫn/hen; ý đó đã có trong lưu ý của INS 211."
+  },
+  {
+   "index": 13,
+   "ins_code": "INS 500(ii)",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Chứa natri",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 14,
+   "ins_code": "INS 503(ii)",
+   "condition": "chronic_kidney_disease / liver_failure",
+   "severity": "WARNING",
+   "message": "Thận trọng với tích tụ ion amoni (NH4+)",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 15,
+   "ins_code": "INS 471",
+   "condition": "hyperlipidemia / dyslipidemia",
+   "severity": "WARNING",
+   "message": "Chứa acid béo",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 16,
+   "ins_code": "INS 1420",
+   "condition": "diabetes",
+   "severity": "WARNING",
+   "message": "Là tinh bột chuyển hóa thành carbohydrate",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 17,
+   "ins_code": "INS 150d",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Phẩm màu có thể ảnh hưởng hành vi trẻ",
+   "decision": "removed",
+   "reason": "EFSA 2011 (caramel) không nói caramel ảnh hưởng hành vi trẻ."
+  },
+  {
+   "index": 18,
+   "ins_code": "INS 150d",
+   "condition": "sulfites",
+   "severity": "WARNING",
+   "message": "Quy trình sản xuất dùng sulfit",
+   "decision": "removed",
+   "reason": "EFSA 2011 chỉ nêu caramel nhóm IV được sản xuất với hợp chất sulfit; không kết luận về nguy cơ cho người nhạy sulfit."
+  },
+  {
+   "index": 19,
+   "ins_code": "INS 631",
+   "condition": "gout",
+   "severity": "WARNING",
+   "message": "Chứa purine có thể làm tăng acid uric",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 20,
+   "ins_code": "INS 627",
+   "condition": "gout",
+   "severity": "WARNING",
+   "message": "Chứa purine có thể làm tăng acid uric",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 21,
+   "ins_code": "INS 110",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Southampton color gây hiếu động ở trẻ",
+   "decision": "covered",
+   "reason": "Như dòng 5."
+  },
+  {
+   "index": 22,
+   "ins_code": "INS 110",
+   "condition": "asthma",
+   "severity": "WARNING",
+   "message": "Nguy cơ quá mẫn",
+   "decision": "removed",
+   "reason": "EFSA 2014 (Sunset Yellow) không có đoạn tương ứng."
+  },
+  {
+   "index": 23,
+   "ins_code": "INS 129",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Southampton color gây hiếu động ở trẻ",
+   "decision": "covered",
+   "reason": "Như dòng 5."
+  },
+  {
+   "index": 24,
+   "ins_code": "INS 129",
+   "condition": "asthma",
+   "severity": "WARNING",
+   "message": "Nguy cơ quá mẫn",
+   "decision": "removed",
+   "reason": "EFSA 2009 (Allura Red): có báo cáo phản ứng nhạy cảm nhưng 'chưa kết luận được' về khả năng gây nhạy cảm."
+  },
+  {
+   "index": 25,
+   "ins_code": "INS 202",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn ở mức cho phép",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 26,
+   "ins_code": "INS 950",
+   "condition": "pregnancy",
+   "severity": "WARNING",
+   "message": "Thận trọng",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 27,
+   "ins_code": "INS 950",
+   "condition": "hyperkalemia",
+   "severity": "WARNING",
+   "message": "Chứa kali",
+   "decision": "removed",
+   "reason": "EFSA 2025 (acesulfame K) không có nội dung về tăng kali máu."
+  },
+  {
+   "index": 28,
+   "ins_code": "INS 415",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn ở mức cho phép",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 29,
+   "ins_code": "INS 412",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn ở mức cho phép",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 30,
+   "ins_code": "INS 407",
+   "condition": "gastrointestinal",
+   "severity": "WARNING",
+   "message": "EFSA 2018 khuyến cáo theo dõi ở trẻ sơ sinh",
+   "decision": "removed",
+   "reason": "Ý kiến EFSA 2018 về carrageenan không có trong KB; không kiểm được."
+  },
+  {
+   "index": 31,
+   "ins_code": "INS 331(iii)",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Chứa natri",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 32,
+   "ins_code": "INS 160a",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 33,
+   "ins_code": "INS 160a",
+   "condition": "smokers",
+   "severity": "WARNING",
+   "message": "Liều cao beta-carotene tăng nguy cơ ung thư phổi ở người hút thuốc",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 34,
+   "ins_code": "INS 300",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 35,
+   "ins_code": "INS 300",
+   "condition": "kidney_stones",
+   "severity": "WARNING",
+   "message": "Liều rất cao có thể tăng nguy cơ sỏi thận oxalat",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 36,
+   "ins_code": "INS 551",
+   "condition": "healthy",
+   "severity": "WARNING",
+   "message": "An toàn ở mức sử dụng thông thường",
+   "decision": "removed",
+   "reason": "Không phải tuyên bố sức khỏe."
+  },
+  {
+   "index": 37,
+   "ins_code": "INS 420",
+   "condition": "ibs",
+   "severity": "WARNING",
+   "message": "Polyol gây đầy hơi tiêu chảy ở người nhạy cảm FODMAP",
+   "decision": "covered",
+   "reason": "Đã có lưu ý nhuận tràng của polyol; nay thay số liệu không kiểm được bằng quy định nhãn EU nguyên văn."
+  },
+  {
+   "index": 38,
+   "ins_code": "INS 420",
+   "condition": "diabetes",
+   "severity": "WARNING",
+   "message": "Vẫn chứa calo cần tính",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 39,
+   "ins_code": "INS 220",
+   "condition": "asthma_allergy",
+   "severity": "CRITICAL",
+   "message": "Sulfite gây co thắt phế quản nghiêm trọng ở 5-10% bệnh nhân hen suyễn, có thể gây sốc phản vệ",
+   "decision": "covered",
+   "reason": "Đã có lưu ý hen suyễn–sulfit; số '5–10%', mức CRITICAL và 'sốc phản vệ' không có trong EFSA 2016 (ghi 3–10%), đã sửa theo nguồn."
+  },
+  {
+   "index": 40,
+   "ins_code": "INS 220",
+   "condition": "pregnancy",
+   "severity": "WARNING",
+   "message": "Khuyến cáo hạn chế sulfite trong thai kỳ",
+   "decision": "removed",
+   "reason": "EFSA 2016 chỉ có nghiên cứu trên động vật mang thai; không có khuyến cáo cho thai phụ."
+  },
+  {
+   "index": 41,
+   "ins_code": "INS 221",
+   "condition": "asthma_allergy",
+   "severity": "CRITICAL",
+   "message": "Nhóm sulfite gây phản ứng nghiêm trọng ở người hen suyễn",
+   "decision": "covered",
+   "reason": "Như dòng 39."
+  },
+  {
+   "index": 42,
+   "ins_code": "INS 250",
+   "condition": "pregnancy",
+   "severity": "WARNING",
+   "message": "Nitrit kết hợp amin trong thực phẩm có thể tạo nitrosamine gây ung thư; thai phụ nên hạn chế thịt chế biến",
+   "decision": "removed",
+   "reason": "EFSA 2017 không có khuyến cáo riêng cho thai phụ."
+  },
+  {
+   "index": 43,
+   "ins_code": "INS 250",
+   "condition": "children_adhd",
+   "severity": "CAUTION",
+   "message": "Trẻ em nên hạn chế thịt chế biến chứa nitrit",
+   "decision": "removed",
+   "reason": "EFSA 2017 không có khuyến cáo về thịt chế biến cho trẻ em."
+  },
+  {
+   "index": 44,
+   "ins_code": "INS 251",
+   "condition": "pregnancy",
+   "severity": "CAUTION",
+   "message": "Nitrat chuyển hóa thành nitrit trong cơ thể; thai phụ nên thận trọng",
+   "decision": "removed",
+   "reason": "EFSA 2017 không có khuyến cáo riêng cho thai phụ."
+  },
+  {
+   "index": 45,
+   "ins_code": "INS 320",
+   "condition": "pregnancy",
+   "severity": "CAUTION",
+   "message": "IARC xếp BHA vào nhóm 2B (có thể gây ung thư ở người); thai phụ nên hạn chế",
+   "decision": "promoted",
+   "reason": "Phần IARC 2B có trong EFSA 2011 (đã đưa vào health_considerations); phần 'thai phụ nên hạn chế' không có trong nguồn."
+  },
+  {
+   "index": 46,
+   "ins_code": "INS 320",
+   "condition": "children_adhd",
+   "severity": "CAUTION",
+   "message": "Nên hạn chế chất chống oxy hóa tổng hợp cho trẻ em",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 47,
+   "ins_code": "INS 321",
+   "condition": "pregnancy",
+   "severity": "CAUTION",
+   "message": "Nên hạn chế BHT trong thai kỳ do thiếu dữ liệu an toàn đầy đủ",
+   "decision": "removed",
+   "reason": "Nguồn về BHT không có trong KB."
+  },
+  {
+   "index": 48,
+   "ins_code": "INS 321",
+   "condition": "children_adhd",
+   "severity": "CAUTION",
+   "message": "Khuyến cáo hạn chế cho trẻ nhỏ",
+   "decision": "removed",
+   "reason": "Nguồn về BHT không có trong KB."
+  },
+  {
+   "index": 49,
+   "ins_code": "INS 338",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Phosphate vô cơ gây tăng phospho máu, nguy hiểm cho bệnh nhân suy thận",
+   "decision": "covered",
+   "reason": "Đã có lưu ý bệnh thận mạn; nay dùng EFSA 2019 có trích nguyên văn (KDOQI 2020 không có trong KB, số 90–100% không kiểm được)."
+  },
+  {
+   "index": 50,
+   "ins_code": "INS 338",
+   "condition": "hypertension",
+   "severity": "CAUTION",
+   "message": "Nước ngọt có gas chứa acid phosphoric góp phần tăng huyết áp gián tiếp",
+   "decision": "removed",
+   "reason": "EFSA 2019 (mục 3.8.4) không kết luận phosphate làm tăng huyết áp."
+  },
+  {
+   "index": 51,
+   "ins_code": "INS 339(i)",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Phosphate natri gây tăng phospho máu và natri máu; nguy hiểm cho bệnh nhân thận",
+   "decision": "covered",
+   "reason": "Như dòng 49."
+  },
+  {
+   "index": 52,
+   "ins_code": "INS 339(i)",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Chứa natri; cần tính vào tổng lượng natri nạp",
+   "decision": "removed",
+   "reason": "Như dòng 50."
+  },
+  {
+   "index": 53,
+   "ins_code": "INS 450(i)",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Diphosphate gây tăng phospho máu ở bệnh nhân suy thận",
+   "decision": "covered",
+   "reason": "Như dòng 49."
+  },
+  {
+   "index": 54,
+   "ins_code": "INS 450(i)",
+   "condition": "hypertension",
+   "severity": "CAUTION",
+   "message": "Chứa natri; cần kiểm soát tổng lượng natri",
+   "decision": "removed",
+   "reason": "Như dòng 50."
+  },
+  {
+   "index": 55,
+   "ins_code": "INS 452(i)",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Polyphosphate natri nguy hiểm cho bệnh nhân suy thận — tăng phospho và natri máu",
+   "decision": "covered",
+   "reason": "Như dòng 49."
+  },
+  {
+   "index": 56,
+   "ins_code": "INS 955",
+   "condition": "diabetes",
+   "severity": "CAUTION",
+   "message": "Sucralose không calo nhưng một số nghiên cứu gợi ý có thể ảnh hưởng đến hệ vi sinh đường ruột và đáp ứng insulin",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 57,
+   "ins_code": "INS 955",
+   "condition": "children_adhd",
+   "severity": "CAUTION",
+   "message": "Nên hạn chế chất tạo ngọt nhân tạo cho trẻ nhỏ theo WHO 2023",
+   "decision": "removed",
+   "reason": "Không thấy khuyến cáo riêng cho trẻ nhỏ trong bản WHO NSS đã lưu."
+  },
+  {
+   "index": 58,
+   "ins_code": "INS 960a",
+   "condition": "diabetes",
+   "severity": "CAUTION",
+   "message": "Steviol glycoside không ảnh hưởng đường huyết nhưng cần theo dõi tổng lượng đường thay thế",
+   "decision": "removed",
+   "reason": "EFSA 2010 ghi không ảnh hưởng cân bằng glucose; phần 'cần theo dõi' không có trong nguồn."
+  },
+  {
+   "index": 59,
+   "ins_code": "INS 961",
+   "condition": "phenylketonuria_pku",
+   "severity": "CAUTION",
+   "message": "Neotame là dẫn xuất aspartame nhưng không phóng thích phenylalanine đáng kể; FDA cho phép không cần cảnh báo PKU",
+   "decision": "removed",
+   "reason": "Phần FDA về PKU của neotame không có trong KB; EFSA 2025 chỉ nói lượng phenylalanin sinh ra là an toàn cho dân số chung."
+  },
+  {
+   "index": 60,
+   "ins_code": "INS 621+631+627",
+   "condition": "hypertension",
+   "severity": "WARNING",
+   "message": "Hỗn hợp MSG + I+G chứa natri cao; người cao huyết áp cần kiểm soát",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 61,
+   "ins_code": "INS 401",
+   "condition": "hypertension",
+   "severity": "CAUTION",
+   "message": "Natri alginat chứa natri; cần tính vào tổng lượng natri nạp cho bệnh nhân cao huyết áp",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 62,
+   "ins_code": "INS 133",
+   "condition": "children_adhd",
+   "severity": "CAUTION",
+   "message": "Phẩm màu tổng hợp có thể ảnh hưởng đến hành vi ở trẻ em nhạy cảm (nghiên cứu Southampton)",
+   "decision": "removed",
+   "reason": "Brilliant Blue FCF không thuộc 6 màu Southampton."
+  },
+  {
+   "index": 63,
+   "ins_code": "INS 133",
+   "condition": "pregnancy",
+   "severity": "CAUTION",
+   "message": "Thai phụ nên hạn chế phẩm màu tổng hợp",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 64,
+   "ins_code": "INS 122",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Thuộc nhóm 6 phẩm màu Southampton có liên quan đến tăng động ở trẻ em",
+   "decision": "covered",
+   "reason": "Như dòng 5."
+  },
+  {
+   "index": 65,
+   "ins_code": "INS 122",
+   "condition": "asthma_allergy",
+   "severity": "CAUTION",
+   "message": "Phẩm màu azo có thể gây phản ứng ở người nhạy cảm aspirin/hen suyễn",
+   "decision": "removed",
+   "reason": "EFSA 2009 (Azorubine): có báo cáo phản ứng nhạy cảm nhưng chưa kết luận."
+  },
+  {
+   "index": 66,
+   "ins_code": "INS 124",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Thuộc nhóm Southampton — gây tăng động ở trẻ nhạy cảm",
+   "decision": "covered",
+   "reason": "Như dòng 5."
+  },
+  {
+   "index": 67,
+   "ins_code": "INS 124",
+   "condition": "asthma_allergy",
+   "severity": "CAUTION",
+   "message": "Gây phản ứng dị ứng chéo ở người nhạy cảm aspirin",
+   "decision": "removed",
+   "reason": "EFSA 2009 (Ponceau 4R): có nghiên cứu ở người hen nhạy aspirin nhưng chưa kết luận."
+  },
+  {
+   "index": 68,
+   "ins_code": "INS 104",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Thuộc nhóm Southampton — ảnh hưởng hành vi trẻ em",
+   "decision": "covered",
+   "reason": "Như dòng 5."
+  },
+  {
+   "index": 69,
+   "ins_code": "INS 171",
+   "condition": "pregnancy",
+   "severity": "WARNING",
+   "message": "EFSA kết luận không thể loại trừ nguy cơ độc tính gen; EU đã cấm E171 trong thực phẩm từ 08/2022",
+   "decision": "covered",
+   "reason": "Đã có lưu ý TiO2 (EFSA 2021: không loại trừ độc tính gen); nguồn không có khuyến cáo riêng cho thai phụ."
+  },
+  {
+   "index": 70,
+   "ins_code": "INS 171",
+   "condition": "children_adhd",
+   "severity": "WARNING",
+   "message": "Trẻ em tiếp xúc qua kẹo, bánh phủ trắng — EU đã cấm",
+   "decision": "removed",
+   "reason": "Nguồn không có khuyến cáo riêng cho trẻ em."
+  },
+  {
+   "index": 71,
+   "ins_code": "INS 262(i)",
+   "condition": "hypertension",
+   "severity": "CAUTION",
+   "message": "Chứa natri; cần tính vào tổng lượng natri nạp hàng ngày",
+   "decision": "removed",
+   "reason": "Không có nguồn nào trong KB nói điều này."
+  },
+  {
+   "index": 72,
+   "ins_code": "INS 341(i)",
+   "condition": "chronic_kidney_disease",
+   "severity": "WARNING",
+   "message": "Phosphate vô cơ gây tăng phospho máu ở bệnh nhân thận mạn",
+   "decision": "covered",
+   "reason": "Như dòng 49."
+  }
+ ]
+}

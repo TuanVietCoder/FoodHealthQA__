@@ -1,0 +1,52 @@
+{
+  "product_name": "Sữa đậu nành Vinasoy Fami Nguyên Chất Ít Đường",
+  "ingredient": [
+    "Dịch trích từ đậu nành hạt (50%)",
+    "Nước",
+    "Đường (5,8%)",
+    "Muối ăn"
+  ],
+  "additive": [
+    "Chất ổn định (471) - Mono- và diglycerid của các acid béo",
+    "Chất ổn định (407) - Carrageenan",
+    "Hương liệu giống tự nhiên dùng cho thực phẩm",
+    "Chất điều chỉnh độ acid (500(ii)) - Natri hydro carbonat"
+  ],
+  "warning": [
+    "Sản phẩm có chứa đậu nành"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "50,2 kcal / 100ml"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "2,5 g / 100ml"
+    },
+    {
+      "name": "Chất béo",
+      "value": "1,4 g / 100ml"
+    },
+    {
+      "name": "Carbohydrate",
+      "value": "6,9 g / 100ml"
+    },
+    {
+      "name": "Chất xơ",
+      "value": "220 mg / 100ml"
+    },
+    {
+      "name": "Natri",
+      "value": "28 mg / 100ml"
+    },
+    {
+      "name": "Cholesterol",
+      "value": "0 mg / 100ml"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": "200ml",
+  "mfg_date": "Xem trên bao bì",
+  "expiry_date": "Xem trên bao bì"
+}

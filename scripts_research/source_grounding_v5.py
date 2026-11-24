@@ -540,15 +540,16 @@ def nss_absent_record(name: str):
 SULPHITE_NAME = re.compile(r"sul[fp]it|sulphite|sulfite|lưu huỳnh", re.I)
 
 VERIFIED_TAGS |= {"EU_REG_1333_2008_ANNEX_V", "US_FDA_RED3_REVOCATION", "IARC_MONOGRAPHS_V134", "WHO_NSS_GUIDELINE_2023",
-                  "EFSA_CAFFEINE_2015"}
-LOC.update({"EU_REG_1333_2008_ANNEX_V": "EU_REG_1333_2008#AnnexV_ColourWarning",
+                  "EFSA_CAFFEINE_2015", "US_FDA_ASPARTAME_SWEETENERS"}
+LOC.update({"US_FDA_ASPARTAME_SWEETENERS": "US_FDA_ASPARTAME_SWEETENERS#PKU_AvoidOrRestrict",
+            "EU_REG_1333_2008_ANNEX_V": "EU_REG_1333_2008#AnnexV_ColourWarning",
             "US_FDA_RED3_REVOCATION": "US_FR_2025_00830#Red3_Revocation",
             "IARC_MONOGRAPHS_V134": "IARC_MONOGRAPHS_V134#Aspartame_Group2B",
             "WHO_NSS_GUIDELINE_2023": "WHO_NSS_GUIDELINE_2023#Pregnancy",
             "EFSA_CAFFEINE_2015": "EFSA_CAFFEINE_2015#Children"})
 AUTHORITY_TAG_PREFIX = {"EU_REG_1333_2008_ANNEX_V": "EU_ANNEXV", "US_FDA_RED3_REVOCATION": "FDA_RED3",
                         "IARC_MONOGRAPHS_V134": "IARC_V134", "WHO_NSS_GUIDELINE_2023": "WHO_NSS_2023",
-                        "EFSA_CAFFEINE_2015": "EFSA_CAFFEINE_2015"}
+                        "EFSA_CAFFEINE_2015": "EFSA_CAFFEINE_2015", "US_FDA_ASPARTAME_SWEETENERS": "FDA_ASPARTAME_"}
 
 _RED3_NAME = re.compile(r"erythrosin", re.I)
 

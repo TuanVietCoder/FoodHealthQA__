@@ -172,6 +172,1679 @@
       "bytes": 14504159,
       "sha256": "f5642d18ce37a22a932195b27cbf5f5a2745fbd6c966f816f65ee499b6790ca4",
       "obtained": "downloaded manually by the user (Wiley blocks automated clients)"
+    },
+    {
+      "file": "complementary_feeding_infants_young_children_6_23_months.pdf",
+      "description": "WHO Guideline for complementary feeding of infants and young children 6-23 months of age (2023), ISBN 978-92-4-008186-4",
+      "bytes": 3647119,
+      "sha256": "a75cc2c922a2f1c0c8ba7b2bc2ab17cb1981ae6ae9e98da80f81fb1a37c289bf",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "Codex_CXS_72_1981.pdf",
+      "description": "Codex CXS 72-1981 Standard for Infant Formula and Formulas for Special Medical Purposes Intended for Infants (amended 2024)",
+      "bytes": 476311,
+      "sha256": "cb149ad299f8aa7cdef98b69d4ce5993dc31dbc6200e552e641664d4584bf604",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "CXS_74_1981.pdf",
+      "description": "Codex STAN 074-1981, Rev. 1-2006 Processed Cereal-Based Foods for Infants and Young Children",
+      "bytes": 48188,
+      "sha256": "68afdbe54a2452ab232a62e5f2222b1f6a8fcfed2399d65d40c9e77bac8af97d",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "QCVN_11_1_2012_BYT.pdf",
+      "description": "QCVN 11-1:2012/BYT Sản phẩm dinh dưỡng công thức cho trẻ đến 12 tháng tuổi",
+      "bytes": 348206,
+      "sha256": "c4688d932db604763a007db2f8679110415a51119dc7cf87e47d836badb8b297",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "QCVN_11_2_2012_BYT.doc",
+      "description": "QCVN 11-2:2012/BYT (TT 21/2012/TT-BYT) Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+      "bytes": 340480,
+      "sha256": "533933422a303e9b6ed3431f6a49b253295adf4dc1d6066f6dbb8b0ca2785e66",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "QCVN_11_3_2012_BYT.doc",
+      "description": "QCVN 11-3:2012/BYT (TT 22/2012/TT-BYT) Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+      "bytes": 228352,
+      "sha256": "5da0040bfbd71386d0d80b1bfd73976479e043f2b5d459e4d7cb259c6ff1ac83",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "QCVN_11_4_2012_BYT.doc",
+      "description": "QCVN 11-4:2012/BYT (TT 23/2012/TT-BYT) Sản phẩm dinh dưỡng chế biến từ ngũ cốc cho trẻ từ 6 đến 36 tháng tuổi",
+      "bytes": 186880,
+      "sha256": "83f3d1a8c229499332c52b8e0514e5e884f2e28e1f976f7692c48cddae68c477",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "ND_1002014NĐ_CP.pdf",
+      "description": "Nghị định 100/2014/NĐ-CP (bản quét, không có lớp chữ; chưa dùng làm trích dẫn)",
+      "bytes": 519426,
+      "sha256": "aaa963370dea142ad5240659ac87d2ab5eea8a023adf848e0cd9ede8d59d6e7c",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2022_7594.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2022.7594 (139 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 14087032,
+      "sha256": "e8192cf1c65167d33840996373289c5d06cede8b0c93d1e942b123e69e69b747",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2009_1331.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2009.1331 (52 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 333472,
+      "sha256": "1f6a7c9e5f1167c48e54e7f5530db1ab891b51352ed23a0f70a297f1aaf1700f",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2014_3765.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2014.3765 (39 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 713671,
+      "sha256": "131d77a77592789b087af332af5162fe0fdd9fcae0e9eba39ba41e69f4854352",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2009_1327.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2009.1327 (39 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 297438,
+      "sha256": "1fd4fcdf5ec5b0c1838987ced5a77ee3c64e314bf9bede53597cec1fb8d84a59",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2009_1332.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2009.1332 (40 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 265137,
+      "sha256": "2a553f6d352bb6ee2564b10f617e1f1f8945461dd0d07ab2d917abd5f3777308",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2009_1328.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2009.1328 (39 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 284903,
+      "sha256": "e650e5df8f6e4f8a68ab7ee39886eb496b0a2076bab9048c79206f970760bca4",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2009_1329.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2009.1329 (40 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 281548,
+      "sha256": "a03d6b36db21b2deaff345a426db09b44ee8f9360a008b6926c30e016c62bbcf",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2010_1853.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2010.1853 (36 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 239276,
+      "sha256": "2597b0fcfd49a1700152affdd9b83983090f23c0c5c0fa77c9f88c01410219af",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2017_4787.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2017.4787 (123 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 13160915,
+      "sha256": "4f03b0e2840f3f88692c3df1755227f131c3bcd229f54e10e3c56a4e8b489eac",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2011_2392.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2011.2392 (49 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 386605,
+      "sha256": "b11e7a3e078d843b3a616e561992991ba628939ccbfdea20e0d58d42193d4453",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2011_2004.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2011.2004 (103 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 810515,
+      "sha256": "4f22fc0270f52bd8346f12e45bc48d66252ebc545d2db3875dfb815ccf9b749b",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2010_1537.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2010.1537 (84 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 461392,
+      "sha256": "a7b5c64308440c7c33ee4d156ed4c68af8bf5c48bc657b74e21f5d58370d894c",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2025_9480.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2025.9480 (63 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 1569122,
+      "sha256": "2cf46634635bb44882e705b752f62982eeccc2b048fbc45171929ea92ed5f30f",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2025_9317.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2025.9317 (74 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 1152231,
+      "sha256": "4e4f1549596831cbc89a611b3032a69ccbc8b74ccbfa04c4eeebb3b62be655fc",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2017_4910.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2017.4910 (90 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 5286973,
+      "sha256": "e79f8c52b01cfad095a650dae6ce65e109920d1777aa21299171ba457a5279dd",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2017_4911.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2017.4911 (96 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 5852760,
+      "sha256": "d5a1ac1ae1359c61baa5c90a0ca52ae5df1ea7ebc83773f5cc0abacf7d4d64a1",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "efsa_2016_4438.pdf",
+      "description": "EFSA Journal, doi:10.2903/j.efsa.2016.4438 (151 trang; PDF khớp DOI trên trang đầu)",
+      "bytes": 1594854,
+      "sha256": "8c02eec612ba45bbad1edf07ca42059b913fcb7eed422df403e128a7ca6b0b7d",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "jecfa87_2019_summary.pdf",
+      "description": "JECFA kỳ họp 87 (Rome, 4–13/6/2019), Summary and Conclusions, 15 trang",
+      "bytes": 466834,
+      "sha256": "80f9eda8dc2eafc995924de30e4e9c6a987fa257038aeb2e5d08b6be200dc0f0",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "CELEX_02011R1169_2025.pdf",
+      "description": "Quy định (EU) 1169/2011 về thông tin thực phẩm cho người tiêu dùng, bản hợp nhất 01.04.2025 (EUR-Lex, không có hiệu lực pháp lý)",
+      "bytes": 674927,
+      "sha256": "6cdf4190d6fa4a99d2e7d3124611724ec4cf69159563f88b35dc3c50dd416c63",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "KDOQI_Nutrition_2020.pdf",
+      "description": "KDOQI Clinical Practice Guideline for Nutrition in CKD: 2020 Update (Ikizler và cộng sự), 109 trang",
+      "bytes": 3843804,
+      "sha256": "5d60490b7299ef25fda20928ccad72dc1b50911f1fe06667e5ac41cede4c969d",
+      "obtained": "downloaded manually by the user"
+    },
+    {
+      "file": "FDA_SWEETENERS_IN_FOOD.html",
+      "description": "US FDA, Aspartame and Other Sweeteners in Food (trang web, 'Content current as of: 02/27/2025'); câu về PKU: 'should avoid or restrict aspartame'",
+      "url": "https://www.fda.gov/food/food-additives-petitions/aspartame-and-other-sweeteners-food",
+      "bytes": 69914,
+      "sha256": "ce5f82dc7d56810558edc91bc57ee813981720517ef5cc7ae57c59d9a8b499bd",
+      "obtained": "file có sẵn trong raw/external từ 2026-11-10, đăng ký 2026-11-24"
+    }
+  ],
+  "jecfa_pages": [
+    {
+      "source_id": "JECFA_CHEMICAL_59",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/59",
+      "bytes": 35083,
+      "sha256": "f0be10c3dfb7bf2c877040f3fe6e9c16fac920e66e39fa5b797d278574cd8625",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:15+00:00",
+      "file": "jecfa/Chemical_59.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_60",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/60",
+      "bytes": 37033,
+      "sha256": "514b3c6ef84907f9c1f376af10e7e3d90c39f463c5ab3cea36e5fe1b553ea4f5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:26+00:00",
+      "file": "jecfa/Chemical_60.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_62",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/62",
+      "bytes": 39244,
+      "sha256": "d1a092883a77adb69d8e5b14256f5641dee31a4de5c50acae8965d9c8c34e407",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:08:44+00:00",
+      "file": "jecfa/Chemical_62.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_78",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/78",
+      "bytes": 36464,
+      "sha256": "4d4a062c6fbb8af0ecc7825c5188dd54bc6ea04c0f35caad5bb49aff45f9de4a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:59+00:00",
+      "file": "jecfa/Chemical_78.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_82",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/82",
+      "bytes": 34048,
+      "sha256": "2793e252e30c7183f35947079fba997535890093377b3290a688bce0a8a1291a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:56+00:00",
+      "file": "jecfa/Chemical_82.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_88",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/88",
+      "bytes": 34028,
+      "sha256": "a6db18069a01eb77522a5ca7070ea8123702f135e27a1e30940540434420d3bd",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:11+00:00",
+      "file": "jecfa/Chemical_88.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_133",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/133",
+      "bytes": 34297,
+      "sha256": "d22bad449f44d306d0693db1137f9ab7f0ab1ca1665457c59860fa09cb7cbd9b",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_133.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_168",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/168",
+      "bytes": 34015,
+      "sha256": "9ad5d39c34a48c172ad59d2fbba7cb0d2a8a27a23b0e928a10ca939c17310c7b",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:28:31+00:00",
+      "file": "jecfa/Chemical_168.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_178",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/178",
+      "bytes": 35107,
+      "sha256": "bd1b8a1d5676fb6bdad9dba15707c63c65a7b27f320600b120002d3dcd00aebb",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:44:09+00:00",
+      "file": "jecfa/Chemical_178.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_236",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/236",
+      "bytes": 35154,
+      "sha256": "270c534edd9a75af9386f739df4cde1bd3650d97cfdf344d59b5c71a856280af",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:22:16+00:00",
+      "file": "jecfa/Chemical_236.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_247",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/247",
+      "bytes": 33955,
+      "sha256": "9dca01db16e73dedf53fbd14b0b9a5a3859756e549358d0bd1771dcdf2c8fda5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:50:16+00:00",
+      "file": "jecfa/Chemical_247.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_251",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/251",
+      "bytes": 33962,
+      "sha256": "a2f30f4cc64c88d64ba8da0f1d164b45494989014f2153791994be62f5d66734",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:06+00:00",
+      "file": "jecfa/Chemical_251.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_252",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/252",
+      "bytes": 34659,
+      "sha256": "bf041450be456bbfa026ee2bd6ef0e0d0d67de828ac3a6685afc056e6e120b03",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:58:24+00:00",
+      "file": "jecfa/Chemical_252.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_267",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/267",
+      "bytes": 45849,
+      "sha256": "132fadee5a18720340a452f8e695c90fa45114e668715912938818eec69222d1",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_267.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_281",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/281",
+      "bytes": 35237,
+      "sha256": "86f37936f2152a95983b8f57e2535b0caead3e5db7454f9e7c92b2e4cff2fba6",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T18:43:19+00:00",
+      "file": "jecfa/Chemical_281.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_349",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/349",
+      "bytes": 34523,
+      "sha256": "d02b618f739aa9bfe2e867d6bec028ac7c56cae4dd78eb5e2a5b18f48cdb8040",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:24+00:00",
+      "file": "jecfa/Chemical_349.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_366",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/366",
+      "bytes": 34060,
+      "sha256": "da3319451653dd7ba53053222f3847967e00389c06d9c247748fb4a83804a524",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:32+00:00",
+      "file": "jecfa/Chemical_366.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_377",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/377",
+      "bytes": 36482,
+      "sha256": "efeed44da4a0702c835f96547985399fe7830ddd1370cb3fc630172c2c1c53df",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:27+00:00",
+      "file": "jecfa/Chemical_377.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_383",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/383",
+      "bytes": 34643,
+      "sha256": "270a674256ac13eff97ed63a6a6602f4b25c4cf6928c4eef76b530007e6d7390",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:55+00:00",
+      "file": "jecfa/Chemical_383.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_423",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/423",
+      "bytes": 34233,
+      "sha256": "546dd512e9139a11fcea3a048ba1d7d022de789d2e293b041c4fa2ef783866aa",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:18:43+00:00",
+      "file": "jecfa/Chemical_423.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_434",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/434",
+      "bytes": 34141,
+      "sha256": "0db94c096982947c37f7c7e4a277ef5253f038398c754c378b40d276127a10b5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:26:19+00:00",
+      "file": "jecfa/Chemical_434.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_436",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/436",
+      "bytes": 34111,
+      "sha256": "e207eea003d4c593a5aa23929fbc309724eaa4c202a7b965d52e33dc620b249d",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:18:47+00:00",
+      "file": "jecfa/Chemical_436.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_457",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/457",
+      "bytes": 34285,
+      "sha256": "72a72229bf68c1c2069b13232be4c319e53f7b6961bd601f06759d7bd567cd72",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:13+00:00",
+      "file": "jecfa/Chemical_457.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_458",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/458",
+      "bytes": 33630,
+      "sha256": "7495e7d2a156758416b9f2df89b6e9c21c0368cf79e783698428bd59a585beff",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:40+00:00",
+      "file": "jecfa/Chemical_458.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_572",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/572",
+      "bytes": 37508,
+      "sha256": "96c5c8ef55d89bb7ba648aff22d11b80f2d984d4f773d3b3a15c7c08a231dc87",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:53+00:00",
+      "file": "jecfa/Chemical_572.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_585",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/585",
+      "bytes": 34051,
+      "sha256": "75e23ad73d0c6a1bd3f3cb2e30cca9d6d78b4b216c8e153a40e39d62f894e3fe",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:24:52+00:00",
+      "file": "jecfa/Chemical_585.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_592",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/592",
+      "bytes": 33816,
+      "sha256": "0c5284da2652d5c3adc5f2c098ac7dfe7eeb74c8ae49be8ffaac07f02aaf3a92",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:16+00:00",
+      "file": "jecfa/Chemical_592.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_607",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/607",
+      "bytes": 35448,
+      "sha256": "35aad37818ad14825933a9ded53917d1b3a7df6f6224c51b2563ded6e58a535a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:04:27+00:00",
+      "file": "jecfa/Chemical_607.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_619",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/619",
+      "bytes": 32947,
+      "sha256": "0cb631c9a05365c197645f4c2759905fc2d9aa1dd2bba3c38a30968671b7af82",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:28:34+00:00",
+      "file": "jecfa/Chemical_619.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_668",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/668",
+      "bytes": 35602,
+      "sha256": "669744e24a4c8fc661ff9c25475a071899c42abf66a86e9859b0149a55e5a8ae",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:52:28+00:00",
+      "file": "jecfa/Chemical_668.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_683",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/683",
+      "bytes": 33877,
+      "sha256": "05ea5d938f5f8a119ffd342a8a9cd2ad5b4150c233213f440a3eb8416196f4b4",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:26:36+00:00",
+      "file": "jecfa/Chemical_683.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_700",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/700",
+      "bytes": 34643,
+      "sha256": "73732066352d23fc440c65f53aa34320913c19cc603b359a6e7f0fe29988f02e",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:17+00:00",
+      "file": "jecfa/Chemical_700.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_720",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/720",
+      "bytes": 34393,
+      "sha256": "1fa90457cb13e144e62f20381345b3191f2eda60a2758dee935afd4be9c07b5a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:28:41+00:00",
+      "file": "jecfa/Chemical_720.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_742",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/742",
+      "bytes": 38436,
+      "sha256": "c2b9413632536abcbf554e2371c73c54d541f251e0ee1f362e0b7b8454a63b7f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:44:56+00:00",
+      "file": "jecfa/Chemical_742.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_802",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/802",
+      "bytes": 35793,
+      "sha256": "3f959a7088ee2cd24fac6864db6ec5c351f5c2038d2d4ff495de3b911f3b4cda",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:49+00:00",
+      "file": "jecfa/Chemical_802.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_822",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/822",
+      "bytes": 34277,
+      "sha256": "b7f662ef9fcadac96ff93f7b1d8c32b85bf7a45b1084aa418090603c20b92b1c",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:34+00:00",
+      "file": "jecfa/Chemical_822.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_823",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/823",
+      "bytes": 37223,
+      "sha256": "5703ea616cd6a2b0afa85b63ae09311290f1d4042d1c820fede645120a09a0ca",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:48:49+00:00",
+      "file": "jecfa/Chemical_823.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_829",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/829",
+      "bytes": 34566,
+      "sha256": "fc10a50f28cc386ae7a1417d425e5b0ba37cbb20ec2339d3c85b916e1625b49e",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_829.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_837",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/837",
+      "bytes": 34261,
+      "sha256": "0c08511a4478ef3be787822469ecef5c58f485e97e6bf3e9b0ce5d3dd55ab9df",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:08:48+00:00",
+      "file": "jecfa/Chemical_837.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_863",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/863",
+      "bytes": 33989,
+      "sha256": "8b382d5020b8876dfca2ee33d901b72db231b6fa5699464e9159754b3d994c8d",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:47+00:00",
+      "file": "jecfa/Chemical_863.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_877",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/877",
+      "bytes": 35510,
+      "sha256": "0771f59c708f00462e4fcdcefb548807b8ca51c11e062a36fc7aad51c66e47aa",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:06+00:00",
+      "file": "jecfa/Chemical_877.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_889",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/889",
+      "bytes": 35884,
+      "sha256": "614cbb22ea95028651a68839521623a33bdee94aaafb6fcc3c4d6210f557d6f9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:42+00:00",
+      "file": "jecfa/Chemical_889.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_900",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/900",
+      "bytes": 35224,
+      "sha256": "f7eab75df52128a17ff7358c8554f8b56cb189877a1efa58d22c519ef644d1d9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:51:14+00:00",
+      "file": "jecfa/Chemical_900.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_917",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/917",
+      "bytes": 34138,
+      "sha256": "119e3ffa5b544eb08f8c7e95d27a2acc1b9cc0115a5c6a30b105bc236374c728",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_917.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_926",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/926",
+      "bytes": 34522,
+      "sha256": "c67c7bab0b6dea2cea3f992c87980c6e50248b07669c0c40a2443ee05f9bbf44",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:08:40+00:00",
+      "file": "jecfa/Chemical_926.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_939",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/939",
+      "bytes": 33331,
+      "sha256": "b9403142562d27791ad8eda362eb2a7d6c376046cec56cdf70992ac2e55a53a1",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:08:33+00:00",
+      "file": "jecfa/Chemical_939.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_940",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/940",
+      "bytes": 38378,
+      "sha256": "3d07448254c693343d103088e00db42fb3bae609017c9150a74a09af5c9df56d",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_940.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_942",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/942",
+      "bytes": 36586,
+      "sha256": "ecf37fa8382781f9aa859ce401d3d1bbd7fbca6875cf12ef48614688eea6b578",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_942.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_959",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/959",
+      "bytes": 34127,
+      "sha256": "11965e92793ecb37bbc40ce8d45c8a3d23909c11c078e9d82df75f3101666d0c",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:28+00:00",
+      "file": "jecfa/Chemical_959.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_985",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/985",
+      "bytes": 34353,
+      "sha256": "c2c8a1be39db49e946ebdf845c67134b647977fed72a1d1e1ccfcfece4d2546b",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_985.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1040",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1040",
+      "bytes": 34034,
+      "sha256": "77f172976536c733a7503a085599fbe39264d0ef7dbfcbf35983fe65f46ea21c",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:28:39+00:00",
+      "file": "jecfa/Chemical_1040.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1079",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1079",
+      "bytes": 35312,
+      "sha256": "617db8cc6c1d7d0cb4696e22c78e6c68685edf652e08cb18328388b1c57e69e4",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:59:03+00:00",
+      "file": "jecfa/Chemical_1079.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1098",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1098",
+      "bytes": 36480,
+      "sha256": "098a0ad5e71795f5a826ba9af37c9697aab90591f2f7823be0120fbf05cb2127",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:33+00:00",
+      "file": "jecfa/Chemical_1098.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1126",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1126",
+      "bytes": 33915,
+      "sha256": "36779d848728cd894eb6a0569ee6470c38f4259f150ac953aecf88d0e573bbcd",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:51:24+00:00",
+      "file": "jecfa/Chemical_1126.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1133",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1133",
+      "bytes": 34024,
+      "sha256": "6e82c9cf0bf96e939c8b165f75a3a0cd818b82b0202a43500a48fe19fd123a59",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:25:01+00:00",
+      "file": "jecfa/Chemical_1133.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1163",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1163",
+      "bytes": 34027,
+      "sha256": "68f0a6e5ab24c9521e0d1038ef85e5bc2811264e5ef8c11c6614eb4beed6ece2",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:24:55+00:00",
+      "file": "jecfa/Chemical_1163.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1186",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1186",
+      "bytes": 33854,
+      "sha256": "355dfc2df84ac17f208d02763c4d9a249b9c4a15e6a93117ec8bb1b6f590dfc7",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:18:11+00:00",
+      "file": "jecfa/Chemical_1186.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1215",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1215",
+      "bytes": 34120,
+      "sha256": "5de8ec27d2f24ca095a0d8eee7868bd0740dd37ecbedcc619f0405ba10de5599",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:32+00:00",
+      "file": "jecfa/Chemical_1215.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1272",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1272",
+      "bytes": 34350,
+      "sha256": "5eb2a2a08c34874002155c37173bebb6f50055416ec9e30252c3eea13cddc165",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:37+00:00",
+      "file": "jecfa/Chemical_1272.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1320",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1320",
+      "bytes": 35348,
+      "sha256": "c9d77a8e6746d3f50c91e31fd0398687c03b4a502c7ac8c99531e7606c02bdd8",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:44:44+00:00",
+      "file": "jecfa/Chemical_1320.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1355",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1355",
+      "bytes": 35044,
+      "sha256": "5216758e2d562d81ec4f93483d1f105e5770e1a76fc1ddafd70f1a3b5afb7cde",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:58:18+00:00",
+      "file": "jecfa/Chemical_1355.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1360",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1360",
+      "bytes": 33865,
+      "sha256": "4eba902298b1772b8a657132a7a1819e27c30f32ebb16702e051d46633586834",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:46+00:00",
+      "file": "jecfa/Chemical_1360.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1370",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1370",
+      "bytes": 34597,
+      "sha256": "5419c5398b450b5cf41030add65d2e998bc0e9a5f84f3288772f1ece974b8861",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:27:31+00:00",
+      "file": "jecfa/Chemical_1370.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1477",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1477",
+      "bytes": 34763,
+      "sha256": "32af8d27c26b4f48e954405d17b744c962a5193f32dab38f052e4471952fcf72",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:19+00:00",
+      "file": "jecfa/Chemical_1477.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1478",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1478",
+      "bytes": 33058,
+      "sha256": "6f174a3798c6c1d21abf8592e8a678b1b751a87fc357169b7553a8b069cbc210",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:46:52+00:00",
+      "file": "jecfa/Chemical_1478.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1514",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1514",
+      "bytes": 39046,
+      "sha256": "8199f7c455d5b63d490a579c2d382efcdeeeeb56df4e81e33e3d670e8e6841fe",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_1514.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1532",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1532",
+      "bytes": 37248,
+      "sha256": "4011da7e421d8c7f8104104b587fb857b020da1ad2f91fa50894bd8dbcde6c87",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:48:57+00:00",
+      "file": "jecfa/Chemical_1532.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1552",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1552",
+      "bytes": 34005,
+      "sha256": "ce76907adc8159e74c67585d552c4b68a5dc4e244e106ec429103e8c2dabcbeb",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:00+00:00",
+      "file": "jecfa/Chemical_1552.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1565",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1565",
+      "bytes": 35111,
+      "sha256": "31a5cad9e982440a32158eea7603f7d9a0b7fcfa2d58d2f6e3b7a9905725d47b",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:50:01+00:00",
+      "file": "jecfa/Chemical_1565.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1569",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1569",
+      "bytes": 34492,
+      "sha256": "a5988b705155585dd3c83dd3d07f6bb376f62de30e46667fa1fe9996f002998f",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_1569.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1668",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1668",
+      "bytes": 34187,
+      "sha256": "7a4bfbdd5e32ba8e357079fe643fd9d87aafecaf4ad38ffcaa5c8c7ca60abdb7",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:18:57+00:00",
+      "file": "jecfa/Chemical_1668.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1704",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1704",
+      "bytes": 35247,
+      "sha256": "38929386bed277d8c9eb35acf52bb7140efd0724670f54774a46533ed6d65a5f",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_1704.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1765",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1765",
+      "bytes": 36484,
+      "sha256": "e54543d7b3d83cffd0634db8bdd7ae681eadd630bc1eded2365bce17ca75a005",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:49+00:00",
+      "file": "jecfa/Chemical_1765.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1777",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1777",
+      "bytes": 34531,
+      "sha256": "802cebdf87a72cd53c9c32eb4876c4f2c84fe7b0e2f937874f443848f00944a6",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:48:10+00:00",
+      "file": "jecfa/Chemical_1777.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1802",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1802",
+      "bytes": 37260,
+      "sha256": "f68c1b17ec6f38e7c67cfe95b4744bd8a212d33be5e92fdabd17cf33d3aabe9f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:49:01+00:00",
+      "file": "jecfa/Chemical_1802.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1823",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1823",
+      "bytes": 33790,
+      "sha256": "c443a94da45a6b5056ece0a5b3539ec93f1c85c2a53f47519eca61e770a8c8de",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:24+00:00",
+      "file": "jecfa/Chemical_1823.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1824",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1824",
+      "bytes": 34709,
+      "sha256": "a89ff12a2d041bccbce669888e56f75466d1e5e0655589691be454d86ecbdf95",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:43+00:00",
+      "file": "jecfa/Chemical_1824.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1874",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1874",
+      "bytes": 34106,
+      "sha256": "10f866fc0e5f74b510dacf10876bbc21f97d538b600fbe57024586c7f42cb343",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:36+00:00",
+      "file": "jecfa/Chemical_1874.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1892",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1892",
+      "bytes": 33775,
+      "sha256": "72b05f27077fba742aa55783f1cc2d8a9ac94b8913682ee067aeadb405329e36",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:26+00:00",
+      "file": "jecfa/Chemical_1892.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_1910",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1910",
+      "bytes": 35092,
+      "sha256": "1996e006b128fd5dac80f0fb34277ab375f3f06cbff7560075a585d5c6813fca",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T04:26:45+00:00",
+      "file": "jecfa/Chemical_1910.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2018",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2018",
+      "bytes": 35708,
+      "sha256": "bdb8bd2010171ef2134b9aae1936768ca2f8d1b17514806d88fc44fdaa5be955",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T04:26:51+00:00",
+      "file": "jecfa/Chemical_2018.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2056",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2056",
+      "bytes": 37572,
+      "sha256": "7cb5b1c258d764ea9c2698bc31456b18712c5e34fa5fe2d9839626041a046a04",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:04:45+00:00",
+      "file": "jecfa/Chemical_2056.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2119",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2119",
+      "bytes": 34546,
+      "sha256": "f37f277b6e51acf6c4aa270e2968959f15cc5073151dbdb9da0dee4c24186cab",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:18:35+00:00",
+      "file": "jecfa/Chemical_2119.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2132",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2132",
+      "bytes": 33838,
+      "sha256": "46b9033ad104cf5d6e3d7022827655d657c6690a3120694c2e9b0080d6de6a12",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:09:11+00:00",
+      "file": "jecfa/Chemical_2132.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2142",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2142",
+      "bytes": 34909,
+      "sha256": "9cb53ba31a9f336c1306da52a0fc82f1c6779b96e3263964e062c1cd3407e93f",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_2142.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2163",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2163",
+      "bytes": 34526,
+      "sha256": "62815ad896b9ed2c5806507c9fa36a19dff2a0bf295733d412acdcbd7d04e5c5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:13+00:00",
+      "file": "jecfa/Chemical_2163.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2181",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2181",
+      "bytes": 36051,
+      "sha256": "ce93c9e3ccbd180d07fcdf86cc25f8772a0feddbbe25ebc4183aef28f22ea0cb",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:05:41+00:00",
+      "file": "jecfa/Chemical_2181.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2257",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2257",
+      "bytes": 34543,
+      "sha256": "423637f3d4f30778cadbdc1ce078c4def5ff45ce4c802859ad80e8aebfd34e3a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:27:53+00:00",
+      "file": "jecfa/Chemical_2257.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2269",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2269",
+      "bytes": 34662,
+      "sha256": "ba23b66cc56dbc1c5925678f6f22c0cde80c453e1e6dd2828d62e8e1382d913a",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:21:23+00:00",
+      "file": "jecfa/Chemical_2269.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2271",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2271",
+      "bytes": 38119,
+      "sha256": "4877db93170b160750005b3a2fabec74028a6da5b459e746ccb262441a72cf53",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:56+00:00",
+      "file": "jecfa/Chemical_2271.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2323",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2323",
+      "bytes": 34150,
+      "sha256": "b12271e975b55773712c3931ede456442966d61a827c248cb3540e6cce2cd95b",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:19:19+00:00",
+      "file": "jecfa/Chemical_2323.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2340",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2340",
+      "bytes": 34234,
+      "sha256": "6857c1f8a7a8d8e123f1822550be845081ef12258536fc925139ea5d9a92faa7",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:28:44+00:00",
+      "file": "jecfa/Chemical_2340.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2343",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2343",
+      "bytes": 35758,
+      "sha256": "276d494d5d4d493eee9277c59a13cabda6c0a53115c56502e7c7b827b3aa0aff",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:37+00:00",
+      "file": "jecfa/Chemical_2343.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2361",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2361",
+      "bytes": 36374,
+      "sha256": "2a5fe83670704873a84bf3a4396fbc8f853134412280ad7b4cbb7e61b6c28b20",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:59:17+00:00",
+      "file": "jecfa/Chemical_2361.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2372",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2372",
+      "bytes": 34382,
+      "sha256": "d0f8f9e7fb8809977aa88fb4add67ad6681b62587910f2f0ba01faf470cf6a74",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:22+00:00",
+      "file": "jecfa/Chemical_2372.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2400",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2400",
+      "bytes": 34038,
+      "sha256": "319a86ffe43ab3eba36009a73594bfda77c36f1e2ec7e4a23c55f1ae6d8f4579",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:51:07+00:00",
+      "file": "jecfa/Chemical_2400.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2443",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2443",
+      "bytes": 34359,
+      "sha256": "181b18b9f39183bd75154c0e01659b8e65fabc731698d2f92afff18361c17c64",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:25+00:00",
+      "file": "jecfa/Chemical_2443.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2461",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2461",
+      "bytes": 36961,
+      "sha256": "8369f4566b76031bc03d40fb2fc0d84996e19343e1e978c4754dead5331689bd",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:28+00:00",
+      "file": "jecfa/Chemical_2461.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2507",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2507",
+      "bytes": 36012,
+      "sha256": "941397c4e2f30244e13eaa5f1a23ac3b0bbbd52c5f559fd9253ff3df885ded22",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:05:18+00:00",
+      "file": "jecfa/Chemical_2507.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2512",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2512",
+      "bytes": 34256,
+      "sha256": "e7f6fc1736fd7253bfe68ae76ca9d769f32919dc9cc142ad0ef3429d754eb6cc",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:29:44+00:00",
+      "file": "jecfa/Chemical_2512.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2553",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2553",
+      "bytes": 36238,
+      "sha256": "a9ec9ee0a31ca737b9b87d56754a3303fb6ddaf999898367a006eb59e83aa6c2",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:32+00:00",
+      "file": "jecfa/Chemical_2553.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2639",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2639",
+      "bytes": 37206,
+      "sha256": "19ded888835e74736c352de23115a3ca18250165dc36a56fe90576be993995dc",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_2639.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2641",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2641",
+      "bytes": 34303,
+      "sha256": "3211d43c4161690179a6c9c8ffb9b64816586a19d8a21fe96d4897244550f54f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:41+00:00",
+      "file": "jecfa/Chemical_2641.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2698",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2698",
+      "bytes": 35375,
+      "sha256": "1bd5b5d387f59dace7c933192f8574e85239dc1e4ad8dc287263551904bbb453",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T18:43:19+00:00",
+      "file": "jecfa/Chemical_2698.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2706",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2706",
+      "bytes": 36682,
+      "sha256": "2d0ebdfd5a69dec50f790e31d4d16b955816980bb99fbb22bd851e94531696d5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:19:51+00:00",
+      "file": "jecfa/Chemical_2706.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2709",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2709",
+      "bytes": 34193,
+      "sha256": "0661a6689ffb901c592e84b78e7509f3002f4a801624179fa3087b14981e5bbc",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:18+00:00",
+      "file": "jecfa/Chemical_2709.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2711",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2711",
+      "bytes": 33476,
+      "sha256": "e2bf6aa93720fceee27512d3acee35d965a44400483042d30277f2358ed74852",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:24+00:00",
+      "file": "jecfa/Chemical_2711.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2723",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2723",
+      "bytes": 38638,
+      "sha256": "362508bf9d3d37f58791c2cffc0d4d31808f5986dfe70f5084d00aea95516433",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_2723.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2724",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2724",
+      "bytes": 34336,
+      "sha256": "a137260291b15ef29fd1715c65a15b254c24e5b83622719bbc8913fd1d7c8a16",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:29+00:00",
+      "file": "jecfa/Chemical_2724.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2736",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2736",
+      "bytes": 36816,
+      "sha256": "3e7712668f5ebe990878f15825ef11df3313f81920333d4e110641c16b73c0e9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:51:26+00:00",
+      "file": "jecfa/Chemical_2736.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2777",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2777",
+      "bytes": 33975,
+      "sha256": "7a788953a1e2925fb1db439736073e1dfed9614e4b0dc933d99731c56634cdee",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:03:08+00:00",
+      "file": "jecfa/Chemical_2777.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2804",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2804",
+      "bytes": 33693,
+      "sha256": "594b6f450c5b32e484dd6ae77af6da2cbd1086f8a8ee51796a502be8b577bdc3",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:03+00:00",
+      "file": "jecfa/Chemical_2804.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2821",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2821",
+      "bytes": 34823,
+      "sha256": "76e35cde25f726c18df1cf1d6113be1b42f705c945e3109cbe4b2ff4e807afaf",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:37+00:00",
+      "file": "jecfa/Chemical_2821.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2855",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2855",
+      "bytes": 37416,
+      "sha256": "146e63352bd99b5ff6e4f0af770f831d8e3cda65d4b85c81593b630e227a57c2",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:50:05+00:00",
+      "file": "jecfa/Chemical_2855.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2876",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2876",
+      "bytes": 34039,
+      "sha256": "7fd7403cb6c72b12b7d9fdbd0ce0e2e1d3d80793cbf43b0ab1aa9e63ac4ea035",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:21:11+00:00",
+      "file": "jecfa/Chemical_2876.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2928",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2928",
+      "bytes": 33664,
+      "sha256": "0ae37f78425819a8905cefa719f37c3ccfd084d688dfe3c1aa94ff661bef289f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:17:31+00:00",
+      "file": "jecfa/Chemical_2928.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2970",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2970",
+      "bytes": 33734,
+      "sha256": "0659ebb86f58c59dd854b441c4f7699c85b2802f0aa4ecc03d9d6dc42f560b5f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:59+00:00",
+      "file": "jecfa/Chemical_2970.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_2989",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2989",
+      "bytes": 37058,
+      "sha256": "a1cf079d32c29daab8e941168cc873149c41df2d5c2ecf0811652d82db4dfc37",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:48:53+00:00",
+      "file": "jecfa/Chemical_2989.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3008",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3008",
+      "bytes": 36224,
+      "sha256": "64a3ac299f3d348d30a1d03a0112135cb2404be93d6c6581f924666cf9df6809",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:07+00:00",
+      "file": "jecfa/Chemical_3008.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3043",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3043",
+      "bytes": 39894,
+      "sha256": "b72ef5512e77344e7f0402008067fe78f7b6ed81cdd78d333d348ba030b0ffd6",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:38+00:00",
+      "file": "jecfa/Chemical_3043.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3252",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3252",
+      "bytes": 33680,
+      "sha256": "429c650199ee00e97a4d68e8d8af8cc35f496d8f8d578799cc52d6feb82697b4",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:18+00:00",
+      "file": "jecfa/Chemical_3252.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3281",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3281",
+      "bytes": 35766,
+      "sha256": "accb5fd3e1b1bdce156765f49e1ff1c3290fe3d0ae03a05fd69662c7135c66ab",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:46+00:00",
+      "file": "jecfa/Chemical_3281.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3309",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3309",
+      "bytes": 36676,
+      "sha256": "edca735daf786d4502ff9040af701340a53efaf399ef6936382a6ce124f0d24d",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:59:20+00:00",
+      "file": "jecfa/Chemical_3309.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3367",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3367",
+      "bytes": 35159,
+      "sha256": "97b10b835a30d8e3968d25c1e326f0b7c324434950b975a15725a9b1c664e7f3",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:46:40+00:00",
+      "file": "jecfa/Chemical_3367.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3389",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3389",
+      "bytes": 34410,
+      "sha256": "e54c30c384c71cc85c987fcdf6ac98fe34310689f040be44257066d4848168ee",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:59:07+00:00",
+      "file": "jecfa/Chemical_3389.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3466",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3466",
+      "bytes": 38281,
+      "sha256": "c8667706b90bc0b2fb6dbc890d717e76a4798fef4d2cec922acbbbdc1df97c5b",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_3466.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3487",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3487",
+      "bytes": 33875,
+      "sha256": "d01ad6dd152304ad7987b8d5ede6e38478a205689f020885263835f300b19699",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T18:43:19+00:00",
+      "file": "jecfa/Chemical_3487.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3547",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3547",
+      "bytes": 33982,
+      "sha256": "b465b7596ec0c34c5470d7ef502df47cfec771a4435908e3761e504011f7334e",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:05:14+00:00",
+      "file": "jecfa/Chemical_3547.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3561",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3561",
+      "bytes": 35708,
+      "sha256": "b88e76f240203a8526bf29597e65b631c0df2220d31df14e5736896c3a59c2e5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:26:33+00:00",
+      "file": "jecfa/Chemical_3561.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3585",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3585",
+      "bytes": 37432,
+      "sha256": "a3d6e45ea31591949436a44176e4f355b6aeb8821cab3b05b4cc1e399682a4a5",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:05:21+00:00",
+      "file": "jecfa/Chemical_3585.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3594",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3594",
+      "bytes": 36050,
+      "sha256": "a606f39f6ac353e2607445b2806f0498617577fd9b7e4065310e4228d826cfe1",
+      "ok": true,
+      "retrieved_utc": "2026-11-08T10:28:22+00:00",
+      "file": "jecfa/Chemical_3594.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3616",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3616",
+      "bytes": 33433,
+      "sha256": "68c9b5876dcafdfdb945dc24b106bde49c3400a913a30bd19d9af8f45ff86780",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:50:09+00:00",
+      "file": "jecfa/Chemical_3616.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3645",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3645",
+      "bytes": 33398,
+      "sha256": "4a6d52438ba5d74f0707ffa2a8d0fd806865ce3108b85ed870ab2b8e2a138f18",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:52:24+00:00",
+      "file": "jecfa/Chemical_3645.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3694",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3694",
+      "bytes": 35735,
+      "sha256": "f10b3a0046b8384aa81edf68205eb21c199f31310cdcba322039f42ad2ea0a60",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:44:02+00:00",
+      "file": "jecfa/Chemical_3694.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3740",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3740",
+      "bytes": 36684,
+      "sha256": "7364fd53779e60e7be68ad50651981696b278a0b722187728c473e2adb567ea9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:59:14+00:00",
+      "file": "jecfa/Chemical_3740.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3773",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3773",
+      "bytes": 34705,
+      "sha256": "8fab5d3c47efaeadfadd9bc58fe76252cf3c16b5ce1ddb05dbe80081371d8fbd",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:22+00:00",
+      "file": "jecfa/Chemical_3773.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3792",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3792",
+      "bytes": 34795,
+      "sha256": "9f34014c7ce3fd45068d939073af4facf1046791c0fd05e27723147f0417d1e0",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:49:42+00:00",
+      "file": "jecfa/Chemical_3792.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3856",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3856",
+      "bytes": 33905,
+      "sha256": "c9ce34e3b76cef8649683ca1d53987e67bdf365e087c22ff9aa1b879be58d512",
+      "ok": true,
+      "retrieved_utc": "2026-11-22T07:39:18+00:00",
+      "file": "jecfa/Chemical_3856.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3883",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3883",
+      "bytes": 34602,
+      "sha256": "a2a3099a6b7bf2be8fd4e922fc4418d9f75af2069fe25275ea4c5caa0b4d029f",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:24:50+00:00",
+      "file": "jecfa/Chemical_3883.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3885",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3885",
+      "bytes": 35971,
+      "sha256": "b5d7bec532615f33f3cf5d4beeee15ffdd72687c1361f4d97617fb082c3b6e07",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:58:34+00:00",
+      "file": "jecfa/Chemical_3885.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3939",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3939",
+      "bytes": 34064,
+      "sha256": "a9f847d5d3173f784d583d883a874de61f141a5c98b540d1f216d3db4b7ed5bc",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:53+00:00",
+      "file": "jecfa/Chemical_3939.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3983",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3983",
+      "bytes": 38072,
+      "sha256": "7c4adbd509489cf91dd84e315c7e9a7139e4b10dfaed97602199d575bba47c06",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:07:01+00:00",
+      "file": "jecfa/Chemical_3983.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_3999",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3999",
+      "bytes": 34526,
+      "sha256": "ead5d3f15170d71f5e0003b94b05110cf02f3ef843d76243a7c3fcc76f6f6225",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:02:09+00:00",
+      "file": "jecfa/Chemical_3999.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4009",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4009",
+      "bytes": 33945,
+      "sha256": "9126853ed9f5e390655368336f79391e3b72dd5dbab88e8ed7f78d3457d08467",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:46+00:00",
+      "file": "jecfa/Chemical_4009.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4092",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4092",
+      "bytes": 35021,
+      "sha256": "cc92353db6eb560d0b77bb9c2daab714096429489eb62d32f36f9b7484d92f96",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T05:58:30+00:00",
+      "file": "jecfa/Chemical_4092.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4140",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4140",
+      "bytes": 33464,
+      "sha256": "577436f66c2898223953d9fc517eaa140b7fe48a48f28ced0bda993938b14168",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:27:59+00:00",
+      "file": "jecfa/Chemical_4140.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4275",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4275",
+      "bytes": 36924,
+      "sha256": "918ec8476e6b693c4c21d4ccc3165d8d218a7adc871467bc3af03697d9e82551",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:06:31+00:00",
+      "file": "jecfa/Chemical_4275.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4276",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4276",
+      "bytes": 34304,
+      "sha256": "ba0a87549c7a713c846ef01222721255063d210acf94637ba4a17ed0a54ffb47",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:09:07+00:00",
+      "file": "jecfa/Chemical_4276.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4292",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4292",
+      "bytes": 35785,
+      "sha256": "806622b89ed24715083f00f83d933eb43a0fe3cbf3aafd22fa9ebb7747c67dba",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:43:56+00:00",
+      "file": "jecfa/Chemical_4292.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4387",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4387",
+      "bytes": 34107,
+      "sha256": "8d11d452b6b97bc8b050c9d11b9cf547c17685464cfa1f09c48c200d82ef85a7",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:24:58+00:00",
+      "file": "jecfa/Chemical_4387.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4481",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4481",
+      "bytes": 34571,
+      "sha256": "fab8ed01a95dc07a793cd589cee17dae6cadd094b42a2f81946daa53d94243b3",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:50:13+00:00",
+      "file": "jecfa/Chemical_4481.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4486",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4486",
+      "bytes": 34346,
+      "sha256": "8165f174a7502624be1fbf1c3606bddd373f8bd59654fd73df16b5982f119ef9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:00:47+00:00",
+      "file": "jecfa/Chemical_4486.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4669",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4669",
+      "bytes": 34618,
+      "sha256": "eaa2f50fed14ff0903ee7416dd57cd93c2da7d1fc0dac1f48b7471c1be9cebb7",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:51:03+00:00",
+      "file": "jecfa/Chemical_4669.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4746",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4746",
+      "bytes": 36304,
+      "sha256": "3cf0021bf9cb913dd4833e7490e9d74bfada12d52cb8ba37adb0fae225ceaf5b",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:23:07+00:00",
+      "file": "jecfa/Chemical_4746.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4785",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4785",
+      "bytes": 37226,
+      "sha256": "425053d855e53f6af57cb4618ae493c5006be8deec0f7132c4a0a3a9e0bccb34",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T07:46:32+00:00",
+      "file": "jecfa/Chemical_4785.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4792",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4792",
+      "bytes": 36170,
+      "sha256": "991c3234cebb5d9baf88144a08569e1a35b958e938cd54526159ac5dc13270a7",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_4792.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_4941",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/4941",
+      "bytes": 36261,
+      "sha256": "2c2bbc1bdf5b4a53076da4bc1cf0dbc9e8b36719f526d4a5aa8c3e72395b83a1",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_4941.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_5107",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5107",
+      "bytes": 32850,
+      "sha256": "c28e47854acb7434c3a3ecb7f6a51ba5876051b9961d3d1de710a4798e0f04e4",
+      "ok": true,
+      "retrieved_utc": "",
+      "file": "jecfa/Chemical_5107.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_5163",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5163",
+      "bytes": 34626,
+      "sha256": "8cc189dca12a616da2d45e47a691c0a71017a71a983ab5cc81517f5b4951c649",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:22:06+00:00",
+      "file": "jecfa/Chemical_5163.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_5572",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5572",
+      "bytes": 34096,
+      "sha256": "60fa0b38bc581bc2d1277de0dd882e4846d4fafd4314980330d07098cdd14740",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:21:15+00:00",
+      "file": "jecfa/Chemical_5572.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_5866",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5866",
+      "bytes": 36501,
+      "sha256": "86fb06536da19170a4d70ccf1f063766fbe743180d8b2a3503eb4ae1349f33cb",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:00:50+00:00",
+      "file": "jecfa/Chemical_5866.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_5880",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/5880",
+      "bytes": 32673,
+      "sha256": "14473b8b2edefd4b1db9a0194680f5fb8661049242b8820463c4780bbaf3ef6d",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:21:20+00:00",
+      "file": "jecfa/Chemical_5880.html"
+    },
+    {
+      "source_id": "JECFA_CHEMICAL_6197",
+      "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/6197",
+      "bytes": 32607,
+      "sha256": "097aeffb0c18c8562ca7415bb1e5efedef597ee15c44106a0b1241aa67e337e9",
+      "ok": true,
+      "retrieved_utc": "2026-11-09T06:01:08+00:00",
+      "file": "jecfa/Chemical_6197.html"
     }
   ]
 }

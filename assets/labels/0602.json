@@ -1,0 +1,50 @@
+{
+  "product_name": "Sữa chua TH true YOGURT",
+  "ingredient": [
+    "Sữa hoàn toàn từ sữa bò tươi (84%)",
+    "Cream từ sữa tươi (12%)",
+    "Đạm sữa",
+    "Tinh bột",
+    "Gelatin",
+    "Khoáng chất (calci carbonat)",
+    "Enzyme lactase",
+    "Men Streptococcus thermophilus",
+    "Men Lactobacillus bulgaricus"
+  ],
+  "additive": [
+    "Chất ổn định (471) - Mono- và diglycerid của các acid béo"
+  ],
+  "warning": [
+    "Sản phẩm có chứa sữa / Contains milk"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "107,1 kcal"
+    },
+    {
+      "name": "Chất đạm",
+      "value": "4,5 g"
+    },
+    {
+      "name": "Carbohydrat",
+      "value": "4,5 g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "7,9 g"
+    },
+    {
+      "name": "Natri",
+      "value": "47 mg"
+    },
+    {
+      "name": "Calci",
+      "value": "179 mg"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": "100g",
+  "mfg_date": null,
+  "expiry_date": null
+}

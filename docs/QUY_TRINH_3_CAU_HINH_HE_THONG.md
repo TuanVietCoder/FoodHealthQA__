@@ -280,6 +280,17 @@ Hệ thống có hai loại đầu vào, phục vụ hai mục đích khác nhau
      * **Thiếu dữ liệu** (`insufficient_data`) — nhãn hoặc thông tin người dùng không đủ cho câu hỏi: không có câu cảnh báo nhiễm chéo (PAL) khi hỏi về nhiễm chéo; không xác định được phụ gia nào theo tên/mã INS; thiếu hàm lượng/khẩu phần để đối chiếu ADI/ML; phụ gia không khớp KB; độ tin cậy OCR/truy xuất thấp. Lời khuyên: **chụp lại nhãn rõ hơn** (nêu cụ thể phần cần chụp) hoặc **bổ sung thông tin** còn thiếu.
      * **Vượt phạm vi** (`out_of_scope`) — câu hỏi đòi chẩn đoán, điều trị, thuốc/tương tác thuốc, thay thế điều trị bằng thực phẩm hoặc lập chế độ ăn cá nhân. Lời khuyên: **trao đổi với bác sĩ, dược sĩ hoặc chuyên gia dinh dưỡng phù hợp**.
      Hai điều kiện trên không phụ thuộc độ tin cậy OCR, nên Cấu hình B (văn bản nhãn tham chiếu, OCR = 1,0) vẫn từ chối khi nhãn thiếu dữ liệu. `CRITICAL_ALERT` không bao giờ bị hạ thành `ABSTAIN` (chỉ được gắn thêm lời khuyên); cảnh báo dị nguyên trực tiếp được giữ nguyên và gắn thêm phần dữ liệu thiếu. Dị nguyên người dùng nêu trong câu hỏi (bỏ qua tên sản phẩm trong dấu nháy) được cộng vào hồ sơ dị ứng. Đo trên bộ chuẩn: `scripts_research/measure_abstention.py` — từ chối đúng 330/345 câu gold ABSTAIN (95,7%, trước đây 36%), từ chối nhầm 77/1525 câu còn lại (5,0%, trước đây 18%). Đây là số đo tầng luật, không gồm LLM, dựng văn bản nhãn từ tệp phiên âm.
+   * **Phạm vi của hệ thống và các loại thiếu dữ liệu.** Hệ thống *tra cứu và giải thích* ADI; chỉ *tính toán* mức phơi nhiễm khi đủ dữ liệu định lượng (hàm lượng phụ gia, khẩu phần, cân nặng — `evaluate_adi_compliance` ghi cờ `data_completeness` cho từng đại lượng). Thiếu một trong số đó thì nêu rõ **chưa đủ dữ liệu để đánh giá có vượt ADI hay không**, không đưa kết luận. Hệ thống không chẩn đoán, không điều trị, không quyết định thay bác sĩ. Năm loại thiếu dữ liệu và cách hệ thống xử lý:
+
+     | Thiếu | Xử lý trong hệ thống |
+     |---|---|
+     | Hàm lượng hoặc lượng tiêu thụ | ADI chỉ tra cứu và giải thích; ghi "chưa đủ dữ liệu định lượng để đánh giá vượt ADI" (`compliance_status = INSUFFICIENT_DATA`) |
+     | Thông tin dị nguyên hoặc nguy cơ nhiễm chéo | `insufficient_data`, mã `CROSS_CONTACT_STATEMENT`: đề nghị chụp lại phần cảnh báo 'có thể chứa…' |
+     | Bằng chứng phù hợp với nhóm người dùng | Không từ chối, chỉ thêm dòng lưu ý (`population_notes`): người cao tuổi, phụ nữ cho con bú, trẻ dưới 12 tháng, và bệnh nền mà KB chưa có lưu ý phụ gia đã kiểm nguồn (`CONDITION_NO_ADDITIVE_EVIDENCE`, vd bệnh gút, thai kỳ); với đái tháo đường và tăng huyết áp nêu thêm rằng chỉ so đường/natri với ngưỡng Codex khi nhãn ghi số liệu |
+     | Thực thể tương ứng trong KB | `insufficient_data`, mã `ADDITIVE_IDENTITY` và khoảng trống do tầng QA động phát hiện: đề nghị chụp lại phần thành phần để thấy tên hoặc mã INS cụ thể |
+     | Nguồn đủ rõ để giải quyết câu hỏi | Không truy xuất được đoạn bằng chứng nào, hoặc câu trả lời của mô hình không bám đúng danh sách nguồn đã truy xuất (cổng nguồn `check_answer_sources`): từ chối kèm lý do thay vì trả lời không nguồn |
+
+     Câu trả lời của chat vì vậy thuộc hai nhóm: **(1) đủ dữ liệu** — trả lời theo luật và bằng chứng, kèm nguồn; **(2) thiếu dữ liệu** — nêu rõ thiếu gì và đề nghị chụp lại nhãn, bổ sung nhãn hoặc thông tin; riêng câu hỏi vượt phạm vi thì chuyển đến chuyên gia (`out_of_scope`).
 6. **Bước 6: Đóng gói Ngữ cảnh Tri thức Thực tế & Khởi tạo Lời tư vấn**
    * Khi dữ liệu đạt chuẩn an toàn, toàn bộ chứng cứ thu thập được cùng các cảnh báo lâm sàng được đưa vào bản chỉ thị nghiêm ngặt gửi tới mô hình ngôn ngữ (Gemini hoặc Qwen2.5).
    * LLM tổng hợp thành văn bản tư vấn tiếng Việt hoàn chỉnh, dẫn chứng từng mã nguồn đối soát.
@@ -301,13 +312,13 @@ Dưới đây là ma trận 10 bước xử lý tiêu chuẩn trong toàn bộ p
 | **3** | **Khử nhiễu & Phục hồi Chính tả** | ❌ Bỏ qua | ❌ Bỏ qua (dùng annotation có sẵn; độ chính xác chưa xác minh độc lập) | ✅ Kích hoạt `SpellingCorrector` (sửa dấu tiếng Việt, chuẩn hóa `INS 50O` $\to$ `INS 500`) | Giảm thiểu lỗi chính tả chuyên ngành thực phẩm |
 | **4** | **Liên kết Thực thể (Entity Linking)** | ❌ Bỏ qua (LLM tự suy đoán) | ✅ Kích hoạt Multi-Agent (`INS`, `E-number`, `FoodOn` hierarchy) | ✅ Kích hoạt Multi-Agent với ngưỡng dung sai bất định (Uncertainty Handling) | Ánh xạ tên thương mại/thường gọi về mã chuẩn hóa |
 | **4b** | **Hiểu câu hỏi & tra theo câu hỏi (QA động)** | ❌ Bỏ qua | ✅ `dynamic_qa`: ý định, phụ gia/dị nguyên/chất dinh dưỡng được hỏi, tra KB theo câu hỏi, ghi vết | ✅ Cùng mã với B | Chỉ đọc câu hỏi + persona + nhãn + KB; không đọc bộ QA (mục 4.5) |
-| **5** | **Truy xuất Tri thức Đa nguồn (KB Retrieval)** | ❌ Bỏ qua (Closed-book) | ✅ Hybrid Search (BM25 + TF-IDF/SBERT) trên 13 nguồn quy chuẩn | ✅ Hybrid Search (BM25 + TF-IDF/SBERT) trên 13 nguồn quy chuẩn | Truy xuất quy định TT24, JECFA ADI, Codex, KDIGO, ACR, USDA |
+| **5** | **Truy xuất Tri thức Đa nguồn (KB Retrieval)** | ❌ Bỏ qua (Closed-book) | ✅ Hybrid Search (BM25 + TF-IDF/SBERT) trên 21 mã nguồn của kho đoạn bằng chứng | ✅ Hybrid Search (BM25 + TF-IDF/SBERT) trên 21 mã nguồn của kho đoạn bằng chứng | Truy xuất quy định TT24, JECFA ADI, Codex, EFSA, USDA |
 | **5b** | **Truy xuất đoạn bằng chứng (Passage Retrieval)** | ❌ Bỏ qua | ✅ BM25 + TF-IDF (+ dense `bge-m3` tùy chọn), hợp nhất RRF, có slot khớp mã INS | ✅ Cùng mã với B | Mục 4.6; tham số `passage_retrieval_enabled` của `run_grounded_pipeline` |
 | **6** | **Kiểm định Ràng buộc Số học & Lâm sàng** | ❌ Bỏ qua | ✅ Kích hoạt `ConstraintModel` (kiểm tra bất đẳng thức dinh dưỡng, cấm kỵ lâm sàng) | ✅ Kích hoạt `ConstraintModel` (kiểm tra bất đẳng thức dinh dưỡng, cấm kỵ lâm sàng) | Đánh giá độc lập logic y khoa trước khi sinh lời |
 | **7** | **Chốt chặn An toàn & Cơ chế Từ chối** | ❌ Bỏ qua (Dễ bị Hallucination) | ✅ Kiểm tra an toàn + **Principled Abstention** khi KB coverage thấp hoặc dữ liệu ADI không đầy đủ | ✅ Kích hoạt **Principled Abstention** ($S_{total} < \tau$, KB coverage thấp, hoặc ADI thiếu dữ liệu) | Ngăn chặn phán đoán liều lĩnh khi dữ liệu không đủ |
 | **8** | **Đóng gói Chỉ thị (Prompt Packaging)** | ✅ Đóng gói cơ bản (Prompt Zero-shot không tài liệu) | ✅ Đóng gói nghiêm ngặt: Ràng buộc bằng chứng y văn, cấm suy diễn | ✅ Đóng gói nghiêm ngặt: Ràng buộc bằng chứng y văn + cảnh báo OCR | Khung chỉ thị Grounded Prompting ép LLM tuân thủ |
-| **9** | **Mô hình Ngôn ngữ Sinh Lời tư vấn** | ✅ LLM đã chọn (tự sinh từ tham số nội tại) | ✅ LLM đã chọn (tổng hợp từ bằng chứng KB cung cấp) | ✅ LLM đã chọn (tổng hợp từ bằng chứng KB cung cấp) | LLM làm nhiệm vụ "Bác sĩ tư vấn & Người phát ngôn" |
-| **10**| **Đánh giá Khoa học & Đo Sai số** | Đo EM, Token F1, Accuracy | Đo EM, Token F1, Citation Recall/Precision (Năng lực RAG lý tưởng) | Đo EM, Token F1, Citation R/P, **Error Propagation** & **False Safe Rate** | Phân tích chênh lệch $(B - C)$ để định lượng tổn thất do khâu đọc ảnh |
+| **9** | **Mô hình Ngôn ngữ Sinh Lời tư vấn** | ✅ LLM đã chọn (tự sinh từ tham số nội tại) | ✅ LLM đã chọn (tổng hợp từ bằng chứng KB cung cấp) | ✅ LLM đã chọn (tổng hợp từ bằng chứng KB cung cấp)| LLM làm nhiệm vụ "Bác sĩ tư vấn & Người phát ngôn" |
+| **10**| **Đánh giá Khoa học & Đo Sai số** | Đo EM, Token F1, Accuracy | Đo EM, Token F1, Citation Recall/Precision (Năng lực RAG lý tưởng) | Đo EM, Token F1, Citation R/P, **Error Propagation** & **False Safe Rate**| Phân tích chênh lệch $(B - C)$ để định lượng tổn thất do khâu đọc ảnh |
 
 ---
 
@@ -416,27 +427,32 @@ Khâu đóng gói chỉ thị trước khi gửi sang cho LLM không đơn thu�
 
 Hệ thống tích hợp các chỉ số để so sánh 3 cấu hình. Với benchmark hiện tại, các chỉ số trả lời và safety được tính theo weak labels chưa được xác minh độc lập; chúng chỉ có ý nghĩa exploratory, không phải độ chính xác sức khỏe đã được chứng nhận.
 
+**Nguyên tắc số liệu:** mỗi con số thuộc đúng một trong ba loại và được ghi rõ: (1) **đo từ dữ liệu**; (2) **quy tắc có chủ đích** (ngưỡng, trọng số, cách gộp nhãn — phải kiểm chứng bằng dữ liệu, không trình bày như phép đo); (3) **không áp dụng** khi không đo được (mẫu số bằng 0, không có bằng chứng) — không điền 0 hay 1 thay thế.
+
 ### Nhóm 1: Chất lượng Đầu vào (Input Quality)
 Đánh giá mức độ chính xác của khâu tiền xử lý — chủ yếu áp dụng cho Cấu hình C (pipeline từ ảnh):
-* **CER / WER (Character/Word Error Rate):** Tỷ lệ lỗi ký tự và lỗi từ sau bước OCR so với annotation tham chiếu.
-* **Ingredient Extraction Precision / Recall / F1:** Đo lường khả năng trích xuất đúng và đầy đủ các thành phần từ chuỗi OCR.
-* **Entity Linking Accuracy:** Tỷ lệ thực thể được liên kết đúng với mã chuẩn INS/E-number trong KB.
+* **Độ phủ từ / độ phủ thành phần (không phụ thuộc thứ tự đọc):** tỉ lệ từ của danh sách thành phần chuẩn có trong chữ OCR; tỉ lệ thành phần OCR đọc được ≥ 80% số từ (`calibrate_confidence.py`). OCR hay đọc sai **thứ tự bố cục** nhãn, nên CER theo thứ tự ký tự bị phạt rất nặng (vd một ảnh 200 ký tự đầu chỉ sai 5% nhưng CER cả đoạn 59%).
+* **CER / WER theo thứ tự đọc:** vẫn báo cáo, ghi rõ tên này.
+* **Độ tin cậy OCR ↔ lỗi OCR:** tương quan Spearman giữa $S_{\text{perception}}$ (xác suất ký tự VietOCR) và mức thiếu từ/thiếu thành phần theo ảnh — kiểm tra điểm tin cậy có dùng được để từ chối không.
+* **Liên kết phụ gia (precision / recall / F1 theo mã):** so mã INS hệ thống liên kết được ở B và C với mã trên nhãn chuẩn (và với cột `ins_codes_matched`); mỗi mã C bỏ sót được quy về **lỗi OCR** (B tìm được) hoặc **lỗi liên kết** (B cũng sót) — `scripts_research/analyze_normalization_errors.py`.
 
 ### Nhóm 2: Truy xuất & Trả lời (Retrieval & Answer Quality)
 Đánh giá chất lượng tra cứu tri thức và câu trả lời sinh ra:
 * **Recall@k:** Tỷ lệ tài liệu liên quan được truy xuất trong top-k kết quả.
 * **Độ khớp Tuyệt đối (Exact Match - EM):** Tỷ lệ câu trả lời khớp chính xác với câu trả lời tham chiếu.
 * **Token F1:** Đo lường sự hài hòa giữa Precision và Recall ở cấp độ từ vựng.
-* **Citation Precision / Recall:** Tỷ lệ trích dẫn đúng và tỷ lệ nguồn quan trọng được viện dẫn đầy đủ. Chỉ tính các thẻ nguồn thuộc danh mục được công nhận (cộng thẻ khớp nguồn chuẩn của câu); thẻ lạ do mô hình tự bịa (ví dụ `[khong tim thay]`) bị loại khỏi precision nhưng được đếm riêng ở chỉ số bên dưới, không bị che giấu.
+* **Citation Precision / Recall:** Tỷ lệ trích dẫn đúng và tỷ lệ nguồn quan trọng được viện dẫn đầy đủ. Câu không trích nguồn nào → precision **không áp dụng** (không tính 0); câu không có nguồn chuẩn → recall không áp dụng; trung bình chỉ trên các câu xác định được, kèm số câu (`citation_precision_n`). Chỉ tính các thẻ nguồn thuộc danh mục được công nhận (cộng thẻ khớp nguồn chuẩn của câu); thẻ lạ do mô hình tự bịa (ví dụ `[khong tim thay]`) bị loại khỏi precision nhưng được đếm riêng ở chỉ số bên dưới, không bị che giấu.
 * **Citation Compliance (tuân thủ trích dẫn):** Tỷ lệ câu trả lời có ít nhất một thẻ nguồn được công nhận. Chỉ có ý nghĩa với B và C (A không truy xuất nên không có nguồn để trích). Mô hình nhỏ chạy cục bộ có thể bỏ sót trích dẫn một cách ngẫu nhiên, nên chỉ số này cần đo bằng nhiều lần chạy lặp (`scripts_research/measure_citation_compliance.py`).
 * **Unrecognized Citation Rate (tỷ lệ thẻ nguồn lạ):** Tỷ lệ câu trả lời chứa thẻ nguồn không thuộc danh mục, kèm số thẻ lạ trung bình mỗi câu (`unrecognized_tags_per_answer`). Dùng để phân tích hallucination ở mức trích dẫn.
-* **Groundedness & Faithfulness:** Đo lường tỷ lệ câu khẳng định được bảo chứng trực tiếp bởi bằng chứng, chứng minh hệ thống không sáng tác kiến thức.
+* **Groundedness (trùng từ):** tỉ lệ từ của câu trả lời có trong **bằng chứng thật mà mô hình đã đọc** (nhãn đầu vào + đoạn nguồn đã truy xuất, lưu trong mỗi dự đoán). Trước đây "bằng chứng" là danh sách thành phần (cả 750 câu đều trống `evidence_excerpt`) — không phản ánh các nhận định về quy định/sức khỏe. Đây là ước lượng bề mặt.
+* **Faithfulness (LLM làm giám khảo + người chấm):** mỗi nhận định được gán SUPPORTED / CONTRADICTED / NOT_ENOUGH_INFO với trích dẫn nguyên văn đã được kiểm tra có thật; báo cáo kèm Cohen's kappa với ~50 câu trả lời chấm tay (`scripts_research/judge_faithfulness.py`). Huy hiệu trên giao diện chỉ là **đối chiếu từ khóa**, không phải faithfulness.
 
 ### Nhóm 3: An toàn & Từ chối (Safety & Abstention)
 Đánh giá khả năng bảo vệ sức khỏe người dùng:
-* **Safety Label Accuracy:** Độ chính xác phân loại 5 trạng thái: SAFE, CAUTION, WARNING, CRITICAL_ALERT, ABSTAIN.
-* **False Safe Rate:** Tỷ lệ bỏ sót nguy cơ — sản phẩm thực tế chống chỉ định nhưng hệ thống phán đoán an toàn. Mục tiêu tối thượng: $0\%$.
-* **Unsafe Recall:** Tỷ lệ phát hiện đúng các trường hợp nguy hiểm thực sự.
+* **Safety Label Accuracy:** Độ chính xác phân loại 5 nhãn: SAFE, CAUTION, UNSAFE, CRITICAL_ALERT, ABSTAIN (guardrail `WARNING` → `UNSAFE`). Nhãn dự đoán không hợp lệ tính là **sai** và đếm riêng (cột `INVALID` của ma trận nhầm lẫn); trước đây chúng bị quy thành SAFE.
+* **SAFE do "chưa thấy cảnh báo":** số câu SAFE đến từ `SCREENED_NO_ALERT` (đã sàng lọc, không thấy cảnh báo) — báo riêng vì đây không phải cam đoan an toàn.
+* **False Safe Rate:** Tỷ lệ bỏ sót nguy cơ — nhãn chuẩn nguy hiểm (UNSAFE/CRITICAL_ALERT) nhưng hệ thống nói SAFE. Mục tiêu tối thượng: $0\%$.
+* **Unsafe Recall:** Tỷ lệ phát hiện đúng các trường hợp nguy hiểm thực sự; nhóm không có câu nguy hiểm → không áp dụng. Điểm gộp "safety score" 0,6×accuracy + 0,4×recall đã bỏ (trọng số tự chọn).
 * **Non-Abstain Coverage:** Tỷ lệ câu hỏi được hệ thống trả lời (không từ chối) — đo khả năng phục vụ.
 * **Confusion Matrix:** Bảng thống kê chi tiết sự dịch chuyển giữa các mức độ cảnh báo, giúp chỉ ra hệ thống hay nhầm lẫn giữa mức nào với mức nào.
 
@@ -450,7 +466,10 @@ Câu hỏi người dùng gõ tự do không có đáp án chuẩn, nên không 
 * **Từ chối đúng lúc:** khi KB không có thông tin, hệ thống nói "chưa đủ dữ liệu" thay vì bịa (vết tra cứu cho thấy nguồn nào không tìm thấy).
 * **Rà soát mẫu bởi chuyên gia:** chưa thực hiện (xem mục 10).
 
-> Các chỉ số EM và Token F1 ở Nhóm 2 là chỉ số bề mặt (khớp chữ), chỉ phù hợp tham khảo với câu trả lời tự do. Chỉ số đáng tin nhất của bộ chấm là nhãn an toàn và trích dẫn. Hệ thống chưa có đánh giá ngữ nghĩa (embedding, LLM làm giám khảo); xem mục 10.
+> Các chỉ số EM và Token F1 ở Nhóm 2 là chỉ số bề mặt (khớp chữ), chỉ phù hợp tham khảo với câu trả lời tự do. Chỉ số đáng tin nhất của bộ chấm là nhãn an toàn và trích dẫn. Đánh giá ngữ nghĩa dùng LLM làm giám khảo có kiểm chứng bằng người chấm (`judge_faithfulness.py`).
+
+### Nhóm 5: Phân tích ca (hallucination, thiếu căn cứ, cần chuyên gia)
+`scripts_research/analyze_cases.py` xuất danh sách ca cụ thể: thẻ nguồn tự bịa; mã INS câu trả lời nêu mà không có trên nhãn, trong câu hỏi hay trong đoạn nguồn; nhận định giám khảo chấm CONTRADICTED / NOT_ENOUGH_INFO; câu hệ thống đã chuyển chuyên gia; câu khớp luật vượt phạm vi mà không được chuyển; false-safe; CRITICAL_ALERT bị bỏ sót. Bộ QA không có nhãn chuẩn "cần chuyên gia", nên nhóm này là đối chiếu với luật và nhãn an toàn, không phải độ chính xác.
 
 ---
 
@@ -578,12 +597,8 @@ Nguồn tham khảo dưới đây là các nguồn đã được ghi trong knowl
 | **5** | **WHO / FAO JECFA** | **JECFA Food Additives Database & Monograph Specifications** | `[JECFA_DB]` / `FAO/WHO JECFA` | Cơ sở dữ liệu thẩm định an toàn độc học: Ngưỡng dung nạp hàng ngày chấp nhận được (ADI), thông số kỹ thuật monograph phụ gia (Monograph có số hiệu cao nhất là bản hiện hành). | [WHO JECFA Committee](https://www.who.int/groups/joint-fao-who-expert-committee-on-food-additives-(jecfa)) <br> [JECFA Database Tra cứu](https://apps.who.int/food-additives-contaminants-jecfa-database/) |
 | **6** | **WHO / FAO / IARC** | **WHO/IARC/JECFA Aspartame Assessment (07/2023)**: Hazard and Risk Assessment Results | `[WHO_ASPARTAME_2023]` / `JECFA_ASPARTAME` | Phân định rạch ròi giữa phân loại nguy cơ tiềm ẩn của IARC (Nhóm 2B - có thể gây ung thư dựa trên bằng chứng hạn chế) và đánh giá liều lượng phơi nhiễm thực tế của JECFA (tái khẳng định mức ADI 0–40 mg/kg thể trọng/ngày). | [WHO Statement (Aspartame 2023)](https://www.who.int/news/item/14-07-2023-aspartame-hazard-and-risk-assessment-results) |
 | **7** | **Cơ quan An toàn Thực phẩm Châu Âu (EFSA)** | **EFSA Journal Scientific Opinions & EC Regulation No 1333/2008**: <br>• *Tartrazine INS 102 & Southampton Six* (EFSA Journal 2009;7(11):1331)<br>• *Glutamates INS 621* (EFSA Journal 2017;15(7):4910)<br>• *Modified Starches INS 1420* (EFSA Journal 2017;15(10):4911)<br>• *Sulfites INS 220* (EFSA Journal 2022;20(11):7594) | `[EFSA_AZO]` <br> `[EFSA_GLUTAMATES]` <br> `[EFSA_MODIFIED_STARCHES]` <br> `[EFSA_SULFITES]` | Cảnh báo tác động của phẩm màu Azo Tartrazine lên sự tập trung và hành vi của trẻ nhỏ (nguy cơ ADHD); ADI nhóm của Glutamate 30 mg/kg; không cần ADI số học cho tinh bột biến tính E1420; cập nhật rút ADI tạm thời của Sulfites. | [EFSA Tartrazine Opinion](https://www.efsa.europa.eu/en/efsajournal/pub/1331) <br> [EFSA Glutamates Opinion](https://www.efsa.europa.eu/en/efsajournal/pub/4910) <br> [EFSA Modified Starches](https://www.efsa.europa.eu/en/efsajournal/pub/4911) <br> [EFSA Sulfites Re-evaluation](https://www.efsa.europa.eu/en/efsajournal/pub/7594) |
-| **8** | **National Kidney Foundation (NKF) & Academy of Nutrition and Dietetics (AND)** | **KDOQI Clinical Practice Guideline for Nutrition in CKD: 2020 Update** | `[KDOQI_2020]` / `KDOQI Nutrition in CKD` | Hướng dẫn Dinh dưỡng Lâm sàng cho bệnh nhân Thận mạn (CKD giai đoạn 1–5): Kiểm soát điện giải (Mục 6 - Electrolytes), cảnh báo phụ gia chứa muối Kali (như Kali sorbat INS 202) và Photpho vô cơ hấp thu nhanh làm tăng nguy cơ tăng kali máu ở bệnh nhân suy giảm eGFR. | [AJKD (DOI: 10.1053/j.ajkd.2020.05.006)](https://www.ajkd.org/article/S0272-6386(20)30726-5/fulltext) |
-| **9** | **Kidney Disease: Improving Global Outcomes (KDIGO)** | **KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease** | `[KDIGO_2024]` / `KDIGO 2024 Guidelines` | Hướng dẫn toàn cầu về chẩn đoán và quản lý suy thận mạn: Đánh giá phân loại mức lọc cầu thận (G1–G5), quản lý chế độ ăn hạn chế gánh nặng bài tiết lọc của thận, phòng ngừa hội chứng ure máu và biến chứng tim mạch. | [KDIGO 2024 Guidelines](https://kdigo.org/guidelines/ckd-evaluation-and-management/) <br> [Kidney International (DOI: 10.1016/j.kint.2023.10.018)](https://www.kidney-international.org/article/S0085-2538(23)00763-7/fulltext) |
-| **10** | **American College of Rheumatology (ACR)** | **2020 American College of Rheumatology Guideline for the Management of Gout** | `[ACR_2020]` / `ACR Guidelines 2020` | Hướng dẫn điều trị và quản lý Bệnh Gút: Bằng chứng fructose tự do (trong mật ong, siro ngô) kích thích tiêu hao ATP tại gan làm tăng tổng hợp acid uric; kiểm soát thực phẩm giàu purin đối với người béo phì kèm tăng acid uric máu. | [ACR Gout Guideline Portal](https://rheumatology.org/gout-guideline) <br> [Wiley Online Library (DOI: 10.1002/acr.24180)](https://onlinelibrary.wiley.com/doi/10.1002/acr.24180) |
-| **11** | **American College of Obstetricians and Gynecologists (ACOG) & BYT** | **ACOG Practice Bulletin No. 190 (2018, Reaffirmed 2023): Gestational Diabetes Mellitus** & *Khuyến nghị Dinh dưỡng Thai kỳ BYT* | `[ACOG_190]` / `ACOG Practice Bulletin No. 190` | Quản lý dinh dưỡng thai kỳ cho phụ nữ mắc đái tháo đường thai kỳ (GDM): Hạn chế nghiêm ngặt carbohydrate tinh chế và đường tự do (ngưỡng an toàn <10g đường/lần ăn) để phòng ngừa thai to, tiền sản giật và đa ối. | [ACOG Practice Bulletin 190 (DOI: 10.1097/AOG.0000000000002501)](https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2018/02/gestational-diabetes-mellitus) <br> [Bộ Y tế Việt Nam](https://moh.gov.vn) |
-| **12** | **Bộ Nông nghiệp Hoa Kỳ (USDA - ARS)** | **USDA FoodData Central – Food and Nutrient Database for Dietary Studies (FNDDS)** | `[USDA_FNDDS]` / `USDA FNDDS` | Bảng đối soát số liệu dinh dưỡng định lượng chuẩn trên 100g (Calo, Protein, Lipid, Carbohydrate, Đường tổng, Natri) phục vụ thẩm định các câu hỏi tính toán dinh dưỡng. | [USDA FoodData Central](https://fdc.nal.usda.gov/) |
-| **13** | **Tổ chức Y tế Thế giới (WHO)** | **WHO Healthy Diet Fact Sheet No. 394** & *Guiding Principles for Feeding Infants and Young Children* | `[WHO_HEALTHY_DIET]` / `WHO Fact Sheet No. 394` | Khuyến nghị ngưỡng dinh dưỡng lành mạnh toàn cầu: Năng lượng từ đường tự do dưới 5–10% tổng năng lượng, Natri dưới 2000 mg/ngày (tương đương 5g muối) cho người trưởng thành. | [WHO Healthy Diet Fact Sheet](https://www.who.int/news-room/fact-sheets/detail/healthy-diet) |
+| **8** | **Cơ quan An toàn Thực phẩm Châu Âu (EFSA)** | **EFSA Journal 2019;17(6):5674 — Re-evaluation of phosphoric acid–phosphates (E 338–341, E 343, E 450–452)** (file `efsa_2019_5674.pdf`, trích nguyên văn ở trang 4) | `EFSA_PHOSPHATES_2019` (mã nguồn trong KB) | Cơ sở của lưu ý bệnh thận mạn cho các phosphat (INS 338, 339(i), 341(i), 450(i), 452(i)): ADI nhóm 40 mg/kg thể trọng/ngày (tính theo phospho) không áp dụng cho người giảm chức năng thận mức vừa đến nặng. *Ghi chú: ngày 2026-11-22 KDOQI 2020 chưa có file nên bị bỏ; ngày 2026-11-23 file `KDOQI_Nutrition_2020.pdf` đã được thêm và dùng làm bằng chứng bổ sung (khuyến nghị 6.3.2, trang 23: cân nhắc sinh khả dụng của nguồn phospho, gồm cả phụ gia). Các số liệu chưa tìm thấy trong file (như hấp thụ 90–100%) và nhận định về kali sorbat vẫn không được dùng.* | [EFSA Journal (DOI: 10.2903/j.efsa.2019.5674)](https://doi.org/10.2903/j.efsa.2019.5674) |
+| **9** | **Bộ Nông nghiệp Hoa Kỳ (USDA - ARS)** | **USDA FoodData Central – Food and Nutrient Database for Dietary Studies (FNDDS)** | `[USDA_FNDDS]` / `USDA FNDDS` | Bảng đối soát số liệu dinh dưỡng định lượng chuẩn trên 100g (Calo, Protein, Lipid, Carbohydrate, Đường tổng, Natri) phục vụ thẩm định các câu hỏi tính toán dinh dưỡng. | [USDA FoodData Central](https://fdc.nal.usda.gov/) |
 
 ---
 
@@ -601,8 +616,6 @@ graph TD
         S3["FAO/WHO JECFA & WHO/IARC Database"]
         S4["EFSA Journal Scientific Opinions"]
         S5["FAO/WHO JEMRA Food Allergens (2021)"]
-        S6["KDIGO 2024 & KDOQI Nutrition in CKD"]
-        S7["ACR Gout 2020 & ACOG GDM 190"]
         S8["USDA FoodData Central (FNDDS)"]
     end
 
@@ -620,7 +633,7 @@ graph TD
     end
 
     subgraph Tier4["Tầng 4: Quy Tắc Lâm Sàng & Ràng Buộc (Clinical Guardrails)"]
-        Rules_Engine["constraint_model.py<br>(Bất đẳng thức FNDDS, Chống chỉ định bệnh nền KDIGO/ACR/ACOG)"]
+        Rules_Engine["constraint_model.py<br>(Bất đẳng thức FNDDS, Lưu ý bệnh nền đã kiểm nguồn: EFSA, FDA, JECFA, KDOQI)"]
     end
 
     subgraph Tier5["Tầng 5: Bộ Chỉ Mục Truy Xuất Lai (Hybrid Retrieval Engine)"]
@@ -631,7 +644,7 @@ graph TD
     S5 --> KB_Allergens
     S8 --> KB_Ingredients
     KB_Ingredients --> Ontology_FoodOn
-    S6 & S7 & S8 --> Rules_Engine
+    S8 --> Rules_Engine
     KB_Additives & KB_Allergens & Ontology_FoodOn & Rules_Engine --> Retriever
 ```
 
@@ -691,20 +704,12 @@ Lưu trữ thông tin chi tiết của từng phụ gia thực phẩm, hợp nh�
     "source_id": "CODEX_GSFA",
     "source_url": "https://www.fao.org/gsfaonline/"
   },
-  "contraindications": [
-    {
-      "condition": "hypertension",
-      "severity": "WARNING",
-      "message": "Chứa ~12.3% natri; cần tính vào tổng lượng natri nạp hàng ngày theo khuyến nghị DASH (<1500mg/ngày)."
-    },
-    {
-      "condition": "chronic_kidney_disease",
-      "severity": "WARNING",
-      "message": "Cần thận trọng gánh nặng ion natri đối với bệnh nhân suy thận mạn eGFR giảm theo KDIGO 2024."
-    }
-  ]
+  "contraindications": [],
+  "health_considerations": []
 }
 ```
+
+*Ghi chú (2026-11-23): các cảnh báo cũ về natri của mẫu này đã bị gỡ vì không có nguồn (xem `knowledge_base/sources/derived/legacy_health_claims_review.json`).*
 
 #### 2. Bảng Danh mục Dị nguyên Ưu tiên (`knowledge_base/allergen_groups.json`)
 Xây dựng theo khuyến nghị chính thức của **FAO/WHO JEMRA (2021) & Codex CXS 1-1985**:
@@ -769,9 +774,13 @@ Trong quá trình thực thi RAG (ở Cấu hình B và C), mô-đun [`modules/h
 * **Đầu vào tự nhập không thuộc ablation** (mục 3.3).
 * **Bộ QA chưa có chuyên gia thẩm định** (`expert_validated = false`). Đáp án chuẩn do bộ quy tắc kiểm chứng; chỉ số là tham khảo (exploratory), không phải hiệu năng trên gold.
 * **Đánh giá thiên về khớp bề mặt.** EM, Token F1, trích dẫn, nhãn rời rạc. Chưa có giám khảo ngữ nghĩa.
-* **Tầng QA động dùng quy tắc.** Nhận diện ý định và thực thể bằng biểu thức chính quy và registry phụ gia (400 mục, trong đó 50 mục có dữ liệu quy chuẩn đầy đủ trong KB). Câu hỏi diễn đạt lạ có thể bị nhận sai ý định.
+* **Tầng QA động dùng quy tắc.** Nhận diện ý định và thực thể bằng biểu thức chính quy và registry phụ gia (400 mục, trong đó 88 mục có dữ liệu quy chuẩn đầy đủ trong KB). Câu hỏi diễn đạt lạ có thể bị nhận sai ý định.
 * **Retrieval vẫn chạy toàn bộ nguồn.** Ý định mới quyết định vết tra cứu và bằng chứng ghi cho LLM, chưa thật sự chọn công cụ để chạy.
-* **Một lượt hỏi.** Chưa có bộ nhớ phiên cho câu hỏi nối tiếp.
+* **Bộ QA chỉ có một lượt hỏi.** Giao diện chat đã hiểu câu nối tiếp ("chất đó…", "còn … thì sao") và câu sửa thông tin nhãn của người dùng, nhưng bộ 750 câu không đo các tình huống nhiều lượt này.
+* **OCR: thứ tự đọc chưa theo bố cục (cập nhật 16/11/2026).** Các khung chữ được xếp theo hàng ngang trên toàn ảnh nên các cột/khối chữ bị trộn (lỗi ký tự theo thứ tự đọc khoảng 72% dù ~88% từ được đọc đúng). Các sửa ở hậu xử lý và bộ tách (mục 3.1 của `MO_TA_HE_THONG.md`) chỉ **chữa triệu chứng**; trên 376 ảnh vẫn còn ~310 mã phụ gia bị bộ tách cắt mất vì lý do này, ~230 mã không có trong chữ OCR và ~155 mã VietOCR đọc sai chữ số. Cải tiến chính mô hình OCR **đang được hoãn**.
+* **Số đo khâu trích xuất sau OCR có thể lạc quan.** Các luật hậu xử lý/tách/liên kết được chỉnh sau khi soi lỗi trên chính 376 ảnh của bộ kiểm tra (bắt mã 47,1% → 62,9%); chưa đo trên ảnh nhãn mới. Riêng bộ sửa chính tả theo cụm được xây chỉ từ ảnh phần phát triển và báo số trên phần kiểm tra.
+* **Sửa chính tả theo cụm chỉ phủ các tên có trong danh mục** (registry phụ gia, từ khóa dị nguyên, cụm thành phần của ảnh phát triển). Tên khoáng chất/vi chất ít gặp ("kẽm sulphat", "đồng sulphat", "dầu cá") chưa có nên chưa sửa được; cần bổ sung từ một danh mục thành phần chuẩn, không thêm theo từng nhãn.
+* **Nhóm người dùng và nguồn chưa rõ (cập nhật 16/11/2026).** Trẻ dưới 12 tháng có luật phụ gia riêng, trích từ TT24 Phụ lục 2A và Codex GSFA nhóm 13.1, 13.2. Luật này (cùng luật đọc câu giới hạn tuổi trên nhãn và bỏ qua nguồn khoáng/vitamin) chưa đo được độ chính xác vì bộ QA không có câu nào cho nhóm này — chỉ có test; luật chưa đánh giá dinh dưỡng của sản phẩm cho trẻ. Người cao tuổi và phụ nữ cho con bú chỉ có dòng lưu ý. Danh mục TT24 (2019, theo GSFA 2018) và GSFA hiện hành (có dòng thông qua 2026) khác nhau ở một số phụ gia (vd 1412–1414, 1440 có trong TT24 nhóm 13.1.1 nhưng không có trong GSFA 13.1.1); luật coi phụ gia là được phép nếu có trong một trong hai. "Nguồn đủ rõ" mới có một phần: các phương án từ chối khi đoạn bằng chứng không khớp hoặc khi thiếu bảng dinh dưỡng làm sai nhiều câu đang đúng nên không dùng (số đo ở mục 3.4 của `MO_TA_HE_THONG.md`). Cần bổ sung vào bộ QA câu cho trẻ dưới 12 tháng và câu ABSTAIN đúng vì nguồn chưa rõ.
 * **Phép so sánh nhãn cũ/mới** của tầng QA động mới chạy trên mẫu 386 bản ghi lấy từ bản nguồn 2.311 (trước khi chốt bộ 750 câu) và chỉ xét nhãn an toàn.
 
 **Hướng phát triển**
@@ -780,8 +789,14 @@ Trong quá trình thực thi RAG (ở Cấu hình B và C), mô-đun [`modules/h
 2. **Cấu hình D (tùy chọn): agent gọi công cụ** (function calling hoặc MCP), để so sánh với B/C trong ablation. Chỉ cho LLM chọn công cụ viết sẵn, không cho LLM tự sinh truy vấn lên KB, vì trong lĩnh vực y tế một truy vấn sai có thể trả thông tin an toàn sai.
 3. **Đánh giá ngữ nghĩa:** LLM làm giám khảo trên một mẫu nhỏ (faithfulness, groundedness theo KB), hoặc độ tương đồng embedding kèm rà soát của chuyên gia. Hiện groundedness chỉ là độ trùng từ với nhãn, faithfulness chỉ đọc cờ gán tay.
 4. **Công cụ tính định lượng:** ví dụ ADI × cân nặng persona so với mức tiêu thụ ước tính, khi nhãn có đủ hàm lượng.
-5. **Bộ nhớ phiên** cho câu hỏi nối tiếp.
+5. **Đánh giá nhiều lượt** cho câu hỏi nối tiếp và câu sửa thông tin nhãn trong chat.
 6. **Chuyên gia thẩm định** một mẫu bộ QA để nâng bộ chuẩn từ silver lên gold.
+7. **Cải tiến OCR thật (đang hoãn).** Theo thứ tự đề xuất:
+   - *Lưu khung chữ vào bộ đệm OCR* (tọa độ + chữ + độ tin cậy từng dòng), OCR lại 376 ảnh **một lần**; sau đó thử thuật toán thứ tự đọc chỉ cần xếp lại các dòng đã đọc, không phải OCR lại.
+   - *Thứ tự đọc theo bố cục* thay `_sort_boxes_reading_order`: gom khung thành cột/khối, cắt XY theo khoảng trống, hoặc bám theo khối chứa tiêu đề "Thành phần". Đo bằng lỗi ký tự theo thứ tự đọc và số mã bị bộ tách cắt; chỉnh trên ảnh "phát triển", báo số trên ảnh "kiểm tra". Có thứ tự đúng thì xem bỏ bớt được các "điểm dừng mềm" của bộ tách.
+   - *Tăng tốc bằng GPU (tùy chọn):* torch bản CUDA cho RTX 4050 (tốn ~4–5 GB ổ cứng, < 1 GB VRAM; driver hiện có đủ, không cần CUDA Toolkit); sửa `config['device'] = 'cpu'` trong `ocr_extractor.py` thành tự chọn `cuda`. Ước tính OCR 376 ảnh từ 2–3 giờ xuống ~20–30 phút (cần đo).
+   - *Mô hình đọc chữ tốt hơn cho dòng mã:* huấn luyện thêm VietOCR trên ảnh cắt các dòng mã phụ gia, hoặc thử mô hình khác — so bằng `scripts_research/ocr_regression.py --cache` (công cụ `scripts_research/ocr_candidate.py`). PP-OCRv6 đã thử: không tốt hơn ở khâu dò vùng, không dùng được ở khâu đọc chữ tiếng Việt.
+8. **Đo trên ảnh nhãn mới** (30–50 nhãn chưa dùng để chỉnh luật) để xác nhận mức cải thiện của khâu trích xuất sau OCR.
 
 
 ---
@@ -828,6 +843,34 @@ python scripts_research/compare_providers.py
 # 6) Đo tỷ lệ tuân thủ trích dẫn khi chạy lặp (B; 10 câu x 3 lần = 30 lượt gọi LLM)
 python scripts_research/measure_citation_compliance.py --llm-provider ollama --questions 10 --repeats 3
 ```
+
+### 11.2b. Trước khi chạy chính thức: hiệu chỉnh điểm tin cậy và ngưỡng (không gọi LLM)
+
+```powershell
+# OCR mọi ảnh vào bộ đệm chung của cấu hình C (~1,5–4 giờ CPU, chạy tiếp được) → tầng luật B/C → phân tích
+python scripts_research/calibrate_confidence.py --stage all
+# Kết quả: data/calibration/calibration_report.json — độ tin cậy OCR ↔ lỗi OCR, liên kết INS, ngưỡng chọn trên
+# phần "phát triển" (chia theo ảnh) và kết quả trên phần "kiểm tra". Cập nhật CONFIDENCE_ABSTAIN_THRESHOLD nếu cần.
+```
+Không chạy song song với `generate_predictions.py` (cùng ghi `data/ocr_cache_config_c.json`).
+
+### 11.2c. Sau khi có dự đoán A/B/C
+
+```powershell
+python scripts_research/run_evaluation.py                       # chỉ số chính
+python scripts_research/analyze_normalization_errors.py         # lỗi OCR vs lỗi liên kết
+python scripts_research/judge_faithfulness.py judge --judge-model <model khác model sinh> --max-new 200
+python scripts_research/judge_faithfulness.py export-annotation --n 50   # điền cột human_label (S/C/N)
+python scripts_research/judge_faithfulness.py agreement         # Cohen's kappa người – giám khảo
+python scripts_research/judge_faithfulness.py summarize
+python scripts_research/analyze_cases.py                        # hallucination / thiếu căn cứ / chuyên gia
+```
+
+### 11.2d. Phiên bản và tính tái lập
+
+* `OCR_PIPELINE_VERSION` (`generate_predictions.py`): đổi khi cách OCR đổi → bộ đệm OCR cũ bị bỏ, dự đoán C cũ được sinh lại khi `--resume`.
+* `OCR_POSTPROCESS_VERSION` (`modules/ocr_extractor.py`): đổi khi hậu xử lý chữ OCR đổi → chữ chuẩn hóa được tính lại từ chữ thô trong bộ đệm (không OCR lại); dự đoán C cũ được sinh lại.
+* Mỗi dự đoán B/C lưu `retrieved_passages`, `linked_entities`, `guardrail` để chấm lại sau mà không phải gọi LLM lần nữa.
 
 ### 11.3. Cơ chế chạy theo lô
 

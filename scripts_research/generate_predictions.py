@@ -24,9 +24,11 @@ except AttributeError:
     pass
 
 from modules.ocr_extractor import (  # noqa: E402
+    OCR_POSTPROCESS_VERSION,
     extract_with_paddle_ocr,
     is_paddleocr_available,
     parse_ingredients_from_ocr,
+    reprocess_ocr_text,
 )
 from modules.pipeline import (  # noqa: E402
     build_persona_from_benchmark_record,
@@ -48,6 +50,9 @@ from modules.benchmark_manifest import (  # noqa: E402
 DATA_DIR = PROJECT_ROOT / "data"
 ASSETS_DIR = PROJECT_ROOT / "assets"
 PIPELINE_VERSION = "canonical_abc_v1"
+# Phiên bản tầng OCR của cấu hình C. v2: độ tin cậy = xác suất ký tự của VietOCR (trước đây gán cứng 0,85),
+# VietOCR đọc theo lô. Đổi giá trị này → bộ đệm OCR cũ bị bỏ và dự đoán C cũ được sinh lại khi --resume.
+OCR_PIPELINE_VERSION = "ocr_vietocr_prob_v2"
 
 
 def _load_dotenv():
@@ -106,6 +111,7 @@ def _serializable_ocr_result(result):
         "avg_confidence": float(result.get("avg_confidence", 0.0) or 0.0),
         "mentions": result.get("mentions", []),
         "engine_name": result.get("engine_name", ""),
+        "postprocess_version": result.get("postprocess_version", ""),
         "is_ocr_unavailable": bool(result.get("is_ocr_unavailable", False)),
         "ocr_error": result.get("ocr_error", ""),
     }
@@ -117,8 +123,8 @@ def _load_ocr_cache(path):
     try:
         with open(path, "r", encoding="utf-8") as source:
             payload = json.load(source)
-        if payload.get("pipeline_version") != PIPELINE_VERSION:
-            return {}
+        if payload.get("ocr_pipeline_version") != OCR_PIPELINE_VERSION:
+            return {}  # bộ đệm của phiên bản OCR cũ (vd độ tin cậy gán cứng 0,85) → OCR lại
         return payload.get("images", {})
     except (OSError, ValueError, TypeError):
         return {}
@@ -126,11 +132,22 @@ def _load_ocr_cache(path):
 
 def _save_ocr_cache(path, cache):
     path.parent.mkdir(parents=True, exist_ok=True)
-    payload = {"pipeline_version": PIPELINE_VERSION, "images": cache}
+    payload = {"pipeline_version": PIPELINE_VERSION, "ocr_pipeline_version": OCR_PIPELINE_VERSION, "images": cache}
     temporary = path.with_suffix(path.suffix + ".tmp")
     with open(temporary, "w", encoding="utf-8") as output:
         json.dump(payload, output, ensure_ascii=False)
     os.replace(temporary, path)
+
+
+def refresh_postprocess(entry):
+    """Bộ đệm lưu chữ OCR thô → khi phiên bản hậu xử lý đổi, tính lại chữ chuẩn hóa từ chữ thô (không OCR lại).
+    Trả về True nếu đã cập nhật entry."""
+    if not entry or entry.get("is_ocr_unavailable") or entry.get("postprocess_version") == OCR_POSTPROCESS_VERSION:
+        return False
+    full_text, after_dict, mentions = reprocess_ocr_text(entry.get("raw_text_before_norm", ""))
+    entry.update(full_text=full_text, text_after_ocr_dict=after_dict, mentions=mentions,
+                 postprocess_version=OCR_POSTPROCESS_VERSION)
+    return True
 
 
 def _ocr_input(record, cache, cache_path):
@@ -143,6 +160,8 @@ def _ocr_input(record, cache, cache_path):
         cache[cache_key] = _serializable_ocr_result(result)
         _save_ocr_cache(cache_path, cache)
     result = cache[cache_key]
+    if refresh_postprocess(result):
+        _save_ocr_cache(cache_path, cache)
     if result.get("is_ocr_unavailable"):
         return result, result.get("ocr_error") or "ocr_unavailable"
     return result, None
@@ -154,12 +173,64 @@ def _base_prediction(record, config_name):
         "config": config_name,
         "evaluation_type": "real",
         "pipeline_version": PIPELINE_VERSION,
+        **({"ocr_pipeline_version": OCR_PIPELINE_VERSION, "ocr_postprocess_version": OCR_POSTPROCESS_VERSION}
+           if config_name == "C" else {}),
         "input_source": {
             "A": "ground_truth_text",
             "B": "ground_truth_text",
             "C": "image_ocr",
         }[config_name],
     }
+
+
+PASSAGE_TEXT_MAX_CHARS = 2000
+
+
+def _trace_fields(grounded, evaluation):
+    """Dữ liệu trung gian lưu kèm mỗi dự đoán B/C để chấm lại sau mà không phải sinh lại câu trả lời:
+    - retrieved_passages: đoạn bằng chứng LLM thực sự được đọc (groundedness / faithfulness);
+    - linked_entities: phụ gia/thành phần hệ thống liên kết được (đo lỗi chuẩn hóa so với ins_codes_matched);
+    - guardrail: lý do từ chối / vượt phạm vi, cơ sở tính S_retrieval, cảnh báo (phân tích ca chuyển chuyên gia)."""
+    passages = []
+    for p in grounded.get("retrieved_passages") or []:
+        text = str(p.get("text", ""))
+        passages.append({
+            "rank": p.get("rank"),
+            "score": p.get("score"),
+            "citation_id": p.get("citation_id"),
+            "locator": p.get("locator"),
+            "text": text[:PASSAGE_TEXT_MAX_CHARS],
+            "text_truncated": len(text) > PASSAGE_TEXT_MAX_CHARS,
+        })
+    linked = []
+    for item in grounded.get("linked_results") or []:
+        entity = item.get("matched_entity") or {}
+        linked.append({
+            "raw_mention": item.get("raw_mention"),
+            "category": item.get("category"),
+            "ins_code": entity.get("ins_code") if entity else None,
+            "canonical_name": (entity.get("canonical_name_vi") or entity.get("canonical_name")) if entity else None,
+            "match_method": item.get("match_method"),
+            "code_origin": item.get("code_origin"),
+            "constraint_type": item.get("constraint_type"),
+            "rule_match_score": item.get("confidence_tau"),
+        })
+    abstention_types = evaluation.get("abstention_types") or []
+    guardrail = {
+        "status": evaluation.get("status"),
+        "abstention_types": abstention_types,
+        "abstention_reasons": evaluation.get("abstention_reasons") or [],
+        "data_gaps": evaluation.get("data_gaps") or [],
+        "referred_to_expert": "out_of_scope" in abstention_types,
+        "s_retrieval_basis": evaluation.get("s_retrieval_basis"),
+        "additive_mentions_total": evaluation.get("additive_mentions_total"),
+        "additive_mentions_linked": evaluation.get("additive_mentions_linked"),
+        "alerts": [
+            {"additive": a.get("additive"), "message": a.get("message")}
+            for a in (evaluation.get("alerts") or []) if isinstance(a, dict)
+        ],
+    }
+    return {"retrieved_passages": passages, "linked_entities": linked, "guardrail": guardrail}
 
 
 def _predict_one(config_name, record, resources, ocr_cache, ocr_cache_path):
@@ -220,9 +291,11 @@ def _predict_one(config_name, record, resources, ocr_cache, ocr_cache_path):
         hazards_list=resources["hazards"],
         fndds_list=resources["fndds"],
         off_products=resources["off_products"],
+        label_text=label_text if config_name == "B" else (ocr_result or {}).get("full_text", ""),
     )
     answer = grounded.get("llm_answer")
     evaluation = grounded.get("evaluation", {})
+    prediction.update(_trace_fields(grounded, evaluation))
     prediction.update(
         answer=answer or "",
         safety_label=grounded.get("safety_label", "ABSTAIN"),
@@ -234,7 +307,8 @@ def _predict_one(config_name, record, resources, ocr_cache, ocr_cache_path):
         citations=evaluation.get("citations", []),
         citation_validation=grounded.get("citation_validation"),
         normalized_mentions=mentions,
-        error=None if answer else "llm_generation_failed",
+        error=None if answer else (f"answer_refused_no_source: {grounded['answer_refusal']}"
+                                   if grounded.get("answer_refusal") else "llm_generation_failed"),
     )
     return prediction
 
@@ -250,8 +324,16 @@ def _load_resources():
 
 
 def _is_good(prediction):
-    """Bản ghi đạt yêu cầu: không lỗi và có câu trả lời. Bản ghi lỗi sẽ được chạy lại khi resume."""
-    return bool(prediction) and not prediction.get("error") and bool(str(prediction.get("answer", "")).strip())
+    """Bản ghi đạt yêu cầu: không lỗi, có câu trả lời, và (riêng cấu hình C) sinh bằng phiên bản OCR hiện tại.
+    Bản ghi không đạt sẽ được chạy lại khi resume."""
+    if not prediction or prediction.get("error") or not str(prediction.get("answer", "")).strip():
+        return False
+    if prediction.get("config") == "C" and (
+        prediction.get("ocr_pipeline_version") != OCR_PIPELINE_VERSION
+        or prediction.get("ocr_postprocess_version") != OCR_POSTPROCESS_VERSION
+    ):
+        return False
+    return True
 
 
 def _atomic_write_jsonl(path, records):

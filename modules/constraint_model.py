@@ -79,7 +79,7 @@ _NEG_MILK_CLAIM = re.compile(
 
 
 # "điều" is cashew, but also the first word of "điều vị" (flavour enhancer), "điều chỉnh độ acid", "điều hòa"...
-_NOT_CASHEW = re.compile(r"(?<!\w)điều\s+(vị|chỉnh|hòa|hoà|chế|kiện|khoản|tiết)(?!\w)", re.IGNORECASE)
+_NOT_CASHEW =re.compile(r"(?<!\w)điều\s+(vị|chỉnh|hòa|hoà|chế|kiện|khoản|tiết)(?!\w)", re.IGNORECASE)
 
 
 def strip_allergen_noise(text, allergy):
@@ -496,8 +496,12 @@ def _load_verified_medical_rules():
 _ALLERGEN_GROUPS, ALLERGEN_KEYWORDS, _ALLERGEN_NEGATION_RULES = _load_allergen_groups()
 
 # Gộp tất cả negation rules: bệnh lý + dị ứng
+_VERIFIED_MEDICAL_RULES = _load_verified_medical_rules()
+# Bệnh nền mà KB có ít nhất một lưu ý phụ gia ĐÃ KIỂM NGUỒN (dùng để báo "KB chưa có lưu ý riêng" cho các bệnh còn lại)
+VERIFIED_ADDITIVE_CONDITIONS = frozenset(_VERIFIED_MEDICAL_RULES)
+
 _NEGATION_RULES = {
-    **_load_verified_medical_rules(),
+    **_VERIFIED_MEDICAL_RULES,
     **_ALLERGEN_NEGATION_RULES,
 }
 

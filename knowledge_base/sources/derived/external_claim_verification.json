@@ -17,6 +17,16 @@
       "statement": "rmation panel, the following statement: PHENYLKETONURICS: CONTAINS PHENYLALANINE The statement shall appear in the labeling prominently and conspicuously as compared to other words, statements, designs or devices and in bold type and on clear contrasting backg"
     }
   },
+  "FDA_ASPARTAME_PKU_AVOID_OR_RESTRICT": {
+    "description": "FDA (Aspartame and Other Sweeteners in Food, 2025): people with phenylketonuria (PKU) should avoid or restrict aspartame; labels must inform people with PKU that the product contains phenylalanine",
+    "source_file": "FDA_SWEETENERS_IN_FOOD.html",
+    "sha256": "ce5f82dc7d56810558edc91bc57ee813981720517ef5cc7ae57c59d9a8b499bd",
+    "passed": true,
+    "evidence": {
+      "pku": "e protective of public health. However, people with difficulty metabolizing phenylalanine because of a rare genetic disorder called phenylketonuria (PKU) should avoid or restrict aspartame. Newborns are routinely tested for PKU using a “heel-prick” test before",
+      "label": "edient list on the product label, which must include a statement to inform people with PKU that the product contains phenylalanine. Aspartame is one of the most studied food additives in the human food supply. To determine the safety of aspartame, the FDA has"
+    }
+  },
   "JEMRA1_PRIORITY_LIST": {
     "description": "JEMRA 2021 Part 1 priority list = cereals containing gluten, crustacea, eggs, fish, milk, peanuts, sesame, specific tree nuts (almond, cashew, hazelnut, pecan, pistachio, walnut)",
     "source_file": "JEMRA_2021_PART1_SUMMARY.pdf",
@@ -167,11 +177,14 @@
     "evidence": {
       "adi": "e ADI. The Panel, using a BMD approach, derived an ADI of 0.07 mg nitrite ion/kg bw per day. The exposure to nitrite resulting from its use as food additive did not exceed this ADI for the general population, except for a slight exceedance in children at the h",
       "exposure": "resulting from its use as food additive did not exceed this ADI for the general population, except for a slight exceedance in children at the highest percentile. The Panel assessed the endogenous formation of nitrosamines from nitrites based on the theoretical",
-      "nordic": "moglobin-forming potential of nitrites. The Nordic Council identified these groups as including: pregnant women, individuals with metabolic disorders and adults with reduced gastric acidity. Health Canada has published a document on nitrate and nitrite in drin"
+      "nordic": "moglobin-forming potential of nitrites. The Nordic Council identified these groups as including: pregnant women, individuals with metabolic disorders and adults with reduced gastric acidity. Health Canada has published a document on nitrate and nitrite in drin",
+      "susceptible_groups": "tal haemoglobin to form MetHb. 3.6.9.8. Specific susceptible population groups Increased methaemoglobinaemia is reported to occur in patients with a genetic defect of cytochrome b5 reductase types 1 and 2 (Percy and Lappin, 2008; Lorenzo et al., 2011) and in p",
+      "infants": "or g globin genes (Marks et al., 2013). Neonates and infants have a reduced level of cytochrome b5 reductase (about 50-60% of the adult level) (Ross, 1963; Bartos and Desforges, 1966). Due to different properties of fetal globin chains (compared to adult globi"
     },
     "evidence_pages": {
       "adi": 1,
-      "exposure": 1
+      "exposure": 1,
+      "infants": 95
     },
     "pages_located": true
   },
@@ -1525,7 +1538,9 @@
       "ins_on_page": [
         "951"
       ],
-      "adi": "0–40 mg/kg bw"
+      "adi": "0–40 mg/kg bw",
+      "no_adverse": " Comments: Overall, JECFA concluded that there was no convincing evidence from experimental animal or human data that aspartame has adverse effects after ingestion. This conclusion is",
+      "reaffirmed": "g bw for aspartame. JECFA therefore reaffirmed the ADI of 0–40 mg/kg bw for aspartame at the present meet"
     }
   },
   "JECFA_ADI_952ii": {
@@ -2421,7 +2436,11 @@
       "reason": "d data demonstrating that this additive induces cancer in male rats. Therefore, FDA is revoking the authorized uses in food and ingested drugs of FD&C Red No. 3 in the color additive regulations. DATES: This order is effective January 15, 2027, except for amendatory instruction 4, which is effective January 18, 2028. If any provisions are delayed or stayed by the filing of proper objections, FDA will publish such notification in the Federal Register. Submit either electronic or written objections and requests for a hearing on the orde",
       "date": "itive regulations. DATES: This order is effective January 15, 2027, except for amendatory instruction 4, which is effective January 18, 2028. If any provisions are delayed or stayed by the filing of proper objections, FDA will publish such notification in the Federal Register. Submit either electronic or written objections and requests for a hearing on the order by February 18, 2025. See VerDate Sep<11>2014 17:12 Jan 15, 2025 Jkt 265001 PO 00000 Frm 00044 Fmt 4700 Sfmt 4700 E:\\FR\\FM\\16JAR1.SGM 16JAR1 ddrumheller on DSK120RN23PROD with",
       "delaney": "the FD&C Act, often referred to as the Delaney Clause, deems color additives unsafe under certain circumstances. The Delaney Clause consists of two parts. The first part (section 721(b)(5)(B)(i) of the FD&C Act) pertains specifically to ingested color additives. The second part (section 721(b)(5)(B)(ii) of the FD&C Act) applies to noningested color additives. For purposes of our review of this petition, we reviewed these uses of FD&C Red No. 3 under the first part because these uses result in ingestion. Section 721(b)(5)(B)(i) of the",
-      "no_risk_weighing": "r when ingested by humans or animals, ‘‘regardless of the probability, or risk, of cancer associated with exposure to the additive or of the extent to which the experimental conditions of the animal study or the carcinogenic mode of action provide insight into the health effects of human consumption and use of the additive in question’’ (83 FR 50490 at 50492, October 9, 2018). Section 721(d) of the FD&C Act provides for the issuance, amendment, or repeal of regulations authorizing the use of a color additive, and, among other things,"
+      "no_risk_weighing": "r when ingested by humans or animals, ‘‘regardless of the probability, or risk, of cancer associated with exposure to the additive or of the extent to which the experimental conditions of the animal study or the carcinogenic mode of action provide insight into the health effects of human consumption and use of the additive in question’’ (83 FR 50490 at 50492, October 9, 2018). Section 721(d) of the FD&C Act provides for the issuance, amendment, or repeal of regulations authorizing the use of a color additive, and, among other things,",
+      "limited_relevance": "on the available data and information, FD&C Red No. 3-induced thyroid tumors in male rats are of limited relevance to humans. FDA’s Center for Food Safety and Applied Nutrition (CFSAN)’s Cancer Assessment Committee (CAC) concluded that while studies show FD&C Red No. 3 induces thyroid tumors in male rats, the risk of developing such tumors in humans at low exposure levels from the current uses is unlikely (Ref. 5). FD&C Red No. 3 is likely not genotoxic (in other words, it is not directly DNA reactive) (Refs. 5 and 6). FD&C Red No. 3",
+      "no_harm": "and the available scientific evidence, we conclude that FD&C Red No. 3 meets the safety standard of a reasonable certainty of no harm required for a color additive (see Refs. 6 and 7). We derived a 210-fold margin of exposure between the highest dietary exposure to FD&C Red No. 3 (0.25 mg/kg bw/d) and the No Observed Adverse Effect Level chosen by the CAC (35.8 mg/kg bw/d) (Ref. 6). We agree that the highest dietary exposure to FD&C Red No. 3 is below the ADI established by JECFA in 2018 (6 mg/kg bw/d). We also agree with JECFA’s con",
+      "unlikely": "also agree with JECFA’s conclusion that the possibility of developing thyroid tumors in humans at low dietary exposure levels from the current uses of FD&C Red No. 3 is unlikely (Ref. 6). However, as a matter of law (see section 721(b)(5)(B) of the FD&C Act), we must revoke the regulations authorizing the uses of FD&C Red No. 3 because it has been shown to induce cancer in male rats. (Comment 7) Several comments stated that the findings that FD&C Red No. 3 induces cancer in male rats are not applicable to humans and, therefore, do not",
+      "matter_of_law": "ed No. 3 is unlikely (Ref. 6). However, as a matter of law (see section 721(b)(5)(B) of the FD&C Act), we must revoke the regulations authorizing the uses of FD&C Red No. 3 because it has been shown to induce cancer in male rats. (Comment 7) Several comments stated that the findings that FD&C Red No. 3 induces cancer in male rats are not applicable to humans and, therefore, do not indicate that the color additive would induce tumors in humans. These comments asserted that the conclusions of other regulatory agencies and authoritative"
     },
     "evidence_pages": {
       "order": 1,
@@ -2431,7 +2450,11 @@
       "no_risk_weighing": [
         3,
         5
-      ]
+      ],
+      "limited_relevance": 4,
+      "no_harm": 5,
+      "unlikely": 5,
+      "matter_of_law": 5
     },
     "pages_located": true
   },
@@ -2534,7 +2557,9 @@
       "child_certainty": "e 3. In formulating the recommendation, because both adult data and child data were considered for children, the overall certainty in the available evidence across both groups was assessed as low. Pregnant women Evidence for health effects of NSS use in pregnant women was also limited. Higher intakes of NSS were associated with a 25% increase in risk of preterm birth, as assessed by meta-analyses of three prospective cohort studies (odds ratio [OR] 1.25; 95% CI: 1.07 to 1.46; 129 009 pregnant women). A dose–response relationship was o",
       "not_safety_limit": "t women. The guidance in this guideline is based on evidence of health effects of NSS use at levels already considered safe by JECFA)1, and is not intended to update or replace existing guidance on safe or maximal levels of intake. Safe levels of intake are based on toxicological assessments of individual NSS, which are undertaken by authoritative bodies before individual NSS are approved for commercial use.2 Because the work of the Nutrition Guidance Expert Advisory Group (NUGAG) Subgroup on Diet and Health is focused on providing gu",
       "definition": "ners that are not classified as sugars. Common NSS include acesulfame K, aspartame, advantame, cyclamates, neotame, saccharin, sucralose, stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Ma",
-      "polyols_excluded": "stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Many medications, and personal care and hygiene products contain NSS in small amounts to make them more palatable. The recommendation in th"
+      "polyols_excluded": "stevia and stevia derivatives. Because low-calorie sugars and sugar alcohols (polyols) are sugars or sugar derivatives containing calories, they are not considered NSS, and therefore the recommendation does not apply to these sweeteners. ▶▶ In this recommendation, “use” of NSS means consumption of foods or beverages that contain NSS, or the addition of NSS to food or beverages by the consumer. ▶▶ Many medications, and personal care and hygiene products contain NSS in small amounts to make them more palatable. The recommendation in th",
+      "adult_effects_relevant": "HR 1.13 (95% CI: 1.09 to 1.17) Children No undesirable effects specific to children were identified; however, effects observed for adults are expected to also be relevant for children. Given the lack of direct evidence, “Don’t know” was conservatively selected. Pregnant women An undesirable effect for pregnant women was observed in prospective cohort studies and was considered to be moderate: Higher compared with lower NSS intake Preterm birth: OR 1.25 (95% CI: 1.07 to 1.46) It is possible that reverse causation and confounding by bod",
+      "young_children_focus": "be targeted to the general population, with a particular focus on infants and young children who have not yet been directly exposed to foods and beverages containing free sugars and/or NSS, as well as their caregivers, as evidence suggests that early taste exposures shape taste preferences and eating behaviour later in life (93–95). Because a significant percentage of NSS consumed globally comes in the form of NSS-sweetened beverages and much of the global effort to reduce the intake of free sugars is focused on sugar-sweetened bever"
     },
     "evidence_pages": {
       "recommendation": [
@@ -2573,7 +2598,9 @@
       "polyols_excluded": [
         13,
         37
-      ]
+      ],
+      "adult_effects_relevant": 78,
+      "young_children_focus": 39
     },
     "pages_located": true
   },

@@ -775,7 +775,8 @@
     ],
     "latest_evaluation_year": "1982",
     "latest_adi": "NOT SPECIFIED",
-    "retrieved_utc": "2026-11-09T06:04:48+00:00",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": true
   },
@@ -790,7 +791,8 @@
     ],
     "latest_evaluation_year": "2018",
     "latest_adi": "NOT SPECIFIED",
-    "retrieved_utc": "2026-11-09T06:04:51+00:00",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": true
   },
@@ -878,9 +880,10 @@
     "ins_on_page": [
       "450iii"
     ],
-    "latest_evaluation_year": "",
-    "latest_adi": "",
-    "retrieved_utc": "2026-11-09T07:50:13+00:00",
+    "latest_evaluation_year": "1982",
+    "latest_adi": "MTDI 70 mg/kg bw (as P)",
+    "adi_source_field": "Tolerable Intake",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": false
   },
@@ -1543,25 +1546,20 @@
     "adi_not_specified": false
   },
   "1520": {
-    "passed": false,
-    "adi_not_specified": false,
-    "candidates_tried": [
-      2381,
-      3726,
-      3789,
-      3405,
-      5999,
-      3725,
-      5998,
-      1237,
-      2013,
-      2087
+    "chemical_id": 2698,
+    "jecfa_name": "PROPYLENE GLYCOL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2698",
+    "file": "Chemical_2698.html",
+    "sha256": "1bd5b5d387f59dace7c933192f8574e85239dc1e4ad8dc287263551904bbb453",
+    "ins_on_page": [
+      "1520"
     ],
-    "keywords": [
-      "propylene glycol",
-      "Propylen glycol Propylene glycol",
-      "Propylene glycol"
-    ]
+    "latest_evaluation_year": "2002",
+    "latest_adi": "0-25 mg/kg bw (1973)",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
+    "passed": true,
+    "adi_not_specified": false
   },
   "153": {
     "chemical_id": 2323,
@@ -1589,7 +1587,8 @@
     ],
     "latest_evaluation_year": "2019",
     "latest_adi": "WITHDRAWN",
-    "retrieved_utc": "2026-11-09T07:44:31+00:00",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": false
   },
@@ -1604,7 +1603,8 @@
     ],
     "latest_evaluation_year": "1993",
     "latest_adi": "NOT SPECIFIED",
-    "retrieved_utc": "2026-11-09T07:44:44+00:00",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": true
   },
@@ -1619,7 +1619,8 @@
     ],
     "latest_evaluation_year": "2019",
     "latest_adi": "WITHDRAWN",
-    "retrieved_utc": "2026-11-09T07:44:46+00:00",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
     "passed": true,
     "adi_not_specified": false
   },
@@ -2252,22 +2253,36 @@
     "adi_not_specified": true
   },
   "460i": {
-    "passed": false,
-    "adi_not_specified": false,
-    "candidates_tried": [],
-    "keywords": [
-      "Cellulose vi tinh thể Microcrystalline cellulose Chất độn, chất chống đông vón, chất mang, chất làm bóng, chất nhũ hóa, chất tạo bọt, chất ổn định, chất làm dày",
-      "chất làm bóng, chất nhũ hóa, chất tạo bọt, chất ổn định, chất làm dày"
-    ]
+    "chemical_id": 281,
+    "jecfa_name": "MICROCRYSTALLINE CELLULOSE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/281",
+    "file": "Chemical_281.html",
+    "sha256": "86f37936f2152a95983b8f57e2535b0caead3e5db7454f9e7c92b2e4cff2fba6",
+    "ins_on_page": [
+      "460"
+    ],
+    "latest_evaluation_year": "1997",
+    "latest_adi": "NOT SPECIFIED",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
+    "passed": true,
+    "adi_not_specified": true
   },
   "470i": {
-    "passed": false,
-    "adi_not_specified": false,
-    "candidates_tried": [],
-    "keywords": [
-      "Muối của acid myristic, palmitic và stearic (NH4, Ca, K và Na) Salts of myristic, palmitic and stearic acids with ammonia, calcium, potassium and sodium",
-      "Salts of myristic, palmitic and stearic acids with ammonia, calcium, potassium and sodium"
-    ]
+    "chemical_id": 3487,
+    "jecfa_name": "SALTS of MYRISTIC, PALMITIC and STEARIC ACIDS (CALCIUM, POTASSIUM, SODIUM)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/3487",
+    "file": "Chemical_3487.html",
+    "sha256": "d01ad6dd152304ad7987b8d5ede6e38478a205689f020885263835f300b19699",
+    "ins_on_page": [
+      "470i"
+    ],
+    "latest_evaluation_year": "1985",
+    "latest_adi": "NOT SPECIFIED",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
+    "passed": true,
+    "adi_not_specified": true
   },
   "470ii": {
     "passed": false,
@@ -2671,5 +2686,96 @@
       "Erythritol",
       "Erythritol Erythritol"
     ]
+  },
+  "503ii": {
+    "chemical_id": 133,
+    "jecfa_name": "AMMONIUM HYDROGEN CARBONATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/133",
+    "file": "Chemical_133.html",
+    "sha256": "d22bad449f44d306d0693db1137f9ab7f0ab1ca1665457c59860fa09cb7cbd9b",
+    "ins_on_page": [
+      "503ii"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-22T07:39:18+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "321": {
+    "chemical_id": 2142,
+    "jecfa_name": "BUTYLATED HYDROXYTOLUENE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2142",
+    "file": "Chemical_2142.html",
+    "sha256": "9cb53ba31a9f336c1306da52a0fc82f1c6779b96e3263964e062c1cd3407e93f",
+    "ins_on_page": [
+      "321"
+    ],
+    "latest_evaluation_year": "1995",
+    "latest_adi": "0-0.3 mg/kg bw Intake: 1998, TRS 891-JECFA 51/126,158; FAS 42-JECFA 51/429. Intake estimates based on food additive levels in the draft General Standard for Food Additives being developed by the Codex Committee on Food Additives and Contaminants, integrated with national data on food consumption, exceeded the ADI of 0-0.3 mg/kg bw in the five Member States that submitted such data. In national data submitted by eight Member States, estimates of mean and high intake for consumers of BHT exceeded the ADI in only one country.",
+    "retrieved_utc": "2026-11-22T07:39:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "410": {
+    "chemical_id": 940,
+    "jecfa_name": "CAROB BEAN GUM",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/940",
+    "file": "Chemical_940.html",
+    "sha256": "3d07448254c693343d103088e00db42fb3bae609017c9150a74a09af5c9df56d",
+    "ins_on_page": [
+      "410"
+    ],
+    "latest_evaluation_year": "2025",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-22T07:39:18+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "420": {
+    "chemical_id": 829,
+    "jecfa_name": "D-SORBITOL",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/829",
+    "file": "Chemical_829.html",
+    "sha256": "fc10a50f28cc386ae7a1417d425e5b0ba37cbb20ec2339d3c85b916e1625b49e",
+    "ins_on_page": [
+      "420i"
+    ],
+    "latest_evaluation_year": "1982",
+    "latest_adi": "NOT SPECIFIED",
+    "retrieved_utc": "2026-11-22T07:39:18+00:00",
+    "passed": true,
+    "adi_not_specified": true
+  },
+  "160a": {
+    "chemical_id": 1514,
+    "jecfa_name": "beta-CAROTENE (synthetic)",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/1514",
+    "file": "Chemical_1514.html",
+    "sha256": "8199f7c455d5b63d490a579c2d382efcdeeeeb56df4e81e33e3d670e8e6841fe",
+    "ins_on_page": [
+      "160ai"
+    ],
+    "latest_evaluation_year": "2019",
+    "latest_adi": "WITHDRAWN",
+    "retrieved_utc": "2026-11-22T07:39:18+00:00",
+    "passed": true,
+    "adi_not_specified": false
+  },
+  "1442": {
+    "chemical_id": 2343,
+    "jecfa_name": "HYDROXYPROPYL DISTARCH PHOSPHATE",
+    "url": "https://apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/2343",
+    "file": "Chemical_2343.html",
+    "sha256": "276d494d5d4d493eee9277c59a13cabda6c0a53115c56502e7c7b827b3aa0aff",
+    "ins_on_page": [
+      "1442"
+    ],
+    "latest_evaluation_year": "2016",
+    "latest_adi": "NOT SPECIFIED",
+    "adi_source_field": "ADI",
+    "retrieved_utc": "2026-11-22T18:43:19+00:00",
+    "passed": true,
+    "adi_not_specified": true
   }
 }

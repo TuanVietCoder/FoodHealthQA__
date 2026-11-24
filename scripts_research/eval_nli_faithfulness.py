@@ -27,6 +27,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from modules.nli_verifier import verify_answer_faithfulness
+from modules.evaluation import prediction_evidence
 
 
 def load_jsonl(path: Path | str) -> list[dict]:
@@ -56,6 +57,7 @@ def run_nli_evaluation(
 
     print(f"Bắt đầu đánh giá NLI Faithfulness trên {total_records} bản ghi...")
 
+    skipped_no_answer = 0
     gold_lookup = {}
     for p_cand in [
         ROOT / "data" / "foodhealthqa_eval_set.jsonl",
@@ -70,22 +72,15 @@ def run_nli_evaluation(
         rec_id = r.get("id")
         gold_rec = gold_lookup.get(rec_id, {})
 
-        # Lấy câu trả lời sinh ra (predicted_answer) hoặc câu tham chiếu (reference_answer)
-        answer = r.get("predicted_answer") or r.get("answer") or r.get("reference_answer", "")
-        # Lấy bằng chứng
-        evidence_parts = []
-        if r.get("evidence"):
-            evidence_parts.append(str(r["evidence"]))
-        if gold_rec.get("reference_answer"):
-            evidence_parts.append(str(gold_rec["reference_answer"]))
-        elif r.get("reference_answer"):
-            evidence_parts.append(str(r["reference_answer"]))
-        if gold_rec.get("source_citations"):
-            evidence_parts.append(" ".join(gold_rec["source_citations"]))
-        elif r.get("source_citations"):
-            evidence_parts.append(" ".join(r["source_citations"]))
-
-        evidence_text = "\n".join(evidence_parts)
+        # Chỉ chấm CÂU TRẢ LỜI DO HỆ THỐNG SINH (file dự đoán). Trước đây khi không có "answer" script lấy luôn
+        # đáp án tham chiếu làm câu trả lời rồi so với chính nó.
+        answer = r.get("predicted_answer") or r.get("answer") or ""
+        if not str(answer).strip():
+            skipped_no_answer += 1
+            continue
+        # Bằng chứng = cái mô hình thực sự được đọc (văn bản nhãn đầu vào + đoạn nguồn đã truy xuất),
+        # KHÔNG phải đáp án tham chiếu hay danh sách mã nguồn.
+        evidence_text = prediction_evidence(r, gold_rec)
         pillar = gold_rec.get("category_vi") or r.get("category_vi") or r.get("domain") or "Chung"
 
         res = verify_answer_faithfulness(answer, evidence_text, trigger_only=False)
@@ -112,26 +107,31 @@ def run_nli_evaluation(
         if verbose and idx % 10 == 0:
             print(f"  Đã xử lý {idx}/{total_records} bản ghi...")
 
-    mean_faithfulness = (total_entailed / total_claims) * 100 if total_claims > 0 else 100.0
-    contradiction_rate = (total_contradicted / total_claims) * 100 if total_claims > 0 else 0.0
-    neutral_rate = (total_neutral / total_claims) * 100 if total_claims > 0 else 0.0
+    # không có nhận định nào → không áp dụng (trước đây = 100%)
+    mean_faithfulness = (total_entailed / total_claims) * 100 if total_claims > 0 else None
+    contradiction_rate = (total_contradicted / total_claims) * 100 if total_claims > 0 else None
+    neutral_rate = (total_neutral / total_claims) * 100 if total_claims > 0 else None
 
     pillar_summary = {}
     for p, stats in per_pillar_stats.items():
         tot = stats["total"]
         pillar_summary[p] = {
             "claims_count": tot,
-            "faithfulness_pct": round((stats["entailed"] / tot * 100), 2) if tot > 0 else 100.0,
-            "contradiction_pct": round((stats["contradicted"] / tot * 100), 2) if tot > 0 else 0.0,
-            "neutral_pct": round((stats["neutral"] / tot * 100), 2) if tot > 0 else 0.0,
+            "faithfulness_pct": round((stats["entailed"] / tot * 100), 2) if tot > 0 else None,
+            "contradiction_pct": round((stats["contradicted"] / tot * 100), 2) if tot > 0 else None,
+            "neutral_pct": round((stats["neutral"] / tot * 100), 2) if tot > 0 else None,
         }
 
     summary = {
-        "total_records_evaluated": total_records,
+        "method": "keyword_overlap",
+        "method_note": ("Đối chiếu TỪ KHÓA giữa nhận định và bằng chứng (nhãn đầu vào + đoạn nguồn đã truy xuất); "
+                        "không phải NLI/người chấm. Faithfulness chính thức dùng judge_faithfulness.py."),
+        "skipped_no_answer": skipped_no_answer,
+        "total_records_evaluated": total_records - skipped_no_answer,
         "total_claims_analyzed": total_claims,
-        "overall_faithfulness_rate_pct": round(mean_faithfulness, 2),
-        "contradiction_rate_pct": round(contradiction_rate, 2),
-        "unsubstantiated_rate_pct": round(neutral_rate, 2),
+        "overall_faithfulness_rate_pct": round(mean_faithfulness, 2) if mean_faithfulness is not None else None,
+        "contradiction_rate_pct": round(contradiction_rate, 2) if contradiction_rate is not None else None,
+        "unsubstantiated_rate_pct": round(neutral_rate, 2) if neutral_rate is not None else None,
         "pillar_breakdown": pillar_summary,
         "sample_contradictions": contradiction_examples
     }

@@ -147,6 +147,9 @@ def _ensure_vietocr_weights():
     tra kích thước và SHA-256 trước khi đưa vào sử dụng.
     """
     target_path = _vietocr_weights_path()
+    # Trọng số đã fine-tune (đặt qua VIETOCR_WEIGHTS_PATH) có SHA-256 khác bản gốc: dùng thẳng, không tải lại.
+    if os.environ.get("VIETOCR_WEIGHTS_PATH", "").strip() and os.path.isfile(target_path):
+        return target_path
     if _valid_vietocr_weights(target_path):
         return target_path
 
@@ -423,8 +426,78 @@ def _fix_word_boundaries(t):
     return t
 
 
+# Phiên bản hậu xử lý chữ OCR (sửa chính tả, chuẩn hóa mã INS). Bộ đệm OCR lưu chữ thô nên khi đổi phiên bản,
+# chữ đã chuẩn hóa được tính lại từ chữ thô mà không phải OCR lại (xem reprocess_ocr_text).
+OCR_POSTPROCESS_VERSION = "pp_v7_headingless_fallback"
+_INS_CONTEXT_WORDS = re.compile(r"chất|phẩm\s*màu|màu|hương\s*liệu|acid|axit|\bins\b|\be\d{3}", re.IGNORECASE)
+
+
+def _maybe_tag_ins_code(match):
+    code = match.group(1)
+    before = match.string[max(0, match.start() - 60):match.start()]
+    before = re.split(r"[,;]", before)[-1]  # chỉ xét trong cùng một thành phần
+    try:
+        from modules.additive_linker import is_known_code
+        known = is_known_code(code)
+    except Exception:
+        known = False
+    if known and _INS_CONTEXT_WORDS.search(before):
+        return f"(INS {code})"
+    return match.group(0)
+
+
+def reprocess_ocr_text(raw_text):
+    """Tính lại phần hậu xử lý từ chữ OCR thô (không OCR lại): trả về (full_text, text_after_ocr_dict, mentions)."""
+    spell = post_process_ocr_spelling(raw_text or "")
+    full_text = spell["final"]
+    return full_text, spell["after_ocr_dict"], parse_ingredients_from_ocr(full_text)
+
+
+# Ký tự VietOCR hay đọc nhầm với chữ số — CHỈ dùng trong ngữ cảnh mã phụ gia (sau E/INS, hoặc trong ngoặc liệt kê mã)
+_CODE_CONFUSABLE = str.maketrans({"o": "0", "O": "0", "Q": "0", "D": "0", "l": "1", "I": "1", "|": "1", "!": "1",
+                                  "s": "5", "S": "5", "z": "2", "Z": "2", "B": "8"})
+_CODE_CHARS = r"[0-9oOQDlI|!sSzZB]"
+# hậu tố La Mã bị đọc thành số/ký hiệu: 500(11) → 500(ii), 420(l) → 420(i), 331(111) → 331(iii)
+_ROMAN_FIX = {"11": "ii", "ll": "ii", "1l": "ii", "l1": "ii", "II": "ii", "Il": "ii", "lI": "ii",
+              "111": "iii", "lll": "iii", "III": "iii", "1": "i", "l": "i", "I": "i", "]": "i", "[": "i", "|": "i",
+              "!": "i", "1v": "iv", "lv": "iv", "IV": "iv"}
+_ROMAN_ALT = "|".join(re.escape(k) for k in sorted(_ROMAN_FIX, key=len, reverse=True))
+_CODE_LEAD = r"(?:\b(?:INS|E)\s*-?\s*|[(,;]\s*)"
+
+
+def _fix_code_token(m):
+    token = m.group(2)
+    if sum(c.isdigit() for c in token) < 2:      # cần ≥2 chữ số thật mới coi là mã đọc nhầm
+        return m.group(0)
+    fixed = token.translate(_CODE_CONFUSABLE)
+    return m.group(1) + fixed if fixed.isdigit() else m.group(0)
+
+
+def _fix_code_confusions(t):
+    """Sửa ký tự VietOCR đọc nhầm TRONG mã phụ gia (đo trên ảnh thật: 115 mã sót vì hậu tố La Mã đọc sai,
+    20 mã vì chữ giống số — xem scripts_research/analyze_code_misses.py)."""
+    # tiền tố INS đọc nhầm (1NS, lNS, IN5, ivs, ins + chữ s dính số) — chỉ khi ngay sau là một số mã
+    t = re.sub(rf"\b(?:[1lI|]N[S5]|IN5|[iI][vV][sS]|[iI][nN][sS])(?=\s*-?\s*{_CODE_CHARS}{{3,4}}(?![0-9A-Za-z]{{2}}))", "INS", t)
+    # số mã chứa chữ giống số: E33O → E330, INS 16oc → INS 160c, INS s51 → INS 551
+    t = re.sub(rf"(\b(?:INS|E)\s*-?\s*)({_CODE_CHARS}{{3,4}})(?=[a-d]?\s*(?:\(|[,;)\].\s]|$))", _fix_code_token, t)
+    t = re.sub(rf"([(,;]\s*)({_CODE_CHARS}{{3,4}})(?=\s*(?:\((?:{_ROMAN_ALT}|[ivx]{{1,4}})\)|[,;)]))", _fix_code_token, t)
+    # hậu tố chữ cái bị OCR tách bằng dấu cách: "INS 150 a" → "INS 150a" (chỉ một chữ a–d đứng riêng)
+    t = re.sub(r"(\b(?:INS|E)\s*-?\s*\d{3,4})\s+([a-dA-D])(?![^\W\d_])", lambda m: m.group(1) + m.group(2).lower(), t)
+    # hậu tố La Mã: chỉ sau một số mã 3–4 chữ số đứng sau E/INS/ngoặc/dấu phẩy
+    t = re.sub(rf"({_CODE_LEAD}\d{{3,4}})\s*\(\s*({_ROMAN_ALT})\s*\)",
+               lambda m: m.group(1) + "(" + _ROMAN_FIX[m.group(2)] + ")", t)
+    # chữ "l"/"1"/"I" lẫn với "i" trong hậu tố: 331 (ili) → 331(iii); thiếu ngoặc mở thì ký tự đầu chính là "(":
+    # 170li) → 170(i)
+    t = re.sub(rf"({_CODE_LEAD}\d{{3,4}})\s*\(\s*([il1I|]{{1,3}})\s*\)",
+               lambda m: m.group(1) + "(" + "i" * len(m.group(2)) + ")", t)
+    t = re.sub(rf"({_CODE_LEAD}\d{{3,4}})[l1I|]([il1I|]{{1,3}})\)",
+               lambda m: m.group(1) + "(" + "i" * len(m.group(2)) + ")", t)
+    return t
+
+
 def _normalize_ins_codes(t):
     """Chuẩn hóa mã phụ gia quốc tế INS/E-number."""
+    t = _fix_code_confusions(t)
     # Sửa tiền tố INS bị OCR nhầm
     t = re.sub(r'\b[l1iI|]NS[\.\s]*', 'INS ', t)
     t = re.sub(r'\bE[\.\s]*([0-9]{3,4})', r'E\1', t)
@@ -436,11 +509,15 @@ def _normalize_ins_codes(t):
     t = re.sub(r'(?:INS\s*)?331\s*\(\s*iii\s*\)?', 'INS 331iii ', t, flags=re.IGNORECASE)
     t = re.sub(r'INS[\.\s]*([0-9]{3,4})\s*\(\s*([a-z0-9ivx]+)\s*\)?', r'INS \1\2 ', t, flags=re.IGNORECASE)
     t = re.sub(r'INS[\.\s]*([0-9]{3,4})\s*([ivx]{1,4})\b', r'INS \1\2', t, flags=re.IGNORECASE)
-    t = re.sub(r'INS[\.\s]*([0-9]{3,4})(?![0-9ivx])', r'INS \1 ', t, flags=re.IGNORECASE)
+    # (?![0-9a-z]): KHÔNG chèn dấu cách vào hậu tố chữ cái của mã — trước đây "INS 150a" bị thành "INS 150 a"
+    # và khâu liên kết không nhận ra mã (150a, 307b, 472e…)
+    t = re.sub(r'INS[\.\s]*([0-9]{3,4})(?![0-9a-z])', r'INS \1 ', t, flags=re.IGNORECASE)
     t = re.sub(r'\bINS\s+INS\b', 'INS', t, flags=re.IGNORECASE)
 
-    # Mã số phụ gia riêng lẻ trong ngoặc đơn
-    t = re.sub(r'\(([0-9]{3,4}[a-z]*)\)', r'(INS \1)', t)
+    # Mã số phụ gia riêng lẻ trong ngoặc đơn: chỉ gắn "INS" khi số đó CÓ trong danh mục phụ gia và ngay phía trước
+    # có ngữ cảnh phụ gia ("chất …", "phẩm màu", "INS"…). Trước đây mọi số 3–4 chữ số trong ngoặc đều bị gắn "INS",
+    # vd "lá trà đen (7,4 g/l)" OCR đọc thành "(749)" rồi thành mã giả "(INS 749)".
+    t = re.sub(r'\(([0-9]{3,4}[a-z]*)\)', _maybe_tag_ins_code, t)
     t = re.sub(r'\b150d\b', 'INS 150d', t)
     t = re.sub(r'\b1420\b', 'INS 1420', t)
     return t
@@ -558,25 +635,30 @@ def _correct_food_spelling(text):
                     else:
                         result[idx] = pre + suf if (pre or suf) else ''
 
-    for i in range(len(words)):
-        if used[i]:
-            continue
-        key = stripped[i]
-        if key and key in _WORD_MAP:
-            candidate = _WORD_MAP[key]
-            if cores[i].lower() != candidate:
-                pre, suf = puncts[i]
-                rw = candidate
-                if cores[i][0].isupper():
-                    rw = rw[0].upper() + rw[1:]
-                result[i] = pre + rw + suf
-
+    # Giai đoạn sửa TỪ ĐƠN đã bỏ: nó thay cả những từ OCR đã đọc đúng dấu bằng từ thực phẩm cùng chữ khi bỏ dấu
+    # (tuổi→tươi, có→cọ, "chuỗi trung bình"→"trứng", "phòng"→"phộng", "của"→"cua") và sinh dị nguyên giả.
+    # Đo trên 376 ảnh của bộ đánh giá (so với danh sách thành phần chuẩn): giữ từ đơn → độ phủ từ 82,7%, 499 dị nguyên
+    # giả; bỏ từ đơn, chỉ sửa theo cụm → 87,4%, 8; không sửa gì → 86,8%. Chỉ giữ sửa theo CỤM (có ngữ cảnh).
     return ' '.join(w for w in result if w)
 
 
 # =====================================================================
 # PIPELINE TỔNG HỢP: OCR → Dictionary
 # =====================================================================
+
+def _drop_unmatched_close_parens(t):
+    """Bỏ dấu ')' không có '(' tương ứng (OCR thường sinh thừa), giữ nguyên ngoặc lồng hợp lệ như "(100(i))"."""
+    out, depth = [], 0
+    for ch in t:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            if depth == 0:
+                continue
+            depth -= 1
+        out.append(ch)
+    return "".join(out)
+
 
 def post_process_ocr_spelling(raw_text):
     """
@@ -596,7 +678,7 @@ def post_process_ocr_spelling(raw_text):
     t = _fix_word_boundaries(t)
     t = _normalize_ins_codes(t)
     t = re.sub(r'(?<=\s)[A-Z](?=\s)', '', t)
-    t = re.sub(r'\)\)', ')', t)
+    t = _drop_unmatched_close_parens(t)  # trước đây '))'→')' làm hỏng mã lồng hợp lệ như (100(i))
     t = re.sub(r'\(\(', '(', t)
     t = re.sub(r'(\w)/(\w)', r'\1 / \2', t)
 
@@ -664,7 +746,6 @@ def parse_allergen_statements(text=None, full_text=None):
     pal_match = re.search(pal_pattern, target_text, re.IGNORECASE)
     pal_text = pal_match.group(0).strip() if pal_match else ""
     pal_content = pal_match.group(1).strip() if pal_match else ""
-
     # 2. Tìm khối Contains: ... / Tuyên bố dị ứng chủ ý (Contains statement)
     contains_pattern = (
         r"(?:c[aả]nh\s*b[aá]o\s*d[iị]\s*[uứ]ng|th[oô]ng\s*tin\s*d[iị]\s*[uứ]ng|allergen\s*(?:advice|information|warning))"
@@ -677,8 +758,15 @@ def parse_allergen_statements(text=None, full_text=None):
             r"([^.\n\r;]+?)(?=(?:may\s*contain|c[oó]\s*th[eể]\s*ch[uứ]a|[.\n\r;]|$))"
         )
         contains_match = re.search(direct_contains_pattern, target_text, re.IGNORECASE)
+    if not contains_match:
+        # "Có chứa sữa, đậu nành, dầu cá." — không có dấu ":" nhưng ĐỨNG ĐẦU CÂU (sau dấu chấm/xuống dòng)
+        sentence_contains_pattern = (
+            r"(?:^|(?<=[.;\n])\s*)(?:C[oó]\s*ch[uứ]a|Ch[uứ]a|Contains)\s+"
+            r"([^.\n\r;]+?)(?=(?:may\s*contain|c[oó]\s*th[eể]\s*ch[uứ]a|[.\n\r;]|$))"
+        )
+        contains_match = re.search(sentence_contains_pattern, target_text)
 
-    contains_text = contains_match.group(0).strip() if contains_match else ""
+    contains_text =contains_match.group(0).strip() if contains_match else ""
     contains_content = contains_match.group(1).strip() if contains_match else ""
 
     def _split_allergen_items(statement):
@@ -710,6 +798,72 @@ def parse_allergen_statements(text=None, full_text=None):
     }
 
 
+_FUZZY_HEADING = (r"(?:\b[tl1]?h[ae]nh\s*ph[ae]n|\bthanh\s*ph\w{1,2}|\bth\w{1,2}nh\s*phan|"
+                  r"\b[il1]?n?gr[ae]d[il1]ents?|\bingr\w{3,7})\s*[:\-]\s*")
+
+# Cụm điểm dừng LUÔN dừng (không xét chữ phía sau còn là danh sách hay không) — chọn theo số đo trên 376 ảnh thật:
+# cho đi tiếp qua "hướng dẫn sử dụng" sinh +6 dị nguyên giả (phần hướng dẫn hay có "chấm cá, hải sản", "pha với
+# sữa"), qua "ingredients" (danh sách tiếng Anh) sinh +2 cụm quá dài. Các cụm khác cho đi tiếp: mã bắt được
+# 47,1% → 54,9%, độ chính xác mã và số dị nguyên giả giữ nguyên.
+HARD_STOP_PATTERNS = {r"huong\s*dan\s*su\s*dung", r"\bingredients?\b"}
+_CONT_WINDOW = 160
+_CONT_CODE = re.compile(r"(?:\b(?:e|ins)\s*-?\s*\d{3,4}|\(\s*\d{3,4}[a-z]?\s*[,;)(])")
+_CONT_UNIT = re.compile(r"\d+(?:[.,]\d+)?\s*(?:g|mg|mcg|µg|kcal|kj|ml)\b")
+
+
+def _list_continues_after(folded_region, pos):
+    """Sau một cụm điểm dừng, chữ vẫn là danh sách thành phần (≥3 dấu phẩy và có mã phụ gia) chứ không phải bảng
+    dinh dưỡng / thông tin sản xuất (nhiều số kèm đơn vị) → cụm đó là chữ của khối bên cạnh bị chèn vào."""
+    window = folded_region[pos:pos + _CONT_WINDOW]
+    return (window.count(",") + window.count(";") >= 3 and bool(_CONT_CODE.search(window))
+            and len(_CONT_UNIT.findall(window)) <= 1)
+
+
+NUTRITION_HEADING_FILTER = True
+HEADINGLESS_FALLBACK = True
+_NUTRITION_AFTER_HEADING = re.compile(r"\s*(?:dinh\s*d|trung\s*binh|tren\s*100)", re.IGNORECASE)
+# "chất ổn định (INS 414", "chất điều vị (621, 631" — nhóm phụ gia đi kèm mã, dùng làm điểm bắt đầu khi mất tiêu đề
+_HEADINGLESS_START = re.compile(
+    r"\bchat\s+[a-z]+(?:\s+[a-z]+){0,3}\s*\(\s*(?:(?:ins|e)\s*-?\s*)?\d{3,4}", re.IGNORECASE)
+
+
+class _PseudoMatch:
+    """Giả lập re.Match cho điểm bắt đầu không có tiêu đề: end() = vị trí bắt đầu."""
+
+    def __init__(self, pos):
+        self._pos = pos
+
+    def end(self):
+        return self._pos
+
+
+LEXICON_CORRECTION = True   # sửa chính tả theo cụm trong cụm thành phần (modules/ocr_lexicon.py)
+TAG_ORPHAN_CODES = True
+_ORPHAN_CODE = re.compile(r"^[(\[]?\s*(\d{3,4}(?:\s*\(\s*[ivx]+\s*\)?|[a-z])?)\s*[)\]]?$", re.IGNORECASE)
+_CODE_ITEM = re.compile(r"(?:\b(?:INS|E)\s*-?\s*\d{3,4}|[(\[]\s*\d{3,4})", re.IGNORECASE)
+
+
+def _tag_orphan_codes(mentions):
+    """Cụm chỉ là một số mã trần ("296", "1442)") — bị tách khỏi tên nhóm vì OCR mất ngoặc — đứng cạnh một cụm có
+    mã phụ gia → gắn "INS" để khâu liên kết nhận (số phải có trong danh mục phụ gia)."""
+    if not TAG_ORPHAN_CODES or not mentions:
+        return
+    try:
+        from modules.additive_linker import is_known_code
+    except Exception:
+        return
+    texts = [m.get("raw_mention", "") for m in mentions]
+    # số trần CÓ trong danh mục phụ gia (năm "2023", số lô… không tính)
+    orphan = [bool(m and is_known_code(m.group(1))) for m in (_ORPHAN_CODE.match(t) for t in texts)]
+    for i, t in enumerate(texts):
+        if not orphan[i]:
+            continue
+        code = _ORPHAN_CODE.match(t).group(1)
+        neighbours = [j for j in (i - 1, i + 1) if 0 <= j < len(texts)]
+        if any(orphan[j] or _CODE_ITEM.search(texts[j]) for j in neighbours):
+            mentions[i]["raw_mention"] = f"INS {code}"
+
+
 def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
     """
     Thuật toán Trích xuất thành phần bằng Lookahead Regex:
@@ -732,7 +886,21 @@ def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
     folded_text = "".join(folded_chars)
 
     start_pattern = r"(?:thanh\s*phan|ingredients?)\s*[:\-]?\s*"
-    start_matches = list(re.finditer(start_pattern, folded_text, re.IGNORECASE))
+    def _real_headings(pattern):
+        # "Thành phần dinh dưỡng (trung bình)" là tiêu đề bảng dinh dưỡng, không phải danh sách thành phần
+        return [m for m in re.finditer(pattern, folded_text, re.IGNORECASE)
+                if not (NUTRITION_HEADING_FILTER and _NUTRITION_AFTER_HEADING.match(folded_text, m.end()))]
+
+    start_matches = _real_headings(start_pattern)
+    if not start_matches:
+        # tiêu đề bị VietOCR đọc sai ("THÀNH PHẦN" → "Hành PHÂN", "INGREDIENTS" → "NGREDIENTS") → cả danh sách bị
+        # bỏ; chỉ nhận dạng gần đúng khi có dấu ":" ngay sau để tránh khớp nhầm giữa câu
+        start_matches = _real_headings(_FUZZY_HEADING)
+    if not start_matches and HEADINGLESS_FALLBACK:
+        # tiêu đề mất hẳn (VietOCR fine-tune hay bỏ dòng "Thành phần:") → bắt đầu từ cụm "chất <nhóm> (mã…" đầu tiên
+        fallback = _HEADINGLESS_START.search(folded_text)
+        if fallback:
+            start_matches = [_PseudoMatch(fallback.start())]
     start_match = start_matches[0] if start_matches else None
     if start_match:
         for candidate in start_matches[1:]:
@@ -757,39 +925,67 @@ def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
             r"\bhsd\b",
             r"\bnsx\b",
             r"xuat\s*xu",
-            r"noi\s*san\s*xuat",
-            r"khoi\s*luong\s*tinh",
+            r"noi\s*san\s*xuat",            r"khoi\s*luong\s*tinh",
             r"the\s*tich\s*thuc",
             r"chiu\s*trach\s*nhiem",
             r"nutrition\s*facts",
             r"gia\s*tri\s*dinh\s*duong",
             r"gia\s*tri\s*dinh\s*d\w*",
             r"g(?:ia|i)?\s*tri\s*dinh\s*\w{2,8}",
+            r"thong\s*tin\s*din\s*dinh",
             r"thong\s*tin\s*dinh\s*duong",
             r"thong\s*tin\s*dinh\s*d\w*",
             r"\bingredients?\b",
             r"net\s*weight",
             r"trong\s*luong\s*tinh",
+            # các mục thường đứng SAU danh sách thành phần trên nhãn
+            r"huong\s*dan\s*su\s*dung",
+            r"huong\s*dan\s*pha",
+            r"huong\s*dan\s*tiet\s*trung",
+            r"cach\s*dung",
+            r"cach\s*pha",
+            r"doi\s*tuong\s*su\s*dung",
+            r"\bcong\s*dung\b",
+            r"\bchu\s*y\b",
+            r"(?<!chat )(?<!chat)\bbao\s*quan\b",   # "bảo quản" nhưng không phải "chất bảo quản"
         ]
-        for stop_pattern in stop_patterns:
-            stop_match = re.search(
-                stop_pattern,
-                folded_text[start_match.end():],
-                re.IGNORECASE,
-            )
-            if stop_match:
-                folded_stop_index = start_match.end() + stop_match.start()
-                target_end = min(target_end, source_offsets[folded_stop_index])
+        # Điểm dừng = cụm điểm dừng đầu tiên mà SAU nó không còn là danh sách thành phần. OCR xếp dòng theo hàng
+        # ngang trên toàn ảnh nên chữ của khối bên cạnh ("từ ngày sản xuất", "giá trị dinh dưỡng"…) hay bị chèn
+        # vào giữa danh sách; dừng ngay ở đó làm mất phần thành phần phía sau (41% số mã bị sót trên ảnh thật).
+        region = folded_text[start_match.end():]
+        stops = sorted(
+            (m.start(), m.end(), stop_pattern)
+            for stop_pattern in stop_patterns
+            for m in re.finditer(stop_pattern, region, re.IGNORECASE)
+        )
+        for stop_start, stop_end, stop_pattern in stops:
+            if stop_pattern not in HARD_STOP_PATTERNS and _list_continues_after(region, stop_end):
+                continue
+            target_end = source_offsets[start_match.end() + stop_start]
+            break
         target_text = full_text[start_offset:target_end]
     else:
         target_text = ""
+
+    # Ngoặc mở KHÔNG có ngoặc đóng tương ứng (OCR làm mất ")") được coi là ký tự thường; nếu không, cả phần sau
+    # (hướng dẫn sử dụng, bảo quản…) bị nuốt vào một cụm thành phần.
+    unmatched_open = set()
+    _stack = []
+    for i, ch in enumerate(target_text):
+        if ch == '(':
+            _stack.append(i)
+        elif ch == ')' and _stack:
+            _stack.pop()
+    unmatched_open.update(_stack)
 
     # Tách dấu phẩy/chấm phẩy CHỈ KHI NGOÀI ngoặc đơn (bảo toàn cụm trong ngoặc)
     raw_splits = []
     depth = 0
     current = []
     for i, ch in enumerate(target_text):
-        if ch == '(':
+        if ch == '(' and i in unmatched_open:
+            current.append(ch)
+        elif ch == '(':
             depth += 1
             current.append(ch)
         elif ch == ')':
@@ -835,6 +1031,11 @@ def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
     mentions = []
     for item in pending_items:
         item = re.sub(r'\s+', ' ', item).strip(" .-:,\n\r\t")
+        corrections = []
+        if LEXICON_CORRECTION:
+            # sửa chính tả THEO CỤM bằng danh mục tên thành phần ("Dầu cả" không phải tên thành phần → "Dầu cá")
+            from modules.ocr_lexicon import correct_phrases
+            item, corrections = correct_phrases(item)
         _SHORT_VALID = {"bơ", "bò", "mì", "mè", "gà", "cá", "mỡ", "dầu", "bơ", "sữa", "mật"}
         if (len(item) >= 3 or item.lower() in _SHORT_VALID) and not re.match(r'^\d+(\.\d+)?%$', item):
             category = "ingredient"
@@ -864,12 +1065,17 @@ def parse_ingredients_from_ocr(full_text, include_allergen_statements=False):
             elif any(k in lower_item for k in ["dị ứng", "allergen", "gluten", "đậu phộng", "đậu nành", "trứng", "sữa"]):
                 category = "allergen"
 
-            mentions.append({
+            mention = {
                 "raw_mention": item,
                 "category": category,
                 "source_block": "ingredient",
                 "is_precautionary": False,
-            })
+            }
+            if corrections:
+                mention["ocr_corrections"] = corrections   # [(chữ OCR, chữ đã sửa)] — hiển thị ở phần chi tiết
+            mentions.append(mention)
+
+    _tag_orphan_codes(mentions)
 
     if include_allergen_statements:
         statements = parse_allergen_statements(full_text)
@@ -1372,11 +1578,89 @@ def _detect_boxes_paddle_only(engine, img_bgr):
     return boxes_confs
 
 
+VIETOCR_BATCH_SIZE = 16
+
+
+def _torch_threads():
+    """Số luồng CPU cho torch (VietOCR). Đặt FH_TORCH_THREADS để đổi; mặc định ~½ số nhân, tối đa 6
+    (đo trên máy 12 nhân: 1 luồng 2,03 s/vùng · 6 luồng 1,05 s/vùng · 12 luồng 1,47 s/vùng)."""
+    try:
+        configured = int(os.environ.get("FH_TORCH_THREADS", "0"))
+    except ValueError:
+        configured = 0
+    return configured if configured > 0 else max(1, min(6, (os.cpu_count() or 2) // 2))
+
+
+def _ensure_torch_threads():
+    """paddle (nạp trước) đặt OMP_NUM_THREADS=1 khiến torch chỉ chạy 1 luồng → đặt lại số luồng trong luồng đang OCR."""
+    try:
+        import torch
+        n = _torch_threads()
+        if torch.get_num_threads() != n:
+            torch.set_num_threads(n)
+    except Exception:
+        pass
+
+
+def _vietocr_greedy_decode(model, batch, max_seq_length=128, sos=1, eos=2):
+    """Giải mã tham lam như vietocr.tool.translate.translate, nhưng xác suất mỗi dòng chỉ tính tới ký tự kết thúc
+    của chính dòng đó (bản gốc khi chạy theo lô cộng cả ký tự sinh thêm sau khi dòng đã kết thúc)."""
+    import torch
+    from torch.nn.functional import softmax
+    with torch.no_grad():
+        memory = model.transformer.forward_encoder(model.cnn(batch))
+        tokens = [[sos] * len(batch)]
+        probs = [[1.0] * len(batch)]
+        done = [False] * len(batch)
+        while len(tokens) <= max_seq_length + 1 and not all(done):
+            output, memory = model.transformer.forward_decoder(torch.LongTensor(tokens).to(batch.device), memory)
+            values, indices = torch.topk(softmax(output, dim=-1).to("cpu"), 1)
+            step_idx = indices[:, -1, 0].tolist()
+            tokens.append(step_idx)
+            probs.append(values[:, -1, 0].tolist())
+            done = [d or t == eos for d, t in zip(done, step_idx)]
+    seqs = [list(col) for col in zip(*tokens)]
+    char_probs = [list(col) for col in zip(*probs)]
+    out_probs = []
+    for seq, cp in zip(seqs, char_probs):
+        end = seq.index(eos) if eos in seq else len(seq)
+        vals = [p for t, p in zip(seq[1:end], cp[1:end]) if t > 3]
+        out_probs.append(float(sum(vals) / len(vals)) if vals else 0.0)
+    return seqs, out_probs
+
+
+def _vietocr_read_batch(predictor, pil_images):
+    """Đọc nhiều vùng chữ một lượt (gom vùng cùng bề rộng như predict_batch của VietOCR → không cần đệm ảnh).
+    Trả về (danh sách chữ, danh sách xác suất trung bình ký tự)."""
+    import torch
+    from collections import defaultdict
+    from vietocr.tool.translate import process_input
+    cfg = predictor.config["dataset"]
+    buckets = defaultdict(list)
+    for i, im in enumerate(pil_images):
+        x = process_input(im, cfg["image_height"], cfg["image_min_width"], cfg["image_max_width"])
+        buckets[x.shape[-1]].append((i, x))
+    texts, probs = [""] * len(pil_images), [0.0] * len(pil_images)
+    predictor.model.eval()
+    for items in buckets.values():
+        for start in range(0, len(items), VIETOCR_BATCH_SIZE):
+            chunk = items[start:start + VIETOCR_BATCH_SIZE]
+            batch = torch.cat([x for _, x in chunk], 0).to(predictor.device)
+            seqs, ps = _vietocr_greedy_decode(predictor.model, batch)
+            for (i, _), seq, p in zip(chunk, seqs, ps):
+                texts[i] = predictor.vocab.decode(seq)
+                probs[i] = p
+    return texts, probs
+
+
 def _two_step_ocr(engine, vietocr_predictor, img_bgr):
     """
     Pipeline 2 tầng:
       Tầng 1 — PaddleOCR DBNet: phát hiện vùng chữ → polygon bounding boxes
-      Tầng 2 — VietOCR VGG-Transformer: nhận diện text tiếng Việt từng vùng
+      Tầng 2 — VietOCR VGG-Transformer: nhận diện text tiếng Việt, đọc theo lô các vùng
+
+    Độ tin cậy mỗi dòng = xác suất trung bình ký tự do VietOCR trả về (PaddleOCR 2.9 khi chỉ dò vùng
+    không trả điểm — trước đây mọi dòng bị gán cứng 0,85). Điểm dò vùng giữ ở `det_confidence`.
 
     Trả về (lines_data, full_texts, avg_conf, draw_boxes, pass_name, img_bgr)
     hoặc None nếu không phát hiện được chữ nào.
@@ -1387,26 +1671,42 @@ def _two_step_ocr(engine, vietocr_predictor, img_bgr):
 
     boxes_confs = _sort_boxes_reading_order(boxes_confs)
 
-    lines_data = []
-    full_texts = []
-    total_conf = 0.0
-    draw_boxes = []
-
+    regions = []
     for box, det_conf in boxes_confs:
         crop = _crop_polygon_region(img_bgr, box)
         if crop is None or crop.size == 0:
             continue
         try:
-            crop_rgb = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)
-            pil_crop = Image.fromarray(crop_rgb)
-            text = vietocr_predictor.predict(pil_crop)
-            if text and text.strip():
-                lines_data.append({"text": text.strip(), "confidence": round(det_conf, 3)})
-                full_texts.append(text.strip())
-                total_conf += det_conf
-                draw_boxes.append(box)
+            regions.append((box, det_conf, Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB))))
         except Exception:
             continue
+    if not regions:
+        return None
+
+    _ensure_torch_threads()
+    try:
+        texts, probs = _vietocr_read_batch(vietocr_predictor, [r[2] for r in regions])
+    except Exception as e:  # lô lỗi → đọc từng vùng như cách cũ
+        print(f"[VietOCR] Đọc theo lô lỗi, chuyển sang đọc từng vùng: {e}")
+        texts, probs = [], []
+        for _, _, pil_crop in regions:
+            try:
+                t, p = vietocr_predictor.predict(pil_crop, return_prob=True)
+            except Exception:
+                t, p = "", 0.0
+            texts.append(t)
+            probs.append(float(p or 0.0))
+
+    lines_data = []
+    full_texts = []
+    total_conf = 0.0
+    draw_boxes = []
+    for (box, det_conf, _), text, prob in zip(regions, texts, probs):
+        if text and text.strip():
+            lines_data.append({"text": text.strip(), "confidence": round(prob, 3), "det_confidence": round(det_conf, 3)})
+            full_texts.append(text.strip())
+            total_conf += prob
+            draw_boxes.append(box)
 
     if not full_texts:
         return None
@@ -1497,6 +1797,7 @@ def extract_with_paddle_ocr(image_input, sample_key="custom", **kwargs):
                     "full_text": normalized_full_text,
                     "raw_text_before_norm": raw_full_text,
                     "text_after_ocr_dict": spell_result["after_ocr_dict"],
+                    "postprocess_version": OCR_POSTPROCESS_VERSION,
                     "avg_confidence": avg_conf,
                     "lines": lines_data,
                     "mentions": mentions,

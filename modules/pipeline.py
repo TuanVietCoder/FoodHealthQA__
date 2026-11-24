@@ -5,7 +5,7 @@ Kế thừa kiến trúc:
 - Tầng 2: Normalization (FoodOntoRAG 4-agent Entity Linking đầy đủ)
   + Agent 1: Hybrid Retriever (BM25 + TF-IDF/SBERT Semantic + Fusion)
   + Agent 2: Selector Agent (Exact-match preference + Specificity rule)
-  + Agent 3: LLM Scorer (Confidence Calibration τ)
+  + Agent 3: Rule match scorer (điểm khớp theo luật τ, không gọi LLM)
   + Agent 4: Synonym Generator & Feedback Loop
   + Hỗ trợ mở rộng nạp đầy đủ 4.6MB Food Ontology (foodon_entities.json)
 - Tầng 3: Hybrid Retrieval & Data Hub:
@@ -25,7 +25,9 @@ import os
 import time
 import json
 import logging
+import copy
 import re
+import unicodedata
 from copy import deepcopy
 import pandas as pd
 from modules.ocr_extractor import (
@@ -38,6 +40,7 @@ from modules.file_resolver import find_data_file, read_table_flexibly
 from modules.foodon import enrich_additive_foodon_curie, load_foodon_entities
 from modules import abstention
 from modules import dynamic_qa
+from modules import infant_rules
 from modules import llm_keys
 from modules.benchmark import validate_citations, canonicalize_citation, is_recognized_citation, extract_citations
 from modules.hybrid_retriever import foodontorag_4agent_linking
@@ -55,6 +58,7 @@ from modules.constraint_model import (
     evaluate_efsa_risk,
     evaluate_regulatory_compliance,
     ALLERGEN_KEYWORDS,
+    VERIFIED_ADDITIVE_CONDITIONS,
     strip_allergen_noise,
     allergen_priority_info,
     PRECAUTION_KEYWORDS,
@@ -728,14 +732,18 @@ def enrich_persona_with_nhanes(persona, data_dir="data", biomarkers_cache=None):
     # Thống kê nhóm NHANES phù hợp
     nhanes_group_size = len(matched_seqns)
 
-    # Enrich conditions từ P_DEMO — thêm nếu persona chưa có
+    # KHÔNG thêm bệnh/chế độ ăn của người tham gia NHANES vào hồ sơ người dùng. Trước đây bệnh của một người
+    # trong khảo sát (vd "Chronic_Kidney_Disease_Stage_3") bị chép vào hồ sơ "trẻ 1 tuổi" rồi kích hoạt luật thận —
+    # hồ sơ người dùng chỉ gồm những gì người dùng khai báo. Dữ liệu NHANES chỉ lưu làm tham chiếu, luật không dùng.
     sample_data = matched_seqns[0][1]
     derived, diet_habits = derive_conditions_from_biomarkers(sample_data)
-    for cond in derived:
-        if cond.lower() not in existing_conditions:
-            conditions.append(cond)
-
     enriched["conditions"] = conditions
+    enriched["nhanes_reference"] = {
+        "example_participant_conditions": list(derived),
+        "example_participant_diets": list(diet_habits or []),
+        "note": "Tham chiếu từ một người tham gia NHANES cùng nhóm; không phải thông tin của người dùng.",
+    }
+    diet_habits = []
 
     # Enrich demographics từ P_DEMO
     demographics = enriched.get("demographics", {})
@@ -1364,6 +1372,72 @@ def _match_fndds(product_name, fndds_list):
     return best_item, best_score
 
 
+CODEX_LOW_SODIUM_MG_PER_100G = 120.0   # Codex CAC/GL 23-1997: "low sodium" ≤ 120 mg/100 g
+_NUM = r"(\d+(?:[.,]\d+)?)"
+
+
+def _to_float(text):
+    return float(str(text).replace(",", "."))
+
+
+# chất dinh dưỡng đọc từ nhãn: khóa → (tên trên nhãn, đơn vị)
+_LABEL_NUTRIENTS = {
+    "sodium_mg": (r"natri|sodium", "mg"),
+    "sugars_g": (r"đường tổng số|tổng đường|đường|sugars?", "g"),
+}
+CODEX_SUGAR_FREE_G_PER_100G = 0.5     # Codex CAC/GL 23-1997: "sugar-free" ≤ 0,5 g/100 g
+
+
+def _extract_one(low, names, unit):
+    head = r"(?:" + names + r")[^0-9]{0,40}?"
+    # 1) theo 100 g/ml: "natri 853 mg trên 100 g", "đường tổng số 54,9 g trên 100 g"
+    m = re.search(head + _NUM + r"\s*" + unit + r"\s*(?:/|trên|per)\s*100\s*(g|ml)\b", low)
+    if m:
+        return _to_float(m.group(1)), f"100 {m.group(2)}", m.group(0)
+    # 2) theo khẩu phần: "natri 35 mg trên 1 khẩu phần 15 g", "59,5 mg trên 170 ml (1 hộp)"
+    m = re.search(head + _NUM + r"\s*" + unit + r"\s*(?:trên|/|per|cho|trong)\s*"
+                  r"(?:1\s+)?(?:khẩu phần|kp|gói|ly|hộp|chai|lon|thanh|cái|viên|serving|portion)?[^0-9]{0,12}?"
+                  + _NUM + r"\s*(g|ml)\b", low)
+    if m and _to_float(m.group(2)) > 0:
+        return (round(_to_float(m.group(1)) * 100.0 / _to_float(m.group(2)), 2),
+                f"quy đổi từ {m.group(2)} {m.group(3)}", m.group(0))
+    # 3) bảng dinh dưỡng: tiêu đề "… trên/per 100 g|ml" rồi dòng "Natri … X mg"
+    hdr = re.search(r"(?:tính\s*)?(?:trên|per|/)\s*100\s*(g|ml)\b", low)
+    row = re.search(r"(?:" + names + r")\s*[:\-]?\s*" + _NUM + r"\s*" + unit + r"\b", low)
+    if hdr and row:
+        return _to_float(row.group(1)), f"100 {hdr.group(1)}", row.group(0)
+    return None
+
+
+def extract_label_nutrition(*texts):
+    """Số liệu dinh dưỡng GHI TRÊN NHÃN (người dùng nêu trong câu hỏi, hoặc đọc từ bảng dinh dưỡng), quy về /100 g.
+
+    Hiện đọc natri (mg) và đường tổng số (g). Chỉ nhận khi có cả con số lẫn cơ sở tính ("trên/per 100 g|ml" hoặc
+    "khẩu phần … X g", quy đổi ×100/X); không đoán khi thiếu. Các cụm nêu NGƯỠNG ("không quá 120 mg/100 g",
+    "natri thấp", "không đường") bị bỏ qua để không hiểu nhầm là số của sản phẩm.
+    Trả về {"sodium_mg"?, "sugars_g"?, "basis": {...}, "source_text": {...}} hoặc None.
+    """
+    result, basis, source = {}, {}, {}
+    for raw in texts:
+        text = unicodedata.normalize("NFC", str(raw or ""))
+        if not text.strip():
+            continue
+        low = text.casefold()
+        low = re.sub(r"(?:không quá|không vượt quá|tối đa|dưới|ngưỡng|<=|≤|<)\s*" + _NUM
+                     + r"\s*(?:mg|g)\s*(?:/|trên|per)\s*100\s*(?:g|ml)", " ", low)
+        low = re.sub(r"(natri|sodium)\s*(thấp|low)", r"tuyên-bố-\2", low)
+        low = re.sub(r"(không|ít|giảm)\s*đường", r"tuyên-bố-\1", low)
+        for key, (names, unit) in _LABEL_NUTRIENTS.items():
+            if key in result:
+                continue
+            hit = _extract_one(low, names, unit)
+            if hit:
+                result[key], basis[key], source[key] = hit
+    if not result:
+        return None
+    return dict(result, basis=basis, source_text=source)
+
+
 def evaluate_nutritional_risk(product_name, fndds_list, persona,
                               label_nutrition=None):
     """
@@ -1424,6 +1498,38 @@ def evaluate_nutritional_risk(product_name, fndds_list, persona,
 
     warnings = [w["message"] for w in constraint_warnings]
 
+    # Số natri GHI TRÊN NHÃN với người tăng huyết áp: so với điều kiện "natri thấp" của Codex CAC/GL 23-1997
+    # (≤ 120 mg/100 g). Chỉ áp dụng cho số liệu của chính sản phẩm, không cho số ước tính.
+    conds = {str(c).lower() for c in persona.get("conditions", [])}
+    sugars = best_item.get("sugars_g")
+    if not best_item.get("is_estimate") and sugars is not None and any("diabet" in c for c in conds):
+        sugars = float(sugars)
+        ok = sugars <= CODEX_SUGAR_FREE_G_PER_100G
+        constraint_details.append({
+            "condition": "diabetes", "nutrient": "Đường (điều kiện 'không đường' Codex)", "value": sugars,
+            "unit": "g/100g", "upper_bound": CODEX_SUGAR_FREE_G_PER_100G, "lower_bound": None,
+            "I_g": 1 if ok else 0, "severity": "OK" if ok else "CAUTION", "citation": "CODEX_CAC_GL_23_1997",
+        })
+        if not ok:
+            warnings.append(
+                f"Đường trên nhãn ≈ {sugars:g} g/100 g, vượt {CODEX_SUGAR_FREE_G_PER_100G:g} g/100 g nên không đạt "
+                "điều kiện 'không đường' của Codex CAC/GL 23-1997 — người đái tháo đường nên thận trọng với lượng dùng."
+            )
+    sodium = best_item.get("sodium_mg")
+    if not best_item.get("is_estimate") and sodium is not None and conds & {"hypertension", "cardiovascular_risk"}:
+        sodium = float(sodium)
+        ok = sodium <= CODEX_LOW_SODIUM_MG_PER_100G
+        constraint_details.append({
+            "condition": "hypertension", "nutrient": "Natri (điều kiện 'natri thấp' Codex)", "value": sodium,
+            "unit": "mg/100g", "upper_bound": CODEX_LOW_SODIUM_MG_PER_100G, "lower_bound": None,
+            "I_g": 1 if ok else 0, "severity": "OK" if ok else "CAUTION", "citation": "CODEX_CAC_GL_23_1997",
+        })
+        if not ok and not any("natri thấp" in w for w in warnings):
+            warnings.append(
+                f"Natri trên nhãn ≈ {sodium:.0f} mg/100 g, vượt {CODEX_LOW_SODIUM_MG_PER_100G:.0f} mg/100 g nên không đạt "
+                "điều kiện 'natri thấp' của Codex CAC/GL 23-1997 — người tăng huyết áp nên thận trọng với lượng dùng."
+            )
+
     # Thêm disclaimer vào warnings nếu là dữ liệu ước tính
     if best_item.get("is_estimate") and warnings:
         disclaimer = best_item.get("estimate_disclaimer", "")
@@ -1444,13 +1550,80 @@ def foodontorag_entity_linking(mention, kb_additives):
     Delegate sang hybrid_retriever.foodontorag_4agent_linking() triển khai đầy đủ:
       Agent 1: Hybrid Retriever (BM25 Lexical + TF-IDF/SBERT Semantic + Fusion)
       Agent 2: Selector Agent (Exact-match preference + Specificity rule)
-      Agent 3: LLM Scorer (Confidence Calibration τ)
+      Agent 3: Rule match scorer (điểm khớp theo luật τ, không gọi LLM)
       Agent 4: Synonym Generator & Feedback Loop (khi τ < 0.70)
     """
     return foodontorag_4agent_linking(mention, kb_additives)
 
 
+def link_all_mentions(mentions, kb_additives):
+    """Liên kết mọi cụm thành phần; một cụm chứa NHIỀU mã phụ gia được tách thành một kết quả cho MỖI mã.
+
+    Trước đây mỗi cụm chỉ giữ một thực thể (mã "cụ thể nhất"), nên cụm như "chất tạo ngọt tổng hợp (950, 955)"
+    hay "chất ổn định (460(i), 407, 466)" làm mất các mã còn lại — đo trên văn bản nhãn chuẩn của bộ 750 câu:
+    1.150/3.032 mã (37,9%) bị bỏ. Việc tách chỉ dùng bộ dò định danh (mã INS/E hoặc tên/tên đồng nghĩa xuất hiện
+    nguyên văn trong cụm, modules.additive_linker.link_additive_mentions) — không đoán thêm mã nào.
+    """
+    from modules.additive_linker import find_uncertain_codes, link_additive_mentions, normalize_ins_key
+
+    kb_by_key = {}
+    for additive in kb_additives or []:
+        kb_by_key.setdefault(normalize_ins_key(additive.get("ins_code", "")), additive)
+
+    linked = []
+    for mention in mentions or []:
+        base = foodontorag_entity_linking(mention, kb_additives)
+        raw_text = mention.get("raw_mention", "")
+        # Mã OCR không có trong danh mục (vd "481(i)" đọc thành "4310") → một mục "phụ gia không liên kết được",
+        # để S_retrieval giảm đúng thực tế thay vì bỏ qua mã lạ. Không đoán mã thay thế.
+        for unc in find_uncertain_codes(raw_text):
+            if unc["kind"] != "unknown_code":
+                continue
+            linked.append({
+                "raw_mention": f"{raw_text} [{unc['code_text']}]",
+                "category": "additive_uncertain_code",
+                "matched_entity": None,
+                "confidence_tau": None,
+                "retrieval_confidence": 0.0,
+                "match_method": "uncertain_code",
+                "code_origin": "unreadable_on_label",
+                "uncertain_code": unc,
+                "rationale": unc["reason"],
+            })
+        identities = link_additive_mentions(raw_text)
+        subtype_flags = {u["key"]: u for u in find_uncertain_codes(raw_text) if u["kind"] == "uncertain_subtype"}
+        if len(identities) < 2:
+            ins_key = normalize_ins_key((base.get("matched_entity") or {}).get("ins_code", ""))
+            if ins_key in subtype_flags:
+                base = dict(base, uncertain_code=subtype_flags[ins_key])
+            linked.append(base)
+            continue
+        for k, ident in enumerate(identities, 1):
+            key = normalize_ins_key(ident.get("ins_code", ""))
+            rich = kb_by_key.get(key)
+            entity = dict(rich or ident["matched_entity"])
+            entity.setdefault("identity_only", rich is None)
+            item = dict(base)
+            item.update({
+                "matched_entity": entity,
+                "confidence_tau": ident.get("confidence"),
+                "retrieval_confidence": ident.get("confidence"),
+                "match_method": ident.get("match_method"),
+                "code_origin": ident.get("code_origin"),
+                "identity_source": ident.get("source", {}),
+                "multi_code_index": f"{k}/{len(identities)}",
+                **({"uncertain_code": subtype_flags[key]} if key in subtype_flags else {}),
+                "rationale": (
+                    f"Cụm chứa {len(identities)} mã phụ gia; liên kết định danh {ident.get('match_method')}: "
+                    f"{ident.get('matched_alias') or ''} → {entity.get('ins_code', '')} (mã {k}/{len(identities)})."
+                ),
+            })
+            linked.append(item)
+    return linked
+
+
 _ADDITIVE_ENTITY_CATEGORIES = {
+    "additive_uncertain_code",
     "flavor_enhancer",
     "preservative",
     "color",
@@ -1469,6 +1642,12 @@ def _is_additive_link_candidate(item):
     return bool(item.get("matched_entity")) or item.get("category") in _ADDITIVE_ENTITY_CATEGORIES
 
 
+# Ngưỡng từ chối theo điểm tin cậy tổng: S_total < ngưỡng (và không có cảnh báo nào) → ABSTAIN.
+# Giá trị phải được chọn trên phần "phát triển" của bộ đánh giá: scripts_research/calibrate_confidence.py.
+CONFIDENCE_ABSTAIN_THRESHOLD = 0.65
+# Số liệu dinh dưỡng ƯỚC TÍNH (thực phẩm tương tự trong USDA FNDDS / VCNDD) có được đổi kết luận an toàn không.
+# Mặc định False: chỉ bảng dinh dưỡng của chính sản phẩm mới được. True chỉ để tái lập hành vi cũ khi đối chiếu.
+NUTRITION_ESTIMATE_CHANGES_LABEL = False
 def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, all_mentions=None):
     """
     Tầng 4: Đánh giá an toàn, tính điểm tin cậy kép và kích hoạt Guardrail an toàn y tế.
@@ -1481,17 +1660,26 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
     additive_link_results = [
         item for item in linked_results if _is_additive_link_candidate(item)
     ]
-    retrieval_scores = [
-        max(0.0, min(float(item.get("retrieval_confidence", 0.0)), 1.0))
-        for item in additive_link_results
-    ]
-    # A label with no additive candidate does not have a retrieval failure.
-    s_retrieval = sum(retrieval_scores) / len(retrieval_scores) if retrieval_scores else 1.0
-    s_total = 0.5 * s_perception + 0.5 * s_retrieval
-    insufficient_evidence = s_total < 0.65
+    # S_retrieval = tỉ lệ cụm phụ gia trên nhãn liên kết được với cơ sở tri thức. Mọi liên kết được giữ lại đều đã
+    # khớp định danh (mã INS/E, tên chuẩn hoặc tên đồng nghĩa có trong chữ trên nhãn) — xem foodontorag_4agent_linking.
+    # Trước đây dùng điểm BM25/ngữ nghĩa chia cho điểm cao nhất của lượt tìm (điểm tương đối, ứng viên đầu luôn ≈1)
+    # và gán 1.0 cho nhãn không có phụ gia. Nhãn không có cụm phụ gia → không áp dụng (None), S_total = S_perception.
+    linked_additives = [item for item in additive_link_results if item.get("matched_entity")]
+    if additive_link_results:
+        s_retrieval = len(linked_additives) / len(additive_link_results)
+        s_retrieval_basis = f"{len(linked_additives)}/{len(additive_link_results)} cụm phụ gia liên kết được với cơ sở tri thức"
+        s_total = 0.5 * s_perception + 0.5 * s_retrieval
+    else:
+        s_retrieval = None
+        s_retrieval_basis = "không áp dụng — nhãn không có cụm phụ gia cần liên kết"
+        s_total = s_perception
+    insufficient_evidence = s_total < CONFIDENCE_ABSTAIN_THRESHOLD
     confidence_metrics = {
         "s_perception": s_perception,
         "s_retrieval": s_retrieval,
+        "s_retrieval_basis": s_retrieval_basis,
+        "additive_mentions_total": len(additive_link_results),
+        "additive_mentions_linked": len(linked_additives),
         "s_total": s_total,
     }
 
@@ -1605,9 +1793,7 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
                 continue
 
             is_prec_text = any(p in raw_text_lower for p in pal_indicators)
-            _text_is_prec = is_prec_text
             for allergy in user_allergies:
-                is_prec_text = _text_is_prec
                 keywords = list(ALLERGEN_KEYWORDS.get(allergy, [allergy]))
                 derivatives = DERIVATIVE_ALLERGEN_MAP.get(allergy, [])
                 combined_terms = keywords + [d for d in derivatives if d not in keywords]
@@ -1675,6 +1861,12 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
         if reg.get("efsa"):
             efsa_warnings.append(reg["efsa"])
 
+    # Trẻ dưới 12 tháng: phụ gia trên nhãn phải nằm trong danh mục cho thực phẩm trẻ nhỏ (TT24 PL2A / Codex GSFA 13.1, 13.2)
+    # và nhãn ghi tuổi tối thiểu lớn hơn tuổi của bé -> làm theo nhãn (mức cảnh báo như dị nguyên trực tiếp)
+    if infant_rules.is_infant(persona, question):
+        caution_alerts.extend(infant_rules.evaluate(linked_results)["alerts"])
+        warning_alerts.extend(infant_rules.label_age_alerts(persona, question, _label_texts(linked_results, all_mentions)))
+
     # Kiểm tra thiếu dữ liệu cho cơ chế từ chối 2 loại
     unlinked_count = sum(
         1 for item in additive_link_results if not item.get("matched_entity")
@@ -1690,7 +1882,7 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
     abstention_reasons = []
     if insufficient_evidence:
         abstention_reasons.append(
-            "Độ tin cậy OCR hoặc độ phù hợp truy xuất dưới ngưỡng an toàn (S_total < 0.65)."
+            f"Độ tin cậy OCR hoặc độ phù hợp truy xuất dưới ngưỡng an toàn (S_total < {CONFIDENCE_ABSTAIN_THRESHOLD:g})."
         )
     if kb_coverage_low:
         abstention_reasons.append(
@@ -1713,7 +1905,6 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
             "Đã định danh được phụ gia nhưng thiếu hàm lượng, khẩu phần hoặc nhóm thực phẩm "
             "để đối chiếu ML/ADI; cần bổ sung dữ liệu định lượng thay vì mã định danh."
         )
-
     def _collect_canonical_citations(alert_list, include_codex=True):
         cits = []
         for a in alert_list:
@@ -1883,10 +2074,30 @@ def _evaluate_safety_core(linked_results, persona, question, avg_ocr_conf=0.95, 
         }
 
 
+def _label_texts(linked_results, all_mentions=None):
+    """Các đoạn chữ của nhãn (mention thô) — dùng để đọc câu cảnh báo như giới hạn tuổi."""
+    texts = [str(m.get("raw_mention", "")) if isinstance(m, dict) else str(m) for m in (all_mentions or [])]
+    texts += [str(it.get("raw_mention", "")) for it in (linked_results or [])]
+    return list(dict.fromkeys(t for t in texts if t))
+
+
+# Từ dị nguyên trong câu hỏi chỉ được hiểu là "người dùng dị ứng" khi đứng ngay sau một dấu hiệu dị ứng/hỏi thành phần,
+# trong cùng cụm (tới động từ hoặc dấu câu kế tiếp). Trước đây mọi từ đều được nhận: "bé ăn sữa chua 'X'" -> dị ứng sữa,
+# "điều kiện 'natri thấp'" -> "điều" = hạt điều.
+_ALLERGY_CUE = re.compile(r"dị\s*ứng|dị\s*nguyên|mẫn\s*cảm|không\s*dung\s*nạp|tránh|kiêng|allerg|nhiễm\s*chéo|chứa")
+_ALLERGY_CUE_END = re.compile(r"\s(có|ăn|uống|dùng|được|thì|nên|không)\b|[?.!]")
+
+
 def _question_allergies(question):
-    """Allergen groups the user names in the question; the quoted product name is ignored."""
+    """Allergen groups the user names in the question (after an allergy cue); the quoted product name is ignored."""
     q = re.sub(r"'.*?'(?=\s|$|[?,.;:])", " ", str(question or "")).lower()
-    return [a for a, kws in ALLERGEN_KEYWORDS.items() if any(contains_label_term(q, kw) for kw in kws)]
+    windows = []
+    for m in _ALLERGY_CUE.finditer(q):
+        rest = q[m.end():]
+        stop = _ALLERGY_CUE_END.search(rest)
+        windows.append(rest[: stop.start() if stop else len(rest)])
+    text = " | ".join(windows)
+    return [a for a, kws in ALLERGEN_KEYWORDS.items() if any(contains_label_term(text, kw) for kw in kws)]
 
 
 def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_conf=0.95, all_mentions=None,
@@ -1914,12 +2125,28 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
         + ([abstention.OUT_OF_SCOPE] if scope else [])))
     result["data_gaps"] = gaps
     result["scope_issues"] = scope
+    # nhóm người dùng KB không có luật riêng (người cao tuổi, cho con bú) và phạm vi của luật trẻ dưới 12 tháng:
+    # chỉ là dòng lưu ý, không đổi kết luận
+    result["population_notes"] = abstention.population_notes(
+        question, persona, linked_results=linked_results, covered_conditions=VERIFIED_ADDITIVE_CONDITIONS)
+    if infant_rules.is_infant(persona, question):
+        result["infant_check"] = infant_rules.evaluate(linked_results)
+        result["infant_check"]["label_age"] = [a for a in result.get("alerts", []) if a.get("label_age_rule")]
+        cits = result.setdefault("citations", [])
+        extra_cits = (["VN_TT24_2019", "CODEX_STAN_192_1995"] if result["infant_check"]["checked"] else []) \
+            + (["CODEX_CXS_72_1981", "VN_QCVN_11_1_2012"] if result["infant_check"]["nutrients"] else []) \
+            + (["CODEX_CXS_74_1981"] if result["infant_check"]["label_age"] else [])
+        for c in extra_cits:
+            if c not in cits:
+                cits.append(c)
     if not types:
         return result
 
     # a direct allergen hit keeps its warning; when the question names the allergen, only a hit on that one counts
+    # a label age statement ("không dùng cho trẻ dưới 1 tuổi") is read straight from the label, so it is kept the same way
     direct_allergen = any(
-        a.get("regulation") == "US_FDA_FALCPA" and (not stated or a.get("allergen_key") in stated)
+        (a.get("regulation") == "US_FDA_FALCPA" and (not stated or a.get("allergen_key") in stated))
+        or a.get("label_age_rule")
         for a in result.get("alerts", []))
     only_data_gap = types == [abstention.INSUFFICIENT_DATA]
     keep_alert = status == "CRITICAL_ALERT" or (only_data_gap and direct_allergen and status != "ABSTAIN")
@@ -1975,6 +2202,11 @@ def evaluate_safety_and_guardrail(linked_results, persona, question, avg_ocr_con
     }
 
 
+# Độ dài câu trả lời — DÙNG CHUNG cho cả Cấu hình A (_LLM_ONLY_PROMPT) và B/C (_LLM_ANSWER_PROMPT) để phép so sánh
+# trong bộ QA không lệch vì một bên được dặn viết ngắn hơn.
+ANSWER_LENGTH_RULE = ("Trình bày ngắn gọn: 1 câu kết luận trả lời thẳng câu hỏi, sau đó tối đa 4 gạch đầu dòng "
+                      "lý do/khuyến nghị; tổng khoảng 120–150 từ; không chép lại danh sách thành phần.")
+
 _LLM_ANSWER_PROMPT = """Bạn là trợ lý tra cứu an toàn thực phẩm Việt Nam. Dựa trên bằng chứng khoa học bên dưới, hãy trả lời câu hỏi của người dùng bằng tiếng Việt.
 
 ## Yêu cầu bắt buộc:
@@ -1988,6 +2220,8 @@ _LLM_ANSWER_PROMPT = """Bạn là trợ lý tra cứu an toàn thực phẩm Vi�
   + Vượt phạm vi hệ thống: đề nghị trao đổi với chuyên gia dinh dưỡng hoặc bác sĩ phù hợp.
 - Nếu dữ liệu dinh dưỡng là ước tính từ FNDDS (không phải từ nhãn sản phẩm), phải nêu rõ đây là số liệu tham chiếu cho loại thực phẩm tương tự, không phải giá trị chính xác của sản phẩm.
 - Không lặp lại nguyên văn bằng chứng, hãy tổng hợp thành câu trả lời mạch lạc.
+- {length_rule}
+- Tên thành phần đọc từ ảnh (OCR) có thể còn sai chính tả hoặc lẫn chữ của phần khác trên bao bì: khi nhắc tới một thành phần, dùng tên đã chuẩn hóa (phần sau dấu "→" trong bằng chứng) nếu có; không đoán thêm thành phần không có trong bằng chứng.
 - Dòng cuối cùng bắt buộc ghi nhãn an toàn chuẩn hóa: SAFETY_LABEL: {status} (chọn đúng 1 trong 5 nhãn sau: SAFE, CAUTION, UNSAFE, CRITICAL_ALERT, ABSTAIN; KHÔNG dùng nhãn WARNING).
 
 ## Hồ sơ người dùng:
@@ -2209,6 +2443,40 @@ def _call_llm(prompt, temperature=0.3, max_output_tokens=4096, api_key=None):
     )
 
 
+# Cổng nguồn: câu trả lời của LLM chỉ được hiển thị khi MỌI mã nguồn nằm trong danh sách bằng chứng đã truy xuất và có
+# ít nhất một mã (trừ khi chính nhãn là ABSTAIN, khi đó câu trả lời là lời từ chối). Đặt STRICT_SOURCE_GATE=0 để tắt
+# (chỉ dùng cho so sánh với số đo cũ).
+STRICT_SOURCE_GATE = os.environ.get("STRICT_SOURCE_GATE", "1").strip() != "0"
+_BRACKET_TAG = re.compile(r"\[([^\]\n]{2,200})\]")
+
+
+def _is_source_like_tag(tag):
+    """Thẻ trông như mã nguồn: có dấu gạch dưới (JECFA_EVALUATIONS) hoặc mở đầu bằng Nguồn/Source/Ref."""
+    return "_" in tag or tag.lower().startswith(("nguồn", "nguon", "source", "ref"))
+
+
+def check_answer_sources(text, allowed, label=None):
+    """Kiểm tra câu trả lời đã làm sạch có bám nguồn không. Trả về (đạt, lý do khi không đạt).
+
+    Không đạt khi: (1) có mã nguồn nằm ngoài danh sách `allowed` (nguồn bịa hoặc không được truy xuất cho câu này);
+    (2) không có mã nguồn nào, trừ khi nhãn là ABSTAIN. Chưa kiểm từng câu có thẻ riêng hay chưa."""
+    allowed_set = {str(a) for a in (allowed or [])}
+    cited, foreign = [], []
+    for match in _BRACKET_TAG.finditer(text or ""):
+        for part in re.split(r"[,;&]", match.group(1)):
+            part = part.strip()
+            if part and _is_source_like_tag(part):
+                cited.append(part)
+                if part not in allowed_set:
+                    foreign.append(part)
+    if foreign:
+        return False, "câu trả lời dẫn nguồn ngoài danh sách bằng chứng đã truy xuất: " + ", ".join(dict.fromkeys(foreign[:3]))
+    if not cited and label != "ABSTAIN":
+        return False, ("câu trả lời không dẫn nguồn nào" if allowed_set
+                       else "không truy xuất được nguồn nào cho câu hỏi này")
+    return True, ""
+
+
 def clean_llm_citations_and_label(text, expected_label=None):
     """
     Chuẩn hóa câu trả lời của LLM:
@@ -2341,6 +2609,26 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     for ew in evaluation.get("efsa_warnings", []):
         evidence_parts.append(f"- EFSA ({ew.get('year', '')}): {ew.get('substance', '')} — {ew.get('key_finding', '')} [Ref: {ew.get('reference', '')}]")
 
+    infant = evaluation.get("infant_check")
+    if infant:
+        evidence_parts.append("### Đối chiếu danh mục phụ gia cho thực phẩm trẻ dưới 12 tháng (TT 24/2019 Phụ lục 2A; Codex GSFA nhóm 13.1, 13.2):")
+        for p in infant.get("permitted", []):
+            evidence_parts.append(f"- {p['summary']} [VN_TT24_2019]")
+        for a in infant.get("alerts", []):
+            evidence_parts.append(f"- KHÔNG có trong danh mục: {a['additive']} [VN_TT24_2019] [CODEX_STAN_192_1995]")
+        if infant.get("nutrients"):
+            evidence_parts.append("- Nguồn khoáng/vitamin, KHÔNG xét như phụ gia: "
+                                  + ", ".join(n["additive"] for n in infant["nutrients"]) + " [CODEX_CXS_72_1981] [VN_QCVN_11_1_2012]")
+        for a in infant.get("label_age", []):
+            evidence_parts.append(f"- NHÃN GHI GIỚI HẠN TUỔI: \"{a['label_excerpt']}\" (từ {a['min_age_months']} tháng) — sản phẩm "
+                                  "không dành cho bé ở tuổi này; nêu rõ điều này trong câu trả lời. [CODEX_CXS_74_1981]")
+        if not infant.get("checked"):
+            evidence_parts.append("- Nhãn không có phụ gia mang mã INS để đối chiếu.")
+    for note in evaluation.get("population_notes", []):
+        extra = (" TUYỆT ĐỐI không viết rằng sản phẩm 'an toàn', 'ổn' hay 'không cần tránh' đối với người này; hãy nói rõ hệ thống "
+                 "không có dữ liệu về bệnh này và khuyên hỏi bác sĩ." if note.get("code") == "CONDITION_NO_ADDITIVE_EVIDENCE" else "")
+        evidence_parts.append(f"**LƯU Ý NHÓM NGƯỜI DÙNG ({note['group']})**: {note['text']} Hãy nêu lưu ý này trong câu trả lời.{extra}")
+
     if detected_hazards:
         evidence_parts.append("### Lịch sử sự cố liên quan:")
         for h in detected_hazards[:3]:
@@ -2409,6 +2697,7 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
     canonical_safety_status = evaluation.get("safety_label") or guardrail_status_to_safety_label(evaluation.get("status", ""))
 
     prompt = _LLM_ANSWER_PROMPT.format(
+        length_rule=ANSWER_LENGTH_RULE,
         persona_info=persona_info,
         question=question or "Sản phẩm này có an toàn cho tôi không?",
         status=canonical_safety_status,
@@ -2421,31 +2710,42 @@ def generate_llm_answer(evaluation, linked_results, persona, question,
         max_output_tokens=4096,
         api_key=api_key,
     )
-    if result and get_llm_provider() == "ollama" and canonical_citations \
-            and not extract_citations(clean_llm_citations_and_label(result, expected_label=canonical_safety_status)):
-        # Model cục bộ nhỏ hay quên trích dẫn: gọi lại một lần với nhắc nhở, không tự chèn nguồn thay model.
-        retry_prompt = (
+    def _retry_prompt():
+        return (
             prompt
             + "\n\nNHẮC LẠI BẮT BUỘC: sau MỖI nhận định phải có mã nguồn trong ngoặc vuông, chỉ dùng các mã: "
             + ", ".join(f"[{c}]" for c in canonical_citations)
             + ". Ví dụ: \"Natri benzoat có ADI 0–5 mg/kg [JECFA_EVALUATIONS].\" Kết thúc bằng dòng SAFETY_LABEL."
         )
-        retried = _call_llm(retry_prompt, temperature=0.2, max_output_tokens=4096, api_key=api_key)
-        if retried:
-            result = retried
+
+    retried = False
+    if result and get_llm_provider() == "ollama" and canonical_citations             and not extract_citations(clean_llm_citations_and_label(result, expected_label=canonical_safety_status)):
+        # Model cục bộ nhỏ hay quên trích dẫn: gọi lại một lần với nhắc nhở, không tự chèn nguồn thay model.
+        retried = True
+        again = _call_llm(_retry_prompt(), temperature=0.2, max_output_tokens=4096, api_key=api_key)
+        if again:
+            result = again
     if result:
         result = clean_llm_citations_and_label(result, expected_label=canonical_safety_status)
+        if STRICT_SOURCE_GATE:
+            ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status)
+            if not ok and canonical_citations and not retried:
+                # thử lại đúng một lần (mọi nhà cung cấp) trước khi từ chối
+                again = _call_llm(_retry_prompt(), temperature=0.2, max_output_tokens=4096, api_key=api_key)
+                if again:
+                    result = clean_llm_citations_and_label(again, expected_label=canonical_safety_status)
+                    ok, reason = check_answer_sources(result, canonical_citations, canonical_safety_status)
+            if not ok:
+                _LOGGER.warning("Từ chối câu trả lời của LLM vì không bám nguồn: %s", reason)
+                evaluation["answer_refusal"] = reason  # pipeline trả ra cho giao diện và bộ đánh giá
+                return None
         citation_check = validate_citations(
             result,
             canonical_citations or citations,
             require_each_sentence=False,
         )
-        if citation_check["valid"]:
-            return result
-        _LOGGER.warning(
-            "Citation check did not pass (returning answer anyway): %s",
-            citation_check,
-        )
+        if not citation_check["valid"]:
+            _LOGGER.warning("Citation check did not pass: %s", citation_check)
         return result
     _LOGGER.warning("Gemini returned an empty or too-short answer.")
     return None
@@ -2460,6 +2760,7 @@ Hãy trả lời câu hỏi của họ DỰA TRÊN KIẾN THỨC CỦA BẠN (kh
 - Câu trả lời chỉ mang tính gợi ý dựa trên kiến thức tổng quát, KHÔNG phải kết luận y khoa.
 - Sử dụng ngôn ngữ khuyến nghị: "nên cân nhắc", "khuyến nghị tham khảo ý kiến bác sĩ".
 - Nếu không chắc chắn, hãy nêu rõ và khuyên tham vấn chuyên gia.
+- {length_rule}
 - Dòng cuối cùng bắt buộc ghi nhãn an toàn chuẩn hóa: SAFETY_LABEL: SAFE|CAUTION|UNSAFE|CRITICAL_ALERT|ABSTAIN (KHÔNG dùng WARNING)
 
 ## Hồ sơ người dùng:
@@ -2490,6 +2791,7 @@ def generate_llm_only_answer(raw_text, persona, question):
     persona_info = f"Bệnh lý: {conditions}. Dị ứng: {allergies}."
 
     prompt = _LLM_ONLY_PROMPT.format(
+        length_rule=ANSWER_LENGTH_RULE,
         persona_info=persona_info,
         ingredients_text=raw_text or "(không có thông tin thành phần)",
         question=question or "Sản phẩm này có an toàn cho tôi không?",
@@ -2696,15 +2998,23 @@ def run_grounded_pipeline(
     passage_retrieval_enabled=True,
     passage_top_k=5,
     passage_mode=None,
+    linked_results=None,
+    label_text=None,
 ):
     """
     Downstream chuẩn dùng chung tuyệt đối cho Config B và Config C.
+
+    linked_results: kết quả liên kết phụ gia đã tính cho CÙNG danh sách mentions (chỉ phụ thuộc chữ trên nhãn, không
+    phụ thuộc câu hỏi hay hồ sơ) — truyền vào để không liên kết lại khi hỏi nhiều câu trên cùng một ảnh.
 
     Hai cấu hình chỉ được phép khác nguồn mentions/confidence trước hàm này:
     B dùng Ground Truth text, C dùng ảnh qua OCR + lexical normalization.
     """
     mentions = list(mentions or [])
-    linked_results = [foodontorag_entity_linking(item, kb_additives) for item in mentions]
+    if linked_results is None:
+        linked_results = link_all_mentions(mentions, kb_additives)
+    else:
+        linked_results = copy.deepcopy(list(linked_results))
     # Tầng QA động: hiểu câu hỏi → tra KB theo phụ gia mà câu hỏi nhắc tới → phát hiện khoảng trống tri thức.
     qa_plan, question_additives, qa_gaps = None, [], []
     if dynamic_qa_enabled:
@@ -2720,10 +3030,13 @@ def run_grounded_pipeline(
         extra_gaps=qa_gaps,
     )
     detected_hazards = check_food_hazards(product_name, mentions, hazards_list)
+    # Số liệu dinh dưỡng GHI TRÊN NHÃN: do người dùng nêu trong câu hỏi, hoặc đọc từ bảng dinh dưỡng của nhãn
+    label_nutrition = extract_label_nutrition(question, label_text)
     matched_fndds, nutri_warnings, constraint_details = evaluate_nutritional_risk(
         product_name,
         fndds_list,
         persona,
+        label_nutrition=label_nutrition,
     )
     has_nutri_conditions = any(
         any(k in str(c).lower() for k in ["tiểu đường", "cao huyết áp", "diabetes", "hypertension", "ckd", "suy thận", "gout", "thận", "tim mạch"])
@@ -2731,12 +3044,24 @@ def run_grounded_pipeline(
     ) or any(
         k in str(question).lower() for k in ["dinh dưỡng", "đường", "muối", "natri", "calo", "béo", "sugar", "sodium", "salt", "fat"]
     )
+    if matched_fndds and not matched_fndds.get("is_estimate") and any(
+        d.get("citation") == "CODEX_CAC_GL_23_1997" for d in (constraint_details or [])
+    ):
+        cits = evaluation.setdefault("citations", [])
+        if "CODEX_CAC_GL_23_1997" not in cits:
+            cits.append("CODEX_CAC_GL_23_1997")
     if matched_fndds and (nutri_warnings or has_nutri_conditions):
         cits = evaluation.setdefault("citations", [])
         for c in ["CODEX_CXS_1_1985", "USDA_FDC"]:
             if c not in cits:
                 cits.append(c)
-    if nutri_warnings and evaluation.get("status") == "SCREENED_NO_ALERT":
+    # Chỉ số liệu dinh dưỡng của CHÍNH sản phẩm (bảng dinh dưỡng trên nhãn) mới được đổi kết luận an toàn.
+    # Số liệu ước tính từ thực phẩm "tương tự" (USDA FNDDS / VCNDD) — vd khớp nhầm "Muscle Milk" cho sữa bột trẻ em —
+    # chỉ hiển thị làm tham chiếu. NUTRITION_ESTIMATE_CHANGES_LABEL = True để tái lập hành vi cũ khi đối chiếu.
+    nutrition_from_label = bool(matched_fndds) and not matched_fndds.get("is_estimate", True)
+    if nutri_warnings and evaluation.get("status") == "SCREENED_NO_ALERT" and (
+        nutrition_from_label or NUTRITION_ESTIMATE_CHANGES_LABEL
+    ):
         evaluation["status"] = "CAUTION"
         evaluation["safety_label"] = "CAUTION"
         evaluation["badge_color"] = "yellow"
@@ -2786,8 +3111,9 @@ def run_grounded_pipeline(
             persona,
             question,
             detected_hazards=detected_hazards,
-            matched_fndds=matched_fndds,
-            nutri_warnings=nutri_warnings,
+            # số liệu ước tính không đưa cho LLM như thể là số liệu của sản phẩm
+            matched_fndds=matched_fndds if (nutrition_from_label or NUTRITION_ESTIMATE_CHANGES_LABEL) else None,
+            nutri_warnings=nutri_warnings if (nutrition_from_label or NUTRITION_ESTIMATE_CHANGES_LABEL) else [],
             qa_context=qa_context,
             passages=retrieved_passages,
         )
@@ -2806,6 +3132,7 @@ def run_grounded_pipeline(
         "constraint_details": constraint_details,
         "off_cross_ref": off_cross_ref,
         "llm_answer": llm_answer,
+        "answer_refusal": evaluation.get("answer_refusal") if not llm_answer else None,
         "citation_validation": citation_validation,
         "qa": qa_summary,
         "retrieved_passages": retrieved_passages,

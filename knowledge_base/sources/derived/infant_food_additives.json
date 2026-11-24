@@ -1,0 +1,3863 @@
+{
+ "description": "Phụ gia được phép cho thực phẩm dành cho trẻ sơ sinh và trẻ nhỏ (nhóm 13.1.x, 13.2). Sinh bởi scripts_research/extract_infant_additive_rules.py — không sửa tay.",
+ "category_names_vi": {
+  "13.1.1": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+  "13.1.2": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+  "13.1.3": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+  "13.2": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi"
+ },
+ "codex": {
+  "source": "Codex GSFA CXS 192-1995 (cxs_192e.pdf)",
+  "general_rules": [
+   {
+    "locator": "CXS 192-1995, Preamble §3.3 (PDF trang 5)",
+    "text": "Chất mang phụ gia không được chấp nhận cho nhóm 13.1 (sữa công thức cho trẻ sơ sinh, tiếp theo, y tế đặc biệt cho trẻ sơ sinh) và 13.2 (thực phẩm bổ sung cho trẻ sơ sinh và trẻ nhỏ), trừ khi Bảng 1 và 2 có quy định phụ gia cho nhóm đó."
+   },
+   {
+    "locator": "CXS 192-1995, Annex to Table Three (PDF trang 493)",
+    "text": "Nhóm 13.1 và 13.2 nằm trong danh sách loại trừ khỏi điều kiện chung của Bảng 3 (dùng theo GMP): việc dùng phụ gia cho các nhóm này chỉ theo quy định ở Bảng 1 và 2."
+   }
+  ],
+  "categories": {
+   "13.1.1": [
+    {
+     "ins_text": "304, 305",
+     "ins_codes": [
+      "304",
+      "305"
+     ],
+     "name": "ASCORBYL ESTERS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "187 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name": "CALCIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name": "CARBON DIOXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name": "CAROB BEAN GUM",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name": "CARRAGEENAN",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "584 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name": "CITRIC ACID",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "472c",
+     "ins_codes": [
+      "472c"
+     ],
+     "name": "CITRIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "max_level": "9000",
+     "unit": "mg/kg",
+     "notes": "380 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "414",
+     "ins_codes": [
+      "414"
+     ],
+     "name": "GUM ARABIC (ACACIA GUM)",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name": "LACTIC ACID, L-, D- and DL-",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name": "LECITHIN",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "585 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "421",
+     "ins_codes": [
+      "421"
+     ],
+     "name": "MANNITOL",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "585 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name": "NITROGEN",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "338; 339(i)-(iii); 340(i)- (iii); 341(i)-(iii); 342(i)-(ii); 343(i)-(iii); 450(i)-(iii),(v)- (vii), (ix); 451(i),(ii); 452(i)-(v); 542",
+     "ins_codes": [
+      "338",
+      "339(i)",
+      "339(ii)",
+      "339(iii)",
+      "340(i)",
+      "340(ii)",
+      "340(iii)",
+      "341(i)",
+      "341(ii)",
+      "341(iii)",
+      "342(i)",
+      "342(ii)",
+      "343(i)",
+      "343(ii)",
+      "343(iii)",
+      "450(i)",
+      "450(ii)",
+      "450(iii)",
+      "450(v)",
+      "450(vi)",
+      "450(vii)",
+      "450(ix)",
+      "451(i)",
+      "451(ii)",
+      "452(i)",
+      "452(ii)",
+      "452(iii)",
+      "452(iv)",
+      "452(v)",
+      "542"
+     ],
+     "name": "PHOSPHATES",
+     "max_level": "450",
+     "unit": "mg/kg",
+     "notes": "33, 230, 586, 587 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name": "POTASSIUM CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name": "POTASSIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name": "POTASSIUM HYDROGEN CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name": "POTASSIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "551",
+     "ins_codes": [
+      "551"
+     ],
+     "name": "SILICON DIOXIDE, AMORPHOUS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name": "SODIUM ASCORBATE",
+     "max_level": "75",
+     "unit": "mg/kg",
+     "notes": "83, 551 & 591",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name": "SODIUM CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name": "SODIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name": "SODIUM HYDROGEN CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name": "SODIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name": "STARCH SODIUM OCTENYL SUCCINATE",
+     "max_level": "20000",
+     "unit": "mg/kg",
+     "notes": "376, 590 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "307a, b, c",
+     "ins_codes": [
+      "307a",
+      "307b",
+      "307c"
+     ],
+     "name": "TOCOPHEROLS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "416 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name": "TRIPOTASSIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name": "TRISODIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    }
+   ],
+   "13.1.2": [
+    {
+     "ins_text": "1422",
+     "ins_codes": [
+      "1422"
+     ],
+     "name": "ACETYLATED DISTARCH ADIPATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "150, 285, 292 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name": "ACETYLATED DISTARCH PHOSPHATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "150, 285, 292 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "300",
+     "ins_codes": [
+      "300"
+     ],
+     "name": "ASCORBIC ACID, L-",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "242, 315 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "304, 305",
+     "ins_codes": [
+      "304",
+      "305"
+     ],
+     "name": "ASCORBYL ESTERS",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "187, 315 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "302",
+     "ins_codes": [
+      "302"
+     ],
+     "name": "CALCIUM ASCORBATE",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "315, 317 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name": "CALCIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name": "CARBON DIOXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2023",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name": "CAROB BEAN GUM",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name": "CARRAGEENAN",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "151, 328, 329 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name": "CITRIC ACID",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name": "DISTARCH PHOSPHATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "150, 285, 292 & 551",
+     "year": "2026",
+     "pdf_page": 425
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name": "GUAR GUM",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "414",
+     "ins_codes": [
+      "414"
+     ],
+     "name": "GUM ARABIC (ACACIA GUM)",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name": "LACTIC ACID, L-, D- and DL-",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name": "LECITHIN",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "421",
+     "ins_codes": [
+      "421"
+     ],
+     "name": "MANNITOL",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name": "NITROGEN",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2023",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "440",
+     "ins_codes": [
+      "440"
+     ],
+     "name": "PECTINS",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name": "PHOSPHATED DISTARCH PHOSPHATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "150, 285, 292 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name": "POTASSIUM CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name": "POTASSIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name": "POTASSIUM HYDROGEN CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name": "POTASSIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "551",
+     "ins_codes": [
+      "551"
+     ],
+     "name": "SILICON DIOXIDE, AMORPHOUS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name": "SODIUM ASCORBATE",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "315, 316, 317, 581 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name": "SODIUM CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "316 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name": "SODIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "316 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name": "SODIUM HYDROGEN CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "316 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name": "SODIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "316 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name": "STARCH SODIUM OCTENYL SUCCINATE",
+     "max_level": "100",
+     "unit": "mg/kg",
+     "notes": "316, 589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "307a, b, c",
+     "ins_codes": [
+      "307a",
+      "307b",
+      "307c"
+     ],
+     "name": "TOCOPHEROLS",
+     "max_level": "30",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name": "TRIPOTASSIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name": "TRISODIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "316 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    }
+   ],
+   "13.1.3": [
+    {
+     "ins_text": "304, 305",
+     "ins_codes": [
+      "304",
+      "305"
+     ],
+     "name": "ASCORBYL ESTERS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "187 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name": "CALCIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name": "CARBON DIOXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name": "CAROB BEAN GUM",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name": "CARRAGEENAN",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "584 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name": "CITRIC ACID",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "472c",
+     "ins_codes": [
+      "472c"
+     ],
+     "name": "CITRIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "max_level": "9000",
+     "unit": "mg/kg",
+     "notes": "380 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "414",
+     "ins_codes": [
+      "414"
+     ],
+     "name": "GUM ARABIC (ACACIA GUM)",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name": "LACTIC ACID, L-, D- and DL-",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name": "LECITHIN",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "585 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "421",
+     "ins_codes": [
+      "421"
+     ],
+     "name": "MANNITOL",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "585 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name": "NITROGEN",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "440",
+     "ins_codes": [
+      "440"
+     ],
+     "name": "PECTINS",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "14 & 551",
+     "year": "2026",
+     "pdf_page": 426
+    },
+    {
+     "ins_text": "338; 339(i)-(iii); 340(i)- (iii); 341(i)-(iii); 342(i)-(ii); 343(i)-(iii); 450(i)-(iii),(v)- (vii), (ix); 451(i),(ii); 452(i)-(v); 542",
+     "ins_codes": [
+      "338",
+      "339(i)",
+      "339(ii)",
+      "339(iii)",
+      "340(i)",
+      "340(ii)",
+      "340(iii)",
+      "341(i)",
+      "341(ii)",
+      "341(iii)",
+      "342(i)",
+      "342(ii)",
+      "343(i)",
+      "343(ii)",
+      "343(iii)",
+      "450(i)",
+      "450(ii)",
+      "450(iii)",
+      "450(v)",
+      "450(vi)",
+      "450(vii)",
+      "450(ix)",
+      "451(i)",
+      "451(ii)",
+      "452(i)",
+      "452(ii)",
+      "452(iii)",
+      "452(iv)",
+      "452(v)",
+      "542"
+     ],
+     "name": "PHOSPHATES",
+     "max_level": "450",
+     "unit": "mg/kg",
+     "notes": "33, 230, 586, 587 & 551",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name": "POTASSIUM CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name": "POTASSIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name": "POTASSIUM HYDROGEN CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name": "POTASSIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "551",
+     "ins_codes": [
+      "551"
+     ],
+     "name": "SILICON DIOXIDE, AMORPHOUS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "589 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name": "SODIUM ASCORBATE",
+     "max_level": "75",
+     "unit": "mg/kg",
+     "notes": "83, 591 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name": "SODIUM CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name": "SODIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name": "SODIUM HYDROGEN CARBONATE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name": "SODIUM HYDROXIDE",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name": "STARCH SODIUM OCTENYL SUCCINATE",
+     "max_level": "20000",
+     "unit": "mg/kg",
+     "notes": "376, 590 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "307a, b, c",
+     "ins_codes": [
+      "307a",
+      "307b",
+      "307c"
+     ],
+     "name": "TOCOPHEROLS",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "416 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name": "TRIPOTASSIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name": "TRISODIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "415",
+     "ins_codes": [
+      "415"
+     ],
+     "name": "XANTHAN GUM",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "588 & 551",
+     "year": "2026",
+     "pdf_page": 427
+    }
+   ],
+   "13.2": [
+    {
+     "ins_text": "260",
+     "ins_codes": [
+      "260"
+     ],
+     "name": "ACETIC ACID, GLACIAL",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238",
+     "year": "2013",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "472a",
+     "ins_codes": [
+      "472a"
+     ],
+     "name": "ACETIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "268 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "1422",
+     "ins_codes": [
+      "1422"
+     ],
+     "name": "ACETYLATED DISTARCH ADIPATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "year": "2014",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name": "ACETYLATED DISTARCH PHOSPHATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "year": "2014",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "1451",
+     "ins_codes": [
+      "1451"
+     ],
+     "name": "ACETYLATED OXIDIZED STARCH",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "503(i)",
+     "ins_codes": [
+      "503(i)"
+     ],
+     "name": "AMMONIUM CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "248 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "503(ii)",
+     "ins_codes": [
+      "503(ii)"
+     ],
+     "name": "AMMONIUM HYDROGEN CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "248 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "300",
+     "ins_codes": [
+      "300"
+     ],
+     "name": "ASCORBIC ACID, L-",
+     "max_level": "500",
+     "unit": "mg/kg",
+     "notes": "242",
+     "year": "2013",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "304, 305",
+     "ins_codes": [
+      "304",
+      "305"
+     ],
+     "name": "ASCORBYL ESTERS",
+     "max_level": "200",
+     "unit": "mg/kg",
+     "notes": "15, 187",
+     "year": "2018",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "263",
+     "ins_codes": [
+      "263"
+     ],
+     "name": "CALCIUM ACETATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "302",
+     "ins_codes": [
+      "302"
+     ],
+     "name": "CALCIUM ASCORBATE",
+     "max_level": "200",
+     "unit": "mg/kg",
+     "notes": "317 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "170(i)",
+     "ins_codes": [
+      "170(i)"
+     ],
+     "name": "CALCIUM CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "year": "2013",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name": "CALCIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "327",
+     "ins_codes": [
+      "327"
+     ],
+     "name": "CALCIUM LACTATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name": "CARBON DIOXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name": "CAROB BEAN GUM",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "271 & 272",
+     "year": "2014",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name": "CITRIC ACID",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238",
+     "year": "2013",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "472c",
+     "ins_codes": [
+      "472c"
+     ],
+     "name": "CITRIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "268 & XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name": "DISTARCH PHOSPHATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "year": "2014",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "575",
+     "ins_codes": [
+      "575"
+     ],
+     "name": "GLUCONO DELTA-LACTONE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name": "GUAR GUM",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "271 & 272",
+     "year": "2014",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "414",
+     "ins_codes": [
+      "414"
+     ],
+     "name": "GUM ARABIC (ACACIA GUM)",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "273, 284 & 304",
+     "year": "2026",
+     "pdf_page": 427
+    },
+    {
+     "ins_text": "507",
+     "ins_codes": [
+      "507"
+     ],
+     "name": "HYDROCHLORIC ACID",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1440",
+     "ins_codes": [
+      "1440"
+     ],
+     "name": "HYDROXYPROPYL STARCH",
+     "max_level": "60000",
+     "unit": "mg/kg",
+     "notes": "276 & XS74",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name": "LACTIC ACID, L-, D- and DL-",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "83 & 238",
+     "year": "2013",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "472b",
+     "ins_codes": [
+      "472b"
+     ],
+     "name": "LACTIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "268 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name": "LECITHIN",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "271 & 274",
+     "year": "2014",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "296",
+     "ins_codes": [
+      "296"
+     ],
+     "name": "MALIC ACID, DL-",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "421",
+     "ins_codes": [
+      "421"
+     ],
+     "name": "MANNITOL",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "305",
+     "year": "2026",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "268 & 275",
+     "year": "2014",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1410",
+     "ins_codes": [
+      "1410"
+     ],
+     "name": "MONOSTARCH PHOSPHATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name": "NITROGEN",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "year": "2015",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1404",
+     "ins_codes": [
+      "1404"
+     ],
+     "name": "OXIDIZED STARCH",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "440",
+     "ins_codes": [
+      "440"
+     ],
+     "name": "PECTINS",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "273, 282 & 283",
+     "year": "2014",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name": "PHOSPHATED DISTARCH PHOSPHATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "year": "2014",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "338; 339(i)-(iii); 340(i)- (iii); 341(i)-(iii); 342(i)-(ii); 343(i)-(iii); 450(i)-(iii),(v)- (vii), (ix); 451(i),(ii); 452(i)-(v); 542",
+     "ins_codes": [
+      "338",
+      "339(i)",
+      "339(ii)",
+      "339(iii)",
+      "340(i)",
+      "340(ii)",
+      "340(iii)",
+      "341(i)",
+      "341(ii)",
+      "341(iii)",
+      "342(i)",
+      "342(ii)",
+      "343(i)",
+      "343(ii)",
+      "343(iii)",
+      "450(i)",
+      "450(ii)",
+      "450(iii)",
+      "450(v)",
+      "450(vi)",
+      "450(vii)",
+      "450(ix)",
+      "451(i)",
+      "451(ii)",
+      "452(i)",
+      "452(ii)",
+      "452(iii)",
+      "452(iv)",
+      "452(v)",
+      "542"
+     ],
+     "name": "PHOSPHATES",
+     "max_level": "4400",
+     "unit": "mg/kg",
+     "notes": "33, 230 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "261(i)",
+     "ins_codes": [
+      "261(i)"
+     ],
+     "name": "POTASSIUM ACETATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name": "POTASSIUM DIHYDROGEN CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name": "POTASSIUM HYDROGEN CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "year": "2013",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name": "POTASSIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "326",
+     "ins_codes": [
+      "326"
+     ],
+     "name": "POTASSIUM LACTATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "551",
+     "ins_codes": [
+      "551"
+     ],
+     "name": "SILICON DIOXIDE, AMORPHOUS",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "318, 284 & 304",
+     "year": "2026",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "262(i)",
+     "ins_codes": [
+      "262(i)"
+     ],
+     "name": "SODIUM ACETATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "320 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name": "SODIUM ASCORBATE",
+     "max_level": "500",
+     "unit": "mg/kg",
+     "notes": "317, 319, 320 & 65",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name": "SODIUM CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "243, 295, 319 & 320",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name": "SODIUM DIHYDROGEN CITRATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238, 319 & 320",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name": "SODIUM HYDROGEN CARBONATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "319 & 320",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name": "SODIUM HYDROXIDE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "320 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "325",
+     "ins_codes": [
+      "325"
+     ],
+     "name": "SODIUM LACTATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83, 320 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1420",
+     "ins_codes": [
+      "1420"
+     ],
+     "name": "STARCH ACETATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name": "STARCH SODIUM OCTENYL SUCCINATE",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269, 414 & 415",
+     "year": "2026",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "334, 335(ii), 337",
+     "ins_codes": [
+      "334",
+      "335(ii)",
+      "337"
+     ],
+     "name": "TARTRATES",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "45, 428, XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "307a, b, c",
+     "ins_codes": [
+      "307a",
+      "307b",
+      "307c"
+     ],
+     "name": "TOCOPHEROLS",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "15",
+     "year": "2018",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "333(iii)",
+     "ins_codes": [
+      "333(iii)"
+     ],
+     "name": "TRICALCIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name": "TRIPOTASSIUM CITRATE",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "XS73",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name": "TRISODIUM CITRATE",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238, 319 & 320",
+     "year": "2023",
+     "pdf_page": 428
+    },
+    {
+     "ins_text": "415",
+     "ins_codes": [
+      "415"
+     ],
+     "name": "XANTHAN GUM",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "273 & XS73",
+     "year": "2023",
+     "pdf_page": 428
+    }
+   ]
+  }
+ },
+ "vn": {
+  "source": "TT 24/2019/TT-BYT, bản hợp nhất 09/VBHN-BYT 2024 (09_VBHN_BYT_2024.pdf)",
+  "general_rules": [
+   {
+    "locator": "09/VBHN-BYT, Phụ lục 3 mục 2 'Đối tượng thực phẩm sử dụng theo GMP' (PDF trang 415–418)",
+    "text": "Danh sách nhóm thực phẩm được dùng phụ gia theo GMP không có nhóm 13.1 và 13.2 → thực phẩm cho trẻ chỉ dùng phụ gia được ghi riêng cho nhóm này ở Phụ lục 2A/2B.",
+    "check_13_1_or_13_2_listed": []
+   }
+  ],
+  "annex_2a_pdf_pages": [
+   46,
+   357
+  ],
+  "categories": {
+   "13.1.1": [
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name_en": "LACTIC ACID, L-, D- and DL-",
+     "name_vi": "Acid lactic (L-, D- và DL-)",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 83",
+     "pdf_page": 136,
+     "printed_page": "91"
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name_en": "CARBON DIOXIDE",
+     "name_vi": "Carbon dioxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 137,
+     "printed_page": "92"
+    },
+    {
+     "ins_text": "304",
+     "ins_codes": [
+      "304"
+     ],
+     "name_en": "ASCORBYL ESTERS",
+     "name_vi": "Ascorbyl palmitat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 146,
+     "printed_page": "101"
+    },
+    {
+     "ins_text": "307a",
+     "ins_codes": [
+      "307a"
+     ],
+     "name_en": "TOCOPHEROLS",
+     "name_vi": "d-alpha-Tocopherol",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "72, 416",
+     "pdf_page": 150,
+     "printed_page": "105"
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name_en": "LECITHIN",
+     "name_vi": "Lecithin",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 162,
+     "printed_page": "117"
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name_en": "CITRIC ACID",
+     "name_vi": "Acid citric",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 167,
+     "printed_page": "122"
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name_en": "SODIUM DIHYDROGEN CITRATE",
+     "name_vi": "Natri dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 169,
+     "printed_page": "124"
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name_en": "TRISODIUM CITRATE",
+     "name_vi": "Trinatri citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 171,
+     "printed_page": "126"
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name_en": "POTASSIUM DIHYDROGEN CITRATE",
+     "name_vi": "Kali dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 172,
+     "printed_page": "127"
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name_en": "TRIPOTASSIUM CITRATE",
+     "name_vi": "Trikali citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 174,
+     "printed_page": "129"
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name_en": "CARRAGEENAN",
+     "name_vi": "Carrageenan",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "378 & 381",
+     "pdf_page": 202,
+     "printed_page": "157"
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name_en": "CAROB BEAN GUM",
+     "name_vi": "Gôm đậu carob",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 206,
+     "printed_page": "161"
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name_en": "GUAR GUM",
+     "name_vi": "Gôm gua",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "14 & 72",
+     "pdf_page": 208,
+     "printed_page": "163"
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name_en": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "name_vi": "Mono và diglycerid của các acid béo",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 241,
+     "printed_page": "196"
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name_en": "SODIUM CARBONATE",
+     "name_vi": "Natri carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 271,
+     "printed_page": "226"
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name_en": "SODIUM HYDROGEN CARBONATE",
+     "name_vi": "Natri hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 272,
+     "printed_page": "227"
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name_en": "POTASSIUM CARBONATE",
+     "name_vi": "Kali carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 274,
+     "printed_page": "229"
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name_en": "POTASSIUM HYDROGEN CARBONATE",
+     "name_vi": "Kali hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 274,
+     "printed_page": "229"
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name_en": "SODIUM HYDROXIDE",
+     "name_vi": "Natri hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name_en": "POTASSIUM HYDROXIDE",
+     "name_vi": "Kali hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name_en": "CALCIUM HYDROXYD",
+     "name_vi": "Calci hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name_en": "NITROGEN",
+     "name_vi": "Khí nitơ",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 307,
+     "printed_page": "262"
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name_en": "DISTARCH PHOSPHATE",
+     "name_vi": "Distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 347,
+     "printed_page": "302"
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name_en": "PHOSPHATED DISTARCH PHOSPHATE",
+     "name_vi": "Phosphated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 348,
+     "printed_page": "303"
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name_en": "ACETYLATED DISTARCH PHOSPHATE",
+     "name_vi": "Acetylated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 350,
+     "printed_page": "305"
+    },
+    {
+     "ins_text": "1440",
+     "ins_codes": [
+      "1440"
+     ],
+     "name_en": "HYDROXYPROPYL STARCH",
+     "name_vi": "Hydroxypropyl starch",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức dành cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 353,
+     "printed_page": "308"
+    }
+   ],
+   "13.1.2": [
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name_en": "LACTIC ACID, L-, D- and DL-",
+     "name_vi": "Acid lactic (L-, D- và DL-)",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 83",
+     "pdf_page": 136,
+     "printed_page": "91"
+    },
+    {
+     "ins_text": "300",
+     "ins_codes": [
+      "300"
+     ],
+     "name_en": "ASCORBIC ACID, L-",
+     "name_vi": "Acid ascorbic (L-)",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 141,
+     "printed_page": "96"
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name_en": "SODIUM ASCORBATE",
+     "name_vi": "Natri ascorbat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 143,
+     "printed_page": "98"
+    },
+    {
+     "ins_text": "302",
+     "ins_codes": [
+      "302"
+     ],
+     "name_en": "CALCIUM ASCORBATE",
+     "name_vi": "Calci ascorbat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 144,
+     "printed_page": "99"
+    },
+    {
+     "ins_text": "304",
+     "ins_codes": [
+      "304"
+     ],
+     "name_en": "ASCORBYL ESTERS",
+     "name_vi": "Ascorbyl palmitat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "50",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 146,
+     "printed_page": "101"
+    },
+    {
+     "ins_text": "307a",
+     "ins_codes": [
+      "307a"
+     ],
+     "name_en": "TOCOPHEROLS",
+     "name_vi": "d-alpha-Tocopherol",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "30",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 150,
+     "printed_page": "105"
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name_en": "LECITHIN",
+     "name_vi": "Lecithin",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 162,
+     "printed_page": "117"
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name_en": "CITRIC ACID",
+     "name_vi": "Acid citric",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 167,
+     "printed_page": "122"
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name_en": "SODIUM DIHYDROGEN CITRATE",
+     "name_vi": "Natri dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 316",
+     "pdf_page": 169,
+     "printed_page": "124"
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name_en": "TRISODIUM CITRATE",
+     "name_vi": "Trinatri citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 316",
+     "pdf_page": 171,
+     "printed_page": "126"
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name_en": "POTASSIUM DIHYDROGEN CITRATE",
+     "name_vi": "Kali dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 172,
+     "printed_page": "127"
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name_en": "TRIPOTASSIUM CITRATE",
+     "name_vi": "Trikali citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 174,
+     "printed_page": "129"
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name_en": "CARRAGEENAN",
+     "name_vi": "Carrageenan",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 202,
+     "printed_page": "157"
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name_en": "CAROB BEAN GUM",
+     "name_vi": "Gôm đậu carob",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 206,
+     "printed_page": "161"
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name_en": "GUAR GUM",
+     "name_vi": "Gôm gua",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 208,
+     "printed_page": "163"
+    },
+    {
+     "ins_text": "440",
+     "ins_codes": [
+      "440"
+     ],
+     "name_en": "PECTINS",
+     "name_vi": "Pectin",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 226,
+     "printed_page": "181"
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name_en": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "name_vi": "Mono và diglycerid của các acid béo",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 242,
+     "printed_page": "197"
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name_en": "SODIUM CARBONATE",
+     "name_vi": "Natri carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 316",
+     "pdf_page": 271,
+     "printed_page": "226"
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name_en": "SODIUM HYDROGEN CARBONATE",
+     "name_vi": "Natri hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 316",
+     "pdf_page": 272,
+     "printed_page": "227"
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name_en": "POTASSIUM CARBONATE",
+     "name_vi": "Kali carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 274,
+     "printed_page": "229"
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name_en": "POTASSIUM HYDROGEN CARBONATE",
+     "name_vi": "Kali hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 274,
+     "printed_page": "229"
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name_en": "SODIUM HYDROXIDE",
+     "name_vi": "Natri hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 316",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name_en": "POTASSIUM HYDROXIDE",
+     "name_vi": "Kali hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name_en": "CALCIUM HYDROXYD",
+     "name_vi": "Calci hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name_en": "DISTARCH PHOSPHATE",
+     "name_vi": "Distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 348,
+     "printed_page": "303"
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name_en": "PHOSPHATED DISTARCH PHOSPHATE",
+     "name_vi": "Phosphated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 349,
+     "printed_page": "304"
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name_en": "ACETYLATED DISTARCH PHOSPHATE",
+     "name_vi": "Acetylated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 350,
+     "printed_page": "305"
+    },
+    {
+     "ins_text": "1422",
+     "ins_codes": [
+      "1422"
+     ],
+     "name_en": "ACETYLATED DISTARCH ADIPATE",
+     "name_vi": "Acetylated distarch adipat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích ăn bổ sung cho trẻ từ 6 đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 352,
+     "printed_page": "307"
+    }
+   ],
+   "13.1.3": [
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name_en": "LACTIC ACID, L-, D- and DL-",
+     "name_vi": "Acid lactic (L-, D- và DL-)",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72 & 83",
+     "pdf_page": 136,
+     "printed_page": "91"
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name_en": "CARBON DIOXIDE",
+     "name_vi": "Carbon dioxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 137,
+     "printed_page": "92"
+    },
+    {
+     "ins_text": "304",
+     "ins_codes": [
+      "304"
+     ],
+     "name_en": "ASCORBYL ESTERS",
+     "name_vi": "Ascorbyl palmitat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 146,
+     "printed_page": "101"
+    },
+    {
+     "ins_text": "307a",
+     "ins_codes": [
+      "307a"
+     ],
+     "name_en": "TOCOPHEROLS",
+     "name_vi": "d-alpha-Tocopherol",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "10",
+     "unit": "mg/kg",
+     "notes": "72, 416",
+     "pdf_page": 150,
+     "printed_page": "105"
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name_en": "LECITHIN",
+     "name_vi": "Lecithin",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 162,
+     "printed_page": "117"
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name_en": "CITRIC ACID",
+     "name_vi": "Acid citric",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "72",
+     "pdf_page": 167,
+     "printed_page": "122"
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name_en": "SODIUM DIHYDROGEN CITRATE",
+     "name_vi": "Natri dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 169,
+     "printed_page": "124"
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name_en": "TRISODIUM CITRATE",
+     "name_vi": "Trinatri citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 171,
+     "printed_page": "126"
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name_en": "POTASSIUM DIHYDROGEN CITRATE",
+     "name_vi": "Kali dihydro citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 173,
+     "printed_page": "128"
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name_en": "TRIPOTASSIUM CITRATE",
+     "name_vi": "Trikali citrat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "55 & 72",
+     "pdf_page": 174,
+     "printed_page": "129"
+    },
+    {
+     "ins_text": "407",
+     "ins_codes": [
+      "407"
+     ],
+     "name_en": "CARRAGEENAN",
+     "name_vi": "Carrageenan",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "379 & 381",
+     "pdf_page": 202,
+     "printed_page": "157"
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name_en": "CAROB BEAN GUM",
+     "name_vi": "Gôm đậu carob",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 206,
+     "printed_page": "161"
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name_en": "GUAR GUM",
+     "name_vi": "Gôm gua",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "1000",
+     "unit": "mg/kg",
+     "notes": "14 & 72",
+     "pdf_page": 208,
+     "printed_page": "163"
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name_en": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "name_vi": "Mono và diglycerid của các acid béo",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "4000",
+     "unit": "mg/kg",
+     "notes": "72",
+     "pdf_page": 242,
+     "printed_page": "197"
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name_en": "SODIUM CARBONATE",
+     "name_vi": "Natri carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 271,
+     "printed_page": "226"
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name_en": "SODIUM HYDROGEN CARBONATE",
+     "name_vi": "Natri hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 272,
+     "printed_page": "227"
+    },
+    {
+     "ins_text": "501(i)",
+     "ins_codes": [
+      "501(i)"
+     ],
+     "name_en": "POTASSIUM CARBONATE",
+     "name_vi": "Kali carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 274,
+     "printed_page": "229"
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name_en": "POTASSIUM HYDROGEN CARBONATE",
+     "name_vi": "Kali hydro carbonat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 275,
+     "printed_page": "230"
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name_en": "SODIUM HYDROXIDE",
+     "name_vi": "Natri hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name_en": "POTASSIUM HYDROXIDE",
+     "name_vi": "Kali hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name_en": "CALCIUM HYDROXYD",
+     "name_vi": "Calci hydroxyd",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "55 & 72",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name_en": "NITROGEN",
+     "name_vi": "Khí nitơ",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 307,
+     "printed_page": "262"
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name_en": "DISTARCH PHOSPHATE",
+     "name_vi": "Distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 348,
+     "printed_page": "303"
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name_en": "PHOSPHATED DISTARCH PHOSPHATE",
+     "name_vi": "Phosphated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 349,
+     "printed_page": "304"
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name_en": "ACETYLATED DISTARCH PHOSPHATE",
+     "name_vi": "Acetylated distarch phosphat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 350,
+     "printed_page": "305"
+    },
+    {
+     "ins_text": "1440",
+     "ins_codes": [
+      "1440"
+     ],
+     "name_en": "HYDROXYPROPYL STARCH",
+     "name_vi": "Hydroxypropyl starch",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 353,
+     "printed_page": "308"
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name_en": "STARCH SODIUM OCTENYL SUCCINATE",
+     "name_vi": "Starch natri octenyl succinat",
+     "category_name_vi": "Sản phẩm dinh dưỡng công thức với mục đích y tế đặc biệt cho trẻ đến 12 tháng tuổi",
+     "max_level": "20000",
+     "unit": "mg/kg",
+     "notes": "376 & 381",
+     "pdf_page": 355,
+     "printed_page": "310"
+    }
+   ],
+   "13.2": [
+    {
+     "ins_text": "170(i)",
+     "ins_codes": [
+      "170(i)"
+     ],
+     "name_en": "CALCIUM CARBONATE",
+     "name_vi": "Calci carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 110,
+     "printed_page": "65"
+    },
+    {
+     "ins_text": "260",
+     "ins_codes": [
+      "260"
+     ],
+     "name_en": "ACETIC ACID, GLACIAL",
+     "name_vi": "Acid acetic băng",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238",
+     "pdf_page": 132,
+     "printed_page": "87"
+    },
+    {
+     "ins_text": "261(i)",
+     "ins_codes": [
+      "261(i)"
+     ],
+     "name_en": "POTASSIUM ACETATE",
+     "name_vi": "Kali acetat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 132,
+     "printed_page": "87"
+    },
+    {
+     "ins_text": "262(i)",
+     "ins_codes": [
+      "262(i)"
+     ],
+     "name_en": "SODIUM ACETATE",
+     "name_vi": "Natri acetat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239, 319",
+     "pdf_page": 133,
+     "printed_page": "88"
+    },
+    {
+     "ins_text": "263",
+     "ins_codes": [
+      "263"
+     ],
+     "name_en": "CALCIUM ACETATE",
+     "name_vi": "Calci acetat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 135,
+     "printed_page": "90"
+    },
+    {
+     "ins_text": "270",
+     "ins_codes": [
+      "270"
+     ],
+     "name_en": "LACTIC ACID, L-, D- and DL-",
+     "name_vi": "Acid lactic (L-, D- và DL-)",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "83 & 238",
+     "pdf_page": 136,
+     "printed_page": "91"
+    },
+    {
+     "ins_text": "290",
+     "ins_codes": [
+      "290"
+     ],
+     "name_en": "CARBON DIOXIDE",
+     "name_vi": "Carbon dioxyd",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 137,
+     "printed_page": "92"
+    },
+    {
+     "ins_text": "296",
+     "ins_codes": [
+      "296"
+     ],
+     "name_en": "MALIC ACID, DL-",
+     "name_vi": "Acid malic (DL-)",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 139,
+     "printed_page": "94"
+    },
+    {
+     "ins_text": "300",
+     "ins_codes": [
+      "300"
+     ],
+     "name_en": "ASCORBIC ACID, L-",
+     "name_vi": "Acid ascorbic (L-)",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "500",
+     "unit": "mg/kg",
+     "notes": "242",
+     "pdf_page": 141,
+     "printed_page": "96"
+    },
+    {
+     "ins_text": "301",
+     "ins_codes": [
+      "301"
+     ],
+     "name_en": "SODIUM ASCORBATE",
+     "name_vi": "Natri ascorbat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "500",
+     "unit": "mg/kg",
+     "notes": "317, 319",
+     "pdf_page": 143,
+     "printed_page": "98"
+    },
+    {
+     "ins_text": "302",
+     "ins_codes": [
+      "302"
+     ],
+     "name_en": "CALCIUM ASCORBATE",
+     "name_vi": "Calci ascorbat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "200",
+     "unit": "mg/kg",
+     "notes": "239 & 317",
+     "pdf_page": 144,
+     "printed_page": "99"
+    },
+    {
+     "ins_text": "304",
+     "ins_codes": [
+      "304"
+     ],
+     "name_en": "ASCORBYL ESTERS",
+     "name_vi": "Ascorbyl palmitat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "200",
+     "unit": "mg/kg",
+     "notes": "15 & 187",
+     "pdf_page": 146,
+     "printed_page": "101"
+    },
+    {
+     "ins_text": "307a",
+     "ins_codes": [
+      "307a"
+     ],
+     "name_en": "TOCOPHEROLS",
+     "name_vi": "d-alpha-Tocopherol",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "300",
+     "unit": "mg/kg",
+     "notes": "15",
+     "pdf_page": 150,
+     "printed_page": "105"
+    },
+    {
+     "ins_text": "322(i)",
+     "ins_codes": [
+      "322(i)"
+     ],
+     "name_en": "LECITHIN",
+     "name_vi": "Lecithin",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "271 & 274",
+     "pdf_page": 163,
+     "printed_page": "118"
+    },
+    {
+     "ins_text": "325",
+     "ins_codes": [
+      "325"
+     ],
+     "name_en": "SODIUM LACTATE",
+     "name_vi": "Natri lactat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 164,
+     "printed_page": "119"
+    },
+    {
+     "ins_text": "326",
+     "ins_codes": [
+      "326"
+     ],
+     "name_en": "POTASSIUM LACTATE",
+     "name_vi": "Kali lactat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & 239",
+     "pdf_page": 164,
+     "printed_page": "119"
+    },
+    {
+     "ins_text": "327",
+     "ins_codes": [
+      "327"
+     ],
+     "name_en": "CALCIUM LACTATE",
+     "name_vi": "Calci lactat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "83 & 239",
+     "pdf_page": 165,
+     "printed_page": "120"
+    },
+    {
+     "ins_text": "330",
+     "ins_codes": [
+      "330"
+     ],
+     "name_en": "CITRIC ACID",
+     "name_vi": "Acid citric",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "238",
+     "pdf_page": 167,
+     "printed_page": "122"
+    },
+    {
+     "ins_text": "331(i)",
+     "ins_codes": [
+      "331(i)"
+     ],
+     "name_en": "SODIUM DIHYDROGEN CITRATE",
+     "name_vi": "Natri dihydro citrat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 169,
+     "printed_page": "124"
+    },
+    {
+     "ins_text": "331(iii)",
+     "ins_codes": [
+      "331(iii)"
+     ],
+     "name_en": "TRISODIUM CITRATE",
+     "name_vi": "Trinatri citrat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 171,
+     "printed_page": "126"
+    },
+    {
+     "ins_text": "332(i)",
+     "ins_codes": [
+      "332(i)"
+     ],
+     "name_en": "POTASSIUM DIHYDROGEN CITRATE",
+     "name_vi": "Kali dihydro citrat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 173,
+     "printed_page": "128"
+    },
+    {
+     "ins_text": "332(ii)",
+     "ins_codes": [
+      "332(ii)"
+     ],
+     "name_en": "TRIPOTASSIUM CITRATE",
+     "name_vi": "Trikali citrat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 174,
+     "printed_page": "129"
+    },
+    {
+     "ins_text": "333(iii)",
+     "ins_codes": [
+      "333(iii)"
+     ],
+     "name_en": "TRICALCIUM CITRATE",
+     "name_vi": "Tricalci citrat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 175,
+     "printed_page": "130"
+    },
+    {
+     "ins_text": "334",
+     "ins_codes": [
+      "334"
+     ],
+     "name_en": "TARTRATES",
+     "name_vi": "Acid tartaric, L(+)-",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 178,
+     "printed_page": "133"
+    },
+    {
+     "ins_text": "338",
+     "ins_codes": [
+      "338"
+     ],
+     "name_en": "PHOSPHATES",
+     "name_vi": "Acid phosphoric",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "4400",
+     "unit": "mg/kg",
+     "notes": "33 & 230",
+     "pdf_page": 184,
+     "printed_page": "139"
+    },
+    {
+     "ins_text": "410",
+     "ins_codes": [
+      "410"
+     ],
+     "name_en": "CAROB BEAN GUM",
+     "name_vi": "Gôm đậu carob",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "271 & 272",
+     "pdf_page": 206,
+     "printed_page": "161"
+    },
+    {
+     "ins_text": "412",
+     "ins_codes": [
+      "412"
+     ],
+     "name_en": "GUAR GUM",
+     "name_vi": "Gôm gua",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "271 & 272",
+     "pdf_page": 208,
+     "printed_page": "163"
+    },
+    {
+     "ins_text": "414",
+     "ins_codes": [
+      "414"
+     ],
+     "name_en": "GUM ARABIC (ACACIA GUM)",
+     "name_vi": "Gôm arabic",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "239 & 273",
+     "pdf_page": 211,
+     "printed_page": "166"
+    },
+    {
+     "ins_text": "415",
+     "ins_codes": [
+      "415"
+     ],
+     "name_en": "XANTHAN GUM",
+     "name_vi": "Gôm xanthan",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "239 & 273",
+     "pdf_page": 213,
+     "printed_page": "168"
+    },
+    {
+     "ins_text": "440",
+     "ins_codes": [
+      "440"
+     ],
+     "name_en": "PECTINS",
+     "name_vi": "Pectin",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "10000",
+     "unit": "mg/kg",
+     "notes": "",
+     "pdf_page": 226,
+     "printed_page": "181"
+    },
+    {
+     "ins_text": "471",
+     "ins_codes": [
+      "471"
+     ],
+     "name_en": "MONO- AND DI-GLYCERIDES OF FATTY ACIDS",
+     "name_vi": "Mono và diglycerid của các acid béo",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "268 & 275",
+     "pdf_page": 242,
+     "printed_page": "197"
+    },
+    {
+     "ins_text": "472a",
+     "ins_codes": [
+      "472a"
+     ],
+     "name_en": "ACETIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "name_vi": "Este của glycerol với acid acetic và acid béo",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "239, 268",
+     "pdf_page": 243,
+     "printed_page": "198"
+    },
+    {
+     "ins_text": "472b",
+     "ins_codes": [
+      "472b"
+     ],
+     "name_en": "LACTIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "name_vi": "Este của glycerol với acid lactic và acid béo",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "239 & 268",
+     "pdf_page": 244,
+     "printed_page": "199"
+    },
+    {
+     "ins_text": "472c",
+     "ins_codes": [
+      "472c"
+     ],
+     "name_en": "CITRIC AND FATTY ACID ESTERS OF GLYCEROL",
+     "name_vi": "Este của glycerol với acid citric và  acid béo",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "5000",
+     "unit": "mg/kg",
+     "notes": "239 & 268",
+     "pdf_page": 246,
+     "printed_page": "201"
+    },
+    {
+     "ins_text": "500(i)",
+     "ins_codes": [
+      "500(i)"
+     ],
+     "name_en": "SODIUM CARBONATE",
+     "name_vi": "Natri carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 271,
+     "printed_page": "226"
+    },
+    {
+     "ins_text": "500(ii)",
+     "ins_codes": [
+      "500(ii)"
+     ],
+     "name_en": "SODIUM HYDROGEN CARBONATE",
+     "name_vi": "Natri hydro carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 272,
+     "printed_page": "227"
+    },
+    {
+     "ins_text": "501(ii)",
+     "ins_codes": [
+      "501(ii)"
+     ],
+     "name_en": "POTASSIUM HYDROGEN CARBONATE",
+     "name_vi": "Kali hydro carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 275,
+     "printed_page": "230"
+    },
+    {
+     "ins_text": "503(i)",
+     "ins_codes": [
+      "503(i)"
+     ],
+     "name_en": "AMMONIUM CARBONATE",
+     "name_vi": "Amoni carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239 & 248",
+     "pdf_page": 275,
+     "printed_page": "230"
+    },
+    {
+     "ins_text": "503(ii)",
+     "ins_codes": [
+      "503(ii)"
+     ],
+     "name_en": "AMMONIUM HYDROGEN CARBONATE",
+     "name_vi": "Amoni hydro carbonat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239 & 248",
+     "pdf_page": 275,
+     "printed_page": "230"
+    },
+    {
+     "ins_text": "507",
+     "ins_codes": [
+      "507"
+     ],
+     "name_en": "HYDROCHLORIC ACID",
+     "name_vi": "Acid hydrocloric",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 277,
+     "printed_page": "232"
+    },
+    {
+     "ins_text": "524",
+     "ins_codes": [
+      "524"
+     ],
+     "name_en": "SODIUM HYDROXIDE",
+     "name_vi": "Natri hydroxyd",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "",
+     "pdf_page": 283,
+     "printed_page": "238"
+    },
+    {
+     "ins_text": "525",
+     "ins_codes": [
+      "525"
+     ],
+     "name_en": "POTASSIUM HYDROXIDE",
+     "name_vi": "Kali hydroxyd",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "526",
+     "ins_codes": [
+      "526"
+     ],
+     "name_en": "CALCIUM HYDROXYD",
+     "name_vi": "Calci hydroxyd",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 284,
+     "printed_page": "239"
+    },
+    {
+     "ins_text": "551",
+     "ins_codes": [
+      "551"
+     ],
+     "name_en": "SILICON DIOXIDE, AMORPHOUS",
+     "name_vi": "Dioxyd silic vô định hình",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "2000",
+     "unit": "mg/kg",
+     "notes": "65 & 318",
+     "pdf_page": 287,
+     "printed_page": "242"
+    },
+    {
+     "ins_text": "575",
+     "ins_codes": [
+      "575"
+     ],
+     "name_en": "GLUCONO DELTA-LACTONE",
+     "name_vi": "Glucono delta-lacton",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "239",
+     "pdf_page": 289,
+     "printed_page": "244"
+    },
+    {
+     "ins_text": "941",
+     "ins_codes": [
+      "941"
+     ],
+     "name_en": "NITROGEN",
+     "name_vi": "Khí nitơ",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "GMP",
+     "unit": "",
+     "notes": "59",
+     "pdf_page": 308,
+     "printed_page": "263"
+    },
+    {
+     "ins_text": "1404",
+     "ins_codes": [
+      "1404"
+     ],
+     "name_en": "OXIDIZED STARCH",
+     "name_vi": "Tinh bột xử lý oxy hóa",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "239 & 269",
+     "pdf_page": 345,
+     "printed_page": "300"
+    },
+    {
+     "ins_text": "1410",
+     "ins_codes": [
+      "1410"
+     ],
+     "name_en": "MONOSTARCH PHOSPHATE",
+     "name_vi": "Monostarch phosphat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "239 & 269",
+     "pdf_page": 347,
+     "printed_page": "302"
+    },
+    {
+     "ins_text": "1412",
+     "ins_codes": [
+      "1412"
+     ],
+     "name_en": "DISTARCH PHOSPHATE",
+     "name_vi": "Distarch phosphat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "pdf_page": 348,
+     "printed_page": "303"
+    },
+    {
+     "ins_text": "1413",
+     "ins_codes": [
+      "1413"
+     ],
+     "name_en": "PHOSPHATED DISTARCH PHOSPHATE",
+     "name_vi": "Phosphated distarch phosphat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "pdf_page": 349,
+     "printed_page": "304"
+    },
+    {
+     "ins_text": "1414",
+     "ins_codes": [
+      "1414"
+     ],
+     "name_en": "ACETYLATED DISTARCH PHOSPHATE",
+     "name_vi": "Acetylated distarch phosphat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269 & 270",
+     "pdf_page": 350,
+     "printed_page": "305"
+    },
+    {
+     "ins_text": "1420",
+     "ins_codes": [
+      "1420"
+     ],
+     "name_en": "STARCH ACETATE",
+     "name_vi": "Starch acetate",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "239 & 269",
+     "pdf_page": 351,
+     "printed_page": "306"
+    },
+    {
+     "ins_text": "1422",
+     "ins_codes": [
+      "1422"
+     ],
+     "name_en": "ACETYLATED DISTARCH ADIPATE",
+     "name_vi": "Acetylated distarch adipat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "269, 270",
+     "pdf_page": 352,
+     "printed_page": "307"
+    },
+    {
+     "ins_text": "1440",
+     "ins_codes": [
+      "1440"
+     ],
+     "name_en": "HYDROXYPROPYL STARCH",
+     "name_vi": "Hydroxypropyl starch",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "60000",
+     "unit": "mg/kg",
+     "notes": "237 & 276",
+     "pdf_page": 353,
+     "printed_page": "308"
+    },
+    {
+     "ins_text": "1450",
+     "ins_codes": [
+      "1450"
+     ],
+     "name_en": "STARCH SODIUM OCTENYL SUCCINATE",
+     "name_vi": "Starch natri octenyl succinat",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "239 & 269",
+     "pdf_page": 355,
+     "printed_page": "310"
+    },
+    {
+     "ins_text": "1451",
+     "ins_codes": [
+      "1451"
+     ],
+     "name_en": "ACETYLATED OXIDIZED STARCH",
+     "name_vi": "Acetylated oxydized starch",
+     "category_name_vi": "Thực phẩm bổ sung cho trẻ đến 36 tháng tuổi",
+     "max_level": "50000",
+     "unit": "mg/kg",
+     "notes": "239, 269",
+     "pdf_page": 355,
+     "printed_page": "310"
+    }
+   ]
+  }
+ }
+}

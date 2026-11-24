@@ -144,6 +144,36 @@ class TestChatIntake(unittest.TestCase):
         self.assertEqual(p3["age_group"], "elderly")
         self.assertTrue(notes)
 
+    def test_followup_uses_previous_focus(self):
+        last = ["INS 950", "INS 955", "sữa"]
+        for q in ["Chất đó có an toàn cho trẻ không?", "Nó có gây hại cho thai phụ không?",
+                  "Còn với người tiểu đường thì sao?", "Các chất trên có được phép theo TT24 không?"]:
+            q2, terms = ci.resolve_followup(q, last)
+            self.assertEqual(terms, last, q)
+            self.assertIn("INS 950", q2)
+
+    def test_self_contained_question_not_rewritten(self):
+        last = ["INS 950"]
+        for q in ["Aspartame (INS 951) có an toàn không?", "Sản phẩm này có chứa dị nguyên nào không?"]:
+            q2, terms = ci.resolve_followup(q, last)
+            self.assertEqual((q2, terms), (q, []), q)
+        self.assertEqual(ci.resolve_followup("Chất đó có an toàn không?", []), ("Chất đó có an toàn không?", []))
+
+    def test_focus_from_turn_uses_class_then_answer(self):
+        linked = [{"matched_entity": {"ins_code": "INS 950"}, "category": "sweetener"},
+                  {"matched_entity": {"ins_code": "INS 955"}, "category": "sweetener"},
+                  {"matched_entity": {"ins_code": "INS 471"}, "category": "emulsifier"}]
+        self.assertEqual(ci.focus_from_turn({}, "Có chất tạo ngọt tổng hợp nào không?", linked),
+                         ["INS 950", "INS 955"])
+        self.assertEqual(ci.focus_from_turn({}, "Sản phẩm có an toàn không?", linked, "Có INS 471 và E330."),
+                         ["INS 471", "INS 330"])
+        self.assertEqual(ci.focus_from_turn({"entities": {"additives": ["INS 951"]}}, "x", linked), ["INS 951"])
+
+    def test_focus_from_qa(self):
+        qa = {"entities": {"additives": ["INS 951"], "allergens": ["milk"]}}
+        self.assertEqual(ci.focus_from_qa(qa), ["INS 951", "sữa"])
+        self.assertEqual(ci.focus_from_qa(None), [])
+
     def test_too_long_message_rejected(self):
         r = self.parse("Sản phẩm này có an toàn không? " * 60)
         self.assertEqual(r["kind"], "invalid")
@@ -161,6 +191,15 @@ class TestChatIntake(unittest.TestCase):
                     "Thành phần: Bột mì (34,242%), Đường")
         self.assertEqual(ci.guess_product_name(one_line), "Bánh xốp ong Deka Jumbo cá phê trắng")
 
+    def test_name_guess_rejects_usage_text_and_falls_back_to_filename(self):
+        self.assertEqual(ci.guess_product_name("Tương SỬ DỤNG Dành cho trẻ từ 3 tuổi. Thành phần: đậu nành"), "")
+        self.assertEqual(ci.guess_product_name("Sữa tươi tiệt trùng Vinamilk có đường HƯỚNG DẪN SỬ DỤNG lắc đều. "
+                                               "Thành phần: sữa bò"), "Sữa tươi tiệt trùng Vinamilk có đường")
+        self.assertEqual(ci.display_name_from_file("nuoc_tuong_maggi.png"), "nuoc_tuong_maggi")
+        long_name = ci.display_name_from_file("1794675545761_2204332108467412409_g8131696245559082487_01c5db.jpg")
+        self.assertLessEqual(len(long_name), 40)
+        self.assertIn("…", long_name)
+
     def test_validate_image(self):
         self.assertIn("không được hỗ trợ", ci.validate_image(_png(), "label.gif")[1])
         self.assertIn("không được hỗ trợ", ci.validate_image(b"%PDF", "label.pdf")[1])
@@ -172,6 +211,82 @@ class TestChatIntake(unittest.TestCase):
         self.assertIsNotNone(ci.validate_image(_png((60, 60)), "tiny.png")[1])
         self.assertIsNotNone(ci.validate_image(_png(noise=False), "blank.png")[1])
         self.assertIsNotNone(ci.validate_image(b"", "empty.png")[1])
+
+
+class TestLabelCorrection(unittest.TestCase):
+    """Người dùng sửa thông tin nhãn ngay trong chat — không hiện danh sách thành phần, không bắt xác nhận."""
+
+    LABEL = "Thành phần: đường, chất điều chỉnh độ acid (33), chất điều vị (E621, E627), E1422, sữa bột. Có chứa sữa, đậu nành."
+
+    def mentions(self):
+        from modules.ocr_extractor import parse_ingredients_from_ocr
+        return parse_ingredients_from_ocr(self.LABEL, include_allergen_statements=True)
+
+    def test_detects_corrections(self):
+        cases = {
+            "không có E621": {"remove": ["E621"], "replace": []},
+            "Sản phẩm không có sữa và đậu nành.": {"remove": ["sữa", "đậu nành"], "replace": []},
+            "Hệ thống đọc sai E621.": {"remove": ["E621"], "replace": []},
+            "mã là E330 chứ không phải E33": {"remove": [], "replace": [("E33", "E330")]},
+            "sửa E33 thành E330": {"remove": [], "replace": [("E33", "E330")]},
+            "không phải E33 mà là E330": {"remove": [], "replace": [("E33", "E330")]},
+        }
+        for text, want in cases.items():
+            parsed = ci.parse_message(text)
+            self.assertEqual(parsed["kind"], "correction", text)
+            got = parsed["correction"]
+            self.assertEqual((got["remove"], got["replace"]), (want["remove"], want["replace"]), text)
+        listed = ci.parse_message("Thành phần đúng là: bột mì, đường, muối")
+        self.assertEqual(listed["correction"]["ingredients"], "bột mì, đường, muối")
+
+    def test_questions_and_profile_are_not_corrections(self):
+        for text in ("không có sữa phải không?", "có chứa sữa không", "E621 là gì?", "E33 có an toàn không?",
+                     "sản phẩm này không có chất bảo quản à?", "Tôi không có dị ứng"):
+            self.assertIsNone(ci.parse_message(text).get("correction"), text)
+
+    def test_correction_with_question_keeps_question(self):
+        parsed = ci.parse_message("nhãn không có E621. Vậy có an toàn cho trẻ không?")
+        self.assertEqual(parsed["correction"]["remove"], ["E621"])
+        self.assertEqual(parsed["question"], "Vậy có an toàn cho trẻ không?")
+
+    def test_apply_remove_replace_and_list(self):
+        from modules.ocr_extractor import parse_ingredients_from_ocr
+        names = lambda ms: [m["raw_mention"] for m in ms]
+        new, done, missing = ci.apply_label_correction(self.mentions(), {"remove": ["E621"]})
+        self.assertFalse(any("E621" in n for n in names(new)))
+        self.assertTrue(any("E627" in n for n in names(new)))     # mã khác cùng nhóm vẫn giữ
+        self.assertEqual(missing, [])
+        new, _, _ = ci.apply_label_correction(self.mentions(), {"remove": ["sữa"]})
+        self.assertFalse(any("sữa" in n.lower() for n in names(new)))
+        self.assertIn("đậu nành", names(new))
+        new, done, _ = ci.apply_label_correction(self.mentions(), {"replace": [("E33", "E330")]})
+        self.assertIn("chất điều chỉnh độ acid (E330)", names(new))
+        _, done, missing = ci.apply_label_correction(self.mentions(), {"remove": ["E142"]})
+        self.assertEqual((done, missing), ([], ["E142"]))          # E142 không khớp nhầm E1422
+        new, done, _ = ci.apply_label_correction(self.mentions(), {"ingredients": "bột mì, đường, muối"},
+                                                 parse_ingredients_from_ocr)
+        self.assertEqual(names(new), ["bột mì", "đường", "muối"])
+
+
+class TestAgeInMonths(unittest.TestCase):
+    def test_months_are_kept_for_infant_rules(self):
+        p, _ = ci.merge_profile(ci.empty_profile(), ci.extract_profile("Bé nhà tôi 8 tháng tuổi")["update"])
+        self.assertEqual(p["age_months"], 8)
+        self.assertEqual(ci.profile_to_persona(p)["demographics"]["age_months"], 8)
+        self.assertIn("8 tháng tuổi", ci.profile_summary(p))
+        p2, _ = ci.merge_profile(p, ci.extract_profile("bé 2 tuổi")["update"])
+        self.assertIsNone(p2["age_months"])
+        self.assertNotIn("age_months", ci.profile_to_persona(p2)["demographics"])
+
+    def test_months_without_the_word_tuoi(self):
+        self.assertEqual(ci.extract_profile("Bé nhà tôi 8 tháng, dị ứng trứng")["update"].get("age_months"), 8)
+        self.assertNotIn("age_months", ci.extract_profile("Tôi đã dùng sản phẩm này 8 tháng")["update"])
+
+    def test_months_of_the_baby_are_not_the_mothers_age(self):
+        upd = ci.extract_profile("Tôi đang cho con bú, bé 3 tháng tuổi")["update"]
+        self.assertTrue(upd["lactating"])
+        self.assertNotIn("age_months", upd)
+        self.assertNotIn("age", upd)
 
 
 if __name__ == "__main__":

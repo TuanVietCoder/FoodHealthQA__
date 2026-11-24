@@ -198,7 +198,8 @@
       "màu vàng cam",
       "Sunset Yellow FCF",
       "Sunset yellow FCF",
-      "Sunset Yellow FCF (Phẩm màu vàng cam)"
+      "Sunset Yellow FCF (Phẩm màu vàng cam)",
+      "sunset yellow"
     ],
     "common_names": [
       "E110",
@@ -206,7 +207,8 @@
       "màu vàng cam",
       "Sunset Yellow FCF",
       "Sunset yellow FCF",
-      "Sunset Yellow FCF (Phẩm màu vàng cam)"
+      "Sunset Yellow FCF (Phẩm màu vàng cam)",
+      "sunset yellow"
     ],
     "function": "Phẩm màu",
     "identity_only": true,
@@ -255,14 +257,18 @@
       "Azorubine (Carmoisine)",
       "carmoisine",
       "CI 14720",
-      "đỏ azo 122"
+      "đỏ azo 122",
+      "azorubine",
+      "azorubin"
     ],
     "common_names": [
       "Azorubin (Carmoisin)",
       "Azorubine (Carmoisine)",
       "carmoisine",
       "CI 14720",
-      "đỏ azo 122"
+      "đỏ azo 122",
+      "azorubine",
+      "azorubin"
     ],
     "function": "Phẩm màu",
     "identity_only": true,
@@ -617,11 +623,17 @@
     "canonical_name_en": "Caramel III – ammonia caramel",
     "aliases": [
       "Caramel III – ammonia caramel",
-      "Caramen nhóm III (caramen amoni)"
+      "Caramen nhóm III (caramen amoni)",
+      "caramen nhóm iii",
+      "caramen nhóm 3",
+      "caramel class iii"
     ],
     "common_names": [
       "Caramel III – ammonia caramel",
-      "Caramen nhóm III (caramen amoni)"
+      "Caramen nhóm III (caramen amoni)",
+      "caramen nhóm iii",
+      "caramen nhóm 3",
+      "caramel class iii"
     ],
     "function": "Phẩm màu",
     "identity_only": true,
@@ -1383,7 +1395,8 @@
       "Titan dioxide",
       "Titan dioxyd",
       "Titanium dioxide",
-      "titanium dioxide"
+      "titanium dioxide",
+      "titan dioxit"
     ],
     "common_names": [
       "CI 77891",
@@ -1391,7 +1404,8 @@
       "Titan dioxide",
       "Titan dioxyd",
       "Titanium dioxide",
-      "titanium dioxide"
+      "titanium dioxide",
+      "titan dioxit"
     ],
     "function": "Phẩm màu",
     "identity_only": true,
@@ -2198,11 +2212,13 @@
     "canonical_name_en": "Acetic acid, glacial",
     "aliases": [
       "Acetic acid, glacial",
-      "Acid acetic băng"
+      "Acid acetic băng",
+      "acid axetic"
     ],
     "common_names": [
       "Acetic acid, glacial",
-      "Acid acetic băng"
+      "Acid acetic băng",
+      "acid axetic"
     ],
     "function": "Chất điều chỉnh độ acid, chất bảo quản",
     "identity_only": true,
@@ -2352,11 +2368,15 @@
     "canonical_name_en": "Lactic acid, L-, D- and DL-",
     "aliases": [
       "Acid lactic (L-, D- và DL-)",
-      "Lactic acid, L-, D- and DL-"
+      "Lactic acid, L-, D- and DL-",
+      "acid lactic",
+      "axit lactic"
     ],
     "common_names": [
       "Acid lactic (L-, D- và DL-)",
-      "Lactic acid, L-, D- and DL-"
+      "Lactic acid, L-, D- and DL-",
+      "acid lactic",
+      "axit lactic"
     ],
     "function": "Chất điều chỉnh độ acid",
     "identity_only": true,
@@ -2502,11 +2522,15 @@
     "canonical_name_en": "Malic acid, DL-",
     "aliases": [
       "Acid malic (DL-)",
-      "Malic acid, DL-"
+      "Malic acid, DL-",
+      "acid malic",
+      "malic acid"
     ],
     "common_names": [
       "Acid malic (DL-)",
-      "Malic acid, DL-"
+      "Malic acid, DL-",
+      "acid malic",
+      "malic acid"
     ],
     "function": "Chất điều chỉnh độ acid, chất tạo phức kim loại",
     "identity_only": true,
@@ -2557,7 +2581,10 @@
       "Ascorbic acid, L-",
       "chất chống oxy hóa 300",
       "E300",
-      "vitamin C"
+      "vitamin C",
+      "acid l ascorbic",
+      "l ascorbic acid",
+      "acid ascorbic"
     ],
     "common_names": [
       "Acid ascorbic (L-)",
@@ -2566,7 +2593,10 @@
       "Ascorbic acid, L-",
       "chất chống oxy hóa 300",
       "E300",
-      "vitamin C"
+      "vitamin C",
+      "acid l ascorbic",
+      "l ascorbic acid",
+      "acid ascorbic"
     ],
     "function": "Chất chống oxy hóa,",
     "identity_only": true,
@@ -2587,11 +2617,13 @@
     "canonical_name_en": "Sodium ascorbate",
     "aliases": [
       "Natri ascorbat",
-      "Sodium ascorbate"
+      "Sodium ascorbate",
+      "natri l ascorbat"
     ],
     "common_names": [
       "Natri ascorbat",
-      "Sodium ascorbate"
+      "Sodium ascorbate",
+      "natri l ascorbat"
     ],
     "function": "Chất chống oxy hóa",
     "identity_only": true,
@@ -2872,11 +2904,15 @@
     "canonical_name_en": "Tertiary butylhydroquinone",
     "aliases": [
       "Tert- butylhydroquinon (TBHQ)",
-      "Tertiary butylhydroquinone"
+      "Tertiary butylhydroquinone",
+      "tbhq",
+      "tert butylhydroquinon"
     ],
     "common_names": [
       "Tert- butylhydroquinon (TBHQ)",
-      "Tertiary butylhydroquinone"
+      "Tertiary butylhydroquinone",
+      "tbhq",
+      "tert butylhydroquinon"
     ],
     "function": "Chất chống oxy hóa",
     "identity_only": true,
@@ -2901,7 +2937,8 @@
       "Butyl hydroxyanisol (BHA)",
       "Butylated hydroxyanisole",
       "Butylated hydroxyanisole (BHA)",
-      "butylhydroxyanisol"
+      "butylhydroxyanisol",
+      "butyl hydroxyanisol"
     ],
     "common_names": [
       "BHA",
@@ -2909,7 +2946,8 @@
       "Butyl hydroxyanisol (BHA)",
       "Butylated hydroxyanisole",
       "Butylated hydroxyanisole (BHA)",
-      "butylhydroxyanisol"
+      "butylhydroxyanisol",
+      "butyl hydroxyanisol"
     ],
     "function": "Chất chống oxy hóa",
     "identity_only": true,
@@ -2934,7 +2972,8 @@
       "Butyl hydroxytoluen (BHT)",
       "Butylated Hydroxytoluene",
       "Butylated hydroxytoluene (BHT)",
-      "butylhydroxytoluen"
+      "butylhydroxytoluen",
+      "butyl hydroxytoluen"
     ],
     "common_names": [
       "BHT",
@@ -2942,7 +2981,8 @@
       "Butyl hydroxytoluen (BHT)",
       "Butylated Hydroxytoluene",
       "Butylated hydroxytoluene (BHT)",
-      "butylhydroxytoluen"
+      "butylhydroxytoluen",
+      "butyl hydroxytoluen"
     ],
     "function": "Chất chống oxy hóa",
     "identity_only": true,
@@ -7734,7 +7774,10 @@
       "Monosodium L-glutamate",
       "MSG",
       "mì chính",
-      "sodium glutamate"
+      "sodium glutamate",
+      "natri glutamat",
+      "mononatri glutamat",
+      "monosodium glutamate"
     ],
     "common_names": [
       "bột ngọt",
@@ -7744,7 +7787,10 @@
       "Monosodium L-glutamate",
       "MSG",
       "mì chính",
-      "sodium glutamate"
+      "sodium glutamate",
+      "natri glutamat",
+      "mononatri glutamat",
+      "monosodium glutamate"
     ],
     "function": "Chất điều vị",
     "identity_only": true,
@@ -7895,7 +7941,8 @@
       "Disodium 5'- guanylate",
       "Disodium 5'-guanylate",
       "disodium guanylate",
-      "GMP"
+      "GMP",
+      "dinatri guanylat"
     ],
     "common_names": [
       "chất điều vị 627",
@@ -7904,7 +7951,8 @@
       "Disodium 5'- guanylate",
       "Disodium 5'-guanylate",
       "disodium guanylate",
-      "GMP"
+      "GMP",
+      "dinatri guanylat"
     ],
     "function": "Chất điều vị",
     "identity_only": true,
@@ -8005,7 +8053,8 @@
       "Disodium 5'- inosinate",
       "Disodium 5'-inosinate",
       "disodium inosinate",
-      "IMP"
+      "IMP",
+      "dinatri inosinat"
     ],
     "common_names": [
       "chất điều vị 631",
@@ -8014,7 +8063,8 @@
       "Disodium 5'- inosinate",
       "Disodium 5'-inosinate",
       "disodium inosinate",
-      "IMP"
+      "IMP",
+      "dinatri inosinat"
     ],
     "function": "Chất điều vị",
     "identity_only": true,
@@ -8635,7 +8685,10 @@
       "acesulfam kali",
       "Acesulfame K (Chất tạo ngọt)",
       "Acesulfame potassium",
-      "E950"
+      "E950",
+      "acesulfame k",
+      "acesulfam k",
+      "acesulfame kali"
     ],
     "common_names": [
       "ace-K",
@@ -8643,7 +8696,10 @@
       "acesulfam kali",
       "Acesulfame K (Chất tạo ngọt)",
       "Acesulfame potassium",
-      "E950"
+      "E950",
+      "acesulfame k",
+      "acesulfam k",
+      "acesulfame kali"
     ],
     "function": "Chất tạo ngọt, chất điều vị",
     "identity_only": true,
@@ -8980,7 +9036,9 @@
       "Steviol glycoside (Stevia)",
       "Steviol glycosides",
       "Steviol glycosides from Stevia rebaudiana Bertoni (Steviol glycosides from Stevia)",
-      "stevioside"
+      "stevioside",
+      "steviol glycoside",
+      "steviol glycosid"
     ],
     "common_names": [
       "chất tạo ngọt stevia",
@@ -8990,7 +9048,9 @@
       "Steviol glycoside (Stevia)",
       "Steviol glycosides",
       "Steviol glycosides from Stevia rebaudiana Bertoni (Steviol glycosides from Stevia)",
-      "stevioside"
+      "stevioside",
+      "steviol glycoside",
+      "steviol glycosid"
     ],
     "function": "Chất tạo ngọt",
     "identity_only": true,

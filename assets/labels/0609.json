@@ -1,0 +1,53 @@
+{
+  "product_name": "Bánh gạo ăn dặm hữu cơ Momsmi vị cà rốt",
+  "ingredient": [
+    "Gạo trắng hữu cơ nội địa Hàn Quốc(98%)",
+    "Bột cà rốt hữu cơ nội địa Hàn Quốc(2%)"
+  ],
+  "additive": [],
+  "warning": [
+    "Sản phẩm này được sản xuất trên cùng dây chuyền với các sản phẩm có sử dụng đậu nành, lúa mì, tôm, trứng, sữa và cà chua"
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng (칼로리)",
+      "value": "93 kcal / 25g (1 gói)"
+    },
+    {
+      "name": "Natri (나트륨)",
+      "value": "0 mg / 25g"
+    },
+    {
+      "name": "Carbohydrat (탄수화물)",
+      "value": "21 g / 25g"
+    },
+    {
+      "name": "Đường (당류)",
+      "value": "0 g / 25g"
+    },
+    {
+      "name": "Chất béo (지방)",
+      "value": "0 g / 25g"
+    },
+    {
+      "name": "Chất béo chuyển hóa (트랜스지방)",
+      "value": "0 g / 25g"
+    },
+    {
+      "name": "Chất béo bão hòa (포화지방)",
+      "value": "0 g / 25g"
+    },
+    {
+      "name": "Cholesterol (콜레스테롤)",
+      "value": "0 mg / 25g"
+    },
+    {
+      "name": "Chất đạm (단백질)",
+      "value": "2 g / 25g"
+    }
+  ],
+  "origin": "Hàn Quốc",
+  "net_weight": null,
+  "mfg_date": "Xem trên bao bì",
+  "expiry_date": "Xem trên bao bì"
+}

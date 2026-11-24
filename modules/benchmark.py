@@ -66,6 +66,11 @@ RECOGNIZED_CITATION_SOURCES = {
             "US_FDA_ALLERGEN_QA_ED5", "FDA Food Allergen Q&A Edition 5", "FDA Allergen Guidance Edition 5",
         ],
     },
+    "US_FDA_ASPARTAME_SWEETENERS": {
+        "title": "US FDA - Aspartame and Other Sweeteners in Food (2025): people with PKU should avoid or restrict aspartame",
+        "jurisdiction": "United States",
+        "aliases": ["US_FDA_ASPARTAME_SWEETENERS", "FDA Aspartame and Other Sweeteners in Food"],
+    },
     "US_FDA_21CFR172_804": {
         "title": "US FDA 21 CFR 172.804 - Aspartame (label statement for phenylketonurics)",
         "jurisdiction": "United States",
@@ -125,6 +130,26 @@ RECOGNIZED_CITATION_SOURCES = {
         "aliases": [
             "CODEX_STAN_192_1995", "Codex STAN 192-1995", "STAN 192-1995", "Codex GSFA", "GSFA",
         ],
+    },
+    "CODEX_CXS_72_1981": {
+        "title": "Codex CXS 72-1981 Standard for Infant Formula and Formulas for Special Medical Purposes Intended for Infants",
+        "jurisdiction": "International",
+        "aliases": ["CODEX_CXS_72_1981", "CXS 72-1981", "Codex CXS 72-1981", "CODEX STAN 72-1981"],
+    },
+    "CODEX_CXS_74_1981": {
+        "title": "Codex CXS 74-1981 Standard for Processed Cereal-Based Foods for Infants and Young Children",
+        "jurisdiction": "International",
+        "aliases": ["CODEX_CXS_74_1981", "CXS 74-1981", "Codex CXS 74-1981", "CODEX STAN 074-1981"],
+    },
+    "VN_QCVN_11_1_2012": {
+        "title": "QCVN 11-1:2012/BYT - Sản phẩm dinh dưỡng công thức cho trẻ đến 12 tháng tuổi",
+        "jurisdiction": "Vietnam",
+        "aliases": ["VN_QCVN_11_1_2012", "QCVN 11-1:2012/BYT", "QCVN 11-1:2012"],
+    },
+    "WHO_COMPLEMENTARY_FEEDING_2023": {
+        "title": "WHO Guideline for complementary feeding of infants and young children 6-23 months of age (2023)",
+        "jurisdiction": "International",
+        "aliases": ["WHO_COMPLEMENTARY_FEEDING_2023", "WHO complementary feeding guideline 2023"],
     },
     "CODEX_CXG_36_1989": {
         "title": "Codex Class Names and the International Numbering System for Food Additives (CXG 36-1989)",

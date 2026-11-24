@@ -1,0 +1,1595 @@
+{
+ "source": "product_ingredients của ảnh phần PHÁT TRIỂN (split_of, dev_fraction 0,5) trong data/foodhealthqa_eval_set.jsonl",
+ "dev_images": 195,
+ "min_images": 2,
+ "phrases": [
+  {
+   "phrase": "acid citric",
+   "images": 3
+  },
+  {
+   "phrase": "acid citric ins",
+   "images": 3
+  },
+  {
+   "phrase": "acid folic",
+   "images": 4
+  },
+  {
+   "phrase": "acid l ascorbic",
+   "images": 2
+  },
+  {
+   "phrase": "acid malic",
+   "images": 3
+  },
+  {
+   "phrase": "allergen information",
+   "images": 2
+  },
+  {
+   "phrase": "allura red ac",
+   "images": 3
+  },
+  {
+   "phrase": "and milk",
+   "images": 2
+  },
+  {
+   "phrase": "artificial flavour",
+   "images": 2
+  },
+  {
+   "phrase": "bí xanh",
+   "images": 3
+  },
+  {
+   "phrase": "bơ cacao",
+   "images": 5
+  },
+  {
+   "phrase": "bơ thực vật",
+   "images": 4
+  },
+  {
+   "phrase": "bạch đậu khấu",
+   "images": 2
+  },
+  {
+   "phrase": "bắp hạt sấy",
+   "images": 2
+  },
+  {
+   "phrase": "bắp sấy",
+   "images": 2
+  },
+  {
+   "phrase": "bột bắp",
+   "images": 2
+  },
+  {
+   "phrase": "bột ca cao",
+   "images": 11
+  },
+  {
+   "phrase": "bột cacao",
+   "images": 12
+  },
+  {
+   "phrase": "bột chiên",
+   "images": 2
+  },
+  {
+   "phrase": "bột chiết xuất sườn heo",
+   "images": 3
+  },
+  {
+   "phrase": "bột cà chua",
+   "images": 2
+  },
+  {
+   "phrase": "bột cà phê",
+   "images": 2
+  },
+  {
+   "phrase": "bột cần tây",
+   "images": 2
+  },
+  {
+   "phrase": "bột gia vị",
+   "images": 2
+  },
+  {
+   "phrase": "bột gia vị cà ri",
+   "images": 2
+  },
+  {
+   "phrase": "bột gia vị phô mai",
+   "images": 2
+  },
+  {
+   "phrase": "bột giấm",
+   "images": 3
+  },
+  {
+   "phrase": "bột gạo",
+   "images": 5
+  },
+  {
+   "phrase": "bột hành",
+   "images": 3
+  },
+  {
+   "phrase": "bột hành tây",
+   "images": 2
+  },
+  {
+   "phrase": "bột hồi",
+   "images": 2
+  },
+  {
+   "phrase": "bột kem béo thực vật",
+   "images": 2
+  },
+  {
+   "phrase": "bột kem không sữa",
+   "images": 4
+  },
+  {
+   "phrase": "bột kem sữa",
+   "images": 3
+  },
+  {
+   "phrase": "bột kem thực vật",
+   "images": 5
+  },
+  {
+   "phrase": "bột kombucha",
+   "images": 3
+  },
+  {
+   "phrase": "bột lòng trắng trứng",
+   "images": 6
+  },
+  {
+   "phrase": "bột lòng đỏ trứng",
+   "images": 6
+  },
+  {
+   "phrase": "bột lúa mì",
+   "images": 2
+  },
+  {
+   "phrase": "bột mì",
+   "images": 65
+  },
+  {
+   "phrase": "bột nghệ",
+   "images": 3
+  },
+  {
+   "phrase": "bột nguyên trứng",
+   "images": 2
+  },
+  {
+   "phrase": "bột nước tương",
+   "images": 2
+  },
+  {
+   "phrase": "bột nếp",
+   "images": 3
+  },
+  {
+   "phrase": "bột phô mai",
+   "images": 12
+  },
+  {
+   "phrase": "bột quế",
+   "images": 4
+  },
+  {
+   "phrase": "bột sữa",
+   "images": 15
+  },
+  {
+   "phrase": "bột sữa béo",
+   "images": 4
+  },
+  {
+   "phrase": "bột sữa chua",
+   "images": 3
+  },
+  {
+   "phrase": "bột sữa dừa",
+   "images": 3
+  },
+  {
+   "phrase": "bột sữa gầy",
+   "images": 7
+  },
+  {
+   "phrase": "bột sữa nguyên kem",
+   "images": 5
+  },
+  {
+   "phrase": "bột sữa tách béo",
+   "images": 2
+  },
+  {
+   "phrase": "bột sữa whey",
+   "images": 2
+  },
+  {
+   "phrase": "bột tiêu",
+   "images": 8
+  },
+  {
+   "phrase": "bột trứng",
+   "images": 4
+  },
+  {
+   "phrase": "bột tôm",
+   "images": 6
+  },
+  {
+   "phrase": "bột tỏi",
+   "images": 12
+  },
+  {
+   "phrase": "bột whey",
+   "images": 16
+  },
+  {
+   "phrase": "bột whey protein",
+   "images": 4
+  },
+  {
+   "phrase": "bột whey protein isolate",
+   "images": 2
+  },
+  {
+   "phrase": "bột ớt",
+   "images": 8
+  },
+  {
+   "phrase": "cacao khối",
+   "images": 2
+  },
+  {
+   "phrase": "calci carbonat",
+   "images": 7
+  },
+  {
+   "phrase": "calci clorid",
+   "images": 2
+  },
+  {
+   "phrase": "calci d pantothenat",
+   "images": 2
+  },
+  {
+   "phrase": "calci lactat",
+   "images": 3
+  },
+  {
+   "phrase": "caramen nhóm iv",
+   "images": 2
+  },
+  {
+   "phrase": "carnauba wax",
+   "images": 2
+  },
+  {
+   "phrase": "cheese powder",
+   "images": 2
+  },
+  {
+   "phrase": "chiết xuất hải sản",
+   "images": 2
+  },
+  {
+   "phrase": "chiết xuất nấm men",
+   "images": 24
+  },
+  {
+   "phrase": "chiết xuất trà đen",
+   "images": 3
+  },
+  {
+   "phrase": "chiết xuất trái dành dành",
+   "images": 2
+  },
+  {
+   "phrase": "chiết xuất từ lúa mạch",
+   "images": 2
+  },
+  {
+   "phrase": "chiết xuất yucca",
+   "images": 2
+  },
+  {
+   "phrase": "cho con bú",
+   "images": 2
+  },
+  {
+   "phrase": "chất béo sữa",
+   "images": 8
+  },
+  {
+   "phrase": "chất béo thực vật",
+   "images": 21
+  },
+  {
+   "phrase": "chất bảo quản",
+   "images": 30
+  },
+  {
+   "phrase": "chất bổ sung",
+   "images": 3
+  },
+  {
+   "phrase": "chất chống oxy hóa",
+   "images": 45
+  },
+  {
+   "phrase": "chất chống đông vón",
+   "images": 10
+  },
+  {
+   "phrase": "chất giữ màu",
+   "images": 3
+  },
+  {
+   "phrase": "chất giữ ẩm",
+   "images": 3
+  },
+  {
+   "phrase": "chất làm bóng",
+   "images": 7
+  },
+  {
+   "phrase": "chất làm dày",
+   "images": 42
+  },
+  {
+   "phrase": "chất làm rắn chắc",
+   "images": 2
+  },
+  {
+   "phrase": "chất làm ẩm",
+   "images": 24
+  },
+  {
+   "phrase": "chất nhũ hoá",
+   "images": 3
+  },
+  {
+   "phrase": "chất nhũ hóa",
+   "images": 57
+  },
+  {
+   "phrase": "chất nhũ hóa ins",
+   "images": 2
+  },
+  {
+   "phrase": "chất rắn",
+   "images": 3
+  },
+  {
+   "phrase": "chất tạo gel",
+   "images": 2
+  },
+  {
+   "phrase": "chất tạo màu",
+   "images": 8
+  },
+  {
+   "phrase": "chất tạo màu nhân tạo",
+   "images": 2
+  },
+  {
+   "phrase": "chất tạo màu tổng hợp",
+   "images": 17
+  },
+  {
+   "phrase": "chất tạo màu tự nhiên",
+   "images": 16
+  },
+  {
+   "phrase": "chất tạo ngọt nhân tạo",
+   "images": 5
+  },
+  {
+   "phrase": "chất tạo ngọt sucralose ins",
+   "images": 3
+  },
+  {
+   "phrase": "chất tạo ngọt tổng hợp",
+   "images": 20
+  },
+  {
+   "phrase": "chất tạo xốp",
+   "images": 39
+  },
+  {
+   "phrase": "chất xơ hòa tan",
+   "images": 3
+  },
+  {
+   "phrase": "chất xơ hòa tan fructooligosaccharides",
+   "images": 3
+  },
+  {
+   "phrase": "chất xơ lúa mì",
+   "images": 3
+  },
+  {
+   "phrase": "chất xơ từ lúa mì",
+   "images": 4
+  },
+  {
+   "phrase": "chất xử lý bột",
+   "images": 11
+  },
+  {
+   "phrase": "chất điều chỉnh độ acid",
+   "images": 64
+  },
+  {
+   "phrase": "chất điều chỉnh độ axit",
+   "images": 3
+  },
+  {
+   "phrase": "chất điều vị",
+   "images": 56
+  },
+  {
+   "phrase": "chất điều vị erythritol ins",
+   "images": 3
+  },
+  {
+   "phrase": "chất ổn định",
+   "images": 77
+  },
+  {
+   "phrase": "chất ổn định dextrin ins",
+   "images": 3
+  },
+  {
+   "phrase": "chất ổn định lecithin ins",
+   "images": 2
+  },
+  {
+   "phrase": "chủng men streptococcus thermophilus",
+   "images": 2
+  },
+  {
+   "phrase": "chứa chất chống oxy hóa",
+   "images": 2
+  },
+  {
+   "phrase": "chứa chất nhũ hóa",
+   "images": 3
+  },
+  {
+   "phrase": "contains wheat",
+   "images": 2
+  },
+  {
+   "phrase": "corn starch",
+   "images": 2
+  },
+  {
+   "phrase": "creamer đặc có đường",
+   "images": 2
+  },
+  {
+   "phrase": "cà chua",
+   "images": 2
+  },
+  {
+   "phrase": "cà chua cô đặc",
+   "images": 6
+  },
+  {
+   "phrase": "cà phê",
+   "images": 3
+  },
+  {
+   "phrase": "cà rốt",
+   "images": 7
+  },
+  {
+   "phrase": "cá tra",
+   "images": 4
+  },
+  {
+   "phrase": "các khoáng chất",
+   "images": 2
+  },
+  {
+   "phrase": "các loại hạt",
+   "images": 2
+  },
+  {
+   "phrase": "các vitamin",
+   "images": 2
+  },
+  {
+   "phrase": "có chứa chất nhũ hóa",
+   "images": 5
+  },
+  {
+   "phrase": "có chứa cá",
+   "images": 4
+  },
+  {
+   "phrase": "có chứa lúa mì",
+   "images": 7
+  },
+  {
+   "phrase": "có chứa sữa",
+   "images": 10
+  },
+  {
+   "phrase": "cảnh báo",
+   "images": 175
+  },
+  {
+   "phrase": "cần tây",
+   "images": 4
+  },
+  {
+   "phrase": "cẩn thận tránh gây hóc",
+   "images": 2
+  },
+  {
+   "phrase": "cốt nước tương",
+   "images": 2
+  },
+  {
+   "phrase": "cồn thực phẩm",
+   "images": 13
+  },
+  {
+   "phrase": "củ cải trắng",
+   "images": 2
+  },
+  {
+   "phrase": "d pantothenat calci",
+   "images": 2
+  },
+  {
+   "phrase": "d xylose",
+   "images": 3
+  },
+  {
+   "phrase": "da heo",
+   "images": 2
+  },
+  {
+   "phrase": "dâu tây",
+   "images": 2
+  },
+  {
+   "phrase": "dùng cho thực phẩm",
+   "images": 2
+  },
+  {
+   "phrase": "dầu cọ",
+   "images": 27
+  },
+  {
+   "phrase": "dầu cọ hydro hóa",
+   "images": 2
+  },
+  {
+   "phrase": "dầu cọ tinh luyện",
+   "images": 2
+  },
+  {
+   "phrase": "dầu dừa",
+   "images": 2
+  },
+  {
+   "phrase": "dầu hướng dương",
+   "images": 4
+  },
+  {
+   "phrase": "dầu hạt cải",
+   "images": 2
+  },
+  {
+   "phrase": "dầu hạt cọ hydro hóa",
+   "images": 2
+  },
+  {
+   "phrase": "dầu mè",
+   "images": 5
+  },
+  {
+   "phrase": "dầu nành",
+   "images": 4
+  },
+  {
+   "phrase": "dầu olein tinh luyện",
+   "images": 4
+  },
+  {
+   "phrase": "dầu thực vật",
+   "images": 48
+  },
+  {
+   "phrase": "dầu ăn",
+   "images": 2
+  },
+  {
+   "phrase": "dầu đậu nành",
+   "images": 4
+  },
+  {
+   "phrase": "dị ứng",
+   "images": 3
+  },
+  {
+   "phrase": "dịch chiết trà đen",
+   "images": 3
+  },
+  {
+   "phrase": "emulsifier soya lecithin",
+   "images": 2
+  },
+  {
+   "phrase": "enzyme chymosin",
+   "images": 2
+  },
+  {
+   "phrase": "flavour enhancer",
+   "images": 3
+  },
+  {
+   "phrase": "gia vị",
+   "images": 2
+  },
+  {
+   "phrase": "gia vị hỗn hợp",
+   "images": 2
+  },
+  {
+   "phrase": "gia vị tẩm ướp",
+   "images": 2
+  },
+  {
+   "phrase": "giáp xác",
+   "images": 7
+  },
+  {
+   "phrase": "giả thịt",
+   "images": 3
+  },
+  {
+   "phrase": "giống tự nhiên",
+   "images": 8
+  },
+  {
+   "phrase": "glucose syrup",
+   "images": 2
+  },
+  {
+   "phrase": "gluten lúa mì",
+   "images": 10
+  },
+  {
+   "phrase": "gluten từ lúa mì",
+   "images": 2
+  },
+  {
+   "phrase": "gói rau",
+   "images": 4
+  },
+  {
+   "phrase": "gói xốt",
+   "images": 2
+  },
+  {
+   "phrase": "gạo japonica",
+   "images": 2
+  },
+  {
+   "phrase": "hành lá",
+   "images": 6
+  },
+  {
+   "phrase": "hành lá sấy",
+   "images": 5
+  },
+  {
+   "phrase": "hành tây",
+   "images": 12
+  },
+  {
+   "phrase": "hành tím",
+   "images": 9
+  },
+  {
+   "phrase": "hút oxy",
+   "images": 2
+  },
+  {
+   "phrase": "hương bò",
+   "images": 2
+  },
+  {
+   "phrase": "hương chanh",
+   "images": 3
+  },
+  {
+   "phrase": "hương gà",
+   "images": 2
+  },
+  {
+   "phrase": "hương liệu",
+   "images": 17
+  },
+  {
+   "phrase": "hương liệu giống tự nhiên",
+   "images": 18
+  },
+  {
+   "phrase": "hương liệu khói tự nhiên",
+   "images": 2
+  },
+  {
+   "phrase": "hương liệu nhân tạo",
+   "images": 9
+  },
+  {
+   "phrase": "hương liệu sữa tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hương liệu tổng hợp",
+   "images": 46
+  },
+  {
+   "phrase": "hương liệu tự nhiên",
+   "images": 15
+  },
+  {
+   "phrase": "hương liệu vani tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hương liệu xoài tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hương phô mai tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hương rau",
+   "images": 2
+  },
+  {
+   "phrase": "hương sôcôla",
+   "images": 4
+  },
+  {
+   "phrase": "hương sữa",
+   "images": 2
+  },
+  {
+   "phrase": "hương thịt",
+   "images": 2
+  },
+  {
+   "phrase": "hương tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hương vani",
+   "images": 5
+  },
+  {
+   "phrase": "hương vani tổng hợp",
+   "images": 2
+  },
+  {
+   "phrase": "hạnh nhân",
+   "images": 7
+  },
+  {
+   "phrase": "hạt chia",
+   "images": 2
+  },
+  {
+   "phrase": "hạt cây",
+   "images": 3
+  },
+  {
+   "phrase": "hạt hạnh nhân",
+   "images": 2
+  },
+  {
+   "phrase": "hạt nêm",
+   "images": 5
+  },
+  {
+   "phrase": "hạt phỉ",
+   "images": 2
+  },
+  {
+   "phrase": "hạt óc chó",
+   "images": 2
+  },
+  {
+   "phrase": "hạt điều",
+   "images": 5
+  },
+  {
+   "phrase": "hỗn hợp bột",
+   "images": 2
+  },
+  {
+   "phrase": "hỗn hợp cốm dạng bột",
+   "images": 2
+  },
+  {
+   "phrase": "hỗn hợp hạt",
+   "images": 2
+  },
+  {
+   "phrase": "hỗn hợp sô cô la",
+   "images": 2
+  },
+  {
+   "phrase": "hỗn hợp tocopherol concentrate",
+   "images": 2
+  },
+  {
+   "phrase": "ins a",
+   "images": 7
+  },
+  {
+   "phrase": "ins b",
+   "images": 5
+  },
+  {
+   "phrase": "ins c",
+   "images": 6
+  },
+  {
+   "phrase": "ins d",
+   "images": 4
+  },
+  {
+   "phrase": "k mk",
+   "images": 2
+  },
+  {
+   "phrase": "kali clorid",
+   "images": 2
+  },
+  {
+   "phrase": "kali iodid",
+   "images": 4
+  },
+  {
+   "phrase": "khoai môn",
+   "images": 2
+  },
+  {
+   "phrase": "khoai tây",
+   "images": 2
+  },
+  {
+   "phrase": "khoáng chất",
+   "images": 5
+  },
+  {
+   "phrase": "không tái đông sản phẩm",
+   "images": 3
+  },
+  {
+   "phrase": "không ăn gói này",
+   "images": 2
+  },
+  {
+   "phrase": "không ăn túi hút ẩm",
+   "images": 2
+  },
+  {
+   "phrase": "kombucha trà đen",
+   "images": 3
+  },
+  {
+   "phrase": "kẽm oxyd",
+   "images": 2
+  },
+  {
+   "phrase": "kẽm sulfat",
+   "images": 2
+  },
+  {
+   "phrase": "lecithin đậu nành",
+   "images": 3
+  },
+  {
+   "phrase": "lá dứa",
+   "images": 2
+  },
+  {
+   "phrase": "lòng đỏ trứng gà",
+   "images": 2
+  },
+  {
+   "phrase": "lúa mì",
+   "images": 30
+  },
+  {
+   "phrase": "mangan sulfat",
+   "images": 2
+  },
+  {
+   "phrase": "men khô",
+   "images": 2
+  },
+  {
+   "phrase": "men streptococcus và lactobacillus",
+   "images": 2
+  },
+  {
+   "phrase": "milk powder",
+   "images": 2
+  },
+  {
+   "phrase": "miếng thạch dừa nhỏ",
+   "images": 2
+  },
+  {
+   "phrase": "mononatri l glutamat",
+   "images": 2
+  },
+  {
+   "phrase": "muối biển",
+   "images": 2
+  },
+  {
+   "phrase": "muối i ốt",
+   "images": 22
+  },
+  {
+   "phrase": "muối tinh",
+   "images": 3
+  },
+  {
+   "phrase": "muối tinh chế",
+   "images": 2
+  },
+  {
+   "phrase": "muối ăn",
+   "images": 5
+  },
+  {
+   "phrase": "màu thực phẩm tổng hợp",
+   "images": 6
+  },
+  {
+   "phrase": "màu thực phẩm tự nhiên",
+   "images": 2
+  },
+  {
+   "phrase": "màu tổng hợp",
+   "images": 4
+  },
+  {
+   "phrase": "màu tự nhiên",
+   "images": 2
+  },
+  {
+   "phrase": "mè trắng",
+   "images": 2
+  },
+  {
+   "phrase": "mạch nha",
+   "images": 19
+  },
+  {
+   "phrase": "mạch nha glucose",
+   "images": 8
+  },
+  {
+   "phrase": "mạch nha isomalto oligo",
+   "images": 5
+  },
+  {
+   "phrase": "mạch nha maltose",
+   "images": 7
+  },
+  {
+   "phrase": "mắc ca",
+   "images": 2
+  },
+  {
+   "phrase": "mắm ruốc",
+   "images": 2
+  },
+  {
+   "phrase": "mỡ heo",
+   "images": 4
+  },
+  {
+   "phrase": "nam việt quất",
+   "images": 2
+  },
+  {
+   "phrase": "natri ascorbat",
+   "images": 2
+  },
+  {
+   "phrase": "natri bicarbonate ins ii",
+   "images": 2
+  },
+  {
+   "phrase": "natri selenit",
+   "images": 4
+  },
+  {
+   "phrase": "nguyên liệu thực phẩm",
+   "images": 2
+  },
+  {
+   "phrase": "ngò gai",
+   "images": 2
+  },
+  {
+   "phrase": "ngò om",
+   "images": 2
+  },
+  {
+   "phrase": "ngũ cốc",
+   "images": 2
+  },
+  {
+   "phrase": "nhai kỹ trước khi nuốt",
+   "images": 2
+  },
+  {
+   "phrase": "nho vàng",
+   "images": 2
+  },
+  {
+   "phrase": "nho đen",
+   "images": 2
+  },
+  {
+   "phrase": "nước cốt bò",
+   "images": 2
+  },
+  {
+   "phrase": "nước cốt dừa",
+   "images": 3
+  },
+  {
+   "phrase": "nước mắm",
+   "images": 19
+  },
+  {
+   "phrase": "nước tương",
+   "images": 9
+  },
+  {
+   "phrase": "nước ép cam",
+   "images": 2
+  },
+  {
+   "phrase": "nước ép cam cô đặc",
+   "images": 3
+  },
+  {
+   "phrase": "nước ép nho cô đặc",
+   "images": 2
+  },
+  {
+   "phrase": "nước ép táo",
+   "images": 4
+  },
+  {
+   "phrase": "nước ép táo cô đặc",
+   "images": 2
+  },
+  {
+   "phrase": "nước ép đào",
+   "images": 3
+  },
+  {
+   "phrase": "nước ép đào cô đặc",
+   "images": 2
+  },
+  {
+   "phrase": "nước đá",
+   "images": 2
+  },
+  {
+   "phrase": "nước đường bắp",
+   "images": 2
+  },
+  {
+   "phrase": "nấm đông cô",
+   "images": 3
+  },
+  {
+   "phrase": "nếu có",
+   "images": 2
+  },
+  {
+   "phrase": "palm oil",
+   "images": 2
+  },
+  {
+   "phrase": "paprika oleoresin",
+   "images": 2
+  },
+  {
+   "phrase": "phô mai",
+   "images": 9
+  },
+  {
+   "phrase": "phẩm màu",
+   "images": 4
+  },
+  {
+   "phrase": "phẩm màu nhân tạo",
+   "images": 2
+  },
+  {
+   "phrase": "phẩm màu tổng hợp",
+   "images": 16
+  },
+  {
+   "phrase": "phẩm màu tự nhiên",
+   "images": 8
+  },
+  {
+   "phrase": "phụ nữ mang thai",
+   "images": 3
+  },
+  {
+   "phrase": "ponceau r",
+   "images": 2
+  },
+  {
+   "phrase": "protein sữa",
+   "images": 5
+  },
+  {
+   "phrase": "pyridoxin hydrochlorid",
+   "images": 2
+  },
+  {
+   "phrase": "quả óc chó",
+   "images": 2
+  },
+  {
+   "phrase": "rau sấy",
+   "images": 4
+  },
+  {
+   "phrase": "rong biển",
+   "images": 4
+  },
+  {
+   "phrase": "saccharomyces cerevisiae",
+   "images": 3
+  },
+  {
+   "phrase": "shortening thực vật",
+   "images": 7
+  },
+  {
+   "phrase": "sodium citrate",
+   "images": 2
+  },
+  {
+   "phrase": "sunset yellow fcf",
+   "images": 2
+  },
+  {
+   "phrase": "synthetic flavour",
+   "images": 2
+  },
+  {
+   "phrase": "sản phẩm chứa bột mì",
+   "images": 2
+  },
+  {
+   "phrase": "sản phẩm có chứa",
+   "images": 9
+  },
+  {
+   "phrase": "sản phẩm có chứa gluten",
+   "images": 2
+  },
+  {
+   "phrase": "sản phẩm có chứa sữa",
+   "images": 16
+  },
+  {
+   "phrase": "sản phẩm có thể chứa",
+   "images": 2
+  },
+  {
+   "phrase": "sắt pyrophosphat",
+   "images": 2
+  },
+  {
+   "phrase": "sữa béo",
+   "images": 2
+  },
+  {
+   "phrase": "sữa bò tươi",
+   "images": 8
+  },
+  {
+   "phrase": "sữa bột",
+   "images": 10
+  },
+  {
+   "phrase": "sữa bột béo",
+   "images": 2
+  },
+  {
+   "phrase": "sữa bột gầy",
+   "images": 3
+  },
+  {
+   "phrase": "sữa bột nguyên chất",
+   "images": 2
+  },
+  {
+   "phrase": "sữa bột nguyên kem",
+   "images": 6
+  },
+  {
+   "phrase": "sữa bột tách béo",
+   "images": 3
+  },
+  {
+   "phrase": "sữa chua",
+   "images": 2
+  },
+  {
+   "phrase": "sữa gầy",
+   "images": 2
+  },
+  {
+   "phrase": "sữa lên men tự nhiên",
+   "images": 2
+  },
+  {
+   "phrase": "sữa tách béo",
+   "images": 3
+  },
+  {
+   "phrase": "sữa tươi",
+   "images": 3
+  },
+  {
+   "phrase": "sữa và đậu nành",
+   "images": 2
+  },
+  {
+   "phrase": "thiamin mononitrat",
+   "images": 2
+  },
+  {
+   "phrase": "thông tin cảnh báo",
+   "images": 2
+  },
+  {
+   "phrase": "thông tin dị ứng",
+   "images": 3
+  },
+  {
+   "phrase": "thạch dừa",
+   "images": 5
+  },
+  {
+   "phrase": "thịt bò",
+   "images": 2
+  },
+  {
+   "phrase": "thịt gà",
+   "images": 11
+  },
+  {
+   "phrase": "thịt heo",
+   "images": 14
+  },
+  {
+   "phrase": "thịt tôm",
+   "images": 2
+  },
+  {
+   "phrase": "thủy sản",
+   "images": 7
+  },
+  {
+   "phrase": "tinh bột",
+   "images": 4
+  },
+  {
+   "phrase": "tinh bột bắp",
+   "images": 16
+  },
+  {
+   "phrase": "tinh bột khoai mì",
+   "images": 8
+  },
+  {
+   "phrase": "tinh bột khoai tây",
+   "images": 13
+  },
+  {
+   "phrase": "tinh bột ngô",
+   "images": 8
+  },
+  {
+   "phrase": "tinh bột sắn",
+   "images": 6
+  },
+  {
+   "phrase": "tiêu đen",
+   "images": 3
+  },
+  {
+   "phrase": "tricalci phosphat",
+   "images": 4
+  },
+  {
+   "phrase": "trong sản phẩm",
+   "images": 2
+  },
+  {
+   "phrase": "trà xanh",
+   "images": 2
+  },
+  {
+   "phrase": "trà đen",
+   "images": 2
+  },
+  {
+   "phrase": "trên chất nền dextrose",
+   "images": 2
+  },
+  {
+   "phrase": "trứng gà",
+   "images": 5
+  },
+  {
+   "phrase": "trứng và đậu nành",
+   "images": 3
+  },
+  {
+   "phrase": "tuổi trở lên",
+   "images": 3
+  },
+  {
+   "phrase": "tôm khô",
+   "images": 2
+  },
+  {
+   "phrase": "tổng hợp",
+   "images": 12
+  },
+  {
+   "phrase": "từ canada",
+   "images": 3
+  },
+  {
+   "phrase": "từ hàn quốc",
+   "images": 3
+  },
+  {
+   "phrase": "từ mỹ",
+   "images": 3
+  },
+  {
+   "phrase": "từ sri lanka",
+   "images": 3
+  },
+  {
+   "phrase": "từ đậu nành",
+   "images": 7
+  },
+  {
+   "phrase": "tự nhiên",
+   "images": 7
+  },
+  {
+   "phrase": "vegetable fat",
+   "images": 3
+  },
+  {
+   "phrase": "vitamin a",
+   "images": 6
+  },
+  {
+   "phrase": "vitamin b",
+   "images": 6
+  },
+  {
+   "phrase": "vitamin c",
+   "images": 8
+  },
+  {
+   "phrase": "vitamin d",
+   "images": 4
+  },
+  {
+   "phrase": "vitamin e",
+   "images": 5
+  },
+  {
+   "phrase": "vitamin k",
+   "images": 2
+  },
+  {
+   "phrase": "vitamin và khoáng chất",
+   "images": 2
+  },
+  {
+   "phrase": "việt quất",
+   "images": 2
+  },
+  {
+   "phrase": "và tự nhiên",
+   "images": 3
+  },
+  {
+   "phrase": "vắt mì",
+   "images": 5
+  },
+  {
+   "phrase": "vắt sợi",
+   "images": 2
+  },
+  {
+   "phrase": "với chất chống oxy hóa",
+   "images": 2
+  },
+  {
+   "phrase": "wheat flour",
+   "images": 3
+  },
+  {
+   "phrase": "whey powder",
+   "images": 3
+  },
+  {
+   "phrase": "xi rô glucose",
+   "images": 3
+  },
+  {
+   "phrase": "xi rô ngô",
+   "images": 2
+  },
+  {
+   "phrase": "xiro fructoza",
+   "images": 2
+  },
+  {
+   "phrase": "xúc xích",
+   "images": 3
+  },
+  {
+   "phrase": "xốt chấm",
+   "images": 2
+  },
+  {
+   "phrase": "yến mạch",
+   "images": 6
+  },
+  {
+   "phrase": "óc chó",
+   "images": 4
+  },
+  {
+   "phrase": "đinh hương",
+   "images": 2
+  },
+  {
+   "phrase": "đường bắp",
+   "images": 2
+  },
+  {
+   "phrase": "đường cát",
+   "images": 3
+  },
+  {
+   "phrase": "đường dextrose",
+   "images": 7
+  },
+  {
+   "phrase": "đường glucose",
+   "images": 4
+  },
+  {
+   "phrase": "đường lactose",
+   "images": 3
+  },
+  {
+   "phrase": "đường maltodextrin",
+   "images": 2
+  },
+  {
+   "phrase": "đường mía",
+   "images": 3
+  },
+  {
+   "phrase": "đường ngô",
+   "images": 2
+  },
+  {
+   "phrase": "đường tinh luyện",
+   "images": 6
+  },
+  {
+   "phrase": "đường trắng",
+   "images": 4
+  },
+  {
+   "phrase": "đạm thực vật thủy phân",
+   "images": 3
+  },
+  {
+   "phrase": "đạm whey",
+   "images": 3
+  },
+  {
+   "phrase": "đạm đậu nành",
+   "images": 10
+  },
+  {
+   "phrase": "đậu hà lan",
+   "images": 2
+  },
+  {
+   "phrase": "đậu nành",
+   "images": 50
+  },
+  {
+   "phrase": "đậu phộng",
+   "images": 10
+  },
+  {
+   "phrase": "đặc biệt ở trẻ em",
+   "images": 2
+  },
+  {
+   "phrase": "đối tượng sử dụng",
+   "images": 4
+  },
+  {
+   "phrase": "động vật có vỏ",
+   "images": 2
+  },
+  {
+   "phrase": "động vật giáp xác",
+   "images": 4
+  },
+  {
+   "phrase": "động vật thân mềm",
+   "images": 6
+  },
+  {
+   "phrase": "ớt chuông",
+   "images": 2
+  },
+  {
+   "phrase": "ớt sấy",
+   "images": 3
+  }
+ ]
+}

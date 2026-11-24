@@ -1,0 +1,793 @@
+{
+ "reference_text": [
+  {
+   "id": "FOODQA_G3_1657",
+   "kind": "adi_corrected",
+   "ins": "INS 330",
+   "kb_old": "JECFA: ADI không xác định (Not Specified) - an toàn ở mức sử dụng thông thường theo GMP",
+   "kb_now": "JECFA: ADI 'không giới hạn' (Not Limited) - an toàn ở mức sử dụng thông thường theo GMP"
+  }
+ ],
+ "label_mismatches": {
+  "FOODQA_G3_0035": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0052": [
+   "ABSTAIN",
+   "SAFE"
+  ],
+  "FOODQA_G3_0084": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_0103": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0113": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0127": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0142": [
+   "CRITICAL_ALERT",
+   "SAFE"
+  ],
+  "FOODQA_G3_0144": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0152": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0157": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0161": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0166": [
+   "CAUTION",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0168": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0171": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0188": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0207": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0230": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0256": [
+   "CRITICAL_ALERT",
+   "SAFE"
+  ],
+  "FOODQA_G3_0294": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0298": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0357": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0365": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0386": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0388": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0405": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0406": [
+   "CRITICAL_ALERT",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0461": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0470": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0496": [
+   "UNSAFE",
+   "SAFE"
+  ],
+  "FOODQA_G3_0513": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0538": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0543": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0596": [
+   "CRITICAL_ALERT",
+   "SAFE"
+  ],
+  "FOODQA_G3_0631": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0659": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0683": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0688": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_0712": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0726": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0745": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0763": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_0774": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0856": [
+   "ABSTAIN",
+   "SAFE"
+  ],
+  "FOODQA_G3_0867": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_0889": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0925": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0945": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_0995": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_0997": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1001": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1011": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1026": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1027": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1033": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1067": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1166": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1170": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1199": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1244": [
+   "ABSTAIN",
+   "SAFE"
+  ],
+  "FOODQA_G3_1265": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1311": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1312": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1318": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1346": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_1364": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1368": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1375": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1407": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1412": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1473": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1535": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1559": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1681": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1690": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1694": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1713": [
+   "CRITICAL_ALERT",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_1724": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1730": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1787": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1803": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1811": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1820": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1837": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1848": [
+   "CRITICAL_ALERT",
+   "UNSAFE"
+  ],
+  "FOODQA_G3_1870": [
+   "CAUTION",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_1879": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1898": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1910": [
+   "CRITICAL_ALERT",
+   "CAUTION"
+  ],
+  "FOODQA_G3_1923": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_1941": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1976": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_1998": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2012": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2031": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2046": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2105": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2126": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2128": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2133": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2138": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2145": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2148": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2149": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2150": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2151": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2154": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2155": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2163": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2166": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2169": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2177": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2184": [
+   "CAUTION",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2185": [
+   "CAUTION",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2192": [
+   "CAUTION",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2194": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2195": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2198": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2199": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2200": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2203": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2204": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2207": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2208": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2209": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2210": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2211": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2213": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2217": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2218": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2219": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2224": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2226": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2228": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2230": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2231": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2233": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2236": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2237": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2238": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2240": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2241": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2242": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2245": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2246": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2247": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2248": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2249": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2250": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2251": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2253": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2254": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2255": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2256": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2257": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2258": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2261": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2262": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2263": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2343": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2381": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2387": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2472": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2478": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2481": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2482": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2487": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2498": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2502": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2506": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2507": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2520": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2521": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2522": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2523": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2524": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2529": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2534": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2537": [
+   "SAFE",
+   "CAUTION"
+  ],
+  "FOODQA_G3_2554": [
+   "SAFE",
+   "CAUTION"
+  ],
+  "FOODQA_G3_2568": [
+   "SAFE",
+   "CAUTION"
+  ],
+  "FOODQA_G3_2569": [
+   "SAFE",
+   "ABSTAIN"
+  ],
+  "FOODQA_G3_2606": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2607": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2608": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2609": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2610": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2611": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2612": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2613": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2614": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2615": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2616": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2617": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2618": [
+   "CAUTION",
+   "SAFE"
+  ],
+  "FOODQA_G3_2619": [
+   "CAUTION",
+   "SAFE"
+  ]
+ }
+}

@@ -8,6 +8,32 @@
 
 ---
 
+## 0. Quan hệ với bộ đánh giá v5 (ghi chú 2026-11-24)
+
+Tài liệu này (bản 1.0) được viết **trước** bộ đánh giá v5 (`data/foodhealthqa_eval_set.jsonl`, 750 câu). Nhãn và đáp án của bộ v5 được tạo theo **quy tắc trong code tạo bộ QA**, không theo trực tiếp tài liệu này:
+
+- Mẫu câu hỏi và đáp án: `scripts_research/create_benchmark_v5.py`, `scripts_research/source_grounding_v5.py`.
+- Nhận định nguồn mà đáp án dựa vào: `knowledge_base/sources/derived/external_claim_verification.json`, kiểm nguyên văn bằng `scripts_research/verify_external_claims.py`.
+- Sáu cổng duyệt từng câu (G1–G6): `scripts_research/verify_v5_answers.py`, gồm suy lại nhãn độc lập từ chữ trên nhãn sản phẩm.
+
+Kiểm ngày 2026-11-24 với nguồn hiện tại: 57/57 nhận định qua, 0/750 câu trượt cổng G1–G6. Tức là bộ v5 khớp quy tắc trong code tạo bộ QA.
+
+**Những chỗ tài liệu này (bản 1.0) chưa theo kịp bộ v5.** Mục này chỉ ghi nhận, không đổi quy tắc nào. Muốn dùng tài liệu làm quy tắc chung cho cả bộ QA lẫn hệ thống thì phải quyết định từng chỗ: sửa tài liệu hay sửa bộ QA.
+
+| Chỗ lệch | Số câu | Tài liệu (bản 1.0) | Bộ v5 |
+|---|---:|---|---|
+| Câu hỏi natri/đường | 82 | Mục ABSTAIN: "câu hỏi liên quan đến dinh dưỡng … nằm ngoài phạm vi" | `SAFE`/`CAUTION` theo ngưỡng công bố Codex CAC/GL 23-1997 (natri thấp ≤ 120 mg/100 g; không đường ≤ 0,5 g/100 g hoặc 100 ml) |
+| PKU + aspartame | 12 | C2 → `CAUTION` | `CRITICAL_ALERT` |
+| Câu hỏi theo một chủ đề (chất ngọt không đường) | 5 | Mục 1.1: nhãn theo sản phẩm và người hỏi | Chỉ xét chủ đề được hỏi (3 sản phẩm cho trẻ có phẩm màu azo; 2 sản phẩm bánh có INS 211 + INS 300) |
+| Trẻ em, sản phẩm chỉ có INS 211 (FOODQA_G3_0298) | 1 | C3: INS 211 chỉ `CAUTION` khi có kèm INS 300 | `CAUTION` (natri benzoat nằm trong hỗn hợp nghiên cứu McCann) |
+| Thai phụ, nhãn ghi "titan dioxyd" = INS 171 (FOODQA_G3_2299) | 1 | Mục 3: INS 171 → `CAUTION` | `SAFE` (câu hỏi về chất ngọt không đường) |
+| Loại câu tài liệu chưa có quy tắc | 128 | — | Chất ngọt không đường + thai phụ (44) hoặc trẻ em (16) → `CAUTION`; dị nguyên không kê khai, không có PAL → `CAUTION` (35); caffeine + trẻ em (14); phẩm màu EU Phụ lục V + người lớn (10); nitrit + thai phụ (6); ghi nhãn sulphite (3) |
+| Aspartame theo IARC Nhóm 2B, người lớn | 4 | Mơ hồ: C1 tính IARC 2B, nhưng mục 3 (INS 320) nói IARC 2B không ghi đè ADI | `CAUTION` |
+
+Thêm một chỗ tài liệu rộng hơn nguồn: C3 viết benzoat + acid ascorbic "trong sản phẩm", trong khi nguồn FDA đã lưu (`FDA_BENZENE_QA.html`) chỉ nói về **đồ uống** ("in some beverages that contain both benzoate salts and ascorbic acid").
+
+---
+
 ## 1. Nguyên tắc nền tảng
 
 ### 1.1 Label phản ánh nội dung, không phản ánh domain
@@ -29,7 +55,7 @@ Khi các nguồn xung đột nhau, ưu tiên theo thứ tự:
 | T2 | Cơ quan phân loại carcinogen | IARC (Group 1, 2A, 2B) | Cao |
 | T3 | Quy chuẩn pháp lý VN | TT24/2019/TT-BYT | Trung bình |
 | T4 | Quy chuẩn pháp lý khác | Codex, EU, US | Tham chiếu |
-| T5 | Hướng dẫn lâm sàng | KDOQI, ADA, EFSA clinical | Cao với nhóm bệnh lý |
+| T5 | Hướng dẫn lâm sàng | EFSA clinical | Cao với nhóm bệnh lý |
 
 **Nguyên tắc xung đột pháp lý:** Nếu VN (T3) cho phép nhưng T1 đưa ra kết luận bảo vệ sức khỏe mạnh (ví dụ: EFSA "cannot establish ADI", EU cấm dựa trên T1), ưu tiên T1 cho label. Ghi rõ trong `note`.
 
@@ -66,7 +92,7 @@ Ngoại lệ: ABSTAIN ghi đè SAFE và CAUTION khi **thiếu dữ liệu cần 
 - IARC Group 2A hoặc 2B với bằng chứng đủ liên quan đến mức tiêu thụ thực phẩm bình thường
 
 **C2 — Nhóm dễ tổn thương + phụ gia có mối quan hệ lâm sàng đã được ghi nhận:**
-- CKD + phosphate (INS 338, 339, 341, 450, 452): KDOQI 2020
+- CKD + phosphate (INS 338, 339, 341, 450, 452): EFSA 2019 (ADI nhóm không áp dụng cho người giảm chức năng thận vừa đến nặng)
 - Trẻ dưới 6 tuổi + azo dyes (INS 102, 104, 110, 122, 124, 129): EFSA 2008/EU Annex V
 - Hen suyễn + sulfite (INS 220, 221): EFSA 2016/2022
 - Trẻ dưới 6 tuổi + nitrite (INS 249, 250): EFSA 2017 (methemoglobin)

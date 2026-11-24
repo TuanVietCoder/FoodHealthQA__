@@ -1,0 +1,102 @@
+{
+  "product_name": "Bột sữa và rau củ dinh dưỡng HiPP (Bí đỏ)",
+  "ingredient": [
+    "Bột whey khử khoáng một phần",
+    "Bột gạo",
+    "Bột sữa tách kem",
+    "Dầu thực vật",
+    "Bí đỏ (2,5%)",
+    "Bột ngô",
+    "Canxi cacbonnat",
+    "Sắt sunphat",
+    "Kẽm oxit",
+    "Vitamin B1",
+    "Vitamin A",
+    "Vitamin D",
+    "Hương thơm tự nhiên"
+  ],
+  "additive": [],
+  "warning": [
+    "Không sử dụng sản phẩm khi có dấu hiệu hư hỏng.",
+    "Không sử dụng cho người dị ứng với các thành phần của sản phẩm.",
+    "Không sử dụng sản phẩm hết hạn sử dụng."
+  ],
+  "nutrition": [
+    {
+      "name": "Năng lượng",
+      "value": "1791 KJ (428 Kcal) / 100g"
+    },
+    {
+      "name": "Chất béo",
+      "value": "11,5 g / 100g"
+    },
+    {
+      "name": "Carbohydrates",
+      "value": "65 g / 100g"
+    },
+    {
+      "name": "Đường trái cây",
+      "value": "35 g / 100g"
+    },
+    {
+      "name": "Chất xơ",
+      "value": "1,2 g / 100g"
+    },
+    {
+      "name": "Đạm",
+      "value": "14,7 g / 100g"
+    },
+    {
+      "name": "Muối",
+      "value": "525 mg / 100g"
+    },
+    {
+      "name": "Natri",
+      "value": "210 mg / 100g"
+    },
+    {
+      "name": "Canxi",
+      "value": "452 mg / 100g"
+    },
+    {
+      "name": "Sắt",
+      "value": "6,6 mg / 100g"
+    },
+    {
+      "name": "Kẽm",
+      "value": "4,7 mg / 100g"
+    },
+    {
+      "name": "Vitamin A",
+      "value": "344 μg / 100g"
+    },
+    {
+      "name": "Vitamin D",
+      "value": "6,5 μg / 100g"
+    },
+    {
+      "name": "Vitamin B1",
+      "value": "450 μg / 100g"
+    },
+    {
+      "name": "Axit lauric",
+      "value": "1,0 g / 100g"
+    },
+    {
+      "name": "Axit myristic",
+      "value": "0,43 g / 100g"
+    },
+    {
+      "name": "Axit linoleic (axit béo Omega 6)",
+      "value": "1,7 g / 100g"
+    },
+    {
+      "name": "Axit linolenic (axit béo Omega 3)",
+      "value": "0,25 g / 100g"
+    }
+  ],
+  "origin": "Việt Nam",
+  "net_weight": "250g",
+  "mfg_date": "Xem trên đáy hộp",
+  "expiry_date": "Xem trên đáy hộp"
+}

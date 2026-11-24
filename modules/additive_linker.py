@@ -18,14 +18,16 @@ from typing import Iterable
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY_PATH = PROJECT_ROOT / "knowledge_base" / "additive_registry.json"
 
+# hậu tố (i)/(ii)… — chấp nhận cả khi OCR mất ngoặc đóng ("450(i" ở cuối cụm / trước dấu phẩy)
+_SUFFIX = r"(?:\s*\(\s*[ivx]+\s*(?:\)|(?=[,;\s]|$))|[a-z]|[ivx]{1,4})?"
 _EXPLICIT_CODE_RE = re.compile(
     r"(?<![A-Za-z0-9])(?P<prefix>INS|E)\s*[.:-]?\s*"
-    r"(?P<code>\d{3,4}(?:\s*\(\s*[ivx]+\s*\)|[a-z]|[ivx]{1,4})?)"
+    r"(?P<code>\d{3,4}" + _SUFFIX + r")"
     r"(?![A-Za-z0-9])",
     re.IGNORECASE,
 )
 _BARE_CODE_RE = re.compile(
-    r"(?<![A-Za-z0-9])(?P<code>\d{3,4}(?:\s*\(\s*[ivx]+\s*\)|[a-z]|[ivx]{1,4})?)"
+    r"(?<![A-Za-z0-9])(?P<code>\d{3,4}" + _SUFFIX + r")"
     r"(?![A-Za-z0-9%])",
     re.IGNORECASE,
 )
@@ -45,13 +47,18 @@ _AMBIGUOUS_GENERIC_ALIASES = {
 }
 
 
+_SPELLING_VARIANTS = {"axit": "acid"}
+
+
 def normalize_text(value: object) -> str:
     """Normalize Vietnamese/English label text for deterministic matching."""
     text = unicodedata.normalize("NFKD", str(value or "").casefold())
     text = "".join(char for char in text if not unicodedata.combining(char))
     text = text.replace("đ", "d")
     text = re.sub(r"[^a-z0-9]+", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
+    # Nhãn Việt Nam viết "axit" lẫn "acid" cho cùng một chữ: chuẩn hoá về một dạng ở cả tên trong sổ và chữ trên nhãn.
+    return " ".join(_SPELLING_VARIANTS.get(token, token) for token in text.split())
 
 
 def normalize_ins_key(value: object) -> str:
@@ -137,6 +144,56 @@ def _build_indexes(path_text: str):
     return code_index, e_index, alias_index, aliases_longest_first
 
 
+def is_known_code(code: object, registry_path: str | Path | None = None) -> bool:
+    """Mã (INS/E, có/không tiền tố) có trong danh mục phụ gia không — kể cả mã nhóm có mã con, vd 500 → 500(ii)."""
+    key = normalize_ins_key(code)
+    if not key:
+        return False
+    path = str((Path(registry_path) if registry_path else DEFAULT_REGISTRY_PATH).resolve())
+    code_index, e_index, _, _ = _build_indexes(path)
+    if key in code_index or key in e_index:
+        return True
+    return any(k.startswith(key + "(") or k.startswith(key) and k[len(key):].isalpha() for k in code_index)
+
+
+# số đi kèm đơn vị là hàm lượng, không phải mã phụ gia
+_UNIT_AFTER_RE = re.compile(r"\s*(?:mg|g|kg|ml|l|mcg|µg|ug|iu|ui|kcal|kj|ppm|%)\b", re.IGNORECASE)
+
+
+def find_uncertain_codes(text: object, registry_path: str | Path | None = None) -> list[dict]:
+    """Mã phụ gia OCR có thể đã đọc sai — chỉ xét khi cụm chữ có ngữ cảnh phụ gia ("chất …", "phẩm màu", INS/E…).
+
+    kind = "unknown_code": số dạng mã (3–4 chữ số, có thể kèm (i)/(ii)…) KHÔNG có trong danh mục, vd "4310";
+    kind = "uncertain_subtype": mã có hậu tố (i)/(ii)… nằm trong cụm có ngoặc lệch, vd "500(i))" (đọc từ "500(ii)") —
+           mã vẫn hợp lệ nhưng loại con có thể sai.
+    Không đoán mã thay thế: mã gần nhất có thể là một chất khác hẳn.
+    """
+    mention = str(text or "")
+    if not mention.strip():
+        return []
+    has_context = bool(_ADDITIVE_CONTEXT_RE.search(mention) or _EXPLICIT_CODE_RE.search(mention))
+    if not has_context:
+        return []
+    unbalanced = mention.count("(") != mention.count(")")
+    found, seen = [], set()
+    for rx in (_EXPLICIT_CODE_RE, _BARE_CODE_RE):
+        for m in rx.finditer(mention):
+            if _UNIT_AFTER_RE.match(mention, m.end()):
+                continue
+            raw = m.group(0).strip()
+            key = normalize_ins_key(m.group("code"))
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            if not is_known_code(key, registry_path):
+                found.append({"code_text": raw, "key": key, "kind": "unknown_code",
+                              "reason": f"mã “{raw}” không có trong danh mục phụ gia — có thể OCR đọc sai"})
+            elif unbalanced and "(" in key:
+                found.append({"code_text": raw, "key": key, "kind": "uncertain_subtype",
+                              "reason": f"mã “{raw}” nằm trong cụm có ngoặc lệch — loại con (i)/(ii)… có thể đọc sai"})
+    return found
+
+
 def _result(record: dict, mention: str, method: str, confidence: float, alias: str = "") -> dict:
     return {
         "mention": mention,
@@ -151,6 +208,35 @@ def _result(record: dict, mention: str, method: str, confidence: float, alias: s
         "identity_only": bool(record.get("identity_only", True)),
         "source": record.get("source", {}),
     }
+
+
+BARE_CONTEXT_EXPLICIT = True   # L2a: cụm đã có mã INS/E ghi rõ → số trần cùng cụm cũng là mã
+BARE_CONTEXT_CODE_LIST = True  # L2c: dãy ≥2 mã có trong danh mục trong cùng ngoặc
+BARE_CONTEXT_FOLDED = True     # L2b: từ ngữ cảnh so ở dạng bỏ dấu (OCR đọc sai dấu: "chật", "Mầu", "aciơ")
+_FOLDED_CONTEXT_RE = re.compile(
+    r"\b(?:chat|mau|pham mau|acid|axit|aci\w?|dieu vi|nhu hoa|on dinh|bao quan|dieu chinh|huong lieu|"
+    r"tao (?:ngot|xop|mau|dong|gel|day|bot|ham)|lam (?:day|dac|am|ran|bong)|chong (?:oxy|oxi|dong|tao)|"
+    r"regulator|enhancer|thickener|raising|humectant|"
+    r"glutamat\w*|benzoat\w*|sorbat\w*|citrat\w*|phosphat\w*|carbonat\w*|lecithin|caramel|caramen)\b"
+)
+
+
+def _bare_code_context(mention: str) -> bool:
+    """Số 3–4 chữ số trần chỉ được coi là mã phụ gia khi cụm có ngữ cảnh phụ gia."""
+    if _ADDITIVE_CONTEXT_RE.search(mention):
+        return True
+    if BARE_CONTEXT_EXPLICIT and _EXPLICIT_CODE_RE.search(mention):
+        return True
+    if BARE_CONTEXT_FOLDED and _FOLDED_CONTEXT_RE.search(normalize_text(mention)):
+        return True
+    # L2c: dãy trong ngoặc gồm ≥2 số đều có trong danh mục — "(1442, 1440, 415)" khi tên nhóm phía trước bị đọc sai
+    if BARE_CONTEXT_CODE_LIST:
+        for group in re.findall(r"[(\[]([^()\[\]]*(?:\([ivx]*\)[^()\[\]]*)*)[)\]]?", mention, re.IGNORECASE):
+            nums = [m.group("code") for m in _BARE_CODE_RE.finditer(group)
+                    if not _UNIT_AFTER_RE.match(group, m.end())]
+            if len(nums) >= 2 and all(is_known_code(n) for n in nums):
+                return True
+    return False
 
 
 def link_additive_mentions(text: object, registry_path: str | Path | None = None) -> list[dict]:
@@ -195,8 +281,10 @@ def link_additive_mentions(text: object, registry_path: str | Path | None = None
     # functional class, e.g. "chất ổn định [170(i)]".  Only accept a bare
     # number when additive context is present, so percentages and quantities
     # are not mistaken for additive codes.
-    if _ADDITIVE_CONTEXT_RE.search(mention):
+    if _bare_code_context(mention):
         for code_match in _BARE_CODE_RE.finditer(mention):
+            if _UNIT_AFTER_RE.match(mention, code_match.end()):   # "100 g", "250 ml" là hàm lượng
+                continue
             key = normalize_ins_key(code_match.group("code"))
             candidates = code_index.get(key, [])
             if len(candidates) == 1:

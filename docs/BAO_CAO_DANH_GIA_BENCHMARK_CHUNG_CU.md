@@ -96,6 +96,7 @@ Mỗi bản ghi phải qua đủ 6 cổng (`scripts_research/verify_v5_answers.p
 
 ## 4. Nhãn an toàn và phạm vi khẳng định
 
+
 **Ánh xạ nhãn.** `gold_safety_label` dùng 5 nhãn của ứng dụng; nhãn mịn của v5 nằm ở `label_v5`. Với 750 câu:
 
 | Nhãn mịn `label_v5` | Số câu | Nhãn ứng dụng `gold_safety_label` | Số câu |

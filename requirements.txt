@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ── Runtime chính (Streamlit demo app) ────────────────────────────────
 streamlit>=1.30.0
 pillow>=10.0.0
@@ -13,11 +14,16 @@ PyMuPDF>=1.24.0
 # Yêu cầu Python 3.10–3.11 (không tương thích Python 3.12+)
 # Cài đúng thứ tự: numpy → paddlepaddle → paddleocr → torch → vietocr
 numpy==1.26.4
-opencv-python>=4.8.0
+opencv-python>=4.8.0,<4.9.0  # 4.8.1.78; opencv 5.x đòi numpy>=2, xung đột với numpy==1.26.4
 paddlepaddle==2.6.2
 paddleocr==2.9.1
-# PyTorch CPU (Text Recognition với VietOCR):
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.3.1+cpu
-torchvision==0.18.1+cpu
-vietocr==0.3.13
+# PyTorch CUDA 12.1 (Text Recognition với VietOCR chạy trên GPU NVIDIA; cần driver hỗ trợ CUDA 12.1+).
+# Máy không có GPU: đổi cu121 → cpu ở URL và thành torch==2.3.1+cpu, torchvision==0.18.1+cpu.
+# Nếu venv đang có torch +cpu, phải gỡ trước (pip uninstall -y torch torchvision) vì pip coi 2.3.1+cpu đã thỏa 2.3.1.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.3.1+cu121
+torchvision==0.18.1+cu121
+# vietocr==0.3.13 KHÔNG đặt ở đây: nó đòi albumentations==1.4.2 còn paddleocr 2.9.1 đòi albumentations==1.4.10,
+# pip báo ResolutionImpossible. Cài riêng SAU các dòng trên, bỏ qua phụ thuộc (albumentations 1.4.10 chạy tốt):
+#   pip install vietocr==0.3.13 --no-deps
+#   pip install einops gdown prefetch_generator lmdb pyyaml tqdm requests

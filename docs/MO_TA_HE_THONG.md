@@ -106,11 +106,42 @@ LLM trả lời trực tiếp                 Gói bằng chứng có kiểm so�
 * **Bước 3: Phục hồi chính tả sau OCR (Domain-Specific Lexical Post-correction):**
   - Dùng từ điển thuật ngữ phụ gia thực phẩm chuẩn hóa (không dùng LLM để đảm bảo tính tất định, tránh ảo giác).
   - Sửa lỗi quét quang học kinh điển: `INS 50O` $\rightarrow$ `INS 500`, `E21l` $\rightarrow$ `E211`, `Natri benzoat` bị mất dấu...
+  - Chỉ gắn tiền tố "INS" cho số trong ngoặc khi số đó **có trong danh mục phụ gia** và cùng thành phần có từ chỉ nhóm phụ gia ("chất …", "phẩm màu", "hương liệu"…). (Trước đây mọi số 3–4 chữ số trong ngoặc đều bị gắn, vd "(7,4 g/l)" OCR thành "(749)" rồi thành mã giả "INS 749".)
+  - Chỉ bỏ dấu ")" **thừa thật sự**; giữ nguyên ngoặc lồng hợp lệ như "(100(i))" (trước đây quy tắc "))"→")" làm lệch ngoặc và dính nhiều thành phần thành một cụm).
+  - Phiên bản hậu xử lý: `OCR_POSTPROCESS_VERSION`. Bộ đệm OCR lưu chữ thô nên đổi phiên bản chỉ cần tính lại hậu xử lý, không phải OCR lại.
 * **Bước 4: Phân đoạn thành phần bảo toàn ngữ cảnh (Regex Segmentation):**
-  - Tách các thành phần độc lập bằng biểu thức chính quy bảo toàn dấu ngoặc đơn: Cụm `"Chất làm dày (INS 412, INS 415)"` không bị chẻ vụn mà được nhận dạng nguyên khối.
+  - Tách các thành phần độc lập bằng biểu thức chính quy bảo toàn dấu ngoặc đơn: Cụm `"Chất làm dày (INS 412, INS 415)"` không bị chẻ vụn mà được nhận dạng nguyên khối. Các mã trong cụm được tách ra ở tầng chuẩn hóa (mục 3.2).
+* **Cập nhật 16/11/2026 — cải tiến hậu xử lý và trích xuất SAU OCR (không phải cải tiến mô hình OCR):**
+  - *Phạm vi:* khâu dò vùng chữ (PaddleOCR) và đọc chữ (VietOCR) **không đổi** — độ phủ từ của chữ OCR thô giữ nguyên 87,8% trên 376 ảnh. Các thay đổi dưới đây nằm ở hậu xử lý, tách thành phần và liên kết mã (mục 3.2), nên cũng có lợi cho Cấu hình B (văn bản chuẩn, không qua OCR).
+  - *Bộ kiểm tra hồi quy trên ảnh thật* (`scripts_research/ocr_regression.py`, mốc `data/ocr_regression_baseline.json`, chạy trong `tests/test_ocr_regression.py`): tính lại hậu xử lý → tách thành phần → dò mã/dị nguyên từ chữ OCR thô của 376 ảnh và so với danh sách thành phần chuẩn. Báo lỗi khi một chỉ số tụt quá ngưỡng cho phép (vd dị nguyên giả tăng > 2). Mọi thay đổi dưới đây chỉ được giữ khi qua bộ kiểm tra này.
+  - *Phân tích mã bị sót* (`scripts_research/analyze_code_misses.py`): trước khi sửa, 1.264/2.388 mã (52,9%) bị sót. Nguyên nhân lớn nhất **không phải VietOCR đọc nhầm ký tự** (≈25% số mã sót) mà là **thứ tự đọc trộn cột**: các khung chữ được xếp theo hàng ngang trên toàn ảnh nên chữ của khối bên cạnh ("từ ngày sản xuất", "giá trị dinh dưỡng"…) chen vào giữa danh sách thành phần; bộ tách gặp cụm đó thì dừng → 521 mã (41%) bị cắt dù chữ OCR có đúng mã.
+  - *Bộ tách không dừng sai chỗ:* gặp cụm điểm dừng mà ngay sau đó vẫn là danh sách (≥3 dấu phẩy, có mã phụ gia, ≤1 số kèm đơn vị) thì đi tiếp. Hai cụm luôn dừng (`HARD_STOP_PATTERNS`: "hướng dẫn sử dụng", "ingredients") được chọn bằng số đo: cho đi tiếp qua "hướng dẫn sử dụng" sinh +6 dị nguyên giả ("chấm cá, hải sản"), qua "ingredients" sinh +2 cụm quá dài.
+  - *Sửa ký tự VietOCR đọc nhầm, chỉ trong ngữ cảnh mã* (`_fix_code_confusions`): hậu tố La Mã `500(11)`→`500(ii)`, `420(l)`→`420(i)`, `331 (ili)`→`331(iii)`; chữ giống số `16oc`→`160c`, `42o`→`420`, `inss51`→`INS551`; tiền tố `1NS`/`IN5`/`ivs`→`INS`. Chuỗi thường (`(7,4 g/l)`, `ISO 22000`, `Vitamin B1 (1)`) không bị đụng tới.
+  - *Nhận tiêu đề bị đọc sai* ("THÀNH PHẦN" → "Hành PHÂN:", "NGREDIENTS:"): chỉ dùng khi không có tiêu đề đúng và phải có dấu ":" ngay sau.
+  - *Sửa lỗi sẵn có:* quy tắc chuẩn hóa `INS 150a` chèn nhầm dấu cách thành `INS 150 a` (và `307b`, `472e`…) làm khâu liên kết không nhận mã.
+  - *Kết quả trên 376 ảnh* (mốc cũ → sau bước 1–3 → sau khâu liên kết, mục 3.2; sửa chính tả theo cụm thêm bắt dị nguyên 72,1% → 73,2%, xem dưới):
+
+    | Chỉ số | Trước | Sau tách + sửa ký tự | Sau liên kết |
+    |---|---|---|---|
+    | Bắt mã phụ gia (code recall) | 47,1% | 54,9% | **62,9%** |
+    | Độ chính xác mã | 93,7% | 93,6% | 94,3% |
+    | Bắt dị nguyên | 67,7% | 72,1% | 72,1% |
+    | Dị nguyên giả / cụm quá dài | 28 / 27 | 28 / 28 | 28 / 28 |
+
+  - *Lưu ý độ tin cậy của số đo:* các luật được viết sau khi soi lỗi trên chính 376 ảnh này (kể cả việc chọn `HARD_STOP_PATTERNS`), nên con số **có thể lạc quan**. Cần xác nhận trên ảnh nhãn mới chưa từng dùng để chỉnh luật; từ nay chỉ soi lỗi trên phần ảnh "phát triển", báo số trên phần "kiểm tra". Tổng số mã chuẩn đổi nhẹ (2.388 → 2.407) vì mã chuẩn cũng được tính bằng khâu liên kết.
+  - *Còn lại (~920 mã sót):* ~310 vẫn bị bộ tách cắt (gốc rễ là thứ tự đọc), ~230 không có trong chữ OCR, ~155 VietOCR đọc sai chữ số. Hai nhóm sau chỉ cải thiện được bằng mô hình đọc chữ tốt hơn (xem mục 10 của `QUY_TRINH_3_CAU_HINH_HE_THONG.md`).
+  - *Thử mô hình dò vùng chữ PP-OCRv6* (PaddleOCR 3.7, môi trường riêng `venv_ocr3`, `scripts_research/ocr_candidate.py`, so bằng `ocr_regression.py --cache`): trên 30 ảnh, bắt mã 47,5% → 46,3%, bắt dị nguyên 64,5% → 67,3%, chậm hơn (14 giây/ảnh dò vùng trên CPU) → **giữ mô hình hiện tại**. Mô hình đọc chữ PP-OCRv6 không dùng được cho tiếng Việt (bộ ký tự thiếu 90/136 chữ có dấu).
+  - *Sửa chính tả theo cụm* (`modules/ocr_lexicon.py`, áp trong từng cụm thành phần của `parse_ingredients_from_ocr`; chỗ sửa lưu ở `mention["ocr_corrections"]`): chữ OCR sai dấu tiếng Việt thường vẫn là một từ đúng chính tả ("sửa", "cả", "khoảng"), nên **không sửa từng từ** (bộ sửa từng từ trước đây làm độ phủ từ 87,4% → 82,7%, sinh dị nguyên giả "trung"→"trứng"). Cụm 5 → 2 từ liền nhau, so ở dạng bỏ dấu, khớp đúng MỘT tên trong danh mục → thay bằng cách viết có dấu ("Khoảng chất"→"Khoáng chất", "Hượng liệu"→"Hương liệu", "lòng đó trứng gà"→"lòng đỏ trứng gà"). Không sửa khi chữ gốc đã là tên hợp lệ, khi dạng bỏ dấu ứng với ≥2 cách viết, khi chỉ khác chỗ đặt dấu ("hoá"/"hóa"), hoặc khi tên trong danh mục không dấu mà chữ gốc có dấu. Luật "từ Latin dài sai một ký tự" đã thử và **bỏ** vì đổi từ đúng thành từ khác ("Carbohydrate"→"Carbohydrase", "tocopheryl"→"tocopherol").
+    - *Danh mục:* tên phụ gia trong `additive_registry.json`, từ khóa dị nguyên, 48 cụm viết tay cũ, và 397 cụm thành phần xuất hiện ở ≥2 ảnh thuộc phần **phát triển** (`knowledge_base/ocr_ingredient_lexicon.json`, tạo bằng `scripts_research/build_ocr_lexicon.py`; ảnh kiểm tra không được dùng).
+    - *Đo riêng phần kiểm tra (181 ảnh chưa dùng để xây danh mục):* độ phủ từ trong cụm thành phần 58,5% → 59,1%, bắt dị nguyên 70,3% → 70,9%; mã, độ chính xác mã, dị nguyên giả, cụm quá dài không đổi. Đối chiếu từng chỗ sửa với danh sách chuẩn: 132 đúng, 1 "sai" (thực ra đúng — danh sách chuẩn ghi nhầm "tinh bột sản"), 8 không xác định được (phần lớn đúng, vd "Sửa Đậu Nành"→"Sữa Đậu Nành"). Trên cả 376 ảnh: bắt dị nguyên 72,1% → 73,2%.
+    - *Giới hạn:* chỉ sửa được cụm có trong danh mục — vd "Dầu cả", "Kêm Sulphat", "Đóng Sulphat" trên nhãn ColosBaby chưa sửa được vì danh mục chưa có "dầu cá", "kẽm sulphat", "đồng sulphat". Không tự thêm tên theo ví dụ đang xem (tránh chỉnh theo dữ liệu kiểm tra); mở rộng danh mục nên lấy từ nguồn tổng quát (danh mục thành phần/khoáng chất chuẩn). Chữ của khối khác chen vào ("lê mạnh nhất", "khỏi các tác") và con số đọc sai ("1410 tuổi" thay vì 1–10) không sửa được bằng chính tả.
+    - Giao diện (phần chi tiết, tab bóc tách nhãn): ô "Văn bản đọc từ nhãn (sau hậu xử lý)" và mục "Chữ OCR thô và các chỗ đã sửa" liệt kê từng chỗ sửa theo cụm và từng chỗ hậu xử lý chung đổi so với chữ OCR thô (trước đây ô "Sau từ điển thực phẩm" trùng nội dung với ô phía trên). LLM được dặn dùng tên đã chuẩn hóa khi nhắc tới thành phần, vì tên đọc từ ảnh có thể còn sai.
+  - Phiên bản hậu xử lý hiện tại: `pp_v6_phrase_lexicon_correction`.
 * **Điểm tin cậy thị giác:**
-  $$S_{\text{perception}} = \frac{1}{|M|} \sum_{m \in M} \text{conf}(m) \in [0, 1]$$
+  $$S_{\text{perception}} = \frac{1}{|L|} \sum_{\ell \in L} \bar p(\ell) \in [0, 1]$$
+  với $\bar p(\ell)$ là **xác suất trung bình các ký tự** mà VietOCR trả về cho dòng chữ $\ell$ (chỉ tính tới ký tự kết thúc của dòng). Trước đây PaddleOCR 2.9 khi chỉ dò vùng không trả điểm nên mọi dòng bị gán cứng 0,85 — con số đó không phản ánh chất lượng OCR. Độ tin cậy được kiểm chứng với lỗi OCR thật bằng `scripts_research/calibrate_confidence.py`.
   *(Với Cấu hình B, do dùng trực tiếp văn bản tham chiếu nên $S_{\text{perception}} = 1.0$).*
+* **Tốc độ:** VietOCR đọc **theo lô** các vùng chữ cùng bề rộng (kết quả giống hệt đọc từng vùng) và torch được đặt lại ~6 luồng (paddle nạp trước làm torch tụt về 1 luồng; đổi bằng `FH_TORCH_THREADS`). OCR khởi tạo một lần ở luồng nền khi trang được mở lần đầu, dùng chung cho mọi phiên.
 
 ---
 
@@ -128,12 +159,23 @@ Kế thừa công trình công bố tại **IEEE BigData 2025** (*Beyond Fine-Tu
    - Hoạt động dựa trên 2 quy tắc cứng:
      - *Ưu tiên khớp chính xác (Exact-match Preference):* Khớp hoàn toàn nhãn hoặc từ đồng nghĩa được ưu tiên cao nhất.
      - *Quy tắc cụ thể (Specificity Rule):* Chọn khái niệm hẹp cụ thể hơn thay vì khái niệm cha quá chung chung.
-3. **Agent 3: LLM Scorer (Tác tử thẩm định độc lập):**
-   - Chấm điểm tin cậy liên tục $\tau \in [0, 1]$, phạt nặng sai lệch bản chất hóa học.
-   - Nếu $\tau \ge 0.70 \rightarrow$ Phê duyệt kết quả (PASS).
+3. **Agent 3: Rule match scorer (điểm khớp theo luật — KHÔNG gọi LLM; hàm `rule_match_score`, tên cũ `llm_scorer`):**
+   - Gán $\tau$ theo luật: khớp mã INS 0,97 · khớp tên chuẩn 0,94 · khớp tên đồng nghĩa 0,91 · còn lại 0,60 + phần điểm truy xuất (+0,02 nếu có FoodOn CURIE). $\tau$ **không phải xác suất đã hiệu chỉnh**; giao diện ghi là "Mức khớp (theo luật)".
+   - Nếu $\tau \ge 0.70 \rightarrow$ chấp nhận; liên kết không khớp định danh (mã/tên/tên đồng nghĩa) bị loại.
 4. **Agent 4: Synonym Generator & Feedback Loop (Sinh từ đồng nghĩa & Vòng phản hồi):**
    - Khi $\tau < 0.70$, đọc lý do lỗi (`failure_reason` từ Scorer) để sinh ra 5 cách diễn đạt thay thế (tên khoa học, biến thể viết đảo ngữ).
    - Kích hoạt vòng truy xuất lượt 2 (vòng lặp 1 bước kiểm soát chống trôi nghĩa).
+
+#### A2. Một cụm nhiều mã & mã không đọc chắc (`modules/pipeline.link_all_mentions`):
+- Cụm như "chất tạo ngọt tổng hợp (950, 955)" được tách thành **một liên kết cho mỗi mã**, chỉ dùng bộ dò định danh (`additive_linker.link_additive_mentions`), không đoán thêm mã. Trước đây mỗi cụm chỉ giữ một mã: trên văn bản nhãn chuẩn của bộ 750 câu, **1.150/3.032 mã (37,9%) bị bỏ**. Sau khi sửa: recall mã trên văn bản chuẩn 67,2% → 99,6%; nhãn an toàn tầng luật khớp nhãn chuẩn 60,5% → 62,9% (18 câu sai→đúng, 0 câu đúng→sai).
+- Mã OCR **không có trong danh mục** (vd "481(i)" đọc thành "4310") được ghi là một mục "phụ gia không liên kết được" (`category = additive_uncertain_code`) để $S_{\text{retrieval}}$ giảm đúng thực tế; hệ thống **không** tự sửa sang mã "gần nhất" vì dễ thành một chất khác.
+- **Cập nhật 16/11/2026 — khâu liên kết nhận mã đã đọc đúng số** (`modules/additive_linker.py`, đo bằng bộ kiểm tra OCR ở mục 3.1; bắt mã 54,9% → 62,9%, độ chính xác 93,6% → 94,3%):
+  - Số 3–4 chữ số trần chỉ là mã khi cụm có ngữ cảnh phụ gia. Ngữ cảnh nay gồm thêm: cụm đã có mã INS/E ghi rõ (`INS 331(iii), 296, 334`); từ chỉ nhóm so ở dạng bỏ dấu, chịu được OCR sai dấu ("chật diều chính độ aciơ (260)", "Mầu thực phầm (129)") và tên chất phổ biến (glutamat, citrat…); dãy ≥2 số trong cùng ngoặc đều có trong danh mục ("(1442, 1440, 415)" khi tên nhóm bị đọc nát).
+  - Số đi kèm đơn vị ("100 g", "250 ml", "%") **không** được coi là mã — riêng điều này tăng độ chính xác mã 93,6% → 94,5% mà không mất mã nào.
+  - Chấp nhận hậu tố có ngoặc chưa đóng ("450(i" ở cuối cụm/trước dấu phẩy).
+  - Cụm chỉ là một số mã trần (bị tách khỏi tên nhóm vì OCR mất ngoặc) đứng cạnh một cụm có mã → gắn "INS" (`ocr_extractor._tag_orphan_codes`); số phải có trong danh mục, năm "2023" hay số lô không tính. Đây là thay đổi lợi nhất (+4,7 điểm bắt mã).
+  - **Không** dùng khớp tên gần đúng (vd "tinh bột biến tính aipha"): chỉ ~50 mã, dễ nhận nhầm sang chất khác — giữ nguyên nguyên tắc không dùng khớp mờ cho liên kết quy chuẩn.
+  - *Ảnh hưởng lên bộ QA 750 câu* (tầng luật, không gọi LLM, `calibrate_confidence.py`, so với lần chạy ngay trước): Cấu hình B 69,3% → 69,3% (không đổi); Cấu hình C 56,4% → 58,7% (toàn bộ), phần kiểm tra 54,0% → 56,5%, độ phủ 73,0% → 76,0%, tỉ lệ trả lời "an toàn" sai giữ 20,0%. Chỉ số "liên kết INS so với mã chuẩn" của C: recall 53,8% → 62,2%, precision 38,1% → 34,9% — precision này so với các mã **câu hỏi nhắc tới** (cả B với văn bản chuẩn cũng chỉ 37,4%), nên mã đúng trên nhãn mà câu hỏi không nhắc bị tính là sai; thước đo nhận nhầm mã là độ chính xác mã so với toàn bộ nhãn trong bộ kiểm tra OCR (93,7% → 94,3%).
 
 #### B. Ứng dụng Đồ thị Bản thể học FoodOn (29.255 thực thể DAG):
 - Xây dựng chỉ mục quan hệ đồ thị hai chiều (`self.parents` và `self.children`).
@@ -171,6 +213,8 @@ Kế thừa công trình công bố tại **IEEE BigData 2025** (*Beyond Fine-Tu
   - Hỏi về **an toàn phụ gia** $\rightarrow$ Kích hoạt tra cứu ADI JECFA & TT 24.
   - Hỏi về **dị ứng / nhiễm chéo** $\rightarrow$ Kích hoạt rà soát JEMRA Part 3, PAL, FoodOn DAG.
   - Hỏi về **dinh dưỡng / bệnh nền** $\rightarrow$ Kích hoạt so sánh định lượng với FNDDS.
+  - **Số liệu dinh dưỡng ghi trên nhãn** (`pipeline.extract_label_nutrition`, cập nhật 16/11/2026): đọc natri (mg) và đường tổng số (g) từ câu hỏi hoặc bảng dinh dưỡng trên nhãn, quy về /100 g (theo 100 g/ml, theo khẩu phần "… trên 1 khẩu phần 25 g" quy đổi ×100/25, hoặc bảng "tính trên 100 ml"). Không đoán khi thiếu con số hay cơ sở tính; cụm nêu NGƯỠNG ("không quá 120 mg/100 g", "natri thấp", "không đường") bị bỏ qua để không hiểu nhầm là số của sản phẩm. Có số trên nhãn thì kiểm tra điều kiện Codex CAC/GL 23-1997: "natri thấp" ≤ 120 mg/100 g (hồ sơ tăng huyết áp/tim mạch), "không đường" ≤ 0,5 g/100 g (hồ sơ đái tháo đường), ghi nguồn `CODEX_CAC_GL_23_1997`. Kiểm tra trên 82 câu Codex của bộ 750 câu: đọc đúng 82/82; tầng luật Cấu hình B đúng 87,8% số câu này.
+  - **Ước tính FNDDS không thay nhãn:** khi nhãn không có số liệu, giá trị ước tính từ món tương tự trong FNDDS **không** được dùng để đổi nhãn an toàn và không đưa vào câu trả lời như số của sản phẩm (`NUTRITION_ESTIMATE_CHANGES_LABEL = False`). Trước đây một ước tính sai món ("Muscle Milk") đã làm nhãn sữa trẻ em bị đánh "cẩn trọng".
   - Câu hỏi **ngoài phạm vi** (hỏi đơn thuốc, chẩn đoán bệnh) $\rightarrow$ Lập tức kích hoạt cờ từ chối có nguyên tắc (`out_of_scope`).
 - **Minh bạch hóa vết tra cứu tri thức (Traceability & Transparent Wording):**
   - Hệ thống hiển thị bảng tra cứu trực quan: Nguồn tri thức, Thực thể truy vấn, Trạng thái và Chi tiết kết quả.
@@ -201,6 +245,7 @@ Hệ thống chuyển đổi giao diện chính sang mô hình **Tự chỉnh H�
      - `P_BIOPRO`: Đối chiếu nồng độ BUN ($> 7.1\text{ mmol/L}$) và Creatinine với Bệnh thận mạn (CKD).
      - `P_DBQ`: Bổ sung dữ liệu thói quen tiêu thụ (tần suất ăn đồ ăn nhanh, dùng bữa sẵn đóng gói, thói quen đọc nhãn dinh dưỡng).
    - Nhờ đó, bất kỳ hồ sơ tự tạo nào của người dùng cũng được tiếp sức bởi dữ liệu sinh hóa thực tế từ NHANES để đánh giá nguy cơ dinh dưỡng định lượng.
+   - **Giới hạn (cập nhật 16/11/2026):** NHANES chỉ là **tham chiếu** (`persona["nhanes_reference"]`), **không** thêm bệnh nền hay chế độ ăn vào hồ sơ người dùng. Trước đây đối tượng NHANES khớp tuổi có thể kéo theo "bệnh thận mạn" vào hồ sơ một em bé 1 tuổi không khai bệnh, làm kết luận "cẩn trọng" sai.
 
 ---
 
@@ -226,20 +271,62 @@ Hệ thống phân định rạch ròi giữa **Trạng thái Kỹ thuật Nội
    - `CAUTION`: Thành phần vượt ngưỡng khuyến nghị dinh dưỡng hoặc phụ gia có mức ADI chặt chẽ.
    - `WARNING`: Có thành phần chống chỉ định với bệnh nền hồ sơ hoặc vi phạm quy định giới hạn ML.
    - `CRITICAL_ALERT`: Dị ứng cấp tính đe dọa tính mạng (theo FoodOn/JEMRA) hoặc phụ gia bị thu hồi khẩn cấp. Mức cảnh báo này không bao giờ bị hạ cấp.
-   - `ABSTAIN`: Từ chối kết luận do dữ liệu OCR mờ ($S_{\text{total}} < 0.65$), thiếu bảng thành phần trọng yếu hoặc câu hỏi ngoài phạm vi y khoa.
-2. **Không gian Nhãn Chuẩn hóa (Taxonomy) 4 Cấp độ:**
-   Khi chấm điểm benchmark hoặc hiển thị đánh giá an toàn cho người dùng (kể cả câu hỏi tự nhập), mọi kết luận kỹ thuật đều được ánh xạ về tập 4 nhãn chuẩn mực:
-   - 🟢 **`SAFE`** (An toàn / Chưa thấy cảnh báo trong dữ liệu đã lọc): Ánh xạ từ `SCREENED_NO_ALERT`.
-   - 🟡 **`CAUTION`** (Thận trọng / Lưu ý liều lượng): Ánh xạ từ `CAUTION`.
-   - 🔴 **`UNSAFE`** (Nguy hiểm / Cảnh báo nguy cơ cao): Ánh xạ từ `WARNING` và `CRITICAL_ALERT`.
-   - ⚪ **`ABSTAIN`** (Từ chối tư vấn có nguyên tắc): Ánh xạ từ `ABSTAIN`.
-   *Trình bày UI:* Dưới tiêu đề trực quan, hệ thống ghi rõ: `Đánh giá an toàn tự động: [NHÃN] (Mức an toàn theo chuẩn kiểm định 4 cấp độ)`.
+   - `ABSTAIN`: Từ chối kết luận do điểm tin cậy tổng dưới ngưỡng (`CONFIDENCE_ABSTAIN_THRESHOLD`, mục C), thiếu dữ liệu trọng yếu trên nhãn hoặc câu hỏi ngoài phạm vi y khoa.
+2. **Không gian Nhãn Chuẩn hóa 5 nhãn** (khớp `guardrail_status_to_safety_label` và nhãn chuẩn của bộ QA):
+   - 🟢 **`SAFE`**: ánh xạ từ `SCREENED_NO_ALERT` — nghĩa là **chưa thấy cảnh báo trong dữ liệu đã sàng lọc**, không phải cam đoan an toàn. Khi chấm điểm, số câu SAFE thuộc loại này được báo riêng (`safe_from_screened_no_alert`).
+   - 🟡 **`CAUTION`**: ánh xạ từ `CAUTION`.
+   - 🟠 **`UNSAFE`**: ánh xạ từ `WARNING`.
+   - 🔴 **`CRITICAL_ALERT`**: giữ nguyên `CRITICAL_ALERT` (cần xác minh với chuyên gia).
+   - ⚪ **`ABSTAIN`**: ánh xạ từ `ABSTAIN`.
 
 #### C. Điểm tin cậy kép & Cơ chế từ chối (Confidence Scoring & Abstention):
+- $S_{\text{perception}}$: xác suất ký tự trung bình của VietOCR (mục 3.1); B = 1,0.
+- $S_{\text{retrieval}}$ = **tỉ lệ cụm phụ gia trên nhãn liên kết được với cơ sở tri thức** bằng khớp định danh (mã INS/E, tên chuẩn, tên đồng nghĩa); mã OCR không đọc chắc tính là không liên kết được. Nhãn **không có cụm phụ gia nào** → $S_{\text{retrieval}}$ = **không áp dụng**. (Trước đây dùng điểm BM25/ngữ nghĩa chia cho điểm cao nhất của lượt tìm — ứng viên đầu luôn ≈1 — và gán 1,0 cho nhãn không có phụ gia.) Hạn chế: chỉ số chỉ thấy các cụm OCR còn đọc ra; mã OCR làm mất hẳn không được tính — phần này đo khi chấm bằng `scripts_research/analyze_normalization_errors.py`.
 - Điểm tin cậy tổng thể:
-  $$S_{\text{total}} = 0.5 \cdot S_{\text{perception}} + 0.5 \cdot S_{\text{retrieval}}$$
-- Nếu $S_{\text{total}} < 0.65 \rightarrow$ Kích hoạt `ABSTAIN` loại `insufficient_data` (yêu cầu người dùng chụp lại ảnh rõ hơn hoặc bổ sung thông tin).
+  $$S_{\text{total}} = \begin{cases} 0.5 \cdot S_{\text{perception}} + 0.5 \cdot S_{\text{retrieval}} & \text{nếu có cụm phụ gia} \\ S_{\text{perception}} & \text{nếu không} \end{cases}$$
+- Nếu $S_{\text{total}} <$ `CONFIDENCE_ABSTAIN_THRESHOLD` (hiện 0,65, `modules/pipeline.py`) **và nhãn không có cảnh báo nào** $\rightarrow$ `ABSTAIN` loại `insufficient_data`. Ngưỡng phải được chọn trên phần "phát triển" của bộ đánh giá (chia theo ảnh) bằng `scripts_research/calibrate_confidence.py` và báo cáo trên phần "kiểm tra".
+- Thêm một luật: hơn 50% cụm phụ gia không liên kết được $\rightarrow$ `ABSTAIN` (ngưỡng 50% là lựa chọn thiết kế, được báo cáo riêng khi hiệu chỉnh).
+- **Kết quả hiệu chỉnh ngưỡng** (`calibrate_confidence.py`, tầng luật, không gọi LLM): ở Cấu hình B, ngưỡng 0,00–0,65 cho kết quả như nhau; ở Cấu hình C, không dùng ngưỡng cho độ chính xác cao nhất trên phần phát triển (58,7% so với 58,1% ở 0,65), còn ngưỡng 0,65 giảm tỉ lệ trả lời "an toàn" sai 23,0% → 21,3%. Ngưỡng 0,65 được **giữ vì lý do thận trọng** (câu hỏi sức khỏe), không phải vì tối ưu độ chính xác. $S_{\text{perception}}$ dự báo lỗi OCR ở mức yếu (Spearman −0,26 với tỉ lệ thiếu từ).
+- **Sửa lỗi (16/11/2026)** trong `modules/abstention.py`: biểu thức nhận "INS 211"/"E211" trong khoảng trống thông tin `ADDITIVE_IDENTITY` bị lưu thành ký tự backspace thay cho `\b`, nên hai nhánh này không bao giờ khớp — cụm có ghi mã nhưng chưa liên kết được vẫn bị coi là "nhãn không khai báo mã INS".
 - Nếu câu hỏi yêu cầu chẩn đoán/kê đơn $\rightarrow$ Kích hoạt `ABSTAIN` loại `out_of_scope` (hướng dẫn người dùng đến gặp bác sĩ chuyên khoa).
+- **Luật phụ gia cho trẻ dưới 12 tháng tuổi (16/11/2026)** — `modules/infant_rules.py`.
+  - *Căn cứ, trích tự động từ văn bản gốc đã lưu* (`scripts_research/extract_infant_additive_rules.py` → `knowledge_base/sources/derived/infant_food_additives.json`; chạy bằng python có PyMuPDF):
+    - TT 24/2019/TT-BYT, bản hợp nhất 09/VBHN-BYT 2024, Phụ lục 2A: các dòng nhóm 13.1.1 (công thức cho trẻ đến 12 tháng), 13.1.2 (công thức ăn bổ sung 6–36 tháng), 13.1.3 (công thức y tế đặc biệt đến 12 tháng), 13.2 (thực phẩm bổ sung cho trẻ đến 36 tháng). Trích được lần lượt 26/28/27/56 dòng, đúng bằng số lần mã nhóm xuất hiện trong Phụ lục 2A. Mỗi dòng có INS, tên, ML, ghi chú và trang.
+    - TT24 Phụ lục 3 mục 2 ("Đối tượng thực phẩm sử dụng theo GMP"): **không** có nhóm 13.1, 13.2.
+    - Codex GSFA CXS 192-1995: Bảng Hai nhóm 13.1.1/13.1.2/13.1.3/13.2 (28/34/30/57 dòng, PDF tr. 425–428). Annex to Table Three (tr. 493) loại 13.1, 13.2 khỏi quy tắc GMP chung; Preamble §3.3 (tr. 5) không chấp nhận chất mang phụ gia cho hai nhóm này trừ khi Bảng 1–2 ghi riêng.
+    - → Với thực phẩm cho trẻ nhỏ, chỉ phụ gia được ghi riêng cho nhóm này mới được dùng.
+  - *Khi nào áp dụng:* hồ sơ có số tháng tuổi < 12 (chat lưu `age_months` khi người dùng khai "8 tháng tuổi"; trước đây bị làm tròn thành 1 tuổi), hoặc câu hỏi nhắc "sơ sinh", "nhũ nhi", "dưới 12 tháng", "N tháng tuổi" với N < 12. Tên sản phẩm trong dấu nháy được bỏ qua. Số tháng ghi cùng câu "đang cho con bú" được hiểu là tuổi của con.
+  - *Luật:* mỗi phụ gia có mã INS trên nhãn được đối chiếu với hợp của bốn nhóm theo TT24 và theo Codex.
+    - Không có trong cả hai danh mục → cảnh báo **CAUTION** "Có phụ gia không thuộc danh mục cho trẻ dưới 12 tháng", kèm căn cứ.
+    - Có trong danh mục → ghi mức tối đa và vị trí (nhãn không ghi hàm lượng nên không so được với ML).
+    - Nhãn không có phụ gia mang mã → không từ chối, chỉ có dòng lưu ý.
+  - *Dòng lưu ý luôn hiện:* luật chỉ đối chiếu phụ gia, không đánh giá sản phẩm có phù hợp dinh dưỡng cho trẻ hay không (vd sữa tươi, thực phẩm người lớn) — nên hỏi bác sĩ nhi.
+  - *Đo:* bộ QA 750 câu không có câu nào cho trẻ dưới 12 tháng (0/750 kích hoạt), nên nhãn và số đo không đổi (từ chối đúng 69/72, từ chối nhầm 18/678); **chưa có số đo lợi ích**. Dòng lưu ý người cao tuổi hiện ở 81 câu của hồ sơ `ckd_stage3` (62 tuổi). Dòng này không đổi nhãn nhưng được đưa vào lời dặn LLM ở Cấu hình B/C.
+  - *Sửa 3 lỗi (16/11/2026)*, phát hiện khi thử chat cho trẻ dưới 12 tháng trên ảnh 0600–0611 và ảnh cũ (không lập bộ QA riêng, nên **không có số độ chính xác cho nhóm này**; chỉ có test và số đo trên bộ 750 câu):
+    1. *Câu giới hạn tuổi trên nhãn* (`infant_rules.label_age_alerts`): đọc "không dùng cho trẻ dưới N tuổi/tháng", "dùng/phù hợp cho trẻ từ/trên N…", "N+ tháng tuổi"; bé nhỏ hơn tuổi tối thiểu → **UNSAFE** ("Nhãn ghi không dùng cho độ tuổi của bé"), căn cứ Codex CXS 74-1981 mục 8.6.4. Không đổi thành ABSTAIN khi nhãn còn thiếu dữ liệu khác (giống dị nguyên trực tiếp). Chỉ biết "dưới 12 tháng" (vd "sơ sinh") thì chỉ chặn khi nhãn ghi từ 12 tháng. Câu không có số ("không thích hợp cho trẻ sơ sinh…") không suy tuổi. Chỉ chạy cho trẻ dưới 12 tháng.
+    2. *Nguồn khoáng/vitamin không phải phụ gia* (`infant_rules.is_nutrient_source`): dòng thành phần ghi "nguồn bổ sung khoáng", "khoáng chất", "(Vitamin …)" và không có nhóm phụ gia trong cùng dòng thì không đối chiếu với danh mục phụ gia (QCVN 11-1:2012/BYT mục 1.3.4; CXS 72-1981 mục A3.4). Trước đây kali clorid (508), beta-caroten (160a) trong sữa công thức Similac/Nutramigen bị CAUTION nhầm.
+    3. *Từ dị nguyên trong câu hỏi* (`pipeline._question_allergies`): chỉ nhận khi đứng ngay sau dấu hiệu dị ứng ("dị ứng", "mẫn cảm", "không dung nạp", "tránh", "kiêng", "nhiễm chéo", "chứa"), trong cùng cụm. Trước đây mọi từ đều được nhận: "bé ăn sữa chua 'X'" → dị ứng sữa; "đạt **điều** kiện 'natri thấp'" → từ khóa "điều" (hạt điều) → dị ứng hạt; "sulphite" trong câu hỏi về khai báo → dị ứng sulphite.
+    - Thêm: chat và luật nhận "bé (nhà tôi) 8 tháng" không cần chữ "tuổi".
+    - **Đo trên bộ 750 câu, tầng luật đầy đủ (`calibrate_confidence.py --stage rules`, ngưỡng 0,65), trước → sau:** Cấu hình B **520 → 530/750**, Cấu hình C **437 → 449/750**. Không câu nào đang đúng bị sai. Đổi kết quả: B 13 câu (10 sai → đúng: 0349, 0531, 1291, 1469, 1684, 2424, 2433, 2434, 2447, 2459; 3 vẫn sai UNSAFE → ABSTAIN: 2184, 2185, 2192 hỏi khai báo sulphite, đáp án CAUTION); C 16 câu (12 sai → đúng, 4 vẫn sai: ba câu sulphite và 0108). Lỗi 1 và 2 không kích hoạt trên bộ 750 câu. `measure_abstention.py`: từ chối đúng giữ 69/72, từ chối nhầm 18 → 20/678 (hai câu sulphite). 364 test qua.
+  - *Nguồn bổ sung cho trẻ nhỏ (16/11/2026)* — người dùng tải tay, ghi SHA-256 vào manifest, 12 khóa trích dẫn mới; vị trí đã đối chiếu với chữ trích từ tệp: WHO 2023 *complementary feeding* (Khuyến nghị 2 tr. 12: sữa có đường/hương không phù hợp cho trẻ 6–23 tháng; Khuyến nghị 5 tr. 14: không dùng chất tạo ngọt), Codex CXS 74-1981 mục 8.6.4 (nhãn phải ghi tuổi bắt đầu dùng, không dưới 6 tháng), CXS 72-1981 mục A3.4, QCVN 11-1..11-4:2012 (mục phụ gia đều dẫn về quy định Bộ Y tế, tức TT24). NĐ 100/2014 là bản quét không có lớp chữ nên chưa dùng. Ghi bằng `scripts_research/register_infant_sources.py`; luật hiện chưa dùng các nguồn này.
+  - *Đã gỡ các luật chỉnh theo lỗi của bộ QA (17/11/2026).* Có một đợt viết luật sau khi xem danh sách câu sai trên bộ 750 câu (luật cơ quan chuyên môn theo chủ đề, luật dị nguyên không kê khai, nhiễm chéo → CRITICAL_ALERT, PKU + aspartame, nhận câu nhiễm chéo "sản xuất trên thiết bị…", số nhiều tiếng Anh, "bơ ca cao"). Vì bộ QA chỉ dùng để kiểm thử/đánh giá, không dùng để chỉnh hệ thống (tránh thiên lệch), **toàn bộ code đó đã bị xóa** (`authority_rules.py`, `qa_tuning.py` và các nhánh trong `pipeline.py`, `ocr_extractor.py`, `constraint_model.py`, `abstention.py`, giao diện). Các số 530 → 699 (B) và 449 → 580 (C) từng ghi ở đây là số **chỉnh theo tập kiểm thử**, không còn là kết quả của hệ thống. **Số chính thức** là trạng thái trước đợt chỉnh đó: sau sửa 3 lỗi trẻ nhỏ ở trên, B 530/750 và C 449/750 (lưu ở `data/runs/cal_official_base_16_11`); kiểm tra lại sau khi gỡ trên 30 câu đầu cho kết quả giống hệt (0 câu đổi). Nếu cần cải tiến (cấu hình D), phải rút luật từ một tập phát triển tách khỏi 750 câu rồi mới đo một lần trên 750 câu.
+- **Các loại thiếu dữ liệu dù OCR đọc đúng — đã áp dụng đến đâu (16/11/2026).** Mọi loại thiếu dữ liệu đều trả lời theo đúng hai hướng: *thiếu dữ liệu* thì đề nghị chụp lại hoặc bổ sung thông tin; *vượt phạm vi* thì đề nghị trao đổi với chuyên gia phù hợp.
+
+  | Loại thiếu | Luật | Trạng thái |
+  |---|---|---|
+  | Hàm lượng / lượng tiêu thụ | câu hỏi về liều/ADI mà nhãn chỉ có mã, không có hàm lượng | có |
+  | Dị nguyên / nhiễm chéo | `CROSS_CONTACT_STATEMENT`: hỏi nhiễm chéo mà nhãn không có câu "có thể chứa" nêu dị nguyên đó | có |
+  | Bằng chứng cho nhóm người dùng | Trẻ dưới 12 tháng: **luật riêng** `modules/infant_rules.py` (xem dưới). Người cao tuổi, phụ nữ cho con bú: KB không có quy định riêng → **chỉ thêm dòng lưu ý** (`abstention.population_notes`), kết luận theo luật người lớn và bệnh nền đã khai, không từ chối | có |
+  | Thực thể trong KB | hơn 50% phụ gia không liên kết được; `ADDITIVE_NOT_IN_KB`; `ADDITIVE_IDENTITY` | có |
+  | Nguồn đủ rõ | chỉ có cho mã không có nguồn quy chuẩn (`ADDITIVE_NOT_IN_KB`). Khi không có đoạn bằng chứng phù hợp, hệ thống chỉ ghi lý do, không từ chối | một phần |
+
+  **Đo trước khi giữ** (tầng luật, cấu hình B, bộ 750 câu; bộ QA chỉ có 72 câu ABSTAIN, đều thuộc loại "nhãn thiếu thông tin" hoặc "không có câu 'có thể chứa'"):
+  - Bản đầu (16/11/2026) từ chối cả ba nhóm (`POPULATION_EVIDENCE`, 0/750 câu) đã được **thay** bằng luật trẻ dưới 12 tháng và dòng lưu ý, vì từ chối người cao tuổi/cho con bú làm mất cả cảnh báo đang có (vd natri với người cao tuổi tăng huyết áp).
+  - Ba phương án cho "nguồn đủ rõ" đều bị **loại**:
+    - "không truy xuất được đoạn nào": 0 lần, vì bộ truy xuất luôn trả về top-k;
+    - "không đoạn nào nhắc đúng mã được hỏi": 139 câu, chỉ 5 câu có đáp án ABSTAIN, làm sai 76 câu đang đúng là SAFE;
+    - "hỏi dinh dưỡng mà không có bảng dinh dưỡng của sản phẩm": 150 câu, không câu nào có đáp án ABSTAIN.
+  - Phương án coi phần đối chiếu Codex còn "pending" (đúng với cả 50 phụ gia trong KB) là "nguồn chưa rõ" cũng bị loại, vì sẽ từ chối 88 câu hỏi về mức tối đa/danh mục mà đáp án chuẩn coi là trả lời được.
 
 #### D. Sinh lời khuyên & Rào chắn hậu kiểm (Generation & Guardrail Enforcement):
 - Prompt ép buộc cấu trúc: Đưa vào toàn bộ bằng chứng tra cứu được, cấm LLM tự bịa kiến thức ngoài.
@@ -289,6 +376,24 @@ Hệ thống được kiểm chứng trên tập benchmark **750 câu hỏi chu�
 
 ## 6. GIAO DIỆN STREAMLIT & CƠ CHẾ VẬN HÀNH (`app.py`)
 
+> **Cập nhật 16/11/2026 — câu trả lời dạng gọn:** mọi câu trả lời trong chat (kể cả câu mới nhất) mặc định chỉ hiện: một dòng sản phẩm + hồ sơ (không lặp lại câu hỏi), kết luận một dòng có màu, một dòng lý do khi chưa đủ bằng chứng, câu trả lời, và một dòng "📜 Nguồn: [1] … · [2] …" (bấm để mở danh sách nguồn đầy đủ). Nút "🔎 Xem chi tiết phân tích" mở 4 tab; tab đầu "📊 Đánh giá & chỉ số" chứa câu hỏi, nhãn kỹ thuật 5 mức, lĩnh vực, ô đối chiếu từ khóa (trùng từ với bằng chứng, không phải kiểm tra ngữ nghĩa), cảnh báo/sự cố và 3 chỉ số tin cậy. Lời dặn độ dài câu trả lời `pipeline.ANSWER_LENGTH_RULE` (1 câu kết luận + tối đa 4 ý, ~120–150 từ) dùng **chung** cho Cấu hình A và B/C để phép so sánh trong bộ QA không lệch.
+>
+> **Cập nhật 16/11/2026 — nhãn của bộ luật viết để đọc là hiểu** (`app.verdict_view`, chỉ đổi chữ hiển thị; trạng thái và nhãn chấm bộ QA giữ nguyên). Câu kết luận của LLM vẫn là phần chính; phía trên là một khung ngắn gồm **tên nhãn + ý nghĩa cụ thể** ghép từ đúng dữ liệu đã kích hoạt luật:
+>
+> | Trạng thái → nhãn QA | Hiển thị (ví dụ) |
+> |---|---|
+> | CRITICAL_ALERT → CRITICAL_ALERT | 🔴 **Chống chỉ định với bệnh của bạn** — Nhãn có Aspartame (INS 951), được quy chuẩn ghi là chống chỉ định với bệnh bạn đã khai. |
+> | WARNING → UNSAFE (dị nguyên trực tiếp) | 🟠 **Có dị nguyên bạn bị dị ứng** — Nhãn có sữa, trùng với dị ứng bạn đã khai. |
+> | WARNING → UNSAFE (chỉ "có thể chứa") | 🟠 **Có thể nhiễm chéo dị nguyên** — Nhãn ghi "có thể chứa" đậu phộng… (không có trong thành phần, nhưng có thể lẫn trong quá trình sản xuất). |
+> | CAUTION → CAUTION | 🟡 **Nên hạn chế** — Có Natri benzoat (INS 211) cần hạn chế với hồ sơ của bạn. / 🟡 **Vượt ngưỡng dinh dưỡng** — (số trên nhãn so với ngưỡng Codex). |
+> | ABSTAIN → ABSTAIN (thiếu dữ liệu) | ⚪ **Chưa đủ thông tin để kết luận** — Nhãn hoặc dữ liệu chưa đủ… Đề nghị chụp lại nhãn rõ hơn hoặc bổ sung thông tin (ghi cụ thể phần cần chụp nếu luật thiếu dữ liệu nêu được). |
+> | ABSTAIN → ABSTAIN (vượt phạm vi) | ⚪ **Ngoài phạm vi của hệ thống** — Hệ thống chỉ sàng lọc nhãn thực phẩm… Đề nghị trao đổi với bác sĩ, dược sĩ hoặc chuyên gia dinh dưỡng phù hợp. (Có cả hai loại → "Thiếu thông tin và ngoài phạm vi", ghi cả hai đề nghị.) |
+> | SCREENED_NO_ALERT → SAFE | 🟢 **Không thấy điểm cần lưu ý** — Trong phần chữ đọc được từ nhãn, không có thành phần nào khớp với dị ứng hay bệnh bạn đã khai. Đây là kết quả sàng lọc, chưa phải xác nhận an toàn. |
+>
+> Tên dị nguyên lấy theo dị ứng người dùng đã khai (không lấy cả cụm chữ OCR). Khung không thêm dòng so sánh với câu trả lời của LLM. Ở phần chi tiết, dòng kỹ thuật ghi "Nhãn dùng khi chấm bộ QA: … — (ý nghĩa)", kèm nhãn LLM tự ghi và trạng thái nội bộ. Tiêu đề cũ `evaluation["title"]` vẫn giữ trong dữ liệu cho chế độ so sánh và báo cáo.
+>
+> **Cập nhật 16/11/2026 — sửa thông tin nhãn ngay trong chat** (`chat_intake.detect_label_correction`, `apply_label_correction`): giao diện không hiện danh sách thành phần và không bắt người dùng xác nhận; người dùng chỉ thấy câu trả lời. Nếu câu trả lời nói sai về nhãn, người dùng gõ tiếp như nói chuyện: "không có E621", "hệ thống đọc sai E621", "sản phẩm không có sữa và đậu nành" (bỏ), "mã là E330 chứ không phải E33" / "sửa E33 thành E330" (đổi mã), "Thành phần đúng là: bột mì, đường, muối" (thay danh sách). Hệ thống áp lên thành phần đã đọc, tính lại liên kết phụ gia (không OCR lại) và trả lời lại câu hỏi gần nhất; bản sửa được giữ cho các câu hỏi sau về cùng ảnh. Câu hỏi ("không có sữa phải không?", "E621 là gì?") và câu khai báo bản thân ("tôi không có dị ứng") không bị hiểu là câu sửa. Mục không có trong phần đọc được thì hệ thống nói rõ "không có gì để sửa".
+
 Giao diện được thiết kế hiện đại, tinh gọn theo phong cách dashboard y tế cao cấp với các tiêu chuẩn công thái học (Ergonomics) và chuẩn tiếp cận WCAG AAA:
 1. **Luồng Trải nghiệm Người dùng Tự nhiên & Trực quan (Clinical Workflow):**
    - **Hồ sơ sức khỏe đặt trước câu hỏi:** Người dùng thiết lập bối cảnh lâm sàng (Tuổi, Giới tính, Thai kỳ, Bệnh nền, Dị ứng) trước khi đặt câu hỏi, giúp hệ thống cá nhân hóa ngay từ khâu tiếp nhận thông tin.
@@ -300,7 +405,7 @@ Giao diện được thiết kế hiện đại, tinh gọn theo phong cách das
      - *Tab 2: 🏷️ Bóc tách & Chuẩn hóa nhãn:* Ảnh nhãn bounding box OCR, Văn bản đọc được từ bao bì (kèm công cụ so sánh phục hồi chính tả) và Bảng thành phần chuẩn hóa INS/FoodOn.
      - *Tab 3: 📚 Tra cứu Tri thức & Quy chuẩn:* Vết tra cứu QA động (Dynamic QA Trace), Bảng quy chuẩn TT24/Codex/JECFA, Ý kiến khoa học EFSA, Ràng buộc dinh dưỡng bệnh lý (WSDM '21) và Sự cố thu hồi thực phẩm liên quan.
      - *Tab 4: 🔬 Chi tiết Kỹ thuật:* Bảng 4-Agent FoodOntoRAG đầy đủ (FoodOn CURIE, phả hệ DAG lineage, điểm $\tau$), Từng dòng OCR kèm độ tin cậy và Danh sách đoạn trích bằng chứng thô trong CSDL.
-   - **Đánh giá an toàn tự động 4 cấp độ:** Hiển thị nhãn chuẩn mực (`SAFE`, `CAUTION`, `UNSAFE`, `ABSTAIN`) kèm giải thích minh bạch, phân định rõ ràng giữa suy diễn động cho câu hỏi tự nhập và bộ dữ liệu kiểm chuẩn.
+   - **Đánh giá an toàn tự động 5 nhãn:** Hiển thị nhãn chuẩn mực (`SAFE`, `CAUTION`, `UNSAFE`, `CRITICAL_ALERT`, `ABSTAIN`) kèm giải thích minh bạch, phân định rõ ràng giữa suy diễn động cho câu hỏi tự nhập và bộ dữ liệu kiểm chuẩn.
 2. **Chế độ Nghiên cứu So sánh (Comparison Mode):**
    - Đặt câu hỏi và so sánh trực tiếp **Cấu hình A vs B vs C** hoặc **Google Gemini vs Qwen2.5 (Ollama)** trên cùng một màn hình chia cột.
    - Bảng so sánh nhanh đối chiếu nhãn an toàn, số nguồn trích dẫn, số đoạn văn bản và thời gian phản hồi.
@@ -341,26 +446,19 @@ Trong các bài toán AI Y tế & An toàn Thực phẩm, việc đo lường đ
 4. **Thuật toán Phân cụm Lấy mẫu theo Ảnh (Cluster Bootstrap per `split_group`):**
    - Thay vì lấy mẫu ngẫu nhiên từng dòng đơn lẻ (dễ gây over-optimism do các câu hỏi chung 1 ảnh bao bì có tính tương quan), thuật toán gom cụm theo từng ảnh bao bì (`split_group = 1 ảnh`) khi tính toán khoảng tin cậy 95% CI.
 
-### 7.3. Thuật toán Thẩm định Khẳng định Ngữ nghĩa NLI (Natural Language Inference)
-*Mã nguồn:* `modules/nli_verifier.py` và `scripts_research/eval_nli_faithfulness.py`
+### 7.3. Đối chiếu nhận định với bằng chứng & Faithfulness
+*Mã nguồn:* `modules/nli_verifier.py`, `scripts_research/judge_faithfulness.py`, `scripts_research/eval_nli_faithfulness.py`
 
-Nhằm giải quyết triệt để hiện tượng **"Gian lận trích dẫn" (Citation Hallucination)** — khi mô hình ngôn ngữ lớn (LLM) phát ngôn sai lệch nhưng vẫn gắn bừa thẻ nguồn hợp lệ, hệ thống tích hợp module kiểm chứng NLI hoạt động theo 4 bước:
+Câu trả lời được tách thành các nhận định; mỗi nhận định được đối chiếu với **bằng chứng thật mà mô hình đã đọc**: văn bản nhãn đầu vào (B: nhãn chuẩn, C: chữ OCR) + các đoạn nguồn đã truy xuất (`modules/evaluation.prediction_evidence`). Có hai mức, phải gọi đúng tên:
 
-1. **Phân rã Nhận định Nguyên tử (Atomic Claim Extraction):** Tách câu trả lời thành từng mệnh đề khẳng định độc lập ($H_1, H_2, \dots, H_k$).
-2. **Ghép cặp Bằng chứng (Premise-Hypothesis Pairing):** Ghép từng nhận định của AI với đoạn văn bản gốc tương ứng trong kho tri thức đã tra cứu.
-3. **Phân loại Quan hệ Logic 3 Trạng thái:**
-   - **`🟢 ENTAILMENT` (Đồng thuận logic):** Nhận định của AI được chứng minh trực tiếp từ tài liệu gốc.
-   - **`🔴 CONTRADICTION` (Mâu thuẫn / Ảo giác):** Nhận định của AI trái ngược hoặc xuyên tạc văn bản gốc (ví dụ: luật cho phép nhưng AI nói cấm).
-   - **`🟡 NEUTRAL` (Trung lập / Không có căn cứ):** Nhận định nói ngoài lề, tài liệu không nhắc tới.
-4. **Cơ chế Tối ưu Tốc độ cho Demo (Trigger-based Fast NLI):**
-   - Chỉ kích hoạt NLI cho các câu rủi ro cao (chứa từ khóa "cấm", "độc tính", "ung thư", "dị ứng") hoặc câu thiếu trích dẫn quy chuẩn.
-   - Giảm thời gian kiểm định từ 2 giây xuống còn **~150 mili-giây**, cho phép hiển thị huy hiệu xác thực trực tiếp trên giao diện Streamlit mà không làm trễ trải nghiệm người dùng.
+1. **Đối chiếu từ khóa** (giao diện và `eval_nli_faithfulness.py`, không dùng LLM): đếm từ trùng giữa nhận định và bằng chứng, cộng vài luật mâu thuẫn "cấm / cho phép". Đây **không phải** suy luận ngôn ngữ (NLI) và không có độ tin cậy; huy hiệu ghi "Đối chiếu từ khóa — chưa phải xác thực ngữ nghĩa". (Trước đây huy hiệu ghi "ĐÃ XÁC THỰC NGỮ NGHĨA", dùng lời khuyên của chính guardrail làm "bằng chứng", gán độ tin cậy cố định 0,85–0,92, và script chấm dùng đáp án tham chiếu làm bằng chứng — con số 51,69% trong `data/runs/nli_faithfulness_report.json` thuộc cách cũ, không dùng được.)
+2. **Faithfulness chính thức — LLM làm giám khảo** (`judge_faithfulness.py`): giám khảo gán SUPPORTED / CONTRADICTED / NOT_ENOUGH_INFO cho từng nhận định và phải trích nguyên văn câu bằng chứng; code kiểm tra trích dẫn có thật trong bằng chứng, không có thì hạ xuống NOT_ENOUGH_INFO. Nhiệt độ 0, prompt cố định (`PROMPT_VERSION`), nên dùng model khác model sinh câu trả lời. Kết quả chỉ được báo cáo kèm **mức đồng thuận với người chấm** (Cohen's kappa trên ~50 câu trả lời chấm tay, xuất bằng `export-annotation`).
 
 ### 7.4. Các Chỉ số Đo lường Khoa học Cốt lõi
-* **Độ trung thực Ngữ nghĩa (Faithfulness Score):**
-  $$\text{Faithfulness} = \frac{\sum \text{Claims}_{\text{Entailed}}}{\text{Total Claims Checked}} \times 100\%$$
-* **Tỷ lệ Ảo giác Mâu thuẫn (Contradiction Rate):**
-  $$\text{Contradiction Rate} = \frac{\sum \text{Claims}_{\text{Contradicted}}}{\text{Total Claims Checked}} \times 100\%$$
+* **Faithfulness** (giám khảo, mục 7.3): $\dfrac{\#\text{SUPPORTED}}{\#\text{nhận định}}$ mỗi câu trả lời, lấy trung bình theo cấu hình; báo kèm Cohen's kappa với người chấm. Câu trả lời không có nhận định nào → không áp dụng.
+* **Tỷ lệ mâu thuẫn (dấu hiệu hallucination):** $\#\text{CONTRADICTED} / \#\text{nhận định}$; **tỷ lệ thiếu căn cứ:** $\#\text{NOT\_ENOUGH\_INFO} / \#\text{nhận định}$.
+* **Groundedness (trùng từ):** tỉ lệ từ của câu trả lời có trong bằng chứng thật (nhãn đầu vào + đoạn nguồn). Là ước lượng bề mặt, báo cáo đúng tên này.
+* **An toàn:** safety accuracy (5 nhãn; nhãn dự đoán không hợp lệ tính là sai và đếm riêng), unsafe recall, **false-safe rate** (nhãn chuẩn nguy hiểm mà hệ thống nói SAFE). Không còn điểm gộp 0,6×accuracy + 0,4×recall (trọng số tự chọn). Chỉ số có mẫu số bằng 0 ghi **không áp dụng**, không ghi 0.
 * **Tỷ lệ Tuân thủ Trích dẫn (Citation Compliance):** Tỷ lệ các lượt chạy mà câu trả lời có chứa ít nhất 1 mã trích dẫn hợp lệ được công nhận trong catalog.
 * **Tỷ lệ Nguồn Lạ (Unrecognized Citation Rate):** Tỷ lệ câu trả lời xuất hiện mã nguồn bịa đặt không nằm trong danh mục pháp lý.
 

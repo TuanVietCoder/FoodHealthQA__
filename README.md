@@ -63,7 +63,7 @@ Trình duyệt sẽ tự động mở ứng dụng tại `http://localhost:8501`
 1. **Ảnh nhãn và vùng chữ OCR đọc được** (khung xanh quanh từng dòng chữ).
 2. **Văn bản đã đọc**, kèm so sánh OCR thô và sau phục hồi chính tả.
 3. **Bảng chuẩn hóa gọn**: tên trên nhãn → thực thể chuẩn, mã INS/E, FoodOn CURIE, độ tin cậy.
-4. **Câu trả lời kèm trích dẫn đánh số `[1]`, `[2]`** bấm được, nhãn lĩnh vực của câu hỏi, và danh sách nguồn (tên tài liệu, mục/điều khoản, đoạn trích, URL, mức tin cậy của nguồn). Khi thiếu bằng chứng, hộp cảnh báo nêu rõ lý do (ảnh khó đọc, không nhận diện được thành phần, không truy xuất được đoạn bằng chứng, điểm tin cậy dưới 0,65).
+4. **Câu trả lời kèm trích dẫn đánh số `[1]`, `[2]`** bấm được, nhãn lĩnh vực của câu hỏi, và danh sách nguồn (tên tài liệu, mục/điều khoản, đoạn trích, URL, mức tin cậy của nguồn). Khi thiếu bằng chứng, hộp cảnh báo nêu rõ lý do (ảnh khó đọc, không nhận diện được thành phần, không truy xuất được đoạn bằng chứng, điểm tin cậy dưới ngưỡng `CONFIDENCE_ABSTAIN_THRESHOLD` — hiện 0,65, chọn lại bằng `calibrate_confidence.py`).
 
 Quy chuẩn ADI, sự cố thu hồi và cảnh báo chỉ hiện khi khớp phụ gia/dị nguyên được hỏi. Phần chi tiết kỹ thuật (bảng 4-Agent FoodOntoRAG đầy đủ, phả hệ FoodOn, từng dòng OCR, các đoạn bằng chứng đã truy xuất) nằm trong mục **🔧 Chi tiết kỹ thuật**. Cấu hình A và B chỉ dùng để đánh giá, chạy bằng `scripts_research/` và không có trong giao diện.
 
@@ -87,7 +87,7 @@ Hệ thống đi theo hướng **QA động**: câu hỏi của người dùng q
 | **Bộ QA** | `data/foodhealthqa_eval_set.*` (bộ đánh giá duy nhất, 750 câu); `data/qa_benchmark.*` (bản nguồn 2.311, chỉ để dựng bộ 750) | Câu hỏi, đáp án, nguồn, nhãn lĩnh vực. |
 | **Kết quả thí nghiệm** | `data/predictions_config_*.jsonl`, `data/evaluation_results.json`, `data/runs/`, `data/cache/` | Sinh ra bởi `scripts_research/`; có thể tạo lại. |
 
-Lưu ý: `data/additives_standard.csv` (10 dòng) chỉ là bảng đối soát nhỏ, **không** thay thế `knowledge_base/additives_standard.json` (50 mục, là nguồn KB chính mà pipeline dùng).
+Lưu ý: `data/additives_standard.csv` (10 dòng) chỉ là bảng đối soát nhỏ, **không** thay thế `knowledge_base/additives_standard.json` (88 mục — 50 mục gốc + 30 mục thêm theo tần suất trên nhãn + 10 mục thêm cho các mã con 420(i), 420(ii), 160a(i)–(iii), 1442, 1520, 460(i), 470(i), 450(iii), bằng `scripts_research/expand_additive_kb.py`; là nguồn KB chính mà pipeline dùng).
 
 ---
 
@@ -140,6 +140,26 @@ Toàn bộ script nghiên cứu khoa học được lưu tại thư mục `scrip
 # 0. (Tùy chọn) Dựng lại bộ 750 câu từ bản nguồn v5
 .\venv\Scripts\python.exe .\scripts_research\build_foodhealthqa_subset.py
 
+# 0a. Kiểm tra hồi quy chất lượng OCR trên 376 ảnh thật (độ phủ thành phần, mã phụ gia, dị nguyên, dị nguyên giả).
+#     Cũng chạy tự động trong bộ test (tests/test_ocr_regression.py). Chỉ cập nhật mốc khi thay đổi đã được duyệt:
+.\venv\Scripts\python.exe .\scripts_research\ocr_regression.py --worst 10
+#     .\venv\Scripts\python.exe .\scripts_research\ocr_regression.py --update-baseline
+#     Mã phụ gia bị sót mất ở khâu nào (bộ tách / liên kết / VietOCR đọc nhầm / không có trong chữ OCR):
+.\venv\Scripts\python.exe .\scripts_research\analyze_code_misses.py
+#     Danh mục cụm tên thành phần cho bộ sửa chính tả theo cụm (chỉ lấy ảnh phần PHÁT TRIỂN) — chạy lại khi bộ đánh giá đổi:
+.\venv\Scripts\python.exe .\scripts_research\build_ocr_lexicon.py
+#     Thử mô hình dò vùng chữ khác (PaddleOCR 3.x trong venv_ocr3), so trên cùng ảnh — xem đầu file ocr_candidate.py:
+#     .\venv\Scripts\python.exe .\scripts_research\ocr_regression.py --cache data\ocr_candidate\<model>_cache.json
+#     Danh mục phụ gia cho thực phẩm trẻ dưới 12 tháng (TT24 PL2A + Codex GSFA nhóm 13.1, 13.2) — cần PyMuPDF,
+#     venv dự án chưa có nên dùng python hệ thống (hoặc pip install pymupdf vào venv):
+python .\scripts_research\extract_infant_additive_rules.py
+#     Nguồn cho trẻ nhỏ người dùng tải tay (WHO 2023, QCVN 11-1..4, Codex CXS 72/74, NĐ 100/2014) → manifest + khóa trích dẫn:
+python .\scripts_research\register_infant_sources.py
+
+# 0b. TRƯỚC khi chạy chính thức: OCR mọi ảnh vào bộ đệm chung, chạy tầng luật B/C, kiểm chứng độ tin cậy OCR với lỗi
+#     OCR thật, đo liên kết INS và chọn ngưỡng từ chối trên phần "phát triển" (không gọi LLM; không chạy song song với bước 1)
+.\venv\Scripts\python.exe .\scripts_research\calibrate_confidence.py --stage all
+
 # 1. Sinh dự đoán A/B/C. Chọn mô hình: --llm-provider gemini (mặc định) hoặc ollama (Qwen2.5 cục bộ).
 #    Kết quả ghi vào data/runs/<provider>/. --resume chạy tiếp (chạy lại bản ghi lỗi); dừng sạch khi hết hạn mức Gemini.
 .\venv\Scripts\python.exe .\scripts_research\generate_predictions.py --llm-provider ollama --resume
@@ -159,9 +179,20 @@ Toàn bộ script nghiên cứu khoa học được lưu tại thư mục `scrip
 # 5. Đo tỷ lệ tuân thủ trích dẫn khi chạy lặp (B; số lượt gọi = --questions x --repeats)
 .\venv\Scripts\python.exe .\scripts_research\measure_citation_compliance.py --llm-provider ollama --questions 10 --repeats 3
 
-# 6. Củng cố metadata cơ sở tri thức
+# 6. (CHỈ khi dựng KB lần đầu) Củng cố metadata cơ sở tri thức. Script từ chối chạy nếu KB đã có mục kiểm nguồn,
+#    vì nó ghi đè ADI/TT24/Codex/lưu ý sức khỏe về trạng thái pending; chỉ dùng --force sau khi sao lưu
 .\venv\Scripts\python.exe .\scripts_research\harden_knowledge_base.py
+
+# 7. Sau khi có dự đoán A/B/C: lỗi chuẩn hóa (OCR vs liên kết), faithfulness bằng LLM giám khảo + người chấm, phân tích ca
+.\venv\Scripts\python.exe .\scripts_research\analyze_normalization_errors.py
+.\venv\Scripts\python.exe .\scripts_research\judge_faithfulness.py judge --judge-model <model khác model sinh>
+.\venv\Scripts\python.exe .\scripts_research\judge_faithfulness.py export-annotation --n 50
+.\venv\Scripts\python.exe .\scripts_research\judge_faithfulness.py agreement
+.\venv\Scripts\python.exe .\scripts_research\judge_faithfulness.py summarize
+.\venv\Scripts\python.exe .\scripts_research\analyze_cases.py
 ```
+
+> **Nguyên tắc số liệu:** mọi chỉ số hoặc được đo từ dữ liệu, hoặc là quy tắc có chủ đích được ghi rõ (ngưỡng, trọng số), hoặc ghi **không áp dụng** khi không đo được. Độ tin cậy OCR là xác suất ký tự của VietOCR (không còn hằng số 0,85); `S_retrieval` là tỉ lệ cụm phụ gia liên kết được (không áp dụng khi nhãn không có phụ gia); huy hiệu trên giao diện chỉ là **đối chiếu từ khóa**, faithfulness chính thức dùng LLM giám khảo có kiểm chứng bằng người chấm. Chi tiết: `docs/MO_TA_HE_THONG.md` mục 3.1, 3.4C, 7.3 và `docs/QUY_TRINH_3_CAU_HINH_HE_THONG.md` mục 6, 11.
 
 ---
 
@@ -185,9 +216,8 @@ d:\FoodHealthQA__\
 │   ├── build/                     # Tệp trung gian của quy trình dựng (đầu vào, bản đầy đủ, kiểm tra từng bản ghi)
 │   ├── runs/                      # Kết quả theo mô hình: gemini/, ollama/ (predictions_config_*.jsonl, run_log.jsonl), comparison.md|json
 │   ├── cache/                     # Bộ nhớ đệm embedding bge-m3 (embeddings_bge-m3.npz)
-│   ├── archive/retired_eval_sets/ # Các tập đã ngừng dùng (cân bằng 1.203, pilot 150) và script/test dựng chúng, chỉ lưu để tham khảo
+│   ├── archive/master_benchmark_2311/ # Bản nguồn 2.311 câu (dùng để dựng bộ 750; code đọc từ đây). Các bản cũ khác đã dời sang _archive_unused/data/
 │   ├── evaluation_results.json    # Kết quả đo 3 cấu hình A, B, C (CHƯA CÓ: tạo bằng generate_predictions.py rồi run_evaluation.py; kết quả theo mô hình nằm ở data/runs/<provider>/)
-│   ├── _backup_pre_persona_conditions/  # Bản benchmark trước khi thêm persona_conditions (kèm SHA256.txt)
 │   ├── foodon_entities.json       # Danh mục bản thể học FoodOn CURIE
 │   ├── incidents_train.csv        # 5.082 báo cáo sự cố Food Hazard Detector
 │   ├── fndds_nutrition.csv        # Dinh dưỡng định lượng USDA FNDDS

@@ -71,7 +71,8 @@ def main():
             (OUT / f"{sid}.{ext}").unlink()
     old = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
     MANIFEST.write_text(json.dumps({"downloaded": results, "unobtainable": UNOBTAINABLE,
-                                    "manually_downloaded": old.get("manually_downloaded", [])},
+                                    "manually_downloaded": old.get("manually_downloaded", []),
+                                    "jecfa_pages": old.get("jecfa_pages", [])},
                                    ensure_ascii=False, indent=2), encoding="utf-8")
     sys.exit(0 if all(r["ok"] for r in results) else 1)
 

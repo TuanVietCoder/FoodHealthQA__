@@ -3,7 +3,7 @@ Module Hybrid Retriever cho hệ thống FoodHealthQA
 Triển khai kiến trúc 4-Agent của FoodOntoRAG:
   Agent 1: Hybrid Retriever (BM25 Lexical + TF-IDF Semantic + Fusion)
   Agent 2: Selector Agent (Exact-match preference + Specificity rule)
-  Agent 3: LLM Scorer (Confidence Calibration τ)
+  Agent 3: Rule match scorer (điểm khớp theo luật τ — không gọi LLM, không phải xác suất đã hiệu chỉnh)
   Agent 4: Synonym Generator & Feedback Loop
 
 Hỗ trợ:
@@ -351,6 +351,26 @@ def compute_specificity_score(additive):
     return score
 
 
+_CODE_IN_TEXT_RE = re.compile(r"(?<![\d.,])(\d{3,4})([a-f])?(?![a-z\d])(?:\s*\(\s*([ivx]+)\s*\))?")
+
+
+def _explicit_codes(text: str) -> list[str]:
+    """Mã INS/E ghi trong cụm chữ, kèm hậu tố: '160(i)' → '160(i)', '160a' → '160a', 'INS 322' → '322'.
+    Chữ cái sau số chỉ được coi là hậu tố mã khi là a–f (g, l, m… là đơn vị: '100g')."""
+    out = []
+    for number, letter, roman in _CODE_IN_TEXT_RE.findall(text or ""):
+        out.append(number + (letter or "") + (f"({roman})" if roman else ""))
+    return out
+
+
+def _code_matches_entity(query_code: str, entity_code: str) -> bool:
+    """Mã trong cụm chữ khớp mã của thực thể KB khi bằng nhau, hoặc một bên là mã gốc của bên kia ('322' ↔ '322(i)').
+    Trước đây chỉ kiểm '160' in '160a(ii)' nên "INS 160(i)" (mã không có thật, OCR đọc sai) bị hiểu là 160a(ii)."""
+    q = normalize_ins_key(query_code)
+    e = normalize_ins_key(re.sub(r"^(?:ins|e)\s*", "", entity_code.strip().lower()))
+    return bool(q and e) and (q == e or e.startswith(q + "(") or q.startswith(e + "("))
+
+
 def selector_agent(candidates, query):
     """
     Selector Agent: Chọn ứng viên tốt nhất từ danh sách candidates.
@@ -361,7 +381,7 @@ def selector_agent(candidates, query):
         return None, 0.0, "Không tìm thấy ứng viên."
 
     query_lower = query.lower()
-    numbers = re.findall(r'\d{3,4}', query_lower)
+    codes = _explicit_codes(query_lower)
 
     scored = []
     for additive, retrieval_score, method in candidates:
@@ -372,11 +392,11 @@ def selector_agent(candidates, query):
 
         exact_bonus = 0.0
 
-        for num in numbers:
-            if num in ins_code:
+        for code in codes:
+            if _code_matches_entity(code, ins_code):
                 exact_bonus = 3.0
                 break
-            if e_number and num in e_number:
+            if e_number and _code_matches_entity(code, e_number):
                 exact_bonus = 2.5
                 break
 
@@ -413,8 +433,11 @@ def selector_agent(candidates, query):
 # AGENT 3: LLM SCORER (Confidence Calibration τ)
 # =====================================================================
 
-def llm_scorer(additive, mention_text, exact_bonus, retrieval_score):
+def rule_match_score(additive, mention_text, exact_bonus, retrieval_score):
     """
+    ĐIỂM KHỚP THEO LUẬT (trước đây tên llm_scorer nhưng KHÔNG gọi LLM): khớp mã INS 0,97 · tên chuẩn 0,94 ·
+    tên đồng nghĩa 0,91 · còn lại 0,60 + phần điểm truy xuất. Đây không phải xác suất đã hiệu chỉnh.
+
     Tính điểm tin cậy τ ∈ [0, 1] dựa trên mức độ tương đồng.
     Kết hợp: exact match weight + retrieval score + specificity + penalty factors.
     """
@@ -426,8 +449,9 @@ def llm_scorer(additive, mention_text, exact_bonus, retrieval_score):
     ins_code = additive.get("ins_code", "")
     mention_lower = mention_text.lower()
     numbers = re.findall(r'\d{3,4}', mention_lower)
+    codes = _explicit_codes(mention_lower)
 
-    if numbers and any(n in ins_code for n in numbers):
+    if codes and any(_code_matches_entity(c, ins_code) for c in codes):
         tau = 0.97
     elif additive.get("canonical_name", "").lower() in mention_lower:
         tau = 0.94
@@ -446,6 +470,10 @@ def llm_scorer(additive, mention_text, exact_bonus, retrieval_score):
         tau = max(tau - 0.05, 0.50)
 
     return round(tau, 3)
+
+
+# Tên cũ, giữ để không làm vỡ mã/test khác
+llm_scorer = rule_match_score
 
 
 # =====================================================================
@@ -519,7 +547,7 @@ def foodontorag_4agent_linking(mention, kb_additives):
     Pipeline 4-Agent FoodOntoRAG Entity Linking đầy đủ:
       Agent 1: Hybrid Retriever (BM25 + TF-IDF/SBERT) -> candidates
       Agent 2: Selector Agent (Exact-match + Specificity) -> best candidate
-      Agent 3: LLM Scorer -> confidence τ
+      Agent 3: Rule match scorer -> điểm khớp τ (theo luật)
       Agent 4: Synonym Generator & Feedback Loop (nếu τ < 0.70)
     """
     raw_text = mention["raw_mention"]
@@ -583,22 +611,22 @@ def foodontorag_4agent_linking(mention, kb_additives):
     has_exact_match = False
     if best_additive:
         query_lower = raw_text.lower()
-        numbers = re.findall(r'\d{3,4}', query_lower)
+        codes = _explicit_codes(query_lower)
         ins = best_additive.get("ins_code", "").lower()
         e_num = best_additive.get("e_number", "").lower()
         canonical = best_additive.get("canonical_name", "").lower()
         synonyms = [s.lower() for s in best_additive.get("common_names", []) if s]
 
-        if numbers and any(n in ins or (e_num and n in e_num) for n in numbers):
+        if codes and any(_code_matches_entity(c, ins) or (e_num and _code_matches_entity(c, e_num)) for c in codes):
             has_exact_match = True
         elif canonical and canonical in query_lower:
             has_exact_match = True
         elif any(syn and syn in query_lower for syn in synonyms):
             has_exact_match = True
 
-    # === Agent 3: LLM Scorer ===
+    # === Agent 3: Rule match scorer (theo luật, không gọi LLM) ===
     exact_bonus = 3.0 if has_exact_match else 0.0
-    tau = llm_scorer(best_additive, raw_text, exact_bonus, selector_score)
+    tau = rule_match_score(best_additive, raw_text, exact_bonus, selector_score)
 
     # === Agent 4: Synonym Generator & Feedback Loop ===
     feedback_note = ""
@@ -608,7 +636,7 @@ def foodontorag_4agent_linking(mention, kb_additives):
             retry_candidates = retriever.retrieve(eq, top_k=3)
             if retry_candidates:
                 retry_best, retry_score, retry_rationale = selector_agent(retry_candidates, eq)
-                retry_tau = llm_scorer(retry_best, raw_text, 0, retry_score)
+                retry_tau = rule_match_score(retry_best, raw_text, 0, retry_score)
                 if retry_tau > tau:
                     best_additive = retry_best
                     tau = retry_tau

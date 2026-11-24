@@ -29,6 +29,13 @@ SOURCE_URL = "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/9/09-vbhn-byt.pd
 
 
 EXTRA_ALIASES = {
+    # tên thường ghi trên nhãn (không có "L-" như trong TT24); đã thêm cả vào knowledge_base/additive_registry.json
+    # (không chạy lại script này chỉ để thêm alias: bản trích văn bản TT24 mặc định cho tên bị vỡ chữ)
+    "621": [
+        "natri glutamat",
+        "mononatri glutamat",
+        "monosodium glutamate",
+    ],
     "150a": [
         "caramen nhóm i",
         "caramen nhóm 1",
